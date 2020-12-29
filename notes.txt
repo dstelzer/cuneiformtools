@@ -1,0 +1,18 @@
+Types of nodes:
+	h H	Horizontal (doubled)
+	v V	Vertical (doubled)
+	u U	Up diagonal (doubled)
+	d D	Down diagonal (doubled)
+	c	Winkelhaken
+	TODO shorteners
+	
+	[ ]	Horizontal stacking
+	{ }	Vertical stacking
+	( )	Superimposition
+	2-9	Repeat
+	
+	< >	Smaller version (pos first element)
+	
+	P	Portrait
+	L	Landscape
+	S	Square
