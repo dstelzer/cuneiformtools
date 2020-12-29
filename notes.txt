@@ -16,3 +16,16 @@ Types of nodes:
 	P	Portrait
 	L	Landscape
 	S	Square
+
+PHASE 1
+	Parsing
+		Modifiers?
+	Rendering
+		Dimensional propagation
+		Modifiers
+		Cairo
+
+PHASE 2
+	Comparisons
+	Degrees of change
+	Searching

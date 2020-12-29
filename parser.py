@@ -6,7 +6,7 @@ STARTS = '([{<'
 ENDS = ')]}>'
 MODS = ''
 
-SHAPES = 'PLS'
+SHAPES = 'PLSW'
 STROKES = 'hHvVuUdDc'
 NUMBERS = '12345689'
 
@@ -122,4 +122,4 @@ if __name__ == '__main__':
 		try:
 			g = parse(s)
 			print(g)
-		except: pass
+		except ValueError: pass

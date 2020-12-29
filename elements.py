@@ -5,11 +5,18 @@ from enum import Enum
 class Element:
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
+	def kern_left(self): return 0
+	def kern_right(self): return 0
+	def kern_top(self): return 0
+	def kern_bottom(self): return 0
 
 class CanvasShape(Enum):
 	PORTRAIT = 'P'
 	LANDSCAPE = 'L'
 	SQUARE = 'S'
+	WIDE = 'W'
+
+MAXIMUM_HEAD_SIZE = 1/3
 
 class Canvas(Element):
 	def __init__(self, shape, internal, *args, **kwargs):
@@ -21,12 +28,14 @@ class Canvas(Element):
 	def __str__(self):
 		return f'{self.shape.value} {self.internal}'
 	
-	def propagate_dimensions(self, _=None):
-		if self.shape == CanvasShape.SQUARE: self.dims = (3, 3)
-		elif self.shape == CanvasShape.PORTRAIT: self.dims = (2, 3)
-		elif self.shape == CanvasShape.LANDSCAPE: self.dims = (3, 2)
+	def propagate_dimensions(self, unused1=None, unused2=None): # The parameters are for consistency with how other elements do dimensional propagation, but they're completely ignored here
+		# (For other elements, it's ((w, h), (x, y)) where x,y is the top left corner)
+		if self.shape == CanvasShape.SQUARE: self.dims = (1, 1)
+		elif self.shape == CanvasShape.PORTRAIT: self.dims = (2/3, 1)
+		elif self.shape == CanvasShape.LANDSCAPE: self.dims = (3/2, 1)
+		elif self.shape == CanvasShape.WIDE: self.dims = (2, 1)
 		
-		self.internal.propagate_dimensions(self.dims)
+		self.internal.propagate_dimensions(self.dims, (0, 0))
 
 class Number(Element):
 	def __init__(self, value, *args, **kwargs):
@@ -42,20 +51,26 @@ class Stroke(Element):
 		super().__init__(*args, **kwargs)
 		self.doubled = doubled
 	
-	def propagate_dimensions(self, dims):
-		self.dims = self.actual_dims = dims
+	def propagate_dimensions(self, dims, pos):
+		self.dims = dims
+		self.pos = pos
 
 class Vertical(Stroke):
 	def __str__(self):
 		return 'V' if self.doubled else 'v'
 	
 	def can_expand_vertically(self): return True
-	def propagate_dimensions(self, dims):
-		self.dims = (w,h) = dims
-		actual_width = min(h/2, w/2) # Allow other elements to extend into our space in order to touch the center of the stroke
-		self.actual_dims = actual_width, h
+	def propagate_dimensions(self, dims, pos):
+		(w,h) = dims
+		act = min(w, MAXIMUM_HEAD_SIZE)
+		self.dims = (act, h)
+		(x,y) = pos
+		if w > act: x += (w-act)/2
+		self.pos = (x,y)
+	def kern_left(self): return self.dims[0]/2
+	def kern_right(self): return self.dims[0]/2
 	
-	def draw(self, context, center):
+	def draw(self, rend):
 		cx, cy = center
 		w, h = self.dims
 		if h < w: h = w
@@ -78,10 +93,15 @@ class Horizontal(Stroke):
 		return 'H' if self.doubled else 'h'
 	
 	def can_expand_horizontally(self): return True
-	def propagate_dimensions(self, dims):
-		self.dims = (w,h) = dims
-		actual_height = min(w/2, h/2)
-		self.actual_dims = w, actual_height
+	def propagate_dimensions(self, dims, pos):
+		(w,h) = dims
+		act = min(h, MAXIMUM_HEAD_SIZE)
+		self.dims = (w, act)
+		(x,y) = pos
+		if h > act: y += (h-act)/2
+		self.pos = (x,y)
+	def kern_top(self): return self.dims[0]/2
+	def kern_bottom(self): return self.dims[0]/2
 
 class UpDiag(Stroke):
 	def __str__(self):
@@ -104,13 +124,17 @@ class Winkelhaken(Stroke):
 	def __str__(self):
 		return 'c'
 	
-	def propagate_dimensions(self, dims):
-		self.dims = (w,h) = dims
+	def propagate_dimensions(self, dims, pos):
+		(w,h) = dims
 		act = min(w, h)
-		self.actual_dims = act, act
+		self.dims = (act, act)
+		(x,y) = pos
+		if w > act: x += (act-w)/2
+		if h > act: y += (act-h)/2
+		self.pos = (x,y)
 
 class Container(Element):
-	only_repeat_strokes = True # Inherited by every child except nudge
+	only_repeat_strokes = True # Inherited by every child except Nudge
 	
 	def __init__(self, contents=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -135,40 +159,71 @@ class HStack(Container):
 		if self.number is not None: return f'[{self.number} {self.contents[0]}]'
 		else: return '[' + ','.join(str(c) for c in self.contents) + ']'
 	
-	def propagate_dimensions(self, dims):
-		self.dims = self.actual_dims = (w,h) = dims
+	def propagate_dimensions(self, dims, pos):
+		self.dims = (w,h) = dims
+		self.pos = (x,y) = pos
 		pieces = self.number or len(self.contents)
 		each_w = w/pieces
-		for each in self.contents: each.propagate_dimensions((each_w, h))
+		for i, each in enumerate(self.contents): each.propagate_dimensions((each_w, h), (x+i*each_w, y))
 		
-		if not self.number: # This container has a mixture of types in it
-			# So we can check if any of those aren't using their full width, and if not, reallocate that width to the ones that *can* use it
-			# (We assume that elements that can expand horizontally will always use their full space, and elements that can't, may not)
-			fixed = sum(each.actual_dims[0] for each in self.contents if not each.can_expand_horizontally())
-			count = sum(1 for each in self.contents if each.can_expand_horizontally())
-			each_w = (w - fixed) / count
-			for each in self.contents:
-				if each.can_expand_horizontally():
-					each.propagate_dimensions((each_w, h))
+		# Now check if we have to do any fancy kerning and recalculation
+		if (not self.number) and any(each.can_expand_horizontally() for each in self.contents):
+			# In this case, we have different types of strokes together, and some of them can expand horizontally
+			# So first we calculate how much space is currently used and can't be avoided
+			fixed_space = 0
+			for i, each in enumerate(self.contents):
+				if each.can_expand_horizontally(): continue # Ignore flexible ones
+				used = each.dims[0]
+				# Can we kern this into its neighbors?
+				if i-1 >= 0 and not each.kern_left():
+					used -= self.contents[i-1].kern_right()
+				if i+1 < len(self.contents) and not each.kern_right():
+					used -= self.contents[i+1].kern_left()
+				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
+				fixed_space += used
+			flexible_space = w - fixed_space
+			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_horizontally()) # Divide by the number of flexible elements
+			
+			# Now give them their new positions
+			current_position = 0
+			for i, each in enumerate(self.contents):
+				left_kerning = self.contents[i-1].kern_right() if i-1>=0 else 0
+				right_kerning = self.contents[i+1].kern_left() if i+1<len(self.contents) else 0
+				previous_position = current_position
+				
+				if each.can_expand_horizontally(): # This is a flexible one
+					new_w = portion + left_kerning + right_kerning # The new width to assign
+					new_x = current_position - left_kerning
+					each.propagate_dimensions((new_w, h), (new_x, y))
+					current_position += portion
+				
+				elif left_kerning and not each.kern_left(): # This one should be nudged to the left
+					new_x = current_position - left_kerning
+					each.propagate_dimensions(each.dims, (new_x, y))
+					current_position += each.dims[0]
+				
+				else: # This one needs no special handling
+					new_x = current_position
+					each.propagate_dimensions(each.dims, (new_x, y))
+					current_position += each.dims[0]
+				
+				if right_kerning and not each.kern_right(): # Finally, check to see if we need to adjust the kerning for the *next* element
+					current_position -= right_kerning
+				if previous_position > current_position: # But don't allow any element to take less than zero width
+					current_position = previous_position
+	
+	def kern_left(self): return self.contents[0].kern_left()
+	def kern_right(self): return self.contents[-1].kern_right()
 
 class VStack(Container):
 	def __str__(self):
 		if self.number is not None: return '{' + f'{self.number} {self.contents[0]}' + '}'
 		else: return '{' + ','.join(str(c) for c in self.contents) + '}'
 	
-	def propagate_dimensions(self, dims):
-		self.dims = self.actual_dims = (w,h) = dims
-		pieces = self.number or len(self.contents)
-		each_h = h/pieces
-		for each in self.contents: each.propagate_dimensions((w, each_h))
-		
-		if not self.number: # See HStack for explanation
-			fixed = sum(each.actual_dims[1] for each in self.contents if not each.can_expand_vertically())
-			count = sum(1 for each in self.contents if each.can_expand_vertically())
-			each_h = (h - fixed) / count
-			for each in self.contents:
-				if each.can_expand_vertically():
-					each.propagate_dimensions((w, each_h))
+	# TODO propagate_dimensions
+	
+	def kern_top(self): return self.contents[0].kern_top()
+	def kern_bottom(self): return self.contents[-1].kern_bottom()
 
 class Superpose(Container):
 	def __init__(self, *args, **kwargs):
@@ -178,26 +233,37 @@ class Superpose(Container):
 	def __str__(self):
 		return '(' + ','.join(str(c) for c in self.contents) + ')'
 	
-	def propagate_dimensions(self, dims):
-		self.dims = self.actual_dims = dims
-		for child in self.contents: child.propagate_dimensions(dims)
+	def propagate_dimensions(self, dims, pos):
+		self.dims = dims
+		self.pos = pos
+		for child in self.contents: child.propagate_dimensions(dims, pos)
+	
+	def kern_left(self): return min(c.kern_left() for c in self.contents)
+	def kern_right(self): return min(c.kern_right() for c in self.contents)
+	def kern_top(self): return min(c.kern_top() for c in self.contents)
+	def kern_bottom(self): return min(c.kern_bottom() for c in self.contents)
 
 class Nudge(Container):
 	only_repeat_strokes = False
 	
 	def __init__(self, *args, **kwargs):
-		super().__init__(self, *args, **kwargs)
+		super().__init__(*args, **kwargs)
 		if len(self.contents) > 1: raise ValueError('<>-containers can contain only a single element')
-		if self.number is None: self.number = 5 # Centered
-		self.position = self.number
+		if self.number is None: self.number = Number(5) # Centered
+		self.region = self.number
 		self.child = self.contents[0]
 	
 	def __str__(self):
-		return f'<{self.position} {self.child}>'
+		return f'<{self.region} {self.child}>'
 	
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
-	def propagate_dimensions(self, dims):
-		self.dims = self.actual_dims = (w,h) = dims
-		w, h = w/3, h/3 # 1/9 of the area
-		self.child.propagate_dimensions((w,h))
+	def propagate_dimensions(self, dims, pos):
+		self.dims = (w,h) = dims
+		self.pos = (x,y) = pos
+		w, h = w/3, h/3 # 1/9 of the total area
+		which_x = self.region.value % 3 # In the range [0,3]
+		which_y = self.region.value // 3
+		x += which_x * w
+		y += which_y * h
+		self.child.propagate_dimensions((w,h), (x,y))
