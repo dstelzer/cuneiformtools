@@ -242,6 +242,12 @@ class HStack(Container):
 					current_position -= right_kerning
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
+		
+		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again)
+		largest_h = max(each.dims[1] for each in self.contents)
+		adjust_y = min(each.adjust[1] for each in self.contents)
+		self.dims = (w, largest_h)
+		self.adjust = (0, adjust_y)
 	
 	def kern_left(self): return self.contents[0].kern_left()
 	def kern_right(self): return self.contents[-1].kern_right()
@@ -308,6 +314,12 @@ class VStack(Container):
 					current_position -= bottom_kerning
 				if previous_position > current_position: # But don't allow any element to take less than zero height
 					current_position = previous_position
+		
+		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again)
+		largest_w = max(each.dims[0] for each in self.contents)
+		adjust_x = min(each.adjust[0] for each in self.contents)
+		self.dims = (largest_w, h)
+		self.adjust = (adjust_x, 0)
 	
 	def kern_top(self): return self.contents[0].kern_top()
 	def kern_bottom(self): return self.contents[-1].kern_bottom()
@@ -323,6 +335,7 @@ class Superpose(Container):
 	def propagate_dimensions(self, dims, pos):
 		self.dims = dims
 		self.pos = pos
+		self.adjust = 0,0
 		for child in self.contents: child.propagate_dimensions(dims, pos)
 	
 	def kern_left(self): return min(c.kern_left() for c in self.contents)
@@ -348,6 +361,7 @@ class Nudge(Container):
 	def propagate_dimensions(self, dims, pos):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
+		self.adjust = 0,0
 		w, h = w/3, h/3 # 1/9 of the total area
 		which_x = (self.region.value-1) % 3 # Choose a region
 		which_y = (self.region.value-1) // 3 # (Each coord in [0,3])
