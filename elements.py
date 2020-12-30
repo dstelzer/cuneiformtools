@@ -58,6 +58,15 @@ class Stroke(Element):
 	def propagate_dimensions(self, dims, pos):
 		self.dims = dims
 		self.pos = pos
+		self.adjust = 0,0
+
+class Void(Stroke): # An emptiness that takes up space and does nothing else
+	def __init__(self, *args, **kwargs):
+		super().__init__(doubled=False, *args, **kwargs)
+	def __str__(self): return '0'
+	def can_expand_horizontally(self): return True
+	def can_expand_vertically(self): return True
+	def draw(self, rend): pass
 
 class Vertical(Stroke):
 	def __str__(self):
@@ -69,12 +78,18 @@ class Vertical(Stroke):
 		act = min(w, MAXIMUM_HEAD_SIZE)
 		self.dims = (act, h)
 		(x,y) = pos
-		if w > act: x += (w-act)/2
+		if w > act:
+			x += (w-act)/2
+			self.adjust = (w-act)/2, 0
+		else:
+			self.adjust = 0,0
 		self.pos = (x,y)
 	def kern_left(self): return self.dims[0]/2
 	def kern_right(self): return self.dims[0]/2
 	
 	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'b')
+		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		if self.doubled: rend.draw_double(*self.pos, *self.dims)
 		else: rend.draw_vertical(*self.pos, *self.dims)
 
@@ -88,12 +103,17 @@ class Horizontal(Stroke):
 		act = min(h, MAXIMUM_HEAD_SIZE)
 		self.dims = (w, act)
 		(x,y) = pos
-		if h > act: y += (h-act)/2
+		if h > act:
+			y += (h-act)/2
+			self.adjust = 0, (h-act)/2
+		else:
+			self.adjust = 0,0
 		self.pos = (x,y)
 	def kern_top(self): return self.dims[0]/2
 	def kern_bottom(self): return self.dims[0]/2
 	
 	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'b')
 		if self.doubled: rend.draw_double_horizontal(*self.pos, *self.dims)
 		else: rend.draw_horizontal(*self.pos, *self.dims)
 
@@ -124,11 +144,19 @@ class Winkelhaken(Stroke):
 		new_h = min(h, 2*w)
 		self.dims = (new_w, new_h)
 		(x,y) = pos
-		if w > new_w: x += (w-new_w)/2
-		if h > new_h: y += (h-new_h)/2
+		xmod, ymod = 0, 0
+		if w > new_w:
+			x += (w-new_w)/2
+			xmod = (w-new_w)/2
+		if h > new_h:
+			y += (h-new_h)/2
+			ymod = (h-new_h)/2
 		self.pos = (x,y)
+		self.adjust = (xmod,ymod)
 	
 	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'b')
+		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.draw_hook(*self.pos, *self.dims)
 
 class Container(Element):
@@ -153,6 +181,7 @@ class Container(Element):
 	def can_expand_vertically(self): return any(e.can_expand_vertically() for e in self.contents)
 	
 	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'g')
 		for each in self.contents: each.draw(rend)
 
 class HStack(Container):
@@ -163,6 +192,7 @@ class HStack(Container):
 	def propagate_dimensions(self, dims, pos):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
+		self.adjust = 0,0
 		pieces = self.number or len(self.contents)
 		each_w = w/pieces
 		for i, each in enumerate(self.contents): each.propagate_dimensions((each_w, h), (x+i*each_w, y))
@@ -191,22 +221,26 @@ class HStack(Container):
 				left_kerning = self.contents[i-1].kern_right() if i-1>=0 else 0
 				right_kerning = self.contents[i+1].kern_left() if i+1<len(self.contents) else 0
 				previous_position = current_position
+				current_position -= each.adjust[0] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
 				if each.can_expand_horizontally(): # This is a flexible one
 					new_w = portion + left_kerning + right_kerning # The new width to assign
 					new_x = current_position - left_kerning
 					each.propagate_dimensions((new_w, h), (new_x, y))
 					current_position += portion
+					current_position += each.adjust[0]
 				
 				elif left_kerning and not each.kern_left(): # This one should be nudged to the left
 					new_x = current_position - left_kerning
 					each.propagate_dimensions((each_w, h), (new_x, y))
 					current_position += each.dims[0] - left_kerning
+					current_position += each.adjust[0]
 				
 				else: # This one needs no special handling
 					new_x = current_position
 					each.propagate_dimensions((each_w, h), (new_x, y))
 					current_position += each.dims[0]
+					current_position += each.adjust[0]
 				
 				if right_kerning and not each.kern_right() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= right_kerning

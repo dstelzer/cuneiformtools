@@ -5,6 +5,8 @@ from time import sleep
 
 import cairo
 
+DRAW_BOXES = True
+
 class Renderer:
 	def __init__(self, width, height, skip=False):
 		self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
@@ -12,6 +14,21 @@ class Renderer:
 		if not skip:
 			self.ctx.scale(width, height)
 			self.blank()
+	
+	def box(self, x, y, w, h, c):
+		if not DRAW_BOXES: return
+		
+		if c == 'r': col = 1,0,0
+		elif c == 'g': col = 0,1,0
+		elif c == 'b': col = 0,0,1
+		elif c == 'c': col = 0,1,1
+		elif c == 'm': col = 1,0,1
+		elif c == 'y': col = 1,1,0
+		elif c == 'w': col = 1,1,1
+		
+		self.ctx.set_source_rgba(*col, 0.1)
+		self.ctx.rectangle(x, y, w, h)
+		self.ctx.fill()
 	
 	def blank(self):
 		self.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)

@@ -7,7 +7,7 @@ ENDS = ')]}>'
 MODS = ''
 
 SHAPES = 'PLSW'
-STROKES = 'hHvVuUdDc'
+STROKES = 'hHvVuUdDc0'
 NUMBERS = '12345689'
 
 IGNORE = ', \t\n\v'
@@ -50,6 +50,7 @@ def make_stroke(char):
 	elif char == 'u': return UpDiag(False)
 	elif char == 'U': return UpDiag(True)
 	elif char == 'c': return Winkelhaken()
+	elif char == '0': return Void()
 
 def report_error(error, string, start, end):
 	print('Parse error:', error)
