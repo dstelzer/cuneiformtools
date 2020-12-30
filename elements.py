@@ -36,6 +36,10 @@ class Canvas(Element):
 		elif self.shape == CanvasShape.WIDE: self.dims = (2, 1)
 		
 		self.internal.propagate_dimensions(self.dims, (0, 0))
+	
+	def draw(self, rend):
+		# TODO sizing
+		self.internal.draw(rend)
 
 class Number(Element):
 	def __init__(self, value, *args, **kwargs):
@@ -71,22 +75,8 @@ class Vertical(Stroke):
 	def kern_right(self): return self.dims[0]/2
 	
 	def draw(self, rend):
-		cx, cy = center
-		w, h = self.dims
-		if h < w: h = w
-		
-		nw = (cx-w/2, cy-h/2)
-		ne = (cx+w/2, cy-h/2)
-		pivot = (cx+w/2, cy-h/2+w/2)
-		r = w/2
-		join = (cx, cy-h/2+w)
-		s = (cx, cy+h/2)
-		
-		context.move_to(*nw)
-		context.line_to(*ne)
-		context.arc_negative(*pivot, r, pi/2, pi)
-		context.line_to(*s)
-		context.stroke()
+		if self.doubled: rend.draw_double(*self.pos, *self.dims)
+		else: rend.draw_vertical(*self.pos, *self.dims)
 
 class Horizontal(Stroke):
 	def __str__(self):
@@ -102,6 +92,10 @@ class Horizontal(Stroke):
 		self.pos = (x,y)
 	def kern_top(self): return self.dims[0]/2
 	def kern_bottom(self): return self.dims[0]/2
+	
+	def draw(self, rend):
+		if self.doubled: rend.draw_double_horizontal(*self.pos, *self.dims)
+		else: rend.draw_horizontal(*self.pos, *self.dims)
 
 class UpDiag(Stroke):
 	def __str__(self):
@@ -126,12 +120,16 @@ class Winkelhaken(Stroke):
 	
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
-		act = min(w, h)
-		self.dims = (act, act)
+		new_w = min(w, h/2)
+		new_h = min(h, 2*w)
+		self.dims = (new_w, new_h)
 		(x,y) = pos
-		if w > act: x += (act-w)/2
-		if h > act: y += (act-h)/2
+		if w > new_w: x += (w-new_w)/2
+		if h > new_h: y += (h-new_h)/2
 		self.pos = (x,y)
+	
+	def draw(self, rend):
+		rend.draw_hook(*self.pos, *self.dims)
 
 class Container(Element):
 	only_repeat_strokes = True # Inherited by every child except Nudge
@@ -153,6 +151,9 @@ class Container(Element):
 	
 	def can_expand_horizontally(self): return any(e.can_expand_horizontally() for e in self.contents)
 	def can_expand_vertically(self): return any(e.can_expand_vertically() for e in self.contents)
+	
+	def draw(self, rend):
+		for each in self.contents: each.draw(rend)
 
 class HStack(Container):
 	def __str__(self):
@@ -199,16 +200,17 @@ class HStack(Container):
 				
 				elif left_kerning and not each.kern_left(): # This one should be nudged to the left
 					new_x = current_position - left_kerning
-					each.propagate_dimensions(each.dims, (new_x, y))
-					current_position += each.dims[0]
+					each.propagate_dimensions((each_w, h), (new_x, y))
+					current_position += each.dims[0] - left_kerning
 				
 				else: # This one needs no special handling
 					new_x = current_position
-					each.propagate_dimensions(each.dims, (new_x, y))
+					each.propagate_dimensions((each_w, h), (new_x, y))
 					current_position += each.dims[0]
 				
-				if right_kerning and not each.kern_right(): # Finally, check to see if we need to adjust the kerning for the *next* element
+				if right_kerning and not each.kern_right() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= right_kerning
+		#			print('Applying right kerning', previous_position, right_kerning, current_position)
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
 	
@@ -220,7 +222,58 @@ class VStack(Container):
 		if self.number is not None: return '{' + f'{self.number} {self.contents[0]}' + '}'
 		else: return '{' + ','.join(str(c) for c in self.contents) + '}'
 	
-	# TODO propagate_dimensions
+	def propagate_dimensions(self, dims, pos):
+		self.dims = (w,h) = dims
+		self.pos = (x,y) = pos
+		pieces = self.number or len(self.contents)
+		each_h = h/pieces
+		for i, each in enumerate(self.contents): each.propagate_dimensions((w, each_h), (x, y+i*each_h))
+		
+		# Now check if we have to do any fancy kerning and recalculation
+		if (not self.number) and any(each.can_expand_vertically() for each in self.contents):
+			# In this case, we have different types of strokes together, and some of them can expand vertically
+			# So first we calculate how much space is currently used and can't be avoided
+			fixed_space = 0
+			for i, each in enumerate(self.contents):
+				if each.can_expand_vertically(): continue # Ignore flexible ones
+				used = each.dims[1]
+				# Can we kern this into its neighbors?
+				if i-1 >= 0 and not each.kern_top():
+					used -= self.contents[i-1].kern_bottom()
+				if i+1 < len(self.contents) and not each.kern_bottom():
+					used -= self.contents[i+1].kern_top()
+				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
+				fixed_space += used
+			flexible_space = h - fixed_space
+			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_vertically()) # Divide by the number of flexible elements
+			
+			# Now give them their new positions
+			current_position = 0
+			for i, each in enumerate(self.contents):
+				top_kerning = self.contents[i-1].kern_bottom() if i-1>=0 else 0
+				bottom_kerning = self.contents[i+1].kern_top() if i+1<len(self.contents) else 0
+				previous_position = current_position
+				
+				if each.can_expand_vertically(): # This is a flexible one
+					new_h = portion + top_kerning + bottom_kerning # The new height to assign
+					new_y = current_position - top_kerning
+					each.propagate_dimensions((w, new_h), (x, new_y))
+					current_position += portion
+				
+				elif top_kerning and not each.kern_top(): # This one should be nudged upward
+					new_y = current_position - top_kerning
+					each.propagate_dimensions((w, each_h), (x, new_y))
+					current_position += each.dims[1] - top_kerning
+				
+				else: # This one needs no special handling
+					new_y = current_position
+					each.propagate_dimensions((w, each_h), (x, new_y))
+					current_position += each.dims[1]
+				
+				if bottom_kerning and not each.kern_bottom() and not each.can_expand_vertically(): # Finally, check to see if we need to adjust the kerning for the *next* element
+					current_position -= bottom_kerning
+				if previous_position > current_position: # But don't allow any element to take less than zero height
+					current_position = previous_position
 	
 	def kern_top(self): return self.contents[0].kern_top()
 	def kern_bottom(self): return self.contents[-1].kern_bottom()
@@ -262,8 +315,8 @@ class Nudge(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		w, h = w/3, h/3 # 1/9 of the total area
-		which_x = self.region.value % 3 # In the range [0,3]
-		which_y = self.region.value // 3
+		which_x = self.region.value % 3 # Choose a region
+		which_y = self.region.value // 3 # (Each coord in [0,3])
 		x += which_x * w
 		y += which_y * h
 		self.child.propagate_dimensions((w,h), (x,y))
