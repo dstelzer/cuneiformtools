@@ -1,15 +1,17 @@
-from subprocess import call
+import subprocess as sp
 from tempfile import NamedTemporaryFile
 from math import pi
+from time import sleep
 
 import cairo
 
 class Renderer:
-	def __init__(self, width, height):
+	def __init__(self, width, height, skip=False):
 		self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
 		self.ctx = cairo.Context(self.surf)
-		self.ctx.scale(width, height)
-		self.blank()
+		if not skip:
+			self.ctx.scale(width, height)
+			self.blank()
 	
 	def blank(self):
 		self.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
@@ -21,11 +23,13 @@ class Renderer:
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
-		with NamedTemporaryFile(suffix='.png') as f:
-			fn = f.name
+	#	with NamedTemporaryFile(suffix='.png') as f:
+		with open('tmp.png', 'wb') as f:
+	#		fn = f.name
+			fn = 'tmp.png'
 			self.surf.write_to_png(fn)
-			call(['xdg-open', fn])
-			input()
+			sp.run(['xdg-open', fn])
+	#		sleep(0.25)
 	
 	def draw_vertical(self, x, y, w, h):
 		raise NotImplemented() # To be implemented in derived classes
@@ -48,6 +52,28 @@ class Renderer:
 		self.draw_double(-y-h, x, h, w)
 		
 		self.ctx.restore()
+	
+	@classmethod
+	def render(cls, root, scale=512, margin=32):
+		root.propagate_dimensions()
+		
+		width = int(scale*root.dims[0] + 2*margin)
+		height = int(scale*root.dims[1] + 2*margin)
+		rend = cls(width, height, skip=True)
+		
+		# Manual blanking
+		rend.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
+		rend.ctx.rectangle(0, 0, width, height)
+		rend.ctx.fill()
+		
+		rend.ctx.save()
+		
+		rend.ctx.translate(margin, margin)
+		rend.ctx.scale(scale, scale)
+		root.draw(rend)
+		
+		rend.ctx.restore()
+		return rend
 
 class OneSidedRenderer(Renderer):
 	def draw_vertical(self, x, y, w, h):
