@@ -78,12 +78,10 @@ class Vertical(Stroke):
 		act = min(w, MAXIMUM_HEAD_SIZE)
 		self.dims = (act, h)
 		(x,y) = pos
-		if w > act:
-			x += (w-act)/2
-			self.adjust = (w-act)/2, 0
-		else:
-			self.adjust = 0,0
-		self.pos = (x,y)
+		adj_x, adj_y = 0, 0
+		if w > act: adj_x = (w-act)/2
+		self.pos = (x+adj_x, y+adj_y)
+		self.adjust = (adj_x, adj_y)
 	def kern_left(self): return self.dims[0]/2
 	def kern_right(self): return self.dims[0]/2
 	
@@ -103,17 +101,16 @@ class Horizontal(Stroke):
 		act = min(h, MAXIMUM_HEAD_SIZE)
 		self.dims = (w, act)
 		(x,y) = pos
-		if h > act:
-			y += (h-act)/2
-			self.adjust = 0, (h-act)/2
-		else:
-			self.adjust = 0,0
-		self.pos = (x,y)
-	def kern_top(self): return self.dims[0]/2
-	def kern_bottom(self): return self.dims[0]/2
+		adj_x, adj_y = 0, 0
+		if h > act: adj_y = (h-act)/2
+		self.pos = (x+adj_x, y+adj_y)
+		self.adjust = (adj_x, adj_y)
+	def kern_top(self): return self.dims[1]/2
+	def kern_bottom(self): return self.dims[1]/2
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
+		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		if self.doubled: rend.draw_double_horizontal(*self.pos, *self.dims)
 		else: rend.draw_horizontal(*self.pos, *self.dims)
 
@@ -140,23 +137,21 @@ class Winkelhaken(Stroke):
 	
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
+		adj_x, adj_y = 0, 0
 		new_w = min(w, h/2)
 		new_h = min(h, 2*w)
 		self.dims = (new_w, new_h)
 		(x,y) = pos
 		xmod, ymod = 0, 0
-		if w > new_w:
-			x += (w-new_w)/2
-			xmod = (w-new_w)/2
-		if h > new_h:
-			y += (h-new_h)/2
-			ymod = (h-new_h)/2
-		self.pos = (x,y)
-		self.adjust = (xmod,ymod)
+		if w > new_w: adj_x = (w-new_w)/2
+		if h > new_h: adj_y = (h-new_h)/2
+		self.pos = (x+adj_x, y+adj_y)
+		self.adjust = (adj_x, adj_y)
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
+		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_hook(*self.pos, *self.dims)
 
 class Container(Element):
@@ -228,11 +223,12 @@ class HStack(Container):
 					new_x = current_position - left_kerning
 					each.propagate_dimensions((new_w, h), (new_x, y))
 					current_position += portion
-					current_position += each.adjust[0]
+					# current_position += each.adjust[0] # Flexible ones should never have adjustment values in the direction that they're flexible - they're expected to take up all the space they're given
 				
 				elif left_kerning and not each.kern_left(): # This one should be nudged to the left
 					new_x = current_position - left_kerning
 					each.propagate_dimensions((each_w, h), (new_x, y))
+					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
 					current_position += each.dims[0] - left_kerning
 					current_position += each.adjust[0]
 				
@@ -244,7 +240,6 @@ class HStack(Container):
 				
 				if right_kerning and not each.kern_right() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= right_kerning
-		#			print('Applying right kerning', previous_position, right_kerning, current_position)
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
 	
@@ -259,14 +254,14 @@ class VStack(Container):
 	def propagate_dimensions(self, dims, pos):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
+		self.adjust = 0,0
 		pieces = self.number or len(self.contents)
 		each_h = h/pieces
 		for i, each in enumerate(self.contents): each.propagate_dimensions((w, each_h), (x, y+i*each_h))
 		
 		# Now check if we have to do any fancy kerning and recalculation
 		if (not self.number) and any(each.can_expand_vertically() for each in self.contents):
-			# In this case, we have different types of strokes together, and some of them can expand vertically
-			# So first we calculate how much space is currently used and can't be avoided
+			# The algorithm is the same as for horizontal, so see HStack for details
 			fixed_space = 0
 			for i, each in enumerate(self.contents):
 				if each.can_expand_vertically(): continue # Ignore flexible ones
@@ -287,22 +282,27 @@ class VStack(Container):
 				top_kerning = self.contents[i-1].kern_bottom() if i-1>=0 else 0
 				bottom_kerning = self.contents[i+1].kern_top() if i+1<len(self.contents) else 0
 				previous_position = current_position
+				current_position -= each.adjust[1] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
 				if each.can_expand_vertically(): # This is a flexible one
 					new_h = portion + top_kerning + bottom_kerning # The new height to assign
 					new_y = current_position - top_kerning
 					each.propagate_dimensions((w, new_h), (x, new_y))
 					current_position += portion
+					# See HStack for justification
 				
 				elif top_kerning and not each.kern_top(): # This one should be nudged upward
 					new_y = current_position - top_kerning
 					each.propagate_dimensions((w, each_h), (x, new_y))
+					# As above
 					current_position += each.dims[1] - top_kerning
+					current_position += each.adjust[1]
 				
 				else: # This one needs no special handling
 					new_y = current_position
 					each.propagate_dimensions((w, each_h), (x, new_y))
 					current_position += each.dims[1]
+					current_position += each.adjust[1]
 				
 				if bottom_kerning and not each.kern_bottom() and not each.can_expand_vertically(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= bottom_kerning
@@ -349,8 +349,8 @@ class Nudge(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		w, h = w/3, h/3 # 1/9 of the total area
-		which_x = self.region.value % 3 # Choose a region
-		which_y = self.region.value // 3 # (Each coord in [0,3])
+		which_x = (self.region.value-1) % 3 # Choose a region
+		which_y = (self.region.value-1) // 3 # (Each coord in [0,3])
 		x += which_x * w
 		y += which_y * h
 		self.child.propagate_dimensions((w,h), (x,y))

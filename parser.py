@@ -8,7 +8,7 @@ MODS = ''
 
 SHAPES = 'PLSW'
 STROKES = 'hHvVuUdDc0'
-NUMBERS = '12345689'
+NUMBERS = '123456789'
 
 IGNORE = ', \t\n\v'
 

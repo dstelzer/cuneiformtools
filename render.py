@@ -26,7 +26,7 @@ class Renderer:
 		elif c == 'y': col = 1,1,0
 		elif c == 'w': col = 1,1,1
 		
-		self.ctx.set_source_rgba(*col, 0.1)
+		self.ctx.set_source_rgba(*col, 0.25)
 		self.ctx.rectangle(x, y, w, h)
 		self.ctx.fill()
 	
@@ -52,6 +52,9 @@ class Renderer:
 		raise NotImplemented() # To be implemented in derived classes
 	
 	def draw_double(self, x, y, w, h):
+		raise NotImplemented() # Same
+	
+	def draw_hook(self, x, y, w, h):
 		raise NotImplemented() # Same
 	
 	def draw_horizontal(self, x, y, w, h):
