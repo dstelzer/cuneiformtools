@@ -5,7 +5,7 @@ from time import sleep
 
 import cairo
 
-DRAW_BOXES = True
+DRAW_BOXES = False
 
 class Renderer:
 	def __init__(self, width, height, skip=False):

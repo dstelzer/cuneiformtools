@@ -38,7 +38,6 @@ class Canvas(Element):
 		self.internal.propagate_dimensions(self.dims, (0, 0))
 	
 	def draw(self, rend):
-		# TODO sizing
 		self.internal.draw(rend)
 
 class Number(Element):

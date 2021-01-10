@@ -10,20 +10,35 @@ Types of nodes:
 	{ }	Vertical stacking
 	( )	Superimposition
 	2-9	Repeat
+			Is this necessary?
 	
 	< >	Smaller version (pos first element)
+			Is this necessary?
 	
 	P	Portrait
 	L	Landscape
 	S	Square
 
+Modifiers:
+	Tenu (slanting), applied to containers
+	Shorten at head, applied to strokes
+	Shorten at tail, applied to strokes
+	Triple, applied to strokes
+
 PHASE 1
 	Parsing
-		Modifiers?
+#		Containers
+#		Strokes
+		Modifiers!
+			Tenu
+			Smaller winkelhaken?
 	Rendering
-		Dimensional propagation
-		Modifiers
-		Cairo
+#		Dimensional propagation
+#		Kerning
+			Fix kerning in {[hc]h}
+#		Modifiers
+#		Cairo
+		"Narrow" renderer
 
 PHASE 2
 	Comparisons
