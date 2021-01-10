@@ -127,6 +127,10 @@ class UpDiag(Stroke):
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
+	
+	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'b')
+		rend.draw_upward(*self.pos, *self.dims, self.doubled)
 
 class DownDiag(Stroke):
 	def __str__(self):
@@ -134,6 +138,10 @@ class DownDiag(Stroke):
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
+	
+	def draw(self, rend):
+		rend.box(*self.pos, *self.dims, 'b')
+		rend.draw_downward(*self.pos, *self.dims, self.doubled)
 
 class Winkelhaken(Stroke):
 	def __init__(self, *args, **kwargs):

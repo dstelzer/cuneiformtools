@@ -1,11 +1,11 @@
 import subprocess as sp
 from tempfile import NamedTemporaryFile
-from math import pi
+from math import pi, atan, cos, sqrt
 from time import sleep
 
 import cairo
 
-DRAW_BOXES = False
+DRAW_BOXES = True
 
 class Renderer:
 	def __init__(self, width, height, skip=False):
@@ -94,6 +94,59 @@ class Renderer:
 		
 		rend.ctx.restore()
 		return rend
+	
+	def draw_downward(self, x, y, w, h, double=False):
+	#	print(x, y, w, h)
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		theta = atan(h/w)
+		phi = (pi/2) - theta
+	#	print('theta', theta*180/pi, 'phi', phi*180/pi)
+		
+		# I need to attach a diagram to make this all make sense...
+		head = min(h, 1/3) # The width of the stroke head
+		diag = sqrt(w**2 + h**2)
+		
+		if h > w:
+			x2 = head / (2*cos(phi))
+			y2 = 0
+			x3 = -head
+			cutoff = (head*w) / (2*h)
+		else:
+			x2 = 0
+			y2 = head / (2*cos(theta))
+			x3 = 0
+			cutoff = (head*h) / (2*w)
+		
+		stroke = diag - cutoff
+		
+		c.translate(x2, y2) # Set the new origin point
+		c.rotate(-phi)
+		c.translate(x3, 0)
+		if double:
+			self.draw_double(0, 0, head, stroke)
+		else:
+			self.draw_vertical(0, 0, head, stroke)
+	#	print('head', head, 'stroke', stroke)
+		c.restore()
+	
+	def draw_double_downward(self, x, y, w, h):
+		self.draw_downward(x, y, w, h, double=True)
+	
+	def draw_upward(self, x, y, w, h, double=False):
+		self.ctx.save()
+		self.ctx.translate(x, y)
+		self.ctx.scale(1, -1) # Invert vertical axis
+		self.ctx.translate(0, -h)
+		
+		self.draw_downward(0, 0, w, h, double)
+		
+		self.ctx.restore()
+	
+	def draw_double_upward(self, x, y, w, h):
+		self.draw_upward(x, y, w, h, double=True)
 
 class OneSidedRenderer(Renderer):
 	def draw_vertical(self, x, y, w, h):
