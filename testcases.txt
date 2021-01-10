@@ -1,0 +1,20 @@
+# Test shapes of individual strokes and containers
+(Hv)
+(hV)
+c
+[du]
+[DU]
+{hh}
+
+# Test kerning
+[cvh]
+L[vcvh]
+W[hvcvh]
+{vhch}
+
+# Test kerning in groups
+{v[hc]}
+{v[hc]h}
+{h[hc]v}
+[h{vc}v]
+[v{vc}h]

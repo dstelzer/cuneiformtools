@@ -9,6 +9,10 @@ class Element:
 	def kern_right(self): return 0
 	def kern_top(self): return 0
 	def kern_bottom(self): return 0
+	def allow_kern_leftward(self): return True
+	def allow_kern_rightward(self): return True
+	def allow_kern_upward(self): return True
+	def allow_kern_downward(self): return True
 
 class CanvasShape(Enum):
 	PORTRAIT = 'P'
@@ -83,6 +87,8 @@ class Vertical(Stroke):
 		self.adjust = (adj_x, adj_y)
 	def kern_left(self): return self.dims[0]/2
 	def kern_right(self): return self.dims[0]/2
+	def allow_kern_leftward(self): return False
+	def allow_kern_rightward(self): return False
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -106,6 +112,8 @@ class Horizontal(Stroke):
 		self.adjust = (adj_x, adj_y)
 	def kern_top(self): return self.dims[1]/2
 	def kern_bottom(self): return self.dims[1]/2
+	def allow_kern_upward(self): return False
+	def allow_kern_downward(self): return False
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -200,9 +208,9 @@ class HStack(Container):
 				if each.can_expand_horizontally(): continue # Ignore flexible ones
 				used = each.dims[0]
 				# Can we kern this into its neighbors?
-				if i-1 >= 0 and not each.kern_left():
+				if i-1 >= 0 and each.allow_kern_leftward():
 					used -= self.contents[i-1].kern_right()
-				if i+1 < len(self.contents) and not each.kern_right():
+				if i+1 < len(self.contents) and each.allow_kern_rightward():
 					used -= self.contents[i+1].kern_left()
 				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
 				fixed_space += used
@@ -224,7 +232,7 @@ class HStack(Container):
 					current_position += portion
 					# current_position += each.adjust[0] # Flexible ones should never have adjustment values in the direction that they're flexible - they're expected to take up all the space they're given
 				
-				elif left_kerning and not each.kern_left(): # This one should be nudged to the left
+				elif left_kerning and each.allow_kern_leftward(): # This one should be nudged to the left
 					new_x = current_position - left_kerning
 					each.propagate_dimensions((each_w, h), (new_x, y))
 					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
@@ -237,7 +245,7 @@ class HStack(Container):
 					current_position += each.dims[0]
 					current_position += each.adjust[0]
 				
-				if right_kerning and not each.kern_right() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
+				if right_kerning and each.allow_kern_rightward() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= right_kerning
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
@@ -250,6 +258,10 @@ class HStack(Container):
 	
 	def kern_left(self): return self.contents[0].kern_left()
 	def kern_right(self): return self.contents[-1].kern_right()
+	def allow_kern_leftward(self): return self.contents[0].allow_kern_leftward()
+	def allow_kern_rightward(self): return self.contents[-1].allow_kern_rightward()
+	def allow_kern_upward(self): return all(c.allow_kern_upward() for c in self.contents)
+	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
 
 class VStack(Container):
 	def __str__(self):
@@ -272,9 +284,9 @@ class VStack(Container):
 				if each.can_expand_vertically(): continue # Ignore flexible ones
 				used = each.dims[1]
 				# Can we kern this into its neighbors?
-				if i-1 >= 0 and not each.kern_top():
+				if i-1 >= 0 and each.allow_kern_upward():
 					used -= self.contents[i-1].kern_bottom()
-				if i+1 < len(self.contents) and not each.kern_bottom():
+				if i+1 < len(self.contents) and each.allow_kern_downward():
 					used -= self.contents[i+1].kern_top()
 				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
 				fixed_space += used
@@ -296,7 +308,7 @@ class VStack(Container):
 					current_position += portion
 					# See HStack for justification
 				
-				elif top_kerning and not each.kern_top(): # This one should be nudged upward
+				elif top_kerning and each.allow_kern_upward(): # This one should be nudged upward
 					new_y = current_position - top_kerning
 					each.propagate_dimensions((w, each_h), (x, new_y))
 					# As above
@@ -309,7 +321,7 @@ class VStack(Container):
 					current_position += each.dims[1]
 					current_position += each.adjust[1]
 				
-				if bottom_kerning and not each.kern_bottom() and not each.can_expand_vertically(): # Finally, check to see if we need to adjust the kerning for the *next* element
+				if bottom_kerning and each.allow_kern_downward() and not each.can_expand_vertically(): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= bottom_kerning
 				if previous_position > current_position: # But don't allow any element to take less than zero height
 					current_position = previous_position
@@ -322,6 +334,10 @@ class VStack(Container):
 	
 	def kern_top(self): return self.contents[0].kern_top()
 	def kern_bottom(self): return self.contents[-1].kern_bottom()
+	def allow_kern_upward(self): return self.contents[0].allow_kern_upward()
+	def allow_kern_downward(self): return self.contents[-1].allow_kern_downward()
+	def allow_kern_leftward(self): return all(c.allow_kern_leftward() for c in self.contents)
+	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
 
 class Superpose(Container):
 	def __init__(self, *args, **kwargs):
@@ -341,6 +357,13 @@ class Superpose(Container):
 	def kern_right(self): return min(c.kern_right() for c in self.contents)
 	def kern_top(self): return min(c.kern_top() for c in self.contents)
 	def kern_bottom(self): return min(c.kern_bottom() for c in self.contents)
+	def allow_kern_upward(self): return any(c.allow_kern_upward() for c in self.contents)
+	def allow_kern_downward(self): return any(c.allow_kern_downward() for c in self.contents)
+	def allow_kern_leftward(self): return any(c.allow_kern_leftward() for c in self.contents)
+	def allow_kern_rightward(self): return any(c.allow_kern_rightward() for c in self.contents)
+	# TODO: Should this be all instead of any?
+	# Superposition is generally used for elements that intersect which means horizontal elements don't go all the way to the top/bot and vertical elements don't go all the way to the left/right
+	# But adjust this if it causes problems
 
 class Nudge(Container):
 	only_repeat_strokes = False
