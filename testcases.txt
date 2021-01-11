@@ -1,9 +1,19 @@
+# Quick overview of test cases for looking for breaks
+(h2v) # AN
+P[vv2] # A
+[cvh] # ŠI
+{chhc} # UP
+L{d(u[0vv0])} # NI
+L[{0[hc]h}v{0dh}] # WI5/GEŠTIN
+<T{[vvv]v}> # ḪI
+W[cvh2vvcv] # AR
+
 # Test shapes of individual strokes and containers
-(Hv)
-(hV)
+(h2v)
+(hv2)
 c
 [du]
-[DU]
+[d2u2]
 {hh}
 
 # Test kerning
@@ -20,7 +30,7 @@ W[hvcvh]
 [v{vc}h]
 
 # Test diagonals
-{dD}
+{dd2}
 [uU]
 {d(u[0vv0])}
 [{0[hc]h}v{0dh}]

@@ -4,7 +4,8 @@ from math import sqrt
 class Modifier(Enum): # Modifiers that can be applied to strokes
 	HEADSHORT = "'"
 	TAILSHORT = '"'
-	TRIPLED = '3' # TODO
+	DOUBLE = '2'
+	TRIPLE = '3' # TODO
 	# TODO incorporate doubling here?
 
 class Element:
@@ -18,6 +19,8 @@ class Element:
 	def allow_kern_rightward(self): return True
 	def allow_kern_upward(self): return True
 	def allow_kern_downward(self): return True
+	
+	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead')
 
 class CanvasShape(Enum):
 	PORTRAIT = 'P'
@@ -49,9 +52,8 @@ class Canvas(Element):
 		self.internal.draw(rend)
 
 class Stroke(Element):
-	def __init__(self, doubled, mods=None, *args, **kwargs):
+	def __init__(self, mods=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.doubled = doubled
 		self.mods = mods or set()
 	
 	def modstr(self):
@@ -66,7 +68,7 @@ class Stroke(Element):
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
-		super().__init__(doubled=False, mods=None, *args, **kwargs)
+		super().__init__(mods=None, *args, **kwargs)
 	def __str__(self): return '0'
 	def can_expand_horizontally(self): return True
 	def can_expand_vertically(self): return True
@@ -74,7 +76,7 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 
 class Vertical(Stroke):
 	def __str__(self):
-		return ('V' if self.doubled else 'v') + self.modstr()
+		return 'v' + self.modstr()
 	
 	def can_expand_vertically(self): return True
 	def propagate_dimensions(self, dims, pos):
@@ -94,11 +96,11 @@ class Vertical(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
-		rend.draw_vertical(*self.pos, *self.dims, self.doubled, self.mods)
+		rend.draw_vertical(*self.pos, *self.dims, self.mods)
 
 class Horizontal(Stroke):
 	def __str__(self):
-		return ('H' if self.doubled else 'h') + self.modstr()
+		return 'h' + self.modstr()
 	
 	def can_expand_horizontally(self): return True
 	def propagate_dimensions(self, dims, pos):
@@ -118,33 +120,33 @@ class Horizontal(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
-		rend.draw_horizontal(*self.pos, *self.dims, self.doubled, self.mods)
+		rend.draw_horizontal(*self.pos, *self.dims, self.mods)
 
 class UpDiag(Stroke):
 	def __str__(self):
-		return ('U' if self.doubled else 'u') + self.modstr()
+		return 'u' + self.modstr()
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
-		rend.draw_upward(*self.pos, *self.dims, self.doubled, self.mods)
+		rend.draw_upward(*self.pos, *self.dims, self.mods)
 
 class DownDiag(Stroke):
 	def __str__(self):
-		return ('D' if self.doubled else 'd') + self.modstr()
+		return 'd' + self.modstr()
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
-		rend.draw_downward(*self.pos, *self.dims, self.doubled, self.mods)
+		rend.draw_downward(*self.pos, *self.dims, self.mods)
 
 class Winkelhaken(Stroke):
 	def __init__(self, *args, **kwargs):
-		super().__init__(doubled=False, mods=None, *args, **kwargs)
+		super().__init__(mods=None, *args, **kwargs)
 	
 	def __str__(self):
 		return 'c'

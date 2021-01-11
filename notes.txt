@@ -1,8 +1,8 @@
 Types of nodes:
-	h H	Horizontal (doubled)
-	v V	Vertical (doubled)
-	u U	Up diagonal (doubled)
-	d D	Down diagonal (doubled)
+	h	Horizontal
+	v	Vertical
+	u	Up diagonal
+	d	Down diagonal
 	c	Winkelhaken
 	0	Void
 	
@@ -19,18 +19,19 @@ Types of nodes:
 	W	Wider-than-landscape
 
 Modifiers:
-	Shorten at head, applied to strokes
-	Shorten at tail, applied to strokes
-	Triple, applied to strokes
+	'	Shorten at head
+	"	Shorten at tail
+	2	Double
+	3	Triple
 
 PHASE 1
 	Parsing
 #		Containers
 #		Strokes
-		Modifiers!
+#		Modifiers!
 #			Tenu
-			Shorten head
-			Shorten tail
+#			Shorten head
+#			Shorten tail
 #	Rendering
 #		Dimensional propagation
 #		Kerning

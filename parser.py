@@ -4,11 +4,20 @@ from elements import *
 
 STARTS = '([{<'
 ENDS = ')]}>'
-MODS = '"\'3'
-ADJS = 'T'
+MODS = set(m.value for m in Modifier)
+ADJS = {
+	'T':Tenu
+}
 
-SHAPES = 'PLSW'
-STROKES = 'hHvVuUdDc0'
+SHAPES = set(s.value for s in CanvasShape)
+STROKES = {
+	'h':Horizontal,
+	'v':Vertical,
+	'u':UpDiag,
+	'd':DownDiag,
+	'c':Winkelhaken,
+	'0':Void,
+}
 
 IGNORE = ', \t\n\v'
 
@@ -42,23 +51,6 @@ class ParseFrame:
 		
 		return newtype(self.contents[1:-1])
 
-def make_stroke(char):
-	if   char == 'h': return Horizontal(False)
-	elif char == 'H': return Horizontal(True)
-	elif char == 'v': return Vertical(False)
-	elif char == 'V': return Vertical(True)
-	elif char == 'd': return DownDiag(False)
-	elif char == 'D': return DownDiag(True)
-	elif char == 'u': return UpDiag(False)
-	elif char == 'U': return UpDiag(True)
-	elif char == 'c': return Winkelhaken()
-	elif char == '0': return Void()
-	raise ValueError(char)
-
-def make_adjustment(char):
-	if  char == 'T': return Tenu # Returning the class, not an instance
-	raise ValueError(char)
-
 def report_error(error, string, start, end):
 	print('Parse error:', error)
 	print(string)
@@ -85,7 +77,7 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			if char == '<': looking_for_adjustment = True
 		
 		elif char in ADJS and looking_for_adjustment:
-			adj = make_adjustment(char)
+			adj = ADJS[char]
 			container_stack[-1].contents.append(adj)
 			looking_for_adjustment = False
 		
@@ -97,7 +89,7 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			container_stack[-1].contents.append(output)
 		
 		elif char in STROKES:
-			stroke = make_stroke(char)
+			stroke = STROKES[char]() # The parentheses are because we want to construct one, not just get the type
 			container_stack[-1].contents.append(stroke)
 		
 		elif char in MODS:

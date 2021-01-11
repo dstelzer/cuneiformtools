@@ -42,13 +42,10 @@ class Renderer:
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
-	#	with NamedTemporaryFile(suffix='.png') as f:
 		with open('tmp.png', 'wb') as f:
-	#		fn = f.name
 			fn = 'tmp.png'
 			self.surf.write_to_png(fn)
 			sp.run(['xdg-open', fn])
-	#		sleep(0.25)
 	
 	def draw_single(self, x, y, w, h):
 		raise NotImplemented() # To be implemented in derived classes
@@ -59,7 +56,7 @@ class Renderer:
 	def draw_hook(self, x, y, w, h):
 		raise NotImplemented() # Same
 	
-	def draw_stroke(self, x, y, w, h, double, mods):
+	def draw_stroke(self, x, y, w, h, mods):
 		adj_amount = h/3
 		if Modifier.HEADSHORT in mods:
 			h -= adj_amount
@@ -67,21 +64,21 @@ class Renderer:
 		if Modifier.TAILSHORT in mods:
 			h -= adj_amount
 		
-		if double: self.draw_double(x, y, w, h)
+		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h)
 		else: self.draw_single(x, y, w, h)
 	
-	def draw_vertical(self, x, y, w, h, double=False, mods=()):
-		self.draw_stroke(x, y, w, h, double, mods)
+	def draw_vertical(self, x, y, w, h, mods=()):
+		self.draw_stroke(x, y, w, h, mods)
 	
-	def draw_horizontal(self, x, y, w, h, double=False, mods=()):
+	def draw_horizontal(self, x, y, w, h, mods=()):
 		self.ctx.save()
 		self.ctx.rotate(-pi/2)
 		
-		self.draw_stroke(-y-h, x, h, w, double, mods)
+		self.draw_stroke(-y-h, x, h, w, mods)
 		
 		self.ctx.restore()
 	
-	def draw_downward(self, x, y, w, h, double=False, mods=()):
+	def draw_downward(self, x, y, w, h, mods=()):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -109,16 +106,16 @@ class Renderer:
 		c.translate(x2, y2) # Set the new origin point
 		c.rotate(-phi)
 		c.translate(x3, 0)
-		self.draw_stroke(0, 0, head, stroke, double, mods)
+		self.draw_stroke(0, 0, head, stroke, mods)
 		c.restore()
 	
-	def draw_upward(self, x, y, w, h, double=False, mods=()):
+	def draw_upward(self, x, y, w, h, mods=()):
 		self.ctx.save()
 		self.ctx.translate(x, y)
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		self.draw_downward(0, 0, w, h, double, mods) # Delegate to downward
+		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
 	
@@ -373,7 +370,8 @@ class LinearRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_downward(self, x, y, w, h, double=False): # We override this method too, because with the linear renderer we can get closer to the corners without the head getting in the way
+	def draw_downward(self, x, y, w, h, mods=()): # We override this method too, because with the linear renderer we can get closer to the corners without the head getting in the way
+		# draw_upward by default delegates to this one so we don't need to override it too
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -381,13 +379,13 @@ class LinearRenderer(Renderer):
 		c.rotate(-theta)
 		c.translate(-self.WIDTH/2, 0)
 		hyp = sqrt(w**2+h**2)
-		self.draw_stroke(0, 0, self.WIDTH, hyp, double)
+		self.draw_stroke(0, 0, self.WIDTH, hyp, mods)
 		c.restore()
 
 if __name__ == '__main__':
 	rend = TwoSidedRenderer(256, 256)
 	rend.blank()
-	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, double=True)
+	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.DOUBLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2, 0.25, 0.25)
 	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25)
 	rend.show()
