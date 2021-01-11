@@ -9,4 +9,4 @@ if __name__ == '__main__':
 			construct = parse(input())
 		except ValueError: pass
 		print(construct)
-		LinearRenderer.render(construct).show()
+		TwoSidedRenderer.render(construct).show()

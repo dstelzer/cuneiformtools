@@ -145,7 +145,7 @@ class Renderer:
 		
 		c.translate(x, y+h/2)
 		c.rotate(-pi/4)
-		c.translate(0, -h/2)
+		c.translate(0, 0)
 		
 		yield self # This is where the other rendering happens
 		

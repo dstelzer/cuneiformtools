@@ -1,6 +1,5 @@
-
-
 from enum import Enum
+from math import sqrt
 
 class Element:
 	def can_expand_horizontally(self): return False
@@ -355,10 +354,14 @@ class Tenu(Adjustment): # Rotate a container 45 degrees
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
 	def propagate_dimensions(self, dims, pos):
-		self.dims = dims
-		self.pos = pos
-		self.adjust = (0,0)
-		self.child.propagate_dimensions(dims, (0, 0)) # Set position to (0,0) to make the rendering hack work better
+		(x,y) = pos
+		(w,h) = dims
+		d = min(dims)
+		self.adjust = (dx,dy) = (w-d)/2, (h-d)/2
+		self.pos = (x+dx, y+dy)
+		self.dims = (d, d)
+		small = d*sqrt(2)/2 # Scale down to fit in a smaller square
+		self.child.propagate_dimensions((small, small), (0, 0)) # Set position to (0,0) to make the rendering hack work better
 	def draw(self, rend):
 		with rend.tenu(self.pos, self.dims): # Context manager that adjusts the coordinate system of the canvas for this one instance, then puts it back afterward
 			self.child.draw(rend)
