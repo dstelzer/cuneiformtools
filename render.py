@@ -5,7 +5,9 @@ from contextlib import contextmanager
 
 import cairo
 
-DRAW_BOXES = True
+from elements import Modifier
+
+DRAW_BOXES = False
 
 class Renderer:
 	def __init__(self, width, height, skip=False):
@@ -57,22 +59,29 @@ class Renderer:
 	def draw_hook(self, x, y, w, h):
 		raise NotImplemented() # Same
 	
-	def draw_stroke(self, x, y, w, h, double):
+	def draw_stroke(self, x, y, w, h, double, mods):
+		adj_amount = h/3
+		if Modifier.HEADSHORT in mods:
+			h -= adj_amount
+			y += adj_amount
+		if Modifier.TAILSHORT in mods:
+			h -= adj_amount
+		
 		if double: self.draw_double(x, y, w, h)
 		else: self.draw_single(x, y, w, h)
 	
-	def draw_vertical(self, x, y, w, h, double=False):
-		self.draw_stroke(x, y, w, h, double)
+	def draw_vertical(self, x, y, w, h, double=False, mods=()):
+		self.draw_stroke(x, y, w, h, double, mods)
 	
-	def draw_horizontal(self, x, y, w, h, double=False):
+	def draw_horizontal(self, x, y, w, h, double=False, mods=()):
 		self.ctx.save()
 		self.ctx.rotate(-pi/2)
 		
-		self.draw_stroke(-y-h, x, h, w, double)
+		self.draw_stroke(-y-h, x, h, w, double, mods)
 		
 		self.ctx.restore()
 	
-	def draw_downward(self, x, y, w, h, double=False):
+	def draw_downward(self, x, y, w, h, double=False, mods=()):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -100,16 +109,16 @@ class Renderer:
 		c.translate(x2, y2) # Set the new origin point
 		c.rotate(-phi)
 		c.translate(x3, 0)
-		self.draw_stroke(0, 0, head, stroke, double)
+		self.draw_stroke(0, 0, head, stroke, double, mods)
 		c.restore()
 	
-	def draw_upward(self, x, y, w, h, double=False):
+	def draw_upward(self, x, y, w, h, double=False, mods=()):
 		self.ctx.save()
 		self.ctx.translate(x, y)
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		self.draw_downward(0, 0, w, h, double) # Delegate to downward
+		self.draw_downward(0, 0, w, h, double, mods) # Delegate to downward
 		
 		self.ctx.restore()
 	

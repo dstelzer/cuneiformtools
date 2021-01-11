@@ -4,7 +4,7 @@ from elements import *
 
 STARTS = '([{<'
 ENDS = ')]}>'
-MODS = ''
+MODS = '"\'3'
 ADJS = 'T'
 
 SHAPES = 'PLSW'

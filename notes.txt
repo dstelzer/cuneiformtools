@@ -4,13 +4,14 @@ Types of nodes:
 	u U	Up diagonal (doubled)
 	d D	Down diagonal (doubled)
 	c	Winkelhaken
+	0	Void
 	
 	[ ]	Horizontal stacking
 	{ }	Vertical stacking
 	( )	Superimposition
 	
-	< >	Smaller version (pos first element)
-			Is this necessary?
+	< >	"Adjustment", first character determines
+		T	Tenû (slanted)
 	
 	P	Portrait
 	L	Landscape
@@ -18,7 +19,6 @@ Types of nodes:
 	W	Wider-than-landscape
 
 Modifiers:
-	Tenu (slanting), applied to containers
 	Shorten at head, applied to strokes
 	Shorten at tail, applied to strokes
 	Triple, applied to strokes
@@ -28,8 +28,9 @@ PHASE 1
 #		Containers
 #		Strokes
 		Modifiers!
-			Tenu
-			Smaller winkelhaken?
+#			Tenu
+			Shorten head
+			Shorten tail
 #	Rendering
 #		Dimensional propagation
 #		Kerning
