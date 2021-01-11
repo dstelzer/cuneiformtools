@@ -27,7 +27,6 @@ class Canvas(Element):
 		super().__init__(*args, **kwargs)
 		self.shape = CanvasShape(shape)
 		self.internal = internal
-		if isinstance(self.internal, Number): raise ValueError('Canvas cannot contain numbers directly')
 	
 	def __str__(self):
 		return f'{self.shape.value} {self.internal}'
@@ -43,15 +42,6 @@ class Canvas(Element):
 	
 	def draw(self, rend):
 		self.internal.draw(rend)
-
-class Number(Element):
-	def __init__(self, value, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		self.value = int(value)
-		if self.value < 1 or self.value > 9: raise ValueError('Number must be a single digit', self.value)
-	
-	def __str__(self):
-		return str(self.value)
 
 class Stroke(Element):
 	def __init__(self, doubled, *args, **kwargs):
@@ -167,23 +157,11 @@ class Winkelhaken(Stroke):
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_hook(*self.pos, *self.dims)
 
-class Container(Element):
-	only_repeat_strokes = True # Inherited by every child except Nudge
-	
+class Container(Element):	
 	def __init__(self, contents=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		if contents is None: contents = []
 		self.contents = contents
-		self.number = None
-		
-		number_count = sum(1 for e in self.contents if isinstance(e, Number))
-		if number_count > 1: raise ValueError('Only one number allowed')
-		if number_count == 1:
-			if len(self.contents) != 2: raise ValueError('A number must be followed by a single element')
-			if not isinstance(self.contents[0], Number): raise ValueError('The number must come first')
-			if self.only_repeat_strokes and not isinstance(self.contents[1], Stroke): raise ValueError('Only single strokes can be repeated')
-			self.number = self.contents[0]
-			self.contents = self.contents[1:]
 	
 	def can_expand_horizontally(self): return any(e.can_expand_horizontally() for e in self.contents)
 	def can_expand_vertically(self): return any(e.can_expand_vertically() for e in self.contents)
@@ -194,19 +172,18 @@ class Container(Element):
 
 class HStack(Container):
 	def __str__(self):
-		if self.number is not None: return f'[{self.number} {self.contents[0]}]'
-		else: return '[' + ','.join(str(c) for c in self.contents) + ']'
+		return '[' + ','.join(str(c) for c in self.contents) + ']'
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = self.number or len(self.contents)
+		pieces = len(self.contents)
 		each_w = w/pieces
 		for i, each in enumerate(self.contents): each.propagate_dimensions((each_w, h), (x+i*each_w, y))
 		
 		# Now check if we have to do any fancy kerning and recalculation
-		if (not self.number) and any(each.can_expand_horizontally() for each in self.contents):
+		if any(each.can_expand_horizontally() for each in self.contents):
 			# In this case, we have different types of strokes together, and some of them can expand horizontally
 			# So first we calculate how much space is currently used and can't be avoided
 			fixed_space = 0
@@ -271,19 +248,18 @@ class HStack(Container):
 
 class VStack(Container):
 	def __str__(self):
-		if self.number is not None: return '{' + f'{self.number} {self.contents[0]}' + '}'
-		else: return '{' + ','.join(str(c) for c in self.contents) + '}'
+		return '{' + ','.join(str(c) for c in self.contents) + '}'
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = self.number or len(self.contents)
+		pieces = len(self.contents)
 		each_h = h/pieces
 		for i, each in enumerate(self.contents): each.propagate_dimensions((w, each_h), (x, y+i*each_h))
 		
 		# Now check if we have to do any fancy kerning and recalculation
-		if (not self.number) and any(each.can_expand_vertically() for each in self.contents):
+		if any(each.can_expand_vertically() for each in self.contents):
 			# The algorithm is the same as for horizontal, so see HStack for details
 			fixed_space = 0
 			for i, each in enumerate(self.contents):
@@ -346,10 +322,6 @@ class VStack(Container):
 	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
 
 class Superpose(Container):
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		if self.number is not None: raise ValueError('Superposition does not allow repetition')
-	
 	def __str__(self):
 		return '(' + ','.join(str(c) for c in self.contents) + ')'
 	
@@ -371,28 +343,22 @@ class Superpose(Container):
 	# Superposition is generally used for elements that intersect which means horizontal elements don't go all the way to the top/bot and vertical elements don't go all the way to the left/right
 	# But adjust this if it causes problems
 
-class Nudge(Container):
-	only_repeat_strokes = False
-	
+class Adjustment(Container):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		if len(self.contents) > 1: raise ValueError('<>-containers can contain only a single element')
-		if self.number is None: self.number = Number(5) # Centered
-		self.region = self.number
+		if len(self.contents) != 1: raise ValueError('Adjustments must contain a single element')
 		self.child = self.contents[0]
-	
+
+class Tenu(Adjustment): # Rotate a container 45 degrees
 	def __str__(self):
-		return f'<{self.region} {self.child}>'
-	
+		return f'<T {self.child}>'
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
 	def propagate_dimensions(self, dims, pos):
-		self.dims = (w,h) = dims
-		self.pos = (x,y) = pos
-		self.adjust = 0,0
-		w, h = w/3, h/3 # 1/9 of the total area
-		which_x = (self.region.value-1) % 3 # Choose a region
-		which_y = (self.region.value-1) // 3 # (Each coord in [0,3])
-		x += which_x * w
-		y += which_y * h
-		self.child.propagate_dimensions((w,h), (x,y))
+		self.dims = dims
+		self.pos = pos
+		self.adjust = (0,0)
+		self.child.propagate_dimensions(dims, (0, 0)) # Set position to (0,0) to make the rendering hack work better
+	def draw(self, rend):
+		with rend.tenu(self.pos, self.dims): # Context manager that adjusts the coordinate system of the canvas for this one instance, then puts it back afterward
+			self.child.draw(rend)

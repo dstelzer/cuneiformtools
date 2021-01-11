@@ -5,10 +5,10 @@ from elements import *
 STARTS = '([{<'
 ENDS = ')]}>'
 MODS = ''
+ADJS = 'T'
 
 SHAPES = 'PLSW'
 STROKES = 'hHvVuUdDc0'
-NUMBERS = '123456789'
 
 IGNORE = ', \t\n\v'
 
@@ -28,17 +28,19 @@ class ParseFrame:
 		if STARTS.index(a) != ENDS.index(z): raise ValueError('Delimiters don\'t match', a, z)
 		
 		if a == '[':
-			type = HStack
+			newtype = HStack
 		elif a == '{':
-			type = VStack
+			newtype = VStack
 		elif a == '(':
-			type = Superpose
+			newtype = Superpose
 		elif a == '<':
-			type = Nudge
+			newtype = self.contents[1]
+			if type(newtype) != type: raise ValueError('Missing adjustment character')
+			del self.contents[1] # Remove from consideration
 		
 		if len(self.contents) < 3: raise ValueError('Empty container')
 		
-		return type(self.contents[1:-1])
+		return newtype(self.contents[1:-1])
 
 def make_stroke(char):
 	if   char == 'h': return Horizontal(False)
@@ -51,6 +53,11 @@ def make_stroke(char):
 	elif char == 'U': return UpDiag(True)
 	elif char == 'c': return Winkelhaken()
 	elif char == '0': return Void()
+	raise ValueError(char)
+
+def make_adjustment(char):
+	if  char == 'T': return Tenu # Returning the class, not an instance
+	raise ValueError(char)
 
 def report_error(error, string, start, end):
 	print('Parse error:', error)
@@ -59,6 +66,7 @@ def report_error(error, string, start, end):
 
 def internal_parse(string, container_stack=None): # The actual parsing, which can throw ValueErrors if something is wrong
 	shape = 'S' # Default if not specified
+	looking_for_adjustment = False
 	if container_stack is None: container_stack = [ParseFrame(initial=True)]
 	
 	for i, char in enumerate(string):
@@ -74,6 +82,12 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			new_frame = ParseFrame(i)
 			container_stack.append(new_frame)
 			container_stack[-1].contents.append(char)
+			if char == '<': looking_for_adjustment = True
+		
+		elif char in ADJS and looking_for_adjustment:
+			adj = make_adjustment(char)
+			container_stack[-1].contents.append(adj)
+			looking_for_adjustment = False
 		
 		elif char in ENDS:
 			if container_stack[-1].initial: raise ValueError('Unmatched closer')
@@ -85,10 +99,6 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 		elif char in STROKES:
 			stroke = make_stroke(char)
 			container_stack[-1].contents.append(stroke)
-		
-		elif char in NUMBERS:
-			num = Number(char)
-			container_stack[-1].contents.append(num)
 		
 		elif char in MODS:
 			container_stack[-1].contents[-1].add_modifier(char)

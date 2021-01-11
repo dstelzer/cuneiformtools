@@ -4,13 +4,10 @@ Types of nodes:
 	u U	Up diagonal (doubled)
 	d D	Down diagonal (doubled)
 	c	Winkelhaken
-	TODO shorteners
 	
 	[ ]	Horizontal stacking
 	{ }	Vertical stacking
 	( )	Superimposition
-	2-9	Repeat
-			Is this necessary?
 	
 	< >	Smaller version (pos first element)
 			Is this necessary?
@@ -18,6 +15,7 @@ Types of nodes:
 	P	Portrait
 	L	Landscape
 	S	Square
+	W	Wider-than-landscape
 
 Modifiers:
 	Tenu (slanting), applied to containers
@@ -32,13 +30,13 @@ PHASE 1
 		Modifiers!
 			Tenu
 			Smaller winkelhaken?
-	Rendering
+#	Rendering
 #		Dimensional propagation
 #		Kerning
-			Fix kerning in {[hc]h}
+#			Fix kerning in {[hc]h}
 #		Modifiers
 #		Cairo
-		"Narrow" renderer
+#		"Narrow" renderer
 
 PHASE 2
 	Comparisons

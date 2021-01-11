@@ -1,11 +1,11 @@
 import subprocess as sp
-from tempfile import NamedTemporaryFile
 from math import pi, atan, cos, sqrt
 from time import sleep
+from contextlib import contextmanager
 
 import cairo
 
-DRAW_BOXES = False
+DRAW_BOXES = True
 
 class Renderer:
 	def __init__(self, width, height, skip=False):
@@ -134,6 +134,22 @@ class Renderer:
 		
 		rend.ctx.restore()
 		return rend
+	
+	@contextmanager
+	def tenu(self, pos, dims): # Tilt the whole canvas sideways temporarily
+		c = self.ctx
+		c.save()
+		
+		x, y = pos
+		w, h = dims
+		
+		c.translate(x, y+h/2)
+		c.rotate(-pi/4)
+		c.translate(0, -h/2)
+		
+		yield self # This is where the other rendering happens
+		
+		c.restore() # Un-tenu-fy the canvas again
 
 class OneSidedRenderer(Renderer):
 	def draw_single(self, x, y, w, h):
