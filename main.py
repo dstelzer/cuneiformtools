@@ -1,6 +1,6 @@
 
 
-from render import TwoSidedRenderer
+from render import *
 from parser import parse
 
 if __name__ == '__main__':
@@ -9,4 +9,4 @@ if __name__ == '__main__':
 			construct = parse(input())
 		except ValueError: pass
 		print(construct)
-		TwoSidedRenderer.render(construct).show()
+		LinearRenderer.render(construct).show()

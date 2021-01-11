@@ -93,8 +93,7 @@ class Vertical(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
-		if self.doubled: rend.draw_double(*self.pos, *self.dims)
-		else: rend.draw_vertical(*self.pos, *self.dims)
+		rend.draw_vertical(*self.pos, *self.dims, self.doubled)
 
 class Horizontal(Stroke):
 	def __str__(self):
@@ -118,8 +117,7 @@ class Horizontal(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
-		if self.doubled: rend.draw_double_horizontal(*self.pos, *self.dims)
-		else: rend.draw_horizontal(*self.pos, *self.dims)
+		rend.draw_horizontal(*self.pos, *self.dims, self.doubled)
 
 class UpDiag(Stroke):
 	def __str__(self):

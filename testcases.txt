@@ -18,3 +18,9 @@ W[hvcvh]
 {h[hc]v}
 [h{vc}v]
 [v{vc}h]
+
+# Test diagonals
+{dD}
+[uU]
+{d(u[0vv0])}
+[{0[hc]h}v{0dh}]

@@ -5,7 +5,7 @@ from time import sleep
 
 import cairo
 
-DRAW_BOXES = True
+DRAW_BOXES = False
 
 class Renderer:
 	def __init__(self, width, height, skip=False):
@@ -48,7 +48,7 @@ class Renderer:
 			sp.run(['xdg-open', fn])
 	#		sleep(0.25)
 	
-	def draw_vertical(self, x, y, w, h):
+	def draw_single(self, x, y, w, h):
 		raise NotImplemented() # To be implemented in derived classes
 	
 	def draw_double(self, x, y, w, h):
@@ -57,19 +57,59 @@ class Renderer:
 	def draw_hook(self, x, y, w, h):
 		raise NotImplemented() # Same
 	
-	def draw_horizontal(self, x, y, w, h):
+	def draw_stroke(self, x, y, w, h, double):
+		if double: self.draw_double(x, y, w, h)
+		else: self.draw_single(x, y, w, h)
+	
+	def draw_vertical(self, x, y, w, h, double=False):
+		self.draw_stroke(x, y, w, h, double)
+	
+	def draw_horizontal(self, x, y, w, h, double=False):
 		self.ctx.save()
 		self.ctx.rotate(-pi/2)
 		
-		self.draw_vertical(-y-h, x, h, w)
+		self.draw_stroke(-y-h, x, h, w, double)
 		
 		self.ctx.restore()
 	
-	def draw_double_horizontal(self, x, y, w, h):
-		self.ctx.save()
-		self.ctx.rotate(-pi/2)
+	def draw_downward(self, x, y, w, h, double=False):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
 		
-		self.draw_double(-y-h, x, h, w)
+		theta = atan(h/w)
+		phi = (pi/2) - theta
+		
+		# I need to attach a diagram to make this all make sense...
+		head = min(h, 1/3) # The width of the stroke head
+		diag = sqrt(w**2 + h**2)
+		
+		if h > w:
+			x2 = head / (2*cos(phi))
+			y2 = 0
+			x3 = -head
+			cutoff = (head*w) / (2*h)
+		else:
+			x2 = 0
+			y2 = head / (2*cos(theta))
+			x3 = 0
+			cutoff = (head*h) / (2*w)
+		
+		stroke = diag - cutoff
+		
+		c.translate(x2, y2) # Set the new origin point
+		c.rotate(-phi)
+		c.translate(x3, 0)
+		self.draw_stroke(0, 0, head, stroke, double)
+		c.restore()
+	
+	def draw_upward(self, x, y, w, h, double=False):
+		self.ctx.save()
+		self.ctx.translate(x, y)
+		self.ctx.scale(1, -1) # Invert vertical axis
+		self.ctx.translate(0, -h)
+		
+		self.draw_downward(0, 0, w, h, double) # Delegate to downward
 		
 		self.ctx.restore()
 	
@@ -94,62 +134,9 @@ class Renderer:
 		
 		rend.ctx.restore()
 		return rend
-	
-	def draw_downward(self, x, y, w, h, double=False):
-	#	print(x, y, w, h)
-		c = self.ctx
-		c.save()
-		c.translate(x, y)
-		
-		theta = atan(h/w)
-		phi = (pi/2) - theta
-	#	print('theta', theta*180/pi, 'phi', phi*180/pi)
-		
-		# I need to attach a diagram to make this all make sense...
-		head = min(h, 1/3) # The width of the stroke head
-		diag = sqrt(w**2 + h**2)
-		
-		if h > w:
-			x2 = head / (2*cos(phi))
-			y2 = 0
-			x3 = -head
-			cutoff = (head*w) / (2*h)
-		else:
-			x2 = 0
-			y2 = head / (2*cos(theta))
-			x3 = 0
-			cutoff = (head*h) / (2*w)
-		
-		stroke = diag - cutoff
-		
-		c.translate(x2, y2) # Set the new origin point
-		c.rotate(-phi)
-		c.translate(x3, 0)
-		if double:
-			self.draw_double(0, 0, head, stroke)
-		else:
-			self.draw_vertical(0, 0, head, stroke)
-	#	print('head', head, 'stroke', stroke)
-		c.restore()
-	
-	def draw_double_downward(self, x, y, w, h):
-		self.draw_downward(x, y, w, h, double=True)
-	
-	def draw_upward(self, x, y, w, h, double=False):
-		self.ctx.save()
-		self.ctx.translate(x, y)
-		self.ctx.scale(1, -1) # Invert vertical axis
-		self.ctx.translate(0, -h)
-		
-		self.draw_downward(0, 0, w, h, double)
-		
-		self.ctx.restore()
-	
-	def draw_double_upward(self, x, y, w, h):
-		self.draw_upward(x, y, w, h, double=True)
 
 class OneSidedRenderer(Renderer):
-	def draw_vertical(self, x, y, w, h):
+	def draw_single(self, x, y, w, h):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -215,9 +202,11 @@ class OneSidedRenderer(Renderer):
 		c.stroke()
 		
 		c.restore()
+	
+	# TODO: Upward strokes are currently inverted, should fix somehow
 
 class TwoSidedRenderer(Renderer):
-	def draw_vertical(self, x, y, w, h):
+	def draw_single(self, x, y, w, h):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -291,10 +280,89 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 
+class LinearRenderer(Renderer):
+	WIDTH = 0.1
+	
+	def draw_single(self, x, y, w, h):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		m = w/2 # Midpoint
+		nw = (m-self.WIDTH/2, 0)
+		ne = (m+self.WIDTH/2, 0)
+		s = (m, h+0.01)
+		
+		self.begin_drawing()
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*s)
+		c.line_to(*nw)
+		c.fill()
+		
+		c.restore()
+	
+	def draw_double(self, x, y, w, h):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		m = w/2 # Midpoint
+		nw = (m-self.WIDTH/2, 0)
+		ne = (m+self.WIDTH/2, 0)
+		_c = (m, h*0.25)
+		_w = (m-self.WIDTH/2, h*0.25)
+		_e = (m+self.WIDTH/2, h*0.25)
+		s = (m, h+0.01)
+		
+		self.begin_drawing()
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*_c)
+		c.line_to(*_e)
+		c.line_to(*s)
+		c.line_to(*_w)
+		c.line_to(*_c)
+		c.line_to(*nw)
+		c.fill()
+		
+		c.restore()
+	
+	def draw_hook(self, x, y, w, h):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		ne = (w, 0)
+		se = (w, h)
+		_w = (0, h/2)
+		_c = (self.WIDTH, h/2)
+		
+		self.begin_drawing()
+		c.move_to(*ne)
+		c.line_to(*_c)
+		c.line_to(*se)
+		c.line_to(*_w)
+		c.line_to(*ne)
+		c.fill()
+		
+		c.restore()
+	
+	def draw_downward(self, x, y, w, h, double=False): # We override this method too, because with the linear renderer we can get closer to the corners without the head getting in the way
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		theta = pi/2 - atan(h/w)
+		c.rotate(-theta)
+		c.translate(-self.WIDTH/2, 0)
+		hyp = sqrt(w**2+h**2)
+		self.draw_stroke(0, 0, self.WIDTH, hyp, double)
+		c.restore()
+
 if __name__ == '__main__':
 	rend = TwoSidedRenderer(256, 256)
 	rend.blank()
-	rend.draw_double(0.25, 0.25, 0.25, 0.5)
+	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, double=True)
 	rend.draw_horizontal(0.25*1.5, 0.25*2, 0.25, 0.25)
 	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25)
 	rend.show()
