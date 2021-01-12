@@ -5,8 +5,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	HEADSHORT = "'"
 	TAILSHORT = '"'
 	DOUBLE = '2'
-	TRIPLE = '3' # TODO
-	# TODO incorporate doubling here?
+	TRIPLE = '3'
 
 class Element:
 	def can_expand_horizontally(self): return False
@@ -20,7 +19,7 @@ class Element:
 	def allow_kern_upward(self): return True
 	def allow_kern_downward(self): return True
 	
-	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead')
+	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
 
 class CanvasShape(Enum):
 	PORTRAIT = 'P'
@@ -57,9 +56,12 @@ class Stroke(Element):
 		self.mods = mods or set()
 	
 	def modstr(self):
-		return ''.join(m.value for m in self.mods)
+		return ''.join(sorted(m.value for m in self.mods)) # Sort so that it's deterministic
+	
 	def add_modifier(self, mod):
 		self.mods.add(Modifier(mod))
+		if Modifier.DOUBLE in self.mods and Modifier.TRIPLE in self.mods:
+			raise ValueError('A stroke cannot be both double and triple')
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims = dims
@@ -73,6 +75,7 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def can_expand_horizontally(self): return True
 	def can_expand_vertically(self): return True
 	def draw(self, rend): pass
+	def add_modifier(self, mod): raise ValueError('Voids do not support modifiers')
 
 class Vertical(Stroke):
 	def __str__(self):
@@ -147,6 +150,8 @@ class DownDiag(Stroke):
 class Winkelhaken(Stroke):
 	def __init__(self, *args, **kwargs):
 		super().__init__(mods=None, *args, **kwargs)
+	
+	def add_modifier(self, mod): raise ValueError('Winkelhaken do not support modifiers')
 	
 	def __str__(self):
 		return 'c'

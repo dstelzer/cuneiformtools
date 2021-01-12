@@ -11,24 +11,27 @@ Types of nodes:
 	( )	Superimposition
 	
 	< >	"Adjustment", first character determines
-		T	Tenû (slanted)
 	
 	P	Portrait
 	L	Landscape
 	S	Square
-	W	Wider-than-landscape
+	W	Wider
 
 Modifiers:
 	'	Shorten at head
 	"	Shorten at tail
 	2	Double
-	3	Triple
+	3	Triple (not used in Hittite)
+			(This one's being put off for now)
+
+Adjustments:
+	T	Tenû (slanted)
 
 PHASE 1
-	Parsing
+#	Parsing
 #		Containers
 #		Strokes
-#		Modifiers!
+#		Modifiers and adjustments
 #			Tenu
 #			Shorten head
 #			Shorten tail
@@ -36,11 +39,17 @@ PHASE 1
 #		Dimensional propagation
 #		Kerning
 #			Fix kerning in {[hc]h}
-#		Modifiers
+#		Modifiers and adjustments
 #		Cairo
 #		"Narrow" renderer
 
+PHASE 1.5
+	Online web app
+
 PHASE 2
+	"Canonical form"
+		Decide on orderings
+		Decide on what to do with doubles
 	Comparisons
 	Degrees of change
 	Searching

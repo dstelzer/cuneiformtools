@@ -7,6 +7,6 @@ if __name__ == '__main__':
 	while True:
 		try:
 			construct = parse(input())
+			print(construct)
+			TwoSidedRenderer.render(construct).show()
 		except ValueError: pass
-		print(construct)
-		TwoSidedRenderer.render(construct).show()

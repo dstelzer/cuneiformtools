@@ -42,19 +42,21 @@ class Renderer:
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
-		with open('tmp.png', 'wb') as f:
-			fn = 'tmp.png'
-			self.surf.write_to_png(fn)
-			sp.run(['xdg-open', fn])
+		fn = 'tmp.png'
+		self.surf.write_to_png(fn)
+		sp.run(['xdg-open', fn])
 	
 	def draw_single(self, x, y, w, h):
-		raise NotImplemented() # To be implemented in derived classes
+		raise NotImplementedError() # To be implemented in derived classes
 	
 	def draw_double(self, x, y, w, h):
-		raise NotImplemented() # Same
+		raise NotImplementedError() # Same
+	
+	def draw_triple(self, x, y, w, h):
+		raise NotImplementedError() # Same
 	
 	def draw_hook(self, x, y, w, h):
-		raise NotImplemented() # Same
+		raise NotImplementedError() # Same
 	
 	def draw_stroke(self, x, y, w, h, mods):
 		adj_amount = h/3
@@ -65,6 +67,7 @@ class Renderer:
 			h -= adj_amount
 		
 		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h)
+		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h)
 		else: self.draw_single(x, y, w, h)
 	
 	def draw_vertical(self, x, y, w, h, mods=()):

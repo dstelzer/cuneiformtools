@@ -28,6 +28,9 @@ class ParseFrame:
 		self.initial = initial
 		self.contents = []
 	
+	def add(self, element):
+		self.contents.append(element)
+	
 	def finish(self):
 		if self.initial: raise ValueError('Unmatched closer', self.contents[-1])
 		
@@ -44,8 +47,8 @@ class ParseFrame:
 			newtype = Superpose
 		elif a == '<':
 			newtype = self.contents[1]
-			if type(newtype) != type: raise ValueError('Missing adjustment character')
-			del self.contents[1] # Remove from consideration
+			if type(newtype) != type: raise ValueError('Missing adjustment character') # This element should be a class; if it's not, there was no adjustment char given
+			del self.contents[1] # Don't put it into the contents, just use it as a type
 		
 		if len(self.contents) < 3: raise ValueError('Empty container')
 		
@@ -73,24 +76,24 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 		elif char in STARTS:
 			new_frame = ParseFrame(i)
 			container_stack.append(new_frame)
-			container_stack[-1].contents.append(char)
+			container_stack[-1].add(char)
 			if char == '<': looking_for_adjustment = True
 		
 		elif char in ADJS and looking_for_adjustment:
 			adj = ADJS[char]
-			container_stack[-1].contents.append(adj)
+			container_stack[-1].add(adj)
 			looking_for_adjustment = False
 		
 		elif char in ENDS:
 			if container_stack[-1].initial: raise ValueError('Unmatched closer')
 			frame = container_stack.pop(-1)
-			frame.contents.append(char)
+			frame.add(char)
 			output = frame.finish()
-			container_stack[-1].contents.append(output)
+			container_stack[-1].add(output)
 		
 		elif char in STROKES:
 			stroke = STROKES[char]() # The parentheses are because we want to construct one, not just get the type
-			container_stack[-1].contents.append(stroke)
+			container_stack[-1].add(stroke)
 		
 		elif char in MODS:
 			container_stack[-1].contents[-1].add_modifier(char)
