@@ -31,6 +31,6 @@ W[hvcvh]
 
 # Test diagonals
 {dd2}
-[uU]
+[uu2]
 {d(u[0vv0])}
 [{0[hc]h}v{0dh}]

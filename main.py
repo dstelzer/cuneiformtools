@@ -8,5 +8,6 @@ if __name__ == '__main__':
 		try:
 			construct = parse(input())
 			print(construct)
+			print(construct.functional_form())
 			TwoSidedRenderer.render(construct).show()
 		except ValueError: pass

@@ -26,6 +26,7 @@ class CanvasShape(Enum):
 	LANDSCAPE = 'L'
 	SQUARE = 'S'
 	WIDE = 'W'
+	FUNCTIONAL = '_F' # This one isn't represented by a single character so it'll never show up in parsing; it's used to indicate a "functional form" designed to make comparisons easy rather than to look nice
 
 MAXIMUM_HEAD_SIZE = 1/3
 
@@ -49,6 +50,9 @@ class Canvas(Element):
 	
 	def draw(self, rend):
 		self.internal.draw(rend)
+	
+	def functional_form(self):
+		return Canvas(CanvasShape.FUNCTIONAL, self.internal.functional_form())
 
 class Stroke(Element):
 	def __init__(self, mods=None, *args, **kwargs):
@@ -76,6 +80,8 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def can_expand_vertically(self): return True
 	def draw(self, rend): pass
 	def add_modifier(self, mod): raise ValueError('Voids do not support modifiers')
+	
+	def functional_form(self): return None # Voids are ignored in functional form
 
 class Vertical(Stroke):
 	def __str__(self):
@@ -100,6 +106,11 @@ class Vertical(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.draw_vertical(*self.pos, *self.dims, self.mods)
+	
+	def functional_form(self):
+		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
+		if Modifier.DOUBLE in self.mods: return VStack([Vertical(), Vertical()])
+		else: return Vertical()
 
 class Horizontal(Stroke):
 	def __str__(self):
@@ -124,6 +135,11 @@ class Horizontal(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_horizontal(*self.pos, *self.dims, self.mods)
+	
+	def functional_form(self):
+		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
+		if Modifier.DOUBLE in self.mods: return HStack([Horizontal(), Horizontal()])
+		else: return Horizontal()
 
 class UpDiag(Stroke):
 	def __str__(self):
@@ -135,6 +151,10 @@ class UpDiag(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.draw_upward(*self.pos, *self.dims, self.mods)
+	
+	def functional_form(self):
+		# There are no diagonal stacks, so we just discard all modifiers
+		return UpDiag()
 
 class DownDiag(Stroke):
 	def __str__(self):
@@ -146,6 +166,10 @@ class DownDiag(Stroke):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.draw_downward(*self.pos, *self.dims, self.mods)
+	
+	def functional_form(self):
+		# There are no diagonal stacks, so we just discard all modifiers
+		return DownDiag()
 
 class Winkelhaken(Stroke):
 	def __init__(self, *args, **kwargs):
@@ -174,8 +198,10 @@ class Winkelhaken(Stroke):
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_hook(*self.pos, *self.dims)
+	
+	def functional_form(self): return Winkelhaken() # No mods to worry about
 
-class Container(Element):	
+class Container(Element):
 	def __init__(self, contents=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		if contents is None: contents = []
@@ -263,6 +289,24 @@ class HStack(Container):
 	def allow_kern_rightward(self): return self.contents[-1].allow_kern_rightward()
 	def allow_kern_upward(self): return all(c.allow_kern_upward() for c in self.contents)
 	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
+	
+	def functional_form(self):
+		# Now here's where things get complicated!
+		# First, take the functional form of each child
+		raw_children = [c.functional_form() for c in self.contents]
+		children = []
+		# Then go through and check some things
+		for child in raw_children:
+			if child is None: continue # Skip over blanks
+			elif isinstance(child, HStack): children.extend(child.contents) # Flatten out nested HStacks
+			else: children.append(child)
+		if len(children) == 1:
+			# If we only have one child, don't bother with a container
+			return children[0]
+		if not children:
+			# If we have *no* children, return nothing
+			return None
+		return HStack(children)
 
 class VStack(Container):
 	def __str__(self):
@@ -338,6 +382,41 @@ class VStack(Container):
 	def allow_kern_downward(self): return self.contents[-1].allow_kern_downward()
 	def allow_kern_leftward(self): return all(c.allow_kern_leftward() for c in self.contents)
 	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
+	
+	def functional_form(self):
+		# This is mostly the same as HStack's implementation
+		# But with one additional complication
+		raw_children = [child.functional_form() for child in self.contents]
+		children = []
+		for child in raw_children:
+			if child is None: continue
+			elif isinstance(child, VStack): children.extend(child.contents)
+			else: children.append(child)
+		if len(children) == 1:
+			return children[0]
+		if not children:
+			return None
+		
+		# Here's the extra part
+		# Sometimes there's an ambiguity where something can be written either as HStacks of VStacks, or as VStacks of HStacks
+		# (Consider, for example, the ZA sign)
+		# In this case, we need to choose one of the two to be canonical
+		# And we chose an HStack of VStacks
+		# So if we see a VStack of HStacks, we need to change that
+		if all(isinstance(child, HStack) for child in children):
+			l = len(children[0].contents)
+			if all(len(child.contents)==l for child in children):
+				# So now we know that we've got a VStack of HStacks
+				# And that all those HStacks are the same size
+				# So, time to change that around
+				child_contents = [child.contents for child in children]
+				new_contents = list(zip(*child_contents))
+				new_stacks = [VStack(list(c)) for c in new_contents]
+				new_parent = HStack(new_stacks)
+				# Then we re-functionalize this in case there are any new nesting issues that need to be handled
+				return new_parent.functional_form()
+		
+		return VStack(children)
 
 class Superpose(Container):
 	def __str__(self):
@@ -360,12 +439,21 @@ class Superpose(Container):
 	# TODO: Should this be all instead of any?
 	# Superposition is generally used for elements that intersect which means horizontal elements don't go all the way to the top/bot and vertical elements don't go all the way to the left/right
 	# But adjust this if it causes problems
+	
+	def functional_form(self):
+		children = [child.functional_form() for child in self.contents]
+		children.sort(key=str) # Sort by ASCII form - it's arbitrary but consistent
+		return Superpose(children)
 
 class Adjustment(Container):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		if len(self.contents) != 1: raise ValueError('Adjustments must contain a single element')
 		self.child = self.contents[0]
+	
+	def functional_form(self):
+		# Adjustments are ignored in functional form
+		return self.child.functional_form()
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def __str__(self):
