@@ -7,6 +7,21 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	DOUBLE = '2'
 	TRIPLE = '3'
 
+class Orientation(Enum): # The general shape of an element
+	WIDE = 0
+	TALL = 1
+	NEITHER = 2
+	MIXED = 3
+	
+	@classmethod
+	def consensus(cls, seq):
+		seq = list(seq) # We need to iterate over it multiple times
+		if cls.MIXED in seq: return cls.MIXED
+		if cls.WIDE in seq and cls.TALL in seq: return cls.MIXED
+		if cls.WIDE in seq and not cls.TALL in seq: return cls.WIDE
+		if cls.TALL in seq and not cls.WIDE in seq: return cls.TALL
+		return cls.NEITHER
+
 class Element:
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
@@ -18,6 +33,7 @@ class Element:
 	def allow_kern_rightward(self): return True
 	def allow_kern_upward(self): return True
 	def allow_kern_downward(self): return True
+	def orient(self): return Orientation.NEITHER
 	
 	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
 
@@ -45,6 +61,7 @@ class Canvas(Element):
 		elif self.shape == CanvasShape.PORTRAIT: self.dims = (2/3, 1)
 		elif self.shape == CanvasShape.LANDSCAPE: self.dims = (3/2, 1)
 		elif self.shape == CanvasShape.WIDE: self.dims = (2, 1)
+		elif self.shape == CanvasShape.FUNCTIONAL: self.dims = (1, 1) # For debugging; functional forms aren't meant to look pretty
 		
 		self.internal.propagate_dimensions(self.dims, (0, 0))
 	
@@ -101,6 +118,7 @@ class Vertical(Stroke):
 	def kern_right(self): return self.dims[0]/2
 	def allow_kern_leftward(self): return False
 	def allow_kern_rightward(self): return False
+	def orient(self): return Orientation.TALL
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -130,6 +148,7 @@ class Horizontal(Stroke):
 	def kern_bottom(self): return self.dims[1]/2
 	def allow_kern_upward(self): return False
 	def allow_kern_downward(self): return False
+	def orient(self): return Orientation.WIDE
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -147,6 +166,7 @@ class UpDiag(Stroke):
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
+	def orient(self): return Orientation.WIDE # Diagonals "act" wide more than they "act" tall, in my experience
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -162,6 +182,7 @@ class DownDiag(Stroke):
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
+	def orient(self): return Orientation.WIDE # Diagonals "act" wide more than they "act" tall, in my experience
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'b')
@@ -209,10 +230,32 @@ class Container(Element):
 	
 	def can_expand_horizontally(self): return any(e.can_expand_horizontally() for e in self.contents)
 	def can_expand_vertically(self): return any(e.can_expand_vertically() for e in self.contents)
+	def orient(self): return Orientation.consensus(e.orient() for e in self.contents)
 	
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'g')
 		for each in self.contents: each.draw(rend)
+	
+	# TODO: This is good for NI, but gives possibly-not-desirable results for TA. Is that okay? Test it and make sure.
+	def clean_intersections(self): # Pull intersecting elements out as far as possible, to deal with the ambiguities in superpositioning
+		# Are all our non-superposed children pointed the same way?
+		overall = Orientation.consensus(child.orient() for child in self.contents if not isinstance(child, Superpose))
+		if overall == Orientation.NEITHER or overall == Orientation.MIXED: return self # Don't do this if there's no clear orientation
+		def conflicts(o): return o != overall and o != Orientation.MIXED
+		
+		outer_elements = []
+		for i, child in enumerate(self.contents):
+			if isinstance(child, Superpose):
+				good = [e for e in child.contents if not conflicts(e.orient())]
+				bad = [e for e in child.contents if conflicts(e.orient())]
+				if bad: # We need to make a change
+					self.contents[i] = Superpose(good)
+					outer_elements.extend(bad)
+		
+		if not outer_elements: return self # No changes necessary
+		# Otherwise, though, we need to put these "pulled-out" elements in superposition with the whole container
+		outer_elements.append(self)
+		return Superpose(outer_elements).functional_form() # Gotta do the functional cleanup all over again just in case
 
 class HStack(Container):
 	def __str__(self):
@@ -306,7 +349,8 @@ class HStack(Container):
 		if not children:
 			# If we have *no* children, return nothing
 			return None
-		return HStack(children)
+		
+		return HStack(children).clean_intersections()
 
 class VStack(Container):
 	def __str__(self):
@@ -416,7 +460,7 @@ class VStack(Container):
 				# Then we re-functionalize this in case there are any new nesting issues that need to be handled
 				return new_parent.functional_form()
 		
-		return VStack(children)
+		return VStack(children).clean_intersections()
 
 class Superpose(Container):
 	def __str__(self):
@@ -439,9 +483,13 @@ class Superpose(Container):
 	# TODO: Should this be all instead of any?
 	# Superposition is generally used for elements that intersect which means horizontal elements don't go all the way to the top/bot and vertical elements don't go all the way to the left/right
 	# But adjust this if it causes problems
+	def orient(self): return Orientation.NEITHER # Because they're handled specially in the orientation systems
 	
 	def functional_form(self):
 		children = [child.functional_form() for child in self.contents]
+		children = [child for child in children if child is not None] # Remove None elements (TODO filter)
+		if len(children) == 1: return children[0]
+		if not children: return None
 		children.sort(key=str) # Sort by ASCII form - it's arbitrary but consistent
 		return Superpose(children)
 
