@@ -1,6 +1,6 @@
 import csv
 
-from .parser import parse
+from parser import parse
 
 class DatabaseEntry:
 	def __init__(self, name, code, notes=''):
