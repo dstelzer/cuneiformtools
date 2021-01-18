@@ -70,6 +70,12 @@ class Canvas(Element):
 	
 	def functional_form(self):
 		return Canvas(CanvasShape.FUNCTIONAL, self.internal.functional_form())
+	
+	def __contains__(self, other): # This one just delegates
+		if isinstance(other, Canvas):
+			if other.shape != CanvasShape.FUNCTIONAL or self.shape != CanvasShape.FUNCTIONAL: raise ValueError('Only elements in functional form should be compared with `in`') # Sanity check
+			return other.internal in self.internal
+		else: return other in self.internal
 
 class Stroke(Element):
 	def __init__(self, mods=None, *args, **kwargs):
@@ -88,6 +94,10 @@ class Stroke(Element):
 		self.dims = dims
 		self.pos = pos
 		self.adjust = 0,0
+	
+	def __contains__(self, other): # The `is` operator is used to test if one element is a sub-element of another; strokes don't contain anything, so for them it's just a test of equality
+		# This method is expected to be used on functional forms, so modifiers don't matter
+		return isinstance(other, Stroke) and type(other) == type(self)
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
@@ -256,6 +266,15 @@ class Container(Element):
 		# Otherwise, though, we need to put these "pulled-out" elements in superposition with the whole container
 		outer_elements.append(self)
 		return Superpose(outer_elements).functional_form() # Gotta do the functional cleanup all over again just in case
+	
+	def match_contents(self, other): # Utility method used by the __contains__ implementation in HStack and VStack
+		outer, inner = self.contents, other.contents
+		matched = 0
+		for each in outer:
+			if inner[matched] in each:
+				matched += 1
+				if matched >= len(inner): return True
+		return False
 
 class HStack(Container):
 	def __str__(self):
@@ -288,7 +307,7 @@ class HStack(Container):
 			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_horizontally()) # Divide by the number of flexible elements
 			
 			# Now give them their new positions
-			current_position = 0
+			current_position = x
 			for i, each in enumerate(self.contents):
 				left_kerning = self.contents[i-1].kern_right() if i-1>=0 else 0
 				right_kerning = self.contents[i+1].kern_left() if i+1<len(self.contents) else 0
@@ -351,6 +370,11 @@ class HStack(Container):
 			return None
 		
 		return HStack(children).clean_intersections()
+	
+	def __contains__(self, other):
+		if any((other in child) for child in self.contents): return True
+		if isinstance(other, HStack) and self.match_contents(other): return True
+		return False
 
 class VStack(Container):
 	def __str__(self):
@@ -382,7 +406,7 @@ class VStack(Container):
 			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_vertically()) # Divide by the number of flexible elements
 			
 			# Now give them their new positions
-			current_position = 0
+			current_position = y
 			for i, each in enumerate(self.contents):
 				top_kerning = self.contents[i-1].kern_bottom() if i-1>=0 else 0
 				bottom_kerning = self.contents[i+1].kern_top() if i+1<len(self.contents) else 0
@@ -461,6 +485,11 @@ class VStack(Container):
 				return new_parent.functional_form()
 		
 		return VStack(children).clean_intersections()
+	
+	def __contains__(self, other):
+		if any((other in child) for child in self.contents): return True
+		if isinstance(other, VStack) and self.match_contents(other): return True
+		return False
 
 class Superpose(Container):
 	def __str__(self):
@@ -492,6 +521,16 @@ class Superpose(Container):
 		if not children: return None
 		children.sort(key=str) # Sort by ASCII form - it's arbitrary but consistent
 		return Superpose(children)
+	
+	def __contains__(self, other):
+		if any((other in child) for child in self.contents): return True
+		if isinstance(other, Superpose):
+			# This part is kind of hacky. It tests whether each child of `other` can be found in a child of `self`, but doesn't check whether those children of `self` are distinct, because that runs into combinatorial explosion.
+			# But superpositions are kind of messy anyway, so hopefully the false positives from this are worth not having any false negatives.
+			for oc in other.contents:
+				if not any(oc in child for child in self.contents): return False
+			return True
+		return False
 
 class Adjustment(Container):
 	def __init__(self, *args, **kwargs):

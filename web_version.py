@@ -19,7 +19,7 @@ def do_the_thing(instr, rendname):
 		with redirect_stdout(log):
 			output = parse(instr)
 	except ValueError:
-		return Response(log.encode('utf-8'), mimetype='text/plain', direct_passthrough=True)
+		return '<pre>'+log.getvalue()+'</pre>'
 	img = BytesIO()
 	rend = renderers[rendname]
 	data = rend.render(output)
