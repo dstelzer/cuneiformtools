@@ -37,8 +37,9 @@ class Renderer:
 		self.ctx.rectangle(0, 0, 1, 1)
 		self.ctx.fill()
 	
-	def begin_drawing(self):
-		self.ctx.set_source_rgba(1, 1, 1, 1)
+	def begin_drawing(self, highlight=False):
+		if highlight: self.ctx.set_source_rgba(0, 1, 0, 1)
+		else: self.ctx.set_source_rgba(1, 1, 1, 1)
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
@@ -46,16 +47,16 @@ class Renderer:
 		self.surf.write_to_png(fn)
 		sp.run(['xdg-open', fn])
 	
-	def draw_single(self, x, y, w, h):
+	def draw_single(self, x, y, w, h, mods):
 		raise NotImplementedError() # To be implemented in derived classes
 	
-	def draw_double(self, x, y, w, h):
+	def draw_double(self, x, y, w, h, mods):
 		raise NotImplementedError() # Same
 	
-	def draw_triple(self, x, y, w, h):
+	def draw_triple(self, x, y, w, h, mods):
 		raise NotImplementedError() # Same
 	
-	def draw_hook(self, x, y, w, h):
+	def draw_hook(self, x, y, w, h, mods):
 		raise NotImplementedError() # Same
 	
 	def draw_stroke(self, x, y, w, h, mods):
@@ -66,9 +67,9 @@ class Renderer:
 		if Modifier.TAILSHORT in mods:
 			h -= adj_amount
 		
-		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h)
-		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h)
-		else: self.draw_single(x, y, w, h)
+		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h, mods)
+		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h, mods)
+		else: self.draw_single(x, y, w, h, mods)
 	
 	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different renderers
 		margin = min(w/3, h/3, 0.05)
@@ -86,7 +87,7 @@ class Renderer:
 		se = (w, h)
 		sw = (0, h)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.line_to(*se)
@@ -192,7 +193,7 @@ class Renderer:
 		c.restore() # Un-tenu-fy the canvas again
 
 class OneSidedRenderer(Renderer):
-	def draw_single(self, x, y, w, h):
+	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -204,7 +205,7 @@ class OneSidedRenderer(Renderer):
 		mid = (w/2, w/2)
 		s = (w/2, h)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.arc_negative(*pivot, r, -pi/2, pi)
@@ -214,7 +215,7 @@ class OneSidedRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_double(self, x, y, w, h):
+	def draw_double(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -229,7 +230,7 @@ class OneSidedRenderer(Renderer):
 		mid = (w/2, w)
 		s = (w/2, h)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.arc_negative(*pivot1, r, -pi/2, pi)
@@ -242,7 +243,7 @@ class OneSidedRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_hook(self, x, y, w, h):
+	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -251,7 +252,7 @@ class OneSidedRenderer(Renderer):
 		se = (w, h)
 		w = (0, h/2)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*ne)
 		c.line_to(*w)
 		c.line_to(*se)
@@ -262,7 +263,7 @@ class OneSidedRenderer(Renderer):
 	# TODO: Upward strokes are currently inverted, should fix somehow
 
 class TwoSidedRenderer(Renderer):
-	def draw_single(self, x, y, w, h):
+	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -275,7 +276,7 @@ class TwoSidedRenderer(Renderer):
 		mid = (w/2, w/2)
 		s = (w/2, h)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.arc_negative(*pivot1, r, -pi/2, pi)
@@ -286,7 +287,7 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_double(self, x, y, w, h):
+	def draw_double(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -303,7 +304,7 @@ class TwoSidedRenderer(Renderer):
 		mid = (w/2, w)
 		s = (w/2, h)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.arc_negative(*pivot1r, r, -pi/2, pi)
@@ -318,7 +319,7 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_hook(self, x, y, w, h):
+	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -327,7 +328,7 @@ class TwoSidedRenderer(Renderer):
 		se = (w, h)
 		w = (0, h/2)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*ne)
 		c.line_to(*w)
 		c.line_to(*se)
@@ -339,7 +340,7 @@ class TwoSidedRenderer(Renderer):
 class LinearRenderer(Renderer):
 	WIDTH = 0.1
 	
-	def draw_single(self, x, y, w, h):
+	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -349,7 +350,7 @@ class LinearRenderer(Renderer):
 		ne = (m+self.WIDTH/2, 0)
 		s = (m, h+0.01)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.line_to(*s)
@@ -358,7 +359,7 @@ class LinearRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_double(self, x, y, w, h):
+	def draw_double(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -371,7 +372,7 @@ class LinearRenderer(Renderer):
 		_e = (m+self.WIDTH/2, h*0.25)
 		s = (m, h+0.01)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*nw)
 		c.line_to(*ne)
 		c.line_to(*_c)
@@ -384,7 +385,7 @@ class LinearRenderer(Renderer):
 		
 		c.restore()
 	
-	def draw_hook(self, x, y, w, h):
+	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -394,7 +395,7 @@ class LinearRenderer(Renderer):
 		_w = (0, h/2)
 		_c = (self.WIDTH, h/2)
 		
-		self.begin_drawing()
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
 		c.move_to(*ne)
 		c.line_to(*_c)
 		c.line_to(*se)
@@ -421,5 +422,5 @@ if __name__ == '__main__':
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.DOUBLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2, 0.25, 0.25)
-	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25)
+	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25, mods={Modifier.HIGHLIGHT})
 	rend.show()

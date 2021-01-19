@@ -10,8 +10,6 @@ Types of nodes:
 	{ }	Vertical stacking
 	( )	Superimposition
 	
-	< >	"Adjustment", first character determines
-	
 	P	Portrait
 	L	Landscape
 	S	Square
@@ -23,9 +21,11 @@ Modifiers:
 	2	Double
 	3	Triple (not used in Hittite)
 			(This one's being put off for now)
+	!	Highlight (render in green)
 
 Adjustments:
-	T	Tenû (slanted)
+	T	Tenû (tilted)
+	E	Expand
 
 PHASE 1
 #	Parsing
@@ -47,17 +47,21 @@ PHASE 1.5
 #	Online web app
 
 PHASE 2
-#	"Canonical form"
+#	"Functional form"
 #		Decide on orderings
 #		Decide on what to do with doubles
+		Reconsider double diagonals?
 #	Comparisons
 #	Wildcards
 #	Better adjustment syntax
 	New modifiers and adjustments
-		Highlight
-		Expand
-		Smaller Winkelhaken
+#		Highlight
+#		Expand
+#		Smaller Winkelhaken
+		One-dimensional voids
 
 PHASE 3
 	Highlight matches
+		Leaf iteration
+		Leaf identification
 	Degrees of change

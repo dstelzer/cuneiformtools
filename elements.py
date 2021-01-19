@@ -113,13 +113,10 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def functional_form(self): return None # Voids are ignored in functional form
 
 class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
-	def __init__(self, *args, **kwargs):
-		super().__init__(mods=None, *args, **kwargs)
-	def __str__(self): return '*'
+	def __str__(self): return '*' + self.modstr()
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
 	def draw(self, rend): rend.draw_wildcard(*self.pos, *self.dims, self.mods)
-	def add_modifier(self, mod): raise ValueError('Wildcards do not support modifiers')
 	def functional_form(self): return Wildcard()
 	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
@@ -216,19 +213,23 @@ class DownDiag(Stroke):
 		return DownDiag()
 
 class Winkelhaken(Stroke):
-	def __init__(self, *args, **kwargs):
-		super().__init__(mods=None, *args, **kwargs)
-	
-	def add_modifier(self, mod): raise ValueError('Winkelhaken do not support modifiers')
-	
 	def __str__(self):
-		return 'c'
+		return 'c' + self.modstr()
+	
+	def _scaling(self):
+		# The HEADSHORT and TAILSHORT modifiers don't make sense for the Winkelhaken, which has no head or tail. So they're repurposed to instead make the whole thing smaller.
+		if Modifier.HEADSHORT in self.mods and Modifier.TAILSHORT in self.mods: return 1/3
+		if Modifier.TAILSHORT in self.mods: return 1/2
+		if Modifier.HEADSHORT in self.mods: return 2/3
+		return 1
 	
 	def propagate_dimensions(self, dims, pos):
+		s = self._scaling()
 		(w,h) = dims
 		adj_x, adj_y = 0, 0
-		new_w = min(w, h/2)
-		new_h = min(h, 2*w)
+		new_w = min(w, h/2) * s
+		new_h = min(h, 2*w) * s
+		
 		self.dims = (new_w, new_h)
 		(x,y) = pos
 		xmod, ymod = 0, 0
@@ -241,7 +242,7 @@ class Winkelhaken(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
-		rend.draw_hook(*self.pos, *self.dims)
+		rend.draw_hook(*self.pos, *self.dims, self.mods)
 	
 	def functional_form(self): return Winkelhaken() # No mods to worry about
 

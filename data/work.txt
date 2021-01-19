@@ -127,7 +127,7 @@
 			seed
 	FORM
 		(h[0c{cc}])
-		[(hc){cc}]
+		[(hc'){cc}]
 13
 	HIT
 		pát
@@ -148,7 +148,7 @@
 		SUMUN
 			old
 	FORM
-		[hc]
+		[hc'"]
 14
 	HIT
 		dim
@@ -166,7 +166,7 @@
 		NA
 			shepherd
 	FORM
-		L[hc{c0}v]
+		L[hc'{c0}v]
 		L[h{cc0}v]
 16
 	SUM
@@ -188,7 +188,7 @@
 	FORM
 		[h{cc}{cc}]
 		[{chc}{cc}]
-		[h<T{v[vvv]}>]
+		[h{v[vvv]}TE]
 18
 	SUM
 		MUN
@@ -202,8 +202,8 @@
 		NAR
 			musician
 	FORM
-		L[h2<T{[vvv]v}>v2{du}]
-		L[h2<T{[vvv]v}>v2{dh}]
+		L[h2{[vvv]v}TEv2{du}]
+		L[h2{[vvv]v}TEv2{dh}]
 20
 	HIT
 		pár
@@ -245,8 +245,8 @@
 			goat
 	FORM
 		L[hv{[ccc]h}]
-		L[hv<T{[vvv]h}>]
-		L[hv<T{[vvv]v}>]
+		L[hv{[vvv]h}TE]
+		L[hv{[vvv]v}TE]
 24
 	HIT
 		ḫu
@@ -273,7 +273,7 @@
 		MUD
 			blood
 	FORM
-		L[hvcv<T{[vvv]v}>]
+		L[hvcv{[vvv]v}TE]
 27
 	SUM
 		SÈD
@@ -309,8 +309,8 @@
 		GI
 			tube
 	FORM
-		L[hvv<T{[vvv]h}>]
-		L[hvv<T{[vvv]v}>]
+		L[hvv{[vvv]h}TE]
+		L[hvv{[vvv]v}TE]
 31
 	HURR
 		ge-e
@@ -382,7 +382,7 @@
 		MÁŠ
 			family
 	FORM
-		L[{vhc}<T{[vvv]v}>]
+		L[{vhc}{[vvv]v}T]
 39
 	HIT
 		nam
@@ -484,8 +484,8 @@
 		GÁB
 		KAB
 	FORM
-		L{[vvhcv]h}
-		L[{[vvhc]h}v]
+		L{[vvhc"v]h}
+		L[{[vvhc"]h}v]
 		L{[vcvcv]h}
 50
 	HIT
