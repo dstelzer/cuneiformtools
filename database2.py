@@ -19,12 +19,13 @@ class DatabaseEntry:
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional)):
 			if part in func:
 				ident = f'{self.name}/{i}' if i else str(self.name)
-				yield ident, pres
+				match = func.highlight_containment(part)
+				yield ident, pres, match
 
 	def yield_all(self):
 		for i, pres in enumerate(self.forms):
 			ident = f'{self.name}/{i}' if i else str(self.name)
-			yield ident, pres
+			yield ident, pres, ()
 
 class Database:
 	def __init__(self):
@@ -70,5 +71,5 @@ if __name__ == '__main__':
 	db = Database()
 	db.load_file('data/work.txt')
 	while True:
-		for name, code in db.lookup(parse(input())):
-			print(name, code)
+		for name, code, match in db.lookup(parse(input())):
+			print(name, code, match)
