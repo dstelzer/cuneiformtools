@@ -155,8 +155,9 @@ class Renderer:
 		self.ctx.restore()
 	
 	@classmethod
-	def render(cls, root, scale=512, margin=32):
+	def render(cls, root, highlight=(), scale=512, margin=32):
 		root.propagate_dimensions()
+		root.apply_highlighting(highlight)
 		
 		width = int(scale*root.dims[0] + 2*margin)
 		height = int(scale*root.dims[1] + 2*margin)

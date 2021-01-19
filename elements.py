@@ -35,6 +35,7 @@ class Element:
 	def allow_kern_upward(self): return True
 	def allow_kern_downward(self): return True
 	def orient(self): return Orientation.NEITHER
+	def traverse(self): yield self # For tree traversal
 	
 	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
 
@@ -69,6 +70,10 @@ class Canvas(Element):
 	def draw(self, rend):
 		self.internal.draw(rend)
 	
+	def traverse(self):
+		yield self
+		yield from self.internal.traverse()
+	
 	def functional_form(self):
 		return Canvas(CanvasShape.FUNCTIONAL, self.internal.functional_form())
 	
@@ -77,14 +82,21 @@ class Canvas(Element):
 			if other.shape != CanvasShape.FUNCTIONAL or self.shape != CanvasShape.FUNCTIONAL: raise ValueError('Only elements in functional form should be compared with `in`') # Sanity check
 			return other.internal in self.internal
 		else: return other in self.internal
+	
+	def apply_highlighting(self, ids): # Apply the HIGHLIGHT modifier to any strokes whose ident is listed in ids
+		for elem in self.traverse():
+			if isinstance(elem, Stroke) and elem.ident in ids:
+				elem.add_modifier(Modifier.HIGHLIGHT)
 
 class Stroke(Element):
-	def __init__(self, mods=None, *args, **kwargs):
+	def __init__(self, ident, mods=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.mods = mods or set()
+		self.ident = ident # Used to identify this stroke for the highlighting features
 	
-	def modstr(self):
-		return ''.join(sorted(m.value for m in self.mods)) # Sort so that it's deterministic
+	def __str__(self):
+		return self._sigil() + ''.join(sorted(m.value for m in self.mods)) # Sort so that it's deterministic
+	def _sigil(self): raise NotImplementedError() # Implement this in derived classes
 	
 	def add_modifier(self, mod):
 		self.mods.add(Modifier(mod))
@@ -104,25 +116,23 @@ class Stroke(Element):
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
 		super().__init__(mods=None, *args, **kwargs)
-	def __str__(self): return '0'
+	def _sigil(self): return '0'
 	def can_expand_horizontally(self): return True
 	def can_expand_vertically(self): return True
-	def draw(self, rend): pass
-	def add_modifier(self, mod): raise ValueError('Voids do not support modifiers')
+	def draw(self, rend): pass # Nothing to render
 	
 	def functional_form(self): return None # Voids are ignored in functional form
 
 class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
-	def __str__(self): return '*' + self.modstr()
+	def _sigil(self): return '*'
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
 	def draw(self, rend): rend.draw_wildcard(*self.pos, *self.dims, self.mods)
-	def functional_form(self): return Wildcard()
+	def functional_form(self): return Wildcard(self.ident)
 	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
 class Vertical(Stroke):
-	def __str__(self):
-		return 'v' + self.modstr()
+	def _sigil(self): return 'v'
 	
 	def can_expand_vertically(self): return True
 	def propagate_dimensions(self, dims, pos):
@@ -147,12 +157,11 @@ class Vertical(Stroke):
 	
 	def functional_form(self):
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
-		if Modifier.DOUBLE in self.mods: return VStack([Vertical(), Vertical()])
-		else: return Vertical()
+		if Modifier.DOUBLE in self.mods: return VStack([Vertical(self.ident), Vertical(self.ident)])
+		else: return Vertical(self.ident)
 
 class Horizontal(Stroke):
-	def __str__(self):
-		return 'h' + self.modstr()
+	def _sigil(self): return 'h'
 	
 	def can_expand_horizontally(self): return True
 	def propagate_dimensions(self, dims, pos):
@@ -177,12 +186,11 @@ class Horizontal(Stroke):
 	
 	def functional_form(self):
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
-		if Modifier.DOUBLE in self.mods: return HStack([Horizontal(), Horizontal()])
-		else: return Horizontal()
+		if Modifier.DOUBLE in self.mods: return HStack([Horizontal(self.ident), Horizontal(self.ident)])
+		else: return Horizontal(self.ident)
 
 class UpDiag(Stroke):
-	def __str__(self):
-		return 'u' + self.modstr()
+	def _sigil(self): return 'u'
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
@@ -194,11 +202,10 @@ class UpDiag(Stroke):
 	
 	def functional_form(self):
 		# There are no diagonal stacks, so we just discard all modifiers
-		return UpDiag()
+		return UpDiag(self.ident)
 
 class DownDiag(Stroke):
-	def __str__(self):
-		return 'd' + self.modstr()
+	def _sigil(self): return 'd'
 	
 	def can_expand_vertically(self): return True
 	def can_expand_horizontally(self): return True
@@ -210,11 +217,10 @@ class DownDiag(Stroke):
 	
 	def functional_form(self):
 		# There are no diagonal stacks, so we just discard all modifiers
-		return DownDiag()
+		return DownDiag(self.ident)
 
 class Winkelhaken(Stroke):
-	def __str__(self):
-		return 'c' + self.modstr()
+	def _sigil(self): return 'c'
 	
 	def _scaling(self):
 		# The HEADSHORT and TAILSHORT modifiers don't make sense for the Winkelhaken, which has no head or tail. So they're repurposed to instead make the whole thing smaller.
@@ -244,7 +250,7 @@ class Winkelhaken(Stroke):
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_hook(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self): return Winkelhaken() # No mods to worry about
+	def functional_form(self): return Winkelhaken(self.ident) # No mods to worry about
 
 class Container(Element):
 	def __init__(self, contents=None, *args, **kwargs):
@@ -259,6 +265,11 @@ class Container(Element):
 	def draw(self, rend):
 		rend.box(*self.pos, *self.dims, 'g')
 		for each in self.contents: each.draw(rend)
+	
+	def traverse(self): # Classic preorder tree traversal
+		yield self
+		for each in self.contents:
+			yield from each.traverse()
 	
 	# TODO: This is good for NI, but gives possibly-not-desirable results for TA. Is that okay? Test it and make sure.
 	def clean_intersections(self): # Pull intersecting elements out as far as possible, to deal with the ambiguities in superpositioning
@@ -568,6 +579,10 @@ class Adjustment(Element):
 	def __init__(self, child, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.child = child
+	
+	def traverse(self):
+		yield self
+		yield from self.child.traverse()
 	
 	def functional_form(self):
 		# Adjustments are ignored in functional form

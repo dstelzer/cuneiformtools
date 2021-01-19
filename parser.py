@@ -65,6 +65,7 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 	shape = 'S' # Default if not specified
 	looking_for_adjustment = False
 	if container_stack is None: container_stack = [ParseFrame(initial=True)]
+	stroke_counter = 0
 	
 	for i, char in enumerate(string):
 		container_stack[-1].end = i
@@ -94,8 +95,9 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			container_stack[-1].add(output)
 		
 		elif char in STROKES:
-			stroke = STROKES[char]() # The parentheses are because we want to construct one, not just get the type
+			stroke = STROKES[char](str(stroke_counter)) # The parentheses are because we want to construct one, not just get the type
 			container_stack[-1].add(stroke)
+			stroke_counter += 1
 		
 		elif char in MODS:
 			container_stack[-1].contents[-1].add_modifier(char)
