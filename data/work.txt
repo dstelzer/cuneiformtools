@@ -1,0 +1,562 @@
+1
+	HIT
+		aš
+	AKK
+		às
+		àz
+		dil
+		del
+		ina
+		rù
+		rum
+	SUM
+		DILI
+			one
+	FORM
+		h
+2
+	HIT
+		ḫal
+	SUM
+		DIDLI
+			[plural]
+		ḪAL
+			overseer
+	FORM
+		h2
+3
+	SUM
+		PÉŠ, PÍŠ
+			mouse
+	FORM
+		W[{({hhh}[vvv])h2[{cc}v]}{d(uv)}]
+4
+	HIT
+		bal
+		pal
+	SUM
+		BAL
+			libation
+			spindle
+	FORM
+		L[h2cv{chc}]
+5
+	HIT
+		šir
+	SUM
+		ŠIR, SIR₄
+			testicle
+	FORM
+		L[{ch2c}{hhhh}h]
+6
+	SUM
+		GÍR
+			knife, dagger
+	FORM
+		L(h2[0{cc}vvv])
+		L[{ch2c}vvv]
+7
+	HIT
+		tar
+		ḫaš
+	AKK
+		dar₆
+		kut
+		qut
+		ṭar
+		ṭír
+	SUM
+		TAR
+			sever
+	FORM
+		{0h2v}
+		{0d2v}
+		{0h2[0d]}
+8
+	HIT
+		an
+	AKK
+		ìl
+	SUM
+		AN
+			heaven
+		DINGIR
+			deity
+	DET
+		DINGIR
+			deity
+	FORM
+		(h2v)
+		[h2v]
+		(hvud)
+9
+	SUM
+		APIN
+			plow
+		ENGAR
+			rural?
+	FORM
+		L[h{hh'h}v]
+		L[{h'h2h'}v]
+10
+	HIT
+		maḫ
+	SUM
+		MAḪ
+			great, large
+	FORM
+		L[{[h{hh'h}]0}{[vv]d2}]
+		L[{[0cc]h2[0v]}{[vv]d2}]
+		L[{h'h2h'}{[vv][cc]}]
+11
+	HIT
+		nu
+	AKK
+		là
+	SUM
+		NU
+			not, no
+	FORM
+		(ch)
+		(uh)
+12
+	HIT
+		kul
+	SUM
+		NUMUN
+			seed
+	FORM
+		(h[0c{cc}])
+		[(hc){cc}]
+13
+	HIT
+		pát
+		pít
+	AKK
+		bat
+		be
+		bi₄
+		mit
+	SUM
+		BAD
+			when
+			person
+		ÚŠ
+			death, die
+		TIL
+			end
+		SUMUN
+			old
+	FORM
+		[hc]
+14
+	HIT
+		dim
+		tim
+	AKK
+		di₁₁
+		tì
+	FORM
+		W[{chc}v'"(ud)]
+		W[{chc}{d(uv)}]
+15
+	HIT
+		na
+	SUM
+		NA
+			shepherd
+	FORM
+		L[hc{c0}v]
+		L[h{cc0}v]
+16
+	SUM
+		ARAD, ÌR
+			servant, slave
+		NÍTA(Ḫ)
+			male
+	FORM
+		L[{c[hc]c}v]
+17
+	HIT
+		mu
+	SUM
+		MU
+			year
+			name
+		MUḪALDIM
+			cook
+	FORM
+		[h{cc}{cc}]
+		[{chc}{cc}]
+		[h<T{v[vvv]}>]
+18
+	SUM
+		MUN
+			salt
+	FORM
+		W[{ch2c}{0[c{cc}]0}{du}]
+		W[{ch2c}{0[c{cc}]0}(du)]
+		W[{ch2c}v'"(du)]
+19
+	SUM
+		NAR
+			musician
+	FORM
+		L[h2<T{[vvv]v}>v2{du}]
+		L[h2<T{[vvv]v}>v2{dh}]
+20
+	HIT
+		pár
+		bar
+		maš
+	AKK
+		mas
+	SUM
+		MAŠ
+			half
+		BÁN
+			measurement
+		BAR
+	FORM
+		P(vh)
+		P{vh}
+		P(vd)
+21
+	HIT
+		ga₅
+		ka₄
+	AKK
+		qa
+	SUM
+		SÌL(A)
+	FORM
+		P[hv]
+		P[{dh0}v]
+22
+	SUM
+		MUG
+			tow (type of fiber)
+	FORM
+		L[hv'"{du}]
+		L[hv'"(du)]
+23
+	SUM
+		UZ₆
+			goat
+	FORM
+		L[hv{[ccc]h}]
+		L[hv<T{[vvv]h}>]
+		L[hv<T{[vvv]v}>]
+24
+	HIT
+		ḫu
+	AKK
+		bak
+	SUM
+		MUŠEN
+			bird
+	DET
+		MUŠEN
+			bird
+	FORM
+		[hvcv]
+		(h[vcv])
+25
+	AKK
+		u₅
+	FORM
+		W[hvcvh{[vv]h}]
+26
+	AKK
+		mut
+	SUM
+		MUD
+			blood
+	FORM
+		L[hvcv<T{[vvv]v}>]
+27
+	SUM
+		SÈD
+			winter, cold
+	FORM
+		[hv{c[vv2]}v]
+28
+	SUM
+		SI×SÁ
+			arrange, join, fix
+	FORM
+		L[hv{[cc]h'h'h}vv]
+29
+	HIT
+		rat
+	AKK
+		rít
+	FORM
+		L[hvvh]
+30
+	HIT
+		gi
+		ge
+	AKK
+		kí
+		ké
+		qì
+		qè
+	SUM
+		GI
+			tube
+	DET
+		GI
+			tube
+	FORM
+		L[hvv<T{[vvv]h}>]
+		L[hvv<T{[vvv]v}>]
+31
+	HURR
+		ge-e
+	FORM
+		W[hvv{[vvv]h[{0hh}vv2]}]
+32
+	HIT
+		ri
+		re
+		tal
+	AKK
+		dal?
+	SUM
+		RI
+	FORM
+		L[hvvcv]
+		L[hvcvv]
+		L(h[vvcv])
+33
+	HIT
+		zi
+		ze
+	AKK
+		sí
+		sé
+		ṣí
+		ṣé
+	SUM
+		ZI
+			soul
+			bile, gallbladder
+	FORM
+		L[hvv{cc}{cc}]
+		L[{hh}vv{cc}{cc}]
+34
+	SUM
+		TÙR
+			stockyard
+	FORM
+		W[(h[vvv]){0h(vh)}v]
+		W[{[hvvvh]h}vv]
+35
+	SUM
+		KUN
+			tail
+	W[hvvv{0c0}{c0c}vv2]
+	W[(h[vvv]){0c0}{c[vv2]c}]
+36
+	SUM
+		NUN
+			clarified butter
+	FORM
+		L[(h[vvvv0])v]
+		L[hvvvv'v]
+37
+	HIT
+		ti
+	AKK
+		dì
+		ṭì
+	SUM
+		TI/TÌL
+			life, live
+	FORM
+		{v[hc]c}
+		[hvcc]
+38
+	SUM
+		MÁŠ
+			family
+	FORM
+		L[{vhc}<T{[vvv]v}>]
+39
+	HIT
+		nam
+	SUM
+		NAM/SIM/SÍN
+			district
+			governor
+		BURU₅
+			locust
+	FORM
+		L[{vhc}{ccc}{ccc}]
+		L[{0hh}v{ccc}{ccc}]
+40
+	HIT
+		en
+	AKK
+		in₄
+	SUM
+		EN
+			lord, master
+	FORM
+		L[{0hv}{[vv]d2}]
+		L[h{[vv]v}{0cc}]
+41
+	SUM
+		INANNA
+			Inanna (goddess)
+	FORM
+		L[h{[vv]v}v]
+42
+	HIT
+		šur
+	SUM
+		SUR
+			pedestal
+	FORM
+		L[h{[vvv]v}]
+43
+	HIT
+		ru
+	AKK
+		šup
+	SUM
+		ŠUB
+			downfall
+	FORM
+		L{[dvv'v]h}
+		L{[cvvv]h}
+44
+	HIT
+		ip
+		ep
+	FORM
+		L[{[vh]h}vv]
+		L[{[v(v'h)]h}vv]
+		L[([vh]{0h})vv]
+45
+	SUM
+		US₅
+	FORM
+		L{[v{hhhh}vcv]h}
+		L{[v(vd)v]h}
+		L{[v([vv]d)]h}
+46
+	HIT
+		zul
+	AKK
+		šul
+		sul
+	FORM
+		W[{[v{0hh}]h}{vc}{vc}{vc}v2]
+		W[cv2{0hh}{vv}{vv}{vv}v2]
+47
+	AKK
+		qi
+		qe
+	SUM
+		KIN
+			work, role
+	FORM
+		W{[v{0hhh}vd]h}
+48
+	SUM
+		ŠUŠANA
+			[half of GIDIM]
+	FORM
+		{[vv]h}
+49
+	HIT
+		kap
+		gáp
+	AKK
+		qáp
+	SUM
+		GÙB
+			left (opposite of right)
+		ḪÚB
+			ring, earring
+		GÁB
+		KAB
+	FORM
+		L{[vvhcv]h}
+		L[{[vvhc]h}v]
+		L{[vcvcv]h}
+50
+	HIT
+		ḫup
+	SUM
+		ḪUB
+			ring, earring
+	FORM
+		W[{[vvh]h2}{cc}v2]
+		W[{[vvd2]h}{cc}v2]
+51
+	HIT
+		ur
+		lik
+	HURR
+		tíš
+	AKK
+		taš
+	SUM
+		UR
+			dog
+	FORM
+		L{[vvhv]h}
+		L{[v(h[v0])v]h}
+52
+	SUM
+		GIDIM
+			dead, ghost
+	FORM
+		W[{[vv{[hc]h}]h}vv]
+		W[{[vv]h}{[hc]h0}vv]
+53
+	SUM
+		TUK(U)
+			anger, rage
+	FORM
+		L{[vvd]h}
+		L{[0vhv]h}
+		(h[vv])
+54
+	SUM
+		SILA₄
+			lamb
+	FORM
+		W[{h'(h[v'v'])}(v{hhhh})v]
+		L[{h({h'h'h'h'}v)(h[vv0])}v]
+		L[{h({h'"h'"}v)(h[vv0])}v]
+55
+	SUM
+		BÚGIN/BÚNIN
+			container
+	FORM
+		[{h[vvv]vh}v]
+		[{h[v{[vv]v}]h}v]
+56
+	AKK
+		ba₄
+		mà
+	SUM
+		PISAN
+			container
+		GÁ
+	FORM
+		L[{h'(h[v'v'0])}v]
+		L[{h'h[vv0]}v]
+57
+	SUM
+		AMA
+			mother
+		DAGAL
+			bright
+	FORM
+		L[{h'[h2'v](h[vv0])}v]
+		L[{h'h2'hv}vv]
