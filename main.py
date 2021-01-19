@@ -34,4 +34,4 @@ def test_database():
 			TwoSidedRenderer.render(tree).show()
 
 if __name__ == '__main__':
-	test_database()
+	test_rendering()

@@ -2,11 +2,12 @@
 
 from elements import *
 
-STARTS = '([{<'
-ENDS = ')]}>'
+STARTS = '([{'
+ENDS = ')]}'
 MODS = set(m.value for m in Modifier)
 ADJS = {
-	'T':Tenu
+	'T':Tenu,
+	'E':Expand,
 }
 
 SHAPES = set(s.value for s in CanvasShape)
@@ -17,6 +18,7 @@ STROKES = {
 	'd':DownDiag,
 	'c':Winkelhaken,
 	'0':Void,
+	'*':Wildcard,
 }
 
 IGNORE = ', \t\n\v'
@@ -45,10 +47,10 @@ class ParseFrame:
 			newtype = VStack
 		elif a == '(':
 			newtype = Superpose
-		elif a == '<':
-			newtype = self.contents[1]
-			if type(newtype) != type: raise ValueError('Missing adjustment character') # This element should be a class; if it's not, there was no adjustment char given
-			del self.contents[1] # Don't put it into the contents, just use it as a type
+	#	elif a == '<':
+	#		newtype = self.contents[1]
+	#		if type(newtype) != type: raise ValueError('Missing adjustment character') # This element should be a class; if it's not, there was no adjustment char given
+	#		del self.contents[1] # Don't put it into the contents, just use it as a type
 		
 		if len(self.contents) < 3: raise ValueError('Empty container')
 		
@@ -77,12 +79,12 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			new_frame = ParseFrame(i)
 			container_stack.append(new_frame)
 			container_stack[-1].add(char)
-			if char == '<': looking_for_adjustment = True
+	#		if char == '<': looking_for_adjustment = True
 		
 		elif char in ADJS and looking_for_adjustment:
 			adj = ADJS[char]
 			container_stack[-1].add(adj)
-			looking_for_adjustment = False
+	#		looking_for_adjustment = False
 		
 		elif char in ENDS:
 			if container_stack[-1].initial: raise ValueError('Unmatched closer')
@@ -97,6 +99,10 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 		
 		elif char in MODS:
 			container_stack[-1].contents[-1].add_modifier(char)
+		
+		elif char in ADJS:
+			adj = ADJS[char] # Get the class of the adjustment we want
+			container_stack[-1].contents[-1] = adj(container_stack[-1].contents[-1]) # And replace the most recent element with an instance of that class containing that adjustment
 		
 		else:
 			raise ValueError('Unrecognized character', char)

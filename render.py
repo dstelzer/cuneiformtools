@@ -70,6 +70,37 @@ class Renderer:
 		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h)
 		else: self.draw_single(x, y, w, h)
 	
+	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different renderers
+		margin = min(w/3, h/3, 0.05)
+		x += margin
+		y += margin
+		w -= 2*margin
+		h -= 2*margin
+		
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		nw = (0, 0)
+		ne = (w, 0)
+		se = (w, h)
+		sw = (0, h)
+		
+		self.begin_drawing()
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*se)
+		c.line_to(*sw)
+		c.line_to(*nw)
+		c.line_to(*ne) # To make the caps look right
+		c.move_to(*se)
+		c.line_to(*nw)
+		c.move_to(*sw)
+		c.line_to(*ne)
+		c.stroke()
+		
+		c.restore()
+	
 	def draw_vertical(self, x, y, w, h, mods=()):
 		self.draw_stroke(x, y, w, h, mods)
 	

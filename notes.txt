@@ -44,12 +44,20 @@ PHASE 1
 #		"Narrow" renderer
 
 PHASE 1.5
-	Online web app
+#	Online web app
 
 PHASE 2
-	"Canonical form"
-		Decide on orderings
-		Decide on what to do with doubles
-	Comparisons
+#	"Canonical form"
+#		Decide on orderings
+#		Decide on what to do with doubles
+#	Comparisons
+#	Wildcards
+#	Better adjustment syntax
+	New modifiers and adjustments
+		Highlight
+		Expand
+		Smaller Winkelhaken
+
+PHASE 3
+	Highlight matches
 	Degrees of change
-	Searching

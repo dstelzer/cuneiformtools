@@ -8,6 +8,7 @@ L[{0[hc]h}v{0dh}] # WI5/GEŠTIN
 <T{[vvv]v}> # ḪI
 W[cvh2vvcv] # AR
 L[c{[hc]([hc]v)}] # UL
+L[{hh2h}{[vvv]v}TEv] # IT
 
 # Test shapes of individual strokes and containers
 (h2v)

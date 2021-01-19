@@ -6,6 +6,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	TAILSHORT = '"'
 	DOUBLE = '2'
 	TRIPLE = '3'
+	HIGHLIGHT = '!'
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0
@@ -97,7 +98,8 @@ class Stroke(Element):
 	
 	def __contains__(self, other): # The `is` operator is used to test if one element is a sub-element of another; strokes don't contain anything, so for them it's just a test of equality
 		# This method is expected to be used on functional forms, so modifiers don't matter
-		return isinstance(other, Stroke) and type(other) == type(self)
+		# Note that any stroke matches a wildcard
+		return isinstance(other, Stroke) and (type(other) == type(self) or type(other) == Wildcard)
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
@@ -109,6 +111,17 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def add_modifier(self, mod): raise ValueError('Voids do not support modifiers')
 	
 	def functional_form(self): return None # Voids are ignored in functional form
+
+class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
+	def __init__(self, *args, **kwargs):
+		super().__init__(mods=None, *args, **kwargs)
+	def __str__(self): return '*'
+	def can_expand_horizontally(self): return False
+	def can_expand_vertically(self): return False
+	def draw(self, rend): rend.draw_wildcard(*self.pos, *self.dims, self.mods)
+	def add_modifier(self, mod): raise ValueError('Wildcards do not support modifiers')
+	def functional_form(self): return Wildcard()
+	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
 class Vertical(Stroke):
 	def __str__(self):
@@ -284,9 +297,16 @@ class HStack(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = len(self.contents)
+		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) # The number of pieces, plus 1 for each Expand adjustment we find
 		each_w = w/pieces
-		for i, each in enumerate(self.contents): each.propagate_dimensions((each_w, h), (x+i*each_w, y))
+		i = 0
+		for each in self.contents:
+			if isinstance(each, Expand):
+				each.propagate_dimensions((each_w*2, h), (x+i*each_w, y))
+				i += 2
+			else:
+				each.propagate_dimensions((each_w, h), (x+i*each_w, y))
+				i += 1
 		
 		# Now check if we have to do any fancy kerning and recalculation
 		if any(each.can_expand_horizontally() for each in self.contents):
@@ -314,6 +334,8 @@ class HStack(Container):
 				previous_position = current_position
 				current_position -= each.adjust[0] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
+				this_w = each_w*2 if isinstance(each, Expand) else each_w
+				
 				if each.can_expand_horizontally(): # This is a flexible one
 					new_w = portion + left_kerning + right_kerning # The new width to assign
 					new_x = current_position - left_kerning
@@ -323,14 +345,14 @@ class HStack(Container):
 				
 				elif left_kerning and each.allow_kern_leftward(): # This one should be nudged to the left
 					new_x = current_position - left_kerning
-					each.propagate_dimensions((each_w, h), (new_x, y))
+					each.propagate_dimensions((this_w, h), (new_x, y))
 					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
 					current_position += each.dims[0] - left_kerning
 					current_position += each.adjust[0]
 				
 				else: # This one needs no special handling
 					new_x = current_position
-					each.propagate_dimensions((each_w, h), (new_x, y))
+					each.propagate_dimensions((this_w, h), (new_x, y))
 					current_position += each.dims[0]
 					current_position += each.adjust[0]
 				
@@ -384,9 +406,16 @@ class VStack(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = len(self.contents)
+		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) # The number of pieces, plus 1 for each Expand adjustment we find
 		each_h = h/pieces
-		for i, each in enumerate(self.contents): each.propagate_dimensions((w, each_h), (x, y+i*each_h))
+		i = 0
+		for each in self.contents:
+			if isinstance(each, Expand):
+				each.propagate_dimensions((w, each_h*2), (x, y+i*each_h))
+				i += 2
+			else:
+				each.propagate_dimensions((w, each_h), (x, y+i*each_h))
+				i += 1
 		
 		# Now check if we have to do any fancy kerning and recalculation
 		if any(each.can_expand_vertically() for each in self.contents):
@@ -413,6 +442,8 @@ class VStack(Container):
 				previous_position = current_position
 				current_position -= each.adjust[1] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
+				this_h = 2*each_h if isinstance(each, Expand) else each_h
+				
 				if each.can_expand_vertically(): # This is a flexible one
 					new_h = portion + top_kerning + bottom_kerning # The new height to assign
 					new_y = current_position - top_kerning
@@ -422,14 +453,14 @@ class VStack(Container):
 				
 				elif top_kerning and each.allow_kern_upward(): # This one should be nudged upward
 					new_y = current_position - top_kerning
-					each.propagate_dimensions((w, each_h), (x, new_y))
+					each.propagate_dimensions((w, this_h), (x, new_y))
 					# As above
 					current_position += each.dims[1] - top_kerning
 					current_position += each.adjust[1]
 				
 				else: # This one needs no special handling
 					new_y = current_position
-					each.propagate_dimensions((w, each_h), (x, new_y))
+					each.propagate_dimensions((w, this_h), (x, new_y))
 					current_position += each.dims[1]
 					current_position += each.adjust[1]
 				
@@ -532,11 +563,10 @@ class Superpose(Container):
 			return True
 		return False
 
-class Adjustment(Container):
-	def __init__(self, *args, **kwargs):
+class Adjustment(Element):
+	def __init__(self, child, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		if len(self.contents) != 1: raise ValueError('Adjustments must contain a single element')
-		self.child = self.contents[0]
+		self.child = child
 	
 	def functional_form(self):
 		# Adjustments are ignored in functional form
@@ -544,7 +574,7 @@ class Adjustment(Container):
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def __str__(self):
-		return f'<T {self.child}>'
+		return str(self.child) + 'T'
 	def can_expand_horizontally(self): return False
 	def can_expand_vertically(self): return False
 	def propagate_dimensions(self, dims, pos):
@@ -559,3 +589,21 @@ class Tenu(Adjustment): # Rotate a container 45 degrees
 	def draw(self, rend):
 		with rend.tenu(self.pos, self.dims): # Context manager that adjusts the coordinate system of the canvas for this one instance, then puts it back afterward
 			self.child.draw(rend)
+
+class Expand(Adjustment): # Request twice as much space as usual from our parent
+	# This class actually does basically nothing - but it's checked for in the kerning algorithm in VStack and HStack
+	# Note that this prevents its child from expanding! It's meant to be used when an element doesn't ask for enough space, and expanding elements always ask for as much space as possible. So don't use this on an expanding element unless you want to give it a fixed size.
+	def __str__(self):
+		return str(self.child) + 'E'
+	def can_expand_horizontally(self): return False
+	def can_expand_vertically(self): return False
+	def propagate_dimensions(self, dims, pos):
+		self.dims, self.pos = dims, pos
+		self.adjust = (0, 0)
+		self.child.propagate_dimensions(dims, pos)
+	def draw(self, rend): self.child.draw(rend)
+	def orient(self): return self.child.orient()
+	def kern_top(self): return self.child.kern_top()
+	def kern_bottom(self): return self.child.kern_bottom()
+	def kern_left(self): return self.child.kern_left()
+	def kern_right(self): return self.child.kern_right()
