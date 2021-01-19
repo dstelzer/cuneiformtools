@@ -38,6 +38,15 @@ class Element:
 	def traverse(self): yield self # For tree traversal
 	
 	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
+	
+	def _add_children(self, notes): # Add all descendant strokes to notes (utility method)
+		for elem in self.traverse():
+			if isinstance(elem, Stroke):
+				notes.add(elem.ident)
+	def _remove_children(self, notes): # The opposite of above
+		for elem in self.traverse():
+			if isinstance(elem, Stroke):
+				notes.discard(elem.ident)
 
 class CanvasShape(Enum):
 	PORTRAIT = 'P'
@@ -87,6 +96,12 @@ class Canvas(Element):
 		for elem in self.traverse():
 			if isinstance(elem, Stroke) and elem.ident in ids:
 				elem.add_modifier(Modifier.HIGHLIGHT)
+	
+	def highlight_containment(self, other, notes=None):
+		if notes is None: notes = set()
+		if isinstance(other, Canvas): self.internal.highlight_containment(other.internal, notes)
+		else: self.internal.highlight_containment(other, notes)
+		return notes
 
 class Stroke(Element):
 	def __init__(self, ident, mods=None, *args, **kwargs):
@@ -108,10 +123,16 @@ class Stroke(Element):
 		self.pos = pos
 		self.adjust = 0,0
 	
-	def __contains__(self, other): # The `is` operator is used to test if one element is a sub-element of another; strokes don't contain anything, so for them it's just a test of equality
+	def __contains__(self, other): # The `in` operator is used to test if one element is a sub-element of another; strokes don't contain anything, so for them it's just a test of equality
 		# This method is expected to be used on functional forms, so modifiers don't matter
 		# Note that any stroke matches a wildcard
 		return isinstance(other, Stroke) and (type(other) == type(self) or type(other) == Wildcard)
+	def highlight_containment(self, other, notes): # An extension to the above which is much less efficient but specifically notes which things have matched
+		if other in self:
+			notes.add(self.ident)
+			return True
+		else:
+			return False
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
@@ -300,6 +321,15 @@ class Container(Element):
 				matched += 1
 				if matched >= len(inner): return True
 		return False
+	def match_contents_highlight(self, other, notes): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
+		outer, inner = self.contents, other.contents
+		matched = 0
+		for each in outer:
+			if each.highlight_containment(inner[matched], notes):
+				matched += 1
+				if matched >= len(inner): return True
+		self._remove_children(notes)
+		return False
 
 class HStack(Container):
 	def __str__(self):
@@ -408,6 +438,14 @@ class HStack(Container):
 	def __contains__(self, other):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, HStack) and self.match_contents(other): return True
+		return False
+	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+		for child in self.contents:
+			if child.highlight_containment(other, notes):
+				return True
+			child._remove_children(notes)
+		if isinstance(other, HStack):
+			return self.match_contents_highlight(other, notes)
 		return False
 
 class VStack(Container):
@@ -533,6 +571,14 @@ class VStack(Container):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, VStack) and self.match_contents(other): return True
 		return False
+	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+		for child in self.contents:
+			if child.highlight_containment(other, notes):
+				return True
+			child._remove_children(notes)
+		if isinstance(other, VStack):
+			return self.match_contents_highlight(other, notes)
+		return False
 
 class Superpose(Container):
 	def __str__(self):
@@ -573,6 +619,22 @@ class Superpose(Container):
 			for oc in other.contents:
 				if not any(oc in child for child in self.contents): return False
 			return True
+		return False
+	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+		for child in self.contents:
+			if child.highlight_containment(other, notes):
+				return True
+			child._remove_children(notes)
+		if isinstance(other, Superpose):
+			for oc in other.contents:
+				for child in self.contents:
+					if child.highlight_containment(oc, notes):
+						break # Skip the else-clause
+				else: # There was no match
+					self._remove_children(notes)
+					return False
+			return True
+		self._remove_children(notes)
 		return False
 
 class Adjustment(Element):

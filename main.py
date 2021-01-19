@@ -17,9 +17,16 @@ def test_rendering():
 
 def test_comparisons():
 	while True:
-		outer = parse(input('Outer: ')).functional_form()
-		inner = parse(input('Inner: ')).functional_form()
-		print(inner in outer)
+		outer = parse(input('Outer: '))
+		outf = outer.functional_form()
+		inner = parse(input('Inner: '))
+		inf = inner.functional_form()
+		if inf in outf:
+			match = outf.highlight_containment(inf)
+	#		print(match)
+			TwoSidedRenderer.render(outer, match).show()
+		else:
+			print('No match')
 
 def test_database():
 	db = Database()
@@ -35,4 +42,4 @@ def test_database():
 			TwoSidedRenderer.render(tree).show()
 
 if __name__ == '__main__':
-	test_rendering()
+	test_comparisons()
