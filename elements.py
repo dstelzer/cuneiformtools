@@ -138,9 +138,21 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
 		super().__init__(mods=None, *args, **kwargs)
 	def _sigil(self): return '0'
-	def can_expand_horizontally(self): return True
-	def can_expand_vertically(self): return True
 	def draw(self, rend): pass # Nothing to render
+	
+	def _shrink_horizontal(self): return Modifier.HEADSHORT in self.mods
+	def _shrink_vertical(self): return Modifier.TAILSHORT in self.mods
+	def can_expand_horizontally(self): return not self._shrink_horizontal()
+	def can_expand_vertically(self): return not self._shrink_vertical()
+	def propagate_dimensions(self, dims, pos):
+		w, h = dims
+		x, y = pos
+		ax, ay = 0, 0 # Adjustment
+		if self._shrink_horizontal(): ax = w/2; x += w/2; w = 0
+		if self._shrink_vertical(): ay = h/2; y += h/2; h = 0
+		self.dims = (w, h)
+		self.pos = (x, y)
+		self.adjust = (ax, ay)
 	
 	def functional_form(self): return None # Voids are ignored in functional form
 
@@ -295,7 +307,6 @@ class Container(Element):
 		for each in self.contents:
 			yield from each.traverse()
 	
-	# TODO: This is good for NI, but gives possibly-not-desirable results for TA. Is that okay? Test it and make sure.
 	def clean_intersections(self): # Pull intersecting elements out as far as possible, to deal with the ambiguities in superpositioning
 		# Are all our non-superposed children pointed the same way?
 		overall = Orientation.consensus(child.orient() for child in self.contents if not isinstance(child, Superpose))
@@ -306,6 +317,8 @@ class Container(Element):
 		outer_elements = []
 		for i, child in enumerate(self.contents):
 			if isinstance(child, Superpose) and child.pulldir != overall:
+				# child.pulldir indicates whether we've already pulled something out in some direction - in which case we shouldn't also pull something out in the *other* direction
+				# Consider for example TA: we should pull the two vertical tacks outward, so that they go through all of the horizontals, but we shouldn't then pull the horizontals out to go through the right-hand vertical
 				good = [e for e in child.contents if not conflicts(e.orient())]
 				bad = [e for e in child.contents if conflicts(e.orient())]
 				if bad: # We need to make a change
