@@ -625,8 +625,15 @@ class Superpose(Container):
 	def orient(self): return Orientation.NEITHER # Because they're handled specially in the orientation systems
 	
 	def functional_form(self):
-		children = [child.functional_form() for child in self.contents]
-		children = [child for child in children if child is not None] # Remove None elements (TODO filter)
+		raw_children = [child.functional_form() for child in self.contents]
+		children = []
+		for child in raw_children:
+			if child is None: continue
+			elif isinstance(child, Superpose):
+				for grandchild in child.contents:
+					children.append(grandchild)
+			else:
+				children.append(child)
 		if len(children) == 1: return children[0]
 		if not children: return None
 		children.sort(key=str) # Sort by ASCII form - it's arbitrary but consistent

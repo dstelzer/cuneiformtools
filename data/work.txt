@@ -21,7 +21,7 @@
 		DIDLI
 			[plural]
 		ḪAL
-			overseer
+			haruspex, seer
 	FORM
 		h2
 3
@@ -29,7 +29,7 @@
 		PÉŠ, PÍŠ
 			mouse
 	FORM
-		W[{({hhh}[vvv])h2[{cc}v]}{d(uv)}]
+		W[{({hhh}[vvv])Mh2[{cc}v]M}{d(uv)}]
 4
 	HIT
 		bal
@@ -39,7 +39,7 @@
 			libation
 			spindle
 	FORM
-		L[h2cv{chc}]
+		L[h2c"v{chc}]
 5
 	HIT
 		šir
@@ -80,7 +80,7 @@
 	SUM
 		AN
 			heaven
-		DINGIR
+		DINGIR (DIŊIR)
 			deity
 	DET
 		DINGIR
@@ -132,6 +132,8 @@
 	HIT
 		pát
 		pít
+		pè?
+		pì?
 	AKK
 		bat
 		be
@@ -281,11 +283,13 @@
 	FORM
 		[hv{c[vv2]}v]
 28
+	COMP
+		SI×SÁ
 	SUM
 		SI×SÁ
-			arrange, join, fix
+			arrange, join, fix, preordain
 	FORM
-		L[hv{[cc]h'h'h}vv]
+		L[hv{[{[cc]hh}v]Mh}v]
 29
 	HIT
 		rat
@@ -312,10 +316,12 @@
 		L[hvv{[vvv]h}TE]
 		L[hvv{[vvv]v}TE]
 31
+	COMP
+		ge+e
 	HURR
-		ge-e
+		ge(e)
 	FORM
-		W[hvv{[vvv]h[{0hh}vv2]}]
+		W[hvv{[0vvv]h[{0hh}vv2]M}]
 32
 	HIT
 		ri
@@ -387,7 +393,7 @@
 	HIT
 		nam
 	SUM
-		NAM/SIM/SÍN
+		NAM
 			district
 			governor
 		BURU₅
@@ -444,8 +450,8 @@
 		US₅
 	FORM
 		L{[v{hhhh}vcv]h}
-		L{[v(vd)v]h}
-		L{[v([vv]d)]h}
+		L{[v{h(vd)}v]h}
+		L{[v{h([vv]d)}]h}
 46
 	HIT
 		zul
@@ -465,9 +471,6 @@
 	FORM
 		W{[v{0hhh}vd]h}
 48
-	SUM
-		ŠUŠANA
-			[half of GIDIM]
 	FORM
 		{[vv]h}
 49
@@ -515,7 +518,7 @@
 		GIDIM
 			dead, ghost
 	FORM
-		W[{[vv{[hc]h}]h}vv]
+		W[{[vv{[hc]h}]h"}vv]
 		W[{[vv]h}{[hc]h0}vv]
 53
 	SUM
@@ -526,20 +529,24 @@
 		L{[0vhv]h}
 		(h[vv])
 54
+	COMP
+		GÁ×PA
 	SUM
 		SILA₄
 			lamb
 	FORM
 		W[{h'(h[v'v'])}(v{hhhh})v]
-		L[{h({h'h'h'h'}v)(h[vv0])}v]
-		L[{h({h'"h'"}v)(h[vv0])}v]
+		L[{h({hhhh}v)M(h[vv0])}v]
+		L[{h({h'"h'"}v)M(h[vv0])}v]
 55
+	COMP
+		LAGAB×NÍG
 	SUM
-		BÚGIN/BÚNIN
+		BÚGIN/BÚNIN (BUNIŊ)
 			container
 	FORM
-		[{h[vvv]vh}v]
-		[{h[v{[vv]v}]h}v]
+		[{h{[vvv]v}Mh}v]
+		[{h[v{[vv]v}]Mh}v]
 56
 	AKK
 		ba₄
@@ -552,11 +559,680 @@
 		L[{h'(h[v'v'0])}v]
 		L[{h'h[vv0]}v]
 57
+	COMP
+		GÁ×AN
 	SUM
 		AMA
 			mother
 		DAGAL
 			bright
 	FORM
-		L[{h'[h2'v](h[vv0])}v]
+		L[{h'[h2'v]M(h[vv0])}v]
 		L[{h'h2'hv}vv]
+58
+	COMP
+		GÁ×NIR
+	SUM
+		ÙR
+			(wooden) beam
+	FORM
+		L[{h[{0hh}{vv}{vv}{vv}v2]M(h[vv0])}v]
+		L[{h[{0hh}{vv}{vv}{vv}v2]Mh[vv0]}v]
+59
+	COMP
+		GÁ×ŠE
+	SUM
+		ÀRAḪ/ÉSAG
+			store, storage, barn
+	FORM
+		[{h[0{cc}{cc}]M(h[vv0])}v]
+		[{h[0{cc}{cc}]Mh[vv0]}v]
+60
+	COMP
+		GÁ×NÍG
+	SUM
+		GALGA (ŊALGA)
+			forethought, planning, advice
+	FORM
+		[{h{[vvv]v}M(h[vv0])}v]
+		[{h{[vvv]v}Mh[vv0]}v]
+61
+	HIT
+		gán
+		kán
+	SUM
+		IKU
+			field
+	FORM
+		L[{h'0(h[vvv0])}v]
+		L[{h'h[vvv0]}v]
+		L[{h'[vvv0]h}v]
+62
+	COMP
+		SÍK.NUN
+	SUM
+		ERIN/EREN
+			cedar
+	FORM
+		W[{h'[h'c]h'h}v{[hvvv]Mh}v]
+63
+	COMP
+		SÍK.LAM
+	SUM
+		ŠÉŠ
+			licorice plant?
+	FORM
+		W[{h'[h'c]h'h}v{[{cc}{hh}v]Mh}v]
+64
+	COMP
+		ŠU.NÍGIN
+	SUM
+		ŠU.NÍGIN
+			total, in all
+	FORM
+		L[{h'h'h'h}{hh}v]
+		L[{h'h'h'h}{hh2}v]
+65
+	SUM
+		SÍG/SÍK/SIKI
+			wool
+	FORM
+		L[{h'h'h'h}{[c'v]h}]
+		L[{0[hc]h}{[vc']h}]
+		L[{h'ch}v{0h}]
+66
+	COMP
+		SÍG+MUNUS
+	SUM
+		SÍG+MUNUS
+			ewe
+	FORM
+		L[{[0{hh[hc]}]h}v{[{cc}h]MEh}]
+67
+	HIT
+		ik
+		ek
+	SUM
+		IG
+			door
+	FORM
+		L[{[0{h[hc]h}]h}v{cc}]
+		[{[vcv]h}{cc}]
+68
+	HIT
+		šu
+	AKK
+		kat₇?
+		suₓ?
+	SUM
+		ŠU
+			hand
+	FORM
+		[{0h'h'h'h}v]
+69
+	SUM
+		KÙ/KUG
+			pure, clean
+			shiny
+	FORM
+		L[{0h'h'h'h}vv2]
+		P{[vv][vv]h}
+		P[{v2}{v2h}]
+70
+	COMP
+		Unknown?
+	SUM
+		GIŠIMMAR
+			date palm
+	FORM
+		W[{h'h'h'h'h[cc]}Evv20{0hh}{vv}{vv}{vv}v2]
+		W[{h'h'h'h'h[hch]M}Evv20{0hh}{vc}{vc}{vc}v2]
+71
+	AKK
+		tàra
+	SUM
+		DÀRA
+			ibex
+	FORM
+		L[{[cc]h'h'h'h}vv{0[hc][hc]}]
+		W[{[cc]h'h'h'h}v{[vv'v'v]h}{ch[vvv]c}{0h2d}]
+		W[{[cc]h'h'h'h}v{[vv'v'v]h}{dh0}{0h2v}]
+		W[{[cc]h'h'h'h}v{[vv'v'v{0hh}]h}{cccc}{cccc}(h2c")]
+		W[{[{d2hhh}v{[v'v']h}v{h[ccc]}]h}E{cc}{0h2v}]
+72
+	HIT
+		ni
+		né
+	AKK
+		lí
+		ṣal
+	SUM
+		Ì/YÀ
+			oil, fat
+			anoint
+	FORM
+		L{du}
+		L{dh0}
+		L{d(u[0vv0])}
+		L{dh[0vv0]}
+		L(du)
+		L(dh)
+73
+	SUM
+		NA₄
+			stone
+	DET
+		NA₄
+			stone
+	FORM
+		L[{dh0'}{cc0'}v]
+		L[{hh0'}{cc0'}v]
+74
+	SUM
+		DÌḪ
+			thorn (type of plant)
+	AKK
+		nim
+		nem
+		num
+	HURR
+		nim
+	FORM
+		L[{du0'}{cc0'}v]
+		L[c'{du}c'v]
+		L[{[cc][hc]0}v]
+75
+	SUM
+		DÙ (DRU)
+			do, make, happen
+		GAG
+			peg
+	AKK
+		qaq
+	FORM
+		L{d(uv)}
+76
+	COMP
+		né+e
+	HURR
+		ne(e)
+	FORM
+		W[{dh[0vv]}{0[{0hh}vv2]}]
+77
+	HITT
+		ir
+		er
+	SUM
+		IR
+			ask
+			consult an oracle
+	FORM
+		L{d(u[vvv])}
+		L{d(h[vvv])}
+		L{dh[vvv]}
+78
+	AKK
+		lú
+	SUM
+		LÚ
+			man
+	DET
+		LÚ
+			profession (male)
+	FORM
+		L{[{cc}c"]u}
+		L{d2[c0"]u}
+		{[0"c'c']h}
+		{h2hh}
+		L{[dd2]h[vvv0]}
+79
+	SUM
+		ŠEŠ
+			brother
+		SES
+			bitter
+	FORM
+		L{[{cc}cc][hc]}
+		L[{[{cc}c]h}{cc}]
+		L{[{cc}cc]([hc][0vvv0])}
+80
+	SUM
+		AŠGAB
+			leatherworker, cobbler
+	FORM
+		L({[vd]u}[0vvvv])
+		L(h[v(d[0vvv])])
+		L(h[v{h[0vvvv]}])
+81
+	HIT
+		ak
+	FORM
+		L[{[h{hhh}{hhh}]h}v{0hh}]
+		L{[hv(h2v)]h'}
+		L{[hvhvh]h}
+82
+	COMP
+		AG.ERIM
+	SUM
+		MÈ
+			battle
+	FORM
+		W[{[h{hhh}{hhh}]h}v{hh}{cc}v2]
+		L[{[hv(hv)]h'}{cc}v2]
+83
+	SUM
+		GÙN
+			colorful
+	FORM
+		L[{[h{hhh}c]h}v]
+		L[hv{[hc]hhh}v]
+84
+	SUM
+		ITI/ITU
+			month
+	DET
+		ITI/ITU
+			month
+	FORM
+		L[{0[hccc]h}v2]
+		L[{h[ccc]h}v2]
+85
+	COMP
+		GAD.ŠE.NAGA
+	SUM
+		ŠINIG
+			tamarisk (shrub)
+	FORM
+		W[{hh}v{cc}{cc}{ccc}{cc}v2{du}]
+		W[{[hv]h}{cc}{cc}{hhh}{hh}v2{du}]
+86
+	HIT
+		ší
+		šé
+	AKK
+		si
+		se
+		ṣì
+	SUM
+		SI
+			horn
+	DET
+		SI
+			horn
+	FORM
+		{[hv'v]h'}
+		{[0vv]h2}
+		[{h[v0]h}v]
+87
+	SUM
+		MÁ
+			ship
+	FORM
+		{[hvv'v]h}
+		{(h[vvv])h}
+		{[vvv]hh}
+		{[vvv]h2}
+88
+	SUM
+		ŠÙDUL/ŠÙDUN
+			yoke
+	FORM
+		W[{[hvvvh]h}{cc}{cc}v2]
+		W[(h[vv])v{chc}{ccc}v2]
+89
+	COMP
+		SI.A
+	SUM
+		SA₅
+			red
+		DIRI
+			leftover
+	AKK
+		dir
+	FORM
+		L[{[hvv]h'}vv2]
+		L{[0v'v'vv2]h2}
+90
+	HIT
+		tap
+	HURR
+		taw
+	AKK
+		dáp
+		ṭap
+	FORM
+		{hh}
+		{(hc)(hc)}
+		({hh}{cc})
+91
+	HIT
+		šum
+	AKK
+		tà
+	FORM
+		L[{hh}{dhu}]
+		L[{hh}v{dhu}]
+		L[{hh}(dhu)]
+		L[{0hh0}{chh}]
+92
+	COMP
+		PIRIG&ZA
+	HIT
+		az
+	AKK
+		as
+		aṣ
+	SUM
+		AZ
+			bear (animal)
+	FORM
+		L{[{hh}{dhh}][{vv}{vv}000]M}
+		L[{hh}{dhh}]
+		L{[{hh}{hhh}][{vv}{vv}000]M}
+		L[{hh}{hhh}]
+93
+	COMP
+		PIRIG&UT
+	HIT
+		uk
+	SUM
+		UG
+			tiger?
+	FORM
+		L{[{hh}{dhh}][{cc}v0]M}
+		L[{hh}{dhh}]
+		L{[{hh}{hhh}][{cc}v0]M}
+		L[{hh}{hhh}]
+94
+	COMP
+		PIRIG&KAL
+	SUM
+		NIB
+			leopard
+	FORM
+		L{[{hh}{dhh}][{hh}vvv200]M}
+95
+	HIT
+		la
+	FORM
+		L[{h'h2h2h'}v]
+		L[{hh}{hhhh}v]
+		L[{hh}{hhhhhh}v]
+96
+	SUM
+		UKU
+	FORM
+		L[{hhhh}{[vvhv]h}E]
+97
+	HIT
+		ap
+	SUM
+		AB
+			window
+	FORM
+		L[{hh}{h0h}v]
+		L[{h2h2}v]
+98
+	HIT
+		um
+	HURR
+		ubₓ
+	FORM
+		L[{hh}{h0h}v]
+		L[{h'([0vv]{hh})h'}v]
+99
+	HIT
+		tup
+	AKK
+		ṭup
+	SUM
+		DUB
+			clay tablet, document
+	FORM
+		L[{hh}{hh}v]
+		L[{h2h2}v]
+		L[{h'hhh'}v]
+100
+	COMP
+		AN&AN
+	HIT
+		nap
+	FORM
+		[{0h2h2}v2]
+101
+	COMP
+		3×AN
+	AKK
+		mul
+	SUM
+		MUL
+			star
+	DET
+		MUL
+			star
+	FORM
+		W[{0h2h2}v20'"h2v]
+		W[{(h2v)(h2v)}E0'"(h2v)]
+102
+	SUM
+		DÉ
+			pour
+	FORM
+		[{ch2h2c}v]
+103
+	COMP
+		NÍNDA×AN
+	SUM
+		šàm
+	SUM
+		ŠÀM
+			cost, buy
+	FORM
+		L[{0hh0}{h(h2v)Mh}E]
+		L[{0hh0}{h[h2v]Mh}E]
+104
+	COMP
+		NÍNDA×NUN
+	SUM
+		AZU/ÚZU
+			haruspex, seer, wizard
+	FORM
+		L[{0hh0}{h([vvvv]h)Mh}Ev]
+		L[{hh}{hhh}vvvv]
+105
+	HIT
+		at
+	FORM
+		L[{0hh0}{hhhh}v]
+		L[{h'h2h2h'}v]
+106
+	AKK
+		sìr
+		šìr
+	SUM
+		SÌR/ŠÌR
+			sing, song
+		KEŠDA/KÉŠ
+			bind
+	FORM
+		W[{0hh0}{hhhh}v{0hh0}v]
+		W[{0hh0}{hhhh}v({0hh0}v)]
+107
+	COMP
+		EZEN×ŠE
+	SUM
+		EZEN₄
+			feast, celebration
+	FORM
+		W[{0hh0}{hh'h'h}v{h[{cc}{cc}]Mh}v]
+108
+	COMP
+		AB×PA
+	HIT
+		zé
+	AKK
+		zí
+		ṣi
+		ṣe
+		si₂₀
+		se₂₀
+	SUM
+		ZÍ
+			gallbladder
+	FORM
+		L[{hh}{h({hh}v)Mh}v]
+		L[{hh}{hh'h'h}vv]
+109
+	SUM
+		URUDU
+			copper
+	DET
+		URUDU
+			metal
+	FORM
+		L[{hh}{hch}v]
+		L[{hh}{[hc]h}v]
+		L[{0hh0}{h[vv]h}v]
+110
+	SUM
+		MÚRU/MURUB₄
+			middle
+	FORM
+		L[{0hh0}{h[ccc]h}v2]
+		L[{hhhh}{h[ccc]h}v2]
+		L[{hhhh}{h(du)Mh}v2]
+111
+	SUM
+		ERI₁₁
+		UNU(G)
+			The city of Uruk
+	FORM
+		L[{hhh}{h[ccc]h}v2]
+		L[{0hh0}{hhhhh}v]
+112
+	HIT
+		miš
+	AKK
+		mis
+	FORM
+		L[{hh}{h[vv2]Mh}v]
+		L[{0hh}{[vvv]h}]
+113
+	HIT
+		ḫé
+	AKK
+		ḫí
+		kan
+	FORM
+		L[{hh}{hh2h}]
+114
+	SUM
+		BÀD
+			wall, fortification
+	FORM
+		L[{hh}{h[{hh}c]h}v{0hh}v]
+		W[{hh}{h[{hh}c]h}v({0hh}v)]
+115
+	AKK
+		šàr
+	SUM
+		LUGAL
+			king
+	FORM
+		W[{hh}{[d0][dd]u}E]
+		W[{hh}{[{cc}c"]u}]
+		W[{hh}{[{hh}h]u}E]
+		W[{hh}{[{hh}h]h}E]
+116
+	AKK
+		dìm
+	SUM
+		DÌM
+			pillar, post
+	FORM
+		W[{hh}{[d0][dd]0'"h}E{cc}{0h2d}]
+		W[{hh}{[d0][dd]0'"h[cc]}E{0h2h}]
+117
+	HIT
+		il
+	AKK
+		él
+	FORM
+		W[{chh}{0d2u}vv2]
+		W[{0[hc']h}(d2u)vvv2]
+		W[{0hh}{0d2h}vvv2]
+		W[{0[dc]h}{[vd2]h}v{[vv]v}]
+118
+	SUM
+		PAN
+			bow
+	FORM
+		{h(hc)}
+		L{h[hc'ch]}
+		L{(hv)[hc'ch]}
+		L{(hv)h[d2]}
+119
+	SUM
+		NÍNDA
+	FORM
+		L[{hh}c'{hh}]
+		L[{hh}{hh}]
+120
+	HIT
+		kum
+	AKK
+		gum
+		ku₁₃
+		qu
+		qum
+	FORM
+		L[{0hh0}c"{[hc'][hc']}E]
+		L[{[hc']h}{[hc'][hc']}]
+121
+	COMP
+		NÍNDA×NE
+	SUM
+		ÁG(A)
+			beloved?
+	FORM
+		W[{0hh0}c"{h[{hh}{[vvv]v}TE{hh}v]Mh}v]
+122
+	COMP
+		KUM×ŠE
+	SUM
+		GAZ
+			kill
+	FORM
+		W[{hh}c"{h[{cc}{cc}]Mh}{cc}]
+		W[{hh}c"{h{v[vvv]}TEh}{cc}]
+123
+	COMP
+		(NÍNDA×ŠE).A.AN
+	SUM
+		ŠÁM
+			cost, buy
+	FORM
+		W[{0hh0}c{h[{cc}{cc}]Mh}0'"vv20'"h2v]
+124
+	HIT
+		úr
+	SUM
+		ÚR
+			genitals
+	FORM
+		W[{chh}{0h(hv)}v]
+		W[{0[hc]h}{0hh}vv]
+125
+	HIT
+		tum
+		tu₄
+	AKK
+		du₄
+		dum
+		íp
+		ép
+		ṭu₄
+		ṭum
+	FORM
+		W[{chh}{h'h'h'h}]
+		W[{chh}v{h'h'h'h}]
