@@ -685,3 +685,25 @@ class Expand(Adjustment): # Request twice as much space as usual from our parent
 	def kern_bottom(self): return self.child.kern_bottom()
 	def kern_left(self): return self.child.kern_left()
 	def kern_right(self): return self.child.kern_right()
+
+class Margin(Adjustment): # Put a small margin around an element (for when signs are components of other signs)
+	def __str__(self):
+		return str(self.child) + 'M'
+	def can_expand_horizontally(self): return self.child.can_expand_horizontally()
+	def can_expand_vertically(self): return self.child.can_expand_vertically()
+	def orient(self): return self.child.orient()
+	def draw(self, rend): self.child.draw(rend)
+	
+	def propagate_dimensions(self, dims, pos):
+		# First, we tell our child to fill in the whole space we're given, minus a margin around it
+		w, h = dims
+		x, y = pos
+		self.margin = m = min(w/5, h/5, 0.1)
+		self.child.propagate_dimensions((w-2*m, h-2*m), (x+m, y+m))
+		# Then, we see what space it actually took up, and resize ourself to be that, plus a margin around it
+		w, h = self.child.dims
+		x, y = self.child.pos
+		ax, ay = self.child.adjust
+		self.dims = (w+2*m, h+2*m)
+		self.pos = (x-m, y-m)
+		self.adjust = (ax, ay)

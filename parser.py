@@ -8,6 +8,7 @@ MODS = set(m.value for m in Modifier)
 ADJS = {
 	'T':Tenu,
 	'E':Expand,
+	'M':Margin,
 }
 
 SHAPES = set(s.value for s in CanvasShape)

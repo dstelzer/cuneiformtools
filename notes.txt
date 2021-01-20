@@ -59,9 +59,10 @@ PHASE 2
 #		Expand
 #		Smaller Winkelhaken
 		One-dimensional voids
+		Margin
 
 PHASE 3
-	Highlight matches
-		Leaf iteration
-		Leaf identification
+#	Highlight matches
+#		Leaf iteration
+#		Leaf identification
 	Degrees of change
