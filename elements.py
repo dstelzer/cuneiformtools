@@ -222,8 +222,10 @@ class UpDiag(Stroke):
 		rend.draw_upward(*self.pos, *self.dims, self.mods)
 	
 	def functional_form(self):
-		# There are no diagonal stacks, so we just discard all modifiers
-		return UpDiag(self.ident)
+		# There's no diagonal stacking so we use HStack instead
+		if Modifier.DOUBLE in self.mods: return HStack([UpDiag(self.ident), UpDiag(self.ident)])
+		else: return UpDiag(self.ident)
+	# TODO: Do double upward strokes actually exist? I don't think I've ever seen one; they're just included here for completeness.
 
 class DownDiag(Stroke):
 	def _sigil(self): return 'd'
@@ -237,8 +239,9 @@ class DownDiag(Stroke):
 		rend.draw_downward(*self.pos, *self.dims, self.mods)
 	
 	def functional_form(self):
-		# There are no diagonal stacks, so we just discard all modifiers
-		return DownDiag(self.ident)
+		# There's no diagonal stacking so we use HStack instead
+		if Modifier.DOUBLE in self.mods: return HStack([DownDiag(self.ident), DownDiag(self.ident)])
+		else: return DownDiag(self.ident)
 
 class Winkelhaken(Stroke):
 	def _sigil(self): return 'c'
@@ -298,20 +301,21 @@ class Container(Element):
 		overall = Orientation.consensus(child.orient() for child in self.contents if not isinstance(child, Superpose))
 		if overall == Orientation.NEITHER or overall == Orientation.MIXED: return self # Don't do this if there's no clear orientation
 		def conflicts(o): return o != overall and o != Orientation.MIXED
+		opposite = Orientation.TALL if overall==Orientation.WIDE else Orientation.WIDE # Whichever is the opposite of `overall`
 		
 		outer_elements = []
 		for i, child in enumerate(self.contents):
-			if isinstance(child, Superpose):
+			if isinstance(child, Superpose) and child.pulldir != overall:
 				good = [e for e in child.contents if not conflicts(e.orient())]
 				bad = [e for e in child.contents if conflicts(e.orient())]
 				if bad: # We need to make a change
-					self.contents[i] = Superpose(good)
+					self.contents[i] = Superpose(good, pulldir=child.pulldir)
 					outer_elements.extend(bad)
 		
 		if not outer_elements: return self # No changes necessary
 		# Otherwise, though, we need to put these "pulled-out" elements in superposition with the whole container
 		outer_elements.append(self)
-		return Superpose(outer_elements).functional_form() # Gotta do the functional cleanup all over again just in case
+		return Superpose(outer_elements, pulldir=opposite).functional_form() # Gotta do the functional cleanup all over again just in case
 	
 	def match_contents(self, other): # Utility method used by the __contains__ implementation in HStack and VStack
 		outer, inner = self.contents, other.contents
@@ -581,6 +585,10 @@ class VStack(Container):
 		return False
 
 class Superpose(Container):
+	def __init__(self, *args, pulldir=Orientation.NEITHER, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.pulldir = pulldir # Used in the functional-form calculations to make sure that we don't "pull out" elements in the wrong way
+	
 	def __str__(self):
 		return '(' + ','.join(str(c) for c in self.contents) + ')'
 	
@@ -609,7 +617,7 @@ class Superpose(Container):
 		if len(children) == 1: return children[0]
 		if not children: return None
 		children.sort(key=str) # Sort by ASCII form - it's arbitrary but consistent
-		return Superpose(children)
+		return Superpose(children, pulldir=self.pulldir)
 	
 	def __contains__(self, other):
 		if any((other in child) for child in self.contents): return True
