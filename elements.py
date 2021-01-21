@@ -331,21 +331,44 @@ class Container(Element):
 		outer_elements.append(self)
 		return Superpose(outer_elements, pulldir=opposite).functional_form() # Gotta do the functional cleanup all over again just in case
 	
-	def match_contents(self, other): # Utility method used by the __contains__ implementation in HStack and VStack
+	def _match_contents(self, other): # Utility method used by the __contains__ implementation in HStack and VStack
 		outer, inner = self.contents, other.contents
+		cls = type(self)
 		matched = 0
 		for each in outer:
-			if inner[matched] in each:
-				matched += 1
-				if matched >= len(inner): return True
+			if any(isinstance(descendant, cls) for descendant in each.traverse()): # This one has a relevant container as a descendant, so we should check for sub-sequences
+				# So let's see if some sub-sequence of our whole sequence is contained (to deal with instances where there's an HStack nested somewhere inside an HStack etc)
+				for end in range(len(inner), matched, -1): # Take progressively shorter sub-sequences
+					subseq = cls(inner[matched:end]) # [matched:end], [matched:end-1], etc
+					if subseq in each:
+						matched = end
+						break
+				else: # We didn't find any sub-sequence, so let's test for a single element's containment instead
+					if inner[matched] in each:
+						matched += 1
+			else: # No descendants of the same class, so we don't have to bother checking sub-sequences
+				if inner[matched] in each:
+					matched += 1
+			if matched >= len(inner): return True
 		return False
-	def match_contents_highlight(self, other, notes): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
+	def _match_contents_highlight(self, other, notes): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
 		outer, inner = self.contents, other.contents
+		cls = type(self)
 		matched = 0
 		for each in outer:
-			if each.highlight_containment(inner[matched], notes):
-				matched += 1
-				if matched >= len(inner): return True
+			if any(isinstance(descendant, cls) for descendant in each.traverse()):
+				for end in range(len(inner), matched, -1):
+					subseq = cls(inner[matched:end])
+					if each.highlight_containment(subseq, notes):
+						matched = end
+						break
+				else:
+					if each.highlight_containment(inner[matched], notes):
+						matched += 1
+			else:
+				if each.highlight_containment(inner[matched], notes):
+					matched += 1
+			if matched >= len(inner): return True
 		self._remove_children(notes)
 		return False
 
@@ -455,7 +478,7 @@ class HStack(Container):
 	
 	def __contains__(self, other):
 		if any((other in child) for child in self.contents): return True
-		if isinstance(other, HStack) and self.match_contents(other): return True
+		if isinstance(other, HStack) and self._match_contents(other): return True
 		return False
 	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
@@ -463,7 +486,7 @@ class HStack(Container):
 				return True
 			child._remove_children(notes)
 		if isinstance(other, HStack):
-			return self.match_contents_highlight(other, notes)
+			return self._match_contents_highlight(other, notes)
 		return False
 
 class VStack(Container):
@@ -587,7 +610,7 @@ class VStack(Container):
 	
 	def __contains__(self, other):
 		if any((other in child) for child in self.contents): return True
-		if isinstance(other, VStack) and self.match_contents(other): return True
+		if isinstance(other, VStack) and self._match_contents(other): return True
 		return False
 	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
@@ -595,7 +618,7 @@ class VStack(Container):
 				return True
 			child._remove_children(notes)
 		if isinstance(other, VStack):
-			return self.match_contents_highlight(other, notes)
+			return self._match_contents_highlight(other, notes)
 		return False
 
 class Superpose(Container):
