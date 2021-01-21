@@ -5,7 +5,10 @@ from contextlib import contextmanager
 
 import cairo
 
-from elements import Modifier
+try:
+	from elements import Modifier
+except ImportError:
+	from .elements import Modifier
 
 DRAW_BOXES = False
 

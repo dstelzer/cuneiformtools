@@ -1,6 +1,9 @@
 
 
-from elements import *
+try:
+	from elements import *
+except ImportError:
+	from .elements import *
 
 STARTS = '([{'
 ENDS = ')]}'
