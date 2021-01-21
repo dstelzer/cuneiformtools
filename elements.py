@@ -7,6 +7,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	DOUBLE = '2'
 	TRIPLE = '3'
 	HIGHLIGHT = '!'
+	REVERSE = '_R' # Multi-character name means it won't show up in parsing; this one's only used internally in the implementation of upward diagonal rendering
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0

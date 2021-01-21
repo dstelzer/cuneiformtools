@@ -26,6 +26,7 @@ Modifiers:
 Adjustments:
 	T	Tenû (tilted)
 	E	Expand
+	M	Margin
 
 PHASE 1
 #	Parsing
@@ -50,19 +51,27 @@ PHASE 2
 #	"Functional form"
 #		Decide on orderings
 #		Decide on what to do with doubles
-		Reconsider double diagonals?
+#		Reconsider double diagonals?
 #	Comparisons
 #	Wildcards
 #	Better adjustment syntax
-	New modifiers and adjustments
+#	New modifiers and adjustments
 #		Highlight
 #		Expand
 #		Smaller Winkelhaken
-		One-dimensional voids
-		Margin
+#		One-dimensional voids
+#		Margin
 
 PHASE 3
 #	Highlight matches
 #		Leaf iteration
 #		Leaf identification
-	Degrees of change
+	"Greedy" matching within containers
+	Encoding the whole HZL
+#		1
+#		2
+		3
+		4
+		5
+		6
+	Degrees of change?

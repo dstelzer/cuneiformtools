@@ -153,6 +153,7 @@ class Renderer:
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
+		mods = set(mods) | {Modifier.REVERSE} # Since we flipped one of the axes we should unflip it for rendering
 		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
@@ -202,6 +203,10 @@ class OneSidedRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
+		if Modifier.REVERSE in mods:
+			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
+			c.translate(-w, 0) # Fix our origin after flipping
+		
 		nw = (0, 0)
 		ne = (w, 0)
 		pivot = (w, w/2)
@@ -223,6 +228,10 @@ class OneSidedRenderer(Renderer):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
+		
+		if Modifier.REVERSE in mods:
+			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
+			c.translate(-w, 0) # Fix our origin after flipping
 		
 		nw = (0, 0)
 		ne = (w, 0)
