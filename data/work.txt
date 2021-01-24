@@ -168,8 +168,8 @@
 		NA
 			shepherd
 	FORM
-		L[hc'{c0}v]
-		L[h{cc0}v]
+		L[hc'{c0'}v]
+		L[h{cc0'}v]
 16
 	SUM
 		ARAD, ÌR
@@ -196,8 +196,8 @@
 		MUN
 			salt
 	FORM
-		W[{ch2c}{0[c{cc}]0}{du}]
-		W[{ch2c}{0[c{cc}]0}(du)]
+		W[{ch2c}c'"{c'c'}{du}]
+		W[{ch2c}c'"{c'c'}(du)]
 		W[{ch2c}v'"(du)]
 19
 	SUM
@@ -497,8 +497,8 @@
 		ḪUB
 			ring, earring
 	FORM
-		W[{[vvh]h2}{cc}v2]
-		W[{[vvd2]h}{cc}v2]
+		W[{[vvh]h2}{cc}0'"v2]
+		W[{[vvd2]h}{cc}0'"v2]
 51
 	HIT
 		ur
@@ -585,8 +585,8 @@
 		ÀRAḪ/ÉSAG
 			store, storage, barn
 	FORM
-		[{h[0{cc}{cc}]M(h[vv0])}v]
-		[{h[0{cc}{cc}]Mh[vv0]}v]
+		[{h[0{cc}{cc}0]M(h[vv0])}v]
+		[{h[0{cc}{cc}0]Mh[vv0]}v]
 60
 	COMP
 		GÁ×NÍG
@@ -606,7 +606,7 @@
 	FORM
 		L[{h'0(h[vvv0])}v]
 		L[{h'h[vvv0]}v]
-		L[{h'[vvv0]h}v]
+		L[{h'[v'v'v'0]h}v]
 62
 	COMP
 		SÍK.NUN
@@ -697,7 +697,7 @@
 		L[{[cc]h'h'h'h}vv{0[hc][hc]}]
 		W[{[cc]h'h'h'h}v{[vv'v'v]h}{ch[vvv]c}{0h2d}]
 		W[{[cc]h'h'h'h}v{[vv'v'v]h}{dh0}{0h2v}]
-		W[{[cc]h'h'h'h}v{[vv'v'v{0hh}]h}{cccc}{cccc}(h2c")]
+		W[{[cc]h'h'h'h}v{[vv'v'v{0hh}]h}{cccc}{cccc}(h2[0c])]
 		W[{[{d2hhh}v{[v'v']h}v{h[ccc]}]h}E{cc}{0h2v}]
 72
 	HIT
@@ -759,7 +759,7 @@
 	FORM
 		W[{dh[0vv]}{0[{0hh}vv2]}]
 77
-	HITT
+	HIT
 		ir
 		er
 	SUM
@@ -780,6 +780,7 @@
 		LÚ
 			profession (male)
 	FORM
+		L{[d0][dd]u}
 		L{[{cc}c"]u}
 		L{d2[c0"]u}
 		{[0"c'c']h}
@@ -806,6 +807,8 @@
 81
 	HIT
 		ak
+	SUM
+		AG
 	FORM
 		L[{[h{hhh}{hhh}]h}v{0hh}]
 		L{[hv(h2v)]h'}
@@ -877,8 +880,8 @@
 		ŠÙDUL/ŠÙDUN
 			yoke
 	FORM
-		W[{[hvvvh]h}{cc}{cc}v2]
-		W[(h[vv])v{chc}{ccc}v2]
+		W[{[hvvvh]h}{cc}{cc}0'"v2]
+		W[(h[vv])v{chc}{ccc}0'"v2]
 89
 	COMP
 		SI.A
@@ -1022,7 +1025,7 @@
 103
 	COMP
 		NÍNDA×AN
-	SUM
+	HIT
 		šàm
 	SUM
 		ŠÀM
@@ -1105,11 +1108,13 @@
 	SUM
 		ERI₁₁
 		UNU(G)
-			The city of Uruk
+			Uruk (city)
 	FORM
 		L[{hhh}{h[ccc]h}v2]
 		L[{0hh0}{hhhhh}v]
 112
+	COMP
+		AB×A?
 	HIT
 		miš
 	AKK
@@ -1174,6 +1179,7 @@
 119
 	SUM
 		NÍNDA
+			[component of other sumerograms]
 	FORM
 		L[{hh}c'{hh}]
 		L[{hh}{hh}]
@@ -1236,3 +1242,2673 @@
 	FORM
 		W[{chh}{h'h'h'h}]
 		W[{chh}v{h'h'h'h}]
+126
+	SUM
+		EGIR
+			back, around
+	FORM
+		L[{chh}{h[hc][hc]h}v2]
+		L[{dhh}{h[hc][hc]h}v2]
+		L[{chh}{hhhhh}{cc}0'"v2]
+		W[{[hc]h}{[hc][hc]}0'"v2]
+127
+	COMP
+		TODO FIX ME
+	SUM
+		LIL
+			fool, idiot
+	AKK
+		lil
+	FORM
+		W[{0'hh0'}c'{0'cc0'}{0'cc0'}{du}c']
+		L[{0'h[hc]0'}{[{ccc}{0'cc}]h}c"]
+128
+	HIT
+		du
+	AKK
+		tù
+		ṭù
+	SUM
+		DU/GIN/RI₆/RÁ
+			go
+		GUB
+			stand
+	FORM
+		L[{[0c]hh2}v]
+		L[{h'hh2}v]
+		L[{d'hh}v]
+129
+	SUM
+		KAŠ₄
+			run
+			courier
+	AKK
+		kas₄
+	FORM
+		L[{c[hc]h2c}v2]
+		L[{c[h2c][h2c]c}v2]
+130
+	SUM
+		DÚB
+	FORM
+		W[{chh}{[v0'"{[hc]h}]h}vv]
+131
+	HIT
+		wi₅
+	SUM
+		GEŠTIN
+			wine
+	FORM
+		L[{0[hc]h}v{0dh}]
+		L{[{ch}v{0d}]h2}
+		L[{h'hh}{[vc"]h}]
+		L[{hhh}(vdu)E]
+132
+	HIT
+		uš
+	AKK
+		ús
+	SUM
+		NITA(Ḫ)
+			man, male
+	FORM
+		L[{0[hc]h}v]
+		L[{0hh0}c"v]
+		L[{0hh0}hv]
+		({d20}[{0h}v])
+		L[{0[hc](h[vv])}v]
+		L[{0h(h[v'v'])}(hv)]
+133
+	HIT
+		ka
+	AKK
+		ga₁₄
+		qà
+	SUM
+		KA
+			mouth
+		KIR_4
+			nose
+		INIM
+			word
+		DU₁₁/DUG₄
+			speak
+		ZÚ
+			tooth
+			obsidian
+			flint
+	FORM
+		L[{0[hc]h}v(v{0hh})]
+		L{[hc"v{hh}v]h}
+		L[{0[hc]h}v{0hh}v]
+		L{[hc"v(v{0hh})]h2}
+		L[h{0hh}v(v{0hh})]
+134
+	COMP
+		KA×BAR
+	SUM
+		UKKIN/UNKIN
+			meeting, assembly
+	FORM
+		W[{0[hc]h}v{h(hv)Mh}v]
+135
+	COMP
+		KA×NUN
+	SUM
+		NUNDUM/NUNDUN
+			lip, edge, bank (of a river)
+	FORM
+		W[{0[hc]h}v{h(h[vvvv])Mh}v]
+		W[{0[hc]h}v{h[hvvvv'v]Mh}v]
+136
+	COMP
+		KA×SA
+	SUM
+		SU₆
+			beard
+	FORM
+		W[{0[hc]h}v{h{[vh](h[0vvv])}Mh}v]
+137
+	COMP
+		KA×ÚR
+	SUM
+		[unknown]
+	FORM
+		W[{0[hc]h}v{h[{hh}{hh}{cv}v]Mh}v]
+138
+	COMP
+		KA×PA
+	SUM
+		[unknown]
+	FORM
+		W[{0[hc]h}v{h(v{hh})Mh}v]
+139
+	COMP
+		KA×GIŠ
+	SUM
+		[unknown]
+	FORM
+		W[{0[hc]h}v{h[{hh}v]Mh}v]
+140
+	COMP
+		KA×GAG
+	SUM
+		KIR₁₄
+			nose
+	FORM
+		W[{0[hc]h}v{h{dhv}Mh}v]
+		W[{0[hc]h}v{hdh(hv)}v]
+		W[{0h2h}v{hh'h'h}v]
+		W[{[hc]c}v{h(hv)Mh}v]
+141
+	COMP
+		KA×U
+	SUM
+		KA×U
+			mouth
+	FORM
+		W[{0[hc]h}v{hch}v]
+142
+	COMP
+		KA×LUM
+	SUM
+		[unknown - hapax]
+	FORM
+		W[{0[hc]h}v{h[{cc}{hh}{hh}]Mh}v]
+143
+	COMP
+		KA×UD
+	SUM
+		ZU₉
+			tooth
+	FORM
+		W[{0[hc]h}v{h[0{cc}0'"v0]Mh}v]
+		W[{0[hc]h}v{h[{dd}v]Mh}v]
+144
+	COMP
+		KA×IM
+	SUM
+		BÚN
+			thunder
+	FORM
+		W[{0[hc]h}v{h[{[vvv]v}TEhvv]Mh}v]
+		W[{0[hc]h}v{h[{[vvv]v}TE(h[vv])]Mh}v]
+145
+	COMP
+		KA×ŠE
+	SUM
+		TÚKUR
+			silent
+	FORM
+		W[{0[hc]h}v{h[{cc}{cc}]h}v]
+146
+	COMP
+		KA×LI
+	SUM
+		MU₇
+			conjurer
+	FORM
+		W[{0[hc]h}v{h[{cc}{cc}{c0}vv]Mh}v]
+147
+	COMP
+		KA×ME
+	SUM
+		EME
+			tongue
+	FORM
+		W[{0[hc]h}v{h[vh]Mh}v]
+		W[h{hh}v{hhh}v]
+148
+	COMP
+		KA×A
+	SUM
+		NAG
+			drink
+	FORM
+		W[{0[hc]h}v{h[vv2]Mh}v]
+149
+	COMP
+		KA×NÍG
+	SUM
+		GU₇
+	FORM
+		W[{0[hc]h}v{h{[vvv]v}Mh}v]
+		W[{0[hc]h}v{h[vvv](vh)}v]
+150
+	COMP
+		KA×ÀŠ
+	SUM
+		[unknown]
+	FORM
+		W[{0[hc]h}v{h[{vv}{vv}{vv}]Mh}v]
+151
+	HIT
+		iš
+		mil/mel?
+	AKK
+		eš₁₅
+		ís
+		íṣ
+		íz
+	SUM
+		KUŠ₇
+			servant
+		SAḪAR
+			dirt, dust, ash
+	FORM
+		L[{0[hc]h}vv]
+		L[{0hch}vv]
+		L[{0hh0}hvv]
+152
+	HIT
+		up
+	AKK
+		ár
+	FORM
+		P{chhc}
+		L{dhhh'}
+		P{c(v{hh})c}
+153
+	HIT
+		bi
+		bé
+		pí
+		pé
+		kaš
+		gaš
+	SUM
+		KAŠ
+			beer
+	FORM
+		L{[hc][hc]}
+		L{[hc][(hv)c]}
+154
+	SUM
+		ŠEM/ŠIM
+			fragrance
+		LUNGA
+			brewer
+	FORM
+		W[{[hc'][hc']}{[hc']h}vv]
+155
+	AKK
+		ṣár
+		ṣur
+	SUM
+		AMAR
+			calf
+	FORM
+		L{[hc]c[hc]}
+156
+	COMP
+		AMAR×ŠE
+	SUM
+		SISKUR
+			ritual
+			offering
+	FORM
+		L{[hc][c{cc}{cc}][hc]}
+		L{[hc][cc][cc][hc]}
+		L{[(h[cc])c][(h[cc])c]}
+157
+	HURR
+		gu₄
+	SUM
+		GU₄/GUD (GUDR)
+			cow
+	DET
+		GU₄
+			bovine
+	FORM
+		L{[hc]([hc]v)}
+158
+	HIT
+		ša
+	AKK
+		saₓ
+	FORM
+		L[{0[hc]([hc]v)}v]
+		L[{[h2c][hv][h2]}v]
+		L[{0[{hhhh}v]}0'"{cc}0'"v]
+159
+	HIT
+		ga
+	AKK
+		kà
+		qá
+	SUM
+		GA
+			milk
+	FORM
+		L{[hc']([0vv0][hc'])}
+		L([0vvv0]{[hc'][hc']})
+		L[{hh}vv{cc}]
+		L{[hc']([0vvvvv0][hc'])}
+160
+	HIT
+		ta
+	AKK
+		dá
+		ṭá
+	SUM
+		TA
+			from, with
+	FORM
+		L[{0[hc]([hc][0vv0])}v]
+161
+	COMP
+		GA.GÍN
+	SUM
+		ÍL
+			[unknown]
+	FORM
+		W[{[hc']([0vv0][hc'])}vv(v{hhh})v]
+		W[{0[hc]([hc]v)}v0'"{h'h2h'}vv]
+		W[{0hh}v{cc}0'"v0'"{h'hh'}vv]
+162
+	COMP
+		BI×A
+	AKK
+		duk
+		tùk
+	SUM
+		DUG
+			vessel
+	DET
+		DUG
+			vessel
+	FORM
+		L{[hc']([hc'][0vv20])}
+		L[{hh}vv2{cc}]
+163
+	COMP
+		ŠIM×NÍG
+	SUM
+		BAPPIR
+			beer-bread
+	FORM
+		W[{[hc][vvv][hc]v}{[hc]h}vv]
+		L[{0hh}{[vvv]v}{0'cc}]
+		W[{hh}{[vvv]v}{c'c'}{[hc']h}vv]
+164
+	AKK
+		gap
+		qap
+	SUM
+		DU₈/DUḪ
+			solve
+			divide
+	FORM
+		L[{hh}{c'c'}{c'c'}]
+		L[{hh}v{c'c'}{c'c'}]
+165
+	AKK
+		kim
+	SUM
+		GIM
+			as, when, as soon as
+	FORM
+		L[{vh(h[0d20])}v]
+		L[{(vh)h[0d20]}v]
+		L[{0hh}{0d2}vv]
+166
+	SUM
+		UMBIN
+			fingernail
+			wheel
+	FORM
+		W[{0[hd2]hv}v{[v'{vh}v']h}{ch2h2[ccc]}[v'v]]
+		W[{[hv]h}{[0cc]h'h'h'h}v{[vv'v'v]h}{ch2h2[cc]}[vv]]
+		W[(v{[hc']h}){[vvv][vvv]h}{[0c]h2h2}[vv]]
+		W[{[hc'][(hv){hhh}v]}{[vv'v'v{h[ccc]}]h}E[vv]]
+167
+	SUM
+		KÁ
+			door
+	FORM
+		[{chhc}v2]
+		L[{ch2h2c}v2{0hhh}]
+		[{h'hhh'}v2]
+		W[{hh}{c'c'}{hh}vv2]
+168
+	HIT
+		am
+	SUM
+		AM
+			wild ox
+			ram
+	FORM
+		L[{hh}{[vvv]v}TE]
+169
+	HIT
+		ne
+	AKK
+		bí
+		dè
+		ṭè
+	SUM
+		IZI
+			fire
+		BIL/BAR₇/BIR₉
+			burn, roast
+		NE
+			[oracular term?]
+	FORM
+		W[{hh}{[vvv]v}TE{hh}v]
+170
+	SUM
+		LAL
+			honey
+	FORM
+		L[{hh}{[vvv][vv]}TEv2]
+		L[{hh}{ccc}{c'c'}0'"v2]
+		L[{hh}{c'c'}{c'c'}0'"v]
+171
+	HIT
+		taḫ
+		túḫ
+	FORM
+		L[{chchc}{[vvv]v}T]
+		[{hh}{ccc}{ccc}]
+		{c[hc]c[hc]c}
+172
+	COMP
+		NE?×PAB
+	HIT
+		píl
+		bíl
+	HURR
+		li₁₃
+	AKK
+		pél
+	SUM
+		GIBIL
+			new, renew
+	FORM
+		W[{hh}{[vvv]v}T{ch(du)Mhc}v2]
+		W[{hh}{[vvv]v}TE{ch(dh)Mhc}v2{0hhh}]
+173
+	SUM
+		GAD(A)
+			linen, cloth
+	DET
+		GADA
+			linen, cloth
+	FORM
+		P{h(vh)}
+		P{[hv]d}
+		P{[hv]h}
+		P(v{hh})
+174
+	HIT
+		pa
+		ḫat
+	AKK
+		bá
+		sàk
+	FORM
+		P(v{hh})
+		P{(vh)h}
+		P{vhh}
+175
+	COMP
+		PA.IB
+	HIT
+		šap
+		šìp
+	AKK
+		sap
+	SUM
+		ŠAB
+			bowl
+	FORM
+		W[(v{hh}){[vh]h}vv]
+		W[(v{hh})([v{h0}]h)vv]
+176
+	COMP
+		PA.KAŠ₄
+	SUM
+		MAŠKIM
+			commissar
+	FORM
+		W[(v{hh}){c[hc][h2c]c}v2]
+177
+	COMP
+		PA.LU?
+	SUM
+		SIPA(D)
+			shepherd
+	FORM
+		L[(v{hh})({hhh}[vvv])]
+		W[(v{hh})0'"v{hhhh}vvv]
+178
+	HIT
+		ez
+		iz
+	AKK
+		is
+		es
+		iṣ
+		eṣ
+		iš₆
+		níš
+	SUM
+		GIŠ
+			wood, tree
+	DET
+		GIŠ
+			wood
+	FORM
+		P[{hh}v]
+		P(h[{h0}v0])
+		P[{h(hv)}v]
+		P(v{hh})
+179
+	HIT
+		ḫap
+	AKK
+		kil
+		kel
+	SUM
+		ḪAB
+			jug
+	FORM
+		P[{hh}v]
+		P[v{hh}v]
+180
+	COMP
+		LAGAB×U
+	HIT
+		túl
+	SUM
+		GÍGIR
+			wagon
+		PÚ/TÚL
+			source, spring, well
+	DET
+		PÚ
+			spring
+	FORM
+		P[{hch}v]
+		P[{hh'h}v]
+181
+	COMP
+		LAGAB×SUM
+	AKK
+		ṣar
+		zar
+	FORM
+		[{h[{cc}{cc}v2]Mh}v]
+182
+	COMP
+		LAGAB×A
+	SUM
+		BUGIN/BUNIN
+			vessel?
+		AMBAR
+			reeds, swamp
+	FORM
+		[{h[vv2]Mh}v]
+		[{[v{h[vv2]M}]h}v]
+		[{[hv'v2']h}v]
+183
+	HIT
+		al
+	SUM
+		AL
+			hoe
+	FORM
+		L[{0hh}v{0h}v]
+		L[{0hh}v{ch}v]
+		W[{0hh}{[vvd]h}]
+		L[{0hh}{[v0v]h}]
+		L[{0hh}v{0u}v]
+184
+	SUM
+		KU₇
+			sweet
+	FORM
+		L[{0hh}v{0h}v]
+		[{0hh}vcv]
+185
+	HIT
+		gur
+		kúr
+	AKK
+		qur
+	SUM
+		GUR
+			another
+			cor (unit of measurement)
+	FORM
+		[{0h(hv)}v]
+		L[{0h'h}vv]
+186
+	SUM
+		LAGAR
+			[component of other signs]
+	FORM
+		[{0h(hv)}v]
+		L[{0h'h}vv]
+187
+	HIT
+		e
+	AKK
+		i₁₅
+	FORM
+		[{0h(hv)}v2]
+		[{0hh}vv2]
+188
+	COMP
+		E!.KISIM₅×GU₄
+	SUM
+		UTUL₅
+			cattle herder
+	FORM
+		W[{0hh}vv2c{d{[hc]([hc]v)}Mu}c]
+189
+	COMP
+		E!.KISIM₅×GA
+	SUM
+		UBUR
+			(female-presenting) breast, nipple
+	FORM
+		W[{0hh}vv2c{d{[hc]([hc][vv])}Mu}c]
+		W[{0h(hv)}v2c{d{[hc]([hc][vv])}Mu}c]
+190
+	COMP
+		E!.KISIM₅×(A.MAŠ)
+	SUM
+		E!.KISIM₅×(A.MAŠ)
+			pen (for animals)
+	FORM
+		W[{0hh}vv2c{d[vv20'"(hv)]Mu}c]
+191
+	HIT
+		mar
+	SUM
+		MAR
+	FORM
+		L[{hh}vvh]
+192
+	HIT
+		šak
+		riš
+	SUM
+		SAG
+			head
+			first
+	FORM
+		L[{[hv]h'}v{hh}v]
+		L[{0h(hv)}v{0hh}v]
+		L[{[hvv{0h'h'}]h}v]
+193
+	SUM
+		GURUN
+			fruit
+	FORM
+		[{0hh0}{vc'}{vc'}{0cc0}]
+		{[0vv0][hc][hc][0cc0]}
+		[{0hh0}{vv}{vv}{0hh0}]
+194
+	AKK
+		kit
+	SUM
+		LÍL
+			field
+	FORM
+		L[{0hh}vv'v]
+		L[{dh}vv'v]
+		L(h[{h0}vv'v])
+		({hh}[vvv])
+195
+	HIT
+		ú
+	AKK
+		ʔuₓ
+		šam
+	SUM
+		Ú
+			plant, grass
+		KÙŠ
+			cubit
+	DET
+		Ú
+			plant
+	FORM
+		[{0hh}vvv]
+		{[vvv]hh}
+		({0hh}[vvvv])
+		L[{0hh}vvvvvvv]
+		{[hvvv]h}
+196
+	HIT
+		kal
+		tan
+		dan
+	AKK
+		gal₉
+		lap
+		rip
+	SUM
+		KAL(A(G))
+			strong, strengthen
+		GURUŠ
+			manly
+		ESI
+			ebony (wood)
+		LAMMA
+			protective deity
+	FORM
+		L[({0hh}[0vv0])v2]
+		[{0hh}vvv2]
+		[{0h(hv)}vv2]
+197
+	HIT
+		un
+	SUM
+		UN
+			human
+			humanity
+			population
+	FORM
+		[{0h(hv')}{vv}{vv}]
+		[{0hhv}{vv}{vv}]
+198
+	HIT
+		luḫ
+	AKK
+		làḫ
+	SUM
+		SUKKAL
+			vizier, minister
+	FORM
+		L[{0hh}vv'v'v]
+		L[{0h(hv')}vv'v'v]
+		L[{0hhv}vv'v'v]
+		L[{hh}vvvc]
+199
+	AKK
+		é
+		pit
+	SUM
+		É
+			house, temple
+	DET
+		É
+			building
+	FORM
+		L[{0hh}vv'v'v'v]
+		L[([vv'v'v'0]{0hh})v]
+		L[{[hv'v'v'v'0]h}v]
+		L[{[0vvvv0]hh}v]
+200
+	AKK
+		sa
+	HURR
+		sa
+	SUM
+		SA
+			tendon, muscle
+	FORM
+		L([vv'v'v'v']{0hh})
+		L{[v0'"{d[vvvv]}]h}
+		L([v0]{hh[0vvvv]})
+		L[{0hh}vv'v'v'v']
+201
+	SUM
+		GÚ?
+			[page missing]
+	FORM
+		L[{0hh}v2c'{cc}]
+		L[{0hh}v2{[vv]v}TE]
+202
+	SUM
+		DUR?
+			[page missing]
+	FORM
+		L[{0hh}v20'"{cc}{ch}]
+203
+	SUM
+		UZU
+			flesh, meat
+	DET
+		UZU
+			body part
+			meat
+	FORM
+		L[{0hh}v2{[vvv][vv]}TE]
+		L[{0hh}v20'"{cc}{cc}]
+204
+	COMP
+		NUN&NUN
+	HIT
+		nir
+		nàr?
+	SUM
+		NIR
+	FORM
+		L[{hh}{vv}{vv}{vv}v2]
+205
+	HIT
+		ba
+	AKK
+		pá
+	SUM
+		BA
+	FORM
+		[{hh'h}v]
+		[{hh'd}v]
+		[{h2d}v]
+		[h{hh}v]
+206
+	HIT
+		ku
+	AKK
+		gu₅
+		qú
+		tuš
+	SUM
+		TUŠ (DÚR(U)/DURUN)
+			sit
+		TUKUL
+			tool, weapon
+	FORM
+		[{hh'h}v]
+		[v{hhh}v]
+		[{h2h}v]
+207
+	COMP
+		KU!.U.GAG
+	SUM
+		MUD₄
+			beer mug
+	FORM
+		W[{hh'h}vc{d(uv)}]
+208
+	SUM
+		PÈŠ
+			fig
+		MA (properly MA.NA)
+			mine
+	FORM
+		L[{hh'h}v]
+		L[{h2h}v]
+209
+	HIT
+		zu
+	AKK
+		sú
+		ṣú
+	SUM
+		GÍN
+			shekel (unit)
+	FORM
+		L[{hh'h}vv]
+		L[{h2h}vv]
+210
+	HIT
+		lu
+	HURR
+		tip
+		dip
+	SUM
+		DAB/DIB
+			grasp, seize
+		UDU
+			sheep
+	DET
+		UDU
+			sheep
+	FORM
+		([vvv]{hhh})
+		[v{hhhhhh}vvvvv]
+		[v{h(vh)Mh}v]
+211
+	SUM
+		DU₆
+			mound
+			ruin
+	FORM
+		[{0[h{hhhh}]h}v]
+		[{h"h'h'h}v]
+		[{v[vvv]}TEv]
+212
+	SUM
+		TU₉/TÚG
+			wool, fabric, garment
+			boxwood
+		ŠÈ
+			toward
+		ÁZLAG
+			launderer
+		ZÌ/ZÍD
+			flour
+	DET
+		TÚG
+			garment
+	FORM
+		[{hh'h'h}v]
+		[{h2h'h}v]
+		[v{hhhhhh}v]
+213
+	AKK
+		su
+	SUM
+		KUŠ
+			skin, fur, leather
+		SU
+			entrails
+			omens read from entrails
+	DET
+		KUŠ
+			fur, leather
+	FORM
+		L[{hh'h'h}vv]
+		L[{hh2h}vv]
+		L[{h[{hh}v]h}v]
+		L[{h[h2v]h}v]
+		L[{dd2d}vv]
+214
+	HIT
+		da
+	AKK
+		tá
+	SUM
+		DA/TÁ
+			from, with
+	FORM
+		L[{h[h2c]h}v]
+		L[{hhh}vcv]
+215
+	HIT
+		it
+		et
+	SUM
+		TI₈
+			eagle
+		Á
+	FORM
+		L[{0hh2h}{[vvv]v}TEv]
+		L[{0[hc][h2c][hc]}v]
+		L[{hh2h}{hhhh'}v]
+216
+	SUM
+		ENGUR
+			[component of other signs]
+	FORM
+		L[{hh2h}v]
+217
+	HIT
+		i
+	AKK
+		ʔiₓ
+	FORM
+		{[hh][hh]h}
+218
+	COMP
+		I.A
+	HIT
+		ya
+	FORM
+		L[{[hh][hh]h}vv2]
+219
+	SUM
+		ḪAŠḪUR
+			apple
+	FORM
+		L[{hhh}{hhh}v]
+220
+	SUM
+		GÚG
+			legume?
+	FORM
+		L[{hhh}{hhh}v2]
+		W[{hhhh}{h{dh}Mh}vvv2]
+		W[{hhhh}{ch(du)Mhc}v2]
+		L[{dhh}{dhh}v2]
+		W[{hhh}{h[h{[vvv][ccc]}M]h}v2]
+221
+	SUM
+		LÙ
+	FORM
+		L[{hhh}{hhh}v2]
+222
+	SUM
+		NIMGIR
+			herald, announcer
+	FORM
+		L[{hhh}{hhh}v2]
+		L[{hhhh}{hhhh}v2]
+223
+	AKK
+		ṭu
+	SUM
+		NÍR
+			[unknown]
+	FORM
+		L[{hhh}{hhh}v2]
+		W[{hhh}{h(h'"c)h}v2]
+		W[{hhh}{h(du)Mh}v2]
+		W[{hhhh}{h[hccc]h}v2]
+		W[{[vvvv{0hh}]h}v]
+224
+	COMP
+		LAGAB×BAD
+	SUM
+		GIGIR
+			wagon
+	FORM
+		[{h[hc]h}v]
+225
+	SUM
+		BALAG
+			instrument similar to a small harp or lyre
+	FORM
+		W[{[{h[hc]}vd2]h2}{cc}0'"v2]
+		W[{[hc]hh[hv]}{d2u}{cc0'}0'"v2]
+		W[{[hc']h}{[v0'"{[hc]h}]h}vv]
+		L[{hh}{cv}{cc}{cc}0'"v2]
+226
+	SUM
+		ALAM/ALAN
+			statue, image, figure
+	FORM
+		W[{hh2h}{[vvv]v}TE{hh2h}{[vvv]v}TE]
+		W[{hhh}{hhhh'}{hhh}{hhhh'}]
+227
+	SUM
+		TAG₄/TAK₄
+	FORM
+		W[{[cc]hh}{[v'vv'v'v]h}c"c"c"]
+		W[{cc}{[{vv}{vv}{vv}]h}c"c"c"]
+		L{[{cc}v'{vv}{vv}{vv}]h}
+228
+	SUM
+		KISAL
+	FORM
+		[{hhh}v]
+		[{hhhh}v]
+229
+	SUM
+		URU
+			city
+	DET
+		URU
+			city, place
+	FORM
+		L[{0h'hh'}vv]
+		L[{hh2h}vv]
+		[{h[{hhhh}v]}v]
+		L[v{hhhhh}vv]
+		L[{h'[h2v]h'}v]
+230
+	COMP
+		SU×A
+	SUM
+		ŠEN
+			kettle
+	FORM
+		L[{0hhh}{[v[v'"v2'"]Mv]h}]
+		L[{0h'hh'}vv'v2'v]
+		L[{0hh0}{h[vv2]Mh}v]
+231
+	AKK
+		lak
+	SUM
+		SANGA
+			priest
+		ÀKA
+			fleece
+		ŠID/ŠIT(I)
+			number, count
+	FORM
+		L[{h[hv]h}{[vv'v'v]h}]
+		L[{[hc']h}{[vv'v'v]h}]
+		L[{h'h(hv)}{[vv'v'v]h}]
+		L[{hhv}{[vv'v'v]h}]
+		L[{hhh}{[vvv]h}]
+232
+	COMP
+		E!.KISIM₅×LA
+	SUM
+		LAḪTA
+	FORM
+		W[{0h(hv)}v2c{d[{hh}{hhhh}v]Mu}c]
+		W[[{0hh}vv2]c"{[{chh}{hhhh}v]h}c"]
+233
+	HIT
+		ra
+	SUM
+		RA
+			hit, strike
+	FORM
+		L[{hhhh}{[vv]h}]
+		L[{hhhh}v{vh}]
+		L[{h2h"h'}vv]
+234
+	SUM
+		GE₄/GI₄
+	W[{0hhhh0}(h[vv]){[vvv]h}TE]
+	W[{0hhhh0}(h[vv]){[vvv]v}TE]
+235
+	SUM
+		BÁR
+			coarse fabric
+	FORM
+		W[{hhhh}{h(du)Mh}{[hhh][ccc]}v2]
+		W[{hhhh}{h{dh}Mh}{[v"v"v"][ccc]}v2]
+		L[{hhh}{hhhh}v2]
+236
+	COMP
+		DU&DU
+	SUM
+		LAḪ₄
+	FORM
+		{[{[0d]hh2}v][{[0d]hh2}v]}
+237
+	AKK
+		tur
+	SUM
+		DUMU
+			child
+		TUR
+			small
+	FORM
+		L{[{hhh}{hh}]h}
+		L{[{hhh}{hh}]([0v]h)}
+238
+	SUM
+		ZÀ/ZAG
+			border, territory
+			right side
+			shoulder
+	FORM
+		L[{hhhh}{hhhh}c]
+		L[{hhh}{h[hc]h}]
+		L{[hh][h[hc]]h}
+239
+	SUM
+		SIG₇
+			green, yellow
+			10,000, myriad, unusually many
+	FORM
+		L[{h[hc]hh}vh]
+		[{hch}vh]
+240
+	HIT
+		kàr
+		gàr
+	AKK
+		qàr
+	FORM
+		L[{hhhh}{[vvv]v}TE]
+		L[{hh2h}{[vvv]v}TE]
+241
+	HIT
+		tàš
+		áš
+		áz
+	SUM
+		ZÍZ
+			emmer (type of wheat)
+	FORM
+		P(v{hhhh})
+		P([vv]{hhhh})
+242
+	HIT
+		gal
+	AKK
+		kál
+	SUM
+		GAL
+			big
+			superior
+			cup
+	FORM
+		L[{hhhh}vh]
+243
+	HIT
+		ták
+		dak?
+	AKK
+		bàr
+	SUM
+		DAG
+			throne
+	FORM
+		[{hhhh}v2]
+244
+	HIT
+		gir
+		kir
+		piš
+		paš?
+		pùš
+		biš
+	AKK
+		qir
+	FORM
+		L[{0hhhh}{vv}{c}{vv}c"]
+		L[{0hhhh}{vv}{vv}c"]
+245
+	HIT
+		bur
+		pur
+	SUM
+		BUR
+	FORM
+		L[{hhhh}{[vvv]v}]
+246
+	COMP
+		BUR&BUR
+	SUM
+		URI
+			Akkad
+	FORM
+		L{[{hh}v{[vvv]v}][{hh}v{[vvv]v}]}
+247
+	AKK
+		gam
+	SUM
+		GAM
+			below, under
+			by, next to
+	FORM
+		d2
+248
+	HIT
+		Glossenkeil
+	FORM
+		{cc}
+		[c"c"]
+		d
+		{dd}
+		c"
+249
+	HIT
+		te
+		ti₇?
+	AKK
+		de₄
+		di₁₂
+		ṭe₄
+	SUM
+		TE
+			cheek
+	FORM
+		[{dd2d}v]
+		[{v[vvv]}TEv]
+		L[h{hhh}v]
+		P[{cc}{cc}v]
+		(v{d2d2})
+250
+	COMP
+		TE.A
+	HIT
+		kar
+		kir₈?
+	AKK
+		gar₁₄
+		qár
+	SUM
+		KAR
+			find, meet, reach
+	FORM
+		L[{dd2d}vvv2]
+		L[{v[vvv]}TEvv2]
+		[{cc}{cc}vv2]
+		L[h{hhh}vv2]
+251
+	HIT
+		šú
+	FORM
+		(vd)
+		(vh)
+		{vh}
+252
+	COMP
+		LU.ḪÚL?+KUN
+	SUM
+		GUKKAL+KUN
+			fat-tailed sheep
+	FORM
+		W[(v{[0"0"[hvvv]]d})c"{c[vv]c}]
+		W[(v{[0"0"[hvvv]]h0})c"{c[vv]c}]
+253
+	SUM
+		IDIGNA
+			Tigris (river)
+	FORM
+		W[([v{h0}]{0d}){[hcc{ccc}{ccc}][hc]}]
+		W{[vh2cc{ccc}{ccc}][hhc']}
+254
+	SUM
+		ÚKUŠ
+			cucumber
+	FORM
+		W[(vd){h[hc]0}vv]
+		W[(vh){h[hc]0}vv]
+255
+	HURR
+		šik
+	SUM
+		SIG
+			thin, flat, narrow
+	FORM
+		L[([0v{d0}]d)v]
+		L[(vd)(vd)]
+		L[([v{h0}]h)vv]
+		[cvcv]
+		[v{dd}v]
+256
+	AKK
+		bap
+		kúr
+	SUM
+		KÚR
+			enemy
+		PAB
+			protect
+	FORM
+		(du)
+		(dh)
+		{du}
+		L[v'"(du)]
+256-B
+	COMP
+		PAB.ḪAL
+	AKK
+		púš
+	FORM
+		L[{ch}hhh]
+257
+	SUM
+		DIM₄/MUNU₈
+			malt
+	FORM
+		L(hd{[0d][d0]})
+		L(h[d'dd"])
+		L{c(du)c}
+		L{c(dh)c}
+258
+	AKK
+		kíl
+	SUM
+		GILIM
+			wreath, wreathe
+	FORM
+		W[(du[0vv0]){{[vvv]v}T{[vvv]v}T}]
+		L[{du}vv{{[vvv]v}T{[vvv]v}T}E]
+		L[{vv}{vv}{[vvv][vvvv]v}TE]
+259
+	SUM
+		KASKAL
+			road, journey, travel
+	FORM
+		([dd][uu])
+		({dd}{uu})
+		([dd]{hh})
+		{ddhh}
+260
+	HIT
+		kip
+	SUM
+		ŠENNUR
+			medlar (type of fruit)
+	FORM
+			L[{c({dd}{uu})c}v2]
+			L[({0hh0}[{0c}dd{c0}])v2]
+			L[{h'hhh'}v2]
+			L[{[ccc]hhc}v2{0hhhhh}]
+261
+	HIT
+		u
+	SUM
+		U
+			10
+		BÙR
+			hole
+	FORM
+		c
+		d
+262
+	AKK
+		tul
+	SUM
+		DUL
+	FORM
+		L[c{[h{hhh}]h}v]
+		L[ch{hhh}v]
+		L[c{hh}{hhhhhh}v]
+263
+	COMP
+		U.DAR
+	AKK
+		Ištar
+	FORM
+		L[c{[h{h[hc]h}]h}v]
+		L[ch{hhh}v]
+		L[c{[hv(v{hh})]h}]
+		L[c{[hv{ch}v]h}]
+		L[chv{h[hc]hh}v]
+264
+	SUM
+		UDUN
+			oven
+	FORM
+		L[c{chc}{cc}]
+		L[ch{v[vvv]}TE]
+		L[ch{cc}{cc}]
+265
+	AKK
+		ù
+			and
+	SUM
+		Ù
+			sleep, dream
+		LIBIR
+			old
+	FORM
+		L[cvh{[v{hhhh}vv]h}E]
+		L[ch{[v{h[hc]h}v]h}]
+		L[cvh({hhh}[vvv])]
+266
+	SUM
+		GIR₄
+			kiln
+			fired clay
+	FORM
+		L[c{[{hh}{hhhh}]h'}v]
+		L[c{hh}{hh'h'h}v]
+267
+	HIT
+		mi
+	AKK
+		mé
+	SUM
+		GE₆/GI₆
+			night, dark, black
+	FORM
+		L[c{hh}{hh}]
+268
+	SUM
+		DUGUD
+			difficult
+			important
+	FORM
+		L[c{hh}{hh}h]
+		L[c{hh}{hc'}{hc'}]
+269
+	AKK
+		gik
+	SUM
+		GIG
+			sick, ill
+	FORM
+		W[c{0hh0}{chhc}v2{0hhh}]
+		W[c{hh}{hh}{ccc}0'"v2{0hhh}]
+270
+	COMP
+		U.GAN
+	SUM
+		ŠAGAN/ŠÁMAN
+	FORM
+		L[c{hh}{hh2h}]
+271
+	HIT
+		gul
+	AKK
+		kúl
+	SUM
+		GUL
+			break, smash
+	FORM
+		W[c{hh}{h[h2c]h}v]
+272
+	COMP
+		U.KA
+	AKK
+		muḫ
+	SUM
+		UGU
+			up, over, above, top
+	FORM
+		L[c{[hc]h}v{hhh}v]
+		L[c{[hc]h}v({hh}v)]
+		L[c{hch}v{hh}v]
+273
+	HIT
+		kiš
+	SUM
+		KIŠ
+			entirety, world
+	FORM
+		L[c{h[ccc]h}]
+		L{h[cccccc]h}
+		L[{cc}{hh}cccc]
+		L[c{[ch][0"hhh]h}]
+274
+	SUM
+		BURU₁₄
+			harvest, summer
+		SULLIM
+			fenugreek (type of plant)
+	FORM
+		L{[c{h[ccc]h}{vv}{vv}][0{hv}c]}
+		L{[c{h[cccc]h}{vv}{vv}][0(hv)d2]}
+		W[c{h[ccc]h}{[vv]hv}{[vv]d2}]
+		W[cc'{h[hc][hh]}{[vv]v}]
+		L[c{[{hh}vvv][cccc]}]
+275
+	HIT
+		ul
+	FORM
+		L[c{[hc']([hc']v)}]
+		L([c{hh}{c'c'}]v)
+276
+	COMP
+		AMAR×KU₆
+	SUM
+		AMAR×KU₆
+			[unknown]
+	FORM
+		L[c{[hc][0{vv}{0'c}{vv}{0'c}0]M[hc]}]
+		L[c{[hc][0vv0][hc][0vcvc0]}]
+277
+	HURR
+		li₈
+	SUM
+		ÁB
+			cow
+	FORM
+		L[c'{d'u}]
+		L[c'(d2u)]
+278
+	SUM
+		KISIM₅
+			an herb?
+	FORM
+		L[c'{d0u}c"]
+279
+	COMP
+		NIM×KÁR
+	SUM
+		TÙM
+	FORM
+		W[c'{d[{h'h[vvv]}v0]u}c"v]
+280
+	COMP
+		KISIM₅×LA
+	SUM
+		KISIM₅×LA
+			[component of other signs]
+	FORM
+		W[c'{d[{hh}{hhhh}v0]u}c"]
+		W[c'{d[{[0h][hh][hh]h'}v0]u}c"]
+281
+	COMP
+		KISIM₅×GU₄
+	SUM
+		KISIM₅×GU₄
+			[component of other signs]
+	FORM
+		L[c'{d[{[hc]([hc]v)}0]u}c"]
+282
+	COMP
+		KISIM₅×GA
+	SUM
+		KISIM₅×GA
+			[component of other signs]
+	FORM
+		L[c'{d[{[hc]([hc][0vv0])}0]u}c"]
+283
+	COMP
+		KISIM₅×(Ú.MAŠ)
+	SUM
+		KISIM₅×(Ú.MAŠ)
+			[component of other signs]
+	FORM
+		W[c'{d[{hh}vvv0'"(vh)0]u}c"]
+284
+	COMP
+		ÁB×A
+	SUM
+		ÁB×A
+			washbasin
+	FORM
+		L[c0'"v'"v2'"{du}]
+		L[c'{d[vv200]u}]
+285
+	COMP
+		KISIM₅×(A.MAŠ)
+	SUM
+		KISIM₅×(A.MAŠ)
+			[component of other signs]
+	FORM
+		W[c'{d[vv20'"(vh)0]u}c"]
+286
+	HIT
+		liš
+		li₁₂
+	SUM
+		DÍLI(M)
+			spoon, ladle
+			bowl
+		LIŠ
+			Ištar/Šauška (deity)
+	FORM
+		P[{c0}v]
+287
+	COMP
+		U.DIŠ
+	SUM
+		11
+			11 (number)
+	FORM
+		[c'v]
+288
+	HIT
+		ši
+	AKK
+		lì
+		lim
+		si₁₇
+		še₂₀
+	SUM
+		IGI
+			eye, see
+	FORM
+		[cvh]
+		[c'(vh)]
+		[hvh]
+		[cv{hh}]
+289
+	COMP
+		IGI.RI
+	HIT
+		ar
+	FORM
+		W[cvh2vvcv]
+		W[hvh2vvcv]
+		W[cv([0vvcv]h2)]
+290
+	COMP
+		IGI.IP?
+	HIT
+		ḫul
+	SUM
+		ḪUL
+			bad, evil
+	FORM
+		W[cvh{[vvh]h}v]
+		W[cvh{[v(vh)]h}v]
+291
+	COMP
+		IGI.DUB
+	SUM
+		AGRIG
+			administrator
+		(G)ISKIM
+			sign, glyph
+	FORM
+		W[cvh{hh}{h0h}v]
+		W[cvh{h2h2}v]
+292
+	COMP
+		IGI.RU
+	HIT
+		pà
+	FORM
+		W[c'vh{[cvv'v]h}]
+293
+	COMP
+		IGI.ERIM?
+	SUM
+		SIG₅
+			good, well
+			healthy, health
+			make good
+			officer
+			cheap?
+			goodness, quality
+	FORm
+		L[cv{chc}v2]
+		L[cv{h'h2h'}v2]
+294
+	SUM
+		ŠÀ/ŠAG₄
+			heart
+			core, interior
+			within?
+	FORM
+		[cvcvcv]
+		{[ccc][vvv]}
+295
+	AKK
+		pat
+		šuk
+	SUM
+		PAD
+			chunk, piece
+			metal ingot
+			type of clothing?
+	FORM
+		[c'{[vvv]v}]
+296
+	HIT
+		man
+	SUM
+		NIŠ/NEŠ
+			20
+	FORM
+		[cc]
+297
+	HIT
+		šal
+	HURR
+		šel₄
+	AKK
+		mim
+		rak
+		sal
+	SUM
+		MUNUS
+			woman
+	DET
+		MUNUS
+			woman
+			profession (female)
+	FORM
+		[{cc}h]
+		P{chc}
+		[v{cc}h]
+298
+	HIT
+		dam
+	AKK
+		tám
+	SUM
+		DAM
+			wife, consort
+	FORM
+		L[{cc}{h'[hh]h'}v]
+		L[{cc}h{hhh}v]
+299
+	COMP
+		MUNUS.TÚG
+		MUNUS.KU
+	AKK
+		eriš
+		nin
+		nen
+	SUM
+		NIN
+			sister
+	FORM
+		L[{cc}{h'[h{hh}]h'}v]
+		L[{cc}h{hhhh}v]
+300
+	HIT
+		zum
+	AKK
+		rik
+		súm
+		ṣu
+		ṣum
+	FORM
+		L[{cc}h{hhhh}]
+		L[{cc}{uu0'"h0'"dd}]
+301
+	SUM
+		GÌR(I)
+			foot
+	FORM
+		L[{cc}{d'hh'"}]
+		L[{cc}{chh}]
+302
+	COMP
+		GÌR&TAB
+		GÌR&PA
+	SUM
+		ANŠE
+			donkey
+	FORM
+		L[{cchh}{d'hh'""}]
+		L[{ddhh}{h'hh'}]
+		L{[{cc}{h'hh'}][(v{hh})M0]}
+		L[{chh}{chh'}]
+303
+	COMP
+		GÌR&(A.IGI)
+	SUM
+		ALIM
+			bison
+	FORM
+		L{[{cc}{ch}]E0'"[[vv20'"cvh]Mh]}
+304
+	HIT
+		gu
+	AKK
+		ku₈
+	FORM
+		L[{cc}h{cc}]
+		L[{cc}h{[vvv]v}TE]
+305
+	COMP
+		MUNUS.KUR
+	SUM
+		GÉME
+			maid, female servant/slave
+	FORM
+		L[{cc}{chc}c"]
+306
+	HIT
+		lam
+	HURR
+		lipₓ
+	AKK
+		la₁₂
+	SUM
+		LAM
+			pistachio, terebinth
+	FORM
+		L[{0cc}{0hh}vv]
+		L[{0dd}{0h(hv)}v]
+		L[cc{0hhh}vv]
+		[{cc}{[hv'v]h}]
+307
+	HIT
+		el
+	AKK
+		il₅
+	FORM
+		L[{cc}{[hvvv]h}]
+		L[{cc}h{[vvv]h}]
+		L[{cc}{[vv'v]hh'}]
+308
+	SUM
+		NAGAR
+			carpenter, woodworker
+	FORM
+		L[{cc}(hv)c']
+		L[{[vv]v}TEhvc']
+309
+	HIT
+		šaḫ
+	AKK
+		šiḫ
+	SUM
+		ŠAḪ
+			pig
+	FORM
+		W[{cc}cv{hh}{vc}{vc}{vc}v2]
+		W[{[cc]c}Ev{hh}{vv}{vv}{vv}{vv}v2]
+		W[{[cc]c}Ev{hh}{[vvv][hhh]}v2]
+		L[{cc}{([vvvv]h)[cccc]v}v2]
+310
+	HIT
+		lum
+	AKK
+		lu₄
+	FORM
+		L[{cc}{hh}{hh}]
+		L[{cc}{0hh0}{chhc}]
+		L[{cc}{0hh0}{h'hhh'}]
+311
+	SUM
+		SIG₄
+			(air-dried) brick
+	FORM
+		L[{cc}{c[hh][hh]c}]
+		L[{cc}{0hh0}{chhc}]
+312
+	HIT
+		di
+		de
+	AKK
+		šùl
+		ti₄
+	SUM
+		DI
+			law, right, court
+		SILIM/SALIM
+			health, heal
+	FORM
+		[{c[ch]h}v]
+		L[c{chh}v]
+		[{[cc]hh}v]
+		L[cv{hh}v]
+313
+	HIT
+		ki
+		ke
+	AKK
+		gi₅
+		ge₅
+		qí
+		qé
+	SUM
+		KI
+			earth
+			place
+	DET
+		place (rare, mostly Akkadian)
+	FORM
+		L[c{chhhh}v]
+		[{[c{chhh}]h}v]
+		[{[cc]hhhh}v]
+		[{[{cc}{hhhh}]h}v]
+		L[cv{hhhh}v]
+		[{cc}{chhh}v]
+314
+	SUM
+		NÁ/NÚ
+			bed
+	W[c"c"{[{hhh}d]u}{[vvv]v}TE]
+	W[c"c"{ddd0"h}{[vvv]v}TE]
+	W[c"{ch}{[vvv][vvv]v}TE]
+	W[c"{[c'{ccc}]h}{[vvv]v}TE]
+315
+	SUM
+		URU₅
+			[component of other signs]
+	FORM
+		W[{cc}{d[({hhhh}v)0]u}c]
+		W[{cc}{[{hh'h}v]u}c]
+		W[{cc}{d[h{hhh}v0]u}v]
+316
+	HIT
+		ut
+		pir
+	AKK
+		bír
+		dám
+		par
+		tam
+		ṭám
+		tú
+		u₄
+	SUM
+		BABBAR
+			white
+		U₄/UD
+			day
+	FORM
+		P[{cc}v]
+		[ccv]
+317
+	HIT
+		wa
+	AKK
+		à
+		am₇
+		aw
+		pi
+		wi?
+	SUM
+		GEŠTU(G)
+			ear, hear
+	FORM
+		[{cc}vh]
+		[{cc}(vh)]
+		[{hh}vh]
+318
+	COMP
+		wa+ap
+	HURR
+		wa(ap)
+		af?
+		aw?
+	FORM
+		L[{cc}v{h[{hh}{hh}v]M}]
+319
+	COMP
+		wa+i
+	HURR
+		wi(i)
+	FORM
+		[{cc}v{h{[hh][hh]h}M}]
+320
+	COMP
+		wa+pí
+	HURR
+		wi(pí)
+		fi?
+	FORM
+		[{cc}v{h{[hc][hc]}M}]
+321
+	COMP
+		wa+ú
+	HURR
+		wu(ú)
+	FORM
+		L[{cc}v{h[{hh}vvv]M}]
+322
+	COMP
+		wa+e
+	HURR
+		we(e)
+	FORM
+		L[{cc}v{h[{hh}vv2]M}]
+		L[{cc}v{h[{h(hv)}v2]M}]
+323
+	COMP
+		wa+u
+	HURR
+		wu(u)
+		wo?
+	FORM
+		[{cc}v{hc'}]
+324
+	COMP
+		wa+pu
+	HURR
+		wu(pu)
+		fu?
+	FORM
+		[{cc}v{h[0"{cc}{cc}h]}]
+325
+	COMP
+		wa+ip
+	HURR
+		wi(ip)
+		if?
+	FORM
+		L[{cc}v{h[{[vh]h}vv]M}]
+326
+	COMP
+		wa+a
+	HURR
+		wa(a)
+		fa?
+	FORM
+		[{cc}v{h[vv2]M}]
+327
+	AKK
+		ṣap
+		zap
+	SUM
+		ZÁLAG
+			light?
+		ÉRIN/RÍN
+			scale, balance
+		ÉRIN/ERIM
+			troops, army
+			crowd
+	FORM
+		P[{cc}v2]
+		P[{hh}v2]
+328
+	SUM
+		NUNUZ
+			pearl?
+	FORM
+		[{cc}0'"v2{0hhhh}]
+329
+	HIT
+		kur
+	AKK
+		mat
+		šat
+	SUM
+		KUR
+			land, mountain
+	DET
+		KUR
+			land
+	FORM
+		[{cc}c"]
+		{[cc]c}
+330
+	HIT
+		tin
+		tén
+	AKK
+		din
+		den
+	SUM
+		KÚRUN
+			host
+		GAMUN
+			caraway
+	FORM
+		{[vv]v}T
+		[c"{cc}]
+		{[cc]c}
+		P{dd2}
+		L[c"{d'(u[v0])}]
+331
+	HIT
+		eš
+	AKK
+		és
+		ìš
+		sin
+	SUM
+		ÙŠU
+			30
+	FORM
+		[ccc]
+		[hhh]
+332
+	HIT
+		aḫ
+		eḫ
+		iḫ
+		uḫ
+	AKK
+		ʔa
+		ʔe
+		ʔi
+		ʔu
+	FORM
+		[c"{chc}]
+		[c'{cc}h]
+		[{cc}{0hd}]
+		L[{[vvv]v}TE(h[vvvv])]
+333
+	COMP
+		ḪI×ÁŠ?
+	HIT
+		ḫar
+		ḫur
+		mur
+	AKK
+		kín
+	SUM
+		ḪAR
+			ring
+		ḪUR
+			thick?
+		MUR
+			lung
+	DET
+		ḪUR.SAG [with SAG]
+			mountain
+	FORM
+		P[c{chhhc}]
+		[c'{cc}{0hhh0}]
+		L[c"{cc}(v{hhhh})]
+		L[{[vvvv]v}TE(v{hhhh})]
+334
+	COMP
+		ḪI×ŠE
+	SUM
+		ÉLLAG
+			kidney
+		BIR
+			scatter
+	FORM
+		P[c'{c{[cc][cc]}Mc}]
+		[c{c0'c}{0'cc0'}{0'cc0'}]
+		[{ccc}{cc}{cc}]
+		{[vv][vvv]}T
+335
+	HIT
+		ḫi
+		ḫe
+	AKK
+		šár
+		tí
+		té
+		ṭí
+		ṭé
+	SUM
+		NIMIN/NIN₅
+			40
+	FORM
+		{[vvv]v}T
+		[{ccc}c']
+		P{ddd2}
+		{[vvvvv]v}T
+336
+	COMP
+		TODO FIX ME
+	SUM
+		GAŠAN
+			lady, mistress (respectful)
+	FORM
+		({[vvv]v}T{0{hhh}})
+		P{{[vvv]v}TE{hhh}}
+		L[{[dd]hh}{[vvv]v}TE]
+337
+	HIT
+		im
+		em
+	SUM
+		IM
+			clay
+			wind
+	DET
+		IM
+			clay
+	FORM
+		L[{[vvv]v}T[hvv]]
+		L[{[vvv]v}T(h[vv])]
+		L[c'{cc}(h[vv])]
+		L[c'{cc}{[vv]h0}]
+338
+	HIT
+		še
+	SUM
+		NIGA/NIGU
+			fat, fattened
+		ŠE
+			barley, grain
+	FORM
+		[{cc}{cc}]
+		{v[vvv]}T
+339
+	HIT
+		pu
+		bu
+	AKK
+		gít
+		qít
+		šír
+	SUM
+		GÍD
+			long, length
+	FORM
+		L[{cc}{cc}h]
+		[{cc}{chc}]
+340
+	HIT
+		uz
+	AKK
+		us
+		uṣ
+		uš₁₀
+	FORM
+		L[{cc}{cc}h2vcv]
+341
+	SUM
+		SUD
+			pull, drag
+	FORM
+		L[{cc}{cc}hvvv]
+		L[{cc}{cc}(h[vvv])]
+		L[{cc}{cc}{[0vv0]h0}v]
+342
+	AKK
+		muš
+		ṣir?
+	SUM
+		MUŠ
+			snake
+	DET
+		MUŠ
+			snake
+	FORM
+		L[{cc}{cc}hvvvc]
+		L[{cc}{cc}(h[vvv])c"]
+		W[{v[vvv]}T[hvvvvc]]
+		L[{cc}{cc}hvvv(ch)]
+343
+	HIT
+		li
+		le
+	FORM
+		W[{cc}{cc}{hh}{hh}v]
+		L[{cc}{cc}{c0}vv]
+		L[{cc}{cc}({h2h2}[0vv])]
+		W[{cc}{cc}{[hc](v[hc])}v]
+		W[{cc}{cc}{cc}(duv'")v]
+344
+	HIT
+		tir
+	AKK
+		ter
+		dir₄
+		ṭir₅
+	SUM
+		TIR
+			forest
+	FORM
+		W[{cc}{cc}{hh}{vv}{vv}{vv}{vv}v2]
+		W[{cc}{cc}{hh}{vc}{vc}{vc}{vc}v2]
+345
+	COMP
+		ŠE.NAGA
+	SUM
+		ŠE.NAGA (NIDABA/NISABA?)
+			soapwort (plant)
+			wash, clean
+			bathtub
+	FORM
+		W[{cc}{cc}{h'[hh][hh]h}v20'"{du}]
+		W[{cc}{cc}{[{hhh}{hh}]h}v20'"{du}]
+		W[{cc}{cc}{[vvv][vv]}TEv2{du}]
+		W[{cc}{cc}{cc}{cc}0'"v20'"{d'hh'}]
+		W[{cc}{cc}{cc}{cc}0'"v20'"{hh2}]
+346
+	HIT
+		tu
+	AKK
+		dú
+		ṭú
+	FORM
+		L[{cc}{cc}{hhhh}v]
+347
+	SUM
+		NINNU
+			50
+	FORM
+		{[vvv][vv]}T
+		[{hhh}{hh}]
+348
+	COMP
+		ḪI?.GÌR
+	AKK
+		ḫuš
+	SUM
+		ḪUŠ
+			fear?
+	FORM
+		L[{ccc}{cc}{d'hh'}]
+		L[{ccc}{cc}{du}]
+		L[{d2d2d}v20'"{h'h"}]
+349
+	SUM
+		SUḪUR
+			lock? of hair
+	FORM
+		W[{ccc}{cc}{d'h0}c']
+		W[{[{[vvv][vv]}Td]u}c']
+		W[{[vvv][vv]}T{d'hh'}{[vv]v}T]
+		W[{cc}{cc}{h'h[vv0]}c']
+350
+	AKK
+		šúm
+	SUM
+		SUM(U)/SÌ
+			give
+	FORM
+		[{ccc}{ccc}v2]
+		L[[v{[vvv][vv]}]TEv2]
+		[{d'd2d}v2]
+351
+	AKK
+		lul
+	SUM
+		KA₅
+	FORM
+		L[{ccc}{cc}0'"v20'"{d'hh'}]
+		L[{d'd2d2d}0'"v20'"{chh'}]
+		L[{ccc}{cc}0'"v20'"{h'hh'}]
+352
+	AKK
+		nák
+	SUM
+		NAGA
+			[component of other signs]
+			[name]
+	FORM
+		W[{[vvv][vv]}TEv2{d'u}]
+		W[{[vvv][vv]}TEv2{d'(u[vvvv])}]
+353
+	HIT
+		šar
+		šir₉?
+	AKK
+		sar
+		šer₉?
+	SUM
+		SAR
+			plant
+			write
+		KIRI₆
+			garden
+	DET
+		SAR
+			plant
+	FORM
+		L[{ccc}{ccc}{hh}v]
+		L[{ccc}{ccc}{hh}vv]
+		L[{ccc}{ccc}({hh}[vv])]
+		[{ccc}{ccc}{[vv]h}]
+		L[{v[vvv]}TEv{hh}v]
+		L[{d2d2d2d}v{h'h}v]
+354
+	HIT
+		in
+	AKK
+		en₆
+	FORM
+		L[{ccc}{ccc}{du}]
+		L[{ccc}{ccc}(du)]
+		L[{[vvvv][vvv]}TE{h'h}]
+		L[{d2d2d}{h'(h[v'v'0])}]
+		L[{cc}{cc}{d'(u[vvv0])}]
+355
+	COMP
+		ḪI.BAD?
+	HIT
+		kam
+	AKK
+		gám
+		qám
+	SUM
+		TU₇
+			soup
+		ÚTUL
+			pot
+	DET
+		TU₇
+			soup
+		KAM
+			number
+	FORM
+		{[vvv][vvv]v}T
+		{[vvv][vv]}T
+		P{d2d2d2d"}
+		L[{[vvvv]v}TEhc"]
+356
+	HIT
+		diš
+		tiš
+		dáš
+		táš
+	AKK
+		ana
+		gì
+		ṭiš
+	SUM
+		DIŠ
+			if
+			1
+	DET
+		DIŠ
+			individual name (usually male)
+	FORM
+		Pv
+357
+	HIT
+		me
+	AKK
+		mì
+		šip
+	SUM
+		ME
+			hundred
+			put, set, take
+	FORM
+		P[vh]
+358
+	HIT
+		lal
+	SUM
+		LAL
+			bind
+			catch sight of
+			tip?
+	FORM
+		[v0'"{h0}]
+359
+	SUM
+		70?
+			70
+	FORM
+		[vc]
+360
+	COMP
+		me+eš
+		TODO ADD D3
+	HIT
+		meš
+	SUM
+		MEŠ
+			[plural]
+		90?
+			90
+	FORM
+		[vccc]
+		[vhhh]
+		[v(h[ccc])]
+		[vvccc]
+		[vvhhh]
+		[vEhhhhh]
+361
+	SUM
+		MIN
+			2
+	FORM
+		P[vv]
+362
+	COMP
+		LAL+LAL
+	HIT
+		lál
+	FORM
+		[vv'{hh'0}]
+		[v20'"{hh0}]
+		[v"v'0'"{h0'"d2}]
+363
+	COMP
+		LÁL.SAR
+	AKK
+		šur₄
+	FORM
+		W[vv'{hh'0}{ccc}{ccc}{0hh}v'v]
+364
+	HIT
+		a
+		aya?
+	AKK
+		ʔ
+		ʔaₓ
+		aya
+	SUM
+		A
+			water
+		DUR(U)₅
+			moist, fresh
+	FORM
+		P[vv2]
+365
+	COMP
+		A.ENGUR
+	SUM
+		I₇/ÍD
+			river
+	DET
+		ÍD
+			river
+	FORM
+		L[vv20'"{hh2h}v]
+		L[vv20'"{h[h2v]Mh}v]
+366
+	HIT
+		za
+	AKK
+		sà
+		ṣa
+	SUM
+		ZA
+			man
+		NÍR
+			[unknown]
+		GUG
+			carnelian
+	FORM
+		P[{vv}{vv}]
+367
+	HIT
+		ḫa
+	AKK
+		ʔa₄
+	SUM
+		KU₆
+			fish
+	DET
+		KU₆
+			fish
+	FORM
+	P[{vv}{0c}{vv}{0c}]
+	P{[vv][vcvc]}
+368
+	SUM
+		EŠ₅
+			3
+	FORM
+		[vvv]
+369
+	HIT
+		šá
+	AKK
+		nì
+		ník
+	SUM
+		NÍG
+			thing?
+		NINDA
+			bread
+		GAR
+			set, place, lay
+	DET
+		NINDA
+			bread
+	FORM
+		{[vv'v]v}
+		{[vv'v]h}
+370
+	SUM
+		LIMMU
+			4
+	FORM
+		{[vvv]v}
+		[v{[vv]v}]
+		[{[vv]v}v]
+371
+	SUM
+		YÁ
+			5
+	FORM
+		{[vvv][vv]}
+372
+	SUM
+		Àš
+			6
+	FORM
+		[{vv}{vv}{vv}]
+373
+	SUM
+		IMIN
+			7
+	FORM
+		P{[vvv][vvv]v}
+		{[vvvv][vvv]}
+374
+	SUM
+		USSU
+			8
+	FORM
+		P{[vvv][vvv][vv]}
+375
+	SUM
+		ILIMMU
+			9
+	FORM
+		P[{vvv}{vvv}{vvv}]
+		P{[vvvv][vvv][vv]}
