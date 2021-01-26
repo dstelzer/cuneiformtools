@@ -40,6 +40,10 @@
 			spindle
 	FORM
 		L[h2c"v{chc}]
+		L[{vh2c}{cc}]
+		L[{ch2c}{chc}]
+		L[hcvhc]
+
 5
 	HIT
 		šir
@@ -48,6 +52,7 @@
 			testicle
 	FORM
 		L[{ch2c}{hhhh}h]
+		L[{h'h2h}{hhhh}hh]
 6
 	SUM
 		GÍR
@@ -55,6 +60,9 @@
 	FORM
 		L(h2[0{cc}vvv])
 		L[{ch2c}vvv]
+		L[{hh2h}vvv]
+		L[{[0hv]h2h'}v]
+		L{c[h2c]c}
 7
 	HIT
 		tar
@@ -72,6 +80,9 @@
 		{0h2v}
 		{0d2v}
 		{0h2[0d]}
+		{d2c}
+		(h2c)
+		{0h2h'}
 8
 	HIT
 		an
@@ -88,7 +99,7 @@
 	FORM
 		(h2v)
 		[h2v]
-		(hvud)
+		(h2vud)
 9
 	SUM
 		APIN
@@ -107,7 +118,10 @@
 	FORM
 		L[{[h{hh'h}]0}{[vv]d2}]
 		L[{[0cc]h2[0v]}{[vv]d2}]
-		L[{h'h2h'}{[vv][cc]}]
+		L[{h'h2h'}{vc}{vc}]
+		L[{ddhuu}{vc}{vc}]
+		L[{h'[h2v]}{vc}{vc}]
+		L[{hh(h2v)}[{vh}{vh}]]
 11
 	HIT
 		nu
@@ -159,8 +173,10 @@
 		di₁₁
 		tì
 	FORM
-		W[{chc}v'"(ud)]
 		W[{chc}{d(uv)}]
+		W[{chc}v'"(ud)]
+		W[{ch2h'}v{dh}]
+		L[h2{d(uv)}]
 15
 	HIT
 		na
@@ -170,6 +186,7 @@
 	FORM
 		L[hc'{c0'}v]
 		L[h{cc0'}v]
+		L[hccv]
 16
 	SUM
 		ARAD, ÌR
@@ -199,13 +216,16 @@
 		W[{ch2c}c'"{c'c'}{du}]
 		W[{ch2c}c'"{c'c'}(du)]
 		W[{ch2c}v'"(du)]
+		W[{ch2c}{[d0][dd]u}]
+		W[{chc}{[vvv]v}T{d([vv2]u)}]
 19
 	SUM
 		NAR
 			musician
 	FORM
-		L[h2{[vvv]v}TEv2{du}]
-		L[h2{[vvv]v}TEv2{dh}]
+		L[h{[vvv][vv]}TEv{du}]
+		L[h2{[vvv][vv]}TEv2{d'h}]
+		W[h2{[vvv][vvvv]}TEv2{h'hh'}]
 20
 	HIT
 		pár
@@ -234,6 +254,7 @@
 	FORM
 		P[hv]
 		P[{dh0}v]
+		L[(du)v]
 22
 	SUM
 		MUG
@@ -248,7 +269,7 @@
 	FORM
 		L[hv{[ccc]h}]
 		L[hv{[vvv]h}TE]
-		L[hv{[vvv]v}TE]
+		L[(hv){[vvv]v}TE]
 24
 	HIT
 		ḫu
@@ -277,11 +298,14 @@
 	FORM
 		L[hvcv{[vvv]v}TE]
 27
+	COMP
+		MÙŠ/INANNA×A
 	SUM
 		SÈD
 			winter, cold
 	FORM
 		[hv{c[vv2]}v]
+		L[hvc{cv}{cv}{cv}]
 28
 	COMP
 		SI×SÁ
@@ -290,6 +314,8 @@
 			arrange, join, fix, preordain
 	FORM
 		L[hv{[{[cc]hh}v]Mh}v]
+		L{[hv{chhh}v2]h'}
+		L{[hv{c[ch]}v]h'}
 29
 	HIT
 		rat
@@ -352,6 +378,8 @@
 		L[hvv{cc}{cc}]
 		L[{hh}vv{cc}{cc}]
 34
+	COMP
+		NUN.LAGAR?
 	SUM
 		TÙR
 			stockyard
@@ -362,8 +390,9 @@
 	SUM
 		KUN
 			tail
-	W[hvvv{0c0}{c0c}vv2]
-	W[(h[vvv]){0c0}{c[vv2]c}]
+	FORM
+		W[hvvv{0'c0'}{c0'c}vv2]
+		W[(h[vvv]){0'c0'}{c[vv2]Mc}]
 36
 	SUM
 		NUN
@@ -383,6 +412,7 @@
 	FORM
 		{v[hc]c}
 		[hvcc]
+		L[hc'vhc']
 38
 	SUM
 		MÁŠ
@@ -400,7 +430,8 @@
 			locust
 	FORM
 		L[{vhc}{ccc}{ccc}]
-		L[{0hh}v{ccc}{ccc}]
+		[({hh}v){ccc}{ccc}]
+		L[hvcv{[vvv][vv]}TE]
 40
 	HIT
 		en
@@ -418,6 +449,7 @@
 			Inanna (goddess)
 	FORM
 		L[h{[vv]v}v]
+		L[{[vvv]hv}v]
 42
 	HIT
 		šur
@@ -426,6 +458,7 @@
 			pedestal
 	FORM
 		L[h{[vvv]v}]
+		L[hv{[vv]v}]
 43
 	HIT
 		ru
@@ -437,6 +470,8 @@
 	FORM
 		L{[dvv'v]h}
 		L{[cvvv]h}
+		L{[vvv]h2}
+		L[{hh}{[v'v'v]h}]
 44
 	HIT
 		ip
@@ -460,7 +495,9 @@
 		sul
 	FORM
 		W[{[v{0hh}]h}{vc}{vc}{vc}v2]
+		W[{[v[{0hh}{vc}{vc}{vc}]M]h}v2]
 		W[cv2{0hh}{vv}{vv}{vv}v2]
+		L[{[v{vh[hcc]}M]h}v]
 47
 	AKK
 		qi
@@ -468,11 +505,19 @@
 	SUM
 		KIN
 			work, role
+			sickle
 	FORM
-		W{[v{0hhh}vd]h}
+		W{[v{hhh}vd]h}
+		L{[v{chhhh}vh]h}
+		L{[v{hc}vc']h}
+		W{[v{hhh}v{h[vvv]}]h}
+		L{[v{[hc]hhh}vh]h}
 48
 	FORM
 		{[vv]h}
+	SUM
+		ŠUŠANA
+			[component of other signs]
 49
 	HIT
 		kap
@@ -490,6 +535,7 @@
 		L{[vvhc"v]h}
 		L[{[vvhc"]h}v]
 		L{[vcvcv]h}
+		L{[vvd2v]h}
 50
 	HIT
 		ḫup
@@ -497,7 +543,7 @@
 		ḪUB
 			ring, earring
 	FORM
-		W[{[vvh]h2}{cc}0'"v2]
+		W[{[vvh{cc}]h2}v2]
 		W[{[vvd2]h}{cc}0'"v2]
 51
 	HIT
@@ -510,16 +556,19 @@
 	SUM
 		UR
 			dog
+			hunter
 	FORM
 		L{[vvhv]h}
-		L{[v(h[v0])v]h}
+		L[{[v(hv)]h"}v]
 52
+	COMP
+		ŠUŠANA+IŠ
 	SUM
 		GIDIM
 			dead, ghost
 	FORM
 		W[{[vv{[hc]h}]h"}vv]
-		W[{[vv]h}{[hc]h0}vv]
+		W[{[vvh]h}{[hc]h0}vv]
 53
 	SUM
 		TUK(U)
@@ -527,6 +576,7 @@
 	FORM
 		L{[vvd]h}
 		L{[0vhv]h}
+		[v{{vh}Mh}]
 		(h[vv])
 54
 	COMP
@@ -535,9 +585,9 @@
 		SILA₄
 			lamb
 	FORM
+		L[{h({h'"h'"}v)M(h[vv0])}v]
 		W[{h'(h[v'v'])}(v{hhhh})v]
 		L[{h({hhhh}v)M(h[vv0])}v]
-		L[{h({h'"h'"}v)M(h[vv0])}v]
 55
 	COMP
 		LAGAB×NÍG
@@ -555,6 +605,7 @@
 		PISAN
 			container
 		GÁ
+			[component of other signs]
 	FORM
 		L[{h'(h[v'v'0])}v]
 		L[{h'h[vv0]}v]
@@ -568,6 +619,7 @@
 			bright
 	FORM
 		L[{h'[h2'v]M(h[vv0])}v]
+		L[{h'[h2'v]Mh[vv0]}v]
 		L[{h'h2'hv}vv]
 58
 	COMP
@@ -623,6 +675,7 @@
 			licorice plant?
 	FORM
 		W[{h'[h'c]h'h}v{[{cc}{hh}v]Mh}v]
+		W[{h'[h'c]h'h}v{[{c[hc]h}v]Mh}v]
 64
 	COMP
 		ŠU.NÍGIN
@@ -656,7 +709,7 @@
 		IG
 			door
 	FORM
-		L[{[0{h[hc]h}]h}v{cc}]
+		L[{[0{h[hc]h}]h}v0'"{cc}]
 		[{[vcv]h}{cc}]
 68
 	HIT
@@ -685,8 +738,8 @@
 		GIŠIMMAR
 			date palm
 	FORM
-		W[{h'h'h'h'h[cc]}Evv20{0hh}{vv}{vv}{vv}v2]
-		W[{h'h'h'h'h[hch]M}Evv20{0hh}{vc}{vc}{vc}v2]
+		W[{h'h'h'h'h[cc]}Evv20'"[{0hh}{vv}{vv}{vv}v2]]
+		W[{h'h'h'h'h[hch]M}Evv20'"[{0hh}{vc}{vc}{vc}v2]]
 71
 	AKK
 		tàra
@@ -725,8 +778,9 @@
 		NA₄
 			stone
 	FORM
-		L[{dh0'}{cc0'}v]
-		L[{hh0'}{cc0'}v]
+		L[{d'h0'}{cc0'}0'"v]
+		L[{hh0'}{cc0'}0'"v]
+		L[{d'h[vv]}c"c"v]
 74
 	SUM
 		DÌḪ
@@ -741,6 +795,7 @@
 		L[{du0'}{cc0'}v]
 		L[c'{du}c'v]
 		L[{[cc][hc]0}v]
+		L[{[ccc][hcc]c}v]
 75
 	SUM
 		DÙ (DRU)
@@ -755,7 +810,7 @@
 	COMP
 		né+e
 	HURR
-		ne(e)
+		né(e)
 	FORM
 		W[{dh[0vv]}{0[{0hh}vv2]}]
 77
@@ -770,6 +825,7 @@
 		L{d(u[vvv])}
 		L{d(h[vvv])}
 		L{dh[vvv]}
+		L{h([vvvv]h)}
 78
 	AKK
 		lú
@@ -785,7 +841,7 @@
 		L{d2[c0"]u}
 		{[0"c'c']h}
 		{h2hh}
-		L{[dd2]h[vvv0]}
+		L{[d0][dd]h[vvvv0]}
 79
 	SUM
 		ŠEŠ
@@ -793,9 +849,12 @@
 		SES
 			bitter
 	FORM
-		L{[{cc}cc][hc]}
-		L[{[{cc}c]h}{cc}]
-		L{[{cc}cc]([hc][0vvv0])}
+		L{[0"{cc}c"0"c][hc]}
+		L[{[0"{cc}c0"]h}{cc}]
+		L{[0"{cc}c"0"c]([hc][0vvv0])}
+		L{[{[vvv]v}TEc]([hc]v)}
+		L{[{d'"d2'"d'"}c]([hc]v)}
+		L{[h2c]h'"[hc]}
 80
 	SUM
 		AŠGAB
@@ -803,6 +862,7 @@
 	FORM
 		L({[vd]u}[0vvvv])
 		L(h[v(d[0vvv])])
+		L(h[v{h[0vvvv]}])
 		L(h[v{h[0vvvv]}])
 81
 	HIT
@@ -820,8 +880,8 @@
 		MÈ
 			battle
 	FORM
-		W[{[h{hhh}{hhh}]h}v{hh}{cc}v2]
-		L[{[hv(hv)]h'}{cc}v2]
+		W[{[h{hhh}{hhh}]h}v{hh}{cc}0'"v2]
+		L[{[hv(h2v)]h'}{cc}0'"v2]
 83
 	SUM
 		GÙN
@@ -829,6 +889,7 @@
 	FORM
 		L[{[h{hhh}c]h}v]
 		L[hv{[hc]hhh}v]
+		L[h{h[hc]h}v]
 84
 	SUM
 		ITI/ITU
@@ -846,8 +907,8 @@
 		ŠINIG
 			tamarisk (shrub)
 	FORM
-		W[{hh}v{cc}{cc}{ccc}{cc}v2{du}]
-		W[{[hv]h}{cc}{cc}{hhh}{hh}v2{du}]
+		W[{hh}v{cc}{cc}{ccc}{cc}0'"v2{d'u}]
+		W[{[hv]h}{cc}{cc}{hhh}{hh}0'"v2{d'u}]
 86
 	HIT
 		ší
@@ -881,7 +942,7 @@
 			yoke
 	FORM
 		W[{[hvvvh]h}{cc}{cc}0'"v2]
-		W[(h[vv])v{chc}{ccc}0'"v2]
+		W[(h[vv])0'"v{[cc]hc}{cc}0'"v2]
 89
 	COMP
 		SI.A
@@ -916,7 +977,6 @@
 		L[{hh}{dhu}]
 		L[{hh}v{dhu}]
 		L[{hh}(dhu)]
-		L[{0hh0}{chh}]
 92
 	COMP
 		PIRIG&ZA
@@ -958,7 +1018,7 @@
 	HIT
 		la
 	FORM
-		L[{h'h2h2h'}v]
+		L[{[0"h][hh][hh]h'}v]
 		L[{hh}{hhhh}v]
 		L[{hh}{hhhhhh}v]
 96
@@ -1031,8 +1091,8 @@
 		ŠÀM
 			cost, buy
 	FORM
-		L[{0hh0}{h(h2v)Mh}E]
-		L[{0hh0}{h[h2v]Mh}E]
+		L[{0hh0}{h(h2v)Mh}Ev]
+		L[{0hh0}{h[h2v]Mh}Ev]
 104
 	COMP
 		NÍNDA×NUN
@@ -1158,6 +1218,8 @@
 		W[{hh}{[d0][dd]0'"h}E{cc}{0h2d}]
 		W[{hh}{[d0][dd]0'"h[cc]}E{0h2h}]
 117
+	COMP
+		TODO TRIPLE
 	HIT
 		il
 	AKK
@@ -1250,10 +1312,8 @@
 		L[{chh}{h[hc][hc]h}v2]
 		L[{dhh}{h[hc][hc]h}v2]
 		L[{chh}{hhhhh}{cc}0'"v2]
-		W[{[hc]h}{[hc][hc]}0'"v2]
+		W[{[hc']h}{[hc'][hc']}0'"v2]
 127
-	COMP
-		TODO FIX ME
 	SUM
 		LIL
 			fool, idiot
@@ -1261,7 +1321,7 @@
 		lil
 	FORM
 		W[{0'hh0'}c'{0'cc0'}{0'cc0'}{du}c']
-		L[{0'h[hc]0'}{[{ccc}{0'cc}]h}c"]
+		L[{0'h[hc]0'}{{[vvv][vv]}TEh}c"]
 128
 	HIT
 		du
@@ -1276,7 +1336,7 @@
 	FORM
 		L[{[0c]hh2}v]
 		L[{h'hh2}v]
-		L[{d'hh}v]
+		L[{d'hh2}v]
 129
 	SUM
 		KAŠ₄
@@ -1290,6 +1350,7 @@
 130
 	SUM
 		DÚB
+			[component of other signs]
 	FORM
 		W[{chh}{[v0'"{[hc]h}]h}vv]
 131
@@ -1414,7 +1475,7 @@
 	SUM
 		[unknown - hapax]
 	FORM
-		W[{0[hc]h}v{h[{cc}{hh}{hh}]Mh}v]
+		W[{0[hc]h}v{h[0{cc}{hh}{hh}0]h}v]
 143
 	COMP
 		KA×UD
@@ -1440,7 +1501,7 @@
 		TÚKUR
 			silent
 	FORM
-		W[{0[hc]h}v{h[{cc}{cc}]h}v]
+		W[{0[hc]h}v{h[cc][cc]h}v]
 146
 	COMP
 		KA×LI
@@ -1471,6 +1532,7 @@
 		KA×NÍG
 	SUM
 		GU₇
+			eat
 	FORM
 		W[{0[hc]h}v{h{[vvv]v}Mh}v]
 		W[{0[hc]h}v{h[vvv](vh)}v]
@@ -1498,7 +1560,7 @@
 	FORM
 		L[{0[hc]h}vv]
 		L[{0hch}vv]
-		L[{0hh0}hvv]
+		L[{0[hh]h'"}vv]
 152
 	HIT
 		up
@@ -1506,7 +1568,7 @@
 		ár
 	FORM
 		P{chhc}
-		L{dhhh'}
+		{d'hhh'}
 		P{c(v{hh})c}
 153
 	HIT
@@ -1603,7 +1665,7 @@
 			[unknown]
 	FORM
 		W[{[hc']([0vv0][hc'])}vv(v{hhh})v]
-		W[{0[hc]([hc]v)}v0'"{h'h2h'}vv]
+		W[{0[hc]([hc]v)}v0'"{h2h'h}vv]
 		W[{0hh}v{cc}0'"v0'"{h'hh'}vv]
 162
 	COMP
@@ -1638,6 +1700,8 @@
 		DU₈/DUḪ
 			solve
 			divide
+		GABA
+			breast, chest
 	FORM
 		L[{hh}{c'c'}{c'c'}]
 		L[{hh}v{c'c'}{c'c'}]
@@ -2024,6 +2088,7 @@
 			vizier, minister
 	FORM
 		L[{0hh}vv'v'v]
+		L[{h'[{hh}v]}[vv'v'v]]
 		L[{0h(hv')}vv'v'v]
 		L[{0hhv}vv'v'v]
 		L[{hh}vvvc]
@@ -2097,8 +2162,8 @@
 	SUM
 		BA
 	FORM
-		[{hh'h}v]
 		[{hh'd}v]
+		[{hh'h}v]
 		[{h2d}v]
 		[h{hh}v]
 206
@@ -2170,8 +2235,9 @@
 			mound
 			ruin
 	FORM
-		[{0[h{hhhh}]h}v]
 		[{h"h'h'h}v]
+		[{0[h{hhhh}]h}v]
+		[{d'd2d'd}v]
 		[{v[vvv]}TEv]
 212
 	SUM
@@ -2279,7 +2345,6 @@
 			herald, announcer
 	FORM
 		L[{hhh}{hhh}v2]
-		L[{hhhh}{hhhh}v2]
 223
 	AKK
 		ṭu
@@ -2348,6 +2413,8 @@
 	SUM
 		ŠEN
 			kettle
+			pipe
+			gutter, eaves
 	FORM
 		L[{0hhh}{[v[v'"v2'"]Mv]h}]
 		L[{0h'hh'}vv'v2'v]
@@ -2389,8 +2456,9 @@
 234
 	SUM
 		GE₄/GI₄
-	W[{0hhhh0}(h[vv]){[vvv]h}TE]
-	W[{0hhhh0}(h[vv]){[vvv]v}TE]
+	FORM
+		W[{0hhhh0}(h[vv]){[vvv]h}TE]
+		W[{0hhhh0}(h[vv]){[vvv]v}TE]
 235
 	SUM
 		BÁR
@@ -2415,8 +2483,8 @@
 		TUR
 			small
 	FORM
-		L{[{hhh}{hh}]h}
-		L{[{hhh}{hh}]([0v]h)}
+		L{[{hhh}{hh}]Eh}
+		L{[{hhh}{hh}]E([0v]h)}
 238
 	SUM
 		ZÀ/ZAG
@@ -2489,8 +2557,7 @@
 	AKK
 		qir
 	FORM
-		L[{0hhhh}{vv}{c}{vv}c"]
-		L[{0hhhh}{vv}{vv}c"]
+		L[{0hhhh}{vv}{0'c'}{vv}c"]
 245
 	HIT
 		bur
@@ -2518,13 +2585,15 @@
 		d2
 248
 	HIT
-		Glossenkeil
+		P2
+		:
+		(The "Glossenkeil", transliterated as a colon or as "punctuation mark 2")
 	FORM
 		{cc}
 		[c"c"]
+		c"
 		d
 		{dd}
-		c"
 249
 	HIT
 		te
@@ -2563,7 +2632,7 @@
 	HIT
 		šú
 	FORM
-		(vd)
+		(v{0d0})
 		(vh)
 		{vh}
 252
@@ -2581,13 +2650,13 @@
 			Tigris (river)
 	FORM
 		W[([v{h0}]{0d}){[hcc{ccc}{ccc}][hc]}]
-		W{[vh2cc{ccc}{ccc}][hhc']}
+		W{[vh2c'c'{ccc}{ccc}][hhc']}
 254
 	SUM
 		ÚKUŠ
 			cucumber
 	FORM
-		W[(vd){h[hc]0}vv]
+		W[(v{0d}){h[hc]0}vv]
 		W[(vh){h[hc]0}vv]
 255
 	HURR
@@ -2657,10 +2726,10 @@
 		ŠENNUR
 			medlar (type of fruit)
 	FORM
-			L[{c({dd}{uu})c}v2]
-			L[({0hh0}[{0c}dd{c0}])v2]
-			L[{h'hhh'}v2]
-			L[{[ccc]hhc}v2{0hhhhh}]
+		L[{c({dd}{uu})c}v2]
+		L[({0hh0}[{0c}dd{c0}])v2]
+		L[{h'hhh'}v2]
+		L[{[ddd]hhc}v2{0hhhhh}]
 261
 	HIT
 		u
@@ -2678,7 +2747,7 @@
 	SUM
 		DUL
 	FORM
-		L[c{[h{hhh}]h}v]
+		L[c{[h{hhh}]Eh}v]
 		L[ch{hhh}v]
 		L[c{hh}{hhhhhh}v]
 263
@@ -2687,7 +2756,7 @@
 	AKK
 		Ištar
 	FORM
-		L[c{[h{h[hc]h}]h}v]
+		L[c{[h{h[hc]h}]Eh}v]
 		L[ch{hhh}v]
 		L[c{[hv(v{hh})]h}]
 		L[c{[hv{ch}v]h}]
@@ -2701,6 +2770,8 @@
 		L[ch{v[vvv]}TE]
 		L[ch{cc}{cc}]
 265
+	COMP
+		TODO FIX ME
 	AKK
 		ù
 			and
@@ -2710,8 +2781,9 @@
 		LIBIR
 			old
 	FORM
+		L[c'h{[v{hhh}v]h}]
 		L[cvh{[v{hhhh}vv]h}E]
-		L[ch{[v{h[hc]h}v]h}]
+		L[c'h{[v{h[hc]h}v]h}]
 		L[cvh({hhh}[vvv])]
 266
 	SUM
@@ -2719,7 +2791,7 @@
 			kiln
 			fired clay
 	FORM
-		L[c{[{hh}{hhhh}]h'}v]
+		L[c{[{hh}{hhhh}]Eh'}v]
 		L[c{hh}{hh'h'h}v]
 267
 	HIT
@@ -2748,6 +2820,7 @@
 	FORM
 		W[c{0hh0}{chhc}v2{0hhh}]
 		W[c{hh}{hh}{ccc}0'"v2{0hhh}]
+		W[c{hhh}{hhh}v2{[vvv]v}TE]
 270
 	COMP
 		U.GAN
@@ -2813,7 +2886,7 @@
 		AMAR×KU₆
 			[unknown]
 	FORM
-		L[c{[hc][0{vv}{0'c}{vv}{0'c}0]M[hc]}]
+		L[c{[hc][0{vv}{0'c}{vv}{0'c}0][hc]}]
 		L[c{[hc][0vv0][hc][0vcvc0]}]
 277
 	HURR
@@ -2823,7 +2896,7 @@
 			cow
 	FORM
 		L[c'{d'u}]
-		L[c'(d2u)]
+		L[c'(du)]
 278
 	SUM
 		KISIM₅
@@ -2972,7 +3045,7 @@
 			officer
 			cheap?
 			goodness, quality
-	FORm
+	FORM
 		L[cv{chc}v2]
 		L[cv{h'h2h'}v2]
 294
@@ -3074,8 +3147,8 @@
 		ANŠE
 			donkey
 	FORM
-		L[{cchh}{d'hh'""}]
 		L[{ddhh}{h'hh'}]
+		L[{cchh}{d'hh'""}]
 		L{[{cc}{h'hh'}][(v{hh})M0]}
 		L[{chh}{chh'}]
 303
@@ -3175,9 +3248,9 @@
 		SILIM/SALIM
 			health, heal
 	FORM
+		[{[cc]hh}v]
 		[{c[ch]h}v]
 		L[c{chh}v]
-		[{[cc]hh}v]
 		L[cv{hh}v]
 313
 	HIT
@@ -3195,20 +3268,21 @@
 	DET
 		place (rare, mostly Akkadian)
 	FORM
+		[{[c{chhh}]Eh}v]
 		L[c{chhhh}v]
-		[{[c{chhh}]h}v]
 		[{[cc]hhhh}v]
-		[{[{cc}{hhhh}]h}v]
+		[{[{cc}{hhhh}]Eh}v]
 		L[cv{hhhh}v]
 		[{cc}{chhh}v]
 314
 	SUM
 		NÁ/NÚ
 			bed
-	W[c"c"{[{hhh}d]u}{[vvv]v}TE]
-	W[c"c"{ddd0"h}{[vvv]v}TE]
-	W[c"{ch}{[vvv][vvv]v}TE]
-	W[c"{[c'{ccc}]h}{[vvv]v}TE]
+	FORM
+		W[c"c"{[{hhh}d]u}{[vvv]v}TE]
+		W[c"c"{ddd0"h}{[vvv]v}TE]
+		W[c"{ch}{[vvv][vvv]v}TE]
+		W[c"{[c'{ccc}]h}{[vvv]v}TE]
 315
 	SUM
 		URU₅
@@ -3268,7 +3342,7 @@
 	HURR
 		wi(i)
 	FORM
-		[{cc}v{h{[hh][hh]h}M}]
+		[{cc}v{h{[hh][hh]h}ME}]
 320
 	COMP
 		wa+pí
@@ -3276,7 +3350,7 @@
 		wi(pí)
 		fi?
 	FORM
-		[{cc}v{h{[hc][hc]}M}]
+		[{cc}v{h{[hc][hc]}ME}]
 321
 	COMP
 		wa+ú
@@ -3577,7 +3651,7 @@
 			wash, clean
 			bathtub
 	FORM
-		W[{cc}{cc}{h'[hh][hh]h}v20'"{du}]
+		W[{cc}{cc}{h"[hh][hh]h}v20'"{du}]
 		W[{cc}{cc}{[{hhh}{hh}]h}v20'"{du}]
 		W[{cc}{cc}{[vvv][vv]}TEv2{du}]
 		W[{cc}{cc}{cc}{cc}0'"v20'"{d'hh'}]
@@ -3768,7 +3842,6 @@
 		[v(h[ccc])]
 		[vvccc]
 		[vvhhh]
-		[vEhhhhh]
 361
 	SUM
 		MIN
@@ -3845,8 +3918,8 @@
 		KU₆
 			fish
 	FORM
-	P[{vv}{0c}{vv}{0c}]
-	P{[vv][vcvc]}
+		P[{vv}E{0c}{vv}E{0c}]
+		P{[vv][vcvc]}
 368
 	SUM
 		EŠ₅
@@ -3878,8 +3951,8 @@
 			4
 	FORM
 		{[vvv]v}
-		[v{[vv]v}]
-		[{[vv]v}v]
+		[v{[vv]v}E]
+		[{[vv]v}Ev]
 371
 	SUM
 		YÁ

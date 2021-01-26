@@ -67,11 +67,21 @@ PHASE 3
 #		Leaf iteration
 #		Leaf identification
 #	"Greedy" matching within containers
-	Encoding the whole HZL
+#	Encoding the whole HZL
 #		1
 #		2
-		3
-		4
-		5
-		6
-	Degrees of change?
+#		3
+#		4
+#		5
+#		6
+#	Check encoding
+	Sort by complexity
+	Sort by usage
+X	Degrees of change?
+
+PHASE 4
+	SVG rendering
+	"Scratchpad" page
+	Render entire phrases
+	Lookup by usage
+	DUB.SAR replacement
