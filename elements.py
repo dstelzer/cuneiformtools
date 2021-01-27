@@ -40,6 +40,9 @@ class Element:
 	
 	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
 	
+	def complexity(self): # Number of strokes within an element
+		return sum(1 for e in self.traverse() if isinstance(e, Stroke))
+	
 	def _add_children(self, notes): # Add all descendant strokes to notes (utility method)
 		for elem in self.traverse():
 			if isinstance(elem, Stroke):

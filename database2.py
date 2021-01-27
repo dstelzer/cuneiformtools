@@ -13,21 +13,40 @@ class DatabaseEntry:
 		self.langs = defaultdict(list)
 		self.forms = []
 		self.sumerogram = defaultdict(list) # ech, kind of hacky TODO
-
+	
 	def finalize(self):
 		try:
 			self.functional = [parse(f).functional_form() for f in self.forms]
 		except ValueError:
 			print(f'(Error while handling {self.name})')
 			raise
-
+	
+	def sort_hzl(self):
+		return self.name.zfill(3)
+	def sort_complex(self):
+		if not self.functional: raise ValueError('No forms found', self.name)
+		return self.functional[0].complexity()
+	def sort_usage(self): # `not` because we want signs which *do* have an entry for a specific language to come first in the sorting
+		return (
+			not self.langs['HIT'],
+			self.langs['HIT'][0] if self.langs['HIT'] else '',
+			not self.langs['HURR'],
+			self.langs['HURR'][0] if self.langs['HURR'] else '',
+			not self.langs['AKK'],
+			self.langs['AKK'][0] if self.langs['AKK'] else '',
+			not self.langs['DET'],
+			self.langs['DET'][0] if self.langs['DET'] else '',
+			not self.langs['SUM'],
+			self.langs['SUM'][0] if self.langs['SUM'] else '',
+		)
+	
 	def find_matches(self, part):
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional)):
 			if part in func:
 				ident = f'{self.name}/{i}' if i else str(self.name)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
-
+	
 	def yield_all(self):
 		for i, pres in enumerate(self.forms):
 			ident = f'{self.name}/{i}' if i else str(self.name)
@@ -36,6 +55,7 @@ class DatabaseEntry:
 class Database:
 	def __init__(self):
 		self.data = []
+		self.sorted = defaultdict(list)
 	
 	def load_file(self, fn):
 		with open(fn, 'r') as f:
@@ -65,6 +85,11 @@ class Database:
 				entry.finalize()
 				self.data.append(entry)
 	
+	def prepare_sorting(self):
+		self.sorted['hzl'] = sorted(self.data, key=DatabaseEntry.sort_hzl)
+		self.sorted['complex'] = sorted(self.data, key=DatabaseEntry.sort_complex)
+		self.sorted['usage'] = sorted(self.data, key=DatabaseEntry.sort_usage)
+	
 	def lookup(self, part):
 		func = part.functional_form()
 		for entry in self.data:
@@ -75,7 +100,7 @@ class Database:
 			yield from entry.yield_all()
 	
 	# Present results as an HTML table
-	def lookup_as_table(self, part):
+	def lookup_as_table(self, part, sort='hzl'):
 		func = part.functional_form()
 		rows = [
 			['<tr id="hzl"><th scope="row">HZL Number</th>'],
@@ -90,7 +115,7 @@ class Database:
 		
 		found = False
 		
-		for entry in self.data:
+		for entry in self.sorted[sort]:
 			matching_forms = list(entry.find_matches(func))
 			if matching_forms:
 				found = True
@@ -131,6 +156,7 @@ class Database:
 if __name__ == '__main__':
 	db = Database()
 	db.load_file('data/work.txt')
+	db.prepare_sorting()
 	while True:
 		for name, code, match in db.lookup(parse(input())):
 			print(name, code, match)
