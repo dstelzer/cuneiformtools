@@ -16,7 +16,9 @@ renderers = {
 	'linear' : LinearRenderer,
 }
 
-def do_rendering(instr, rendname, highlight=''):
+def do_rendering(instr, rendname, highlight='', format='png'):
+	if format not in ('png', 'svg'): return 'Invalid format' # Safety check
+	
 	log = StringIO()
 	try:
 		with redirect_stdout(log):
@@ -27,13 +29,14 @@ def do_rendering(instr, rendname, highlight=''):
 	if highlight: hl = highlight.split(',')
 	else: hl = ()
 	
-	img = BytesIO()
 	rend = renderers[rendname]
-	data = rend.render(output, hl)
-	data.surf.write_to_png(img)
-	img.seek(0)
-	w = FileWrapper(img)
-	return Response(w, mimetype='image/png', direct_passthrough=True)
+	data = rend.render(output, hl, format=format).get_raw_data()
+	w = FileWrapper(data)
+	
+	if format == 'png': mime = 'image/png'
+	elif format == 'svg': mime = 'image/svg+xml'
+	
+	return Response(w, mimetype=mime, direct_passthrough=True)
 
 def make_image(code, match=()):
 	raw = {'text':code, 'type':'publish'}

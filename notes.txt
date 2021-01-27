@@ -75,13 +75,16 @@ PHASE 3
 #		5
 #		6
 #	Check encoding
-	Sort by complexity
-	Sort by usage
+#	Sort by complexity
+#	Sort by usage
 X	Degrees of change?
 
 PHASE 4
-	SVG rendering
+	Refactor search UI
+#	SVG rendering
 	"Scratchpad" page
+		"Generous" parsing
 	Render entire phrases
 	Lookup by usage
+		Encode name list
 	DUB.SAR replacement

@@ -2,6 +2,7 @@ import subprocess as sp
 from math import pi, atan, cos, sqrt
 from time import sleep
 from contextlib import contextmanager
+from io import StringIO, BytesIO
 
 import cairo
 
@@ -13,8 +14,16 @@ except ImportError:
 DRAW_BOXES = False
 
 class Renderer:
-	def __init__(self, width, height, skip=False):
-		self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+	def __init__(self, width, height, skip=False, format='png'):
+		self.format = format
+		if format == 'svg':
+			self.buffer = BytesIO()
+			self.surf = cairo.SVGSurface(self.buffer, width, height)
+		elif format == 'png':
+			self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+		else:
+			raise ValueError('Unrecognized format', format)
+		
 		self.ctx = cairo.Context(self.surf)
 		if not skip:
 			self.ctx.scale(width, height)
@@ -46,9 +55,27 @@ class Renderer:
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
-		fn = 'tmp.png'
-		self.surf.write_to_png(fn)
-		sp.run(['xdg-open', fn])
+		if self.format == 'png':
+			fn = 'tmp.png'
+			self.surf.write_to_png(fn)
+			sp.run(['xdg-open', fn])
+		elif self.format == 'svg':
+			fn = 'tmp.svg'
+			self.surf.finish()
+			with open(fn, 'wb') as f:
+				f.write(self.buffer.getvalue())
+			sp.run(['xdg-open', fn])
+	
+	def get_raw_data(self):
+		if self.format == 'png':
+			out = BytesIO()
+			self.surf.write_to_png(out)
+			out.seek(0)
+			return out
+		elif self.format == 'svg':
+			self.surf.finish()
+			self.buffer.seek(0)
+			return self.buffer
 	
 	def draw_single(self, x, y, w, h, mods):
 		raise NotImplementedError() # To be implemented in derived classes
@@ -159,13 +186,13 @@ class Renderer:
 		self.ctx.restore()
 	
 	@classmethod
-	def render(cls, root, highlight=(), scale=512, margin=32):
+	def render(cls, root, highlight=(), scale=512, margin=32, format='png'):
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		
 		width = int(scale*root.dims[0] + 2*margin)
 		height = int(scale*root.dims[1] + 2*margin)
-		rend = cls(width, height, skip=True)
+		rend = cls(width, height, skip=True, format=format)
 		
 		# Manual blanking
 		rend.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
@@ -431,7 +458,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TwoSidedRenderer(256, 256)
+	rend = TwoSidedRenderer(256, 256, format='svg')
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.DOUBLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2, 0.25, 0.25)
