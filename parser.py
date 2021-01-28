@@ -37,11 +37,18 @@ class ParseFrame:
 	def add(self, element):
 		self.contents.append(element)
 	
-	def finish(self):
+	def finish(self, friendly=False, unfinished=False):
 		if self.initial: raise ValueError('Unmatched closer', self.contents[-1])
+		
+		if unfinished:
+			a = self.contents[0]
+			if a not in STARTS: raise ValueError('Bad delimiter', a)
+			z = ENDS[STARTS.index(a)]
+			self.contents.append(z)
 		
 		a = self.contents[0]
 		z = self.contents[-1]
+		
 		if a not in STARTS or z not in ENDS: raise ValueError('Bad delimiters', a, z)
 		if STARTS.index(a) != ENDS.index(z): raise ValueError('Delimiters don\'t match', a, z)
 		
@@ -51,12 +58,10 @@ class ParseFrame:
 			newtype = VStack
 		elif a == '(':
 			newtype = Superpose
-	#	elif a == '<':
-	#		newtype = self.contents[1]
-	#		if type(newtype) != type: raise ValueError('Missing adjustment character') # This element should be a class; if it's not, there was no adjustment char given
-	#		del self.contents[1] # Don't put it into the contents, just use it as a type
 		
-		if len(self.contents) < 3: raise ValueError('Empty container')
+		if len(self.contents) < 3:
+			if friendly: self.contents.insert(1, Wildcard('-1'))
+			else: raise ValueError('Empty container')
 		
 		return newtype(self.contents[1:-1])
 
@@ -65,7 +70,7 @@ def report_error(error, string, start, end):
 	print(string)
 	print(' '*start + '~'*(end-start) + '^')
 
-def internal_parse(string, container_stack=None): # The actual parsing, which can throw ValueErrors if something is wrong
+def internal_parse(string, container_stack=None, friendly=False): # The actual parsing, which can throw ValueErrors if something is wrong
 	shape = 'S' # Default if not specified
 	looking_for_adjustment = False
 	if container_stack is None: container_stack = [ParseFrame(initial=True)]
@@ -95,7 +100,7 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			if container_stack[-1].initial: raise ValueError('Unmatched closer')
 			frame = container_stack.pop(-1)
 			frame.add(char)
-			output = frame.finish()
+			output = frame.finish(friendly)
 			container_stack[-1].add(output)
 		
 		elif char in STROKES:
@@ -114,18 +119,24 @@ def internal_parse(string, container_stack=None): # The actual parsing, which ca
 			raise ValueError('Unrecognized character', char)
 	
 	if len(container_stack) > 1:
-		raise ValueError('Unmatched opener', container_stack[-1].contents[0])
+		if friendly:
+			while len(container_stack) > 1:
+				frame = container_stack.pop(-1)
+				output = frame.finish(friendly, unfinished=True)
+				container_stack[-1].add(output)
+		else: raise ValueError('Unmatched opener', container_stack[-1].contents[0])
 	if not container_stack[0].contents:
-		raise ValueError('Empty canvas')
+		if friendly: container_stack[0].contents.append(Wildcard('-1'))
+		else: raise ValueError('Empty canvas')
 	if len(container_stack[0].contents) > 1:
 		raise ValueError('Unconnected elements', container_stack[0].contents)
 	
 	return Canvas(shape, container_stack[0].contents[0])
 
-def parse(string): # A wrapper around internal_parse for error reporting
+def parse(string, friendly=False): # A wrapper around internal_parse for error reporting
 	container_stack = [ParseFrame(initial=True)] # We keep this in the outer function to be able to access it during error reporting
 	try:
-		out = internal_parse(string, container_stack)
+		out = internal_parse(string, container_stack, friendly)
 	except ValueError as e:
 		msg = e.args[0]
 		start = container_stack[-1].start

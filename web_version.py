@@ -16,13 +16,13 @@ renderers = {
 	'linear' : LinearRenderer,
 }
 
-def do_rendering(instr, rendname, highlight='', format='png'):
+def do_rendering(instr, rendname, highlight='', format='png', friendly=False):
 	if format not in ('png', 'svg'): return 'Invalid format' # Safety check
 	
 	log = StringIO()
 	try:
 		with redirect_stdout(log):
-			output = parse(instr)
+			output = parse(instr, friendly)
 	except ValueError:
 		return '<pre>'+log.getvalue()+'</pre>'
 	
