@@ -126,7 +126,7 @@ def internal_parse(string, container_stack=None, friendly=False): # The actual p
 				container_stack[-1].add(output)
 		else: raise ValueError('Unmatched opener', container_stack[-1].contents[0])
 	if not container_stack[0].contents:
-		if friendly: container_stack[0].contents.append(Wildcard('-1'))
+		if friendly: container_stack[0].contents.append(Void('-1'))
 		else: raise ValueError('Empty canvas')
 	if len(container_stack[0].contents) > 1:
 		raise ValueError('Unconnected elements', container_stack[0].contents)

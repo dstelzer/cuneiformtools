@@ -2585,15 +2585,14 @@
 		d2
 248
 	HIT
-		P2
 		:
 		(The "Glossenkeil", transliterated as a colon or as "punctuation mark 2")
 	FORM
-		{cc}
+		P{cc}
 		[c"c"]
-		c"
+		Pc"
 		d
-		{dd}
+		P{dd}
 249
 	HIT
 		te

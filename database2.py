@@ -111,20 +111,22 @@ class Database:
 			['<tr id="akk"><th scope="row">In Akkadian</th>'],
 			['<tr id="sum"><th scope="row">Sumerogram</th>'],
 			['<tr id="det"><th scope="row">Determinative</th>'],
+			['<tr id="code"><th scope="row">Code</th>'],
 		]
 		
-		found = False
+		matches = 0
 		
 		for entry in self.sorted[sort]:
 			matching_forms = list(entry.find_matches(func))
 			if matching_forms:
-				found = True
+				matches += 1
 				colspan = len(matching_forms)
 				for ident, pres, match in matching_forms:
-					raw = {'text':pres, 'type':'publish'}
+					raw = {'code':pres}
 					if match: raw['highlight'] = ','.join(str(s) for s in match)
 					query = urlencode(raw)
-					rows[2].append(f'<td><img src="/hantatallas_process?{query}" height="100px" /></td>')
+					rows[2].append(f'<td><img src="/rendersign?{query}" height="100px" /></td>')
+					rows[8].append(f'<td><tt>{pres}</tt></td>')
 				
 				hzl = entry.name
 				rows[0].append(f'<td colspan="{colspan}">{hzl}</td>')
@@ -145,13 +147,11 @@ class Database:
 				sumerian = ', '.join(f'{sg} "{meanings(sg)}"' for sg in entry.langs['SUM'])
 				rows[6].append(f'<td colspan="{colspan}">{sumerian}</td>')
 				
-				determinative = ', '.join(entry.langs['DET'])
+				determinative = ', '.join(f'{sg} "{meanings(sg)}"' for sg in entry.langs['DET'])
 				rows[7].append(f'<td colspan="{colspan}">{determinative}</td>')
 		for row in rows: row.append('</td></tr>')
 		
-		if not found: return '<p>No results found</p>'
-		
-		return '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
+		return matches, '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
 
 if __name__ == '__main__':
 	db = Database()

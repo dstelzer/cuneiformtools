@@ -82,8 +82,8 @@ X	Degrees of change?
 PHASE 4
 	Refactor search UI
 #	SVG rendering
-	"Scratchpad" page
-		"Generous" parsing
+#	"Scratchpad" page
+#		"Generous" parsing
 	Render entire phrases
 	Lookup by usage
 		Encode name list
