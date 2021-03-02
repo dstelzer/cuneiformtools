@@ -55,6 +55,8 @@ class Renderer:
 		elif c == 'm': col = 1,0,1
 		elif c == 'y': col = 1,1,0
 		elif c == 'w': col = 1,1,1
+		# TODO: Is it worth making this use colorparse?
+		# Or is that overkill? Now that kerning works reliably I'm not really using boxes at all any more
 		
 		self.ctx.set_source_rgba(*col, 0.25)
 		self.ctx.rectangle(x, y, w, h)

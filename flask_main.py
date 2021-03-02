@@ -31,7 +31,9 @@ def do_hantatallas():
 	bgcolor = request.args.get('bgcolor', None, type=str)
 	fgcolor = request.args.get('fgcolor', None, type=str)
 	hlcolor = request.args.get('hlcolor', None, type=str)
-	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor)
+	scale = request.args.get('scale', 512, type=int)
+	margin = request.args.get('margin', 32, type=int)
+	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor, scale=scale, margin=margin)
 
 @app.route('/search')
 def do_hant_search():
