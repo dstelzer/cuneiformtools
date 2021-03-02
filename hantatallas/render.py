@@ -265,7 +265,8 @@ class Renderer:
 			y += 1 # Sign height (fixed)
 	
 	@classmethod
-	def render_sequence(cls, rows, scale=512, margin=32, justify='c', *args, **kwargs): # As above re additional parameters
+	def render_sequence(cls, rows, highlight=(), scale=512, margin=32, justify='c', *args, **kwargs): # As above re additional parameters
+		# This time, `highlight` is the one that's ignored but included in order to make signatures line up
 		row_widths = []
 		for row in rows:
 			for sign in row:
