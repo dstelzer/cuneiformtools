@@ -180,7 +180,7 @@ class Renderer:
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		mods = set(mods) | {Modifier.REVERSE} # Since we flipped one of the axes we should unflip it for rendering
+		mods = set(mods) ^ {Modifier.REVERSE} # Since we flipped one of the axes we should unflip it for rendering
 		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
@@ -283,6 +283,44 @@ class OneSidedRenderer(Renderer):
 		
 		c.restore()
 	
+	def draw_triple(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		if Modifier.REVERSE in mods:
+			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
+			c.translate(-w, 0) # Fix our origin after flipping
+		
+		r = w/2
+		nw = (0, 0)
+		ne = (w, 0)
+		pivot1 = (w, r)
+		w_ = (0, r)
+		e = (w, r)
+		pivot2 = (w, 2*r)
+		w2 = (0, 2*r)
+		e2 = (w, 2*r)
+		pivot3 = (w, 3*r)
+		mid = (w/2, 3*r)
+		s = (w/2, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.arc_negative(*pivot1, r, -pi/2, pi)
+		c.move_to(*w_)
+		c.line_to(*e)
+		c.arc_negative(*pivot2, r, -pi/2, pi)
+		c.move_to(*w2)
+		c.line_to(*e2)
+		c.arc_negative(*pivot3, r, -pi/2, pi)
+		c.move_to(*mid)
+		c.line_to(*s)
+		c.stroke()
+		
+		c.restore()
+	
 	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -299,8 +337,6 @@ class OneSidedRenderer(Renderer):
 		c.stroke()
 		
 		c.restore()
-	
-	# TODO: Upward strokes are currently inverted, should fix somehow
 
 class TwoSidedRenderer(Renderer):
 	def draw_single(self, x, y, w, h, mods):
@@ -359,6 +395,46 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 	
+	def draw_triple(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		r = w/2
+		nw = (0, 0)
+		ne = (w, 0)
+		pivot1r = (w, r)
+		pivot1l = (0, r)
+		w_ = (0, r)
+		e = (w, r)
+		pivot2r = (w, 2*r)
+		pivot2l = (0, 2*r)
+		w2 = (0, 2*r)
+		e2 = (w, 2*r)
+		pivot3r = (w, 3*r)
+		pivot3l = (0, 3*r)
+		mid = (w/2, 3*r)
+		s = (w/2, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.arc_negative(*pivot1r, r, -pi/2, pi)
+		c.arc_negative(*pivot1l, r, 0, -pi/2)
+		c.move_to(*w_)
+		c.line_to(*e)
+		c.arc_negative(*pivot2r, r, -pi/2, pi)
+		c.arc_negative(*pivot2l, r, 0, -pi/2)
+		c.move_to(*w2)
+		c.line_to(*e2)
+		c.arc_negative(*pivot3r, r, -pi/2, pi)
+		c.arc_negative(*pivot3l, r, 0, -pi/2)
+		c.move_to(*mid)
+		c.line_to(*s)
+		c.stroke()
+		
+		c.restore()
+	
 	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -378,7 +454,8 @@ class TwoSidedRenderer(Renderer):
 		c.restore()
 
 class LinearRenderer(Renderer):
-	WIDTH = 0.1
+	WIDTH = 0.1 # The maximum width of a stroke
+	SHARPNESS = 0.01 # How much to extend a stroke past the boundaries, to make convergences look good
 	
 	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
@@ -425,6 +502,39 @@ class LinearRenderer(Renderer):
 		
 		c.restore()
 	
+	def draw_triple(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		m = w/2 # Midpoint
+		nw = (m-self.WIDTH/2, 0)
+		ne = (m+self.WIDTH/2, 0)
+		_c = (m, h*0.2)
+		_w = (m-self.WIDTH/2, h*0.2)
+		_e = (m+self.WIDTH/2, h*0.2)
+		c2 = (m, h*0.4)
+		w2 = (m-self.WIDTH/2, h*0.4)
+		e2 = (m+self.WIDTH/2, h*0.4)
+		s = (m, h+0.01)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*_c)
+		c.line_to(*_e)
+		c.line_to(*c2)
+		c.line_to(*e2)
+		c.line_to(*s)
+		c.line_to(*w2)
+		c.line_to(*c2)
+		c.line_to(*_w)
+		c.line_to(*_c)
+		c.line_to(*nw)
+		c.fill()
+		
+		c.restore()
+	
 	def draw_hook(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -460,7 +570,7 @@ class LinearRenderer(Renderer):
 if __name__ == '__main__':
 	rend = TwoSidedRenderer(256, 256, format='svg')
 	rend.blank()
-	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.DOUBLE})
-	rend.draw_horizontal(0.25*1.5, 0.25*2, 0.25, 0.25)
+	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
+	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)
 	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25, mods={Modifier.HIGHLIGHT})
 	rend.show()

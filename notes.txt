@@ -88,3 +88,8 @@ PHASE 4
 	Lookup by usage
 		Encode name list
 	DUB.SAR replacement
+
+MISC
+	Triple-headed strokes
+	Color specification
+		From web

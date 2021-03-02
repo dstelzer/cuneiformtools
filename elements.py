@@ -195,6 +195,7 @@ class Vertical(Stroke):
 	def functional_form(self):
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
 		if Modifier.DOUBLE in self.mods: return VStack([Vertical(self.ident), Vertical(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return VStack([Vertical(self.ident), Vertical(self.ident), Vertical(self.ident)])
 		else: return Vertical(self.ident)
 
 class Horizontal(Stroke):
@@ -224,6 +225,7 @@ class Horizontal(Stroke):
 	def functional_form(self):
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
 		if Modifier.DOUBLE in self.mods: return HStack([Horizontal(self.ident), Horizontal(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return HStack([Horizontal(self.ident), Horizontal(self.ident), Horizontal(self.ident)])
 		else: return Horizontal(self.ident)
 
 class UpDiag(Stroke):
@@ -240,6 +242,7 @@ class UpDiag(Stroke):
 	def functional_form(self):
 		# There's no diagonal stacking so we use HStack instead
 		if Modifier.DOUBLE in self.mods: return HStack([UpDiag(self.ident), UpDiag(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return HStack([UpDiag(self.ident), UpDiag(self.ident), UpDiag(self.ident)])
 		else: return UpDiag(self.ident)
 	# TODO: Do double upward strokes actually exist? I don't think I've ever seen one; they're just included here for completeness.
 
@@ -257,6 +260,7 @@ class DownDiag(Stroke):
 	def functional_form(self):
 		# There's no diagonal stacking so we use HStack instead
 		if Modifier.DOUBLE in self.mods: return HStack([DownDiag(self.ident), DownDiag(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return HStack([DownDiag(self.ident), DownDiag(self.ident), DownDiag(self.ident)])
 		else: return DownDiag(self.ident)
 
 class Winkelhaken(Stroke):
@@ -457,6 +461,8 @@ class HStack(Container):
 	def kern_right(self): return self.contents[-1].kern_right()
 	def allow_kern_leftward(self): return self.contents[0].allow_kern_leftward()
 	def allow_kern_rightward(self): return self.contents[-1].allow_kern_rightward()
+	def kern_top(self): return min(c.kern_top() for c in self.contents)
+	def kern_bottom(self): return min(c.kern_bottom() for c in self.contents)
 	def allow_kern_upward(self): return all(c.allow_kern_upward() for c in self.contents)
 	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
 	
@@ -573,6 +579,8 @@ class VStack(Container):
 	def kern_bottom(self): return self.contents[-1].kern_bottom()
 	def allow_kern_upward(self): return self.contents[0].allow_kern_upward()
 	def allow_kern_downward(self): return self.contents[-1].allow_kern_downward()
+	def kern_left(self): return min(c.kern_left() for c in self.contents)
+	def kern_right(self): return min(c.kern_right() for c in self.contents)
 	def allow_kern_leftward(self): return all(c.allow_kern_leftward() for c in self.contents)
 	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
 	
