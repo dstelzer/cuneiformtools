@@ -219,7 +219,8 @@ class Renderer:
 		self.ctx.restore()
 	
 	@classmethod
-	def render(cls, root, highlight=(), scale=512, margin=32, *args, **kwargs): # Any additional parameters are passed to the class constructor
+	def render(cls, root, highlight=(), scale=512, margin=32, justify=None, *args, **kwargs): # Any additional parameters are passed to the class constructor
+		# `justify` is unused but it's very convenient to have this and `render_sequence` have the same signature
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		
@@ -239,6 +240,66 @@ class Renderer:
 		root.draw(rend)
 		
 		rend.ctx.restore()
+		return rend
+	
+	def render_sign_at(self, sign, x, y):
+		self.ctx.save()
+		self.ctx.translate(x, y)
+		sign.draw(self)
+		self.ctx.restore()
+	
+	def render_sign_row(self, row, y, offset):
+		x = offset / self.scale
+		scaled_margin = self.margin / self.scale # We've scaled the canvas so that 1 unit = scale pixels, therefore margin pixels = margin/scale units
+		for sign in row:
+			x += scaled_margin
+			self.render_sign_at(sign, x, y)
+			x += sign.dims[0] # Sign width
+	
+	def render_sign_rows(self, rows, offsets):
+		y = 0
+		scaled_margin = self.margin / self.scale # See above
+		for row, offset in zip(rows, offsets):
+			y += scaled_margin
+			self.render_sign_row(row, y, offset)
+			y += 1 # Sign height (fixed)
+	
+	@classmethod
+	def render_sequence(cls, rows, scale=512, margin=32, justify='c', *args, **kwargs): # As above re additional parameters
+		row_widths = []
+		for row in rows:
+			for sign in row:
+				sign.propagate_dimensions()
+			# Now measure this row
+			width = (
+				sum(sign.dims[0] for sign in row)*scale # Signs
+				+ margin * (len(row)+1) # Margins
+			)
+			row_widths.append(width)
+		max_width = max(row_widths)
+		height = scale * len(rows) + margin * (len(rows)+1)
+		
+		rend = cls(int(max_width), int(height), skip=True, *args, **kwargs)
+		rend.scale = scale
+		rend.margin = margin
+		
+		if justify == 'c':
+			offsets = [(max_width-width)/2 for width in row_widths]
+		elif justify == 'r':
+			offsets = [(max_width-width) for width in row_widths]
+		else:
+			offsets = [0 for width in row_widths]
+		
+		# Manual blanking
+		rend.ctx.set_source_rgba(*rend.bgcolor)
+		rend.ctx.rectangle(0, 0, max_width, height)
+		rend.ctx.fill()
+		
+		rend.ctx.save()
+		rend.ctx.scale(scale, scale)
+		rend.render_sign_rows(rows, offsets)
+		rend.ctx.restore()
+		
 		return rend
 	
 	@contextmanager

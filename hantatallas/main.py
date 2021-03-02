@@ -1,7 +1,7 @@
 
 
 from render import *
-from parser import parse
+from parser import parse, parse_sequence
 from database import Database
 
 def test_rendering():
@@ -13,6 +13,20 @@ def test_rendering():
 			TwoSidedRenderer.render(construct).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
+		except ValueError: pass
+
+def test_group_rendering():
+	while True:
+		try:
+			seq = parse_sequence(input())
+		#	full = input()
+		#	rows = []
+		#	for line in full.split('`n'):
+		#		row = []
+		#		for sign in line.split('`s'):
+		#			row.append(parse(sign))
+		#		rows.append(row)
+			TwoSidedRenderer.render_sequence(seq, justify='r').show()
 		except ValueError: pass
 
 def test_comparisons():
@@ -42,4 +56,4 @@ def test_database():
 			TwoSidedRenderer.render(tree).show()
 
 if __name__ == '__main__':
-	test_rendering()
+	test_group_rendering()

@@ -135,6 +135,7 @@ def internal_parse(string, container_stack=None, friendly=False): # The actual p
 
 def parse(string, friendly=False): # A wrapper around internal_parse for error reporting
 	container_stack = [ParseFrame(initial=True)] # We keep this in the outer function to be able to access it during error reporting
+	string = string.strip(IGNORE)
 	try:
 		out = internal_parse(string, container_stack, friendly)
 	except ValueError as e:
@@ -144,6 +145,20 @@ def parse(string, friendly=False): # A wrapper around internal_parse for error r
 		report_error(msg, string, start, end)
 		raise
 	return out
+
+def parse_sequence(string): # Parse a two-dimensional list of signs, with signs separated with `s and rows separated by `n
+	rows = []
+	for i, line in enumerate(string.split('`n')):
+		row = []
+		for j, sign in enumerate(line.split('`s')):
+			try:
+				row.append(parse(sign))
+			except ValueError: # Add a bit of extra information to be helpful
+				print(f'(Line {i}, sign {j})')
+				raise
+		rows.append(row)
+	if not rows: return [[]]
+	return rows
 
 if __name__ == '__main__':
 	while True:

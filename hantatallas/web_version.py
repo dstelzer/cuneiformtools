@@ -7,7 +7,7 @@ from flask import Response
 from werkzeug.wsgi import FileWrapper
 
 from .render import *
-from .parser import parse
+from .parser import parse, parse_sequence
 from .database2 import Database
 
 renderers = {
@@ -16,13 +16,14 @@ renderers = {
 	'linear' : LinearRenderer,
 }
 
-def do_rendering(instr, rendname, highlight='', format='png', friendly=False, *args, **kwargs):
+def do_rendering(instr, rendname, highlight='', format='png', friendly=False, sequence=False, *args, **kwargs):
 	if format not in ('png', 'svg', 'pdf'): return f'Unrecognized format {format}' # Safety check
 	
 	log = StringIO()
 	try:
 		with redirect_stdout(log):
-			output = parse(instr, friendly)
+			func = parse_sequence if sequence else parse
+			output = func(instr)
 	except ValueError:
 		return '<pre>'+log.getvalue()+'</pre>'
 	
@@ -30,7 +31,8 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, *a
 	else: hl = ()
 	
 	rend = renderers[rendname]
-	data = rend.render(output, hl, format=format, *args, **kwargs).get_raw_data()
+	func = rend.render_sequence if sequence else rend.render # Choose the right rendering function to invoke
+	data = func(output, hl, format=format, *args, **kwargs).get_raw_data()
 	w = FileWrapper(data)
 	
 	if format == 'png': mime = 'image/png'

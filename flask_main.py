@@ -21,19 +21,27 @@ def do_dubsar():
 	w = FileWrapper(io)
 	return Response(w, mimetype='image/png', direct_passthrough=True)
 
-@app.route('/rendersign')
+@app.route('/rendersign', methods=['GET','POST'])
 def do_hantatallas():
-	text = request.args.get('code', '', type=str)
-	rend = request.args.get('type', 'publish', type=str)
-	hlight = request.args.get('highlight', '', type=str)
-	format = request.args.get('format', 'png', type=str)
-	friendly = request.args.get('friendly', 0, type=int)
-	bgcolor = request.args.get('bgcolor', None, type=str)
-	fgcolor = request.args.get('fgcolor', None, type=str)
-	hlcolor = request.args.get('hlcolor', None, type=str)
-	scale = request.args.get('scale', 512, type=int)
-	margin = request.args.get('margin', 32, type=int)
-	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor, scale=scale, margin=margin)
+	# We need to get the params in a slightly different way depending on the request method
+	# But GET is extremely convenient for image embedding and POST can circumvent the 2048-character limit for longer texts
+	# So we support both
+	if request.method == 'GET': args = request.args
+	elif request.method == 'POST': args = request.form
+	
+	text = args.get('code', '', type=str)
+	rend = args.get('type', 'publish', type=str)
+	hlight = args.get('highlight', '', type=str)
+	format = args.get('format', 'png', type=str)
+	friendly = args.get('friendly', 0, type=int)
+	bgcolor = args.get('bgcolor', None, type=str)
+	fgcolor = args.get('fgcolor', None, type=str)
+	hlcolor = args.get('hlcolor', None, type=str)
+	scale = args.get('scale', 512, type=int)
+	margin = args.get('margin', 32, type=int)
+	seq = args.get('sequence', 0, type=int)
+	just = args.get('justify', 'c', type=str)
+	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor, scale=scale, margin=margin, sequence=seq, justify=just)
 
 @app.route('/search')
 def do_hant_search():

@@ -92,4 +92,7 @@ PHASE 4
 MISC
 #	Triple-headed strokes
 #	Color specification
-		From web
+#		From web
+#	Scale specification
+#		From web
+#	PDF output for LaTeX
