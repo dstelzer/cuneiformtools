@@ -17,7 +17,7 @@ renderers = {
 }
 
 def do_rendering(instr, rendname, highlight='', format='png', friendly=False, *args, **kwargs):
-	if format not in ('png', 'svg'): return 'Invalid format' # Safety check
+	if format not in ('png', 'svg', 'pdf'): return f'Unrecognized format {format}' # Safety check
 	
 	log = StringIO()
 	try:
@@ -35,6 +35,7 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, *a
 	
 	if format == 'png': mime = 'image/png'
 	elif format == 'svg': mime = 'image/svg+xml'
+	elif format == 'pdf': mime = 'application/pdf'
 	
 	return Response(w, mimetype=mime, direct_passthrough=True)
 

@@ -33,6 +33,9 @@ class Renderer:
 			self.surf = cairo.SVGSurface(self.buffer, width, height)
 		elif format == 'png':
 			self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+		elif format == 'pdf':
+			self.buffer = BytesIO()
+			self.surf = cairo.PDFSurface(self.buffer, width, height)
 		else:
 			raise ValueError('Unrecognized format', format)
 		
@@ -83,6 +86,13 @@ class Renderer:
 			with open(fn, 'wb') as f:
 				f.write(self.buffer.getvalue())
 			sp.run(['xdg-open', fn])
+		elif self.format == 'pdf':
+			fn = 'tmp.pdf'
+			self.surf.show_page()
+			self.surf.finish()
+			with open(fn, 'wb') as f:
+				f.write(self.buffer.getvalue())
+			sp.run(['xdg-open', fn])
 	
 	def get_raw_data(self):
 		if self.format == 'png':
@@ -91,6 +101,11 @@ class Renderer:
 			out.seek(0)
 			return out
 		elif self.format == 'svg':
+			self.surf.finish()
+			self.buffer.seek(0)
+			return self.buffer
+		elif self.format == 'pdf':
+			self.surf.show_page()
 			self.surf.finish()
 			self.buffer.seek(0)
 			return self.buffer
@@ -586,7 +601,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold')
+	rend = TwoSidedRenderer(256, 256, format='pdf', hlcolor='gold')
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)
