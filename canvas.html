@@ -1,0 +1,148 @@
+<html>
+	<head>
+		<title>Ḫantatallaš Canvas</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script language="javascript" type="text/javascript">
+			function render(){
+				code = encodeURIComponent(document.getElementById("source").value);
+				format = "svg";
+				type = document.getElementById("type").value;
+				url = "/rendersign?code=" + code + "&format=" + format + "&type=" + type + "&friendly=1";
+				document.getElementById("canvas").src = url;
+			}
+			function search(){
+				code = encodeURIComponent(document.getElementById("source").value);
+				document.location = "/search?code="+ code;
+			}
+			function resize(){
+				canvas = document.getElementById("canvas");
+				canvas.style.width = canvas.contentWindow.document.documentElement.scrollWidth + 'px';
+				canvas.style.height = canvas.contentWindow.document.documentElement.scrollHeight + 'px';
+			}
+			function background(){
+				document.getElementById("canvas").style.backgroundColor =
+					document.getElementById("bg").checked
+						? "rgb(10%,10%,10%)"
+						: "#ffffff"
+				;
+			}
+		</script>
+		<style>
+			#container{
+				display: flex;
+			}
+			#left{
+				width: 50%;
+			}
+			#right{
+				width: 50%;
+			}
+			@media(orientation:portrait){
+				#left, #right{
+					width: auto;
+				}
+				#instructions{
+					height: 25%;
+				}
+			}
+			#canvas{
+			/*	zoom: 0.75;	*/
+				-moz-transform: scale(0.75);
+				-moz-transform-origin: 0 0;
+				-o-transform: scale(0.75);
+				-o-transform-origin: 0 0;
+				-webkit-transform: scale(0.75);
+				-webkit-transform-origin: 0 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+		<div id="left">
+			<span id="controls">
+				<input type="text" id="source" oninput="render();" />
+				<select id="type" onchange="render();">
+					<option value="publish">Published</option>
+					<option value="handwrite">Handwritten</option>
+					<option value="linear">Linear</option>
+				</select>
+				<input type="button" onclick="search();" value="Search for this sign" />
+			</span>
+			<span id="instructions">
+				<h3>Syntax</h3>
+				<p>There are five basic strokes:<ul>
+					<li><tt>h</tt> for horizontal</li>
+					<li><tt>v</tt> for vertical</li>
+					<li><tt>u</tt> for upward diagonal</li>
+					<li><tt>d</tt> for downward diagonal</li>
+					<li><tt>c</tt> for the Winkelhaken</li>
+				</ul></p>
+				<p>There are three basic ways of combining elements:
+				<ul>
+					<li><tt>[]</tt> stacks things next to each other horizontally</li>
+					<li><tt>{}</tt> stacks things on top of each other vertically</li>
+					<li><tt>()</tt> makes things cross/overlap</li>
+				</ul></p>
+				<p>These are used recursively to build up more complicated signs.</p>
+				
+				<h3>Examples</h3>
+				<p><ul>
+					<li><em>u</em> is a single Winkelhaken: <tt>c</tt></li>
+					<li><em>me</em> is a vertical next to a horizontal: <tt>[vh]</tt></li>
+					<li><em>pa</em> is a vertical crossing a stack of two horizontals: <tt>(v{hh})</tt></li>
+				</ul></p>
+				
+				<h3>Aesthetics</h3>
+				<p>There are a few special ways to modify the look of a sign, though these are ignored when searching:
+				<ul>
+					<li>The letters <tt>S</tt>, <tt>P</tt>, <tt>L</tt>, or <tt>W</tt> at the beginning of the sign change the shape of the canvas to Square, Portrait, Landscape, or Wide</li>
+					<li><tt>2</tt> after a stroke doubles its head</li>
+					<li><tt>'</tt> after a stroke shortens it from the head end; <tt>"</tt> shortens it from the tail end</li>
+					<li>Since Winkelhaken don't have heads or tails, <tt>'</tt> and <tt>"</tt> just make them smaller</li>
+					<li><tt>T</tt> after a component rotates it 45 degrees (T for <em>tenû</em>, the Akkadian term, or just for "tilted")</li>
+					<li><tt>E</tt> after a component asks the spacing algorithm to give it additional space, if possible (E for "expand")</li>
+					<li><tt>M</tt> after a component puts a small margin around it, separating it from other elements</li>
+					<li><tt>0</tt> (the number zero) creates a "void", which takes up space but doesn't appear on the screen</li>
+					<li><tt>0'</tt> is a "vertical void" that takes up no horizontal space; <tt>0"</tt> is a "horizontal void" that takes up no vertical space; <tt>0'"</tt> takes up no space at all but prevents things from kerning together</li>
+					<li><tt>!</tt> after a single stroke turns it green, which…might be useful for demonstration purposes? This one's really just a side effect of other features but it might as well be documented</li>
+				</ul></p>
+				
+				<h3>Search tips</h3>
+				<p><ul>
+					<li>Winkelhaken and small downward diagonals often look very similar. If you're not finding anything, try swapping one for the other.</li>
+					<li>Ancient scribes didn't always distinguish downward-over-upward and downward-over-horizontal as well as they should. If you can't find your sign with one, try the other.</li>
+					<li>Use <tt>()</tt> sparingly; if it's not clear that the strokes are actually intended to cross, it should probably be <tt>[]</tt> or <tt>{}</tt> instead.</li>
+					<li>The <em>tenû</em> modifier is ignored when searching, so only use it when an entire structure is tilted; if it's only a couple strokes, encode them as downward and upward diagonals instead.</li>
+					<li>You can use a star <tt>*</tt> to indicate that <em>something</em> should be in a certain position, but it doesn't matter what.</li>
+				</ul></p>
+			</span>
+		</div>
+		<div id="right">
+			<span id="results">
+				<label>Darken background (click this if the canvas is flashing too much) <input type="checkbox" id="bg" onchange="background();" /></label> </br>
+				<iframe id="canvas" name="canvas" title="rendered sign" src="/rendersign?code=&format=svg&friendly=1" onload="resize();"></iframe>
+			</span>
+		</div>
+		</div>
+		
+		Site visits:
+		<!-- Default Statcounter code for Cuneiform tools
+			http://dstelzer.pythonanywhere.com -->
+		<script type="text/javascript">
+		var sc_project=12471737; 
+		var sc_invisible=0; 
+		var sc_security="eab5dafa"; 
+		var sc_text=2; 
+		var scJsHost = "https://";
+		document.write("<sc"+"ript type='text/javascript' src='" +
+		scJsHost+
+		"statcounter.com/counter/counter.js'></"+"script>");
+		</script>
+		<noscript><div class="statcounter"><a title="Web Analytics"
+		href="https://statcounter.com/" target="_blank"><img
+		class="statcounter"
+		src="https://c.statcounter.com/12471737/0/eab5dafa/0/"
+		alt="Web Analytics"></a></div></noscript>
+		<!-- End of Statcounter Code -->
+	</body>
+</html>

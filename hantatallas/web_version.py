@@ -16,7 +16,7 @@ renderers = {
 	'linear' : LinearRenderer,
 }
 
-def do_rendering(instr, rendname, highlight='', format='png', friendly=False):
+def do_rendering(instr, rendname, highlight='', format='png', friendly=False, *args, **kwargs):
 	if format not in ('png', 'svg'): return 'Invalid format' # Safety check
 	
 	log = StringIO()
@@ -30,7 +30,7 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False):
 	else: hl = ()
 	
 	rend = renderers[rendname]
-	data = rend.render(output, hl, format=format).get_raw_data()
+	data = rend.render(output, hl, format=format, *args, **kwargs).get_raw_data()
 	w = FileWrapper(data)
 	
 	if format == 'png': mime = 'image/png'

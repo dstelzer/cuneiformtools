@@ -5,6 +5,7 @@ from contextlib import contextmanager
 from io import StringIO, BytesIO
 
 import cairo
+from PIL.ImageColor import getrgb
 
 try:
 	from elements import Modifier
@@ -13,8 +14,19 @@ except ImportError:
 
 DRAW_BOXES = False
 
+def colorparse(color): # Convert a color name into a RGBA tuple
+	if color is None: return None # Efficiency
+	color = str(color).strip()
+	if not color: return None
+	if color == '0': return (0, 0, 0, 0) # Special case for transparency, since PIL's helper function doesn't do alpha
+	# (If you need something more intricate than this, use a transparent background and an opaque foreground and do the rest in your image processing program of choice)
+	try:
+		r, g, b = getrgb(color)
+	except ValueError: return None
+	return (r, g, b, 1)
+
 class Renderer:
-	def __init__(self, width, height, skip=False, format='png'):
+	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None):
 		self.format = format
 		if format == 'svg':
 			self.buffer = BytesIO()
@@ -23,6 +35,10 @@ class Renderer:
 			self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
 		else:
 			raise ValueError('Unrecognized format', format)
+		
+		self.bgcolor = colorparse(bgcolor) or (0.1, 0.1, 0.1, 1)
+		self.fgcolor = colorparse(fgcolor) or (1, 1, 1, 1)
+		self.hlcolor = colorparse(hlcolor) or (0, 1, 0, 1)
 		
 		self.ctx = cairo.Context(self.surf)
 		if not skip:
@@ -45,13 +61,13 @@ class Renderer:
 		self.ctx.fill()
 	
 	def blank(self):
-		self.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
+		self.ctx.set_source_rgba(*self.bgcolor)
 		self.ctx.rectangle(0, 0, 1, 1)
 		self.ctx.fill()
 	
 	def begin_drawing(self, highlight=False):
-		if highlight: self.ctx.set_source_rgba(0, 1, 0, 1)
-		else: self.ctx.set_source_rgba(1, 1, 1, 1)
+		if highlight: self.ctx.set_source_rgba(*self.hlcolor)
+		else: self.ctx.set_source_rgba(*self.fgcolor)
 		self.ctx.set_line_width(0.01)
 	
 	def show(self):
@@ -186,16 +202,16 @@ class Renderer:
 		self.ctx.restore()
 	
 	@classmethod
-	def render(cls, root, highlight=(), scale=512, margin=32, format='png'):
+	def render(cls, root, highlight=(), scale=512, margin=32, *args, **kwargs): # Any additional parameters are passed to the class constructor
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		
 		width = int(scale*root.dims[0] + 2*margin)
 		height = int(scale*root.dims[1] + 2*margin)
-		rend = cls(width, height, skip=True, format=format)
+		rend = cls(width, height, skip=True, *args, **kwargs)
 		
 		# Manual blanking
-		rend.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
+		rend.ctx.set_source_rgba(*rend.bgcolor)
 		rend.ctx.rectangle(0, 0, width, height)
 		rend.ctx.fill()
 		
@@ -568,7 +584,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TwoSidedRenderer(256, 256, format='svg')
+	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold')
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)

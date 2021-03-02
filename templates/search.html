@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<title>Sign Search</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style>
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th {
+				background-color: #AAAAAA;
+				position: sticky;
+				z-index: 100;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="/search" method="get" accept-charset="utf-8">
+			<input type="text" name="code" size="20" value="{{code}}" />
+			<label>Sort by: <select name="sort" id="sort">
+				<option value="hzl" {{ 'selected' if sort=='hzl' else '' }}>HZL number</option>
+				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>
+				<option value="usage" {{ 'selected' if sort=='usage' else '' }}>Usage</option>
+			</select></label>
+			<input type="submit" value="Search" />
+		</form>
+		
+		{% if code != '' %}
+			<h3>Results for <tt>{{code}}</tt>, sorting by {{ {'hzl':'HZL number','complex':'complexity','usage':'usage'}[sort] }}</h3>
+			
+			{% if matches == -1 %}
+				{{table|safe}}
+			{% elif matches == 0 %}
+				<p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p>
+				<p>No matches found</p>
+			{% else %}
+				<p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p>
+				<p>Found {{matches}} matching {{'signs' if matches>1 else 'sign'}}</p>
+				{{table|safe}}
+			{% endif %}
+		{% else %}
+			<p>This page lets you search the Zeichenlexikon for signs containing a particular component. Enter a part of a sign in the box above, then click "Search".</p>
+			
+			<p>Tips for effective searching:
+			<ul>
+				<li>Winkelhaken and downward diagonals often look very similar. If you're not finding anything, try swapping one for the other.</li>
+				<li>Scribes don't always distinguish downward-over-upward and downward-over-horizontal as well as they should. If you can't find your sign with one, try the other.</li>
+				<li>Use <tt>()</tt> sparingly; if it's not clear that the strokes are meant to cross, it's likely <tt>[]</tt> or <tt>{}</tt> instead.</li>
+				<li>The <em>tenû</em> modifier is ignored when searching, so only use it when an entire structure is tilted; if it's only a couple strokes, encode them as downward and upward diagonals.</li>
+				<li>You can use a star <tt>*</tt> to indicate that <em>something</em> should be in a certain position, but it doesn't matter what.</li>
+			</ul>
+			</p>
+		{% endif %}
+		
+		Site visits:
+		<!-- Default Statcounter code for Cuneiform tools
+			http://dstelzer.pythonanywhere.com -->
+		<script type="text/javascript">
+		var sc_project=12471737; 
+		var sc_invisible=0; 
+		var sc_security="eab5dafa"; 
+		var sc_text=2; 
+		var scJsHost = "https://";
+		document.write("<sc"+"ript type='text/javascript' src='" +
+		scJsHost+
+		"statcounter.com/counter/counter.js'></"+"script>");
+		</script>
+		<noscript><div class="statcounter"><a title="Web Analytics"
+		href="https://statcounter.com/" target="_blank"><img
+		class="statcounter"
+		src="https://c.statcounter.com/12471737/0/eab5dafa/0/"
+		alt="Web Analytics"></a></div></noscript>
+		<!-- End of Statcounter Code -->
+	</body>
+</html>

@@ -1,0 +1,1 @@
+This project is organized a bit strangely because it's intended to be used as a web app. If you want the standalone code, look in /hantatallas/; most of the Python files in there have a way to run them independently to demonstrate or test their features.

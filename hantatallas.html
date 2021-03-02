@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<title>Ḫantatallaš</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<form action="/rendersign" method="get" accept-charset="utf-8">
+			<input type="text" name="code" size="20" value="" />
+			<input type="submit" value="Render" />
+			<br />
+			
+			Advanced rendering options (can be ignored): <br />
+			<label>Style: <select name="type">
+				<option value="publish">Published</option>
+				<option value="handwrite">Handwritten</option>
+				<option value="linear">Linear</option>
+			</select></label>
+			<label>Format: <select name="format">
+				<option value="png">PNG</option>
+				<option value="svg">SVG</option>
+			</select></label>
+			<label>BG: <input type="text" name="bgcolor" size="10" /></label>
+			<label>FG: <input type="text" name="fgcolor" size="10" /></label>
+			<label>HL: <input type="text" name="hlcolor" size="10" /></label>
+		</form>
+		
+		<!-- Note: the links are automatically generated, and are somewhat of a nightmare. If you need to edit them, use a regex to purge them all and autogen them again. -->
+		
+		<h2>Ḫantatallaš</h2>
+		
+		<p>One of the biggest difficulties in working with cuneiform is recognizing the signs. There's no easy way to look up a sign by its shape, so while it's easy to go from a pronunciation to a visual form (like my DUB.SAR tool does), that's no help when you're actually looking at the clay.</p>
+		
+		<p>As an experiment, I've been working on a "graphical encoding" for cuneiform. It's a way to encode a cuneiform glyph's <em>shape</em>, rather than its <em>meaning</em>; eventually, the goal is to use this as a sort of index, letting people look up an unknown sign without needing to search through the entire Zeichenlexikon.</p>
+		
+		<p>The main drawback of the encoding is that it's much harder to read than it is to write. And that's what this tool is meant to help with. Put an encoded sign into the text box at the top, choose the style you want, and it'll draw it out graphically.</p>
+		
+		<strong>NOTE: <a href="/canvas.html">An experimental, more user-friendly version of this tool</a> is now available. We recommend using that page instead. You can also <a href="/search">search the Zeichenlexikon directly</a>.</strong>
+		
+		<h3>The encoding</h3>
+		
+		<p>There are five basic strokes:
+		<ul>
+			<li><tt>h</tt> for horizontal</li>
+			<li><tt>v</tt> for vertical</li>
+			<li><tt>u</tt> for upward diagonal</li>
+			<li><tt>d</tt> for downward diagonal</li>
+			<li><tt>c</tt> for the Winkelhaken</li>
+		</ul>
+		So for example, <em>u</em> is encoded as <a href="/rendersign?code=c" target="_blank"><tt>c</tt></a>, and <em>aš</em> is encoded as <a href="/rendersign?code=h" target="_blank"><tt>h</tt></a>.</p>
+		
+		<p>These can be combined in three different ways:
+		<ul>
+			<li><tt>[]</tt> stacks things next to each other horizontally</li>
+			<li><tt>{}</tt> stacks things on top of each other vertically</li>
+			<li><tt>()</tt> makes two things cross</li>
+		</ul>
+		Thus, <em>me</em> is <a href="/rendersign?code=[vh]" target="_blank"><tt>[vh]</tt></a> (a vertical next to a horizontal), and <em>nu</em> is <a href="/rendersign?code=(ch)" target="_blank"><tt>(ch)</tt></a> (a horizontal crossing a Winkelhaken).</p>
+		
+		<p>These can be combined recursively to create more complicated signs. For example, <em>pa</em> is <a href="/rendersign?code=(v{hh})" target="_blank"><tt>(v{hh})</tt></a> (a stack of two horizontals, crossing a vertical), and <em>ti</em> is <a href="/rendersign?code={v[hc]c}" target="_blank"><tt>{v[hc]c}</tt></a> (a vertical, on top of a horizontal-next-to-a-Winkelhaken, on top of a Winkelhaken).
+		
+		<p>Finally, there are a few special ways to modify strokes and groups aesthetically. These are mostly ignored in the searching system; I just use them to make the glyphs look better.
+		<ul>
+			<li><tt>S</tt>, <tt>P</tt>, <tt>L</tt>, or <tt>W</tt> at the very beginning changes the size of the canvas: square, portrait, landscape, or wide (square is the default)</li>
+			<li><tt>2</tt> after a stroke doubles its head, as in <em>an</em>: <a href="/rendersign?code=(h2v)" target="_blank"><tt>(h2v)</tt></a> (in searching, a double-headed stroke is treated as a group of two strokes)</li>
+			<li><tt>'</tt> or <tt>"</tt> after a stroke makes it shorter: a single quote shortens it from the head end, a double quote shortens it from the tail end</li>
+			<li><tt>'</tt> and/or <tt>"</tt> after a Winkelhaken make it smaller, as in <em>bi</em> <a href="/rendersign?code={[hc'][hc']}" target="_blank"><tt>{[hc'][hc']}</tt></a></li>
+			<li><tt>T</tt> after a component tilts it 45 degrees, e.g. <em>ḫi</em> <a href="/rendersign?code={[vvv]v}T" target="_blank"><tt>{[vvv]v}T</tt></a> (T for <em>tenû</em>, the Akkadian term for tilted signs…or just for "tilt" if you prefer)</li>
+			<li><tt>E</tt> after a component tells the renderer to give it more space (E for "expand")</li>
+			<li><tt>M</tt> after a component tells the renderer to leave a small margin on all sides of it; this is intended especially for signs contained within other signs, where there's a distinct gap between the inner and outer signs (M for "margin")</li>
+			<li><tt>0</tt> (the number zero, not the letter O) creates a "void", which takes up space but doesn't appear in the image; <tt>0'</tt> is a vertical-only void, <tt>0"</tt> is a horizontal-only void, <tt>0'"</tt> is a void that takes up no space at all (that is, a "zero-width non-joiner")</li>
+			<li><tt>!</tt> after a single stroke turns it green, which…might be useful for demonstration purposes? This one's really a side effect of other features but it might as well be documented</li>
+		</ul></p>
+		
+		<p>Here are some more examples of signs laid out in this notation:
+		<ul>
+			<li><em>a</em> = <a href="/rendersign?code=P[vv2]" target="_blank"><tt>P[vv2]</tt></a></li>
+			<li><em>ši</em> = <a href="/rendersign?code=[cvh]" target="_blank"><tt>[cvh]</tt></a></li>
+			<li><em>iš</em> = <a href="/rendersign?code=L[{0[hc]h}vv]" target="_blank"><tt>L[{0[hc]h}vv]</tt></a></li>
+			<li><em>ni</em> = <a href="/rendersign?code=L{d(u[0vv0])}" target="_blank"><tt>L{d(u[0vv0])}</tt></a></li>
+			<li><em>ar</em> = <a href="/rendersign?code=W[cvh2vvcv]" target="_blank"><tt>W[cvh2vvcv]</tt></a></li>
+			<li><em>ba</em> = <a href="/rendersign?code=[{hh'h}v]" target="_blank"><tt>[{hh'h}v]</tt></a></li>
+			<li><em>wi<sub>5</sub></em> = <a href="/rendersign?code=L[{0[hc]h}v{0dh}]" target="_blank"><tt>L[{0[hc]h}v{0dh}]</tt></a></li>
+		</ul>
+		</p>
+		
+		<p><em>If you want to test the searching system, type in a part of a sign here, and it will give you a list of signs that contain that part.</em></p>
+		
+		<p>Tips for effective searching:
+		<ul>
+			<li>Winkelhaken and downward diagonals often look very similar</li>
+			<li>Scribes don't always distinguish downward-over-upward and downward-over-horizontal as well as they should; if you can't find your sign with one, try the other</li>
+			<li>Use <tt>()</tt> sparingly; if it's not clear that the strokes are meant to cross, it's likely <tt>[]</tt> or <tt>{}</tt> instead</li>
+			<li>The <em>tenû</em> modifier is ignored when searching, so only use it when an entire structure is tilted; if it's only a couple strokes, encode them as downward and upward diagonals instead</li>
+			<li>You can use a star <tt>*</tt> to indicate that <em>something</em> should be in a certain position, but it doesn't matter what</li>
+		</ul>
+		</p>
+		
+		<p><strong><a href="/canvas.html">An experimental, more user-friendly version of this tool</a> is now available. We recommend using it instead.</strong></p>
+		
+		<form action="/search" method="get" accept-charset="utf-8">
+			<input type="text" name="code" size="20" value="" />
+			<input type="submit" value="Search" />
+		</form>
+		
+		<p>Have fun! Report any issues to Daniel.</p>
+		
+		Site visits:
+		<!-- Default Statcounter code for Cuneiform tools
+			http://dstelzer.pythonanywhere.com -->
+		<script type="text/javascript">
+		var sc_project=12471737; 
+		var sc_invisible=0; 
+		var sc_security="eab5dafa"; 
+		var sc_text=2; 
+		var scJsHost = "https://";
+		document.write("<sc"+"ript type='text/javascript' src='" +
+		scJsHost+
+		"statcounter.com/counter/counter.js'></"+"script>");
+		</script>
+		<noscript><div class="statcounter"><a title="Web Analytics"
+		href="https://statcounter.com/" target="_blank"><img
+		class="statcounter"
+		src="https://c.statcounter.com/12471737/0/eab5dafa/0/"
+		alt="Web Analytics"></a></div></noscript>
+		<!-- End of Statcounter Code -->
+	</body>
+</html>

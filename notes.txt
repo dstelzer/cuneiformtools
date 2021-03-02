@@ -90,6 +90,6 @@ PHASE 4
 	DUB.SAR replacement
 
 MISC
-	Triple-headed strokes
-	Color specification
+#	Triple-headed strokes
+#	Color specification
 		From web
