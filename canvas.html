@@ -7,7 +7,7 @@
 				code = encodeURIComponent(document.getElementById("source").value);
 				format = "svg";
 				type = document.getElementById("type").value;
-				url = "/rendersign?code=" + code + "&format=" + format + "&type=" + type + "&friendly=1";
+				url = "/rendersign?code=" + code + "&format=" + format + "&type=" + type + "&friendly=1&scale=256";
 				document.getElementById("canvas").src = url;
 			}
 			function search(){
@@ -47,12 +47,13 @@
 			}
 			#canvas{
 			/*	zoom: 0.75;	*/
-				-moz-transform: scale(0.75);
+			/*	-moz-transform: scale(0.75);
 				-moz-transform-origin: 0 0;
 				-o-transform: scale(0.75);
 				-o-transform-origin: 0 0;
 				-webkit-transform: scale(0.75);
 				-webkit-transform-origin: 0 0;
+			*/
 			}
 		</style>
 	</head>
