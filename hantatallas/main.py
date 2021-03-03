@@ -19,14 +19,7 @@ def test_group_rendering():
 	while True:
 		try:
 			seq = parse_sequence(input())
-		#	full = input()
-		#	rows = []
-		#	for line in full.split('`n'):
-		#		row = []
-		#		for sign in line.split('`s'):
-		#			row.append(parse(sign))
-		#		rows.append(row)
-			TwoSidedRenderer.render_sequence(seq, justify='r').show()
+			TwoSidedRenderer.render_sequence(seq, justify='c').show()
 		except ValueError: pass
 
 def test_comparisons():

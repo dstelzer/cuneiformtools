@@ -7,7 +7,8 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	DOUBLE = '2'
 	TRIPLE = '3'
 	HIGHLIGHT = '!'
-	REVERSE = '_R' # Multi-character name means it won't show up in parsing; this one's only used internally in the implementation of upward diagonal rendering
+	INTERNAL_FLIP = '_I' # Multi-character name means it won't show up in parsing; this one's only used internally in the implementation of upward diagonal rendering
+	INVERT = '?'
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0
@@ -58,6 +59,8 @@ class CanvasShape(Enum):
 	SQUARE = 'S'
 	WIDE = 'W'
 	FUNCTIONAL = '_F' # This one isn't represented by a single character so it'll never show up in parsing; it's used to indicate a "functional form" designed to make comparisons easy rather than to look nice
+	NARROW = 'N'
+	XWIDE = 'X'
 
 MAXIMUM_HEAD_SIZE = 1/3
 
@@ -77,6 +80,8 @@ class Canvas(Element):
 		elif self.shape == CanvasShape.LANDSCAPE: self.dims = (3/2, 1)
 		elif self.shape == CanvasShape.WIDE: self.dims = (2, 1)
 		elif self.shape == CanvasShape.FUNCTIONAL: self.dims = (1, 1) # For debugging; functional forms aren't meant to look pretty
+		elif self.shape == CanvasShape.NARROW: self.dims = (1/3, 1)
+		elif self.shape == CanvasShape.XWIDE: self.dims = (3, 1)
 		
 		self.internal.propagate_dimensions(self.dims, (0, 0))
 	

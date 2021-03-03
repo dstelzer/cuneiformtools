@@ -213,7 +213,7 @@ class Renderer:
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		mods = set(mods) ^ {Modifier.REVERSE} # Since we flipped one of the axes we should unflip it for rendering
+		mods = set(mods) ^ {Modifier.INTERNAL_FLIP} # Since we flipped one of the axes we should unflip it for rendering
 		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
@@ -325,9 +325,13 @@ class OneSidedRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
-		if Modifier.REVERSE in mods:
+		if Modifier.INTERNAL_FLIP in mods:
 			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
 			c.translate(-w, 0) # Fix our origin after flipping
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		nw = (0, 0)
 		ne = (w, 0)
@@ -351,9 +355,13 @@ class OneSidedRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
-		if Modifier.REVERSE in mods:
+		if Modifier.INTERNAL_FLIP in mods:
 			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
 			c.translate(-w, 0) # Fix our origin after flipping
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		nw = (0, 0)
 		ne = (w, 0)
@@ -383,9 +391,13 @@ class OneSidedRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
-		if Modifier.REVERSE in mods:
-			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to the REVERSE modifier
+		if Modifier.INTERNAL_FLIP in mods:
+			c.scale(-1, 1) # This particular renderer doesn't make horizontally-symmetric strokes so we need to pay attention to this special internal modifier
 			c.translate(-w, 0) # Fix our origin after flipping
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		r = w/2
 		nw = (0, 0)
@@ -439,6 +451,10 @@ class TwoSidedRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
+		
 		nw = (0, 0)
 		ne = (w, 0)
 		pivot1 = (w, w/2)
@@ -462,6 +478,10 @@ class TwoSidedRenderer(Renderer):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		nw = (0, 0)
 		ne = (w, 0)
@@ -494,6 +514,10 @@ class TwoSidedRenderer(Renderer):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		r = w/2
 		nw = (0, 0)
@@ -557,6 +581,10 @@ class LinearRenderer(Renderer):
 		c.save()
 		c.translate(x, y)
 		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
+		
 		m = w/2 # Midpoint
 		nw = (m-self.WIDTH/2, 0)
 		ne = (m+self.WIDTH/2, 0)
@@ -575,6 +603,10 @@ class LinearRenderer(Renderer):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		m = w/2 # Midpoint
 		nw = (m-self.WIDTH/2, 0)
@@ -601,6 +633,10 @@ class LinearRenderer(Renderer):
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
 		
 		m = w/2 # Midpoint
 		nw = (m-self.WIDTH/2, 0)
