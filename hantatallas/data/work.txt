@@ -14,7 +14,11 @@
 			one
 	FORM
 		h
+	NAME
+		AŠ RÙ RU3 ÀS AS3 ÀZ AZ3 DIL DEL INA RUM DILI
 2
+	COMP
+		AŠ.AŠ
 	HIT
 		ḫal
 	SUM
@@ -24,12 +28,16 @@
 			haruspex, seer
 	FORM
 		h2
+	NAME
+		ḪAL DIDLI
 3
 	SUM
 		PÉŠ, PÍŠ
 			mouse
 	FORM
 		W[{({hhh}[vvv])Mh2[{cc}v]M}{d(uv)}]
+	NAME
+		PÉŠ PEŠ2 PÍŠ PIŠ2
 4
 	HIT
 		bal
@@ -43,7 +51,8 @@
 		L[{vh2c}{cc}]
 		L[{ch2c}{chc}]
 		L[hcvhc]
-
+	NAME
+		BAL PAL
 5
 	HIT
 		šir
@@ -53,6 +62,8 @@
 	FORM
 		L[{ch2c}{hhhh}h]
 		L[{h'h2h}{hhhh}hh]
+	NAME
+		NU11 SIR4 ŠIR
 6
 	SUM
 		GÍR
@@ -63,6 +74,8 @@
 		L[{hh2h}vvv]
 		L[{[0hv]h2h'}v]
 		L{c[h2c]c}
+	NAME
+		GÍR GIR2 UL4
 7
 	HIT
 		tar
@@ -83,6 +96,8 @@
 		{d2c}
 		(h2c)
 		{0h2h'}
+	NAME
+		TAR ḪAŠ DAR6 KUD KUT QUD QUT ṬAR ṬÍR ṬIR2 KUD KU5
 8
 	HIT
 		an
@@ -100,6 +115,8 @@
 		(h2v)
 		[h2v]
 		(h2vud)
+	NAME
+		AN ÌL IL3 DINGIR DIŊIR D
 9
 	SUM
 		APIN
@@ -109,6 +126,8 @@
 	FORM
 		L[h{hh'h}v]
 		L[{h'h2h'}v]
+	NAME
+		APIN ENGAR
 10
 	HIT
 		maḫ
@@ -122,6 +141,8 @@
 		L[{ddhuu}{vc}{vc}]
 		L[{h'[h2v]}{vc}{vc}]
 		L[{hh(h2v)}[{vh}{vh}]]
+	NAME
+		MAḪ
 11
 	HIT
 		nu
@@ -133,6 +154,8 @@
 	FORM
 		(ch)
 		(uh)
+	NAME
+		NU LÀ LA3
 12
 	HIT
 		kul
@@ -142,6 +165,8 @@
 	FORM
 		(h[0c{cc}])
 		[(hc'){cc}]
+	NAME
+		KUL NUMUN
 13
 	HIT
 		pát
@@ -165,6 +190,8 @@
 			old
 	FORM
 		[hc'"]
+	NAME
+		PÁT PAT2 PÁD PAD2 PÍT PIT2 PÍD PID2 PÈ PE3 PÌ PI3 MÚT MUT2 MÚD MUD2 BAD BAT BAṬ BE BI4 MID MIT MIṬ SUMUN SUN TIL ÚŠ UŠ2
 14
 	HIT
 		dim
@@ -177,6 +204,8 @@
 		W[{chc}v'"(ud)]
 		W[{ch2h'}v{dh}]
 		L[h2{d(uv)}]
+	NAME
+		DIM TIM DI11 TÌ TI3
 15
 	HIT
 		na
@@ -187,6 +216,8 @@
 		L[hc'{c0'}v]
 		L[h{cc0'}v]
 		L[hccv]
+	NAME
+		NA
 16
 	SUM
 		ARAD, ÌR
@@ -195,6 +226,8 @@
 			male
 	FORM
 		L[{c[hc]c}v]
+	NAME
+		ARAD ÌR IR3 NÍTA NITA2 NÍTAḪ NITAḪ2
 17
 	HIT
 		mu
@@ -208,6 +241,8 @@
 		[h{cc}{cc}]
 		[{chc}{cc}]
 		[h{v[vvv]}TE]
+	NAME
+		MU MUḪALDIM
 18
 	SUM
 		MUN
@@ -218,6 +253,8 @@
 		W[{ch2c}v'"(du)]
 		W[{ch2c}{[d0][dd]u}]
 		W[{chc}{[vvv]v}T{d([vv2]u)}]
+	NAME
+		MUN
 19
 	SUM
 		NAR
@@ -226,6 +263,8 @@
 		L[h{[vvv][vv]}TEv{du}]
 		L[h2{[vvv][vv]}TEv2{d'h}]
 		W[h2{[vvv][vvvv]}TEv2{h'hh'}]
+	NAME
+		NAR
 20
 	HIT
 		pár
@@ -243,6 +282,8 @@
 		P(vh)
 		P{vh}
 		P(vd)
+	NAME
+		PÁR PAR2 BAR MAŠ MAS BÁN BAN2
 21
 	HIT
 		ga₅
@@ -255,6 +296,8 @@
 		P[hv]
 		P[{dh0}v]
 		L[(du)v]
+	NAME
+		QA GA5 KA4 SÌL SIL3 SÌLA SILA3
 22
 	SUM
 		MUG
@@ -262,6 +305,8 @@
 	FORM
 		L[hv'"{du}]
 		L[hv'"(du)]
+	NAME
+		MUG
 23
 	SUM
 		UZ₆
@@ -270,6 +315,8 @@
 		L[hv{[ccc]h}]
 		L[hv{[vvv]h}TE]
 		L[(hv){[vvv]v}TE]
+	NAME
+		UZ6
 24
 	HIT
 		ḫu
@@ -284,11 +331,15 @@
 	FORM
 		[hvcv]
 		(h[vcv])
+	NAME
+		ḪU BAG BAK BAQ MUŠEN
 25
 	AKK
 		u₅
 	FORM
 		W[hvcvh{[vv]h}]
+	NAME
+		U5
 26
 	AKK
 		mut
@@ -297,6 +348,8 @@
 			blood
 	FORM
 		L[hvcv{[vvv]v}TE]
+	NAME
+		MUD MUT MUṬ
 27
 	COMP
 		MÙŠ/INANNA×A
@@ -306,6 +359,8 @@
 	FORM
 		[hv{c[vv2]}v]
 		L[hvc{cv}{cv}{cv}]
+	NAME
+		SE24 SÈD SED3 ŠE12 ŠED9
 28
 	COMP
 		SI×SÁ
@@ -316,6 +371,8 @@
 		L[hv{[{[cc]hh}v]Mh}v]
 		L{[hv{chhh}v2]h'}
 		L{[hv{c[ch]}v]h'}
+	NAME
+		SI×SÁ SI×SA2
 29
 	HIT
 		rat
@@ -323,6 +380,8 @@
 		rít
 	FORM
 		L[hvvh]
+	NAME
+		RAD RAT RAṬ RÍT RIT2
 30
 	HIT
 		gi
@@ -341,6 +400,8 @@
 	FORM
 		L[hvv{[vvv]h}TE]
 		L[hvv{[vvv]v}TE]
+	NAME
+		GI GE KÍ KI2 KÉ KE2 QÌ QI3 QÈ QE3 SI22 SIG17
 31
 	COMP
 		ge+e
@@ -348,6 +409,8 @@
 		ge(e)
 	FORM
 		W[hvv{[0vvv]h[{0hh}vv2]M}]
+	NAME
+		GE+E GE_E GE(E) GEE
 32
 	HIT
 		ri
@@ -361,6 +424,8 @@
 		L[hvvcv]
 		L[hvcvv]
 		L(h[vvcv])
+	NAME
+		RI RE TAL DAL
 33
 	HIT
 		zi
@@ -377,6 +442,8 @@
 	FORM
 		L[hvv{cc}{cc}]
 		L[{hh}vv{cc}{cc}]
+	NAME
+		ZI ZE SÍ SI2 SÉ SE2 ṢÍ ṢI2 ṢÉ ṢE2
 34
 	COMP
 		NUN.LAGAR?
@@ -386,6 +453,8 @@
 	FORM
 		W[(h[vvv]){0h(vh)}v]
 		W[{[hvvvh]h}vv]
+	NAME
+		TÙR TUR3
 35
 	SUM
 		KUN
@@ -393,6 +462,8 @@
 	FORM
 		W[hvvv{0'c0'}{c0'c}vv2]
 		W[(h[vvv]){0'c0'}{c[vv2]Mc}]
+	NAME
+		KUN
 36
 	SUM
 		NUN
@@ -400,6 +471,8 @@
 	FORM
 		L[(h[vvvv0])v]
 		L[hvvvv'v]
+	NAME
+		NUN
 37
 	HIT
 		ti
@@ -413,12 +486,16 @@
 		{v[hc]c}
 		[hvcc]
 		L[hc'vhc']
+	NAME
+		TI DÌ DI3 ṬÌ ṬI3 TE9 TÌL TIL3
 38
 	SUM
 		MÁŠ
 			family
 	FORM
 		L[{vhc}{[vvv]v}T]
+	NAME
+		MÁŠ MAŠ2
 39
 	HIT
 		nam
@@ -432,6 +509,8 @@
 		L[{vhc}{ccc}{ccc}]
 		[({hh}v){ccc}{ccc}]
 		L[hvcv{[vvv][vv]}TE]
+	NAME
+		NAM SIM SÍN SIN2 BURU5
 40
 	HIT
 		en
@@ -443,6 +522,8 @@
 	FORM
 		L[{0hv}{[vv]d2}]
 		L[h{[vv]v}{0cc}]
+	NAME
+		EN IN4
 41
 	SUM
 		INANNA
@@ -450,6 +531,8 @@
 	FORM
 		L[h{[vv]v}v]
 		L[{[vvv]hv}v]
+	NAME
+		INANNA INNIN INANA
 42
 	HIT
 		šur
@@ -459,6 +542,8 @@
 	FORM
 		L[h{[vvv]v}]
 		L[hv{[vv]v}]
+	NAME
+		ŠUR SUR
 43
 	HIT
 		ru
@@ -472,6 +557,8 @@
 		L{[cvvv]h}
 		L{[vvv]h2}
 		L[{hh}{[v'v'v]h}]
+	NAME
+		RU ŠUB ŠUP
 44
 	HIT
 		ip
@@ -480,6 +567,8 @@
 		L[{[vh]h}vv]
 		L[{[v(v'h)]h}vv]
 		L[([vh]{0h})vv]
+	NAME
+		IB IP EB EP URAŠ URTA
 45
 	SUM
 		US₅
@@ -487,6 +576,8 @@
 		L{[v{hhhh}vcv]h}
 		L{[v{h(vd)}v]h}
 		L{[v{h([vv]d)}]h}
+	NAME
+		U8 US5
 46
 	HIT
 		zul
@@ -498,6 +589,8 @@
 		W[{[v[{0hh}{vc}{vc}{vc}]M]h}v2]
 		W[cv2{0hh}{vv}{vv}{vv}v2]
 		L[{[v{vh[hcc]}M]h}v]
+	NAME
+		ZUL ŠUL SUL
 47
 	AKK
 		qi
@@ -512,12 +605,16 @@
 		L{[v{hc}vc']h}
 		W{[v{hhh}v{h[vvv]}]h}
 		L{[v{[hc]hhh}vh]h}
+	NAME
+		QI QE KIN GUR10
 48
 	FORM
 		{[vv]h}
 	SUM
 		ŠUŠANA
 			[component of other signs]
+	NAME
+		ŠUŠANA
 49
 	HIT
 		kap
@@ -536,6 +633,8 @@
 		L[{[vvhc"]h}v]
 		L{[vcvcv]h}
 		L{[vvd2v]h}
+	NAME
+		KAB KAP GÁB GAB2 GÁP GAP2 QÁB QAB2 QÁP QAP2 GÙB GUB3 ḪÚB ḪUB2
 50
 	HIT
 		ḫup
@@ -545,6 +644,8 @@
 	FORM
 		W[{[vvh{cc}]h2}v2]
 		W[{[vvd2]h}{cc}0'"v2]
+	NAME
+		ḪUB ḪUP
 51
 	HIT
 		ur
@@ -560,6 +661,8 @@
 	FORM
 		L{[vvhv]h}
 		L[{[v(hv)]h"}v]
+	NAME
+		UR LIG LIK LIQ TÍŠ TIŠ2 TAŠ TÉŠ TEŠ2
 52
 	COMP
 		ŠUŠANA+IŠ
@@ -569,6 +672,8 @@
 	FORM
 		W[{[vv{[hc]h}]h"}vv]
 		W[{[vvh]h}{[hc]h0}vv]
+	NAME
+		GIDIM
 53
 	SUM
 		TUK(U)
@@ -578,6 +683,8 @@
 		L{[0vhv]h}
 		[v{{vh}Mh}]
 		(h[vv])
+	NAME
+		TUK TUKU
 54
 	COMP
 		GÁ×PA
@@ -588,6 +695,8 @@
 		L[{h({h'"h'"}v)M(h[vv0])}v]
 		W[{h'(h[v'v'])}(v{hhhh})v]
 		L[{h({hhhh}v)M(h[vv0])}v]
+	NAME
+		SILA4
 55
 	COMP
 		LAGAB×NÍG
@@ -597,6 +706,8 @@
 	FORM
 		[{h{[vvv]v}Mh}v]
 		[{h[v{[vv]v}]Mh}v]
+	NAME
+		BÚGIN BUGIN2 BÚNIN BUNIN2 BUNIŊ
 56
 	AKK
 		ba₄
@@ -609,6 +720,8 @@
 	FORM
 		L[{h'(h[v'v'0])}v]
 		L[{h'h[vv0]}v]
+	NAME
+		BA4 MÀ MA3 GÁ GA2 MAL PISAN
 57
 	COMP
 		GÁ×AN
@@ -621,6 +734,8 @@
 		L[{h'[h2'v]M(h[vv0])}v]
 		L[{h'[h2'v]Mh[vv0]}v]
 		L[{h'h2'hv}vv]
+	NAME
+		AMA DAGAL
 58
 	COMP
 		GÁ×NIR
@@ -630,6 +745,8 @@
 	FORM
 		L[{h[{0hh}{vv}{vv}{vv}v2]M(h[vv0])}v]
 		L[{h[{0hh}{vv}{vv}{vv}v2]Mh[vv0]}v]
+	NAME
+		ÙR UR3
 59
 	COMP
 		GÁ×ŠE
@@ -639,6 +756,8 @@
 	FORM
 		[{h[0{cc}{cc}0]M(h[vv0])}v]
 		[{h[0{cc}{cc}0]Mh[vv0]}v]
+	NAME
+		ÀRAḪ ARAḪ3 ÉSAG ESAG2
 60
 	COMP
 		GÁ×NÍG
@@ -648,6 +767,8 @@
 	FORM
 		[{h{[vvv]v}M(h[vv0])}v]
 		[{h{[vvv]v}Mh[vv0]}v]
+	NAME
+		GALGA ŊALGA
 61
 	HIT
 		gán
@@ -659,6 +780,8 @@
 		L[{h'0(h[vvv0])}v]
 		L[{h'h[vvv0]}v]
 		L[{h'[v'v'v'0]h}v]
+	NAME
+		GÁN GAN2 KÁN KAN2 IKU
 62
 	COMP
 		SÍK.NUN
@@ -667,6 +790,8 @@
 			cedar
 	FORM
 		W[{h'[h'c]h'h}v{[hvvv]Mh}v]
+	NAME
+		ERIN EREN
 63
 	COMP
 		SÍK.LAM
@@ -676,6 +801,8 @@
 	FORM
 		W[{h'[h'c]h'h}v{[{cc}{hh}v]Mh}v]
 		W[{h'[h'c]h'h}v{[{c[hc]h}v]Mh}v]
+	NAME
+		ŠÉŠ ŠEŠ2
 64
 	COMP
 		ŠU.NÍGIN
@@ -685,6 +812,8 @@
 	FORM
 		L[{h'h'h'h}{hh}v]
 		L[{h'h'h'h}{hh2}v]
+	NAME
+		ŠU+NÍGIN ŠU+NIGIN2
 65
 	SUM
 		SÍG/SÍK/SIKI
@@ -693,6 +822,8 @@
 		L[{h'h'h'h}{[c'v]h}]
 		L[{0[hc]h}{[vc']h}]
 		L[{h'ch}v{0h}]
+	NAME
+		SÍG SIG2 SÍK SIK2 SIKI
 66
 	COMP
 		SÍG+MUNUS
@@ -701,6 +832,8 @@
 			ewe
 	FORM
 		L[{[0{hh[hc]}]h}v{[{cc}h]MEh}]
+	NAME
+		SÍG+MUNUS SIG2+MUNUS
 67
 	HIT
 		ik
@@ -711,6 +844,8 @@
 	FORM
 		L[{[0{h[hc]h}]h}v0'"{cc}]
 		[{[vcv]h}{cc}]
+	NAME
+		IG IK IQ EG EK EQ GÁL GAL2
 68
 	HIT
 		šu
@@ -722,6 +857,8 @@
 			hand
 	FORM
 		[{0h'h'h'h}v]
+	NAME
+		ŠU KAT7 SU×
 69
 	SUM
 		KÙ/KUG
@@ -731,6 +868,8 @@
 		L[{0h'h'h'h}vv2]
 		P{[vv][vv]h}
 		P[{v2}{v2h}]
+	NAME
+		KÙ KU3 KUG
 70
 	COMP
 		Unknown?
@@ -740,6 +879,8 @@
 	FORM
 		W[{h'h'h'h'h[cc]}Evv20'"[{0hh}{vv}{vv}{vv}v2]]
 		W[{h'h'h'h'h[hch]M}Evv20'"[{0hh}{vc}{vc}{vc}v2]]
+	NAME
+		GIŠIMMAR
 71
 	AKK
 		tàra
@@ -752,6 +893,8 @@
 		W[{[cc]h'h'h'h}v{[vv'v'v]h}{dh0}{0h2v}]
 		W[{[cc]h'h'h'h}v{[vv'v'v{0hh}]h}{cccc}{cccc}(h2[0c])]
 		W[{[{d2hhh}v{[v'v']h}v{h[ccc]}]h}E{cc}{0h2v}]
+	NAME
+		TÀRA TARA3 DÀRA DARA3
 72
 	HIT
 		ni
@@ -770,7 +913,11 @@
 		L{dh[0vv0]}
 		L(du)
 		L(dh)
+	NAME
+		NI NÉ NE2 LÍ LI2 ṢAL Ì I3 IÀ IA3 YÀ YA3 ZAL
 73
+	COMP
+		NI+UD
 	SUM
 		NA₄
 			stone
@@ -781,10 +928,14 @@
 		L[{d'h0'}{cc0'}0'"v]
 		L[{hh0'}{cc0'}0'"v]
 		L[{d'h[vv]}c"c"v]
+	NAME
+		IA4 YA4 NA4 ZÁ ZA2
 74
 	SUM
 		DÌḪ
 			thorn (type of plant)
+		ELAM
+			Elam (place)
 	AKK
 		nim
 		nem
@@ -796,6 +947,8 @@
 		L[c'{du}c'v]
 		L[{[cc][hc]0}v]
 		L[{[ccc][hcc]c}v]
+	NAME
+		NIM NEM NUM DÌḪ DIḪ3 ELAM
 75
 	SUM
 		DÙ (DRU)
@@ -806,6 +959,8 @@
 		qaq
 	FORM
 		L{d(uv)}
+	NAME
+		QAQ DÙ DU3 DRU GAG RÚ RU2
 76
 	COMP
 		né+e
@@ -813,6 +968,8 @@
 		né(e)
 	FORM
 		W[{dh[0vv]}{0[{0hh}vv2]}]
+	NAME
+		NÉ+E NÉ_E NÉ(E) NE2+E NE2_E NE2(E) NEE
 77
 	HIT
 		ir
@@ -826,6 +983,8 @@
 		L{d(h[vvv])}
 		L{dh[vvv]}
 		L{h([vvvv]h)}
+	NAME
+		IR ER
 78
 	AKK
 		lú
@@ -842,6 +1001,8 @@
 		{[0"c'c']h}
 		{h2hh}
 		L{[d0][dd]h[vvvv0]}
+	NAME
+		LÚ LU2
 79
 	SUM
 		ŠEŠ
@@ -855,6 +1016,8 @@
 		L{[{[vvv]v}TEc]([hc]v)}
 		L{[{d'"d2'"d'"}c]([hc]v)}
 		L{[h2c]h'"[hc]}
+	NAME
+		SES ŠEŠ
 80
 	SUM
 		AŠGAB
@@ -864,6 +1027,8 @@
 		L(h[v(d[0vvv])])
 		L(h[v{h[0vvvv]}])
 		L(h[v{h[0vvvv]}])
+	NAME
+		AŠGAB
 81
 	HIT
 		ak
@@ -873,6 +1038,8 @@
 		L[{[h{hhh}{hhh}]h}v{0hh}]
 		L{[hv(h2v)]h'}
 		L{[hvhvh]h}
+	NAME
+		AG AK AQ
 82
 	COMP
 		AG.ERIM
@@ -882,6 +1049,8 @@
 	FORM
 		W[{[h{hhh}{hhh}]h}v{hh}{cc}0'"v2]
 		L[{[hv(h2v)]h'}{cc}0'"v2]
+	NAME
+		MÈ ME3
 83
 	SUM
 		GÙN
@@ -890,6 +1059,8 @@
 		L[{[h{hhh}c]h}v]
 		L[hv{[hc]hhh}v]
 		L[h{h[hc]h}v]
+	NAME
+		TÁR TAR2 ṬÁR ṬAR2 GÙN GUN3 DAR
 84
 	SUM
 		ITI/ITU
@@ -900,6 +1071,8 @@
 	FORM
 		L[{0[hccc]h}v2]
 		L[{h[ccc]h}v2]
+	NAME
+		ITI ITU
 85
 	COMP
 		GAD.ŠE.NAGA
@@ -909,6 +1082,8 @@
 	FORM
 		W[{hh}v{cc}{cc}{ccc}{cc}0'"v2{d'u}]
 		W[{[hv]h}{cc}{cc}{hhh}{hh}0'"v2{d'u}]
+	NAME
+		ŠINIG
 86
 	HIT
 		ší
@@ -917,6 +1092,8 @@
 		si
 		se
 		ṣì
+	HURR
+		si
 	SUM
 		SI
 			horn
@@ -927,6 +1104,8 @@
 		{[hv'v]h'}
 		{[0vv]h2}
 		[{h[v0]h}v]
+	NAME
+		ŠÍ ŠI2 ŠÉ ŠE2 SI SE ṢÌ ṢI3 ṢÈ ṢE3
 87
 	SUM
 		MÁ
@@ -936,6 +1115,8 @@
 		{(h[vvv])h}
 		{[vvv]hh}
 		{[vvv]h2}
+	NAME
+		MÁ MA2
 88
 	SUM
 		ŠÙDUL/ŠÙDUN
@@ -943,6 +1124,8 @@
 	FORM
 		W[{[hvvvh]h}{cc}{cc}0'"v2]
 		W[(h[vv])0'"v{[cc]hc}{cc}0'"v2]
+	NAME
+		ŠÙDUL ŠUDUL3 ŠÙDUN ŠUDUN3
 89
 	COMP
 		SI.A
@@ -956,6 +1139,8 @@
 	FORM
 		L[{[hvv]h'}vv2]
 		L{[0v'v'vv2]h2}
+	NAME
+		DIR DIRI SA5
 90
 	HIT
 		tap
@@ -968,6 +1153,8 @@
 		{hh}
 		{(hc)(hc)}
 		({hh}{cc})
+	NAME
+		TAB TAP DÁB DAB2 DÁP DAP2 TAU TAW TAV ṬAB ṬAP
 91
 	HIT
 		šum
@@ -977,6 +1164,8 @@
 		L[{hh}{dhu}]
 		L[{hh}v{dhu}]
 		L[{hh}(dhu)]
+	NAME
+		ŠUM TÀ TA3 TAG
 92
 	COMP
 		PIRIG&ZA
@@ -993,6 +1182,8 @@
 		L[{hh}{dhh}]
 		L{[{hh}{hhh}][{vv}{vv}000]M}
 		L[{hh}{hhh}]
+	NAME
+		AZ AS AṢ
 93
 	COMP
 		PIRIG&UT
@@ -1006,6 +1197,8 @@
 		L[{hh}{dhh}]
 		L{[{hh}{hhh}][{cc}v0]M}
 		L[{hh}{hhh}]
+	NAME
+		UG UK UQ PÌRIG PIRIG3
 94
 	COMP
 		PIRIG&KAL
@@ -1014,6 +1207,8 @@
 			leopard
 	FORM
 		L{[{hh}{dhh}][{hh}vvv200]M}
+	NAME
+		NIB
 95
 	HIT
 		la
@@ -1021,11 +1216,15 @@
 		L[{[0"h][hh][hh]h'}v]
 		L[{hh}{hhhh}v]
 		L[{hh}{hhhhhh}v]
+	NAME
+		LA
 96
 	SUM
 		UKU
 	FORM
 		L[{hhhh}{[vvhv]h}E]
+	NAME
+		UKU
 97
 	HIT
 		ap
@@ -1035,6 +1234,8 @@
 	FORM
 		L[{hh}{h0h}v]
 		L[{h2h2}v]
+	NAME
+		AP AB
 98
 	HIT
 		um
@@ -1043,6 +1244,8 @@
 	FORM
 		L[{hh}{h0h}v]
 		L[{h'([0vv]{hh})h'}v]
+	NAME
+		UM UB×
 99
 	HIT
 		tup
@@ -1055,6 +1258,8 @@
 		L[{hh}{hh}v]
 		L[{h2h2}v]
 		L[{h'hhh'}v]
+	NAME
+		TUB TUP DUB DUP ṬUP KIŠIB
 100
 	COMP
 		AN&AN
@@ -1062,6 +1267,8 @@
 		nap
 	FORM
 		[{0h2h2}v2]
+	NAME
+		NAB NAP
 101
 	COMP
 		3×AN
@@ -1076,12 +1283,16 @@
 	FORM
 		W[{0h2h2}v20'"h2v]
 		W[{(h2v)(h2v)}E0'"(h2v)]
+	NAME
+		MUL
 102
 	SUM
 		DÉ
 			pour
 	FORM
 		[{ch2h2c}v]
+	NAME
+		DÉ DE2
 103
 	COMP
 		NÍNDA×AN
@@ -1093,6 +1304,8 @@
 	FORM
 		L[{0hh0}{h(h2v)Mh}Ev]
 		L[{0hh0}{h[h2v]Mh}Ev]
+	NAME
+		ŠÀM ŠAM3
 104
 	COMP
 		NÍNDA×NUN
@@ -1102,12 +1315,16 @@
 	FORM
 		L[{0hh0}{h([vvvv]h)Mh}Ev]
 		L[{hh}{hhh}vvvv]
+	NAME
+		AZU ÚZU UZU2
 105
 	HIT
 		at
 	FORM
 		L[{0hh0}{hhhh}v]
 		L[{h'h2h2h'}v]
+	NAME
+		AD AT AṬ
 106
 	AKK
 		sìr
@@ -1120,6 +1337,8 @@
 	FORM
 		W[{0hh0}{hhhh}v{0hh0}v]
 		W[{0hh0}{hhhh}v({0hh0}v)]
+	NAME
+		SÌR SIR3 ŠÌR ŠIR3 KÉŠ KEŠ2 KEŠDA ŠÈR ŠER3
 107
 	COMP
 		EZEN×ŠE
@@ -1128,6 +1347,8 @@
 			feast, celebration
 	FORM
 		W[{0hh0}{hh'h'h}v{h[{cc}{cc}]Mh}v]
+	NAME
+		EZEN4
 108
 	COMP
 		AB×PA
@@ -1145,6 +1366,8 @@
 	FORM
 		L[{hh}{h({hh}v)Mh}v]
 		L[{hh}{hh'h'h}vv]
+	NAME
+		ZÉ ZE2 ZÍ ZI2 SI20 SE20 ṢI ṢE
 109
 	SUM
 		URUDU
@@ -1156,6 +1379,8 @@
 		L[{hh}{hch}v]
 		L[{hh}{[hc]h}v]
 		L[{0hh0}{h[vv]h}v]
+	NAME
+		URUDU
 110
 	SUM
 		MÚRU/MURUB₄
@@ -1164,6 +1389,8 @@
 		L[{0hh0}{h[ccc]h}v2]
 		L[{hhhh}{h[ccc]h}v2]
 		L[{hhhh}{h(du)Mh}v2]
+	NAME
+		MÚRU MURU2 MURUB4
 111
 	SUM
 		ERI₁₁
@@ -1172,6 +1399,8 @@
 	FORM
 		L[{hhh}{h[ccc]h}v2]
 		L[{0hh0}{hhhhh}v]
+	NAME
+		ERI11 UNU UNUG
 112
 	COMP
 		AB×A?
@@ -1182,6 +1411,8 @@
 	FORM
 		L[{hh}{h[vv2]Mh}v]
 		L[{0hh}{[vvv]h}]
+	NAME
+		MIŠ MIS
 113
 	HIT
 		ḫé
@@ -1190,6 +1421,8 @@
 		kan
 	FORM
 		L[{hh}{hh2h}]
+	NAME
+		ḪÉ ḪE2 ḪÍ ḪI2 KAN GAN
 114
 	SUM
 		BÀD
@@ -1197,6 +1430,8 @@
 	FORM
 		L[{hh}{h[{hh}c]h}v{0hh}v]
 		W[{hh}{h[{hh}c]h}v({0hh}v)]
+	NAME
+		BÀD BAD3
 115
 	AKK
 		šàr
@@ -1208,6 +1443,8 @@
 		W[{hh}{[{cc}c"]u}]
 		W[{hh}{[{hh}h]u}E]
 		W[{hh}{[{hh}h]h}E]
+	NAME
+		ŠÀR ŠAR3 LUGAL
 116
 	AKK
 		dìm
@@ -1217,6 +1454,8 @@
 	FORM
 		W[{hh}{[d0][dd]0'"h}E{cc}{0h2d}]
 		W[{hh}{[d0][dd]0'"h[cc]}E{0h2h}]
+	NAME
+		DÌM DIM3
 117
 	COMP
 		TODO TRIPLE
@@ -1229,6 +1468,8 @@
 		W[{0[hc']h}(d2u)vvv2]
 		W[{0hh}{0d2h}vvv2]
 		W[{0[dc]h}{[vd2]h}v{[vv]v}]
+	NAME
+		IL ÉL EL2
 118
 	SUM
 		PAN
@@ -1238,6 +1479,8 @@
 		L{h[hc'ch]}
 		L{(hv)[hc'ch]}
 		L{(hv)h[d2]}
+	NAME
+		PAN
 119
 	SUM
 		NÍNDA
@@ -1245,6 +1488,8 @@
 	FORM
 		L[{hh}c'{hh}]
 		L[{hh}{hh}]
+	NAME
+		NÍNDA NINDA2
 120
 	HIT
 		kum
@@ -1256,6 +1501,8 @@
 	FORM
 		L[{0hh0}c"{[hc'][hc']}E]
 		L[{[hc']h}{[hc'][hc']}]
+	NAME
+		KUM GUM KU13 QU QUM
 121
 	COMP
 		NÍNDA×NE
@@ -1264,6 +1511,8 @@
 			beloved?
 	FORM
 		W[{0hh0}c"{h[{hh}{[vvv]v}TE{hh}v]Mh}v]
+	NAME
+		ÁG AG2 ÁGA AGA2
 122
 	COMP
 		KUM×ŠE
@@ -1273,6 +1522,8 @@
 	FORM
 		W[{hh}c"{h[{cc}{cc}]Mh}{cc}]
 		W[{hh}c"{h{v[vvv]}TEh}{cc}]
+	NAME
+		GAZ GAS GAṢ KAṢ KÀṢ KAṢ3
 123
 	COMP
 		(NÍNDA×ŠE).A.AN
@@ -1281,6 +1532,8 @@
 			cost, buy
 	FORM
 		W[{0hh0}c{h[{cc}{cc}]Mh}0'"vv20'"h2v]
+	NAME
+		ŠÁM ŠAM2
 124
 	HIT
 		úr
@@ -1290,6 +1543,8 @@
 	FORM
 		W[{chh}{0h(hv)}v]
 		W[{0[hc]h}{0hh}vv]
+	NAME
+		ÚR UR2
 125
 	HIT
 		tum
@@ -1304,6 +1559,8 @@
 	FORM
 		W[{chh}{h'h'h'h}]
 		W[{chh}v{h'h'h'h}]
+	NAME
+		TUM DUM TU4 DU4 ÍB IB2 ÍP IP2 ÉB EB2 ÉP EP2 ṬU4 ṬUM
 126
 	SUM
 		EGIR
@@ -1313,6 +1570,8 @@
 		L[{dhh}{h[hc][hc]h}v2]
 		L[{chh}{hhhhh}{cc}0'"v2]
 		W[{[hc']h}{[hc'][hc']}0'"v2]
+	NAME
+		EGIR
 127
 	SUM
 		LIL
@@ -1322,6 +1581,8 @@
 	FORM
 		W[{0'hh0'}c'{0'cc0'}{0'cc0'}{du}c']
 		L[{0'h[hc]0'}{{[vvv][vv]}TEh}c"]
+	NAME
+		LIL
 128
 	HIT
 		du
@@ -1337,6 +1598,8 @@
 		L[{[0c]hh2}v]
 		L[{h'hh2}v]
 		L[{d'hh2}v]
+	NAME
+		DU TÙ TU3 ṬÙ ṬU3 GIN GUB RÁ RA2 RI6 ŠA4
 129
 	SUM
 		KAŠ₄
@@ -1347,12 +1610,16 @@
 	FORM
 		L[{c[hc]h2c}v2]
 		L[{c[h2c][h2c]c}v2]
+	NAME
+		KAS4 KAŠ4
 130
 	SUM
 		DÚB
 			[component of other signs]
 	FORM
 		W[{chh}{[v0'"{[hc]h}]h}vv]
+	NAME
+		DÚB DUB2
 131
 	HIT
 		wi₅
@@ -1364,6 +1631,8 @@
 		L{[{ch}v{0d}]h2}
 		L[{h'hh}{[vc"]h}]
 		L[{hhh}(vdu)E]
+	NAME
+		WI5 UI5 GEŠTIN
 132
 	HIT
 		uš
@@ -1379,6 +1648,8 @@
 		({d20}[{0h}v])
 		L[{0[hc](h[vv])}v]
 		L[{0h(h[v'v'])}(hv)]
+	NAME
+		UŠ ÚS US2 NITA NITAḪ
 133
 	HIT
 		ka
@@ -1404,6 +1675,8 @@
 		L[{0[hc]h}v{0hh}v]
 		L{[hc"v(v{0hh})]h2}
 		L[h{0hh}v(v{0hh})]
+	NAME
+		KA GA14 QÀ QA3 DU11 DUG4 GÙ GU3 INIM KIR4 ZÚ ZU2
 134
 	COMP
 		KA×BAR
@@ -1412,6 +1685,8 @@
 			meeting, assembly
 	FORM
 		W[{0[hc]h}v{h(hv)Mh}v]
+	NAME
+		UKKIN UNKIN
 135
 	COMP
 		KA×NUN
@@ -1421,6 +1696,8 @@
 	FORM
 		W[{0[hc]h}v{h(h[vvvv])Mh}v]
 		W[{0[hc]h}v{h[hvvvv'v]Mh}v]
+	NAME
+		NUNDUM NUNDUN
 136
 	COMP
 		KA×SA
@@ -1429,6 +1706,8 @@
 			beard
 	FORM
 		W[{0[hc]h}v{h{[vh](h[0vvv])}Mh}v]
+	NAME
+		SU6
 137
 	COMP
 		KA×ÚR
@@ -1436,6 +1715,8 @@
 		[unknown]
 	FORM
 		W[{0[hc]h}v{h[{hh}{hh}{cv}v]Mh}v]
+	NAME
+		KA×ÚR KA×UR2
 138
 	COMP
 		KA×PA
@@ -1443,6 +1724,8 @@
 		[unknown]
 	FORM
 		W[{0[hc]h}v{h(v{hh})Mh}v]
+	NAME
+		KA×PA
 139
 	COMP
 		KA×GIŠ
@@ -1450,6 +1733,8 @@
 		[unknown]
 	FORM
 		W[{0[hc]h}v{h[{hh}v]Mh}v]
+	NAME
+		KA×GIŠ KA×ŊIŠ
 140
 	COMP
 		KA×GAG
@@ -1461,6 +1746,8 @@
 		W[{0[hc]h}v{hdh(hv)}v]
 		W[{0h2h}v{hh'h'h}v]
 		W[{[hc]c}v{h(hv)Mh}v]
+	NAME
+		KIR14
 141
 	COMP
 		KA×U
@@ -1469,6 +1756,8 @@
 			mouth
 	FORM
 		W[{0[hc]h}v{hch}v]
+	NAME
+		KA×U
 142
 	COMP
 		KA×LUM
@@ -1476,6 +1765,8 @@
 		[unknown - hapax]
 	FORM
 		W[{0[hc]h}v{h[0{cc}{hh}{hh}0]h}v]
+	NAME
+		KA×LUM
 143
 	COMP
 		KA×UD
@@ -1485,6 +1776,8 @@
 	FORM
 		W[{0[hc]h}v{h[0{cc}0'"v0]Mh}v]
 		W[{0[hc]h}v{h[{dd}v]Mh}v]
+	NAME
+		ZU9
 144
 	COMP
 		KA×IM
@@ -1494,6 +1787,8 @@
 	FORM
 		W[{0[hc]h}v{h[{[vvv]v}TEhvv]Mh}v]
 		W[{0[hc]h}v{h[{[vvv]v}TE(h[vv])]Mh}v]
+	NAME
+		BÚN BUN2
 145
 	COMP
 		KA×ŠE
@@ -1502,6 +1797,8 @@
 			silent
 	FORM
 		W[{0[hc]h}v{h[cc][cc]h}v]
+	NAME
+		TÚKUR TUKUR2
 146
 	COMP
 		KA×LI
@@ -1510,6 +1807,8 @@
 			conjurer
 	FORM
 		W[{0[hc]h}v{h[{cc}{cc}{c0}vv]Mh}v]
+	NAME
+		MU7 TU6
 147
 	COMP
 		KA×ME
@@ -1519,6 +1818,8 @@
 	FORM
 		W[{0[hc]h}v{h[vh]Mh}v]
 		W[h{hh}v{hhh}v]
+	NAME
+		EME
 148
 	COMP
 		KA×A
@@ -1527,6 +1828,8 @@
 			drink
 	FORM
 		W[{0[hc]h}v{h[vv2]Mh}v]
+	NAME
+		NAG
 149
 	COMP
 		KA×NÍG
@@ -1536,6 +1839,8 @@
 	FORM
 		W[{0[hc]h}v{h{[vvv]v}Mh}v]
 		W[{0[hc]h}v{h[vvv](vh)}v]
+	NAME
+		GU7
 150
 	COMP
 		KA×ÀŠ
@@ -1543,6 +1848,8 @@
 		[unknown]
 	FORM
 		W[{0[hc]h}v{h[{vv}{vv}{vv}]Mh}v]
+	NAME
+		KA×ÀŠ KA×AŠ3
 151
 	HIT
 		iš
@@ -1561,6 +1868,8 @@
 		L[{0[hc]h}vv]
 		L[{0hch}vv]
 		L[{0[hh]h'"}vv]
+	NAME
+		IŠ EŠ15 MIL MEL ÍS IS2 ÍṢ IṢ2 ÍZ IZ2 KUŠ7 SAḪAR
 152
 	HIT
 		up
@@ -1570,6 +1879,8 @@
 		P{chhc}
 		{d'hhh'}
 		P{c(v{hh})c}
+	NAME
+		UP UB ÁR AR2
 153
 	HIT
 		bi
@@ -1584,6 +1895,8 @@
 	FORM
 		L{[hc][hc]}
 		L{[hc][(hv)c]}
+	NAME
+		PÍ PI2 PÉ PE2 BI BÉ BE2 KAŠ GAŠ
 154
 	SUM
 		ŠEM/ŠIM
@@ -1592,6 +1905,8 @@
 			brewer
 	FORM
 		W[{[hc'][hc']}{[hc']h}vv]
+	NAME
+		LUNGA ŠEM ŠIM
 155
 	AKK
 		ṣár
@@ -1601,6 +1916,8 @@
 			calf
 	FORM
 		L{[hc]c[hc]}
+	NAME
+		ṢÁR ṢAR2 ṢUR AMAR
 156
 	COMP
 		AMAR×ŠE
@@ -1612,6 +1929,8 @@
 		L{[hc][c{cc}{cc}][hc]}
 		L{[hc][cc][cc][hc]}
 		L{[(h[cc])c][(h[cc])c]}
+	NAME
+		SISKUR
 157
 	HURR
 		gu₄
@@ -1623,6 +1942,8 @@
 			bovine
 	FORM
 		L{[hc]([hc]v)}
+	NAME
+		GU4 GUD GUDR
 158
 	HIT
 		ša
@@ -1632,6 +1953,8 @@
 		L[{0[hc]([hc]v)}v]
 		L[{[h2c][hv][h2]}v]
 		L[{0[{hhhh}v]}0'"{cc}0'"v]
+	NAME
+		ŠA SA×
 159
 	HIT
 		ga
@@ -1646,6 +1969,8 @@
 		L([0vvv0]{[hc'][hc']})
 		L[{hh}vv{cc}]
 		L{[hc']([0vvvvv0][hc'])}
+	NAME
+		GA KÀ KA3 QÁ QA2
 160
 	HIT
 		ta
@@ -1657,6 +1982,8 @@
 			from, with
 	FORM
 		L[{0[hc]([hc][0vv0])}v]
+	NAME
+		TA DÁ DA2 ṬÁ ṬA2
 161
 	COMP
 		GA.GÍN
@@ -1667,6 +1994,8 @@
 		W[{[hc']([0vv0][hc'])}vv(v{hhh})v]
 		W[{0[hc]([hc]v)}v0'"{h2h'h}vv]
 		W[{0hh}v{cc}0'"v0'"{h'hh'}vv]
+	NAME
+		ÍL IL2
 162
 	COMP
 		BI×A
@@ -1682,6 +2011,8 @@
 	FORM
 		L{[hc']([hc'][0vv20])}
 		L[{hh}vv2{cc}]
+	NAME
+		DUG DUK DUQ TÙK TUK3 TÙQ TUQ3
 163
 	COMP
 		ŠIM×NÍG
@@ -1692,6 +2023,8 @@
 		W[{[hc][vvv][hc]v}{[hc]h}vv]
 		L[{0hh}{[vvv]v}{0'cc}]
 		W[{hh}{[vvv]v}{c'c'}{[hc']h}vv]
+	NAME
+		BAPPIR
 164
 	AKK
 		gap
@@ -1705,6 +2038,8 @@
 	FORM
 		L[{hh}{c'c'}{c'c'}]
 		L[{hh}v{c'c'}{c'c'}]
+	NAME
+		GAB GAP QAB QAP DU8 DUḪ GABA
 165
 	AKK
 		kim
@@ -1715,6 +2050,8 @@
 		L[{vh(h[0d20])}v]
 		L[{(vh)h[0d20]}v]
 		L[{0hh}{0d2}vv]
+	NAME
+		KIM GIM DÍM DIM2
 166
 	SUM
 		UMBIN
@@ -1725,6 +2062,8 @@
 		W[{[hv]h}{[0cc]h'h'h'h}v{[vv'v'v]h}{ch2h2[cc]}[vv]]
 		W[(v{[hc']h}){[vvv][vvv]h}{[0c]h2h2}[vv]]
 		W[{[hc'][(hv){hhh}v]}{[vv'v'v{h[ccc]}]h}E[vv]]
+	NAME
+		UMBIN
 167
 	SUM
 		KÁ
@@ -1734,6 +2073,8 @@
 		L[{ch2h2c}v2{0hhh}]
 		[{h'hhh'}v2]
 		W[{hh}{c'c'}{hh}vv2]
+	NAME
+		KÁ KA2
 168
 	HIT
 		am
@@ -1743,6 +2084,8 @@
 			ram
 	FORM
 		L[{hh}{[vvv]v}TE]
+	NAME
+		AM
 169
 	HIT
 		ne
@@ -1759,14 +2102,18 @@
 			[oracular term?]
 	FORM
 		W[{hh}{[vvv]v}TE{hh}v]
+	NAME
+		NE NI5 BÍ BI2 DÈ DE3 ṬÈ ṬE3 BAR7 BIL BIR9 IZI LÁM LAM2 ŠEG6
 170
 	SUM
-		LAL
+		LÀL
 			honey
 	FORM
 		L[{hh}{[vvv][vv]}TEv2]
 		L[{hh}{ccc}{c'c'}0'"v2]
 		L[{hh}{c'c'}{c'c'}0'"v]
+	NAME
+		LÀL LAL3
 171
 	HIT
 		taḫ
@@ -1775,6 +2122,8 @@
 		L[{chchc}{[vvv]v}T]
 		[{hh}{ccc}{ccc}]
 		{c[hc]c[hc]c}
+	NAME
+		TAḪ DAḪ TÚḪ TUḪ2
 172
 	COMP
 		NE?×PAB
@@ -1791,7 +2140,15 @@
 	FORM
 		W[{hh}{[vvv]v}T{ch(du)Mhc}v2]
 		W[{hh}{[vvv]v}TE{ch(dh)Mhc}v2{0hhh}]
+	NAME
+		PÍL PIL2 BÍL BIL2 PÉL PEL2 LI13 GIBIL
 173
+	HIT
+		gat
+		kat
+		kit₉?
+	AKK
+		qàt
 	SUM
 		GAD(A)
 			linen, cloth
@@ -1803,6 +2160,8 @@
 		P{[hv]d}
 		P{[hv]h}
 		P(v{hh})
+	NAME
+		GAD GAT KAD KAT KID9 KIT9 QÀD QAD3 QÀT QAT3 GADA
 174
 	HIT
 		pa
@@ -1810,10 +2169,17 @@
 	AKK
 		bá
 		sàk
+	SUM
+		UGULA
+			overseer
+		GIDRU
+			staff, scepter
 	FORM
 		P(v{hh})
 		P{(vh)h}
 		P{vhh}
+	NAME
+		PA ḪAD ḪAT BÁ BA2 ḪAṬ SÀK SAK3 GIDRU UGULA
 175
 	COMP
 		PA.IB
@@ -1828,6 +2194,8 @@
 	FORM
 		W[(v{hh}){[vh]h}vv]
 		W[(v{hh})([v{h0}]h)vv]
+	NAME
+		ŠAB ŠAP ŠÌB ŠIB3 ŠÌP ŠIP3 SAB SAP
 176
 	COMP
 		PA.KAŠ₄
@@ -1836,6 +2204,8 @@
 			commissar
 	FORM
 		W[(v{hh}){c[hc][h2c]c}v2]
+	NAME
+		MAŠKIM
 177
 	COMP
 		PA.LU?
@@ -1845,6 +2215,8 @@
 	FORM
 		L[(v{hh})({hhh}[vvv])]
 		W[(v{hh})0'"v{hhhh}vvv]
+	NAME
+		SIPA SIPAD
 178
 	HIT
 		ez
@@ -1857,16 +2229,18 @@
 		iš₆
 		níš
 	SUM
-		GIŠ
+		GIŠ (ŊIŠ)
 			wood, tree
 	DET
-		GIŠ
+		GIŠ (ŊIŠ, G)
 			wood
 	FORM
 		P[{hh}v]
 		P(h[{h0}v0])
 		P[{h(hv)}v]
 		P(v{hh})
+	NAME
+		EZ IZ NÍŠ NIŠ2 IS ES IṢ EṢ IŠ6 GIŠ ŊIŠ G
 179
 	HIT
 		ḫap
@@ -1879,6 +2253,8 @@
 	FORM
 		P[{hh}v]
 		P[v{hh}v]
+	NAME
+		ḪAB ḪAP KIL KEL GUD8 GUR4 LAGAB LÚGUD LUGUD2 NÍGIN NIGIN2 RIN
 180
 	COMP
 		LAGAB×U
@@ -1895,6 +2271,8 @@
 	FORM
 		P[{hch}v]
 		P[{hh'h}v]
+	NAME
+		TÚL TUL2 GÍGIR GIGIR2 PÚ PU2
 181
 	COMP
 		LAGAB×SUM
@@ -1903,6 +2281,8 @@
 		zar
 	FORM
 		[{h[{cc}{cc}v2]Mh}v]
+	NAME
+		ṢAR ZAR
 182
 	COMP
 		LAGAB×A
@@ -1915,6 +2295,8 @@
 		[{h[vv2]Mh}v]
 		[{[v{h[vv2]M}]h}v]
 		[{[hv'v2']h}v]
+	NAME
+		AMBAR BUGIN BUNIN SUG
 183
 	HIT
 		al
@@ -1927,6 +2309,8 @@
 		W[{0hh}{[vvd]h}]
 		L[{0hh}{[v0v]h}]
 		L[{0hh}v{0u}v]
+	NAME
+		AL
 184
 	SUM
 		KU₇
@@ -1934,6 +2318,8 @@
 	FORM
 		L[{0hh}v{0h}v]
 		[{0hh}vcv]
+	NAME
+		KU7
 185
 	HIT
 		gur
@@ -1947,6 +2333,8 @@
 	FORM
 		[{0h(hv)}v]
 		L[{0h'h}vv]
+	NAME
+		GUR KÙR KUR3 QUR
 186
 	SUM
 		LAGAR
@@ -1954,6 +2342,8 @@
 	FORM
 		[{0h(hv)}v]
 		L[{0h'h}vv]
+	NAME
+		LAGAR
 187
 	HIT
 		e
@@ -1962,6 +2352,8 @@
 	FORM
 		[{0h(hv)}v2]
 		[{0hh}vv2]
+	NAME
+		E I15
 188
 	COMP
 		E!.KISIM₅×GU₄
@@ -1970,6 +2362,8 @@
 			cattle herder
 	FORM
 		W[{0hh}vv2c{d{[hc]([hc]v)}Mu}c]
+	NAME
+		UTUL5
 189
 	COMP
 		E!.KISIM₅×GA
@@ -1979,6 +2373,8 @@
 	FORM
 		W[{0hh}vv2c{d{[hc]([hc][vv])}Mu}c]
 		W[{0h(hv)}v2c{d{[hc]([hc][vv])}Mu}c]
+	NAME
+		UBUR
 190
 	COMP
 		E!.KISIM₅×(A.MAŠ)
@@ -1987,6 +2383,8 @@
 			pen (for animals)
 	FORM
 		W[{0hh}vv2c{d[vv20'"(hv)]Mu}c]
+	NAME
+		E+KISIM5×A+MAŠ
 191
 	HIT
 		mar
@@ -1994,6 +2392,8 @@
 		MAR
 	FORM
 		L[{hh}vvh]
+	NAME
+		MAR
 192
 	HIT
 		šak
@@ -2006,6 +2406,8 @@
 		L[{[hv]h'}v{hh}v]
 		L[{0h(hv)}v{0hh}v]
 		L[{[hvv{0h'h'}]h}v]
+	NAME
+		ŠAG ŠAK ŠAQ RIŠ SAG SUR14
 193
 	SUM
 		GURUN
@@ -2014,6 +2416,8 @@
 		[{0hh0}{vc'}{vc'}{0cc0}]
 		{[0vv0][hc][hc][0cc0]}
 		[{0hh0}{vv}{vv}{0hh0}]
+	NAME
+		GURUN
 194
 	AKK
 		kit
@@ -2025,6 +2429,8 @@
 		L[{dh}vv'v]
 		L(h[{h0}vv'v])
 		({hh}[vvv])
+	NAME
+		KID KIT KIṬ GÉ GE2 KE4 LÍL LIL2
 195
 	HIT
 		ú
@@ -2045,6 +2451,8 @@
 		({0hh}[vvvv])
 		L[{0hh}vvvvvvv]
 		{[hvvv]h}
+	NAME
+		Ú U2 ʔU× ŠAM KÙŠ KUŠ3
 196
 	HIT
 		kal
@@ -2067,6 +2475,8 @@
 		L[({0hh}[0vv0])v2]
 		[{0hh}vvv2]
 		[{0h(hv)}vv2]
+	NAME
+		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KAL KALA KALAG LAMMA
 197
 	HIT
 		un
@@ -2078,6 +2488,8 @@
 	FORM
 		[{0h(hv')}{vv}{vv}]
 		[{0hhv}{vv}{vv}]
+	NAME
+		UN ÙG UG3 ÙKU UKU3
 198
 	HIT
 		luḫ
@@ -2092,6 +2504,8 @@
 		L[{0h(hv')}vv'v'v]
 		L[{0hhv}vv'v'v]
 		L[{hh}vvvc]
+	NAME
+		LUḪ LÀḪ LAḪ3 SUKKAL
 199
 	AKK
 		é
@@ -2107,6 +2521,8 @@
 		L[([vv'v'v'0]{0hh})v]
 		L[{[hv'v'v'v'0]h}v]
 		L[{[0vvvv0]hh}v]
+	NAME
+		É E2 PID PIT PIṬ
 200
 	AKK
 		sa
@@ -2120,6 +2536,8 @@
 		L{[v0'"{d[vvvv]}]h}
 		L([v0]{hh[0vvvv]})
 		L[{0hh}vv'v'v'v']
+	NAME
+		SA
 201
 	SUM
 		GÚ?
@@ -2127,12 +2545,16 @@
 	FORM
 		L[{0hh}v2c'{cc}]
 		L[{0hh}v2{[vv]v}TE]
+	NAME
+		GÚ GU2
 202
 	SUM
 		DUR?
 			[page missing]
 	FORM
 		L[{0hh}v20'"{cc}{ch}]
+	NAME
+		DUR
 203
 	SUM
 		UZU
@@ -2144,6 +2566,8 @@
 	FORM
 		L[{0hh}v2{[vvv][vv]}TE]
 		L[{0hh}v20'"{cc}{cc}]
+	NAME
+		UZU
 204
 	COMP
 		NUN&NUN
@@ -2154,6 +2578,8 @@
 		NIR
 	FORM
 		L[{hh}{vv}{vv}{vv}v2]
+	NAME
+		NIR NÀR NAR3
 205
 	HIT
 		ba
@@ -2166,6 +2592,8 @@
 		[{hh'h}v]
 		[{h2d}v]
 		[h{hh}v]
+	NAME
+		BA PÁ PA2
 206
 	HIT
 		ku
@@ -2182,6 +2610,8 @@
 		[{hh'h}v]
 		[v{hhh}v]
 		[{h2h}v]
+	NAME
+		KU GU5 QÚ QU2 TUŠ DÚR DUR2 DURU DURU2 DURUN TUKUL
 207
 	COMP
 		KU!.U.GAG
@@ -2190,6 +2620,8 @@
 			beer mug
 	FORM
 		W[{hh'h}vc{d(uv)}]
+	NAME
+		MUD4
 208
 	SUM
 		PÈŠ
@@ -2199,6 +2631,8 @@
 	FORM
 		L[{hh'h}v]
 		L[{h2h}v]
+	NAME
+		MA PÈŠ PEŠ3
 209
 	HIT
 		zu
@@ -2211,6 +2645,8 @@
 	FORM
 		L[{hh'h}vv]
 		L[{h2h}vv]
+	NAME
+		ZU SÚ SU2 ṢÚ ṢU2 GÍN GIN2
 210
 	HIT
 		lu
@@ -2229,6 +2665,8 @@
 		([vvv]{hhh})
 		[v{hhhhhh}vvvvv]
 		[v{h(vh)Mh}v]
+	NAME
+		LU DIB DIP TIB TIP DAB DUL8 UDU
 211
 	SUM
 		DU₆
@@ -2239,6 +2677,8 @@
 		[{0[h{hhhh}]h}v]
 		[{d'd2d'd}v]
 		[{v[vvv]}TEv]
+	NAME
+		DU6
 212
 	SUM
 		TU₉/TÚG
@@ -2257,6 +2697,8 @@
 		[{hh'h'h}v]
 		[{h2h'h}v]
 		[v{hhhhhh}v]
+	NAME
+		ÁZLAG AZLAG2 GI7 ŠÈ ŠE3 TU9 TÚG TUG2 ZÌ ZI3 ZÍD ZID2
 213
 	AKK
 		su
@@ -2275,6 +2717,8 @@
 		L[{h[{hh}v]h}v]
 		L[{h[h2v]h}v]
 		L[{dd2d}vv]
+	NAME
+		SU KUŠ
 214
 	HIT
 		da
@@ -2286,6 +2730,8 @@
 	FORM
 		L[{h[h2c]h}v]
 		L[{hhh}vcv]
+	NAME
+		DA TÁ TA2
 215
 	HIT
 		it
@@ -2298,12 +2744,16 @@
 		L[{0hh2h}{[vvv]v}TEv]
 		L[{0[hc][h2c][hc]}v]
 		L[{hh2h}{hhhh'}v]
+	NAME
+		ID IT ED ET IṬ EṬ Á A2 TI8
 216
 	SUM
 		ENGUR
 			[component of other signs]
 	FORM
 		L[{hh2h}v]
+	NAME
+		ENGUR
 217
 	HIT
 		i
@@ -2311,6 +2761,8 @@
 		ʔiₓ
 	FORM
 		{[hh][hh]h}
+	NAME
+		I ʔI×
 218
 	COMP
 		I.A
@@ -2318,12 +2770,16 @@
 		ya
 	FORM
 		L[{[hh][hh]h}vv2]
+	NAME
+		IA YA
 219
 	SUM
 		ḪAŠḪUR
 			apple
 	FORM
 		L[{hhh}{hhh}v]
+	NAME
+		ḪAŠḪUR
 220
 	SUM
 		GÚG
@@ -2334,17 +2790,23 @@
 		W[{hhhh}{ch(du)Mhc}v2]
 		L[{dhh}{dhh}v2]
 		W[{hhh}{h[h{[vvv][ccc]}M]h}v2]
+	NAME
+		GAR5 GÚG GUG2
 221
 	SUM
 		LÙ
 	FORM
 		L[{hhh}{hhh}v2]
+	NAME
+		LÙ LU3
 222
 	SUM
 		NIMGIR
 			herald, announcer
 	FORM
 		L[{hhh}{hhh}v2]
+	NAME
+		NIMGIR
 223
 	AKK
 		ṭu
@@ -2357,6 +2819,8 @@
 		W[{hhh}{h(du)Mh}v2]
 		W[{hhhh}{h[hccc]h}v2]
 		W[{[vvvv{0hh}]h}v]
+	NAME
+		ṬU GÍN GIN2 TÙN TUN3
 224
 	COMP
 		LAGAB×BAD
@@ -2365,6 +2829,8 @@
 			wagon
 	FORM
 		[{h[hc]h}v]
+	NAME
+		GIGIR
 225
 	SUM
 		BALAG
@@ -2374,6 +2840,8 @@
 		W[{[hc]hh[hv]}{d2u}{cc0'}0'"v2]
 		W[{[hc']h}{[v0'"{[hc]h}]h}vv]
 		L[{hh}{cv}{cc}{cc}0'"v2]
+	NAME
+		BALAG
 226
 	SUM
 		ALAM/ALAN
@@ -2381,6 +2849,8 @@
 	FORM
 		W[{hh2h}{[vvv]v}TE{hh2h}{[vvv]v}TE]
 		W[{hhh}{hhhh'}{hhh}{hhhh'}]
+	NAME
+		ALAM ALAN
 227
 	SUM
 		TAG₄/TAK₄
@@ -2388,12 +2858,16 @@
 		W[{[cc]hh}{[v'vv'v'v]h}c"c"c"]
 		W[{cc}{[{vv}{vv}{vv}]h}c"c"c"]
 		L{[{cc}v'{vv}{vv}{vv}]h}
+	NAME
+		TAG4 TAK4
 228
 	SUM
 		KISAL
 	FORM
 		[{hhh}v]
 		[{hhhh}v]
+	NAME
+		KISAL
 229
 	SUM
 		URU
@@ -2407,6 +2881,8 @@
 		[{h[{hhhh}v]}v]
 		L[v{hhhhh}vv]
 		L[{h'[h2v]h'}v]
+	NAME
+		RÍ RI2 U19 URU
 230
 	COMP
 		SU×A
@@ -2419,6 +2895,8 @@
 		L[{0hhh}{[v[v'"v2'"]Mv]h}]
 		L[{0h'hh'}vv'v2'v]
 		L[{0hh0}{h[vv2]Mh}v]
+	NAME
+		ALAL PÌSAN DUR10 ŠEN
 231
 	AKK
 		lak
@@ -2435,14 +2913,19 @@
 		L[{h'h(hv)}{[vv'v'v]h}]
 		L[{hhv}{[vv'v'v]h}]
 		L[{hhh}{[vvv]h}]
+	NAME
+		LAG LAK LAQ ÀKA AKA3 SANGA ŠID ŠIT ŠITA5 ŠITI
 232
 	COMP
 		E!.KISIM₅×LA
 	SUM
 		LAḪTA
+			[unknown]
 	FORM
 		W[{0h(hv)}v2c{d[{hh}{hhhh}v]Mu}c]
 		W[[{0hh}vv2]c"{[{chh}{hhhh}v]h}c"]
+	NAME
+		LAḪTA
 233
 	HIT
 		ra
@@ -2453,12 +2936,16 @@
 		L[{hhhh}{[vv]h}]
 		L[{hhhh}v{vh}]
 		L[{h2h"h'}vv]
+	NAME
+		RA
 234
 	SUM
 		GE₄/GI₄
 	FORM
 		W[{0hhhh0}(h[vv]){[vvv]h}TE]
 		W[{0hhhh0}(h[vv]){[vvv]v}TE]
+	NAME
+		GE4 GI4
 235
 	SUM
 		BÁR
@@ -2467,6 +2954,8 @@
 		W[{hhhh}{h(du)Mh}{[hhh][ccc]}v2]
 		W[{hhhh}{h{dh}Mh}{[v"v"v"][ccc]}v2]
 		L[{hhh}{hhhh}v2]
+	NAME
+		BÁR BAR2
 236
 	COMP
 		DU&DU
@@ -2474,6 +2963,8 @@
 		LAḪ₄
 	FORM
 		{[{[0d]hh2}v][{[0d]hh2}v]}
+	NAME
+		LAḪ4
 237
 	AKK
 		tur
@@ -2485,6 +2976,8 @@
 	FORM
 		L{[{hhh}{hh}]Eh}
 		L{[{hhh}{hh}]E([0v]h)}
+	NAME
+		TUR DUMU
 238
 	SUM
 		ZÀ/ZAG
@@ -2495,6 +2988,8 @@
 		L[{hhhh}{hhhh}c]
 		L[{hhh}{h[hc]h}]
 		L{[hh][h[hc]]h}
+	NAME
+		ZÀ ZA3 ZAG
 239
 	SUM
 		SIG₇
@@ -2503,6 +2998,8 @@
 	FORM
 		L[{h[hc]hh}vh]
 		[{hch}vh]
+	NAME
+		SIG7
 240
 	HIT
 		kàr
@@ -2512,9 +3009,12 @@
 	FORM
 		L[{hhhh}{[vvv]v}TE]
 		L[{hh2h}{[vvv]v}TE]
+	NAME
+		GÀR GAR3 KÀR KAR3 QAR
 241
 	HIT
 		tàš
+	HURR
 		áš
 		áz
 	SUM
@@ -2523,6 +3023,8 @@
 	FORM
 		P(v{hhhh})
 		P([vv]{hhhh})
+	NAME
+		TÀŠ TAŠ3 ÁŠ AŠ2 ÁZ AZ2 ZÍZ ZIZ2
 242
 	HIT
 		gal
@@ -2535,6 +3037,8 @@
 			cup
 	FORM
 		L[{hhhh}vh]
+	NAME
+		GAL KÁL KAL2
 243
 	HIT
 		ták
@@ -2546,6 +3050,8 @@
 			throne
 	FORM
 		[{hhhh}v2]
+	NAME
+		TÁG TAG2 TÁK TAK2 TÁQ TAQ2 DAG DAK DAQ BÀR BAR3
 244
 	HIT
 		gir
@@ -2558,6 +3064,8 @@
 		qir
 	FORM
 		L[{0hhhh}{vv}{0'c'}{vv}c"]
+	NAME
+		GIR KIR PIŠ PAŠ PÙŠ PUŠ3 BIŠ QIR ḪA6
 245
 	HIT
 		bur
@@ -2566,14 +3074,18 @@
 		BUR
 	FORM
 		L[{hhhh}{[vvv]v}]
+	NAME
+		BUR PUR
 246
 	COMP
 		BUR&BUR
 	SUM
 		URI
-			Akkad
+			Akkad (place)
 	FORM
 		L{[{hh}v{[vvv]v}][{hh}v{[vvv]v}]}
+	NAME
+		URI
 247
 	AKK
 		gam
@@ -2583,6 +3095,8 @@
 			by, next to
 	FORM
 		d2
+	NAME
+		GAM
 248
 	HIT
 		:
@@ -2593,6 +3107,8 @@
 		Pc"
 		d
 		P{dd}
+	NAME
+		: P2
 249
 	HIT
 		te
@@ -2610,6 +3126,8 @@
 		L[h{hhh}v]
 		P[{cc}{cc}v]
 		(v{d2d2})
+	NAME
+		TE TI7 DE4 DI12 ṬE4
 250
 	COMP
 		TE.A
@@ -2627,6 +3145,8 @@
 		L[{v[vvv]}TEvv2]
 		[{cc}{cc}vv2]
 		L[h{hhh}vv2]
+	NAME
+		KAR KIR8 GAR14 QÁR QAR2
 251
 	HIT
 		šú
@@ -2634,15 +3154,19 @@
 		(v{0d0})
 		(vh)
 		{vh}
+	NAME
+		ŠÚ ŠU2
 252
 	COMP
-		LU.ḪÚL?+KUN
+		ḪÚL?+KUN
 	SUM
-		GUKKAL+KUN
-			fat-tailed sheep
+		ḪÚL+KUN
+			[component of other signs]
 	FORM
 		W[(v{[0"0"[hvvv]]d})c"{c[vv]c}]
 		W[(v{[0"0"[hvvv]]h0})c"{c[vv]c}]
+	NAME
+		ḪÚL+KUN ḪUL2+KUN
 253
 	SUM
 		IDIGNA
@@ -2650,6 +3174,8 @@
 	FORM
 		W[([v{h0}]{0d}){[hcc{ccc}{ccc}][hc]}]
 		W{[vh2c'c'{ccc}{ccc}][hhc']}
+	NAME
+		IDIGNA
 254
 	SUM
 		ÚKUŠ
@@ -2657,6 +3183,8 @@
 	FORM
 		W[(v{0d}){h[hc]0}vv]
 		W[(vh){h[hc]0}vv]
+	NAME
+		ÚKUŠ UKUŠ2
 255
 	HURR
 		šik
@@ -2669,6 +3197,8 @@
 		L[([v{h0}]h)vv]
 		[cvcv]
 		[v{dd}v]
+	NAME
+		ŠIG ŠIK ŠIQ
 256
 	AKK
 		bap
@@ -2683,6 +3213,8 @@
 		(dh)
 		{du}
 		L[v'"(du)]
+	NAME
+		BAB BAP KÚR KUR2 PAB
 256-B
 	COMP
 		PAB.ḪAL
@@ -2690,6 +3222,8 @@
 		púš
 	FORM
 		L[{ch}hhh]
+	NAME
+		PÚŠ PUŠ2
 257
 	SUM
 		DIM₄/MUNU₈
@@ -2699,6 +3233,8 @@
 		L(h[d'dd"])
 		L{c(du)c}
 		L{c(dh)c}
+	NAME
+		BÙLUG BULUG3 DIM4 MUNU8
 258
 	AKK
 		kíl
@@ -2709,6 +3245,8 @@
 		W[(du[0vv0]){{[vvv]v}T{[vvv]v}T}]
 		L[{du}vv{{[vvv]v}T{[vvv]v}T}E]
 		L[{vv}{vv}{[vvv][vvvv]v}TE]
+	NAME
+		KÍL KIL2 GILIM
 259
 	SUM
 		KASKAL
@@ -2718,6 +3256,8 @@
 		({dd}{uu})
 		([dd]{hh})
 		{ddhh}
+	NAME
+		KASKAL RAŠ
 260
 	HIT
 		kip
@@ -2729,6 +3269,8 @@
 		L[({0hh0}[{0c}dd{c0}])v2]
 		L[{h'hhh'}v2]
 		L[{[ddd]hhc}v2{0hhhhh}]
+	NAME
+		KIB KIP ŠENNUR
 261
 	HIT
 		u
@@ -2740,6 +3282,8 @@
 	FORM
 		c
 		d
+	NAME
+		U O BÙR BUR3 10
 262
 	AKK
 		tul
@@ -2749,6 +3293,8 @@
 		L[c{[h{hhh}]Eh}v]
 		L[ch{hhh}v]
 		L[c{hh}{hhhhhh}v]
+	NAME
+		TUL DUL
 263
 	COMP
 		U.DAR
@@ -2760,6 +3306,8 @@
 		L[c{[hv(v{hh})]h}]
 		L[c{[hv{ch}v]h}]
 		L[chv{h[hc]hh}v]
+	NAME
+		IŠTAR
 264
 	SUM
 		UDUN
@@ -2768,6 +3316,8 @@
 		L[c{chc}{cc}]
 		L[ch{v[vvv]}TE]
 		L[ch{cc}{cc}]
+	NAME
+		UDUN
 265
 	COMP
 		TODO FIX ME
@@ -2784,6 +3334,8 @@
 		L[cvh{[v{hhhh}vv]h}E]
 		L[c'h{[v{h[hc]h}v]h}]
 		L[cvh({hhh}[vvv])]
+	NAME
+		Ù U3 LIBIR
 266
 	SUM
 		GIR₄
@@ -2792,6 +3344,8 @@
 	FORM
 		L[c{[{hh}{hhhh}]Eh'}v]
 		L[c{hh}{hh'h'h}v]
+	NAME
+		GIR4
 267
 	HIT
 		mi
@@ -2802,6 +3356,8 @@
 			night, dark, black
 	FORM
 		L[c{hh}{hh}]
+	NAME
+		MI MÉ ME2 GE6 GI6 GÍG GIG2 MI
 268
 	SUM
 		DUGUD
@@ -2810,7 +3366,11 @@
 	FORM
 		L[c{hh}{hh}h]
 		L[c{hh}{hc'}{hc'}]
+	NAME
+		DUGUD
 269
+	COMP
+		MI.NUNUZ
 	AKK
 		gik
 	SUM
@@ -2820,6 +3380,8 @@
 		W[c{0hh0}{chhc}v2{0hhh}]
 		W[c{hh}{hh}{ccc}0'"v2{0hhh}]
 		W[c{hhh}{hhh}v2{[vvv]v}TE]
+	NAME
+		GIG GIQ
 270
 	COMP
 		U.GAN
@@ -2827,6 +3389,8 @@
 		ŠAGAN/ŠÁMAN
 	FORM
 		L[c{hh}{hh2h}]
+	NAME
+		ŠAGAN ŠÁMAN ŠAMAN2
 271
 	HIT
 		gul
@@ -2837,6 +3401,8 @@
 			break, smash
 	FORM
 		W[c{hh}{h[h2c]h}v]
+	NAME
+		GUL KÚL KUL2
 272
 	COMP
 		U.KA
@@ -2849,6 +3415,8 @@
 		L[c{[hc]h}v{hhh}v]
 		L[c{[hc]h}v({hh}v)]
 		L[c{hch}v{hh}v]
+	NAME
+		MUḪ UGU
 273
 	HIT
 		kiš
@@ -2860,6 +3428,8 @@
 		L{h[cccccc]h}
 		L[{cc}{hh}cccc]
 		L[c{[ch][0"hhh]h}]
+	NAME
+		KIŠ
 274
 	SUM
 		BURU₁₄
@@ -2872,12 +3442,16 @@
 		W[c{h[ccc]h}{[vv]hv}{[vv]d2}]
 		W[cc'{h[hc][hh]}{[vv]v}]
 		L[c{[{hh}vvv][cccc]}]
+	NAME
+		BAR8 BURU14 SULLIM
 275
 	HIT
 		ul
 	FORM
 		L[c{[hc']([hc']v)}]
 		L([c{hh}{c'c'}]v)
+	NAME
+		UL
 276
 	COMP
 		AMAR×KU₆
@@ -2887,6 +3461,8 @@
 	FORM
 		L[c{[hc][0{vv}{0'c}{vv}{0'c}0][hc]}]
 		L[c{[hc][0vv0][hc][0vcvc0]}]
+	NAME
+		AMAR×KU6
 277
 	HURR
 		li₈
@@ -2896,12 +3472,16 @@
 	FORM
 		L[c'{d'u}]
 		L[c'(du)]
+	NAME
+		LI8 ÁB AB2
 278
 	SUM
 		KISIM₅
 			an herb?
 	FORM
 		L[c'{d0u}c"]
+	NAME
+		KISIM5
 279
 	COMP
 		NIM×KÁR
@@ -2909,6 +3489,8 @@
 		TÙM
 	FORM
 		W[c'{d[{h'h[vvv]}v0]u}c"v]
+	NAME
+		TÙM TUM3
 280
 	COMP
 		KISIM₅×LA
@@ -2918,6 +3500,8 @@
 	FORM
 		W[c'{d[{hh}{hhhh}v0]u}c"]
 		W[c'{d[{[0h][hh][hh]h'}v0]u}c"]
+	NAME
+		KISIM5×LA
 281
 	COMP
 		KISIM₅×GU₄
@@ -2926,6 +3510,8 @@
 			[component of other signs]
 	FORM
 		L[c'{d[{[hc]([hc]v)}0]u}c"]
+	NAME
+		KISIM5×GU4
 282
 	COMP
 		KISIM₅×GA
@@ -2934,14 +3520,19 @@
 			[component of other signs]
 	FORM
 		L[c'{d[{[hc]([hc][0vv0])}0]u}c"]
+	NAME
+		KISIM5×GA
 283
 	COMP
 		KISIM₅×(Ú.MAŠ)
 	SUM
 		KISIM₅×(Ú.MAŠ)
 			[component of other signs]
+		KISIM₅×Ú+MAŠ
 	FORM
 		W[c'{d[{hh}vvv0'"(vh)0]u}c"]
+	NAME
+		KISIM5×Ú+MAŠ KISIM5×U2+MAŠ
 284
 	COMP
 		ÁB×A
@@ -2951,14 +3542,19 @@
 	FORM
 		L[c0'"v'"v2'"{du}]
 		L[c'{d[vv200]u}]
+	NAME
+		ÁB×A AB2×A
 285
 	COMP
 		KISIM₅×(A.MAŠ)
 	SUM
 		KISIM₅×(A.MAŠ)
 			[component of other signs]
+		KISIM₅×A+MAŠ
 	FORM
 		W[c'{d[vv20'"(vh)0]u}c"]
+	NAME
+		KISIM5×A+MAŠ
 286
 	HIT
 		liš
@@ -2971,6 +3567,8 @@
 			Ištar/Šauška (deity)
 	FORM
 		P[{c0}v]
+	NAME
+		LIŠ LI12 DÍLI DILI2 DÍLIM DILIM2
 287
 	COMP
 		U.DIŠ
@@ -2979,6 +3577,8 @@
 			11 (number)
 	FORM
 		[c'v]
+	NAME
+		11
 288
 	HIT
 		ši
@@ -2995,6 +3595,8 @@
 		[c'(vh)]
 		[hvh]
 		[cv{hh}]
+	NAME
+		ŠI LÌ LI3 ŠE20 LIM SI17 IGI
 289
 	COMP
 		IGI.RI
@@ -3004,6 +3606,8 @@
 		W[cvh2vvcv]
 		W[hvh2vvcv]
 		W[cv([0vvcv]h2)]
+	NAME
+		AR
 290
 	COMP
 		IGI.IP?
@@ -3015,6 +3619,8 @@
 	FORM
 		W[cvh{[vvh]h}v]
 		W[cvh{[v(vh)]h}v]
+	NAME
+		ḪUL
 291
 	COMP
 		IGI.DUB
@@ -3026,6 +3632,8 @@
 	FORM
 		W[cvh{hh}{h0h}v]
 		W[cvh{h2h2}v]
+	NAME
+		AGRIG GISKIM ISKIM
 292
 	COMP
 		IGI.RU
@@ -3033,6 +3641,8 @@
 		pà
 	FORM
 		W[c'vh{[cvv'v]h}]
+	NAME
+		PÀ PA3
 293
 	COMP
 		IGI.ERIM?
@@ -3047,6 +3657,8 @@
 	FORM
 		L[cv{chc}v2]
 		L[cv{h'h2h'}v2]
+	NAME
+		SIG5
 294
 	SUM
 		ŠÀ/ŠAG₄
@@ -3056,6 +3668,8 @@
 	FORM
 		[cvcvcv]
 		{[ccc][vvv]}
+	NAME
+		LÌB LIB3 ŠÀ ŠA3 ŠAG4
 295
 	AKK
 		pat
@@ -3067,6 +3681,8 @@
 			type of clothing?
 	FORM
 		[c'{[vvv]v}]
+	NAME
+		PAD PAT PAṬ ŠUG ŠUK ŠUQ
 296
 	HIT
 		man
@@ -3075,6 +3691,8 @@
 			20
 	FORM
 		[cc]
+	NAME
+		MAN MÌN MIN3 NEŠ NIŠ 20
 297
 	HIT
 		šal
@@ -3095,6 +3713,8 @@
 		[{cc}h]
 		P{chc}
 		[v{cc}h]
+	NAME
+		ŠAL ŠEL4 MIM RAG RAK RAQ SAL MÍ MI2 MUNUS F
 298
 	HIT
 		dam
@@ -3106,6 +3726,8 @@
 	FORM
 		L[{cc}{h'[hh]h'}v]
 		L[{cc}h{hhh}v]
+	NAME
+		DAM TÁM TAM2
 299
 	COMP
 		MUNUS.TÚG
@@ -3120,6 +3742,8 @@
 	FORM
 		L[{cc}{h'[h{hh}]h'}v]
 		L[{cc}h{hhhh}v]
+	NAME
+		ERIŠ NIN NEN EREŠ NIN9
 300
 	HIT
 		zum
@@ -3131,6 +3755,8 @@
 	FORM
 		L[{cc}h{hhhh}]
 		L[{cc}{uu0'"h0'"dd}]
+	NAME
+		ZUM RÍG RIG2 RÍK RIK2 RÍQ RIQ2 SÚM SUM2 ṢU ṢUM
 301
 	SUM
 		GÌR(I)
@@ -3138,6 +3764,8 @@
 	FORM
 		L[{cc}{d'hh'"}]
 		L[{cc}{chh}]
+	NAME
+		GÌR GIR3 GÌRI GIRI3 NÈ NE3
 302
 	COMP
 		GÌR&TAB
@@ -3150,6 +3778,8 @@
 		L[{cchh}{d'hh'""}]
 		L{[{cc}{h'hh'}][(v{hh})M0]}
 		L[{chh}{chh'}]
+	NAME
+		ANŠE
 303
 	COMP
 		GÌR&(A.IGI)
@@ -3158,6 +3788,8 @@
 			bison
 	FORM
 		L{[{cc}{ch}]E0'"[[vv20'"cvh]Mh]}
+	NAME
+		ALIM
 304
 	HIT
 		gu
@@ -3166,6 +3798,8 @@
 	FORM
 		L[{cc}h{cc}]
 		L[{cc}h{[vvv]v}TE]
+	NAME
+		GU KU8
 305
 	COMP
 		MUNUS.KUR
@@ -3174,6 +3808,8 @@
 			maid, female servant/slave
 	FORM
 		L[{cc}{chc}c"]
+	NAME
+		GÉME GEME2
 306
 	HIT
 		lam
@@ -3189,6 +3825,8 @@
 		L[{0dd}{0h(hv)}v]
 		L[cc{0hhh}vv]
 		[{cc}{[hv'v]h}]
+	NAME
+		LAM LIB× LIP× LA12
 307
 	HIT
 		el
@@ -3198,6 +3836,8 @@
 		L[{cc}{[hvvv]h}]
 		L[{cc}h{[vvv]h}]
 		L[{cc}{[vv'v]hh'}]
+	NAME
+		EL IL5 SIKIL
 308
 	SUM
 		NAGAR
@@ -3205,6 +3845,8 @@
 	FORM
 		L[{cc}(hv)c']
 		L[{[vv]v}TEhvc']
+	NAME
+		NAGAR
 309
 	HIT
 		šaḫ
@@ -3218,6 +3860,8 @@
 		W[{[cc]c}Ev{hh}{vv}{vv}{vv}{vv}v2]
 		W[{[cc]c}Ev{hh}{[vvv][hhh]}v2]
 		L[{cc}{([vvvv]h)[cccc]v}v2]
+	NAME
+		ŠAḪ ŠIḪ
 310
 	HIT
 		lum
@@ -3227,6 +3871,8 @@
 		L[{cc}{hh}{hh}]
 		L[{cc}{0hh0}{chhc}]
 		L[{cc}{0hh0}{h'hhh'}]
+	NAME
+		LUM LU4 GUZ ḪUM LUM
 311
 	SUM
 		SIG₄
@@ -3234,6 +3880,8 @@
 	FORM
 		L[{cc}{c[hh][hh]c}]
 		L[{cc}{0hh0}{chhc}]
+	NAME
+		MUR7 MURGU SIG4
 312
 	HIT
 		di
@@ -3251,6 +3899,8 @@
 		[{c[ch]h}v]
 		L[c{chh}v]
 		L[cv{hh}v]
+	NAME
+		DI DE TI4 ŠÙL ŠUL3 SÁ SA2 SALIM SILIM
 313
 	HIT
 		ki
@@ -3273,6 +3923,8 @@
 		[{[{cc}{hhhh}]Eh}v]
 		L[cv{hhhh}v]
 		[{cc}{chhh}v]
+	NAME
+		KI KE GI5 GE5 QÍ QI2 QÉ QE2
 314
 	SUM
 		NÁ/NÚ
@@ -3282,6 +3934,8 @@
 		W[c"c"{ddd0"h}{[vvv]v}TE]
 		W[c"{ch}{[vvv][vvv]v}TE]
 		W[c"{[c'{ccc}]h}{[vvv]v}TE]
+	NAME
+		NÁ NA2 NÚ NU2
 315
 	SUM
 		URU₅
@@ -3290,6 +3944,8 @@
 		W[{cc}{d[({hhhh}v)0]u}c]
 		W[{cc}{[{hh'h}v]u}c]
 		W[{cc}{d[h{hhh}v0]u}v]
+	NAME
+		URU5
 316
 	HIT
 		ut
@@ -3310,6 +3966,8 @@
 	FORM
 		P[{cc}v]
 		[ccv]
+	NAME
+		UD UT PIR BÍR BIR2 DÁM DAM2 PAR TAM ṬÁM ṬAM2 TÚ TU2 U4 UṬ BABBAR ḪÁD ḪAD2 UTU ZALAG
 317
 	HIT
 		wa
@@ -3326,6 +3984,8 @@
 		[{cc}vh]
 		[{cc}(vh)]
 		[{hh}vh]
+	NAME
+		WA UA À A3 AM7 AW AU PI WI WU WE GEŠTU GEŠTUG TÁL TAL2
 318
 	COMP
 		wa+ap
@@ -3335,6 +3995,8 @@
 		aw?
 	FORM
 		L[{cc}v{h[{hh}{hh}v]M}]
+	NAME
+		WA+AP ÁW AW2 AF WA(AP) WA_AP
 319
 	COMP
 		wa+i
@@ -3342,6 +4004,8 @@
 		wi(i)
 	FORM
 		[{cc}v{h{[hh][hh]h}ME}]
+	NAME
+		WI+I WI× WI(I) WI_I WII
 320
 	COMP
 		wa+pí
@@ -3350,6 +4014,8 @@
 		fi?
 	FORM
 		[{cc}v{h{[hc][hc]}ME}]
+	NAME
+		WI+PÍ WI+PI2 WI(PÍ) WI(PI2) WI_PÍ WI_PI2 FI
 321
 	COMP
 		wa+ú
@@ -3357,6 +4023,8 @@
 		wu(ú)
 	FORM
 		L[{cc}v{h[{hh}vvv]M}]
+	NAME
+		WU+Ú WU+U2 WU_Ú WU_U2 WU(Ú) WU(U2) WUU
 322
 	COMP
 		wa+e
@@ -3365,6 +4033,8 @@
 	FORM
 		L[{cc}v{h[{hh}vv2]M}]
 		L[{cc}v{h[{h(hv)}v2]M}]
+	NAME
+		WE+E WE_E WE(E) WEE
 323
 	COMP
 		wa+u
@@ -3373,6 +4043,8 @@
 		wo?
 	FORM
 		[{cc}v{hc'}]
+	NAME
+		WU+U WU_U WU(U) WO WOO
 324
 	COMP
 		wa+pu
@@ -3381,6 +4053,8 @@
 		fu?
 	FORM
 		[{cc}v{h[0"{cc}{cc}h]}]
+	NAME
+		WU+PU WU_PU WU(PU) FU
 325
 	COMP
 		wa+ip
@@ -3389,6 +4063,8 @@
 		if?
 	FORM
 		L[{cc}v{h[{[vh]h}vv]M}]
+	NAME
+		WI+IP WI_IP WI(IP) IF
 326
 	COMP
 		wa+a
@@ -3397,6 +4073,8 @@
 		fa?
 	FORM
 		[{cc}v{h[vv2]M}]
+	NAME
+		WA+A WA_A WA(a) WAA
 327
 	AKK
 		ṣap
@@ -3412,12 +4090,16 @@
 	FORM
 		P[{cc}v2]
 		P[{hh}v2]
+	NAME
+		ṢAB ṢAP ZAB ZAP ERIM ÉRIN ERIN2 RÍN RIN2 ZÁLAG ZALAG2
 328
 	SUM
 		NUNUZ
 			pearl?
 	FORM
 		[{cc}0'"v2{0hhhh}]
+	NAME
+		NUNUZ
 329
 	HIT
 		kur
@@ -3433,6 +4115,8 @@
 	FORM
 		[{cc}c"]
 		{[cc]c}
+	NAME
+		KUR MAD MAT MAṬ ŠAD ŠAT ŠAṬ GÌN GIN3
 330
 	HIT
 		tin
@@ -3451,6 +4135,8 @@
 		{[cc]c}
 		P{dd2}
 		L[c"{d'(u[v0])}]
+	NAME
+		TIN TÉN TEN2 TAN× DIN DEN KÚRUN KURUN2
 331
 	HIT
 		eš
@@ -3464,6 +4150,8 @@
 	FORM
 		[ccc]
 		[hhh]
+	NAME
+		EŠ ÌŠ IŠ3 SIN ÙŠU UŠU3 30
 332
 	HIT
 		aḫ
@@ -3480,6 +4168,8 @@
 		[c'{cc}h]
 		[{cc}{0hd}]
 		L[{[vvv]v}TE(h[vvvv])]
+	NAME
+		AḪ EḪ IḪ UḪ ʔA ʔE ʔI ʔU ʔ
 333
 	COMP
 		ḪI×ÁŠ?
@@ -3504,6 +4194,8 @@
 		[c'{cc}{0hhh0}]
 		L[c"{cc}(v{hhhh})]
 		L[{[vvvv]v}TE(v{hhhh})]
+	NAME
+		ḪAR ḪUR MUR KÍN KIN2 ÀR AR3 UR5
 334
 	COMP
 		ḪI×ŠE
@@ -3517,6 +4209,8 @@
 		[c{c0'c}{0'cc0'}{0'cc0'}]
 		[{ccc}{cc}{cc}]
 		{[vv][vvv]}T
+	NAME
+		BIR ÉLLAG ELLAG2
 335
 	HIT
 		ḫi
@@ -3535,6 +4229,8 @@
 		[{ccc}c']
 		P{ddd2}
 		{[vvvvv]v}T
+	NAME
+		ḪI ḪE ŠÁR ŠAR2 TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 DU10 DÙG DUG3 NIMIN NIN5
 336
 	COMP
 		TODO FIX ME
@@ -3545,6 +4241,8 @@
 		({[vvv]v}T{0{hhh}})
 		P{{[vvv]v}TE{hhh}}
 		L[{[dd]hh}{[vvv]v}TE]
+	NAME
+		GAŠAN
 337
 	HIT
 		im
@@ -3561,6 +4259,8 @@
 		L[{[vvv]v}T(h[vv])]
 		L[c'{cc}(h[vv])]
 		L[c'{cc}{[vv]h0}]
+	NAME
+		IM EM NÍ NI2
 338
 	HIT
 		še
@@ -3572,6 +4272,8 @@
 	FORM
 		[{cc}{cc}]
 		{v[vvv]}T
+	NAME
+		ŠE NIGA NIGU
 339
 	HIT
 		pu
@@ -3586,6 +4288,8 @@
 	FORM
 		L[{cc}{cc}h]
 		[{cc}{chc}]
+	NAME
+		PU BU GÍT GIT2 GÍD GID2 GÍṬ GIṬ2 QÍD QID2 QÍT QIT2 QÍṬ QIṬ2 ŠÍR ŠIR2
 340
 	HIT
 		uz
@@ -3595,6 +4299,8 @@
 		uš₁₀
 	FORM
 		L[{cc}{cc}h2vcv]
+	NAME
+		UZ US UṢ UŠ10
 341
 	SUM
 		SUD
@@ -3603,6 +4309,8 @@
 		L[{cc}{cc}hvvv]
 		L[{cc}{cc}(h[vvv])]
 		L[{cc}{cc}{[0vv0]h0}v]
+	NAME
+		SIR SUD
 342
 	AKK
 		muš
@@ -3618,6 +4326,8 @@
 		L[{cc}{cc}(h[vvv])c"]
 		W[{v[vvv]}T[hvvvvc]]
 		L[{cc}{cc}hvvv(ch)]
+	NAME
+		MUŠ ṢIR
 343
 	HIT
 		li
@@ -3628,6 +4338,8 @@
 		L[{cc}{cc}({h2h2}[0vv])]
 		W[{cc}{cc}{[hc](v[hc])}v]
 		W[{cc}{cc}{cc}(duv'")v]
+	NAME
+		LI LE ÈN EN3
 344
 	HIT
 		tir
@@ -3641,6 +4353,8 @@
 	FORM
 		W[{cc}{cc}{hh}{vv}{vv}{vv}{vv}v2]
 		W[{cc}{cc}{hh}{vc}{vc}{vc}{vc}v2]
+	NAME
+		TIR TER DIR4 ṬIR5
 345
 	COMP
 		ŠE.NAGA
@@ -3655,6 +4369,8 @@
 		W[{cc}{cc}{[vvv][vv]}TEv2{du}]
 		W[{cc}{cc}{cc}{cc}0'"v20'"{d'hh'}]
 		W[{cc}{cc}{cc}{cc}0'"v20'"{hh2}]
+	NAME
+		TÈ TE3 NIDABA NISABA
 346
 	HIT
 		tu
@@ -3663,6 +4379,8 @@
 		ṭú
 	FORM
 		L[{cc}{cc}{hhhh}v]
+	NAME
+		TU DÚ DU2 ṬÚ ṬU2
 347
 	SUM
 		NINNU
@@ -3670,6 +4388,8 @@
 	FORM
 		{[vvv][vv]}T
 		[{hhh}{hh}]
+	NAME
+		NINNU 50
 348
 	COMP
 		ḪI?.GÌR
@@ -3682,6 +4402,8 @@
 		L[{ccc}{cc}{d'hh'}]
 		L[{ccc}{cc}{du}]
 		L[{d2d2d}v20'"{h'h"}]
+	NAME
+		ḪUŠ
 349
 	SUM
 		SUḪUR
@@ -3691,6 +4413,8 @@
 		W[{[{[vvv][vv]}Td]u}c']
 		W[{[vvv][vv]}T{d'hh'}{[vv]v}T]
 		W[{cc}{cc}{h'h[vv0]}c']
+	NAME
+		SUḪUR
 350
 	AKK
 		šúm
@@ -3701,6 +4425,8 @@
 		[{ccc}{ccc}v2]
 		L[[v{[vvv][vv]}]TEv2]
 		[{d'd2d}v2]
+	NAME
+		ŠÚM ŠUM2 SÌ SI3 SUM SUMU
 351
 	AKK
 		lul
@@ -3710,6 +4436,9 @@
 		L[{ccc}{cc}0'"v20'"{d'hh'}]
 		L[{d'd2d2d}0'"v20'"{chh'}]
 		L[{ccc}{cc}0'"v20'"{h'hh'}]
+	NAME
+		LUL
+		KA5
 352
 	AKK
 		nák
@@ -3720,6 +4449,8 @@
 	FORM
 		W[{[vvv][vv]}TEv2{d'u}]
 		W[{[vvv][vv]}TEv2{d'(u[vvvv])}]
+	NAME
+		NÁG NAG2 NÁK NAK2 NAGA NÍDABA NIDABA2 NÍSABA NISABA2
 353
 	HIT
 		šar
@@ -3743,6 +4474,8 @@
 		[{ccc}{ccc}{[vv]h}]
 		L[{v[vvv]}TEv{hh}v]
 		L[{d2d2d2d}v{h'h}v]
+	NAME
+		ŠAR ŠIR9 SAR ŠER9 KIRI6 MÚ MU2 SAKAR
 354
 	HIT
 		in
@@ -3754,6 +4487,8 @@
 		L[{[vvvv][vvv]}TE{h'h}]
 		L[{d2d2d}{h'(h[v'v'0])}]
 		L[{cc}{cc}{d'(u[vvv0])}]
+	NAME
+		IN EN6
 355
 	COMP
 		ḪI.BAD?
@@ -3777,6 +4512,8 @@
 		{[vvv][vv]}T
 		P{d2d2d2d"}
 		L[{[vvvv]v}TEhc"]
+	NAME
+		KAM GÁM GAM2 QÁM QAM2 TU7 ÚTUL UTUL2
 356
 	HIT
 		diš
@@ -3791,11 +4528,15 @@
 		DIŠ
 			if
 			1
+		GÉŠ/GÍŠ
+			60
 	DET
 		DIŠ
 			individual name (usually male)
 	FORM
 		Pv
+	NAME
+		DIŠ TIŠ DÁŠ DAŠ2 TÁŠ TAŠ2 ANA GÌ GI3 ṬIŠ GÉŠ GEŠ2 GÍŠ GIŠ2 1 M 60
 357
 	HIT
 		me
@@ -3808,6 +4549,8 @@
 			put, set, take
 	FORM
 		P[vh]
+	NAME
+		ME MÌ MI3 ŠIB ŠIP IŠIB
 358
 	HIT
 		lal
@@ -3818,16 +4561,26 @@
 			tip?
 	FORM
 		[v0'"{h0}]
+	NAME
+		LAL LÁ LA2
 359
 	SUM
 		70?
 			70
 	FORM
 		[vc]
+	NAME
+		70
+359-B
+	SUM
+		80
+	FORM
+		[vcc]
+	NAME
+		80
 360
 	COMP
 		me+eš
-		TODO ADD D3
 	HIT
 		meš
 	SUM
@@ -3841,12 +4594,17 @@
 		[v(h[ccc])]
 		[vvccc]
 		[vvhhh]
+		[vd3]
+	NAME
+		MEŠ EŠ17 90
 361
 	SUM
 		MIN
 			2
 	FORM
 		P[vv]
+	NAME
+		MIN 2
 362
 	COMP
 		LAL+LAL
@@ -3856,6 +4614,8 @@
 		[vv'{hh'0}]
 		[v20'"{hh0}]
 		[v"v'0'"{h0'"d2}]
+	NAME
+		LÁL LAL2 LA5
 363
 	COMP
 		LÁL.SAR
@@ -3863,6 +4623,8 @@
 		šur₄
 	FORM
 		W[vv'{hh'0}{ccc}{ccc}{0hh}v'v]
+	NAME
+		ŠUR4
 364
 	HIT
 		a
@@ -3878,6 +4640,8 @@
 			moist, fresh
 	FORM
 		P[vv2]
+	NAME
+		A ʔ× ʔA× DUR5 DURU5 AYA AIA AYE AIE
 365
 	COMP
 		A.ENGUR
@@ -3890,6 +4654,8 @@
 	FORM
 		L[vv20'"{hh2h}v]
 		L[vv20'"{h[h2v]Mh}v]
+	NAME
+		I7 ÍD ID2
 366
 	HIT
 		za
@@ -3905,6 +4671,8 @@
 			carnelian
 	FORM
 		P[{vv}{vv}]
+	NAME
+		ZA SÀ SA3 ṢA
 367
 	HIT
 		ḫa
@@ -3919,12 +4687,16 @@
 	FORM
 		P[{vv}E{0c}{vv}E{0c}]
 		P{[vv][vcvc]}
+	NAME
+		ḪA ʔA4 KU6
 368
 	SUM
 		EŠ₅
 			3
 	FORM
 		[vvv]
+	NAME
+		EŠ5 3
 369
 	HIT
 		šá
@@ -3944,6 +4716,8 @@
 	FORM
 		{[vv'v]v}
 		{[vv'v]h}
+	NAME
+		ŠÁ ŠA2 NÌ NI3 NÍG NIG2 NÍK NIK2 NÍQ NIQ2 GAR NINDA
 370
 	SUM
 		LIMMU
@@ -3952,18 +4726,24 @@
 		{[vvv]v}
 		[v{[vv]v}E]
 		[{[vv]v}Ev]
+	NAME
+		LIMMU 4
 371
 	SUM
 		YÁ
 			5
 	FORM
 		{[vvv][vv]}
+	NAME
+		YÁ YA2 IÁ IA2 5
 372
 	SUM
 		Àš
 			6
 	FORM
 		[{vv}{vv}{vv}]
+	NAME
+		ÀŠ AŠ3 6
 373
 	SUM
 		IMIN
@@ -3971,12 +4751,16 @@
 	FORM
 		P{[vvv][vvv]v}
 		{[vvvv][vvv]}
+	NAME
+		IMIN 7
 374
 	SUM
 		USSU
 			8
 	FORM
 		P{[vvv][vvv][vv]}
+	NAME
+		USSU 8
 375
 	SUM
 		ILIMMU
@@ -3984,3 +4768,5 @@
 	FORM
 		P[{vvv}{vvv}{vvv}]
 		P{[vvvv][vvv][vv]}
+	NAME
+		ILIMMU 9
