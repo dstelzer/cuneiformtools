@@ -2,7 +2,6 @@
 
 from render import *
 from parser import parse, parse_sequence
-from database import Database
 
 def test_rendering():
 	while True:
@@ -34,19 +33,6 @@ def test_comparisons():
 			TwoSidedRenderer.render(outer, match).show()
 		else:
 			print('No match')
-
-def test_database():
-	db = Database()
-	for fn in ['data/cv.tsv', 'data/vc.tsv']:
-		db.load_file(fn)
-	while True:
-		cmd, code = input().strip().split(' ')
-		if cmd.lower() == 's':
-			part = parse(code)
-			print(', '.join(e.name for e in db.lookup(part)))
-		elif cmd.lower() == 'p':
-			tree = db.data[code].presentation
-			TwoSidedRenderer.render(tree).show()
 
 if __name__ == '__main__':
 	test_group_rendering()

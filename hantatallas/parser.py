@@ -154,7 +154,7 @@ def parse_sequence(string): # Parse a two-dimensional list of signs, with signs 
 			try:
 				row.append(parse(sign))
 			except ValueError: # Add a bit of extra information to be helpful
-				print(f'(Line {i}, sign {j})')
+				print(f'(Line {i+1}, sign {j+1})')
 				raise
 		rows.append(row)
 	if not rows: return [[]]

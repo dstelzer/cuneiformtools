@@ -8,7 +8,7 @@ from werkzeug.wsgi import FileWrapper
 
 from .render import *
 from .parser import parse, parse_sequence
-from .database2 import Database
+from .database import Database
 
 renderers = {
 	'publish' : TwoSidedRenderer,
@@ -48,7 +48,7 @@ def make_image(code, match=()):
 	return f'<img src="/rendersign?{query}" height="100px" />'
 
 db = Database()
-db.load_file('./hantatallas/data/work.txt')
+db.load_file('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
 def do_searching(code, sort):
