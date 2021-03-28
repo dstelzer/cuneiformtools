@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>GAL DUB.SAR</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css">
+			label{
+				border-bottom: 1px dotted black;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="/galdubsar" method="post" accept-charset="utf-8">
+			<label title="The general aesthetic of the wedges">Style: <select name="type">
+				<option value="publish">Published</option>
+				<option value="handwrite">Handwritten</option>
+				<option value="linear">Linear</option>
+			</select></label>
+			<label title="The format of the output file">Format: <select name="format">
+				<option value="png">PNG</option>
+				<option value="svg">SVG</option>
+				<option value="pdf">PDF</option>
+			</select></label>
+			<label title="Background color">Background: <input type="text" name="bgcolor" size="10" /></label>
+			<label title="Foreground color">Foreground: <input type="text" name="fgcolor" size="10" /></label>
+			<label title="Highlight color">Highlight: <input type="text" name="hlcolor" size="10" /></label>
+			<label title="Pen size, as a fraction of sign height">Stroke: <input type="text" name="strokewidth" size="5" value="0.01" /></label>
+			
+			<br />
+			
+			<label title="How to align the lines when there's more than one">Justify: <select name="justify">
+				<option value="l">Left align</option>
+				<option value="r">Right align</option>
+				<option value="c">Center</option>
+				<option value="w">Justify (words)</option>
+				<option value="s" selected>Justify (signs)</option>
+			</select></label>
+			<label title="Maximum height of a sign in pixels">Sign size: <input type="text" name="size" size="4" value="256" /></label>
+			<label title="Margin around the edge of the image">Margin: <input type="text" name="margin" size="6" value="0.125" /></label>
+			<label title="Vertical space between lines">Leading: <input type="text" name="leading" size="6" value="0.25" /></label>
+			<label title="Horizontal space between words">Spacing: <input type="text" name="spacing" size="6" value="0.25" /></label>
+			<label title="Horizontal space between signs">Kerning: <input type="text" name="kerning" size="6" value="0.125" /></label>
+			<label title="If specified, all lines are forced to this width">Width: <input type="text" name="fixedwidth" size="6" /></label>
+			<label title="Are the spacing values given as fractions of the sign size, or pixels?">Size unit: <select name="absolute">
+				<option value="0">Fraction</option>
+				<option value="1">Pixels</option>
+			</select></label>
+			
+			<br />
+			
+			<input type="submit" value="Render" />
+			
+			<br />
+			
+			<textarea name="code" rows="8" cols="100"></textarea>
+		</form>
+	</body>
+</html>

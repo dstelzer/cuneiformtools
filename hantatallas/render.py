@@ -28,7 +28,7 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	return (r, g, b, 1)
 
 class Renderer:
-	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None):
+	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, linewidth=None):
 		self.format = format
 		if format == 'svg':
 			self.buffer = BytesIO()
@@ -44,6 +44,7 @@ class Renderer:
 		self.bgcolor = colorparse(bgcolor) or (0.1, 0.1, 0.1, 1)
 		self.fgcolor = colorparse(fgcolor) or (1, 1, 1, 1)
 		self.hlcolor = colorparse(hlcolor) or (0, 1, 0, 1)
+		self.strokewidth = strokewidth or 0.01
 		
 		self.ctx = cairo.Context(self.surf)
 		if not skip:
@@ -75,7 +76,7 @@ class Renderer:
 	def begin_drawing(self, highlight=False):
 		if highlight: self.ctx.set_source_rgba(*self.hlcolor)
 		else: self.ctx.set_source_rgba(*self.fgcolor)
-		self.ctx.set_line_width(0.01)
+		self.ctx.set_line_width(self.strokewidth)
 	
 	def show(self):
 		if self.format == 'png':

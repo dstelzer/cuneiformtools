@@ -80,14 +80,14 @@ PHASE 3
 X	Degrees of change?
 
 PHASE 4
-	Refactor search UI
+#	Refactor search UI
 #	SVG rendering
 #	"Scratchpad" page
 #		"Generous" parsing
-	Render entire phrases
-	Lookup by usage
-		Encode name list
-	DUB.SAR replacement
+#	Render entire phrases
+#	Lookup by usage
+#		Encode name list
+#	DUB.SAR replacement
 
 MISC
 #	Triple-headed strokes
