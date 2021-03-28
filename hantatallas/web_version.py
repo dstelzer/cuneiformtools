@@ -48,7 +48,7 @@ def make_image(code, match=()):
 	return f'<img src="/rendersign?{query}" height="100px" />'
 
 db = Database()
-db.load_file('./hantatallas/data/hzl.dat')
+db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
 def do_searching(code, sort):

@@ -238,7 +238,7 @@ class Database:
 
 if __name__ == '__main__':
 	db = Database()
-	db.load_file('data/hzl.dat')
+	db.load_data('data/hzl.dat')
 	db.prepare_sorting()
 	while True:
 		for name, code, match in db.lookup(parse(input())):
