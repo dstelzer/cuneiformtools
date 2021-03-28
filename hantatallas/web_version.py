@@ -16,10 +16,16 @@ renderers = {
 	'linear' : LinearRenderer,
 }
 
+def formatted_response(data, format):
+	if format not in ('png', 'svg', 'pdf'): return f'<pre>Unrecognized format "{format}"</pre>' # Safety check
+	if format == 'png': mime = 'image/png'
+	elif format == 'svg': mime = 'image/svg+xml'
+	elif format == 'pdf': mime = 'application/pdf'
+	w = FileWrapper(data)
+	return Response(w, mimetype=mime, direct_passthrough=True)
+
 def do_rendering(instr, rendname, highlight='', format='png', friendly=False, sequence=False, *args, **kwargs):
-	if format not in ('png', 'svg', 'pdf'): return f'Unrecognized format {format}' # Safety check
-	
-	log = StringIO()
+	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.
 	try:
 		with redirect_stdout(log):
 			func = parse_sequence if sequence else parse
@@ -33,13 +39,8 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, se
 	rend = renderers[rendname]
 	func = rend.render_sequence if sequence else rend.render # Choose the right rendering function to invoke
 	data = func(output, hl, format=format, *args, **kwargs).get_raw_data()
-	w = FileWrapper(data)
 	
-	if format == 'png': mime = 'image/png'
-	elif format == 'svg': mime = 'image/svg+xml'
-	elif format == 'pdf': mime = 'application/pdf'
-	
-	return Response(w, mimetype=mime, direct_passthrough=True)
+	return formatted_response(data, format)
 
 def make_image(code, match=()):
 	raw = {'text':code, 'type':'publish'}
@@ -48,6 +49,8 @@ def make_image(code, match=()):
 	return f'<img src="/rendersign?{query}" height="100px" />'
 
 db = Database()
+db.load_cleanup('./hantatallas/data/cleanup.dat')
+db.load_expansions('./hantatallas/data/replacements.dat')
 db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
@@ -59,3 +62,17 @@ def do_searching(code, sort):
 	except ValueError:
 		return -1, '<pre>'+log.getvalue()+'</pre>'
 	return db.lookup_as_table(piece, sort)
+
+def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
+	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.
+	try:
+		with redirect_stdout(log):
+			rows = db.parse_transcription(instr)
+	except ValueError:
+		return '<pre>'+log.getvalue()+'</pre>'
+	
+	renderclass = renderers[rendname]
+	
+	data = Layout(renderclass=renderclass, **layoutparams).render(rows, format=format, **rendparams).get_raw_data()
+	
+	return formatted_response(data, format)

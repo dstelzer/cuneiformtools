@@ -4,7 +4,7 @@ from flask import Flask, request, Response, render_template
 from werkzeug.wsgi import FileWrapper
 
 from dubsar.consolidated import DubSar
-from hantatallas.web_version import do_rendering, do_searching
+from hantatallas.web_version import do_rendering, do_searching, do_scribing
 
 app = Flask(__name__)
 
@@ -49,3 +49,28 @@ def do_hant_search():
 	sort = request.args.get('sort', 'hzl', type=str)
 	matches, table = do_searching(code, sort)
 	return render_template('search.html', code=code, sort=sort, matches=matches, table=table)
+
+@app.route('/galdubsar', methods=['GET', 'POST'])
+def do_hantatallas():
+	# As above re GET/POST
+	if request.method == 'GET': args = request.args
+	elif request.method == 'POST': args = request.form
+	
+	text = args.get('code', '', type=str)
+	rend = args.get('type', 'publish', type=str)
+	format = args.get('format', 'png', type=str)
+	bgcolor = args.get('bgcolor', None, type=str)
+	fgcolor = args.get('fgcolor', None, type=str)
+	hlcolor = args.get('hlcolor', None, type=str)
+	justify = args.get('justify', 'l', type=str)
+	size = args.get('size', 256, type=int)
+	margin = args.get('margin', 1/8, type=float)
+	leading = args.get('leading', 1/4, type=float)
+	spacing = args.get('spacing', 1/2, type=float)
+	kerning = args.get('kerning', 1/8, type=float)
+	absolute = args.get('absolute', 0, type=int)
+	fixedwidth = args.get('fixedwidth', 0, type=int)
+	
+	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor}
+	layoutparams = {'justify':justify, 'size':size, 'margin':margin, 'leading':leading, 'spacing':spacing, 'kerning':kerning, 'absolute':absolute, 'fixed':fixedwidth}
+	return do_scribing(text, rendname=rend, format=format, rendparams, layoutparams)

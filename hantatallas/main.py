@@ -2,6 +2,7 @@
 
 from render import *
 from parser import parse, parse_sequence
+from layout import Layout
 from database import Database
 
 def test_rendering():
@@ -43,7 +44,7 @@ def test_layout():
 	db.prepare_sorting()
 	while True:
 		desc = input()
-		TwoSidedRenderer.render_sequence(db.parse_transcription(desc), justify='l', margin=32, scale=256).show()
+		Layout(TwoSidedRenderer, justify='s').render(db.parse_transcription(desc)).show()
 
 if __name__ == '__main__':
 	test_layout()

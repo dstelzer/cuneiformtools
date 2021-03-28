@@ -5,10 +5,10 @@ import re
 
 try:
 	from parser import parse
-	from layout import Spacer, HRule
+	from layout import Spacer, Ruling
 except ImportError:
 	from .parser import parse
-	from .layout import Spacer, HRule
+	from .layout import Spacer, Ruling
 
 def dict_list_factory(): return defaultdict(list)
 
@@ -157,9 +157,15 @@ class Database:
 		return parse(entry.forms[variant-1])
 	
 	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
+		# Special codes: `n newline, `r ruling, `t space
 		results = []
+		trans = trans.replace('`r', '`n`R`n')
 		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we define an alternative
 		for i, line in enumerate(trans.split('\n')):
+			if line.strip() == '`R': # Check for a special case: rulings
+				results.append(Ruling())
+				continue 
+			
 			row = []
 			line = line.strip() # Remove lingering space on either end
 			line = re.sub(r'\s+', '.`t.', line) # Replace whitespace with `s
