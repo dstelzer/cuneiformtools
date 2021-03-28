@@ -75,4 +75,4 @@ def do_hantatallas():
 	
 	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor, 'strokewidth':strokewidth}
 	layoutparams = {'justify':justify, 'size':size, 'margin':margin, 'leading':leading, 'spacing':spacing, 'kerning':kerning, 'absolute':absolute, 'fixed':fixedwidth}
-	return do_scribing(text, rendname=rend, format=format, rendparams, layoutparams)
+	return do_scribing(text, rendname=rend, format=format, rendparams=rendparams, layoutparams=layoutparams)

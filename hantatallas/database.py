@@ -24,7 +24,7 @@ class DatabaseEntry:
 		try:
 			self.functional = [parse(f).functional_form() for f in self.forms]
 		except ValueError:
-			print(f'(Error while handling {self.name})')
+			print(f'(Error while handling {self.ident})')
 			raise
 		self.names.add('HZL'+str(self.ident)) # Fallback name in case nothing else is provided
 	
@@ -216,7 +216,7 @@ class Database:
 					rows[2].append(f'<td><img src="/rendersign?{query}" height="100px" /></td>')
 					rows[8].append(f'<td><tt>{pres}</tt></td>')
 				
-				hzl = entry.name
+				hzl = entry.ident
 				rows[0].append(f'<td colspan="{colspan}">{hzl}</td>')
 				
 				comp = ', '.join(entry.langs['COMP'])
