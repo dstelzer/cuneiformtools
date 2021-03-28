@@ -2,6 +2,7 @@
 
 from render import *
 from parser import parse, parse_sequence
+from database import Database
 
 def test_rendering():
 	while True:
@@ -34,5 +35,15 @@ def test_comparisons():
 		else:
 			print('No match')
 
+def test_layout():
+	db = Database()
+	db.load_cleanup('data/cleanup.dat')
+	db.load_expansions('data/replacements.dat')
+	db.load_data('data/hzl.dat')
+	db.prepare_sorting()
+	while True:
+		desc = input()
+		TwoSidedRenderer.render_sequence(db.parse_transcription(desc), justify='l', margin=32, scale=256).show()
+
 if __name__ == '__main__':
-	test_group_rendering()
+	test_layout()

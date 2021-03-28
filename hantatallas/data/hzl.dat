@@ -97,7 +97,7 @@
 		(h2c)
 		{0h2h'}
 	NAME
-		TAR ḪAŠ DAR6 KUD KUT QUD QUT ṬAR ṬÍR ṬIR2 KUD KU5
+		TAR ḪAŠ DAR6 KUD KUT QUD QUT ṬAR ṬÍR ṬIR2 KU5
 8
 	HIT
 		an
@@ -2476,7 +2476,7 @@
 		[{0hh}vvv2]
 		[{0h(hv)}vv2]
 	NAME
-		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KAL KALA KALAG LAMMA
+		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KALA KALAG LAMMA
 197
 	HIT
 		un
@@ -2640,13 +2640,13 @@
 		sú
 		ṣú
 	SUM
-		GÍN
+		GÍNx?
 			shekel (unit)
 	FORM
 		L[{hh'h}vv]
 		L[{h2h}vv]
 	NAME
-		ZU SÚ SU2 ṢÚ ṢU2 GÍN GIN2
+		ZU SÚ SU2 ṢÚ ṢU2 GÍN× GIN2×
 210
 	HIT
 		lu
@@ -3357,7 +3357,7 @@
 	FORM
 		L[c{hh}{hh}]
 	NAME
-		MI MÉ ME2 GE6 GI6 GÍG GIG2 MI
+		MI MÉ ME2 GE6 GI6 GÍG GIG2
 268
 	SUM
 		DUGUD
@@ -3872,7 +3872,7 @@
 		L[{cc}{0hh0}{chhc}]
 		L[{cc}{0hh0}{h'hhh'}]
 	NAME
-		LUM LU4 GUZ ḪUM LUM
+		LUM LU4 GUZ ḪUM
 311
 	SUM
 		SIG₄

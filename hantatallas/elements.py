@@ -775,3 +775,14 @@ class Margin(Adjustment): # Put a small margin around an element (for when signs
 		self.dims = (w+2*m, h+2*m)
 		self.pos = (x-m, y-m)
 		self.adjust = (ax, ay)
+
+class Restrict(Adjustment): # Prevent a component from expanding
+	def __str__(self): return str(self.child) + 'R'
+	def can_expand_horizontally(self): return False
+	def can_expand_vertically(self): return False
+	def draw(self, rend): self.child.draw(rend)
+	def orient(self): return self.child.orient()
+	def kern_top(self): return self.child.kern_top()
+	def kern_bottom(self): return self.child.kern_bottom()
+	def kern_left(self): return self.child.kern_left()
+	def kern_right(self): return self.child.kern_right()

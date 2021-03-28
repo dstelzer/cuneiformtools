@@ -9,8 +9,10 @@ from PIL.ImageColor import getrgb
 
 try:
 	from elements import Modifier
+	from layout import Spacer
 except ImportError:
 	from .elements import Modifier
+	from .layout import Spacer
 
 DRAW_BOXES = False
 
@@ -260,7 +262,7 @@ class Renderer:
 		y = 0
 		scaled_margin = self.margin / self.scale # See above
 		for row, offset in zip(rows, offsets):
-			y += scaled_margin
+			y += scaled_margin * 2
 			self.render_sign_row(row, y, offset)
 			y += 1 # Sign height (fixed)
 	
@@ -278,7 +280,7 @@ class Renderer:
 			)
 			row_widths.append(width)
 		max_width = max(row_widths)
-		height = scale * len(rows) + margin * (len(rows)+1)
+		height = scale * len(rows) + margin * 2 * (len(rows)+1)
 		
 		rend = cls(int(max_width), int(height), skip=True, *args, **kwargs)
 		rend.scale = scale

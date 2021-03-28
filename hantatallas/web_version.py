@@ -23,7 +23,7 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, se
 	try:
 		with redirect_stdout(log):
 			func = parse_sequence if sequence else parse
-			output = func(instr)
+			output = func(instr, friendly=friendly)
 	except ValueError:
 		return '<pre>'+log.getvalue()+'</pre>'
 	

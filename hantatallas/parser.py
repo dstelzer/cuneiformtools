@@ -12,6 +12,7 @@ ADJS = {
 	'T':Tenu,
 	'E':Expand,
 	'M':Margin,
+	'R':Restrict,
 }
 
 SHAPES = set(s.value for s in CanvasShape)
@@ -146,7 +147,8 @@ def parse(string, friendly=False): # A wrapper around internal_parse for error r
 		raise
 	return out
 
-def parse_sequence(string): # Parse a two-dimensional list of signs, with signs separated with `s and rows separated by `n
+def parse_sequence(string, friendly=None): # Parse a two-dimensional list of signs, with signs separated with `s and rows separated by `n
+	# The friendly parameter is unused and included only to make the signature match that of parse
 	rows = []
 	for i, line in enumerate(string.split('`n')):
 		row = []

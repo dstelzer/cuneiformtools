@@ -1,18 +1,24 @@
 from collections import defaultdict
 from urllib.parse import urlencode
 import html
+import re
 
 try:
 	from parser import parse
+	from layout import Spacer, HRule
 except ImportError:
 	from .parser import parse
+	from .layout import Spacer, HRule
+
+def dict_list_factory(): return defaultdict(list)
 
 class DatabaseEntry:
 	def __init__(self):
-		self.name = None
-		self.langs = defaultdict(list)
-		self.forms = []
-		self.sumerogram = defaultdict(list) # ech, kind of hacky TODO
+		self.ident = None # internal ID, must be unique
+		self.langs = defaultdict(list) # lang -> [reading]
+		self.forms = [] # [Canvas]
+		self.notes = defaultdict(dict_list_factory) # lang -> name -> [meaning]
+		self.names = set() # names to reference this sign by
 	
 	def finalize(self):
 		try:
@@ -20,9 +26,10 @@ class DatabaseEntry:
 		except ValueError:
 			print(f'(Error while handling {self.name})')
 			raise
+		self.names.add('HZL'+str(self.ident)) # Fallback name in case nothing else is provided
 	
 	def sort_hzl(self):
-		return self.name.zfill(3)
+		return self.ident.zfill(3)
 	def sort_complex(self):
 		if not self.functional: raise ValueError('No forms found', self.name)
 		return self.functional[0].complexity()
@@ -43,21 +50,39 @@ class DatabaseEntry:
 	def find_matches(self, part):
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional)):
 			if part in func:
-				ident = f'{self.name}/{i}' if i else str(self.name)
+				ident = f'{self.ident}/{i}' if i else str(self.ident)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
 	
 	def yield_all(self):
 		for i, pres in enumerate(self.forms):
-			ident = f'{self.name}/{i}' if i else str(self.name)
+			ident = f'{self.ident}/{i}' if i else str(self.ident)
 			yield ident, pres, ()
 
 class Database:
 	def __init__(self):
 		self.data = []
 		self.sorted = defaultdict(list)
+		self.name_lookup = {}
+		self.cleanup = {}
+		self.expansions = {}
 	
-	def load_file(self, fn):
+	def load_cleanup(self, fn):
+		with open(fn, 'r') as f:
+			lines = f.read().split('\n')
+			for line in lines:
+				source, target = line.split('\t')
+				self.cleanup[source] = target
+	
+	def load_expansions(self, fn):
+		with open(fn, 'r') as f:
+			lines = f.read().split('\n')
+			for line in lines:
+				source, target = line.split('\t')
+				expand = list(target.split('.'))
+				self.expansions[source] = expand
+	
+	def load_data(self, fn):
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
 			current_language = None
@@ -67,23 +92,37 @@ class Database:
 				tabs = len(line) - len(line.lstrip())
 				line = line.strip()
 				if not line: continue
-				if tabs == 0: # Sign name
+				if tabs == 0: # Sign ID
 					if entry:
 						entry.finalize()
 						self.data.append(entry)
 					entry = DatabaseEntry()
-					entry.name = line
+					entry.ident = line
 				elif tabs == 1: # Language
 					current_language = line
 				elif tabs == 2: # Form
-					if current_language == 'FORM': entry.forms.append(line)
-					else: entry.langs[current_language].append(line)
+					if current_language == 'FORM':
+						entry.forms.append(line)
+					elif current_language == 'NAME':
+						names = line.upper().split()
+						for name in names:
+							entry.names.add(name)
+							if name in self.name_lookup: raise ValueError(f'Name {name} for sign {entry.ident} already taken by sign {self.name_lookup[name].ident}')
+							self.name_lookup[name] = entry
+					else:
+						entry.langs[current_language].append(line)
 					current_form = line
-				elif tabs == 3: # Sumerogram definition
-					entry.sumerogram[current_form].append(line)
+				elif tabs == 3: # Sumerogram definition or elaboration
+					entry.notes[current_language][current_form].append(line)
 			if entry:
 				entry.finalize()
 				self.data.append(entry)
+	
+	def clean_name(self, name):
+		name = name.upper()
+		for source, target in self.cleanup.items():
+			name = name.replace(source, target)
+		return name
 	
 	def prepare_sorting(self):
 		self.sorted['hzl'] = sorted(self.data, key=DatabaseEntry.sort_hzl)
@@ -99,7 +138,50 @@ class Database:
 		for entry in self.data:
 			yield from entry.yield_all()
 	
-	# Present results as an HTML table
+	def find_by_name(self, name):
+		name = self.clean_name(name)
+		if name in self.expansions:
+			exp = '.'.join(self.expansions[name])
+			raise ValueError(f'Sign {name} is shorthand for {exp}')
+		
+		if '/' in name: name, variant = name.split('/')
+		else: variant = '1'
+		name = name.strip()
+		variant = int(variant.strip())
+		
+		if name not in self.name_lookup: raise ValueError(f'Unknown sign name {name}')
+		
+		entry = self.name_lookup[name]
+		if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
+		
+		return parse(entry.forms[variant-1])
+	
+	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
+		results = []
+		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we define an alternative
+		for i, line in enumerate(trans.split('\n')):
+			row = []
+			line = line.strip() # Remove lingering space on either end
+			line = re.sub(r'\s+', '.`t.', line) # Replace whitespace with `s
+			line = line.replace('-', '.') # Standardize separators
+			for j, unit in enumerate(line.split('.')):
+				if not unit: continue
+				if unit == '`t':
+					row.append(Spacer())
+				elif unit.startswith('%'):
+					row.append(parse(unit[1:]))
+				else:
+					unit = self.clean_name(unit)
+					if unit in self.expansions:
+						for subunit in self.expansions[unit]:
+							if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally
+							row.append(self.name_lookup[subunit])
+					else:
+						row.append(self.find_by_name(unit))
+			results.append(row)
+		return results
+	
+	# Present results as an HTML table - this is kind of a mess and deserves refactoring
 	def lookup_as_table(self, part, sort='hzl'):
 		func = part.functional_form()
 		rows = [
@@ -143,11 +225,12 @@ class Database:
 				akkadian = ', '.join(entry.langs['AKK'])
 				rows[5].append(f'<td colspan="{colspan}">{akkadian}</td>')
 				
-				def meanings(sg): return ', '.join(entry.sumerogram[sg])
-				sumerian = ', '.join(f'{sg} "{meanings(sg)}"' for sg in entry.langs['SUM'])
+				def meanings1(sg): return ', '.join(entry.notes['SUM'][sg])
+				sumerian = ', '.join(f'{sg} "{meanings1(sg)}"' for sg in entry.langs['SUM'])
 				rows[6].append(f'<td colspan="{colspan}">{sumerian}</td>')
 				
-				determinative = ', '.join(f'{sg} "{meanings(sg)}"' for sg in entry.langs['DET'])
+				def meanings2(sg): return ', '.join(entry.notes['DET'][sg])
+				determinative = ', '.join(f'{sg} "{meanings2(sg)}"' for sg in entry.langs['DET'])
 				rows[7].append(f'<td colspan="{colspan}">{determinative}</td>')
 		for row in rows: row.append('</td></tr>')
 		
