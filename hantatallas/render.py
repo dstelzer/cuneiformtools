@@ -28,7 +28,7 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	return (r, g, b, 1)
 
 class Renderer:
-	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, linewidth=None):
+	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, fill=False):
 		self.format = format
 		if format == 'svg':
 			self.buffer = BytesIO()
@@ -45,6 +45,7 @@ class Renderer:
 		self.fgcolor = colorparse(fgcolor) or (1, 1, 1, 1)
 		self.hlcolor = colorparse(hlcolor) or (0, 1, 0, 1)
 		self.strokewidth = strokewidth or 0.01
+		self.fill = fill
 		
 		self.ctx = cairo.Context(self.surf)
 		if not skip:
@@ -471,6 +472,7 @@ class TwoSidedRenderer(Renderer):
 		c.line_to(*ne)
 		c.arc_negative(*pivot1, r, -pi/2, pi)
 		c.arc_negative(*pivot2, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
 		c.stroke()
@@ -503,10 +505,12 @@ class TwoSidedRenderer(Renderer):
 		c.line_to(*ne)
 		c.arc_negative(*pivot1r, r, -pi/2, pi)
 		c.arc_negative(*pivot1l, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*w_)
 		c.line_to(*e)
 		c.arc_negative(*pivot2r, r, -pi/2, pi)
 		c.arc_negative(*pivot2l, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
 		c.stroke()
@@ -543,14 +547,17 @@ class TwoSidedRenderer(Renderer):
 		c.line_to(*ne)
 		c.arc_negative(*pivot1r, r, -pi/2, pi)
 		c.arc_negative(*pivot1l, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*w_)
 		c.line_to(*e)
 		c.arc_negative(*pivot2r, r, -pi/2, pi)
 		c.arc_negative(*pivot2l, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*w2)
 		c.line_to(*e2)
 		c.arc_negative(*pivot3r, r, -pi/2, pi)
 		c.arc_negative(*pivot3l, r, 0, -pi/2)
+		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
 		c.stroke()
@@ -571,6 +578,7 @@ class TwoSidedRenderer(Renderer):
 		c.line_to(*w)
 		c.line_to(*se)
 		c.curve_to(*se, *w, *ne)
+		if self.fill: c.fill_preserve()
 		c.stroke()
 		
 		c.restore()
@@ -702,7 +710,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TwoSidedRenderer(256, 256, format='pdf', hlcolor='gold')
+	rend = TwoSidedRenderer(256, 256, format='pdf', hlcolor='gold', fill=True)
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)

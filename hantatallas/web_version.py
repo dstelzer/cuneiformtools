@@ -9,6 +9,7 @@ from werkzeug.wsgi import FileWrapper
 from .render import *
 from .parser import parse, parse_sequence
 from .database import Database
+from .layout import Layout
 
 renderers = {
 	'publish' : TwoSidedRenderer,

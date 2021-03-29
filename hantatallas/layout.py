@@ -1,6 +1,9 @@
 from enum import Enum
 
-from elements import Element
+try:
+	from elements import Element
+except ImportError:
+	from .elements import Element
 
 class Justification(Enum):
 	LEFT = 'l'
