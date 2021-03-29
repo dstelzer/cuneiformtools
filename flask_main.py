@@ -48,9 +48,10 @@ def do_hantatallas():
 @app.route('/search')
 def do_hant_search():
 	code = request.args.get('code', '', type=str)
+	regex = request.args.get('regex', '', type=str)
 	sort = request.args.get('sort', 'hzl', type=str)
-	matches, table = do_searching(code, sort)
-	return render_template('search.html', code=code, sort=sort, matches=matches, table=table)
+	matches, table = do_searching(code, regex, sort)
+	return render_template('search.html', code=code, regex=regex, sort=sort, matches=matches, table=table)
 
 @app.route('/galdubsar', methods=['GET', 'POST'])
 def do_galdubsar():

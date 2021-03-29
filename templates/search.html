@@ -17,7 +17,8 @@
 	</head>
 	<body>
 		<form action="/search" method="get" accept-charset="utf-8">
-			<input type="text" name="code" size="20" value="{{code}}" />
+			<label>Code: <input type="text" name="code" size="20" value="{{code}}" /></label>
+			<label>Regex: <input type="text" name="regex" size="10" value="{{regex}}" /></label>
 			<label>Sort by: <select name="sort" id="sort">
 				<option value="hzl" {{ 'selected' if sort=='hzl' else '' }}>HZL number</option>
 				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>
@@ -26,29 +27,40 @@
 			<input type="submit" value="Search" />
 		</form>
 		
-		{% if code != '' %}
-			<h3>Results for <tt>{{code}}</tt>, sorting by {{ {'hzl':'HZL number','complex':'complexity','usage':'usage'}[sort] }}</h3>
+		{% if code != '' or regex != '' %}
+			<h3>Results
+				{% if code != '' %} for <tt>{{code}}</tt>{% endif %}
+				{% if regex != '' %} matching <tt>{{regex}}</tt>{% endif %}
+				 sorted by {{ {'hzl':'HZL number','complex':'complexity','usage':'usage'}[sort] }}</h3>
 			
 			{% if matches == -1 %}
 				{{table|safe}}
 			{% elif matches == 0 %}
-				<p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p>
+				{% if code != '' %} <p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p> {% endif %}
 				<p>No matches found</p>
 			{% else %}
-				<p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p>
+				{% if code != '' %} <p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p> {% endif %}
 				<p>Found {{matches}} matching {{'signs' if matches>1 else 'sign'}}</p>
 				{{table|safe}}
 			{% endif %}
 		{% else %}
-			<p>This page lets you search the Zeichenlexikon for signs containing a particular component. Enter a part of a sign in the box above, then click "Search".</p>
+			<p>This page lets you search the Zeichenlexikon for signs containing a particular component, or whose names match a particular regex. Enter a part of a sign (and/or a regex) in the boxes above, then click "Search".</p>
 			
-			<p>Tips for effective searching:
+			<p>Tips for effective searching by component:
 			<ul>
 				<li>Winkelhaken and downward diagonals often look very similar. If you're not finding anything, try swapping one for the other.</li>
 				<li>Scribes don't always distinguish downward-over-upward and downward-over-horizontal as well as they should. If you can't find your sign with one, try the other.</li>
 				<li>Use <tt>()</tt> sparingly; if it's not clear that the strokes are meant to cross, it's likely <tt>[]</tt> or <tt>{}</tt> instead.</li>
 				<li>The <em>tenû</em> modifier is ignored when searching, so only use it when an entire structure is tilted; if it's only a couple strokes, encode them as downward and upward diagonals.</li>
 				<li>You can use a star <tt>*</tt> to indicate that <em>something</em> should be in a certain position, but it doesn't matter what.</li>
+			</ul>
+			</p>
+			
+			<p>Tips for effective searching by regex:
+			<ul>
+				<li>If there's a particular sign you want, just type in its name.</li>
+				<li>Use all-caps, and use the actual characters <tt>Ḫ Š Ṭ Ṣ Ŋ</tt> rather than <tt>H C T, S, J</tt> (sorry, I'm working on this one).</li>
+				<li>Use a dot (<tt>.</tt>) to match any single letter, and dot-star (<tt>.*</tt>) to match any number of letters.</li>
 			</ul>
 			</p>
 		{% endif %}

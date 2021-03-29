@@ -2,6 +2,7 @@ from contextlib import redirect_stdout
 from io import StringIO, BytesIO
 from urllib.parse import urlencode
 import html
+import re
 
 from flask import Response
 from werkzeug.wsgi import FileWrapper
@@ -56,22 +57,35 @@ db.load_expansions('./hantatallas/data/replacements.dat')
 db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
-def do_searching(code, sort):
+def do_searching(code, regex, sort):
 	log = StringIO()
-	try:
-		with redirect_stdout(log):
-			piece = parse(code)
-	except ValueError:
-		return -1, '<pre>'+log.getvalue()+'</pre>'
-	return db.lookup_as_table(piece, sort)
+	if code.strip():
+		try:
+			with redirect_stdout(log):
+				piece = parse(code)
+		except ValueError:
+			return -1, '<pre>'+log.getvalue()+'</pre>'
+	else:
+		piece = None
+	
+	if regex.strip():
+		try:
+			recomp = re.compile(regex.strip())
+		except re.error as e:
+			return -1, f'<pre>Regex error: {e.args[0]}</pre>'
+	else:
+		recomp = None
+	
+	return db.lookup_as_table(piece, recomp, sort)
 
 def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
 	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.
 	try:
 		with redirect_stdout(log):
 			rows = db.parse_transcription(instr)
-	except ValueError:
-		return '<pre>'+log.getvalue()+'</pre>'
+	except ValueError as e:
+		result = log.getvalue() or 'Error outside normal handling system\n'+'\n'.join(e.args) # The error message should always be pretty-printed to stdout, but just in case it's not we have a fallback here (printing the exception's arguments)
+		return '<pre>'+result+'</pre>'
 	
 	renderclass = renderers[rendname]
 	

@@ -7,9 +7,23 @@
 				border-bottom: 1px dotted black;
 			}
 		</style>
+		<script language="javascript">
+			function expand(){
+				document.getElementById("collapsed").style.display = "none";
+				document.getElementById("expanded").style.display = "inline";
+			}
+			function collapse(){
+				document.getElementById("collapsed").style.display = "inline";
+				document.getElementById("expanded").style.display = "none";
+			}
+		</script>
 	</head>
 	<body>
+		<h2>GAL DUB.SAR</h2>
 		<form action="/galdubsar" method="post" accept-charset="utf-8">
+			<span id="collapsed" onclick="expand();">[+] Advanced options</span>
+			<span id="expanded" style="display:none"><span onclick="collapse();">[–] Advanced options</span><br />
+			
 			<label title="The general aesthetic of the wedges">Style: <select name="type">
 				<option value="publish">Published</option>
 				<option value="handwrite">Handwritten</option>
@@ -49,6 +63,7 @@
 				<option value="0">Fraction</option>
 				<option value="1">Pixels</option>
 			</select></label>
+			</span>
 			
 			<br />
 			
@@ -58,5 +73,29 @@
 			
 			<textarea name="code" rows="8" cols="100"></textarea>
 		</form>
+		
+		<h4>What is this?</h4>
+		<p>This is the shiny new-and-improved version of <a href="index.html">my DUB.SAR tool</a> and a spiritual successor to <a href="http://cuneifyplus.arch.cam.ac.uk/">Cuneify</a>. Give it the transliteration of a Hittite text, and it'll render it in cuneiform. Unlike Cuneify, the result is an image (so you don't need to have any fonts installed), and unlike DUB.SAR, it uses my <a href="hantatallas.html">recursive graphical encoding</a> rather than drawings of the signs.</p>
+		
+		<h4>How do I use it?</h4>
+		<p>Type a transliteration into the box, then hit "Render". For the most part, this follows standard Hethitological conventions: try Hrozný's famous example <br /><tt>nu NINDA-an e-ez-za-at-te-ni<br />wa-a-tar-ma e-ku-ut-te-ni</tt></p>
+		
+		<h4>What notation does this use?</h4>
+		<p>Uppercase versus lowercase is ignored. Dots and hyphens separate signs. Spaces separate words. Newlines (or <tt>`n</tt>) separate lines. <tt>`r</tt> makes a ruling (a horizontal line across the whole tablet).</p>
+		
+		<p>All standard sign names should be recognized, including shorthand like "m" for the determinative DIŠ <a name="link1" href="#footnote1">(*)</a>. Separate <em>all</em> signs with hyphens or dots, including determinatives and punctuation: <tt>d-U</tt> for <sup>d</sup>U.
+		
+		Use a slash and a number after a sign name to specify a variant (like <tt>ni/2</tt> for the second variant of NI). This works for punctuation too: <tt>:</tt> is the first type of Glossenkeil, <tt>:/2</tt> is the second type, etc. If you want to include a custom sign, use a percent sign followed by a recursive code (like <tt>%{hvh}</tt>).</p>
+		
+		<p>Even though they're not distinct in Hittite, it's important to distinguish S and Š for the sake of Sumerograms and Akkadograms—SI "horn" is a different sign from ŠI "eye". For the sake of easier typing, ASCII replacements are understood:<ul>
+			<li>C → Š</li>
+			<li>SZ → Š</li>
+			<li>S, → Ṣ</li>
+			<li>T, → Ṭ</li>
+			<li>J → Ŋ</li>
+			<li>H → Ḫ</li>
+		</ul>Similarly, you can use normal numbers instead of subscripts or accents (LU2 for LÚ or LU₂), and x instead of a multiplication sign (SIxSA for SI×SA).</p>
+		
+		<a name="footnote1" href="#link1">(*)</a> The shorthand determinatives are m (DIŠ), f (MUNUS), d (DIŊIR), and g (GIŠ/ŊIŠ). Some publishers abbreviate DIŠ as I (the Roman numeral for 1), but that's also the name of a totally different sign, so it's ambiguous; use 1 instead.
 	</body>
 </html>

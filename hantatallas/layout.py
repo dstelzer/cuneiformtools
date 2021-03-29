@@ -110,12 +110,20 @@ class Layout:
 			right_space += difference/2
 		elif self.justify == Justification.WORD:
 			n_spaces = sum(1 for space in row if isinstance(space, Spacer))
-			spacing += difference/n_spaces
+			if n_spaces:
+				spacing += difference/n_spaces
+			else:
+				left_space += difference/2
+				right_space += difference/2
 		elif self.justify == Justification.SIGN:
 			factor = self.spacing / self.kerning # How many kerns to a space?
 			n_kerns = sum(factor for space in row if isinstance(space, Spacer)) + sum(1 for (a,b) in zip(row, row[1:]) if self.should_kern_between(a, b))
-			kerning += difference / n_kerns
-			spacing += (difference / n_kerns) * factor
+			if n_kerns:
+				kerning += difference / n_kerns
+				spacing += (difference / n_kerns) * factor
+			else:
+				left_space += difference/2
+				right_space += difference/2
 		else:
 			raise ValueError('Unrecognized justification', self.justify)
 		

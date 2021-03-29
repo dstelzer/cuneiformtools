@@ -47,14 +47,20 @@ class DatabaseEntry:
 			self.langs['SUM'][0] if self.langs['SUM'] else '',
 		)
 	
-	def find_matches(self, part):
+	def find_matches(self, part=None, regex=None):
+		if regex is not None:
+			if not any(re.search(regex, name) for name in self.names):
+				return # We didn't match the regex
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional)):
-			if part in func:
+			if part is None:
+				ident = f'{self.ident}/{i}' if i else str(self.ident)
+				yield ident, pres, ()
+			elif part in func:
 				ident = f'{self.ident}/{i}' if i else str(self.ident)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
 	
-	def yield_all(self):
+	def yield_all(self): # TODO not needed now, find_matches with no params does this
 		for i, pres in enumerate(self.forms):
 			ident = f'{self.ident}/{i}' if i else str(self.ident)
 			yield ident, pres, ()
@@ -129,10 +135,10 @@ class Database:
 		self.sorted['complex'] = sorted(self.data, key=DatabaseEntry.sort_complex)
 		self.sorted['usage'] = sorted(self.data, key=DatabaseEntry.sort_usage)
 	
-	def lookup(self, part):
+	def lookup(self, part, regex):
 		func = part.functional_form()
 		for entry in self.data:
-			yield from entry.find_matches(func)
+			yield from entry.find_matches(func, regex)
 	
 	def yield_all(self): # TODO: probably not needed now due to wildcards
 		for entry in self.data:
@@ -159,37 +165,44 @@ class Database:
 	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
 		# Special codes: `n newline, `r ruling, `t space
 		results = []
+		trans = trans.replace('\r', '') # Carriage returns are the bane of text processing
+		trans = trans.replace('\n`r\n', '`r')
 		trans = trans.replace('`r', '`n`R`n')
 		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we define an alternative
 		for i, line in enumerate(trans.split('\n')):
 			if line.strip() == '`R': # Check for a special case: rulings
 				results.append(Ruling())
-				continue 
+				continue
 			
 			row = []
 			line = line.strip() # Remove lingering space on either end
 			line = re.sub(r'\s+', '.`t.', line) # Replace whitespace with `s
 			line = line.replace('-', '.') # Standardize separators
 			for j, unit in enumerate(line.split('.')):
-				if not unit: continue
-				if unit == '`t':
-					row.append(Spacer())
-				elif unit.startswith('%'):
-					row.append(parse(unit[1:]))
-				else:
-					unit = self.clean_name(unit)
-					if unit in self.expansions:
-						for subunit in self.expansions[unit]:
-							if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally
-							row.append(self.name_lookup[subunit])
+				try:
+					if not unit: continue
+					if unit == '`t':
+						row.append(Spacer())
+					elif unit.startswith('%'):
+						row.append(parse(unit[1:]))
 					else:
-						row.append(self.find_by_name(unit))
+						unit = self.clean_name(unit)
+						if unit in self.expansions:
+							for subunit in self.expansions[unit]:
+								if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally
+								row.append(self.name_lookup[subunit])
+						else:
+							row.append(self.find_by_name(unit))
+				except ValueError as e:
+					print(f'Parse error in line {i+1}, sign {j+1}')
+					if e.args: print('\n'.join(e.args))
+					raise
 			results.append(row)
 		return results
 	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part, sort='hzl'):
-		func = part.functional_form()
+	def lookup_as_table(self, part=None, regex=None, sort='hzl'):
+		func = part.functional_form() if part else None
 		rows = [
 			['<tr id="hzl"><th scope="row">HZL Number</th>'],
 			['<tr id="comp"><th scope="row">Composition</th>'],
@@ -205,7 +218,7 @@ class Database:
 		matches = 0
 		
 		for entry in self.sorted[sort]:
-			matching_forms = list(entry.find_matches(func))
+			matching_forms = list(entry.find_matches(func, regex))
 			if matching_forms:
 				matches += 1
 				colspan = len(matching_forms)
@@ -247,5 +260,5 @@ if __name__ == '__main__':
 	db.load_data('data/hzl.dat')
 	db.prepare_sorting()
 	while True:
-		for name, code, match in db.lookup(parse(input())):
+		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: '))):
 			print(name, code, match)
