@@ -583,6 +583,136 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 
+class TriangleRenderer(Renderer):
+	def draw_single(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
+		
+		nw = (0, 0)
+		ne = (w, 0)
+		mid = (w/2, w/2)
+		s = (w/2, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*mid)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*mid)
+		c.line_to(*s)
+		c.stroke()
+		
+		c.restore()
+	
+	def draw_double(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
+		
+		nw = (0, 0)
+		ne = (w, 0)
+		mid1 = (w/2, w/2)
+		w_ = (0, w/2)
+		e = (w, w/2)
+		mid2 = (w/2, w)
+		s = (w/2, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*mid1)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*w_)
+		c.line_to(*e)
+		c.line_to(*mid2)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*mid2)
+		c.line_to(*s)
+		c.stroke()
+		
+		c.restore()
+	
+	def draw_triple(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		if Modifier.INVERT in mods:
+			c.scale(1, -1)
+			c.translate(0, -h)
+		
+		r = w/2
+		nw = (0, 0)
+		ne = (w, 0)
+		mid1 = (w/2, r)
+		w_ = (0, r)
+		e = (w, r)
+		mid2 = (w/2, 2*r)
+		w2 = (0, 2*r)
+		e2 = (w, 2*r)
+		mid3 = (w/2, 3*r)
+		s = (w/2, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*ne)
+		c.line_to(*mid1)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*w_)
+		c.line_to(*e)
+		c.line_to(*mid2)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*w2)
+		c.line_to(*e2)
+		c.line_to(*mid3)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.move_to(*mid3)
+		c.line_to(*s)
+		c.stroke()
+		
+		c.restore()
+	
+	def draw_hook(self, x, y, w, h, mods):
+		if h > 2*w:
+			y += (h-2*w)/2
+			h = 2*w
+		elif w > h/2:
+			x += (w-h/2)/2
+			w = h/2
+		
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		ne = (w, 0)
+		se = (w, h)
+		w = (0, h/2)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*ne)
+		c.line_to(*w)
+		c.line_to(*se)
+		c.close_path()
+		if self.fill: c.fill_preserve()
+		c.stroke()
+		
+		c.restore()
+
 class LinearRenderer(Renderer):
 	WIDTH = 0.1 # The maximum width of a stroke
 	SHARPNESS = 0.01 # How much to extend a stroke past the boundaries, to make convergences look good
@@ -710,7 +840,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TwoSidedRenderer(256, 256, format='pdf', hlcolor='gold', fill=True)
+	rend = TriangleRenderer(256, 256, format='pdf', hlcolor='gold', fill=True)
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)

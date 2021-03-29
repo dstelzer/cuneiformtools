@@ -44,7 +44,7 @@ def test_layout():
 	db.prepare_sorting()
 	while True:
 		desc = input()
-		Layout(TwoSidedRenderer, justify='s').render(db.parse_transcription(desc)).show()
+		Layout(TriangleRenderer, justify='s').render(db.parse_transcription(desc)).show()
 
 if __name__ == '__main__':
 	test_layout()

@@ -15,6 +15,7 @@ renderers = {
 	'publish' : TwoSidedRenderer,
 	'handwrite' : OneSidedRenderer,
 	'linear' : LinearRenderer,
+	'triangle' : TriangleRenderer,
 }
 
 def formatted_response(data, format):
