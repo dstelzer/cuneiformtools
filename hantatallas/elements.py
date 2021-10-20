@@ -405,6 +405,7 @@ class HStack(Container):
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
 		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
+		if pieces == 0: pieces = 1 # Prevent divide by zero when cursor but no other strokes
 		each_w = w/pieces
 		i = 0
 		for each in self.contents:
@@ -531,6 +532,7 @@ class VStack(Container):
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
 		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
+		if pieces == 0: pieces = 1 # Prevent divide by zero
 		each_h = h/pieces
 		i = 0
 		for each in self.contents:
