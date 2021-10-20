@@ -173,6 +173,18 @@ class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches a
 	def functional_form(self): return Wildcard(self.ident)
 	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
+class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in the text area when building signs. It takes up no space and is ignored in all comparisons.
+	def _sigil(self): return '|'
+	def can_expand_horizontally(self): return False # TODO does anything care about all(can_expand_*)?
+	def can_expand_vertically(self): return False
+	def allow_kern_leftward(self): return False
+	def allow_kern_rightward(self): return False
+	def allow_kern_downward(self): return False
+	def allow_kern_upward(self): return False
+	def draw(self, rend): rend.draw_cursor(*self.pos, *self.dims, self.mods)
+	def functional_form(self): return None # Remove from functional form
+	def __contains__(self, other): raise ValueError('cursor should not be in search')
+
 class Vertical(Stroke):
 	def _sigil(self): return 'v'
 	
@@ -392,11 +404,13 @@ class HStack(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) # The number of pieces, plus 1 for each Expand adjustment we find
+		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
 		each_w = w/pieces
 		i = 0
 		for each in self.contents:
-			if isinstance(each, Expand):
+			if isinstance(each, Cursor):
+				each.propagate_dimensions((0, h), (x+i*each_w, y))
+			elif isinstance(each, Expand):
 				each.propagate_dimensions((each_w*2, h), (x+i*each_w, y))
 				i += 2
 			else:
@@ -429,7 +443,12 @@ class HStack(Container):
 				previous_position = current_position
 				current_position -= each.adjust[0] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
-				this_w = each_w*2 if isinstance(each, Expand) else each_w
+				if isinstance(each, Expand):
+					this_w = each_w*2
+				elif isinstance(each, Cursor):
+					this_w = 0
+				else:
+					this_w = each_w
 				
 				if each.can_expand_horizontally(): # This is a flexible one
 					new_w = portion + left_kerning + right_kerning # The new width to assign
@@ -511,11 +530,13 @@ class VStack(Container):
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
-		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) # The number of pieces, plus 1 for each Expand adjustment we find
+		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
 		each_h = h/pieces
 		i = 0
 		for each in self.contents:
-			if isinstance(each, Expand):
+			if isinstance(each, Cursor):
+				each.propagate_dimensions((w, 0), (x, y+i*each_h))
+			elif isinstance(each, Expand):
 				each.propagate_dimensions((w, each_h*2), (x, y+i*each_h))
 				i += 2
 			else:
@@ -547,7 +568,12 @@ class VStack(Container):
 				previous_position = current_position
 				current_position -= each.adjust[1] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
-				this_h = 2*each_h if isinstance(each, Expand) else each_h
+				if isinstance(each, Expand):
+					this_h = 2*each_h
+				elif isinstance(each, Cursor):
+					this_h = 0
+				else:
+					this_h = each_h
 				
 				if each.can_expand_vertically(): # This is a flexible one
 					new_h = portion + top_kerning + bottom_kerning # The new height to assign

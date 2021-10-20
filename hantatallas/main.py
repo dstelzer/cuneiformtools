@@ -8,7 +8,7 @@ from database import Database
 def test_rendering():
 	while True:
 		try:
-			construct = parse(input())
+			construct = parse(input(), friendly=True)
 			print(construct)
 			print(construct.functional_form())
 			TwoSidedRenderer.render(construct).show()
@@ -55,4 +55,4 @@ def test_uga():
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
-	test_layout()
+	test_rendering()

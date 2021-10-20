@@ -126,7 +126,7 @@ class Renderer:
 	def draw_hook(self, x, y, w, h, mods):
 		raise NotImplementedError() # Same
 	
-	def draw_stroke(self, x, y, w, h, mods):
+	def draw_stroke(self, x, y, w, h, mods): # Delegates to the others after handling some common modifiers
 		adj_amount = h/3
 		if Modifier.HEADSHORT in mods:
 			h -= adj_amount
@@ -165,6 +165,25 @@ class Renderer:
 		c.line_to(*nw)
 		c.move_to(*sw)
 		c.line_to(*ne)
+		c.stroke()
+		
+		c.restore()
+	
+	def draw_cursor(self, x, y, w, h, mods): # As above, this places a cursor (a line or X)
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		nw = (0, 0)
+		ne = (w, 0)
+		se = (w, h)
+		sw = (0, h)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*nw)
+		c.line_to(*se)
+		c.move_to(*ne)
+		c.line_to(*sw)
 		c.stroke()
 		
 		c.restore()

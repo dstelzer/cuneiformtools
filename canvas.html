@@ -4,10 +4,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<script language="javascript" type="text/javascript">
 			function render(){
-				code = encodeURIComponent(document.getElementById("source").value);
+				source = document.getElementById("source");
+				code = source.value;
+				start = source.selectionStart;
+				end = source.selectionEnd;
+				if(typeof start == "number" && typeof end == "number"){
+					if(start == end){
+						code = code.slice(0, start) + '|!' + code.slice(start); // Add cursor
+					}else{
+						code = code.slice(0, start) + code.slice(start, end).replace(/([hvduc])/g, '$1!') + code.slice(end);
+					}
+					console.log(code);
+				}
+				encode = encodeURIComponent(code);
 				format = "svg";
 				type = document.getElementById("type").value;
-				url = "/rendersign?code=" + code + "&format=" + format + "&type=" + type + "&friendly=1&scale=256";
+			//	size = Math.min(document.getElementById("right").scrollWidth/1.5, document.getElementById("right").scrollHeight, 256);
+				size = 256;
+				url = "/rendersign?code=" + encode + "&format=" + format + "&type=" + type + "&friendly=1&scale=" + size;
 				document.getElementById("canvas").src = url;
 			}
 			function search(){
@@ -61,7 +75,7 @@
 		<div id="container">
 		<div id="left">
 			<span id="controls">
-				<input type="text" id="source" oninput="render();" />
+				<textarea id="source" oninput="render();" onkeyup="render();" onselect="render();"></textarea>
 				<select id="type" onchange="render();">
 					<option value="publish">Published</option>
 					<option value="handwrite">Handwritten</option>

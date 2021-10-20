@@ -24,6 +24,7 @@ STROKES = {
 	'c':Winkelhaken,
 	'0':Void,
 	'*':Wildcard,
+	'|':Cursor,
 }
 
 IGNORE = ', \t\n\v'
@@ -129,6 +130,9 @@ def internal_parse(string, container_stack=None, friendly=False): # The actual p
 	if not container_stack[0].contents:
 		if friendly: container_stack[0].contents.append(Void('-1'))
 		else: raise ValueError('Empty canvas')
+	if friendly:
+		while len(container_stack[0].contents) > 1 and isinstance(container_stack[0].contents[0], Cursor): container_stack[0].contents.pop(0)
+		while len(container_stack[0].contents) > 1 and isinstance(container_stack[0].contents[-1], Cursor): container_stack[0].contents.pop(-1)
 	if len(container_stack[0].contents) > 1:
 		raise ValueError('Unconnected elements', container_stack[0].contents)
 	
