@@ -1,0 +1,156 @@
+ALPA
+	FORM
+		P[hh]
+	NAME
+		A ʔA ʾA ALPA
+BETA
+	FORM
+		P[{vh}{vh}]
+	NAME
+		B BETA
+GAMLA
+	FORM
+		Nv
+	NAME
+		G GAMLA
+KHA
+	FORM
+		N{vvv}
+	NAME
+		Ḫ X KH KHA
+DELTA
+	FORM
+		[{vh}{vh}{vh}]
+	NAME
+		D DELTA
+HO
+	FORM
+		P{hhh}
+	NAME
+		H HO
+WO
+	FORM
+		[{hh}hh]
+	NAME
+		W WO
+ZETA
+	FORM
+		N{vv}
+	NAME
+		Z ZETA
+HOTA
+	FORM
+		({vc'}[hc"])
+	NAME
+		Ḥ Ħ H, HH HOTA
+TET
+	FORM
+		(v[hc"])
+	NAME
+		Ṭ T, TT TET
+YOD
+	FORM
+		P[{vvv}{vvv}]
+	NAME
+		Y YOD
+KAF
+	FORM
+		[{hh}h]
+	NAME
+		K KAF
+SHIN
+	FORM
+		L[c0'vu"?]
+	NAME
+		Š SZ SH C SHIN
+LAMDA
+	FORM
+		[vvv]
+	NAME
+		L LAMDA
+MEM
+	FORM
+		P[{h0}v]
+	NAME
+		M MEM
+DHAL
+	FORM
+		[c'u"?]
+	NAME
+		Ḏ DH DHAL
+NUN
+	FORM
+		[hhh]
+	NAME
+		N NUN
+ZU
+	FORM
+		[{hh}c']
+	NAME
+		Ẓ Z, ZZ ZU
+SAMKA
+	FORM
+		P{[vv]v}
+	NAME
+		S SAMKA
+AIN
+	FORM
+		Nc
+	NAME
+		ʕ ʿ O AYIN
+PU
+	FORM
+		P{hh}
+	NAME
+		P PU
+SADE
+	FORM
+		P[vv]
+	NAME
+		Ṣ S, SS SADE
+QOPA
+	FORM
+		P[hc"]
+	NAME
+		Q QOPA
+RASHA
+	FORM
+		[{hh}{hh}h]
+	NAME
+		R RASHA
+THANNA
+	FORM
+		N(vc)
+	NAME
+		Ṯ TH THANNA
+GHAIN
+	FORM
+		(hu")
+	NAME
+		Ġ G, GH GHAIN
+TO
+	FORM
+		Ph
+	NAME
+		T TO
+I
+	FORM
+		P{hhhv}
+	NAME
+		I ʔI ʾI
+U
+	FORM
+		{[vvv]h}
+	NAME
+		U ʔU ʾU
+SSU
+	FORM
+		P[{hhh}Rv{ccc}]
+		P(v{[hc][hc][hc]})
+	NAME
+		S̀ S2 Ś SSU
+DOT
+	FORM
+		Nv'"
+	NAME
+		: DOT

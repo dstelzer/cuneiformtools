@@ -44,7 +44,15 @@ def test_layout():
 	db.prepare_sorting()
 	while True:
 		desc = input()
-		Layout(TriangleRenderer, justify='s').render(db.parse_transcription(desc)).show()
+		Layout(TriangleRenderer, justify='s').render(db.parse_transcription(desc), fill=True).show()
+
+def test_uga():
+	db = Database()
+	db.load_data('data/uga.dat')
+	db.prepare_sorting()
+	while True:
+		desc = input()
+		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
 	test_layout()

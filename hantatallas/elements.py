@@ -786,3 +786,7 @@ class Restrict(Adjustment): # Prevent a component from expanding
 	def kern_bottom(self): return self.child.kern_bottom()
 	def kern_left(self): return self.child.kern_left()
 	def kern_right(self): return self.child.kern_right()
+	def propagate_dimensions(self, dims, pos):
+		self.dims, self.pos = dims, pos
+		self.adjust = (0, 0)
+		self.child.propagate_dimensions(dims, pos)
