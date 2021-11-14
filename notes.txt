@@ -4,7 +4,10 @@ Types of nodes:
 	u	Up diagonal
 	d	Down diagonal
 	c	Winkelhaken
+
 	0	Void
+	|	Cursor
+	*	Wildcard
 	
 	[ ]	Horizontal stacking
 	{ }	Vertical stacking
@@ -14,19 +17,22 @@ Types of nodes:
 	L	Landscape
 	S	Square
 	W	Wider
+	X	Extra-wide
+	N	Narrow
 
 Modifiers:
 	'	Shorten at head
 	"	Shorten at tail
 	2	Double
 	3	Triple (not used in Hittite)
-			(This one's being put off for now)
 	!	Highlight (render in green)
+	?	Reverse (not used in Hittite)
 
 Adjustments:
 	T	Tenû (tilted)
 	E	Expand
 	M	Margin
+	R	Restrict
 
 PHASE 1
 #	Parsing
@@ -96,3 +102,13 @@ MISC
 #	Scale specification
 #		From web
 #	PDF output for LaTeX
+
+PHASE 5
+#	Visible cursor
+#	Visible selection
+	FontForge integration
+	Better tenu placement
+	Better tenu sizing
+	Location restrictions?
+	Space-fillers for GALDUBSAR
+	"Damaged" modifier

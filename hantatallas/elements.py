@@ -711,6 +711,7 @@ class Superpose(Container):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, Superpose):
 			# This part is kind of hacky. It tests whether each child of `other` can be found in a child of `self`, but doesn't check whether those children of `self` are distinct, because that runs into combinatorial explosion.
+			# For example, by this algorithm, ([hvh]d) encompoasses (hv), which is not ideal.
 			# But superpositions are kind of messy anyway, so hopefully the false positives from this are worth not having any false negatives.
 			for oc in other.contents:
 				if not any(oc in child for child in self.contents): return False
