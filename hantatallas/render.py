@@ -17,7 +17,7 @@ except ImportError:
 
 DRAW_BOXES = False
 
-def frange(start, stop, step): return takewhile(lambda x: x < stop, (start + i * step for i in count())) # Like range for non-integers. https://stackoverflow.com/a/34114983/3233017
+def frange(start, stop, step): return takewhile(lambda x: x < stop, (start + i * step for i in count())) # Like range for non-integers. https://stackoverflow.com/a/34114983
 
 def colorparse(color): # Convert a color name into a RGBA tuple
 	if color is None: return None # Efficiency
@@ -73,51 +73,17 @@ class Renderer:
 		self.ctx.rectangle(x, y, w, h)
 		self.ctx.fill()
 	
-	def hatch(self, x, y, w, h, highlight=False):
-		if not hasattr(self, '_hatching'):
-			scale = self.tmpval
-			spacing = 5 * self.strokewidth
-			print(spacing)
-			half = spacing / 2
-			adjust = 2 * self.strokewidth
-			self._hatch_surf = cairo.SVGSurface('test.svg', spacing*scale, spacing*scale)
-			print(int(spacing*scale))
-			c = cairo.Context(self._hatch_surf)
-			c.scale(scale, scale)
-			if highlight: c.set_source_rgba(*self.hlcolor)
-			else: c.set_source_rgba(*self.fgcolor)
-			c.set_line_width(self.strokewidth)
-			
-			north = (half+adjust, -adjust)
-			east = (spacing+adjust, half-adjust)
-			south = (half-adjust, spacing+adjust)
-			west = (-adjust, half+adjust)
-			
-			c.move_to(*north)
-			c.line_to(*west)
-			c.move_to(*east)
-			c.line_to(*south)
-			c.stroke()
-			
-			self._hatching = cairo.SurfacePattern(self._hatch_surf)
-			self._hatching.set_matrix(cairo.Matrix(xx=scale, yy=scale))
-			self._hatching.set_extend(cairo.EXTEND_REPEAT)
+	def hatch(self, x, y, w, h, highlight=False): # Draw a hatched pattern over a rectangle - the algorithm is designed so that adjacent or overlapping rectangles will always line up their hatching properly
+		if w <= 0 or h <= 0: return # Head off weird edge cases like DAMAGE one-dimensional voids or cursors
 		
-		self.ctx.set_source(self._hatching)
-		self.ctx.rectangle(x, y, w, h)
-		self.ctx.fill()
-		
-		self._hatch_surf.finish()
-	
-	def hatch2(self, x, y, w, h, highlight=False):
 		self.begin_drawing(highlight)
 		spacing = 8 * self.strokewidth
 		
 		dist = w+h # Half of the way around the rectangle
-		def sw(t): # South or west side
+		def sw(t): # South and west side
 			if t < h: return (x, y+t)
 			else: return (x+t-h, y+h)
-		def ne(t):
+		def ne(t): # North and east side
 			if t < w: return (x+t, y)
 			else: return (x+w, y+t-w)
 		
@@ -174,6 +140,11 @@ class Renderer:
 			self.buffer.seek(0)
 			return self.buffer
 	
+	def draw_potential_damage(self, x, y, w, h, mods):
+		damage = Modifier.DAMAGE in mods
+		highlight = Modifier.HIGHLIGHT in mods
+		if damage: self.hatch(x, y, w, h, highlight)
+	
 	def draw_single(self, x, y, w, h, mods):
 		raise NotImplementedError() # To be implemented in derived classes
 	
@@ -197,6 +168,9 @@ class Renderer:
 		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h, mods)
 		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h, mods)
 		else: self.draw_single(x, y, w, h, mods)
+	
+	def draw_void(self, x, y, w, h, mods): # Draw absolutely nothing except potential damage
+		self.draw_potential_damage(x, y, w, h, mods)
 	
 	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different renderers
 		margin = min(w/3, h/3, 0.05)
@@ -248,10 +222,16 @@ class Renderer:
 		
 		c.restore()
 	
+	def draw_hook_wrapper(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+		self.draw_hook(x, y, w, h, mods)
+	
 	def draw_vertical(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
 		self.draw_stroke(x, y, w, h, mods)
 	
 	def draw_horizontal(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
 		self.ctx.save()
 		self.ctx.rotate(-pi/2)
 		
@@ -260,6 +240,7 @@ class Renderer:
 		self.ctx.restore()
 	
 	def draw_downward(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
 		c = self.ctx
 		c.save()
 		c.translate(x, y)
@@ -291,12 +272,13 @@ class Renderer:
 		c.restore()
 	
 	def draw_upward(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
 		self.ctx.save()
 		self.ctx.translate(x, y)
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		mods = set(mods) ^ {Modifier.INTERNAL_FLIP} # Since we flipped one of the axes we should unflip it for rendering
+		mods = set(mods) ^ {Modifier.INTERNAL_FLIP} - {Modifier.DAMAGE} # Since we flipped one of the axes we should unflip it for rendering, and since we already drew the damage we shouldn't draw it again
 		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
@@ -907,6 +889,7 @@ class LinearRenderer(Renderer):
 		c.restore()
 	
 	def draw_downward(self, x, y, w, h, mods=()): # We override this method too, because with the linear renderer we can get closer to the corners without the head getting in the way
+		self.draw_potential_damage(x, y, w, h, mods)
 		# draw_upward by default delegates to this one so we don't need to override it too
 		c = self.ctx
 		c.save()
@@ -924,6 +907,6 @@ if __name__ == '__main__':
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)
 	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25, mods={Modifier.HIGHLIGHT})
-	rend.hatch2(0.25, 0.25, 0.5, 0.5)
-	rend.hatch2(0.3446, 0.33, 0.25, 0.5, True)
+	rend.hatch(0.25, 0.25, 0.5, 0.5)
+	rend.hatch(0.3446, 0.33, 0.25, 0.5, True)
 	rend.show()

@@ -9,6 +9,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	HIGHLIGHT = '!'
 	INTERNAL_FLIP = '_I' # Multi-character name means it won't show up in parsing; this one's only used internally in the implementation of upward diagonal rendering
 	INVERT = '?'
+	DAMAGE = '#'
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0
@@ -147,7 +148,7 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
 		super().__init__(mods=None, *args, **kwargs)
 	def _sigil(self): return '0'
-	def draw(self, rend): pass # Nothing to render
+	def draw(self, rend): rend.draw_void(*self.pos, *self.dims, self.mods) # Nothing to render normally - but if this has the "damaged" modifier, we should hatch in the whole area
 	
 	def _shrink_horizontal(self): return Modifier.HEADSHORT in self.mods
 	def _shrink_vertical(self): return Modifier.TAILSHORT in self.mods
@@ -309,7 +310,7 @@ class Winkelhaken(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
-		rend.draw_hook(*self.pos, *self.dims, self.mods)
+		rend.draw_hook_wrapper(*self.pos, *self.dims, self.mods)
 	
 	def functional_form(self): return Winkelhaken(self.ident) # No mods to worry about
 
