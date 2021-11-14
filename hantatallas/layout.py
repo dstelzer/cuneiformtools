@@ -38,46 +38,46 @@ class Layout:
 		self.kerning = kerning / divisor
 		self.fixed = fixed / divisor
 		self.ready = False # Do we have a renderer ready to go? No we do not
-	
+
 	@staticmethod
 	def should_kern_between(first, second):
 		# Don't kern if it involves spaces or fills
 		return isinstance(first, Element) and isinstance(second, Element)
-	
+
 	def row_width(self, row):
 		if isinstance(row, Ruling): return 0
 		sign_total = sum(sign.dims[0] for sign in row if isinstance(sign, Element)) # Width of each sign
 		space_total = sum(self.spacing for space in row if isinstance(space, Spacer) or isinstance(space, Fill)) # Width of each space (treating fills as spaces)
 		kern_total = sum(self.kerning for (a,b) in zip(row,row[1:]) if self.should_kern_between(a, b)) # Kerning between every two adjacent signs
 		return sign_total + space_total + kern_total
-	
+
 	def render(self, rows, **rendparams):
 		for row in rows:
 			if not isinstance(row, Ruling):
 				for sign in row:
 					if isinstance(sign, Element):
 						sign.propagate_dimensions()
-		
+
 		height = sum(1 for row in rows if not isinstance(row, Ruling)) + self.leading*(len(rows)-1) # Rulings have no height but still get leading between them and the next line
 		width = max(self.row_width(row) for row in rows)
-		
+
 		if self.fixed:
 			if width > self.fixed: raise ValueError(f'Fixed width of {self.fixed} is too small for this text; need at least {width}')
 			width = self.fixed
 		self.line_width = width
-		
+
 		full_width = int((width + 2*self.margin) * self.size)
 		full_height = int((height + 2*self.margin) * self.size)
 		self.rend = self.renderclass(full_width, full_height, skip=True, **rendparams)
 		self.rend.ctx.set_source_rgba(*self.rend.bgcolor)
 		self.rend.ctx.rectangle(0, 0, full_width, full_height) # Manual blanking
 		self.rend.ctx.fill()
-		
+
 		self.rend.ctx.save()
 		self.rend.ctx.scale(self.size, self.size)
 		self.rend.ctx.translate(self.margin, self.margin)
 		self.ready = True
-		
+
 		y = 0
 		for row in rows:
 			if isinstance(row, Ruling):
@@ -86,30 +86,30 @@ class Layout:
 				self.render_row(row, y)
 				y += 1
 			y += self.leading
-		
+
 		self.rend.ctx.restore()
-		
+
 		return self.rend
-	
+
 	def render_rule(self, y): # TODO should this be delegated to the renderer?
 		self.rend.begin_drawing()
 		self.rend.ctx.move_to(0, y)
 		self.rend.ctx.line_to(self.line_width, y)
 		self.rend.ctx.stroke()
-	
+
 	def render_row(self, row, y):
 		if not self.ready: raise ValueError('Renderer is not ready!') # Don't try to render anything if we don't have a renderer set up
 		goal = self.line_width
 		actual = self.row_width(row)
 		difference = goal - actual
 		fills = sum(1 for sign in row if isinstance(sign, Fill))
-		
+
 		left_space = 0
 		right_space = 0
 		spacing = self.spacing
 		kerning = self.kerning
 		filling = self.spacing # By default, fills are equivalent to spaces
-		
+
 		if fills: # If we have any fills, they'll absorb all the difference
 			filling += difference / fills
 		elif self.justify == Justification.LEFT:
@@ -137,7 +137,7 @@ class Layout:
 				right_space += difference/2
 		else:
 			raise ValueError('Unrecognized justification', self.justify)
-		
+
 		x = left_space
 		prev = None
 		for sign in row:
@@ -148,7 +148,7 @@ class Layout:
 			elif isinstance(sign, Spacer):
 				x += spacing
 			elif isinstance(sign, Fill):
-				if sign.damaged: self.rend.hatch(x, y-self.leading, filling, self.size+self.leading)
+				if sign.damaged: self.rend.hatch(x, y-0.5*self.leading, filling, 1+self.leading)
 				x += filling
 			else:
 				raise ValueError('Unrecognized element', sign)
