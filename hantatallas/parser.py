@@ -74,7 +74,6 @@ def report_error(error, string, start, end):
 
 def internal_parse(string, container_stack=None, friendly=False): # The actual parsing, which can throw ValueErrors if something is wrong
 	shape = 'S' # Default if not specified
-	looking_for_adjustment = False
 	if container_stack is None: container_stack = [ParseFrame(initial=True)]
 	stroke_counter = 0
 	
@@ -91,12 +90,6 @@ def internal_parse(string, container_stack=None, friendly=False): # The actual p
 			new_frame = ParseFrame(i)
 			container_stack.append(new_frame)
 			container_stack[-1].add(char)
-	#		if char == '<': looking_for_adjustment = True
-		
-		elif char in ADJS and looking_for_adjustment:
-			adj = ADJS[char]
-			container_stack[-1].add(adj)
-	#		looking_for_adjustment = False
 		
 		elif char in ENDS:
 			if container_stack[-1].initial: raise ValueError('Unmatched closer')
