@@ -31,7 +31,7 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	return (r, g, b, 1)
 
 class Renderer:
-	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, fill=False):
+	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
 		self.format = format
 		self.tmpval = height
 		if format == 'svg':
@@ -50,6 +50,7 @@ class Renderer:
 		self.hlcolor = colorparse(hlcolor) or (0, 1, 0, 1)
 		self.strokewidth = strokewidth or 0.01
 		self.fill = fill
+		self.hatchspace = hatchspace or 8
 		
 		self.ctx = cairo.Context(self.surf)
 		if not skip:
@@ -77,7 +78,7 @@ class Renderer:
 		if w <= 0 or h <= 0: return # Head off weird edge cases like DAMAGE one-dimensional voids or cursors
 		
 		self.begin_drawing(highlight)
-		spacing = 8 * self.strokewidth
+		spacing = self.hatchspace * self.strokewidth
 		
 		dist = w+h # Half of the way around the rectangle
 		def sw(t): # South and west side

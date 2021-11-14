@@ -66,6 +66,7 @@ def do_galdubsar():
 	fgcolor = args.get('fgcolor', None, type=str)
 	hlcolor = args.get('hlcolor', None, type=str)
 	strokewidth = args.get('strokewidth', None, type=float)
+	hatchspace = args.get('hatchspace', None, type=float)
 	fill = args.get('fill', 0, type=int)
 	justify = args.get('justify', 'l', type=str)
 	size = args.get('size', 256, type=int)
@@ -76,6 +77,6 @@ def do_galdubsar():
 	absolute = args.get('absolute', 0, type=int)
 	fixedwidth = args.get('fixedwidth', 0, type=float)
 	
-	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor, 'strokewidth':strokewidth, 'fill':fill}
+	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor, 'strokewidth':strokewidth, 'hatchspace':hatchspace, 'fill':fill}
 	layoutparams = {'justify':justify, 'size':size, 'margin':margin, 'leading':leading, 'spacing':spacing, 'kerning':kerning, 'absolute':absolute, 'fixed':fixedwidth}
 	return do_scribing(text, rendname=rend, format=format, rendparams=rendparams, layoutparams=layoutparams)
