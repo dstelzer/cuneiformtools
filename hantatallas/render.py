@@ -3,6 +3,7 @@ from math import pi, atan, cos, sqrt
 from time import sleep
 from contextlib import contextmanager
 from io import StringIO, BytesIO
+from itertools import takewhile, count
 
 import cairo
 from PIL.ImageColor import getrgb
@@ -15,6 +16,8 @@ except ImportError:
 	from .layout import Spacer
 
 DRAW_BOXES = False
+
+def frange(start, stop, step): return takewhile(lambda x: x < stop, (start + i * step for i in count())) # Like range for non-integers. https://stackoverflow.com/a/34114983/3233017
 
 def colorparse(color): # Convert a color name into a RGBA tuple
 	if color is None: return None # Efficiency
@@ -30,6 +33,7 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 class Renderer:
 	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, fill=False):
 		self.format = format
+		self.tmpval = height
 		if format == 'svg':
 			self.buffer = BytesIO()
 			self.surf = cairo.SVGSurface(self.buffer, width, height)
@@ -68,6 +72,62 @@ class Renderer:
 		self.ctx.set_source_rgba(*col, 0.25)
 		self.ctx.rectangle(x, y, w, h)
 		self.ctx.fill()
+	
+	def hatch(self, x, y, w, h, highlight=False):
+		if not hasattr(self, '_hatching'):
+			scale = self.tmpval
+			spacing = 5 * self.strokewidth
+			print(spacing)
+			half = spacing / 2
+			adjust = 2 * self.strokewidth
+			self._hatch_surf = cairo.SVGSurface('test.svg', spacing*scale, spacing*scale)
+			print(int(spacing*scale))
+			c = cairo.Context(self._hatch_surf)
+			c.scale(scale, scale)
+			if highlight: c.set_source_rgba(*self.hlcolor)
+			else: c.set_source_rgba(*self.fgcolor)
+			c.set_line_width(self.strokewidth)
+			
+			north = (half+adjust, -adjust)
+			east = (spacing+adjust, half-adjust)
+			south = (half-adjust, spacing+adjust)
+			west = (-adjust, half+adjust)
+			
+			c.move_to(*north)
+			c.line_to(*west)
+			c.move_to(*east)
+			c.line_to(*south)
+			c.stroke()
+			
+			self._hatching = cairo.SurfacePattern(self._hatch_surf)
+			self._hatching.set_matrix(cairo.Matrix(xx=scale, yy=scale))
+			self._hatching.set_extend(cairo.EXTEND_REPEAT)
+		
+		self.ctx.set_source(self._hatching)
+		self.ctx.rectangle(x, y, w, h)
+		self.ctx.fill()
+		
+		self._hatch_surf.finish()
+	
+	def hatch2(self, x, y, w, h, highlight=False):
+		self.begin_drawing(highlight)
+		spacing = 8 * self.strokewidth
+		
+		dist = w+h # Half of the way around the rectangle
+		def sw(t): # South or west side
+			if t < h: return (x, y+t)
+			else: return (x+t-h, y+h)
+		def ne(t):
+			if t < w: return (x+t, y)
+			else: return (x+w, y+t-w)
+		
+		adjust = (-x-y) % spacing
+		
+		for t in frange(adjust, dist, spacing):
+			self.ctx.move_to(*sw(t))
+			self.ctx.line_to(*ne(t))
+		
+		self.ctx.stroke()
 	
 	def blank(self):
 		self.ctx.set_source_rgba(*self.bgcolor)
@@ -859,9 +919,11 @@ class LinearRenderer(Renderer):
 		c.restore()
 
 if __name__ == '__main__':
-	rend = TriangleRenderer(256, 256, format='pdf', hlcolor='gold', fill=True)
+	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold', fill=False)
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
 	rend.draw_horizontal(0.25*1.5, 0.25*2.5, 0.25, 0.25)
 	rend.draw_hook(0.125, 0.25*1.5, 0.125, 0.25, mods={Modifier.HIGHLIGHT})
+	rend.hatch2(0.25, 0.25, 0.5, 0.5)
+	rend.hatch2(0.3446, 0.33, 0.25, 0.5, True)
 	rend.show()
