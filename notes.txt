@@ -106,9 +106,9 @@ MISC
 PHASE 5
 #	Visible cursor
 #	Visible selection
-	FontForge integration
+?	FontForge integration
 	Better tenu placement
 	Better tenu sizing
 	Location restrictions?
-	Space-fillers for GALDUBSAR
+#	Space-fillers for GALDUBSAR
 #	"Damaged" modifier

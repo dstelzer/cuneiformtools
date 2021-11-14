@@ -5,10 +5,10 @@ import re
 
 try:
 	from parser import parse
-	from layout import Spacer, Ruling
+	from layout import Spacer, Ruling, Fill
 except ImportError:
 	from .parser import parse
-	from .layout import Spacer, Ruling
+	from .layout import Spacer, Ruling, Fill
 
 def dict_list_factory(): return defaultdict(list)
 
@@ -163,33 +163,40 @@ class Database:
 		return parse(entry.forms[variant-1])
 	
 	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
-		# Special codes: `n newline, `r ruling, `t space
+		# Special codes: `n newline, `r ruling, `w word sep, `f hfill
+		# (Not used here: `s sign sep in raw sequence parser)
 		results = []
 		trans = trans.replace('\r', '') # Carriage returns are the bane of text processing
-		trans = trans.replace('\n`r\n', '`r')
-		trans = trans.replace('`r', '`n`R`n')
-		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we define an alternative
+		trans = trans.replace('\n`r\n', '`r') # Standardize newlines on either side of a ruling: first remove them if they're present
+		trans = trans.replace('`n`r`n', '`r') # Whether written literally or with escapes
+		trans = trans.replace('`r', '\n`r\n') # Then impose them uniformly everywhere
+		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we've defined a control-character-less alternative. Here, we turn that into a normal newline.
 		for i, line in enumerate(trans.split('\n')):
-			if line.strip() == '`R': # Check for a special case: rulings
+			if line.strip() == '`r': # Check for a special case: rulings
 				results.append(Ruling())
 				continue
 			
 			row = []
 			line = line.strip() # Remove lingering space on either end
-			line = re.sub(r'\s+', '.`t.', line) # Replace whitespace with `s
-			line = line.replace('-', '.') # Standardize separators
+			line = re.sub(r'\s*(`[wfF])\s*', r'.\1.', line) # Remove any whitespace surrounding separators and fillers
+			line = re.sub(r'\s+', '.`w.', line) # Replace whitespace with `w (word separator)
+			line = line.replace('-', '.') # Standardize separators; dot and dash are treated equivalently here
 			for j, unit in enumerate(line.split('.')):
 				try:
 					if not unit: continue
-					if unit == '`t':
+					if unit == '`w': # Special code for a spacer
 						row.append(Spacer())
-					elif unit.startswith('%'):
+					elif unit == '`f': # Fill
+						row.append(Fill())
+					elif unit == '`F': # Damaged fill
+						row.append(Fill(damaged=True))
+					elif unit.startswith('%'): # Recursive code rather than sign name
 						row.append(parse(unit[1:]))
 					else:
 						unit = self.clean_name(unit)
 						if unit in self.expansions:
 							for subunit in self.expansions[unit]:
-								if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally
+								if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
 								row.append(self.name_lookup[subunit])
 						else:
 							row.append(self.find_by_name(unit))

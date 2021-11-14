@@ -19,11 +19,15 @@ renderers = {
 	'triangle' : TriangleRenderer,
 }
 
+formats = { # Maps from format shorthand to MIME type
+	'png' : 'image/png',
+	'svg' : 'image/svg+xml',
+	'pdf' : 'application/pdf',
+}
+
 def formatted_response(data, format):
-	if format not in ('png', 'svg', 'pdf'): return f'<pre>Unrecognized format "{format}"</pre>' # Safety check
-	if format == 'png': mime = 'image/png'
-	elif format == 'svg': mime = 'image/svg+xml'
-	elif format == 'pdf': mime = 'application/pdf'
+	if format not in formats: return f'<pre>Unrecognized format "{format}"</pre>' # Safety check
+	mime = formats[format]
 	w = FileWrapper(data)
 	return Response(w, mimetype=mime, direct_passthrough=True)
 
@@ -84,7 +88,7 @@ def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=Non
 		with redirect_stdout(log):
 			rows = db.parse_transcription(instr)
 	except ValueError as e:
-		result = log.getvalue() or 'Error outside normal handling system\n'+'\n'.join(e.args) # The error message should always be pretty-printed to stdout, but just in case it's not we have a fallback here (printing the exception's arguments)
+		result = log.getvalue() or 'Error outside normal handling system\n'+'\n'.join(e.args) # The error message should always be pretty-printed to stdout (and thus redirected into `log`), but just in case it's not we have a fallback here: printing the exception's arguments
 		return '<pre>'+result+'</pre>'
 	
 	renderclass = renderers[rendname]
