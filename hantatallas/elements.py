@@ -1,5 +1,5 @@
 from enum import Enum
-from math import sqrt
+from math import sqrt, inf
 
 class Modifier(Enum): # Modifiers that can be applied to strokes
 	HEADSHORT = "'"
@@ -27,13 +27,13 @@ class Orientation(Enum): # The general shape of an element
 		return cls.NEITHER
 
 class Element:
-	def can_expand_horizontally(self): return False
-	def can_expand_vertically(self): return False
-	def kern_left(self): return 0
+	def can_expand_horizontally(self): return 0 # The amount of additional space this element wants
+	def can_expand_vertically(self): return 0
+	def kern_left(self): return 0 # The amount of space this element is willing to give up on each side
 	def kern_right(self): return 0
 	def kern_top(self): return 0
 	def kern_bottom(self): return 0
-	def allow_kern_leftward(self): return True
+	def allow_kern_leftward(self): return True # Should this element take up available space in this direction?
 	def allow_kern_rightward(self): return True
 	def allow_kern_upward(self): return True
 	def allow_kern_downward(self): return True
@@ -152,8 +152,8 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 	
 	def _shrink_horizontal(self): return Modifier.HEADSHORT in self.mods
 	def _shrink_vertical(self): return Modifier.TAILSHORT in self.mods
-	def can_expand_horizontally(self): return not self._shrink_horizontal()
-	def can_expand_vertically(self): return not self._shrink_vertical()
+	def can_expand_horizontally(self): return 0 if self._shrink_horizontal() else inf
+	def can_expand_vertically(self): return 0 if self._shrink_vertical() else inf
 	def propagate_dimensions(self, dims, pos):
 		w, h = dims
 		x, y = pos
@@ -168,16 +168,12 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 
 class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
 	def _sigil(self): return '*'
-	def can_expand_horizontally(self): return False
-	def can_expand_vertically(self): return False
 	def draw(self, rend): rend.draw_wildcard(*self.pos, *self.dims, self.mods)
 	def functional_form(self): return Wildcard(self.ident)
 	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
 class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in the text area when building signs. It takes up no space and is ignored in all comparisons.
 	def _sigil(self): return '|'
-	def can_expand_horizontally(self): return False # TODO does anything care about all(can_expand_*)?
-	def can_expand_vertically(self): return False
 	def allow_kern_leftward(self): return False
 	def allow_kern_rightward(self): return False
 	def allow_kern_downward(self): return False
@@ -189,7 +185,8 @@ class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in 
 class Vertical(Stroke):
 	def _sigil(self): return 'v'
 	
-	def can_expand_vertically(self): return True
+	def can_expand_vertically(self): return inf
+	def can_expand_horizontally(self): return max(0, MAXIMUM_HEAD_SIZE-self.dims[0])
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
 		act = min(w, MAXIMUM_HEAD_SIZE)
@@ -219,7 +216,8 @@ class Vertical(Stroke):
 class Horizontal(Stroke):
 	def _sigil(self): return 'h'
 	
-	def can_expand_horizontally(self): return True
+	def can_expand_horizontally(self): return inf
+	def can_expand_vertically(self): return max(0, MAXIMUM_HEAD_SIZE-self.dims[1])
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
 		act = min(h, MAXIMUM_HEAD_SIZE)
@@ -249,8 +247,8 @@ class Horizontal(Stroke):
 class UpDiag(Stroke):
 	def _sigil(self): return 'u'
 	
-	def can_expand_vertically(self): return True
-	def can_expand_horizontally(self): return True
+	def can_expand_vertically(self): return inf
+	def can_expand_horizontally(self): return inf
 	def orient(self): return Orientation.WIDE # Diagonals "act" wide more than they "act" tall, in my experience
 	
 	def draw(self, rend):
@@ -267,8 +265,8 @@ class UpDiag(Stroke):
 class DownDiag(Stroke):
 	def _sigil(self): return 'd'
 	
-	def can_expand_vertically(self): return True
-	def can_expand_horizontally(self): return True
+	def can_expand_vertically(self): return inf
+	def can_expand_horizontally(self): return inf
 	def orient(self): return Orientation.WIDE # Diagonals "act" wide more than they "act" tall, in my experience
 	
 	def draw(self, rend):
@@ -291,12 +289,17 @@ class Winkelhaken(Stroke):
 		if Modifier.HEADSHORT in self.mods: return 2/3
 		return 1
 	
+#	def can_expand_horizontally(self): return self.goal_w - self.dims[0]
+#	def can_expand_vertically(self): return self.goal_h - self.dims[1]
+	
 	def propagate_dimensions(self, dims, pos):
 		s = self._scaling()
 		(w,h) = dims
 		adj_x, adj_y = 0, 0
 		new_w = min(w, h/2) * s
 		new_h = min(h, 2*w) * s
+#		self.goal_w = max(w, h/2) * s
+#		self.goal_h = max(h, 2*w) * s
 		
 		self.dims = (new_w, new_h)
 		(x,y) = pos
@@ -320,8 +323,8 @@ class Container(Element):
 		if contents is None: contents = []
 		self.contents = contents
 	
-	def can_expand_horizontally(self): return any(e.can_expand_horizontally() for e in self.contents)
-	def can_expand_vertically(self): return any(e.can_expand_vertically() for e in self.contents)
+	def can_expand_horizontally(self): return max(e.can_expand_horizontally() for e in self.contents)
+	def can_expand_vertically(self): return max(e.can_expand_vertically() for e in self.contents)
 	def orient(self): return Orientation.consensus(e.orient() for e in self.contents)
 	
 	def draw(self, rend):
@@ -403,6 +406,7 @@ class Container(Element):
 		def propagate_child(child, j, k, u, v):
 			if horizontal: child.propagate_dimensions((j, k), (u, v))
 			else: child.propagate_dimensions((k, j), (v, u))
+			child._tmpj = j # For later reference
 		def can_expand(child):
 			if horizontal: return child.can_expand_horizontally()
 			else: return child.can_expand_vertically()
@@ -440,64 +444,108 @@ class Container(Element):
 				propagate_child(each, each_j, k, u+i*each_j, v)
 				i += 1
 		
-		# Now check if we have to do any fancy kerning and recalculation
-		if any(can_expand(each) for each in self.contents):
-			# In this case, we have different types of strokes together, and some of them can expand horizontally
-			# So first we calculate how much space is currently used and can't be avoided
-			fixed_space = 0
-			for i, each in enumerate(self.contents):
-				if can_expand(each): continue # Ignore flexible ones
-				used = each.dims[jd]
-				# Can we kern this into its neighbors?
-				if i-1 >= 0 and allow_kern_back(each):
-					used -= kern_front(self.contents[i-1])
-				if i+1 < len(self.contents) and allow_kern_front(each):
-					used -= kern_back(self.contents[i+1])
-				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
-				fixed_space += used
-			flexible_space = j - fixed_space
-			portion = flexible_space / sum(1 for each in self.contents if can_expand(each)) # Divide by the number of flexible elements
+		# Now iteratively try to reclaim and reapportion space (if elements aren't using it or can kern into it)
+		# We loop until nothing can expand, or no space can be reclaimed
+		
+		# Precision variable
+		epsilon = 1e-4
+		passes = 0
+		
+		while True: # Now we go through an iterative process, reclaiming any available space, redistributing it, and repeating as necessary.
+			# The first step: figuring out how much space can be reclaimed, and where it should be put.
+			for each in self.contents: each._tmpgrow = 0 # Scratch variable
+			dirty = False # Do we need to recalculate anything?
+			while True:
+				wanting = sum(1 for each in self.contents if can_expand(each)-each._tmpgrow > epsilon) # Count how many elements want more space
+				if not wanting: break # Nothing that wants more space, don't bother
+				
+				fixed_space = 0
+				kerns = 0
+				for i, each in enumerate(self.contents):
+					used = each.dims[jd] + each._tmpgrow # Space used + space newly allocated
+					if i-1 >= 0 and allow_kern_back(each): # This element can be kerned backward to save some space
+						used -= kern_front(self.contents[i-1])
+						if kern_front(self.contents[i-1]): kerns += 1 # TODO ugly
+					if i+1 < len(self.contents) and allow_kern_front(each): # This element can be kerned forward to save some more space
+						used -= kern_back(self.contents[i+1])
+						if kern_back(self.contents[i+1]): kerns += 1
+					if used < 0: used = 0 # No glyph can take less than zero spce, regardless of kerning
+					fixed_space += used
+				flexible_space = j - fixed_space
+				if flexible_space <= epsilon: break # No space available to work with
+				remaining_space = flexible_space
+				
+				portion = flexible_space / wanting # Tentatively divide the available space evenly between the elements that want it
+				found = False # Then check if any element specifically wants *less* than this
+				for each in self.contents:
+					grow = can_expand(each) - each._tmpgrow
+					if epsilon < grow < portion:
+						found = True
+						each._tmpgrow += grow # Assign how much space we're going to give this one
+						remaining_space -= grow
+						print(f'Assigned {grow} to {each} as requested')
+						dirty = True
+				if not found: # There was nothing that wanted less than we had, so divide the remaining space between all of them equally
+					for each in self.contents:
+						if can_expand(each) - each._tmpgrow > epsilon:
+							each._tmpgrow += portion
+							remaining_space -= portion
+							print(f'Assigned {portion} to {each} as available')
+							dirty = True
 			
-			# Now give them their new positions
+			if not dirty: break # Nothing was able to be repositioned
+		#	if passes > 30: break
+			print(f'Pass {passes}')
+			
+			# The second step: repositioning the elements based on this reallocated space
 			current_position = u
+			hacked_kerning = remaining_space / kerns if kerns else 0 # If there was some space that couldn't be used by flexible elements, give it back by expanding each kerning slightly
+			# (But if there were no kerns, don't divide by zero)
+			print(f'Kern: {remaining_space} {kerns} {hacked_kerning}')
+			next_back_kerning = 0
 			for i, each in enumerate(self.contents):
-				back_kerning = kern_front(self.contents[i-1]) if i-1>=0 else 0 # The kerning behind this element
-				front_kerning = kern_back(self.contents[i+1]) if i+1<len(self.contents) else 0 # The kerning in front of this element
+				back_kerning = next_back_kerning # We have to note this *before* reallocating space because that might change the kerning values! The updated values will get noted on the next pass through the big optimization loop
+				next_back_kerning = kern_front(each) # So we record the back_kerning value here (for *this* element), before we reallocate its space, and then use this value in the next iteration of the loop
+				front_kerning = kern_back(self.contents[i+1]) if i+1<len(self.contents) else 0 # The kerning available in front of this element - this one doesn't need to be calculated in advance because self.contents[i+1] hasn't been reallocated yet at this time
+				print(f'Kerning for {each}: front {front_kerning} back {back_kerning} hack {hacked_kerning}')
 				previous_position = current_position
 				current_position -= each.adjust[jd] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
 				# The amount of space allotted on the first pass (since this doesn't change for fixed elements)
-				if isinstance(each, Expand):
-					this_j = each_j*2
-				elif isinstance(each, Cursor):
-					this_j = 0
-				else:
-					this_j = each_j
+				this_j = each._tmpj
 				
-				if can_expand(each): # This is a flexible one
-					new_j = portion + back_kerning + front_kerning # The new width to assign
-					new_u = current_position - back_kerning
+				if back_kerning and allow_kern_back(each): # Kern backwards the appropriate amount
+					current_position -= (back_kerning - hacked_kerning)
+					print(f'Kerned {each} back into {self.contents[i-1]} by {back_kerning - hacked_kerning}')
+				
+				if each._tmpgrow: # This one has grown!
+			#		print(f'{each} can grow')
+					new_j = each.dims[jd] + each._tmpgrow
+					new_u = current_position
 					propagate_child(each, new_j, k, new_u, v)
-					current_position += portion
-					# current_position += each.adjust[jd] # Flexible ones should never have adjustment values in the direction that they're flexible - they're expected to take up all the space they're given
-				
-				elif back_kerning and allow_kern_back(each): # This one should be nudged to the left
-					new_u = current_position - back_kerning
-					propagate_child(each, this_j, k, new_u, v)
-					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
-					current_position += each.dims[jd] - left_kerning
-					current_position += each.adjust[jd]
+					current_position += new_j
+					current_position += each.adjust[jd] # TODO: Flexible ones should never have adjustment values in the direction that they're flexible, should they?
 				
 				else: # This one needs no special handling
-					new_u = current_position
-					propagate_child(each, this_j, k, new_u, v)
+			#		print(f'{each} needs no special handling')
+					new_u = current_position #- each.adjust[jd]
+					propagate_child(each, this_j, k, new_u, v) # TODO Why doesn't each.dims[jd] work for this_j here?
+			#		print(f'{each} {this_j} {each.dims[jd]} {each.adjust[jd]}')
 					current_position += each.dims[jd]
 					current_position += each.adjust[jd]
 				
-				if front_kerning and allow_kern_front(each) and not can_expand(each): # Finally, check to see if we need to adjust the kerning for the *next* element
-					current_position -= front_kerning
+				if front_kerning and allow_kern_front(each): # Finally, check to see if we need to adjust the kerning for the *next* element
+			#		print(f'Current {current_position}')
+					current_position -= (front_kerning - hacked_kerning)
+			#		print(f'Adjusting front kerning by {front_kerning}')
+			#		print(f'Current {current_position}')
+					print(f'Kerned {each} forward into {self.contents[i+1]} by {front_kerning - hacked_kerning}')
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
+			#		print('RESET')
+			
+			passes += 1
+			# Now loop back and check again
 		
 		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again on the next level)
 		largest_k = max(each.dims[kd] for each in self.contents)
@@ -867,8 +915,8 @@ class Adjustment(Element):
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def __str__(self):
 		return str(self.child) + 'T'
-	def can_expand_horizontally(self): return False
-	def can_expand_vertically(self): return False
+	def can_expand_horizontally(self): return 0
+	def can_expand_vertically(self): return 0
 	def propagate_dimensions(self, dims, pos):
 		(x,y) = pos
 		(w,h) = dims
@@ -887,8 +935,8 @@ class Expand(Adjustment): # Request twice as much space as usual from our parent
 	# Note that this prevents its child from expanding! It's meant to be used when an element doesn't ask for enough space, and expanding elements always ask for as much space as possible. So don't use this on an expanding element unless you want to give it a fixed size.
 	def __str__(self):
 		return str(self.child) + 'E'
-	def can_expand_horizontally(self): return False
-	def can_expand_vertically(self): return False
+	def can_expand_horizontally(self): return 0
+	def can_expand_vertically(self): return 0
 	def propagate_dimensions(self, dims, pos):
 		self.dims, self.pos = dims, pos
 		self.adjust = (0, 0)
@@ -924,8 +972,8 @@ class Margin(Adjustment): # Put a small margin around an element (for when signs
 
 class Restrict(Adjustment): # Prevent a component from expanding
 	def __str__(self): return str(self.child) + 'R'
-	def can_expand_horizontally(self): return False
-	def can_expand_vertically(self): return False
+	def can_expand_horizontally(self): return 0
+	def can_expand_vertically(self): return 0
 	def draw(self, rend): self.child.draw(rend)
 	def orient(self): return self.child.orient()
 	def kern_top(self): return self.child.kern_top()
