@@ -289,17 +289,12 @@ class Winkelhaken(Stroke):
 		if Modifier.HEADSHORT in self.mods: return 2/3
 		return 1
 	
-#	def can_expand_horizontally(self): return self.goal_w - self.dims[0]
-#	def can_expand_vertically(self): return self.goal_h - self.dims[1]
-	
 	def propagate_dimensions(self, dims, pos):
 		s = self._scaling()
 		(w,h) = dims
 		adj_x, adj_y = 0, 0
 		new_w = min(w, h/2) * s
 		new_h = min(h, 2*w) * s
-#		self.goal_w = max(w, h/2) * s
-#		self.goal_h = max(h, 2*w) * s
 		
 		self.dims = (new_w, new_h)
 		(x,y) = pos
@@ -447,7 +442,7 @@ class Container(Element):
 		# Now iteratively try to reclaim and reapportion space (if elements aren't using it or can kern into it)
 		# We loop until nothing can expand, or no space can be reclaimed
 		
-		# Precision variable
+		# Precision variable - don't bother making any changes if they're smaller than this
 		epsilon = 1e-4
 		passes = 0
 		
@@ -483,31 +478,25 @@ class Container(Element):
 						found = True
 						each._tmpgrow += grow # Assign how much space we're going to give this one
 						remaining_space -= grow
-	#					print(f'Assigned {grow} to {each} as requested')
 						dirty = True
 				if not found: # There was nothing that wanted less than we had, so divide the remaining space between all of them equally
 					for each in self.contents:
 						if can_expand(each) - each._tmpgrow > epsilon:
 							each._tmpgrow += portion
 							remaining_space -= portion
-	#						print(f'Assigned {portion} to {each} as available')
 							dirty = True
 			
 			if not dirty: break # Nothing was able to be repositioned
-		#	if passes > 30: break
-	#		print(f'Pass {passes}')
 			
 			# The second step: repositioning the elements based on this reallocated space
 			current_position = u
 			hacked_kerning = remaining_space / kerns if kerns else 0 # If there was some space that couldn't be used by flexible elements, give it back by expanding each kerning slightly
 			# (But if there were no kerns, don't divide by zero)
-	#		print(f'Kern: {remaining_space} {kerns} {hacked_kerning}')
 			next_back_kerning = 0
 			for i, each in enumerate(self.contents):
 				back_kerning = next_back_kerning # We have to note this *before* reallocating space because that might change the kerning values! The updated values will get noted on the next pass through the big optimization loop
 				next_back_kerning = kern_front(each) # So we record the back_kerning value here (for *this* element), before we reallocate its space, and then use this value in the next iteration of the loop
 				front_kerning = kern_back(self.contents[i+1]) if i+1<len(self.contents) else 0 # The kerning available in front of this element - this one doesn't need to be calculated in advance because self.contents[i+1] hasn't been reallocated yet at this time
-	#			print(f'Kerning for {each}: front {front_kerning} back {back_kerning} hack {hacked_kerning}')
 				previous_position = current_position
 				current_position -= each.adjust[jd] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
@@ -516,10 +505,8 @@ class Container(Element):
 				
 				if back_kerning and allow_kern_back(each): # Kern backwards the appropriate amount
 					current_position -= (back_kerning - hacked_kerning)
-	#				print(f'Kerned {each} back into {self.contents[i-1]} by {back_kerning - hacked_kerning}')
 				
 				if each._tmpgrow: # This one has grown!
-			#		print(f'{each} can grow')
 					new_j = each.dims[jd] + each._tmpgrow
 					new_u = current_position
 					propagate_child(each, new_j, k, new_u, v)
@@ -527,27 +514,20 @@ class Container(Element):
 					current_position += each.adjust[jd] # TODO: Flexible ones should never have adjustment values in the direction that they're flexible, should they?
 				
 				else: # This one needs no special handling
-			#		print(f'{each} needs no special handling')
 					new_u = current_position #- each.adjust[jd]
 					propagate_child(each, this_j, k, new_u, v) # TODO Why doesn't each.dims[jd] work for this_j here?
-			#		print(f'{each} {this_j} {each.dims[jd]} {each.adjust[jd]}')
 					current_position += each.dims[jd]
 					current_position += each.adjust[jd]
 				
 				if front_kerning and allow_kern_front(each): # Finally, check to see if we need to adjust the kerning for the *next* element
-			#		print(f'Current {current_position}')
 					current_position -= (front_kerning - hacked_kerning)
-			#		print(f'Adjusting front kerning by {front_kerning}')
-			#		print(f'Current {current_position}')
-	#				print(f'Kerned {each} forward into {self.contents[i+1]} by {front_kerning - hacked_kerning}')
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
-			#		print('RESET')
 			
 			passes += 1
 			# Now loop back and check again
 		
-		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again on the next level)
+		# Once we've done all the positioning, we see if there's any vertical space we can give up to other elements on the next level up
 		largest_k = max(each.dims[kd] for each in self.contents)
 		adjust_v = min(each.adjust[kd] for each in self.contents)
 		if horizontal:
@@ -561,90 +541,7 @@ class HStack(Container):
 	def __str__(self):
 		return '[' + ','.join(str(c) for c in self.contents) + ']'
 	
-	def propagate_dimensions(self, dims, pos):
-		return self.kerning_and_arrangement(dims, pos, horizontal=True)
-		
-		self.dims = (w,h) = dims
-		self.pos = (x,y) = pos
-		self.adjust = 0,0
-		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
-		if pieces == 0: pieces = 1 # Prevent divide by zero when cursor but no other strokes
-		each_w = w/pieces
-		i = 0
-		for each in self.contents:
-			if isinstance(each, Cursor):
-				each.propagate_dimensions((0, h), (x+i*each_w, y))
-			elif isinstance(each, Expand):
-				each.propagate_dimensions((each_w*2, h), (x+i*each_w, y))
-				i += 2
-			else:
-				each.propagate_dimensions((each_w, h), (x+i*each_w, y))
-				i += 1
-		
-		# Now check if we have to do any fancy kerning and recalculation
-		if any(each.can_expand_horizontally() for each in self.contents):
-			# In this case, we have different types of strokes together, and some of them can expand horizontally
-			# So first we calculate how much space is currently used and can't be avoided
-			fixed_space = 0
-			for i, each in enumerate(self.contents):
-				if each.can_expand_horizontally(): continue # Ignore flexible ones
-				used = each.dims[0]
-				# Can we kern this into its neighbors?
-				if i-1 >= 0 and each.allow_kern_leftward():
-					used -= self.contents[i-1].kern_right()
-				if i+1 < len(self.contents) and each.allow_kern_rightward():
-					used -= self.contents[i+1].kern_left()
-				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
-				fixed_space += used
-			flexible_space = w - fixed_space
-			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_horizontally()) # Divide by the number of flexible elements
-			
-			# Now give them their new positions
-			current_position = x
-			for i, each in enumerate(self.contents):
-				left_kerning = self.contents[i-1].kern_right() if i-1>=0 else 0
-				right_kerning = self.contents[i+1].kern_left() if i+1<len(self.contents) else 0
-				previous_position = current_position
-				current_position -= each.adjust[0] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
-				
-				if isinstance(each, Expand):
-					this_w = each_w*2
-				elif isinstance(each, Cursor):
-					this_w = 0
-				else:
-					this_w = each_w
-				
-				if each.can_expand_horizontally(): # This is a flexible one
-					new_w = portion + left_kerning + right_kerning # The new width to assign
-					new_x = current_position - left_kerning
-					each.propagate_dimensions((new_w, h), (new_x, y))
-					current_position += portion
-					# current_position += each.adjust[0] # Flexible ones should never have adjustment values in the direction that they're flexible - they're expected to take up all the space they're given
-				
-				elif left_kerning and each.allow_kern_leftward(): # This one should be nudged to the left
-					new_x = current_position - left_kerning
-					each.propagate_dimensions((this_w, h), (new_x, y))
-					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
-					current_position += each.dims[0] - left_kerning
-					current_position += each.adjust[0]
-				
-				else: # This one needs no special handling
-					new_x = current_position
-					each.propagate_dimensions((this_w, h), (new_x, y))
-					current_position += each.dims[0]
-					current_position += each.adjust[0]
-				
-				if right_kerning and each.allow_kern_rightward() and not each.can_expand_horizontally(): # Finally, check to see if we need to adjust the kerning for the *next* element
-					current_position -= right_kerning
-				if previous_position > current_position: # But don't allow any element to take less than zero width
-					current_position = previous_position
-		
-		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again)
-		largest_h = max(each.dims[1] for each in self.contents)
-		adjust_y = min(each.adjust[1] for each in self.contents)
-		self.dims = (w, largest_h)
-		self.adjust = (0, adjust_y)
-	
+	def propagate_dimensions(self, dims, pos): return self.kerning_and_arrangement(dims, pos, horizontal=True)
 	def kern_left(self): return self.contents[0].kern_left()
 	def kern_right(self): return self.contents[-1].kern_right()
 	def allow_kern_leftward(self): return self.contents[0].allow_kern_leftward()
@@ -690,89 +587,7 @@ class VStack(Container):
 	def __str__(self):
 		return '{' + ','.join(str(c) for c in self.contents) + '}'
 	
-	def propagate_dimensions(self, dims, pos):
-		return self.kerning_and_arrangement(dims, pos, horizontal=False)
-		
-		self.dims = (w,h) = dims
-		self.pos = (x,y) = pos
-		self.adjust = 0,0
-		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
-		if pieces == 0: pieces = 1 # Prevent divide by zero
-		each_h = h/pieces
-		i = 0
-		for each in self.contents:
-			if isinstance(each, Cursor):
-				each.propagate_dimensions((w, 0), (x, y+i*each_h))
-			elif isinstance(each, Expand):
-				each.propagate_dimensions((w, each_h*2), (x, y+i*each_h))
-				i += 2
-			else:
-				each.propagate_dimensions((w, each_h), (x, y+i*each_h))
-				i += 1
-		
-		# Now check if we have to do any fancy kerning and recalculation
-		if any(each.can_expand_vertically() for each in self.contents):
-			# The algorithm is the same as for horizontal, so see HStack for details
-			fixed_space = 0
-			for i, each in enumerate(self.contents):
-				if each.can_expand_vertically(): continue # Ignore flexible ones
-				used = each.dims[1]
-				# Can we kern this into its neighbors?
-				if i-1 >= 0 and each.allow_kern_upward():
-					used -= self.contents[i-1].kern_bottom()
-				if i+1 < len(self.contents) and each.allow_kern_downward():
-					used -= self.contents[i+1].kern_top()
-				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
-				fixed_space += used
-			flexible_space = h - fixed_space
-			portion = flexible_space / sum(1 for each in self.contents if each.can_expand_vertically()) # Divide by the number of flexible elements
-			
-			# Now give them their new positions
-			current_position = y
-			for i, each in enumerate(self.contents):
-				top_kerning = self.contents[i-1].kern_bottom() if i-1>=0 else 0
-				bottom_kerning = self.contents[i+1].kern_top() if i+1<len(self.contents) else 0
-				previous_position = current_position
-				current_position -= each.adjust[1] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
-				
-				if isinstance(each, Expand):
-					this_h = 2*each_h
-				elif isinstance(each, Cursor):
-					this_h = 0
-				else:
-					this_h = each_h
-				
-				if each.can_expand_vertically(): # This is a flexible one
-					new_h = portion + top_kerning + bottom_kerning # The new height to assign
-					new_y = current_position - top_kerning
-					each.propagate_dimensions((w, new_h), (x, new_y))
-					current_position += portion
-					# See HStack for justification
-				
-				elif top_kerning and each.allow_kern_upward(): # This one should be nudged upward
-					new_y = current_position - top_kerning
-					each.propagate_dimensions((w, this_h), (x, new_y))
-					# As above
-					current_position += each.dims[1] - top_kerning
-					current_position += each.adjust[1]
-				
-				else: # This one needs no special handling
-					new_y = current_position
-					each.propagate_dimensions((w, this_h), (x, new_y))
-					current_position += each.dims[1]
-					current_position += each.adjust[1]
-				
-				if bottom_kerning and each.allow_kern_downward() and not each.can_expand_vertically(): # Finally, check to see if we need to adjust the kerning for the *next* element
-					current_position -= bottom_kerning
-				if previous_position > current_position: # But don't allow any element to take less than zero height
-					current_position = previous_position
-		
-		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again)
-		largest_w = max(each.dims[0] for each in self.contents)
-		adjust_x = min(each.adjust[0] for each in self.contents)
-		self.dims = (largest_w, h)
-		self.adjust = (adjust_x, 0)
-	
+	def propagate_dimensions(self, dims, pos): return self.kerning_and_arrangement(dims, pos, horizontal=False)
 	def kern_top(self): return self.contents[0].kern_top()
 	def kern_bottom(self): return self.contents[-1].kern_bottom()
 	def allow_kern_upward(self): return self.contents[0].allow_kern_upward()

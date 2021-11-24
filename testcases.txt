@@ -5,7 +5,7 @@ P[vv2] # A
 {chhc} # UP
 L{d(u[0vv0])} # NI
 L[{0[hc]h}v{0dh}] # WI5/GEŠTIN
-<T{[vvv]v}> # ḪI
+{[vvv]v}T # ḪI
 W[cvh2vvcv] # AR
 L[c{[hc]([hc]v)}] # UL
 L[{hh2h}{[vvv]v}TEv] # IT

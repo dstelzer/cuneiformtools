@@ -112,5 +112,5 @@ PHASE 5
 	Location restrictions?
 #	Space-fillers for GALDUBSAR
 #	"Damaged" modifier
-?	Better kerning algorithm
-#	Better control of E modifier
+#	Better kerning algorithm
+#	Better control of E adjustment
