@@ -429,7 +429,7 @@ class Container(Element):
 		else: (k, j), (v, u), (kd, jd) = dims, pos, (0, 1)
 		self.adjust = 0,0
 		
-		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
+		pieces = len(self.contents) + sum(c.factor()-1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus (factor-1) for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
 		if pieces == 0: pieces = 1 # Prevent divide by zero when cursor but no other strokes
 		each_j = j/pieces
 		i = 0
@@ -438,8 +438,8 @@ class Container(Element):
 			if isinstance(each, Cursor):
 				propagate_child(each, 0, k, u+i*each_j, v)
 			elif isinstance(each, Expand):
-				propagate_child(each, each_j*2, k, u+i*each_j, v)
-				i += 2
+				propagate_child(each, each_j*each.factor(), k, u+i*each_j, v)
+				i += each.factor()
 			else:
 				propagate_child(each, each_j, k, u+i*each_j, v)
 				i += 1
@@ -483,31 +483,31 @@ class Container(Element):
 						found = True
 						each._tmpgrow += grow # Assign how much space we're going to give this one
 						remaining_space -= grow
-						print(f'Assigned {grow} to {each} as requested')
+	#					print(f'Assigned {grow} to {each} as requested')
 						dirty = True
 				if not found: # There was nothing that wanted less than we had, so divide the remaining space between all of them equally
 					for each in self.contents:
 						if can_expand(each) - each._tmpgrow > epsilon:
 							each._tmpgrow += portion
 							remaining_space -= portion
-							print(f'Assigned {portion} to {each} as available')
+	#						print(f'Assigned {portion} to {each} as available')
 							dirty = True
 			
 			if not dirty: break # Nothing was able to be repositioned
 		#	if passes > 30: break
-			print(f'Pass {passes}')
+	#		print(f'Pass {passes}')
 			
 			# The second step: repositioning the elements based on this reallocated space
 			current_position = u
 			hacked_kerning = remaining_space / kerns if kerns else 0 # If there was some space that couldn't be used by flexible elements, give it back by expanding each kerning slightly
 			# (But if there were no kerns, don't divide by zero)
-			print(f'Kern: {remaining_space} {kerns} {hacked_kerning}')
+	#		print(f'Kern: {remaining_space} {kerns} {hacked_kerning}')
 			next_back_kerning = 0
 			for i, each in enumerate(self.contents):
 				back_kerning = next_back_kerning # We have to note this *before* reallocating space because that might change the kerning values! The updated values will get noted on the next pass through the big optimization loop
 				next_back_kerning = kern_front(each) # So we record the back_kerning value here (for *this* element), before we reallocate its space, and then use this value in the next iteration of the loop
 				front_kerning = kern_back(self.contents[i+1]) if i+1<len(self.contents) else 0 # The kerning available in front of this element - this one doesn't need to be calculated in advance because self.contents[i+1] hasn't been reallocated yet at this time
-				print(f'Kerning for {each}: front {front_kerning} back {back_kerning} hack {hacked_kerning}')
+	#			print(f'Kerning for {each}: front {front_kerning} back {back_kerning} hack {hacked_kerning}')
 				previous_position = current_position
 				current_position -= each.adjust[jd] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
@@ -516,7 +516,7 @@ class Container(Element):
 				
 				if back_kerning and allow_kern_back(each): # Kern backwards the appropriate amount
 					current_position -= (back_kerning - hacked_kerning)
-					print(f'Kerned {each} back into {self.contents[i-1]} by {back_kerning - hacked_kerning}')
+	#				print(f'Kerned {each} back into {self.contents[i-1]} by {back_kerning - hacked_kerning}')
 				
 				if each._tmpgrow: # This one has grown!
 			#		print(f'{each} can grow')
@@ -539,7 +539,7 @@ class Container(Element):
 					current_position -= (front_kerning - hacked_kerning)
 			#		print(f'Adjusting front kerning by {front_kerning}')
 			#		print(f'Current {current_position}')
-					print(f'Kerned {each} forward into {self.contents[i+1]} by {front_kerning - hacked_kerning}')
+	#				print(f'Kerned {each} forward into {self.contents[i+1]} by {front_kerning - hacked_kerning}')
 				if previous_position > current_position: # But don't allow any element to take less than zero width
 					current_position = previous_position
 			#		print('RESET')
@@ -904,6 +904,9 @@ class Adjustment(Element):
 		super().__init__(*args, **kwargs)
 		self.child = child
 	
+	def __str__(self):
+		return str(self.child) + self._sigil()
+	
 	def traverse(self):
 		yield self
 		yield from self.child.traverse()
@@ -913,8 +916,7 @@ class Adjustment(Element):
 		return self.child.functional_form()
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
-	def __str__(self):
-		return str(self.child) + 'T'
+	def _sigil(self): return 'T'
 	def can_expand_horizontally(self): return 0
 	def can_expand_vertically(self): return 0
 	def propagate_dimensions(self, dims, pos):
@@ -933,8 +935,10 @@ class Tenu(Adjustment): # Rotate a container 45 degrees
 class Expand(Adjustment): # Request twice as much space as usual from our parent
 	# This class actually does basically nothing - but it's checked for in the kerning algorithm in VStack and HStack
 	# Note that this prevents its child from expanding! It's meant to be used when an element doesn't ask for enough space, and expanding elements always ask for as much space as possible. So don't use this on an expanding element unless you want to give it a fixed size.
-	def __str__(self):
-		return str(self.child) + 'E'
+	def _sigil(self): return 'E'
+	def factor(self): # How much expansion do we want?
+		if isinstance(self.child, Expand): return 1+self.child.factor()
+		else: return 2
 	def can_expand_horizontally(self): return 0
 	def can_expand_vertically(self): return 0
 	def propagate_dimensions(self, dims, pos):
@@ -949,8 +953,7 @@ class Expand(Adjustment): # Request twice as much space as usual from our parent
 	def kern_right(self): return self.child.kern_right()
 
 class Margin(Adjustment): # Put a small margin around an element (for when signs are components of other signs)
-	def __str__(self):
-		return str(self.child) + 'M'
+	def _sigil(self): return 'M'
 	def can_expand_horizontally(self): return self.child.can_expand_horizontally()
 	def can_expand_vertically(self): return self.child.can_expand_vertically()
 	def orient(self): return self.child.orient()
@@ -971,7 +974,7 @@ class Margin(Adjustment): # Put a small margin around an element (for when signs
 		self.adjust = (ax, ay)
 
 class Restrict(Adjustment): # Prevent a component from expanding
-	def __str__(self): return str(self.child) + 'R'
+	def _sigil(self): return 'R'
 	def can_expand_horizontally(self): return 0
 	def can_expand_vertically(self): return 0
 	def draw(self, rend): self.child.draw(rend)
