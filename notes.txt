@@ -15,7 +15,7 @@ Types of nodes:
 	
 	P	Portrait
 	L	Landscape
-	S	Square
+	S	Square (default)
 	W	Wider
 	X	Extra-wide
 	N	Narrow
@@ -109,8 +109,10 @@ PHASE 5
 ?	FontForge integration
 	Better tenu placement
 	Better tenu sizing
+#	Better tenu normalization
 	Location restrictions?
 #	Space-fillers for GALDUBSAR
 #	"Damaged" modifier
 #	Better kerning algorithm
 #	Better control of E adjustment
+	Ugaritic-style parsing

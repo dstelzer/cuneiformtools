@@ -1,6 +1,8 @@
 from enum import Enum
 from math import sqrt, inf
 
+empty = frozenset()
+
 class Modifier(Enum): # Modifiers that can be applied to strokes
 	HEADSHORT = "'"
 	TAILSHORT = '"'
@@ -93,8 +95,8 @@ class Canvas(Element):
 		yield self
 		yield from self.internal.traverse()
 	
-	def functional_form(self):
-		return Canvas(CanvasShape.FUNCTIONAL, self.internal.functional_form())
+	def functional_form(self, special=empty):
+		return Canvas(CanvasShape.FUNCTIONAL, self.internal.functional_form(special))
 	
 	def __contains__(self, other): # This one just delegates
 		if isinstance(other, Canvas):
@@ -164,12 +166,12 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 		self.pos = (x, y)
 		self.adjust = (ax, ay)
 	
-	def functional_form(self): return None # Voids are ignored in functional form
+	def functional_form(self, special=empty): return None # Voids are ignored in functional form
 
 class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
 	def _sigil(self): return '*'
 	def draw(self, rend): rend.draw_wildcard(*self.pos, *self.dims, self.mods)
-	def functional_form(self): return Wildcard(self.ident)
+	def functional_form(self, special=empty): return Wildcard(self.ident)
 	def __contains__(self, other): return False # Wildcards should only be on the right side of a comparison, not the left, so they're considered to match nothing (not even other wildcards)
 
 class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in the text area when building signs. It takes up no space and is ignored in all comparisons.
@@ -179,7 +181,7 @@ class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in 
 	def allow_kern_downward(self): return False
 	def allow_kern_upward(self): return False
 	def draw(self, rend): rend.draw_cursor(*self.pos, *self.dims, self.mods)
-	def functional_form(self): return None # Remove from functional form
+	def functional_form(self, special=empty): return None # Remove from functional form
 	def __contains__(self, other): raise ValueError('cursor should not be in search')
 
 class Vertical(Stroke):
@@ -207,7 +209,8 @@ class Vertical(Stroke):
 		rend.box(self.pos[0]-self.adjust[0], self.pos[1], self.adjust[0], self.dims[1], 'r')
 		rend.draw_vertical(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self):
+	def functional_form(self, special=empty):
+		if Tenu in special: return DownDiag(self.ident, self.mods).functional_form(special-{Tenu}) # If this is in a tenu stack, treat it as a downward diagonal instead
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
 		if Modifier.DOUBLE in self.mods: return VStack([Vertical(self.ident), Vertical(self.ident)])
 		elif Modifier.TRIPLE in self.mods: return VStack([Vertical(self.ident), Vertical(self.ident), Vertical(self.ident)])
@@ -238,7 +241,8 @@ class Horizontal(Stroke):
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_horizontal(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self):
+	def functional_form(self, special=empty):
+		if Tenu in special: return UpDiag(self.ident, self.mods).functional_form(special-{Tenu}) # If this is in a tenu stack, treat it as a upward diagonal instead
 		# Like with most strokes, we ignore most modifiers but turn doubling into a stack
 		if Modifier.DOUBLE in self.mods: return HStack([Horizontal(self.ident), Horizontal(self.ident)])
 		elif Modifier.TRIPLE in self.mods: return HStack([Horizontal(self.ident), Horizontal(self.ident), Horizontal(self.ident)])
@@ -255,8 +259,8 @@ class UpDiag(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.draw_upward(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self):
-		# There's no diagonal stacking so we use HStack instead
+	def functional_form(self, special=empty):
+		# There's no diagonal stacking so we use HStack instead, since that becomes an "upward diagonal stack" when tenu
 		if Modifier.DOUBLE in self.mods: return HStack([UpDiag(self.ident), UpDiag(self.ident)])
 		elif Modifier.TRIPLE in self.mods: return HStack([UpDiag(self.ident), UpDiag(self.ident), UpDiag(self.ident)])
 		else: return UpDiag(self.ident)
@@ -273,10 +277,10 @@ class DownDiag(Stroke):
 		rend.box(*self.pos, *self.dims, 'b')
 		rend.draw_downward(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self):
-		# There's no diagonal stacking so we use HStack instead
-		if Modifier.DOUBLE in self.mods: return HStack([DownDiag(self.ident), DownDiag(self.ident)])
-		elif Modifier.TRIPLE in self.mods: return HStack([DownDiag(self.ident), DownDiag(self.ident), DownDiag(self.ident)])
+	def functional_form(self, special=empty):
+		# There's no diagonal stacking so we use VStack instead, since that becomes a "downward diagonal stack" when tenu
+		if Modifier.DOUBLE in self.mods: return VStack([DownDiag(self.ident), DownDiag(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return VStack([DownDiag(self.ident), DownDiag(self.ident), DownDiag(self.ident)])
 		else: return DownDiag(self.ident)
 
 class Winkelhaken(Stroke):
@@ -310,7 +314,7 @@ class Winkelhaken(Stroke):
 		rend.box(self.pos[0], self.pos[1]-self.adjust[1], self.dims[0], self.adjust[1], 'r')
 		rend.draw_hook_wrapper(*self.pos, *self.dims, self.mods)
 	
-	def functional_form(self): return Winkelhaken(self.ident) # No mods to worry about
+	def functional_form(self, special=empty): return Winkelhaken(self.ident) # No mods to worry about
 
 class Container(Element):
 	def __init__(self, contents=None, *args, **kwargs):
@@ -487,6 +491,7 @@ class Container(Element):
 							dirty = True
 			
 			if not dirty: break # Nothing was able to be repositioned
+		#	if passes > 1: break
 			
 			# The second step: repositioning the elements based on this reallocated space
 			current_position = u
@@ -500,24 +505,30 @@ class Container(Element):
 				previous_position = current_position
 				current_position -= each.adjust[jd] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
 				
-				# The amount of space allotted on the first pass (since this doesn't change for fixed elements)
-				this_j = each._tmpj
+				if each._tmpgrow:
+					new_j = each.dims[jd] + each._tmpgrow
+				else:
+					# The amount of space allotted on the first pass (since this doesn't change for fixed elements)
+					new_j = each._tmpj
+				
+				# Check for an edge case involving the available kerning exceeding the size of the element
+				# When this happens, we want to center the element in the available kerning space, rather than letting it fall to the left edge (by default)
+				# We don't have to worry about excessive kerning causing actual problems because we ensure current_position never moves backward, so this is purely an aesthetic thing
+				if allow_kern_back(each) and allow_kern_front(each) and back_kerning+front_kerning > new_j:
+					space = back_kerning + front_kerning - new_j
+					back_kerning -= space/2
+					front_kerning -= space/2
 				
 				if back_kerning and allow_kern_back(each): # Kern backwards the appropriate amount
+					print(f'Kerning between {self.contents[i-1]} and {each}: {back_kerning}')
+					print(f'{current_position}')
 					current_position -= (back_kerning - hacked_kerning)
+					print(f'{current_position}')
 				
-				if each._tmpgrow: # This one has grown!
-					new_j = each.dims[jd] + each._tmpgrow
-					new_u = current_position
-					propagate_child(each, new_j, k, new_u, v)
-					current_position += new_j
-					current_position += each.adjust[jd] # TODO: Flexible ones should never have adjustment values in the direction that they're flexible, should they?
-				
-				else: # This one needs no special handling
-					new_u = current_position #- each.adjust[jd]
-					propagate_child(each, this_j, k, new_u, v) # TODO Why doesn't each.dims[jd] work for this_j here?
-					current_position += each.dims[jd]
-					current_position += each.adjust[jd]
+				new_u = current_position
+				propagate_child(each, new_j, k, new_u, v)
+				current_position += each.dims[jd] # Major bug fixed here! This must be used space not allocated space!
+				current_position += each.adjust[jd]
 				
 				if front_kerning and allow_kern_front(each): # Finally, check to see if we need to adjust the kerning for the *next* element
 					current_position -= (front_kerning - hacked_kerning)
@@ -551,10 +562,10 @@ class HStack(Container):
 	def allow_kern_upward(self): return all(c.allow_kern_upward() for c in self.contents)
 	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
 	
-	def functional_form(self):
+	def functional_form(self, special=empty):
 		# Now here's where things get complicated!
 		# First, take the functional form of each child
-		raw_children = [c.functional_form() for c in self.contents]
+		raw_children = [c.functional_form(special) for c in self.contents]
 		children = []
 		# Then go through and check some things
 		for child in raw_children:
@@ -597,10 +608,10 @@ class VStack(Container):
 	def allow_kern_leftward(self): return all(c.allow_kern_leftward() for c in self.contents)
 	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
 	
-	def functional_form(self):
+	def functional_form(self, special=empty):
 		# This is mostly the same as HStack's implementation
 		# But with one additional complication
-		raw_children = [child.functional_form() for child in self.contents]
+		raw_children = [child.functional_form(special) for child in self.contents]
 		children = []
 		for child in raw_children:
 			if child is None: continue
@@ -672,8 +683,8 @@ class Superpose(Container):
 	# But adjust this if it causes problems
 	def orient(self): return Orientation.NEITHER # Because they're handled specially in the orientation systems
 	
-	def functional_form(self):
-		raw_children = [child.functional_form() for child in self.contents]
+	def functional_form(self, special=empty):
+		raw_children = [child.functional_form(special) for child in self.contents]
 		children = []
 		for child in raw_children:
 			if child is None: continue
@@ -691,7 +702,7 @@ class Superpose(Container):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, Superpose):
 			# This part is kind of hacky. It tests whether each child of `other` can be found in a child of `self`, but doesn't check whether those children of `self` are distinct, because that runs into combinatorial explosion.
-			# For example, by this algorithm, ([hvh]d) encompoasses (hv), which is not ideal.
+			# For example, by this algorithm, ([hvh]d) encompasses (hv), which is not ideal.
 			# But superpositions are kind of messy anyway, so hopefully the false positives from this are worth not having any false negatives.
 			for oc in other.contents:
 				if not any(oc in child for child in self.contents): return False
@@ -726,26 +737,89 @@ class Adjustment(Element):
 		yield self
 		yield from self.child.traverse()
 	
-	def functional_form(self):
-		# Adjustments are ignored in functional form
-		return self.child.functional_form()
+	def functional_form(self, special=empty):
+		# Adjustments are by default ignored in functional form
+		return self.child.functional_form(special)
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def _sigil(self): return 'T'
-	def can_expand_horizontally(self): return 0
-	def can_expand_vertically(self): return 0
+	def can_expand_horizontally(self): return self._potential - self.dims[0]
+	def can_expand_vertically(self): return self._potential - self.dims[1]
+#	def kern_left(self): return self._leftmost
+#	def kern_right(self): return self.dims[0]-self._rightmost
+#	def kern_top(self): return self._topmost
+#	def kern_bottom(self): return self.dims[1]-self._bottommost
+	def allow_kern_downward(self): return self.kern_bottom()<0.05
+	def allow_kern_upward(self): return self.kern_top()<0.05
+	def allow_kern_leftward(self): return self.kern_left()<0.05
+	def allow_kern_rightward(self): return self.kern_right()<0.05
 	def propagate_dimensions(self, dims, pos):
 		(x,y) = pos
 		(w,h) = dims
 		d = min(dims)
+		self._potential = max(dims) # Potential size
 		self.adjust = (dx,dy) = (w-d)/2, (h-d)/2
 		self.pos = (x+dx, y+dy)
 		self.dims = (d, d)
-		small = d*sqrt(2)/2 # Scale down to fit in a smaller square
+		small = d*sqrt(2)/2 # This is the side length of the smaller, tilted square that forms the bounds of our child
 		self.child.propagate_dimensions((small, small), (0, 0)) # Set position to (0,0) to make the rendering hack work better
+		self._determine_extrema()
 	def draw(self, rend):
 		with rend.tenu(self.pos, self.dims): # Context manager that adjusts the coordinate system of the canvas for this one instance, then puts it back afterward
 			self.child.draw(rend)
+		rend.box(self.pos[0]+self._rightmost, self.pos[1], self.dims[0]-self._rightmost, self.dims[1], 'y') # Rightmost
+		rend.box(self.pos[0], self.pos[1], self._leftmost, self.dims[1], 'y') # Leftmost
+		rend.box(self.pos[0], self.pos[1]+self._bottommost, self.dims[0], self.dims[1]-self._bottommost, 'y') # Bottommost
+		rend.box(self.pos[0], self.pos[1], self.dims[0], self._topmost, 'y') # Topmost
+	def functional_form(self, special=empty): # This is where the special parameter gets used!
+		return self.child.functional_form(special|{Tenu}) # Add the "Tenu" special modifier
+	
+	def _coordinate_transform(self, x, y):
+		cs = sqrt(2)/2 # Since the rotation is always 45 degrees, cos and sin are both sqrt(2)/2
+		# First, rotation matrix
+		# x' =  x cos + y sin
+		# y' = -x sin + y cos
+		xx =  x*cs + y*cs
+		yy = -x*cs + y*cs
+		# Then, translate the origin
+		yy += self.dims[1]/2 # By half the large square side length
+		# (I.e. the distance between the small square's origin and the large square's origin)
+		return xx, yy
+	def _determine_extrema(self):
+		strokes = [elem for elem in self.child.traverse() if type(elem) in {Horizontal, Vertical, DownDiag, UpDiag, Winkelhaken}]
+		# Rightmost = southeast corner
+		self._rightmost = max(
+			self._coordinate_transform(
+				stroke.pos[0]+stroke.dims[0], # east
+				stroke.pos[1]+stroke.dims[1]  # south
+			)[0] # x'
+			for stroke in strokes
+		)
+		# Leftmost = northwest corner
+		self._leftmost = min(
+			self._coordinate_transform(
+				stroke.pos[0], # west
+				stroke.pos[1]  # north
+			)[0] # x'
+			for stroke in strokes
+		)
+		# Topmost = northeast corner
+		self._topmost = min(
+			self._coordinate_transform(
+				stroke.pos[0]+stroke.dims[0], # east
+				stroke.pos[1] # north
+			)[1] # y'
+			for stroke in strokes
+		)
+		# Bottommost = southwest corner
+		self._bottommost = max(
+			self._coordinate_transform(
+				stroke.pos[0], # west
+				stroke.pos[1]+stroke.dims[1] # south
+			)[1] # y'
+			for stroke in strokes
+		)
+		#print(self._rightmost, self._leftmost, self._topmost, self._bottommost)
 
 class Expand(Adjustment): # Request twice as much space as usual from our parent
 	# This class actually does basically nothing - but it's checked for in the kerning algorithm in VStack and HStack
