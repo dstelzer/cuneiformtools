@@ -396,12 +396,126 @@ class Container(Element):
 			if matched >= len(inner): return True
 		self._remove_children(notes)
 		return False
+	
+	def kerning_and_arrangement(self, dims, pos, horizontal): # This is the special arrangement code for HStack and VStack, unified here based on the "horizontal" parameter
+		# So instead of w/h we have "j" (direction of stacking) and "k" (opposite direction)
+		# And instead of x/y we have "u" (direction of stacking) and "v" (opposite direction)
+		def propagate_child(child, j, k, u, v):
+			if horizontal: child.propagate_dimensions((j, k), (u, v))
+			else: child.propagate_dimensions((k, j), (v, u))
+		def can_expand(child):
+			if horizontal: return child.can_expand_horizontally()
+			else: return child.can_expand_vertically()
+		def allow_kern_back(child):
+			if horizontal: return child.allow_kern_leftward()
+			else: return child.allow_kern_upward()
+		def allow_kern_front(child):
+			if horizontal: return child.allow_kern_rightward()
+			else: return child.allow_kern_downward()
+		def kern_back(child):
+			if horizontal: return child.kern_left()
+			else: return child.kern_top()
+		def kern_front(child):
+			if horizontal: return child.kern_right()
+			else: return child.kern_bottom()
+		
+		self.dims = dims
+		self.pos = pos
+		if horizontal: (j, k), (u, v), (jd, kd) = dims, pos, (0, 1)
+		else: (k, j), (v, u), (kd, jd) = dims, pos, (0, 1)
+		self.adjust = 0,0
+		
+		pieces = len(self.contents) + sum(1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus 1 for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
+		if pieces == 0: pieces = 1 # Prevent divide by zero when cursor but no other strokes
+		each_j = j/pieces
+		i = 0
+		# First pass: just divide up the space evenly (with more space for Expands and less space for Cursors)
+		for each in self.contents:
+			if isinstance(each, Cursor):
+				propagate_child(each, 0, k, u+i*each_j, v)
+			elif isinstance(each, Expand):
+				propagate_child(each, each_j*2, k, u+i*each_j, v)
+				i += 2
+			else:
+				propagate_child(each, each_j, k, u+i*each_j, v)
+				i += 1
+		
+		# Now check if we have to do any fancy kerning and recalculation
+		if any(can_expand(each) for each in self.contents):
+			# In this case, we have different types of strokes together, and some of them can expand horizontally
+			# So first we calculate how much space is currently used and can't be avoided
+			fixed_space = 0
+			for i, each in enumerate(self.contents):
+				if can_expand(each): continue # Ignore flexible ones
+				used = each.dims[jd]
+				# Can we kern this into its neighbors?
+				if i-1 >= 0 and allow_kern_back(each):
+					used -= kern_front(self.contents[i-1])
+				if i+1 < len(self.contents) and allow_kern_front(each):
+					used -= kern_back(self.contents[i+1])
+				if used < 0: used = 0 # Even with kerning, the minimum space occupied by a glyph is 0
+				fixed_space += used
+			flexible_space = j - fixed_space
+			portion = flexible_space / sum(1 for each in self.contents if can_expand(each)) # Divide by the number of flexible elements
+			
+			# Now give them their new positions
+			current_position = u
+			for i, each in enumerate(self.contents):
+				back_kerning = kern_front(self.contents[i-1]) if i-1>=0 else 0 # The kerning behind this element
+				front_kerning = kern_back(self.contents[i+1]) if i+1<len(self.contents) else 0 # The kerning in front of this element
+				previous_position = current_position
+				current_position -= each.adjust[jd] # If the element adjusted its own position, we need to take that into account when assigning its new coordinates
+				
+				# The amount of space allotted on the first pass (since this doesn't change for fixed elements)
+				if isinstance(each, Expand):
+					this_j = each_j*2
+				elif isinstance(each, Cursor):
+					this_j = 0
+				else:
+					this_j = each_j
+				
+				if can_expand(each): # This is a flexible one
+					new_j = portion + back_kerning + front_kerning # The new width to assign
+					new_u = current_position - back_kerning
+					propagate_child(each, new_j, k, new_u, v)
+					current_position += portion
+					# current_position += each.adjust[jd] # Flexible ones should never have adjustment values in the direction that they're flexible - they're expected to take up all the space they're given
+				
+				elif back_kerning and allow_kern_back(each): # This one should be nudged to the left
+					new_u = current_position - back_kerning
+					propagate_child(each, this_j, k, new_u, v)
+					# I'm not exactly sure why, but propagating the dimensions with the original width and height, and then applying the adjustment values, works better than propagating with the width and height stored in each.dims. So propagate(each.dims, (new_x, each.pos[1])) doesn't work, and this does.
+					current_position += each.dims[jd] - left_kerning
+					current_position += each.adjust[jd]
+				
+				else: # This one needs no special handling
+					new_u = current_position
+					propagate_child(each, this_j, k, new_u, v)
+					current_position += each.dims[jd]
+					current_position += each.adjust[jd]
+				
+				if front_kerning and allow_kern_front(each) and not can_expand(each): # Finally, check to see if we need to adjust the kerning for the *next* element
+					current_position -= front_kerning
+				if previous_position > current_position: # But don't allow any element to take less than zero width
+					current_position = previous_position
+		
+		# Once we've done all the positioning, we see if there's any space we can give up to other elements (which might trigger this whole process all over again on the next level)
+		largest_k = max(each.dims[kd] for each in self.contents)
+		adjust_v = min(each.adjust[kd] for each in self.contents)
+		if horizontal:
+			self.dims = (j, largest_k)
+			self.adjust = (0, adjust_v)
+		else:
+			self.dims = (largest_k, j)
+			self.adjust = (adjust_v, 0)
 
 class HStack(Container):
 	def __str__(self):
 		return '[' + ','.join(str(c) for c in self.contents) + ']'
 	
 	def propagate_dimensions(self, dims, pos):
+		return self.kerning_and_arrangement(dims, pos, horizontal=True)
+		
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
@@ -529,6 +643,8 @@ class VStack(Container):
 		return '{' + ','.join(str(c) for c in self.contents) + '}'
 	
 	def propagate_dimensions(self, dims, pos):
+		return self.kerning_and_arrangement(dims, pos, horizontal=False)
+		
 		self.dims = (w,h) = dims
 		self.pos = (x,y) = pos
 		self.adjust = 0,0
