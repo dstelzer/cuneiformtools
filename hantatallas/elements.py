@@ -745,14 +745,14 @@ class Tenu(Adjustment): # Rotate a container 45 degrees
 	def _sigil(self): return 'T'
 	def can_expand_horizontally(self): return self._potential - self.dims[0]
 	def can_expand_vertically(self): return self._potential - self.dims[1]
-#	def kern_left(self): return self._leftmost
-#	def kern_right(self): return self.dims[0]-self._rightmost
-#	def kern_top(self): return self._topmost
-#	def kern_bottom(self): return self.dims[1]-self._bottommost
-	def allow_kern_downward(self): return self.kern_bottom()<0.05
-	def allow_kern_upward(self): return self.kern_top()<0.05
-	def allow_kern_leftward(self): return self.kern_left()<0.05
-	def allow_kern_rightward(self): return self.kern_right()<0.05
+	def kern_left(self): return self._leftmost
+	def kern_right(self): return self.dims[0]-self._rightmost
+	def kern_top(self): return self._topmost
+	def kern_bottom(self): return self.dims[1]-self._bottommost
+#	def allow_kern_downward(self): return self.kern_bottom()<0.05
+#	def allow_kern_upward(self): return self.kern_top()<0.05
+#	def allow_kern_leftward(self): return self.kern_left()<0.05
+#	def allow_kern_rightward(self): return self.kern_right()<0.05
 	def propagate_dimensions(self, dims, pos):
 		(x,y) = pos
 		(w,h) = dims
