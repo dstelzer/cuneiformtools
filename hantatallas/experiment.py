@@ -8,6 +8,7 @@ import io
 experimental_log = logging.getLogger('experiment') # Specifically deviating from recommended practice because this isn't meant to be module-specific, it's meant to be experiment-specific
 exlog = experimental_log
 experimental_log.setLevel(logging.INFO)
+experimental_log.propagate = False
 
 form = logging.Formatter('"{asctime}",{message}', style='{')
 form.converter = time.gmtime

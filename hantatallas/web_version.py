@@ -11,7 +11,7 @@ from .render import *
 from .parser import parse, parse_sequence
 from .database import Database
 from .layout import Layout
-import .experiment
+from . import experiment
 
 renderers = {
 	'publish' : TwoSidedRenderer,
@@ -40,14 +40,14 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, se
 			output = func(instr, friendly=friendly)
 	except ValueError:
 		return '<pre>'+log.getvalue()+'</pre>'
-	
+
 	if highlight: hl = highlight.split(',')
 	else: hl = ()
-	
+
 	rend = renderers[rendname]
 	func = rend.render_sequence if sequence else rend.render # Choose the right rendering function to invoke
 	data = func(output, hl, format=format, *args, **kwargs).get_raw_data()
-	
+
 	return formatted_response(data, format)
 
 def make_image(code, match=()):
@@ -64,7 +64,7 @@ db.prepare_sorting()
 
 def do_searching(code, regex, sort, expkey=None):
 	if expkey: experiment.record(expkey, 'SEARCH', f'{code} % {regex} % {sort}')
-	
+
 	log = StringIO()
 	if code.strip():
 		try:
@@ -75,7 +75,7 @@ def do_searching(code, regex, sort, expkey=None):
 			return -1, '<pre>'+log.getvalue()+'</pre>'
 	else:
 		piece = None
-	
+
 	if regex.strip():
 		try:
 			recomp = re.compile(regex.strip())
@@ -84,7 +84,7 @@ def do_searching(code, regex, sort, expkey=None):
 			return -1, f'<pre>Regex error: {e.args[0]}</pre>'
 	else:
 		recomp = None
-	
+
 	return db.lookup_as_table(piece, recomp, sort)
 
 def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
@@ -95,9 +95,9 @@ def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=Non
 	except ValueError as e:
 		result = log.getvalue() or 'Error outside normal handling system\n'+'\n'.join(e.args) # The error message should always be pretty-printed to stdout (and thus redirected into `log`), but just in case it's not we have a fallback here: printing the exception's arguments
 		return '<pre>'+result+'</pre>'
-	
+
 	renderclass = renderers[rendname]
-	
+
 	data = Layout(renderclass=renderclass, **layoutparams).render(rows, format=format, **rendparams).get_raw_data()
-	
+
 	return formatted_response(data, format)
