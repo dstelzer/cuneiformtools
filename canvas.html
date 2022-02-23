@@ -26,7 +26,12 @@
 			}
 			function search(){
 				code = encodeURIComponent(document.getElementById("source").value);
-				document.location = "/search?code="+ code;
+				params = new URLSearchParams(document.location.search);
+				if(params.has("expkey")){
+					document.location = "/search?code="+ code +"&expkey="+ params.get("expkey");
+				}else{
+					document.location = "/search?code="+ code;
+				}
 			}
 			function resize(){
 				canvas = document.getElementById("canvas");

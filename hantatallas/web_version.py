@@ -11,6 +11,7 @@ from .render import *
 from .parser import parse, parse_sequence
 from .database import Database
 from .layout import Layout
+import .experiment
 
 renderers = {
 	'publish' : TwoSidedRenderer,
@@ -61,13 +62,16 @@ db.load_expansions('./hantatallas/data/replacements.dat')
 db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
-def do_searching(code, regex, sort):
+def do_searching(code, regex, sort, expkey=None):
+	if expkey: experiment.record(expkey, 'SEARCH', f'{code} % {regex} % {sort}')
+	
 	log = StringIO()
 	if code.strip():
 		try:
 			with redirect_stdout(log):
 				piece = parse(code)
 		except ValueError:
+			if expkey: experiment.record(expkey, 'ERROR', log.getvalue())
 			return -1, '<pre>'+log.getvalue()+'</pre>'
 	else:
 		piece = None
@@ -76,6 +80,7 @@ def do_searching(code, regex, sort):
 		try:
 			recomp = re.compile(regex.strip())
 		except re.error as e:
+			if expkey: experiment.record(expkey, 'ERROR', e.args[0])
 			return -1, f'<pre>Regex error: {e.args[0]}</pre>'
 	else:
 		recomp = None
