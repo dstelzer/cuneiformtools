@@ -116,3 +116,6 @@ PHASE 5
 #	Better kerning algorithm
 #	Better control of E adjustment
 	Ugaritic-style parsing
+
+MISC
+	Improve kerning, check dims in group (ur, el)

@@ -52,7 +52,7 @@ def do_hant_search():
 	sort = request.args.get('sort', 'hzl', type=str)
 	expkey = request.args.get('expkey', '', type=str)
 	matches, table = do_searching(code, regex, sort, expkey=expkey)
-	return render_template('search.html', code=code, regex=regex, sort=sort, matches=matches, table=table)
+	return render_template('search.html', code=code, regex=regex, sort=sort, matches=matches, table=table, expkey=expkey)
 
 @app.route('/galdubsar', methods=['GET', 'POST'])
 def do_galdubsar():

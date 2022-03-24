@@ -24,6 +24,9 @@
 				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>
 				<option value="usage" {{ 'selected' if sort=='usage' else '' }}>Usage</option>
 			</select></label>
+			{% if expkey != '' %}
+			<input type="hidden" name="expkey" value="{{expkey}}" />
+			{% endif %}
 			<input type="submit" value="Search" />
 		</form>
 		
