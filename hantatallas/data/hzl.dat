@@ -2534,27 +2534,38 @@
 	FORM
 		L([vv'v'v'v']{0hh})
 		L{[v0'"{d[vvvv]}]h}
+		L[v({d[vvvv]}{0h})]
 		L([v0]{hh[0vvvv]})
 		L[{0hh}vv'v'v'v']
 	NAME
 		SA
 201
 	SUM
-		GÚ?
-			[page missing]
+		GÚ
+			throat, neck
+			shoulder
 	FORM
 		L[{0hh}v2c'{cc}]
 		L[{0hh}v2{[vv]v}TE]
+		[{vh(vh)}c'{cc}]
 	NAME
 		GÚ GU2
 202
+	HIT
+		dur
+		túr
 	SUM
-		DUR?
-			[page missing]
-	FORM
-		L[{0hh}v20'"{cc}{ch}]
-	NAME
 		DUR
+			band, ribbon
+	AKK
+		ṭur
+	FORM
+		L[{0hh}v2c'{chc}]
+		L[{[hv][hv]}0'"c'{cc}h]
+		L[{0hh}v20'"{ccc}{d(uv)}]
+		L[{[hv][hv]}0'"{ccc}h]
+	NAME
+		DUR TÚR TUR2 ṬUR
 203
 	SUM
 		UZU
@@ -2611,7 +2622,7 @@
 		[v{hhh}v]
 		[{h2h}v]
 	NAME
-		KU GU5 QÚ QU2 TUŠ DÚR DUR2 DURU DURU2 DURUN TUKUL
+		KU GU5 QÚ QU2 TUŠ DÚR DUR2 DÚRU DURU2 DURUN TUKUL
 207
 	COMP
 		KU!.U.GAG
