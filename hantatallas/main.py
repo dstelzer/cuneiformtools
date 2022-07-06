@@ -27,14 +27,18 @@ def test_comparisons():
 	while True:
 		outer = parse(input('Outer: '))
 		outf = outer.functional_form()
+		print(outf)
 		inner = parse(input('Inner: '))
 		inf = inner.functional_form()
+		print(inf)
 		if inf in outf:
 			match = outf.highlight_containment(inf)
 	#		print(match)
+			print('Match')
 			TwoSidedRenderer.render(outer, match).show()
 		else:
 			print('No match')
+		print()
 
 def test_layout():
 	db = Database()
@@ -55,4 +59,7 @@ def test_uga():
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
-	test_rendering()
+	test_comparisons()
+
+# Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
+# Should match, currently doesn't

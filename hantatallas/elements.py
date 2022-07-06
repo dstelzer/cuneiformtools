@@ -563,9 +563,11 @@ class HStack(Container):
 	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
 	
 	def functional_form(self, special=empty):
+		newspecial = special - {VStack} # Indicate that the current processing is NOT happening inside a VStack, which matters for a certain type of ambiguity
+		
 		# Now here's where things get complicated!
 		# First, take the functional form of each child
-		raw_children = [c.functional_form(special) for c in self.contents]
+		raw_children = [c.functional_form(newspecial) for c in self.contents]
 		children = []
 		# Then go through and check some things
 		for child in raw_children:
@@ -578,6 +580,22 @@ class HStack(Container):
 		if not children:
 			# If we have *no* children, return nothing
 			return None
+		
+		# This extra complication is imported from VStack and is used in one specific case to resolve ambiguity in a way that leads to fewer overall stacks
+		# See VStack.functional_form for details
+		if all(isinstance(child, VStack) for child in children) and VStack in special:
+			l = len(children[0].contents)
+			if all(len(child.contents)==l for child in children):
+				# So now we know that we've got an HStack of VStacks
+				# And that all those VStacks are the same size
+				# So, time to change that around
+				child_contents = [child.contents for child in children]
+				new_contents = list(zip(*child_contents))
+				new_stacks = [HStack(list(c)) for c in new_contents]
+				new_parent = VStack(new_stacks)
+				# Then we re-functionalize this in case there are any new nesting issues that need to be handled
+				return new_parent.functional_form(special-{Tenu}) # Note that we specifically use `special` rather than `newspecial` here because we want this evaluated in the same context that we were evaluated in!
+				# Don't re-apply the Tenu modifier when re-functionalizing though - we've already converted cardinal strokes into diagonals, we don't want to do that again
 		
 		return HStack(children).clean_intersections()
 	
@@ -609,9 +627,11 @@ class VStack(Container):
 	def allow_kern_rightward(self): return all(c.allow_kern_rightward() for c in self.contents)
 	
 	def functional_form(self, special=empty):
+		newspecial = special | {VStack} # Indicate that the current processing is happening inside a VStack, which matters for a certain type of ambiguity (see below)
+		
 		# This is mostly the same as HStack's implementation
 		# But with one additional complication
-		raw_children = [child.functional_form(special) for child in self.contents]
+		raw_children = [child.functional_form(newspecial) for child in self.contents]
 		children = []
 		for child in raw_children:
 			if child is None: continue
@@ -622,14 +642,13 @@ class VStack(Container):
 		if not children:
 			return None
 		
-		# Here's the extra part
-		# Sometimes there's an ambiguity where something can be written either as HStacks of VStacks, or as VStacks of HStacks
-		# (Consider, for example, the ZA sign)
-		# In this case, we need to choose one of the two to be canonical
-		# And we chose an HStack of VStacks
-		# So if we see a VStack of HStacks, we need to change that
-		if all(isinstance(child, HStack) for child in children):
-			l = len(children[0].contents)
+		# Here's the extra complication mentioned above!
+		# Sometimes there's an ambiguity where something can be written either as HStacks of VStacks, or as VStacks of HStacks. (Consider, for example, the ZA sign.)
+		# In this case, we need to choose one of the two to be canonical (to avoid search failures), and we chose an HStack of VStacks.
+		# So if we see a VStack of HStacks, we need to change that.
+		# EXCEPTION: If we're *within* a VStack, we choose instead to make a VStack of HStacks, so the total number of stacks can be reduced. We indicate this by having `VStack` included in `special` if we're processing the inside of a VStack.
+		if all(isinstance(child, HStack) for child in children) and VStack not in special:
+			l = len(children[0].contents) # We also know that `children` is not empty (because that case would have been handled above) so we can do this safely
 			if all(len(child.contents)==l for child in children):
 				# So now we know that we've got a VStack of HStacks
 				# And that all those HStacks are the same size
@@ -639,7 +658,8 @@ class VStack(Container):
 				new_stacks = [VStack(list(c)) for c in new_contents]
 				new_parent = HStack(new_stacks)
 				# Then we re-functionalize this in case there are any new nesting issues that need to be handled
-				return new_parent.functional_form()
+				return new_parent.functional_form(special-{Tenu}) # Note that we specifically use `special` rather than `newspecial` here because we want this evaluated in the same context that we were evaluated in!
+				# Don't re-apply the Tenu modifier when re-functionalizing though - we've already converted cardinal strokes into diagonals, we don't want to do that again
 		
 		return VStack(children).clean_intersections()
 	
@@ -684,7 +704,9 @@ class Superpose(Container):
 	def orient(self): return Orientation.NEITHER # Because they're handled specially in the orientation systems
 	
 	def functional_form(self, special=empty):
-		raw_children = [child.functional_form(special) for child in self.contents]
+		newspecial = special - {VStack} # Indicate that the current processing is NOT happening inside a VStack, which matters for a certain type of ambiguity
+		
+		raw_children = [child.functional_form(newspecial) for child in self.contents]
 		children = []
 		for child in raw_children:
 			if child is None: continue

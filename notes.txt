@@ -118,4 +118,14 @@ PHASE 5
 	Ugaritic-style parsing
 
 MISC
-	Improve kerning, check dims in group (ur, el)
+	Improve kerning
+	Check dims in group (ur, el)
+#	Missing HZL entries
+#	Fix containment issue with stacked stacks (EZEN4)
+	Recheck the entire HZL
+		1
+		2
+		3
+		4
+		5
+		6
