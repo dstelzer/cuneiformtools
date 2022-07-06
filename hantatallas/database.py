@@ -19,7 +19,7 @@ class DatabaseEntry:
 		self.forms = [] # [Canvas]
 		self.notes = defaultdict(dict_list_factory) # lang -> name -> [meaning]
 		self.names = set() # names to reference this sign by
-
+	
 	def finalize(self):
 		try:
 			self.functional = [parse(f).functional_form() for f in self.forms]
@@ -27,7 +27,7 @@ class DatabaseEntry:
 			print(f'(Error while handling {self.ident})')
 			raise
 		self.names.add('HZL'+str(self.ident)) # Fallback name in case nothing else is provided
-
+	
 	def sort_hzl(self):
 		return self.ident.zfill(3)
 	def sort_complex(self):
@@ -46,7 +46,7 @@ class DatabaseEntry:
 			not self.langs['SUM'],
 			self.langs['SUM'][0] if self.langs['SUM'] else '',
 		)
-
+	
 	def find_matches(self, part=None, regex=None):
 		if regex is not None:
 			if not any(re.search(regex, name) for name in self.names):
@@ -59,7 +59,7 @@ class DatabaseEntry:
 				ident = f'{self.ident}/{i}' if i else str(self.ident)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
-
+	
 	def yield_all(self): # TODO not needed now, find_matches with no params does this
 		for i, pres in enumerate(self.forms):
 			ident = f'{self.ident}/{i}' if i else str(self.ident)
@@ -72,14 +72,14 @@ class Database:
 		self.name_lookup = {}
 		self.cleanup = {}
 		self.expansions = {}
-
+	
 	def load_cleanup(self, fn):
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
 			for line in lines:
 				source, target = line.split('\t')
 				self.cleanup[source] = target
-
+	
 	def load_expansions(self, fn):
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
@@ -87,7 +87,7 @@ class Database:
 				source, target = line.split('\t')
 				expand = list(target.split('.'))
 				self.expansions[source] = expand
-
+	
 	def load_data(self, fn):
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
@@ -123,45 +123,45 @@ class Database:
 			if entry:
 				entry.finalize()
 				self.data.append(entry)
-
+	
 	def clean_name(self, name):
 		name = name.upper()
 		for source, target in self.cleanup.items():
 			name = name.replace(source, target)
 		return name
-
+	
 	def prepare_sorting(self):
 		self.sorted['hzl'] = sorted(self.data, key=DatabaseEntry.sort_hzl)
 		self.sorted['complex'] = sorted(self.data, key=DatabaseEntry.sort_complex)
 		self.sorted['usage'] = sorted(self.data, key=DatabaseEntry.sort_usage)
-
+	
 	def lookup(self, part, regex):
 		func = part.functional_form()
 		for entry in self.data:
 			yield from entry.find_matches(func, regex)
-
+	
 	def yield_all(self): # TODO: probably not needed now due to wildcards
 		for entry in self.data:
 			yield from entry.yield_all()
-
-	def find_by_name(self, name):
+	
+	def name_to_glyph(self, name):
 		name = self.clean_name(name)
 		if name in self.expansions:
 			exp = '.'.join(self.expansions[name])
 			raise ValueError(f'Sign {name} is shorthand for {exp}')
-
+		
 		if '/' in name: name, variant = name.split('/')
 		else: variant = '1'
 		name = name.strip()
 		variant = int(variant.strip())
-
+		
 		if name not in self.name_lookup: raise ValueError(f'Unknown sign name {name}')
-
+		
 		entry = self.name_lookup[name]
 		if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
-
+		
 		return parse(entry.forms[variant-1])
-
+	
 	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
 		# Special codes: `n newline, `r ruling, `w word sep, `f hfill
 		# (Not used here: `s sign sep in raw sequence parser)
@@ -175,7 +175,7 @@ class Database:
 			if line.strip() == '`r': # Check for a special case: rulings
 				results.append(Ruling())
 				continue
-
+			
 			row = []
 			line = line.strip() # Remove lingering space on either end
 	#		line = re.sub(r'\s*(`[wfF])\s*', r'.\1.', line) # Remove any whitespace surrounding separators and fillers
@@ -199,14 +199,14 @@ class Database:
 								if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
 								row.append(self.name_lookup[subunit])
 						else:
-							row.append(self.find_by_name(unit))
+							row.append(self.name_to_glyph(unit))
 				except ValueError as e:
 					print(f'Parse error in line {i+1}, sign {j+1}')
 					if e.args: print('\n'.join(e.args))
 					raise
 			results.append(row)
 		return results
-
+	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
 	def lookup_as_table(self, part=None, regex=None, sort='hzl'):
 		func = part.functional_form() if part else None
@@ -221,9 +221,9 @@ class Database:
 			['<tr id="det"><th scope="row">Determinative</th>'],
 			['<tr id="code"><th scope="row">Code</th>'],
 		]
-
+		
 		matches = 0
-
+		
 		for entry in self.sorted[sort]:
 			matching_forms = list(entry.find_matches(func, regex))
 			if matching_forms:
@@ -235,31 +235,31 @@ class Database:
 					query = urlencode(raw)
 					rows[2].append(f'<td><img src="/rendersign?{query}" height="100px" /></td>')
 					rows[8].append(f'<td><tt>{pres}</tt></td>')
-
+				
 				hzl = entry.ident
 				rows[0].append(f'<td colspan="{colspan}">{hzl}</td>')
-
+				
 				comp = ', '.join(entry.langs['COMP'])
 				rows[1].append(f'<td colspan="{colspan}">{comp}</td>')
-
+				
 				hittite = ', '.join(entry.langs['HIT'])
 				rows[3].append(f'<td colspan="{colspan}">{hittite}</td>')
-
+				
 				foreign = ', '.join(entry.langs['HURR'])
 				rows[4].append(f'<td colspan="{colspan}">{foreign}</td>')
-
+				
 				akkadian = ', '.join(entry.langs['AKK'])
 				rows[5].append(f'<td colspan="{colspan}">{akkadian}</td>')
-
+				
 				def meanings1(sg): return ', '.join(entry.notes['SUM'][sg])
 				sumerian = ', '.join(f'{sg} "{meanings1(sg)}"' for sg in entry.langs['SUM'])
 				rows[6].append(f'<td colspan="{colspan}">{sumerian}</td>')
-
+				
 				def meanings2(sg): return ', '.join(entry.notes['DET'][sg])
 				determinative = ', '.join(f'{sg} "{meanings2(sg)}"' for sg in entry.langs['DET'])
 				rows[7].append(f'<td colspan="{colspan}">{determinative}</td>')
 		for row in rows: row.append('</td></tr>')
-
+		
 		return matches, '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
 
 if __name__ == '__main__':
