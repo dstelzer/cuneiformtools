@@ -122,6 +122,7 @@ MISC
 	Check dims in group (ur, el)
 #	Missing HZL entries
 #	Fix containment issue with stacked stacks (EZEN4)
+#	Recheck sign names and references
 	Recheck the entire HZL
 		1
 		2

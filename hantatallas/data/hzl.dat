@@ -11,6 +11,8 @@
 		rum
 	SUM
 		DILI
+			single
+		AŠ
 			one
 	FORM
 		h
@@ -23,7 +25,7 @@
 		ḫal
 	SUM
 		DIDLI
-			[plural]
+			several
 		ḪAL
 			haruspex, seer
 	FORM
@@ -59,6 +61,7 @@
 	SUM
 		ŠIR, SIR₄
 			testicle
+		(NU₁₁?)
 	FORM
 		L[{ch2c}{hhhh}h]
 		L[{h'h2h}{hhhh}hh]
@@ -68,6 +71,7 @@
 	SUM
 		GÍR
 			knife, dagger
+		(UL₄?)
 	FORM
 		L(h2[0{cc}vvv])
 		L[{ch2c}vvv]
@@ -87,7 +91,7 @@
 		ṭar
 		ṭír
 	SUM
-		TAR
+		TAR, KUD, KU₅
 			sever
 	FORM
 		{0h2v}
@@ -162,6 +166,7 @@
 	SUM
 		NUMUN
 			seed
+		(KUL?)
 	FORM
 		(h[0c{cc}])
 		[(hc'){cc}]
@@ -181,12 +186,13 @@
 	SUM
 		BAD
 			when
-			person
+		BE
+			noble (Akk. bēl)
 		ÚŠ
 			death, die
 		TIL
 			end
-		SUMUN
+		SUMUN, SUN
 			old
 	FORM
 		[hc'"]
@@ -223,7 +229,7 @@
 		ARAD, ÌR
 			servant, slave
 		NÍTA(Ḫ)
-			male
+			male (animal)
 	FORM
 		L[{c[hc]c}v]
 	NAME
@@ -354,8 +360,9 @@
 	COMP
 		MÙŠ/INANNA×A
 	SUM
-		SÈD
+		SÈD/SE₂₄/ŠED₉/ŠE₁₂
 			winter, cold
+			be content
 	FORM
 		[hv{c[vv2]}v]
 		L[hvc{cv}{cv}{cv}]
@@ -394,6 +401,7 @@
 	SUM
 		GI
 			tube
+		(SI₂₂/SIG₁₇?)
 	DET
 		GI
 			tube
@@ -503,6 +511,8 @@
 		NAM
 			district
 			governor
+		SIM
+			swallow (bird)
 		BURU₅
 			locust
 	FORM
@@ -526,7 +536,7 @@
 		EN IN4
 41
 	SUM
-		INANNA
+		INANNA/INNIN
 			Inanna (goddess)
 	FORM
 		L[h{[vv]v}v]
@@ -552,6 +562,7 @@
 	SUM
 		ŠUB
 			downfall
+		(RU?)
 	FORM
 		L{[dvv'v]h}
 		L{[cvvv]h}
@@ -563,6 +574,9 @@
 	HIT
 		ip
 		ep
+	SUM
+		IB/URAŠ/URTA
+			the god Ninurta
 	FORM
 		L[{[vh]h}vv]
 		L[{[v(v'h)]h}vv]
@@ -571,7 +585,7 @@
 		IB IP EB EP URAŠ URTA
 45
 	SUM
-		US₅
+		U₈/US₅
 	FORM
 		L{[v{hhhh}vcv]h}
 		L{[v{h(vd)}v]h}
@@ -626,8 +640,7 @@
 			left (opposite of right)
 		ḪÚB
 			ring, earring
-		GÁB
-		KAB
+		KAB/GÁB
 	FORM
 		L{[vvhc"v]h}
 		L[{[vvhc"]h}v]
@@ -658,6 +671,7 @@
 		UR
 			dog
 			hunter
+		(TÉŠ?)
 	FORM
 		L{[vvhv]h}
 		L[{[v(hv)]h"}v]
@@ -715,7 +729,7 @@
 	SUM
 		PISAN
 			container
-		GÁ
+		GÁ/MAL
 			[component of other signs]
 	FORM
 		L[{h'(h[v'v'0])}v]
@@ -805,9 +819,9 @@
 		ŠÉŠ ŠEŠ2
 64
 	COMP
-		ŠU.NÍGIN
+		ŠU+NÍGIN
 	SUM
-		ŠU.NÍGIN
+		ŠU+NÍGIN
 			total, in all
 	FORM
 		L[{h'h'h'h}{hh}v]
@@ -841,6 +855,7 @@
 	SUM
 		IG
 			door
+		(GÁL?)
 	FORM
 		L[{[0{h[hc]h}]h}v0'"{cc}]
 		[{[vcv]h}{cc}]
@@ -919,7 +934,7 @@
 	COMP
 		NI+UD
 	SUM
-		NA₄
+		NA₄/YA₄/ZÁ
 			stone
 	DET
 		NA₄
@@ -936,6 +951,7 @@
 			thorn (type of plant)
 		ELAM
 			Elam (place)
+		(NIM?)
 	AKK
 		nim
 		nem
@@ -1034,6 +1050,7 @@
 		ak
 	SUM
 		AG
+			[component of other signs]
 	FORM
 		L[{[h{hhh}{hhh}]h}v{0hh}]
 		L{[hv(h2v)]h'}
@@ -1052,6 +1069,9 @@
 	NAME
 		MÈ ME3
 83
+	AKK
+		tár
+		ṭár
 	SUM
 		GÙN
 			colorful
@@ -1190,7 +1210,7 @@
 	HIT
 		uk
 	SUM
-		UG
+		UG/PÌRIG
 			tiger?
 	FORM
 		L{[{hh}{dhh}][{cc}v0]M}
@@ -1221,6 +1241,7 @@
 96
 	SUM
 		UKU
+			[component of other signs]
 	FORM
 		L[{hhhh}{[vvhv]h}E]
 	NAME
@@ -1254,6 +1275,8 @@
 	SUM
 		DUB
 			clay tablet, document
+		KIŠIB
+			seal (stamp)
 	FORM
 		L[{hh}{hh}v]
 		L[{h2h2}v]
@@ -1394,6 +1417,7 @@
 111
 	SUM
 		ERI₁₁
+			[component of other signs]
 		UNU(G)
 			Uruk (city)
 	FORM
@@ -1419,6 +1443,9 @@
 	AKK
 		ḫí
 		kan
+	SUM
+		GAN
+			[component of other signs]
 	FORM
 		L[{hh}{hh2h}]
 	NAME
@@ -1458,15 +1485,15 @@
 		DÌM DIM3
 117
 	COMP
-		TODO TRIPLE
 	HIT
 		il
 	AKK
 		él
 	FORM
 		W[{chh}{0d2u}vv2]
-		W[{0[hc']h}(d2u)vvv2]
+		W[{0[hc']h}{0(d2u)}vvv2]
 		W[{0hh}{0d2h}vvv2]
+		W[{d3[{hh}u]}vvv2]
 		W[{0[dc]h}{[vd2]h}v{[vv]v}]
 	NAME
 		IL ÉL EL2
@@ -1484,7 +1511,7 @@
 119
 	SUM
 		NÍNDA
-			[component of other sumerograms]
+			[component of other signs]
 	FORM
 		L[{hh}c'{hh}]
 		L[{hh}{hh}]
@@ -1516,6 +1543,12 @@
 122
 	COMP
 		KUM×ŠE
+	HIT
+		gaz
+	AKK
+		gas
+		kaṣ
+		kàṣ
 	SUM
 		GAZ
 			kill
@@ -1563,7 +1596,7 @@
 		TUM DUM TU4 DU4 ÍB IB2 ÍP IP2 ÉB EB2 ÉP EP2 ṬU4 ṬUM
 126
 	SUM
-		EGIR
+		EGIR (EŊIR)
 			back, around
 	FORM
 		L[{chh}{h[hc][hc]h}v2]
@@ -1571,7 +1604,7 @@
 		L[{chh}{hhhhh}{cc}0'"v2]
 		W[{[hc']h}{[hc'][hc']}0'"v2]
 	NAME
-		EGIR
+		EGIR EŊIR
 127
 	SUM
 		LIL
@@ -1659,7 +1692,7 @@
 	SUM
 		KA
 			mouth
-		KIR_4
+		KIR₄
 			nose
 		INIM
 			word
@@ -1713,6 +1746,7 @@
 		KA×ÚR
 	SUM
 		[unknown]
+			[a wooden object?]
 	FORM
 		W[{0[hc]h}v{h[{hh}{hh}{cv}v]Mh}v]
 	NAME
@@ -1722,6 +1756,7 @@
 		KA×PA
 	SUM
 		[unknown]
+			[a metal object?]
 	FORM
 		W[{0[hc]h}v{h(v{hh})Mh}v]
 	NAME
@@ -1731,6 +1766,7 @@
 		KA×GIŠ
 	SUM
 		[unknown]
+			[a wooden container?]
 	FORM
 		W[{0[hc]h}v{h[{hh}v]Mh}v]
 	NAME
@@ -1762,7 +1798,8 @@
 	COMP
 		KA×LUM
 	SUM
-		[unknown - hapax]
+		[unknown]
+			[hapax legomenon]
 	FORM
 		W[{0[hc]h}v{h[0{cc}{hh}{hh}0]h}v]
 	NAME
@@ -1846,6 +1883,7 @@
 		KA×ÀŠ
 	SUM
 		[unknown]
+			[a body part?]
 	FORM
 		W[{0[hc]h}v{h[{vv}{vv}{vv}]Mh}v]
 	NAME
@@ -2033,7 +2071,7 @@
 		DU₈/DUḪ
 			solve
 			divide
-		GABA
+		GAB(A)
 			breast, chest
 	FORM
 		L[{hh}{c'c'}{c'c'}]
@@ -2046,6 +2084,8 @@
 	SUM
 		GIM
 			as, when, as soon as
+		DÍM
+			[component of other signs]
 	FORM
 		L[{vh(h[0d20])}v]
 		L[{(vh)h[0d20]}v]
@@ -2250,6 +2290,8 @@
 	SUM
 		ḪAB
 			jug
+		GUD₈/GUR₄/LÚGUD
+			[component of other signs]
 	FORM
 		P[{hh}v]
 		P[v{hh}v]
@@ -2329,7 +2371,7 @@
 	SUM
 		GUR
 			another
-			cor (unit of measurement)
+			cor (Akk. kurrum, a unit of measurement)
 	FORM
 		[{0h(hv)}v]
 		L[{0h'h}vv]
@@ -2390,6 +2432,7 @@
 		mar
 	SUM
 		MAR
+			spade
 	FORM
 		L[{hh}vvh]
 	NAME
@@ -2424,6 +2467,8 @@
 	SUM
 		LÍL
 			field
+		GÉ/KE₄
+			[component of other signs]
 	FORM
 		L[{0hh}vv'v]
 		L[{dh}vv'v]
@@ -2481,7 +2526,7 @@
 	HIT
 		un
 	SUM
-		UN
+		UN/ÙKU/ÙG
 			human
 			humanity
 			population
@@ -2585,8 +2630,6 @@
 	HIT
 		nir
 		nàr?
-	SUM
-		NIR
 	FORM
 		L[{hh}{vv}{vv}{vv}v2]
 	NAME
@@ -2596,8 +2639,6 @@
 		ba
 	AKK
 		pá
-	SUM
-		BA
 	FORM
 		[{hh'd}v]
 		[{hh'h}v]
@@ -2613,7 +2654,7 @@
 		qú
 		tuš
 	SUM
-		TUŠ (DÚR(U)/DURUN)
+		TUŠ/DÚR(U)/DURUN
 			sit
 		TUKUL
 			tool, weapon
@@ -2638,7 +2679,7 @@
 		PÈŠ
 			fig
 		MA (properly MA.NA)
-			mine
+			mine (for ore)
 	FORM
 		L[{hh'h}v]
 		L[{h2h}v]
@@ -2651,7 +2692,7 @@
 		sú
 		ṣú
 	SUM
-		GÍNx?
+		GÍNₓ?
 			shekel (unit)
 	FORM
 		L[{hh'h}vv]
@@ -2751,6 +2792,7 @@
 		TI₈
 			eagle
 		Á
+			[component of other signs]
 	FORM
 		L[{0hh2h}{[vvv]v}TEv]
 		L[{0[hc][h2c][hc]}v]
@@ -2793,8 +2835,8 @@
 		ḪAŠḪUR
 220
 	SUM
-		GÚG
-			legume?
+		GÚG/GAR₅
+			type of legume?
 	FORM
 		L[{hhh}{hhh}v2]
 		W[{hhhh}{h{dh}Mh}vvv2]
@@ -2806,6 +2848,7 @@
 221
 	SUM
 		LÙ
+			[component of other signs]
 	FORM
 		L[{hhh}{hhh}v2]
 	NAME
@@ -2822,8 +2865,8 @@
 	AKK
 		ṭu
 	SUM
-		NÍR
-			[unknown]
+		GÍN/TÙN
+			[component of other signs]
 	FORM
 		L[{hhh}{hhh}v2]
 		W[{hhh}{h(h'"c)h}v2]
@@ -2865,6 +2908,7 @@
 227
 	SUM
 		TAG₄/TAK₄
+			[usage not clear]
 	FORM
 		W[{[cc]hh}{[v'vv'v'v]h}c"c"c"]
 		W[{cc}{[{vv}{vv}{vv}]h}c"c"c"]
@@ -2874,6 +2918,7 @@
 228
 	SUM
 		KISAL
+			[component of other signs]
 	FORM
 		[{hhh}v]
 		[{hhhh}v]
@@ -2883,6 +2928,8 @@
 	SUM
 		URU
 			city
+		U₁₉/RÍ
+			[component of other signs]
 	DET
 		URU
 			city, place
@@ -2898,10 +2945,12 @@
 	COMP
 		SU×A
 	SUM
-		ŠEN
+		ŠEN/ALAL/PÌSAN
 			kettle
 			pipe
 			gutter, eaves
+		DUR₁₀
+			[component of other signs]
 	FORM
 		L[{0hhh}{[v[v'"v2'"]Mv]h}]
 		L[{0h'hh'}vv'v2'v]
@@ -2916,7 +2965,7 @@
 			priest
 		ÀKA
 			fleece
-		ŠID/ŠIT(I)
+		ŠID/ŠIT/ŠITI/ŠITA₅
 			number, count
 	FORM
 		L[{h[hv]h}{[vv'v'v]h}]
@@ -2931,7 +2980,7 @@
 		E!.KISIM₅×LA
 	SUM
 		LAḪTA
-			[unknown]
+			[type of vessel?]
 	FORM
 		W[{0h(hv)}v2c{d[{hh}{hhhh}v]Mu}c]
 		W[[{0hh}vv2]c"{[{chh}{hhhh}v]h}c"]
@@ -2952,6 +3001,7 @@
 234
 	SUM
 		GE₄/GI₄
+			[component of other signs]
 	FORM
 		W[{0hhhh0}(h[vv]){[vvv]h}TE]
 		W[{0hhhh0}(h[vv]){[vvv]v}TE]
@@ -2972,6 +3022,7 @@
 		DU&DU
 	SUM
 		LAḪ₄
+			[component of other signs]
 	FORM
 		{[{[0d]hh2}v][{[0d]hh2}v]}
 	NAME
@@ -3073,6 +3124,9 @@
 		biš
 	AKK
 		qir
+	SUM
+		ḪA₆
+			[component of other signs]
 	FORM
 		L[{0hhhh}{vv}{0'c'}{vv}c"]
 	NAME
@@ -3083,6 +3137,7 @@
 		pur
 	SUM
 		BUR
+			[component of other signs]
 	FORM
 		L[{hhhh}{[vvv]v}]
 	NAME
@@ -3111,7 +3166,8 @@
 248
 	HIT
 		:
-		(The "Glossenkeil", transliterated as a colon or as "punctuation mark 2")
+		P2
+		Glossenkeil
 	FORM
 		P{cc}
 		[c"c"]
@@ -3226,7 +3282,7 @@
 		L[v'"(du)]
 	NAME
 		BAB BAP KÚR KUR2 PAB
-256-B
+256B
 	COMP
 		PAB.ḪAL
 	AKK
@@ -3237,7 +3293,7 @@
 		PÚŠ PUŠ2
 257
 	SUM
-		DIM₄/MUNU₈
+		DIM₄/MUNU₈/BÙLUG
 			malt
 	FORM
 		L(hd{[0d][d0]})
@@ -3262,6 +3318,8 @@
 	SUM
 		KASKAL
 			road, journey, travel
+		RAŠ
+			[component of other signs]
 	FORM
 		([dd][uu])
 		({dd}{uu})
@@ -3285,6 +3343,8 @@
 261
 	HIT
 		u
+	HURR
+		o
 	SUM
 		U
 			10
@@ -3300,6 +3360,7 @@
 		tul
 	SUM
 		DUL
+			[component of other signs]
 	FORM
 		L[c{[h{hhh}]Eh}v]
 		L[ch{hhh}v]
@@ -3363,12 +3424,12 @@
 	AKK
 		mé
 	SUM
-		GE₆/GI₆
+		GE₆/GI₆/GÍG (ŊI₆)
 			night, dark, black
 	FORM
 		L[c{hh}{hh}]
 	NAME
-		MI MÉ ME2 GE6 GI6 GÍG GIG2
+		MI MÉ ME2 GE6 GI6 GÍG GIG2 ŊI6 ŊE6
 268
 	SUM
 		DUGUD
@@ -3398,6 +3459,7 @@
 		U.GAN
 	SUM
 		ŠAGAN/ŠÁMAN
+			[component of other signs]
 	FORM
 		L[c{hh}{hh2h}]
 	NAME
@@ -3447,6 +3509,8 @@
 			harvest, summer
 		SULLIM
 			fenugreek (type of plant)
+		BAR₈
+			[component of other signs]
 	FORM
 		L{[c{h[ccc]h}{vv}{vv}][0{hv}c]}
 		L{[c{h[cccc]h}{vv}{vv}][0(hv)d2]}
@@ -3468,7 +3532,7 @@
 		AMAR×KU₆
 	SUM
 		AMAR×KU₆
-			[unknown]
+			[type of bread?]
 	FORM
 		L[c{[hc][0{vv}{0'c}{vv}{0'c}0][hc]}]
 		L[c{[hc][0vv0][hc][0vcvc0]}]
@@ -3498,6 +3562,7 @@
 		NIM×KÁR
 	SUM
 		TÙM
+			[meaning unknown]
 	FORM
 		W[c'{d[{h'h[vvv]}v0]u}c"v]
 	NAME
@@ -3539,7 +3604,6 @@
 	SUM
 		KISIM₅×(Ú.MAŠ)
 			[component of other signs]
-		KISIM₅×Ú+MAŠ
 	FORM
 		W[c'{d[{hh}vvv0'"(vh)0]u}c"]
 	NAME
@@ -3575,7 +3639,7 @@
 			spoon, ladle
 			bowl
 		LIŠ
-			Ištar/Šauška (deity)
+			abbreviation for Ištar/Šauška (deity)
 	FORM
 		P[{c0}v]
 	NAME
@@ -3585,11 +3649,91 @@
 		U.DIŠ
 	SUM
 		11
-			11 (number)
+			11
 	FORM
 		[c'v]
 	NAME
 		11
+287B
+	COMP
+		U.MIN
+	SUM
+		12
+			12
+	FORM
+		[c'vv]
+	NAME
+		12
+287C
+	COMP
+		U.EŠ₅
+	SUM
+		13
+			13
+	FORM
+		L[cvvv]
+	NAME
+		13
+287D
+	COMP
+		U.LIMMU
+	SUM
+		14
+			14
+	FORM
+		L[c{[vvv]v}]
+	NAME
+		14
+287E
+	COMP
+		U.YÁ
+	SUM
+		15
+			15
+	FORM
+		L[c{[vvv][vv]}]
+	NAME
+		15
+287F
+	COMP
+		U.ÀŠ
+	SUM
+		16
+			16
+	FORM
+		L[c{vv}{vv}{vv}]
+	NAME
+		16
+287G
+	COMP
+		U.IMIN
+	SUM
+		17
+			17
+	FORM
+		[c{[vvv][vvv]v}]
+	NAME
+		17
+287H
+	COMP
+		U.USSU
+	SUM
+		18
+			18
+	FORM
+		[c{[vvv][vvv][vv]}]
+	NAME
+		18
+287I
+	COMP
+		U.ILIMMU
+	SUM
+		19
+			19
+	FORM
+		[c{vvv}{vvv}{vvv}]
+	NAME
+		19
 288
 	HIT
 		ši
@@ -3714,7 +3858,7 @@
 		rak
 		sal
 	SUM
-		MUNUS
+		MUNUS/MÍ/SAL
 			woman
 	DET
 		MUNUS
@@ -3748,7 +3892,9 @@
 		nin
 		nen
 	SUM
-		NIN
+		EREŠ/NIN
+			sister
+		NIN₉
 			sister
 	FORM
 		L[{cc}{h'[h{hh}]h'}v]
@@ -3772,6 +3918,8 @@
 	SUM
 		GÌR(I)
 			foot
+		NÈ
+			[component of other signs]
 	FORM
 		L[{cc}{d'hh'"}]
 		L[{cc}{chh}]
@@ -3843,6 +3991,9 @@
 		el
 	AKK
 		il₅
+	SUM
+		SIKIL
+			[component of other signs]
 	FORM
 		L[{cc}{[hvvv]h}]
 		L[{cc}h{[vvv]h}]
@@ -3878,6 +4029,9 @@
 		lum
 	AKK
 		lu₄
+	SUM
+		GUZ/ḪUM
+			[component of other signs]
 	FORM
 		L[{cc}{hh}{hh}]
 		L[{cc}{0hh0}{chhc}]
@@ -3888,6 +4042,8 @@
 	SUM
 		SIG₄
 			(air-dried) brick
+		MUR₇/MURGU
+			shoulder (properly MUR₇.GÚ)
 	FORM
 		L[{cc}{c[hh][hh]c}]
 		L[{cc}{0hh0}{chhc}]
@@ -3903,7 +4059,7 @@
 	SUM
 		DI
 			law, right, court
-		SILIM/SALIM
+		SILIM/SALIM/SÁ
 			health, heal
 	FORM
 		[{[cc]hh}v]
@@ -3974,6 +4130,11 @@
 			white
 		U₄/UD
 			day
+		UTU
+			sunrise, east
+			the sun god (Utu/Šamaš/Ištanu)
+		ZALAG
+			light, bright
 	FORM
 		P[{cc}v]
 		[ccv]
@@ -3991,6 +4152,8 @@
 	SUM
 		GEŠTU(G)
 			ear, hear
+		TÁL
+			[component of other signs]
 	FORM
 		[{cc}vh]
 		[{cc}(vh)]
@@ -4092,7 +4255,7 @@
 		zap
 	SUM
 		ZÁLAG
-			light?
+			light
 		ÉRIN/RÍN
 			scale, balance
 		ÉRIN/ERIM
@@ -4107,6 +4270,8 @@
 	SUM
 		NUNUZ
 			pearl?
+		RINₓ
+			mistake for RÍN 'scale'
 	FORM
 		[{cc}0'"v2{0hhhh}]
 	NAME
@@ -4120,6 +4285,8 @@
 	SUM
 		KUR
 			land, mountain
+		GÌN
+			[component of other signs]
 	DET
 		KUR
 			land
@@ -4197,6 +4364,8 @@
 			thick?
 		MUR
 			lung
+		ÀR/KÍN/UR₅
+			[component of other signs]
 	DET
 		ḪUR.SAG [with SAG]
 			mountain
@@ -4235,13 +4404,15 @@
 	SUM
 		NIMIN/NIN₅
 			40
+		DU₁₀/DÙG
+			[component of other signs]
 	FORM
 		{[vvv]v}T
 		[{ccc}c']
 		P{ddd2}
 		{[vvvvv]v}T
 	NAME
-		ḪI ḪE ŠÁR ŠAR2 TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 DU10 DÙG DUG3 NIMIN NIN5
+		ḪI ḪE ŠÁR ŠAR2 TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 DU10 DÙG DUG3 NIMIN NIN5 40
 336
 	COMP
 		TODO FIX ME
@@ -4262,6 +4433,8 @@
 		IM
 			clay
 			wind
+		NÍ
+			[component of other signs]
 	DET
 		IM
 			clay
@@ -4316,6 +4489,8 @@
 	SUM
 		SUD
 			pull, drag
+		SIR
+			[component of other signs]
 	FORM
 		L[{cc}{cc}hvvv]
 		L[{cc}{cc}(h[vvv])]
@@ -4343,6 +4518,9 @@
 	HIT
 		li
 		le
+	SUM
+		ÉN
+			[component of other signs]
 	FORM
 		W[{cc}{cc}{hh}{hh}v]
 		L[{cc}{cc}{c0}vv]
@@ -4370,7 +4548,7 @@
 	COMP
 		ŠE.NAGA
 	SUM
-		ŠE.NAGA (NIDABA/NISABA?)
+		ŠE.NAGA (NIDABA/NISABA? TÈ?)
 			soapwort (plant)
 			wash, clean
 			bathtub
@@ -4443,6 +4621,7 @@
 		lul
 	SUM
 		KA₅
+			fox
 	FORM
 		L[{ccc}{cc}0'"v20'"{d'hh'}]
 		L[{d'd2d2d}0'"v20'"{chh'}]
@@ -4454,9 +4633,10 @@
 	AKK
 		nák
 	SUM
-		NAGA
+		NAGA/NÍDABA/NÍSABA
 			[component of other signs]
-			[name]
+		DALḪAMUN₄
+			[divine name in Kreuzform]
 	FORM
 		W[{[vvv][vv]}TEv2{d'u}]
 		W[{[vvv][vv]}TEv2{d'(u[vvvv])}]
@@ -4475,6 +4655,8 @@
 			write
 		KIRI₆
 			garden
+		SAKAR/MÚ
+			[component of other signs]
 	DET
 		SAR
 			plant
@@ -4542,7 +4724,7 @@
 		GÉŠ/GÍŠ
 			60
 	DET
-		DIŠ
+		DIŠ/1
 			individual name (usually male)
 	FORM
 		Pv
@@ -4558,6 +4740,8 @@
 		ME
 			hundred
 			put, set, take
+		IŠIB
+			[component of other signs]
 	FORM
 		P[vh]
 	NAME
@@ -4566,7 +4750,7 @@
 	HIT
 		lal
 	SUM
-		LAL
+		LAL/LÁ
 			bind
 			catch sight of
 			tip?
@@ -4576,15 +4760,16 @@
 		LAL LÁ LA2
 359
 	SUM
-		70?
+		70
 			70
 	FORM
 		[vc]
 	NAME
 		70
-359-B
+359B
 	SUM
 		80
+			80
 	FORM
 		[vcc]
 	NAME
@@ -4594,6 +4779,7 @@
 		me+eš
 	HIT
 		meš
+		eš₁₇?
 	SUM
 		MEŠ
 			[plural]
@@ -4621,6 +4807,9 @@
 		LAL+LAL
 	HIT
 		lál
+	SUM
+		LA₅
+			[component of other signs]
 	FORM
 		[vv'{hh'0}]
 		[v20'"{hh0}]
