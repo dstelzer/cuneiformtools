@@ -12,6 +12,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	INTERNAL_FLIP = '_I' # Multi-character name means it won't show up in parsing; this one's only used internally in the implementation of upward diagonal rendering
 	INVERT = '?'
 	DAMAGE = '#'
+	INTERNAL_DIAGONAL = '_D' # As above
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0

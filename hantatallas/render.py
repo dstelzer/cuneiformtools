@@ -8,6 +8,7 @@ from itertools import takewhile, count
 import cairo
 from PIL.ImageColor import getrgb
 
+# It's hard to know if we need to import these with relative paths or absolute ones, so we just try both
 try:
 	from elements import Modifier
 	from layout import Spacer
@@ -159,7 +160,18 @@ class Renderer:
 		raise NotImplementedError() # Same
 	
 	def draw_stroke(self, x, y, w, h, mods): # Delegates to the others after handling some common modifiers
-		adj_amount = h/3
+		
+		# For horizontals and verticals, cutting off a third of the stroke (at head and/or tail) is a good amount of adjustment.
+		# But for diagonals, it's more useful to be able to make them be the same length as other strokes.
+		# For example, in (vhud), it would be nice to make them fit into a circle rather than a square.
+		# So if we're drawing a diagonal, we cut off 1/sqrt(2) of the length, whether it's in one cut or two.
+		if Modifier.INTERNAL_DIAGONAL in mods:
+			adj_amount = h * (1-1/sqrt(2))
+			if Modifier.HEADSHORT in mods and Modifier.TAILSHORT in mods:
+				adj_amount /= 2
+		else:
+			adj_amount = h/3
+		
 		if Modifier.HEADSHORT in mods:
 			h -= adj_amount
 			y += adj_amount
@@ -244,6 +256,7 @@ class Renderer:
 		self.draw_potential_damage(x, y, w, h, mods)
 		c = self.ctx
 		c.save()
+		print(x, y, w, h)
 		c.translate(x, y)
 		
 		theta = atan(h/w)
@@ -253,22 +266,27 @@ class Renderer:
 		head = min(h, 1/3) # The width of the stroke head
 		diag = sqrt(w**2 + h**2)
 		
-		if h > w:
-			x2 = head / (2*cos(phi))
-			y2 = 0
-			x3 = -head
-			cutoff = (head*w) / (2*h)
-		else:
-			x2 = 0
-			y2 = head / (2*cos(theta))
-			x3 = 0
-			cutoff = (head*h) / (2*w)
+	#	if h > w:
+	#		x2 = head / (2*cos(phi))
+	#		y2 = 0
+	#		x3 = -head
+	#		cutoff = (head*w) / (2*h)
+	#	else:
+	#		x2 = 0
+	#		y2 = head / (2*cos(theta))
+	#		x3 = 0
+	#		cutoff = (head*h) / (2*w)
 		
+		cutoff = 0
 		stroke = diag - cutoff
+		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL}
 		
-		c.translate(x2, y2) # Set the new origin point
+		#c.translate(x2, y2) # Set the new origin point
+	#	c.arc(0, 0, 0.05, 0, pi*2)
 		c.rotate(-phi)
-		c.translate(x3, 0)
+		c.translate(-head/2, 0)
+		#c.translate(x3, 0)
+		print(head, stroke)
 		self.draw_stroke(0, 0, head, stroke, mods)
 		c.restore()
 	
@@ -279,7 +297,7 @@ class Renderer:
 		self.ctx.scale(1, -1) # Invert vertical axis
 		self.ctx.translate(0, -h)
 		
-		mods = set(mods) ^ {Modifier.INTERNAL_FLIP} - {Modifier.DAMAGE} # Since we flipped one of the axes we should unflip it for rendering, and since we already drew the damage we shouldn't draw it again
+		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL} ^ {Modifier.INTERNAL_FLIP} - {Modifier.DAMAGE} # Since we flipped one of the axes we should unflip it for rendering, and since we already drew the damage we shouldn't draw it again. Also this is a diagonal so we mark that here for safety, even though draw_downward should set that again.
 		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
 		
 		self.ctx.restore()
@@ -889,6 +907,7 @@ class LinearRenderer(Renderer):
 		
 		c.restore()
 	
+	'''
 	def draw_downward(self, x, y, w, h, mods=()): # We override this method too, because with the linear renderer we can get closer to the corners without the head getting in the way
 		self.draw_potential_damage(x, y, w, h, mods)
 		# draw_upward by default delegates to this one so we don't need to override it too
@@ -901,6 +920,7 @@ class LinearRenderer(Renderer):
 		hyp = sqrt(w**2+h**2)
 		self.draw_stroke(0, 0, self.WIDTH, hyp, mods)
 		c.restore()
+	'''
 
 if __name__ == '__main__':
 	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold', fill=False)

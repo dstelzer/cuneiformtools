@@ -11,7 +11,7 @@ def test_rendering():
 			construct = parse(input(), friendly=True)
 			print(construct)
 			print(construct.functional_form())
-			TwoSidedRenderer.render(construct).show()
+			LinearRenderer.render(construct).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
 		except ValueError: pass
@@ -59,7 +59,7 @@ def test_uga():
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
-	test_comparisons()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't
