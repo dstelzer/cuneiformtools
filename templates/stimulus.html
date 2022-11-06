@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Experiment in Progress</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<h3>Sign {{index+1}}/{{total}}</h3>
+		<p><img src="/experiment/image?expkey={{expkey}}&list={{list}}&index={{index}}" /></p>
+		<form action="/experiment/respond" method="get" accept-charset="utf-8">
+			<input type="hidden" name="expkey" value="{{expkey}}" />
+			<input type="hidden" name="list" value="{{lst}}" />
+			<input type="hidden" name="index" value="{{index}}" />
+			<input type="hidden" name="system" value="{{system}}" />
+			<label>Sign name: <input type="text" name="result" size="24" required /></label>
+			<input type="submit" value="Submit" />
+		</form>
+		<p>
+			{% if system == 'Z' %}
+			<a href="/download/Zeichenlexikon.pdf" target="_blank">Hethitisches Zeichenlexikon</a>
+			{% else %}
+			<a href="/canvas.html?expkey={{expkey}}" target="_blank">Hantatallas Search System</a>
+			{% endif %}
+		</p>
+	</body>
+</html>

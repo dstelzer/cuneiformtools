@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>Experiment</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<p>This is where the description of the experiment will go. All details can be put here for subjects to read.</p>
+		{% if system == 'Z' %}
+		<p>You will be using the <i>Hethitisches Zeichenlexikon</i> for this session. Download it here: <a href="/download/Zeichenlexikon.pdf" target="_blank">Hethitisches Zeichenlexikon</a></p>
+		{% else %}
+		<p>You will be using the Hantatallas search system for this session. Open it here: <a href="/canvas.html?expkey={{expkey}}" target="_blank">Hantatallas Search System</a></p>
+		{% endif %}
+		<form action="/experiment/stimulus" method="get" accept-charset="utf-8">
+			<input type="hidden" name="expkey" value="{{expkey}}" />
+			<input type="hidden" name="list" value="{{lst}}" />
+			<input type="hidden" name="index" value="{{index}}" />
+			<input type="hidden" name="system" value="{{system}}" />
+			<input type="submit" value="Begin" />
+		</form>
+		<p>Information for experimenters: subject key {{expkey}}, list {{lst}}, index {{index}}, system {{system}}</p>
+	</body>
+</html>
+
