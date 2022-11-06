@@ -2675,6 +2675,8 @@
 	NAME
 		MUD4
 208
+	HIT
+		ma
 	SUM
 		PÈŠ
 			fig
@@ -4433,6 +4435,8 @@
 		IM
 			clay
 			wind
+		IŠKUR
+			storm-god
 		NÍ
 			[component of other signs]
 	DET
@@ -4444,7 +4448,7 @@
 		L[c'{cc}(h[vv])]
 		L[c'{cc}{[vv]h0}]
 	NAME
-		IM EM NÍ NI2
+		IM EM NÍ NI2 IŠKUR
 338
 	HIT
 		še
