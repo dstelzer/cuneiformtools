@@ -1,0 +1,1587 @@
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+    /*encloses EVERYTHING on page:  <div class=page-container immediately after <body> and closing just before </body>  */
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+    /*level immediately beneath page container: forces distance between final content and page footer*/
+.content-wrap {
+    padding-bottom: 250px;
+}
+.container {
+    max-width: 960px; }
+.header {
+    margin-top: 6rem;
+    text-align: center; }
+.header-space {
+    margin-top: 2rem;
+}
+
+.fnz {
+    display: table-cell;
+    border: collapse;
+    padding: 5px;
+    text-indent: 0.5988cm;
+    font-family: "HPMLinux Biolinum O";
+    font-size: 10pt;
+    text-align: left;
+}
+
+.fnbod {
+    display: table-cell;
+    border: collapse;
+    padding: 5px;
+    font-family: "HPMLinux Biolinum O";
+    font-size: 80%;
+    text-align: left;
+}
+
+.fnanc {
+    padding: 1px;
+    font-style: normal;
+    font-size: 78%;
+    vertical-align: super;
+    color: #000;
+    font-weight: bold;
+    border: 1px solid darkgray;
+    font-family: "HPMLinux Biolinum O";
+}
+
+.fnsym {
+    padding: 1px;
+    font-style: normal;
+    font-size: 78%;
+    vertical-align: text-top;
+    color: #000;
+    font-weight: normal;
+    border: 1px solid darkgray;
+    font-family: "HPMLinux Biolinum O";
+}
+
+.fnanct {
+    padding: 1px;
+    margin: 1.5px;
+    font-style: normal;
+    font-size: 78%;
+    vertical-align: text-top;
+    color: #000;
+    font-weight: normal;
+    border: 1px solid darkgray;
+    font-family: "HPMLinux Biolinum O";
+}
+
+.fnsymt {
+    padding: 1px;
+    font-style: normal;
+    font-size: 78%;
+    vertical-align: text-top;
+    color: #000;
+    font-weight: normal;
+    border: 1px solid darkgray;
+    font-family: "HPMLinux Biolinum O";
+}
+
+
+.footer {
+    background-color: #fdfdfd; 
+}
+
+.table {
+  padding:0px 8px 0px 8px;    
+}
+
+.ticker {
+  background-color: #eee;}
+.value-prop {
+  margin-top: 1rem; }
+.value-props {
+  margin-top: 4rem;
+  margin-bottom: 4rem; }
+.docs-header {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  letter-spacing: .2rem;
+  font-weight: 600; }
+.docs-section {
+  border-top: 1px solid #eee;
+  padding: 4rem 0;
+  margin-bottom: 0;}
+.value-img {
+  display: block;
+  text-align: center;
+  margin: 2.5rem auto 0; }
+.example-grid .column,
+.example-grid .columns {
+  background: #EEE;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: .75rem;
+  font-weight: 600;
+  letter-spacing: .1rem; }
+.del {
+  color: #000;    
+}
+.docs-example .row,
+.docs-example.row,
+.docs-example form {
+  margin-bottom: 0; }
+.docs-example h1,
+.docs-example h2,
+.docs-example h3,
+.docs-example h4,
+.docs-example h5,
+.docs-example h6 {
+  margin-bottom: 1rem; }
+.heading-font-size {
+  font-size: 1.2rem;
+  color: #999;
+  letter-spacing: normal; }
+.code-example {
+  margin-top: 1.5rem;
+  margin-bottom: 0; }
+.code-example-body {
+  white-space: pre;
+  word-wrap: break-word }
+.example {
+  position: relative; 
+  margin-top: 4rem; }
+.example-header {
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: .5rem; }
+.example-description {
+  margin-bottom: 1.5rem; }
+.example-screenshot-wrapper {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  height: 250px; }
+.example-screenshot {
+  width: 100%;
+  height: auto; }
+.example-screenshot.coming-soon {
+  width: auto;
+  position: absolute;
+  background: #eee;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px; }
+.ivs {
+  color: blue;  
+  font-size:0pt; 
+  visibility:hidden;  }
+.navbar {
+  display: none; }
+
+/* Larger than phone */
+@media (min-width: 550px) {
+  .header {
+    margin-top: 18rem; }
+  .value-props {
+    margin-top: 9rem;
+    margin-bottom: 7rem; }
+  .value-img {
+    margin-bottom: 1rem; }
+  .example-grid .column,
+  .example-grid .columns {
+    margin-bottom: 1.5rem; }
+  .docs-section {
+    padding: 6rem 0; }
+  .example-send-yourself-copy {
+    float: right;
+    margin-top: 12px; }
+  .example-screenshot-wrapper {
+    position: absolute;
+    width: 48%;
+    height: 100%;
+    left: 0;
+    max-height: none; }
+}
+
+/* Larger than tablet –––––––––––––––––––––––––––––––––––––––––*/
+@media (min-width: 750px) {
+  /* Navbar –––––––––––––––––––––––––––––––––––––––––––––––––––*/
+  .navbar + .docs-section {
+    border-top-width: 0; }
+  .navbar,
+  .navbar-spacer {
+    display: block;
+    width: 100%;
+    height: 4.5rem;
+    background: #fff;
+    z-index: 99;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eaa; }
+  .navbar-spacer {
+    display: none; }
+  .navbar > .container {
+    width: 100%; }
+  .navbar-list {
+    list-style: none;
+    margin-bottom: 0; }
+  .navbar-item {
+    position: relative;
+    float: left;
+    margin-bottom: 0; }
+  .navbar-link {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2rem;
+    margin-right: 35px;
+    text-decoration: none;
+    line-height: 6.5rem;
+    color: #222; }
+  .navbar-link.active {
+    color: #33C3F0; }
+  .has-docked-nav .navbar {
+    position: fixed;
+    top: 0;
+    left: 0; }
+  .has-docked-nav .navbar-spacer {
+    display: block; }
+  /* Re-overiding the width 100% declaration to match size of % based container */
+  .has-docked-nav .navbar > .container {
+    width: 80%; }
+
+  /* Popover –––––––––––––––––––––––––––––––––––––––––*/
+  .popover.open {
+    display: block;
+  }
+  .popover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    top: 92%;
+    left: -50%;
+    -webkit-filter: drop-shadow(0 0 6px rgba(0,0,0,.1));
+       -moz-filter: drop-shadow(0 0 6px rgba(0,0,0,.1));
+            filter: drop-shadow(0 0 6px rgba(0,0,0,.1)); }
+  .popover-item:first-child .popover-link:after, 
+  .popover-item:first-child .popover-link:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none; }
+  .popover-item:first-child .popover-link:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px; }
+  .popover-item:first-child .popover-link:before {
+    border-color: rgba(238, 238, 238, 0);
+    border-bottom-color: #eee;
+    border-width: 11px;
+    margin-left: -11px; }
+  .popover-list {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+  .popover-item {
+    padding: 0;
+    margin: 0; }
+  .popover-link {
+    position: relative;
+    color: #222;
+    display: block;
+    padding: 8px 20px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.0rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .1rem; }
+  .popover-item:first-child .popover-link {
+    border-radius: 4px 4px 0 0; }
+  .popover-item:last-child .popover-link {
+    border-radius: 0 0 4px 4px;
+    border-bottom-width: 0; }
+  .popover-link:hover {
+    color: #fff;
+    background: #33C3F0; }
+  .popover-link:hover,
+  .popover-item:first-child .popover-link:hover:after {
+    border-bottom-color: #33C3F0; }
+
+  .li#popover:first-child .popover-link:after, 
+  .li#popover:first-child .popover-link:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none; }
+  .li#popover:first-child .popover-link:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px; }
+  .li#popover:first-child .popover-link:before {
+    border-color: rgba(238, 238, 238, 0);
+    border-bottom-color: #eee;
+    border-width: 11px;
+    margin-left: -11px; }
+  .ul#popover {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+  .li#popover {
+    padding: 0;
+    margin: 0; }
+  .popover-link {
+    position: relative;
+    color: #222;
+    display: block;
+    padding: 8px 20px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.0rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .1rem; }
+  .li#popover:first-child .popover-link {
+    border-radius: 4px 4px 0 0; }
+  .li#popover:last-child .popover-link {
+    border-radius: 0 0 4px 4px;
+    border-bottom-width: 0; }
+  .popover-link:hover {
+    color: #fff;
+    background: #33C3F0; }
+  .popover-link:hover,
+  .li#popover:first-child .popover-link:hover:after {
+    border-bottom-color: #33C3F0; }
+}
+
+a.info
+{
+  position: relative;
+  text-decoration: none;
+  
+}
+
+a.info span
+{
+  display: none;
+}
+
+a.info:hover span
+{
+  position: absolute;
+  display: block;
+  opacity: 0.9;
+  top: 1em;
+  left: 2em;
+  border: 0px solid #036;
+  background-color: rgba(0, 79, 129, 1);
+  padding: 0.2em 0.1em 0.0em 0.1em;
+  color:white;
+}
+
+.project h2 a
+{
+    color: white;
+}
+
+.project h5 a
+{
+    color: white;
+}
+
+.project h4 a
+{
+    color: white;
+}
+
+.footer a
+{
+    color: white;
+}
+
+/* Special –––––––––––––––––––––––––––––––––––––––––*/
+.project {
+	color: white;
+    vertical-align: middle;
+}
+/* Abfragemaske Konkordanz */
+.konki {
+	color: #fff;
+    font-weight: 800;
+    vertical-align: middle;
+    margin-bottom: 0.5rem;    
+}
+.konkibutton {
+    background-color: #fff;
+}
+
+.lang-sel {
+    display: inline-block;
+    height: 35px;
+    padding: 10px 0px 0px 0px;
+    margin: 0px;
+    border: 0px;
+    color: inherit;
+    text-align: left;
+    font-size: 2.4rem;
+    font-weight: inherit;
+    line-height: 1.2;
+    letter-spacing: -.05rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.lang-sel:hover {
+    color: #33C3F0;
+    background: inherit; 
+}
+
+.name-sel {
+    display: inline-block;
+    height: 25px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    border: 0px;
+    color: inherit;
+    text-align: left;
+    font-size: 2.0rem;
+    font-weight: inherit;
+    line-height: 1.2;
+    letter-spacing: -.05rem;
+    text-transform: unset;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.name-sel:hover {
+    color: #33C3F0;
+    background: inherit; 
+}
+
+/* Images –––––––––––––––––––––––––––––––––––––––––––––––––––*/
+.shadow {
+    width: 95%;
+    border: 1px solid #bbb;   
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.caption {
+    color: #777;
+    font-style: italic;
+    font-size: 95%;
+    text-align: center;
+    margin: 15px 0px 15px 0px;
+    margin-left: auto;
+    margin-right: auto;   
+}
+/* Basiscorpus Darstellung –––––––––––––––––––––––––––––––––––––––––-*/
+    /** Darstellung von AO:ParagrNr – Paragraphnummer, Kolophonangabe **/
+.parnr,
+p .parnr{
+    font-style:normal;
+    font-size:140%;
+    background-color:#eee;
+    color:#000;
+    font-family:"HPMLinux Biolinum O", sans-serif;
+    padding: 2px 10px;
+    border: solid 1px #9f9f9f;
+    margin: 5px 0px;
+}
+
+
+/* Special Tables –––––––––––––––––––––––––––––––––––––––––-*/
+    /*** Basicorpus interlineare Glossierung ***/ 
+.tblcls {
+	border-collapse: collapse;
+	border: 1px solid #8b8b8b;
+	display: none;
+	font-family: "HPMLinux Biolinum O", sans-serif;
+    margin-bottom: 30px;
+}
+.tblcls th {
+    border-right: 1px dotted black;
+    border-bottom: 1px solid #8b8b8b;
+    color: #fff;
+    background:#11ccaa;
+  }
+
+.tblcls td {
+    padding:4px 8px;
+    border: 1px dotted black;
+    background:#eee;
+  }
+
+.tblcls .grau {
+    color: #707070;
+  }
+
+.tblcls .text {
+    color: #b404ae;
+  }
+
+div.XXXlang .tblcls hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#show_hide {
+   position:fixed;
+}
+
+th.transl {
+	color: #fff;
+	padding: 4px 8px;
+}
+
+.transl .sGr,
+.transl .aGr,
+.transl .del,
+.transl .d,
+.transl .subscr,
+.transl .sGr,
+.transl .corr,
+.transl .materlect,
+.transl .MaterLect {
+    color: inherit;
+    font-family: inherit;
+}
+
+
+
+/* Cuneiform fonts –––––––––––––––––––––––––––––––––––––––––*/
+.santak{
+    font-family: "Santakku", Santakku;
+    font-size:150%;
+}
+
+.santakM{
+    font-family: "SantakkuM", SantakkuM;
+    font-size:150%;
+}
+
+.ullikA{
+    font-family: "UllikummiA", UllikummiA;
+    font-size:150%;
+}
+
+.ullikB{
+    font-family: "UllikummiB", UllikummiB;
+    font-size:150%;
+}
+
+.ullikC{
+    font-family: "UllikummiC", UllikummiC;
+    font-size:150%;
+}
+
+.esagil{
+    font-family: "Esagil", Esagil;
+    font-size:150%;
+}
+
+.assurb{
+    font-family: "Assurbanipal", Assurbanipal;
+    font-size:150%;
+}
+
+.bisitun{
+    font-family: "Bisitun", Bisitun;
+    font-size:150%;
+}
+
+.luwglyph{
+    font-family: "LUWGLYPH", LUWGLYPH;
+    font-size:150%;
+}
+
+.ugarit{
+    font-family: "Aegean", Aegean;
+    font-size:180%;
+}
+
+/* formerly in AOtxtxml20.css –––––––––––––––––––––––––––––––––––––––––*/
+
+td { 
+    border:0px dotted #EFEFEF;
+    vertical-align:top
+}
+
+p.Hur a:link,
+p.Luw a:link,
+p.Pal a:link,
+p.Hat a:link,
+p.Akk a:link,
+p.Sum a:link,
+p.Hit a:link {  
+    color:#111111;  
+    text-decoration:none;  
+    white-space:nowrap;      
+}
+
+p.Hur a:visited,
+p.Luw a:visited,
+p.Pal a:visited,
+p.Hat a:visited,
+p.Akk a:visited,
+p.Sum a:visited,
+p.Hit a:visited { 
+    text-decoration:none;   
+    white-space:nowrap;  
+}
+
+p.Hur a:hover,
+p.Luw a:hover,
+p.Pal a:hover,
+p.Hat a:hover,
+p.Akk a:hover,
+p.Sum a:hover,
+p.Hit a:hover {  
+    background-color:darkgray;  
+    text-decoration:none;  
+    white-space:nowrap;  
+}
+
+p.Hur a:active,
+p.Luw a:active,
+p.Pal a:active,
+p.Hat a:active,
+p.Akk a:active,
+p.Sum a:active,
+p.Hit a:active { 
+    text-decoration:none;  
+    white-space:nowrap;  
+}
+
+
+/*<!-- div section ANFANG-->*/
+/*
+.table { 
+    display:table;  
+    border-collapse:separate;  
+    vertical-align:top;  
+}
+
+.tr { 
+    display:table-row;  
+    vertical-align:top;  
+}
+
+.td { 
+    display:table-cell;  
+    padding:2px;  
+    vertical-align:top;  
+}
+*/
+
+.AOParagrNr { 
+    margin-top:15px;  
+    font-weight:bold;  
+    font-size:120%;  
+    vertical-align:baseline
+}
+
+.Standard {
+    text-align:justify;  
+    font-size:11pt;  
+    font-family:"HPMLinux Biolinum O";
+}
+
+.STD { 
+    margin-left: 1.0cm;  
+    border:collapse;  
+    font-size:11pt;  
+    text-align:justify;  
+    vertical-align:top;  
+}
+
+.FNO { 
+    text-align:justify;  
+    font-size:10pt;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.fnz { 
+    display:table-cell;  
+    border:collapse;  
+    padding:5px;  
+    text-indent:0.5988cm;  
+    font-family:"HPMLinux Biolinum O";  
+    font-size:10pt;  
+    text-align:left;  
+}
+
+.fnbod { 
+    color: #000;
+    display:table-cell;  
+    border:collapse;  
+    padding:5px;  
+    font-family:"HPMLinux Biolinum O";  
+    font-size:100%;  
+    text-align:left;  
+}
+
+
+
+.Textbody { 
+    text-align:justify;  
+    font-size:11pt;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Textbodyindent { 
+    text-align:justify;  
+    text-align:left;  
+    margin-left:1.4cm;  
+    font-size:11pt;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Title { 
+    font-size:20pt;  
+    font-weight:bold;  
+    text-align:center;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Subtitle { 
+    font-size:18pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    text-align:center;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Heading1 { 
+    font-size:17pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Heading2 { 
+    margin-left: 0.4cm;  
+    font-size:15pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Heading3 { 
+    margin-left: 0.7cm;  
+    font-size:14pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.Heading4 { 
+    margin-left: 1.0cm;  
+    font-size:13pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOTitle { 
+    font-size:20pt;  
+    font-weight:bold;  
+    text-align:center;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOSubtitle { 
+    font-size:18pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    text-align:center;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH1 {
+    font-size: 16pt;
+    color: #025;
+    margin-top: 0.5cm;
+    margin-bottom: 0.5cm;    
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH2 {
+    font-size: 14pt;
+    color: #025;
+    margin-left: 0.4cm;
+    margin-top: 0.5cm;
+    margin-bottom: 0.5cm;
+    font-style: italic;
+    line-height: 100%;
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH3 {
+    font-size: 13pt;
+    color: #025;
+    margin-top: 0.5cm;
+    margin-left: 0.7cm;
+    margin-bottom: 0.5cm;
+    font-style: italic;
+    line-height: 50%;
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH4 {
+    font-size: 12pt;
+    color: #025;
+    margin-top: 0.5cm;
+    margin-left: 0.7cm;
+    margin-bottom: 0.5cm;
+    vertical-align: text-top;
+    line-height: 100%;
+    font-family:"HPMLinux Biolinum O";  
+}
+
+/* Ersetzt mit AO Headers definiert für CTH-Seite
+.AOH1 { 
+    font-size:16pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH2 { 
+    margin-left: 0.4cm;  
+    font-size:14pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH3 { 
+    margin-left: 0.7cm;  
+    font-size:13pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH4 { 
+    margin-left: 1.0cm;  
+    font-size:12pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOH4 { 
+    margin-left: 1.0cm;  
+    font-size:11pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+}
+***************************************/
+
+.inhVHeading1 { 
+    margin-left: 0.0cm;  
+    font-size:10pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.inhVHeading2 { 
+    margin-left: 0.3cm;  
+    font-size:9pt;  
+    font-variant:small-caps;  
+    font-style:italic;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.inhVHeading3 { 
+    margin-left: 0.6cm;  
+    font-size:8pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.inhVHeading4 { 
+    margin-left: 0.9cm;  
+    font-size:7pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.master { 
+    display:block;  
+    border:2px solid lightgray;  
+    background-color:#EEEEEE;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOExemplar { 
+    padding-left:5px;  
+    padding-right:5px;  
+    text-align:center;  
+    font-weight:bold;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+    vertical-align:top;  
+}
+
+.AOKolonNr { 
+    padding-left:5px;  
+    padding-right:5px;  
+    text-align:right;  
+    font-style:normal;  
+    background-color: darkgray;  
+    color:#fff;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+}
+
+.LineNrExpl, 
+.LineNrExpl a { 
+    font-weight:bold;  
+    color:#000;  
+    font-style:normal;  
+    font-size: 80%;
+    vertical-align: top;
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+}
+
+.AOTextline-Hit,
+.AOHittite { 
+    font-style:oblique;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTextline-Akk { 
+    font-style:italic;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTextline-Hurr { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTextline-Luw { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTextline-Pal { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTextline-Sum { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTranslat-DE { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTranslat-EN { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTranslat-IT { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOTranslat-FR { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.DE { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.EN { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.IT { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.FR { 
+    font-style:normal;  
+    color:#000000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+
+
+/*<!-- div section ENDE -->*/
+
+.AOParagrNr { 
+    white-space:nowrap;  
+    margin-top:15px;  
+    font-family:"HPMLinux Biolinum O";  
+    font-weight:bold;  
+    font-size:14pt;  
+    vertical-align:baseline}
+
+.Footnote { 
+    margin-left:0.5988cm;  
+    margin-right:0.0cm;  
+    text-indent:-0.5988cm;  
+    background-color:#eee;  
+    font-family:"HPMLinux Biolinum O";  
+    font-size:90%}
+
+.sdfootnote { 
+    margin-left:0.5988cm;  
+    margin-right:0.0cm;  
+    text-indent:-0.5988cm;  
+    background-color:#eee;  
+    font-family:"HPMLinux Biolinum O";  
+    font-size:10pt}
+
+
+.Standard { 
+    text-align:justify;  
+    font-size:12pt;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Textbody { 
+    text-align:justify;  
+    font-size:12pt;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Textbodyindent{ 
+    text-align:justify;  
+    text-align:left;  
+    margin-left:1.4cm;  
+    font-size:11pt;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+
+/*<!--
+.Title { 
+    font-size:20pt;  
+    font-weight:bold;  
+    text-align:center;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Subtitle { 
+    font-size:18pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    text-align:center;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Heading1 { 
+    font-size:17pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Heading2 { 
+    font-size:15pt;  
+    font-weight:bold;  
+    font-style:italic;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Heading3 { 
+    font-size:14pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.Heading4 { 
+    font-size:13pt;  
+    font-weight:bold;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.inhVHeading1 { 
+    font-size:12pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.inhVHeading2 { 
+    font-size:11pt;  
+    font-variant:small-caps;  
+    font-style:italic;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.inhVHeading3 { 
+    font-size:9pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.inhVHeading4 { 
+    font-size:9pt;  
+    font-variant:small-caps;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+-->*/
+
+
+.AOExemplar { 
+    text-align:center;  
+    font-weight:bold;  
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+}
+
+.AOKolonNr { 
+    font-style:normal;  
+    text-align:right;  
+    font-weight:bold;  
+    background-color: darkgray;  
+    color:#fff;  
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+}
+
+.LineNr { 
+    font-style:normal;  
+    font-weight:bold;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+    white-space:nowrap;  
+}
+
+
+.svh--LitBemerk { 
+    margin-left:2.4cm;  
+    font-size:85%;  
+}
+
+ 
+.AONumeral { 
+    font-style:normal;  
+    font-size:100%;  
+    color:black;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AOSumgram { 
+    font-style:normal;  
+    font-size:90%;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.sGr { 
+    font-style:normal;  
+    font-size:90%;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.aGr { 
+    font-style:italic;  
+    font-size:90%;  
+    color:#000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.master .sGr { 
+    font-style:normal;  
+    font-size:90%;  
+    font-weight:500;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Libertine O";  
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+
+.Hur {   
+    color:#000;  
+    background-color:transparent;  
+    font-style:italic;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O";
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+.Luw { 
+    color:#000;  
+    background-color:transparent;  
+    font-style:normal;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O";
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+.Pal { 
+    color:#000;  
+    background-color:transparent;  
+    font-style:normal;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O";
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+.Hat { 
+    color:#000;  
+    background-color:transparent;  
+    font-style:normal;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O";
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+.Hit { 
+    color:#000;  
+    background-color:transparent;  
+    font-style:italic;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O"; 
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+.Akk { 
+    color:#000;  
+    background-color:transparent;  
+    font-style:italic;  
+    font-size:130%;  
+    font-family:"HPMLinux Libertine O"; 
+    margin-bottom: 5px;
+    padding-left: 44px;
+    text-indent: -44px; 
+}
+
+
+.AODeterm,
+.det,
+.d { 
+    font-style:normal;  
+    font-size:58%;  
+    vertical-align:super;  
+    color:#000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.materlect,
+.MaterLect { 
+    font-style:normal;  
+    font-size:75%;  
+    vertical-align:super;  
+    color:#000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+
+
+.AOLineNrExpl { 
+    font-style:normal;  
+    font-weight:bold;  
+    font-size:68%;  
+    vertical-align:text-top;  
+    color:#000;  
+    background-color:#EEEEEE;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+
+.FnAnc { 
+    padding:1px;  
+    font-style:normal;  
+    font-size:78%;  
+    vertical-align:super;  
+    color:#000;  
+    font-weight:bold;  
+    border:1px solid darkgray;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.FnSym { 
+    padding:1px;  
+    font-style:normal;  
+    font-size:78%;  
+    vertical-align:text-top;  
+    color:#000;  
+    font-weight:normal;  
+    border:1px solid darkgray;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.FnAncT { 
+    padding:1px;  
+    margin:1.5px;  
+    font-style:normal;  
+    font-size:78%;  
+    vertical-align:text-top;  
+    color:#000;  
+    font-weight:normal;  
+    border:1px solid darkgray;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.FnSymT { 
+    padding:1px;  
+    font-style:normal;  
+    font-size:78%;  
+    vertical-align:text-top;  
+    color:#000;  
+    font-weight:normal;  
+    border:1px solid darkgray;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+
+.gap,
+.gapln,
+p .gap{ 
+    font-style:italic;  
+    font-size:140%;  
+    background-color:#eee;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O"; 
+    padding: 2px 20px;
+    margin-top: 10px;
+}
+
+.gapln { 
+    font-size:110%;
+    padding: 2px 2px;
+    margin: 0px;
+ }
+
+.AO-Text-Gap { 
+    font-style:italic;  
+    font-size:100%;  
+    background-color:#eee;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.AOsuperscr { 
+    font-style:normal;  
+    font-size:58%;  
+    vertical-align:super;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.corr { 
+    font-style:normal;  
+    font-size:58%;  
+    vertical-align:super;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.sgn {
+    font-style:normal;  
+    font-size:110%;  
+    color:#000;  
+    background-color:transparent;  
+    font-family:"HPMLinux Libertine O";  
+
+}
+
+/* # Ausweißen von "BAdewanne" */
+.wht { 
+    color:#fff;  
+}
+  
+.num { 
+    font-style:normal;  
+}
+ 
+
+.AO-LIT { 
+    font-weight:bold;  
+    background-color:#eee;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+
+.subscr { 
+    font-style:normal;  
+    font-size:78%;  
+    color:#000;  
+    vertical-align:sub;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AO--index { 
+    font-style:normal;  
+    font-size:58%;  
+    color:#000;  
+    vertical-align:sub;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.AO--superscr { 
+    font-style:normal;  
+    font-size:58%;  
+    vertical-align:super;  
+    color:black;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.KolonNr { 
+    padding:1px;  
+    font-style:normal;  
+    font-size:78%;  
+    vertical-align:super;  
+    background-color:darkgray;  
+    color:#fff;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+
+.AO--italic { 
+    font-style:italic;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.master { 
+    background-color:#eee;  
+    color:#000;  
+    font-size:110%;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.masterT { 
+    background-color:#eee;  
+    color:#000;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+td.master { 
+    border:2px solid lightgray;  
+    background-color:#EEEEEE;  
+    font-family:"HPMLinux Libertine O";  
+}
+
+.zcth { 
+    font-weight: normal;  
+    color:#000;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.ztitel { 
+    font-size: 11pt;  
+    color:#000;  
+    vertical-align:top;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+.zeditor { 
+    font-size: 10pt;  
+    color:#000;  
+    vertical-align:top;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+span.LL { 
+    font-size: 10pt;  
+    color:#000;  
+    margin: 4px;  
+    font-variant:small-caps;  
+    color:#995511;  
+    border-width:0px;  
+    border-style:solid;  
+    padding:0.2em;  
+    text-align:left;  
+    font-family:"HPMLinux Biolinum O";  
+}
+
+/* für die CTH-Seite */
+
+
+p.STD {
+    font-size: 12pt;
+    margin-left: 115px;
+    text-indent: -80px;
+    color: #025;
+    font-family:"HPMLinux Biolinum O";  
+    text-align: left;
+}
+
+.CTHcatnrZchn {
+    margin-right: 0.5cm;
+
+}
+
+.CTHcatstichw {
+    font-size: 120%;
+    text-indent: 0px;
+}
+
+p.STD .AO--italic {
+    font-family:"HPMLinux Biolinum O";     
+}
+/* OTHER */

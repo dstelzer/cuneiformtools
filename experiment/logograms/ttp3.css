@@ -1,0 +1,101 @@
+/* Tooltip container */
+.ttp3 {
+  position: relative;
+  /*background-color: #369; 
+    display: inline-block;
+  color: #fff;
+   padding: 0 3px 0 3px;
+  margin: 0  1px 0 2px;
+
+  */
+
+    /* border: 2px solid #369;  */
+}
+
+/* Tooltip text */
+.ttp3 .ttp3text {
+  visibility: hidden;
+  width: 220px;
+  font-style:normal;
+  background-color: #fff;
+  color: #B404AE;
+  text-align: center;
+  padding: 5px 0;
+  /*border: 1px solid #bbb;*/
+  border-radius: 4px;
+
+  /* Position the ttp3 text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 30%;
+  margin-left: -60px;
+  text-indent: 0px;
+
+  /* Fade in ttp3 */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.ttp3 .ttp3text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+} /**/
+
+/* Show the ttp3 text when you mouse over the ttp3 container */
+.ttp3:hover .ttp3text {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* grau für nicht validierte Annotation*/
+/* Tooltip text */
+.ttp3 .ttp3grau {
+  visibility: hidden;
+  width: 220px;
+  font-style:normal;
+  background-color: #fff;
+  color: #888;
+  text-align: center;
+  padding: 5px 0;
+  /*border: 1px solid #bbb;*/
+  border-radius: 4px;
+
+  /* Position the ttp3 text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 30%;
+  margin-left: -60px;
+  text-indent: 0px;    
+
+  /* Fade in ttp3 */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.ttp3 .ttp3grau::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+} /**/
+
+/* Show the ttp3 text when you mouse over the ttp3 container */
+.ttp3:hover .ttp3grau {
+  visibility: visible;
+  opacity: 1;
+}
