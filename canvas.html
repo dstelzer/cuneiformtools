@@ -24,14 +24,21 @@
 				url = "/rendersign?code=" + encode + "&format=" + format + "&type=" + type + "&friendly=1&scale=" + size;
 				document.getElementById("canvas").src = url;
 			}
+			function keyup(){
+				if(event.keyCode == 13){
+					search();
+				}else{
+					render();
+				}
+			}
 			function search(){
 				code = encodeURIComponent(document.getElementById("source").value);
 				params = new URLSearchParams(document.location.search);
+				url = "/search?code="+ code +"&sort=complex";
 				if(params.has("expkey")){
-					document.location = "/search?code="+ code +"&expkey="+ params.get("expkey");
-				}else{
-					document.location = "/search?code="+ code;
+					url = url +"&expkey="+ params.get("expkey");
 				}
+				document.location = url;
 			}
 			function resize(){
 				canvas = document.getElementById("canvas");
@@ -80,7 +87,7 @@
 		<div id="container">
 		<div id="left">
 			<span id="controls">
-				<textarea id="source" oninput="render();" onkeyup="render();" onselect="render();"></textarea>
+				<input type="text" id="source" oninput="render();" onkeyup="keyup();" onselect="render();"></textarea>
 				<select id="type" onchange="render();">
 					<option value="publish">Published</option>
 					<option value="handwrite">Handwritten</option>

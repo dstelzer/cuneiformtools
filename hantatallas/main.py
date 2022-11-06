@@ -11,7 +11,7 @@ def test_rendering():
 			construct = parse(input(), friendly=True)
 			print(construct)
 			print(construct.functional_form())
-			LinearRenderer.render(construct).show()
+			TwoSidedRenderer.render(construct).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
 		except ValueError: pass

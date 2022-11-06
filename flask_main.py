@@ -1,10 +1,11 @@
 from io import BytesIO
 
-from flask import Flask, request, Response, render_template
+from flask import Flask, request, Response, render_template, send_file, redirect, url_for
 from werkzeug.wsgi import FileWrapper
 
 from dubsar.consolidated import DubSar
 from hantatallas.web_version import do_rendering, do_searching, do_scribing
+from hantatallas.experiment import choose_image, record_stimulus, record_response
 
 app = Flask(__name__)
 
@@ -81,3 +82,38 @@ def do_galdubsar():
 	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor, 'strokewidth':strokewidth, 'hatchspace':hatchspace, 'fill':fill}
 	layoutparams = {'justify':justify, 'size':size, 'margin':margin, 'leading':leading, 'spacing':spacing, 'kerning':kerning, 'absolute':absolute, 'fixed':fixedwidth}
 	return do_scribing(text, rendname=rend, format=format, rendparams=rendparams, layoutparams=layoutparams)
+
+@app.route('/experiment/image')
+def do_experiment_image():
+	expkey = request.args.get('expkey', '', type=str)
+	index = request.args.get('index', 0, type=int)
+	lst = request.args.get('list', 0, type=int)
+	fn = choose_image(subject=expkey, index=index, lst=lst)
+	return send_file(fn, mimetype='image/png')
+@app.route('/experiment/respond')
+def do_experiment_submit():
+	expkey = request.args.get('expkey', '', type=str)
+	index = request.args.get('index', -1, type=int)
+	lst = request.args.get('list', 0, type=int)
+	result = request.args.get('result', '', type=str)
+	system = request.args.get('system', None, type=str)
+	record_response(expkey, index, lst, system, result)
+	return redirect(url_for('.do_experiment_stimulus', expkey=expkey, index=index+1, lst=lst, system=system))
+@app.route('/experiment/stimulus')
+def do_experiment_stimulus():
+	total = 16
+	expkey = request.args.get('expkey', '', type=str)
+	index = request.args.get('index', -1, type=int)
+	lst = request.args.get('list', 0, type=int)
+	system = request.args.get('system', None, type=str)
+	if index == total:
+		return redirect('/experiment/complete.html')
+	record_stimulus(expkey, index, lst, system)
+	return render_template('stimulus.html', expkey=expkey, index=index, lst=lst, system=system, total=total)
+@app.route('/experiment/cover')
+def do_experiment_cover():
+	expkey = request.args.get('expkey', '', type=str)
+	index = request.args.get('index', -1, type=int)
+	lst = request.args.get('list', 0, type=int)
+	system = request.args.get('system', None, type=str)
+	return render_template('cover.html', expkey=expkey, index=index, lst=lst, system=system)

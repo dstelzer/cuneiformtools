@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 import time
+import random
 
 import csv
 import io
@@ -28,6 +29,27 @@ def clean_data(subject, event, detail): # Use csv.writer to convert it to a vali
 
 def record(subject, event, detail):
 	exlog.info(clean_data(subject, event, detail))
+
+permutations = {}
+def choose_index(subject, index, n_images=16, salt=''):
+	if not subject.strip(): return index
+	if subject not in permutations:
+	#	random.seed(salt+subject)
+		permutations[subject] = random.sample(range(n_images), k=n_images) # Random permutation of the numbers [0..n_images)
+		record(subject, 'SHUFFLE', ' '.join(str(n) for n in permutations[subject]))
+	return permutations[subject][index]
+
+def choose_image(subject, index, lst):
+	i = choose_index(subject, index)
+	return f'./expimgs/{lst}/{i}.png'
+
+def record_stimulus(subject, index, lst, system):
+	i = choose_index(subject, index)
+	record(subject, 'STIMULUS', f'list:{lst}, index:{index}, which:{i}, system:{system}')
+
+def record_response(subject, index, lst, system, result):
+	i = choose_index(subject, index)
+	record(subject, 'RESPONSE', f'list:{lst}, index:{index}, which:{i}, system:{system}, result:{result}')
 
 if __name__ == '__main__':
 	from random import randint
