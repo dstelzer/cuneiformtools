@@ -87,14 +87,14 @@ def do_galdubsar():
 def do_experiment_image():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', 0, type=int)
-	lst = request.args.get('list', 0, type=int)
+	lst = request.args.get('list', '', type=str)
 	fn = choose_image(subject=expkey, index=index, lst=lst)
 	return send_file(fn, mimetype='image/png')
 @app.route('/experiment/respond')
 def do_experiment_submit():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	lst = request.args.get('list', 0, type=int)
+	lst = request.args.get('list', '', type=str)
 	result = request.args.get('result', '', type=str)
 	system = request.args.get('system', None, type=str)
 	record_response(expkey, index, lst, system, result)
@@ -104,7 +104,7 @@ def do_experiment_stimulus():
 	total = 16
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	lst = request.args.get('list', 0, type=int)
+	lst = request.args.get('list', '', type=str)
 	system = request.args.get('system', None, type=str)
 	if index == total:
 		return redirect(url_for('.do_experiment_give_survey', expkey=expkey, which='final', system=system))

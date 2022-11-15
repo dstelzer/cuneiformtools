@@ -35,7 +35,7 @@ def record(subject, event, detail):
 filelists = {}
 def image_from_index(index, lst):
 	if lst not in filelists:
-		parent = Path.cwd() / 'expings' / str(lst)
+		parent = Path.cwd() / 'expimgs' / str(lst)
 		filelists[lst] = sorted(parent.iterdir())
 	return filelists[lst][index]
 
