@@ -5,7 +5,7 @@ from werkzeug.wsgi import FileWrapper
 
 from dubsar.consolidated import DubSar
 from hantatallas.web_version import do_rendering, do_searching, do_scribing
-from hantatallas.experiment import choose_image, record_stimulus, record_response
+from hantatallas.experiment import choose_image, record_stimulus, record_response, record_survey
 
 app = Flask(__name__)
 
@@ -107,7 +107,7 @@ def do_experiment_stimulus():
 	lst = request.args.get('list', 0, type=int)
 	system = request.args.get('system', None, type=str)
 	if index == total:
-		return redirect('/experiment/complete.html')
+		return redirect(url_for('.do_experiment_give_survey', expkey=expkey, which='final', system=system))
 	record_stimulus(expkey, index, lst, system)
 	return render_template('stimulus.html', expkey=expkey, index=index, lst=lst, system=system, total=total)
 @app.route('/experiment/cover')
@@ -117,3 +117,15 @@ def do_experiment_cover():
 	lst = request.args.get('list', 0, type=int)
 	system = request.args.get('system', None, type=str)
 	return render_template('cover.html', expkey=expkey, index=index, lst=lst, system=system)
+@app.route('/experiment/survey')
+def do_experiment_survey():
+	expkey = request.args.get('expkey', '', type=str)
+	rest = request.args.to_dict()
+	record_survey(expkey, rest)
+	return redirect('/experiment/complete.html')
+@app.route('/experiment/give_survey')
+def do_experiment_give_survey():
+	expkey = request.args.get('expkey', '', type=str)
+	which = request.args.get('which', '', type=str)
+	system = request.args.get('system', None, type=str)
+	return render_template('survey.html', expkey=expkey, which=which, system=system)

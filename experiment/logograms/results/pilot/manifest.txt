@@ -1,0 +1,61 @@
+0: 22 (undamaged)
+1: 4 (fuzzy)
+2: 10 (strokes missing)
+3: 6 (parts missing)
+4: 2 (illegible)
+
+Lists
+P1: 0×9, 1×2, 2×4, 3×2, 4×1
+P2: 0×9, 1×2, 2×4, 3×2, 4×1
+S1: 0×2,      2×1, 3×1
+S2: 0×2,      2×1, 3×1
+
+0
+	ANŠE "donkey"
+	ŠÀ ŠAG₄ "heart"
+	ŠÙDUN ŠÙDUL "yoke"
+c	DAM dam "wife"
+	EĜIR EGIR "back" "around"
+	GÍN "[component]"
+	GIR₄ "kiln" "pottery"
+c	GUR gur "another" "cor"
+c	ḪUB ḫup "ring"
+	KAŠ₄ "run" "courier"
+	KID LÍL GÉ KE₄ "field"
+	KIN qi "work" "sickle"
+cd	KIRI₆ SAR šar "plant" "garden" det
+	KU₇ "sweet"
+d	NA₄ ZÁ "stone" det
+	NÍTA ARAD ÌR "servant" "male"
+cd	PÚ GÍGIR túl "spring" "wagon" det
+	SANGA ÀKA ŠIT(I) "priest" "fleece" "number"
+v	SI ší šé "horn"
+	SÍG+MUNUS "ewe"
+	SIPA(D) "shepherd"
+c	ZÍZ tàš "emmer"
+1
+	AMA DAGAL "mother" "bright"
+	GAG DÙ DRU "do" "peg"
+c	GAL gal "big"
+	TUR DUMU "child" "small"
+2
+	ALAM ALAN "statue"
+	DUGUD "difficult"
+	DUḪ GAB(A) "divide" "breast"
+	GIG "ill"
+	GÌR(I) NÈ "foot"
+d	KUŠ SU "skin" "entrails" det
+	LUGAL "king"
+	NAG "drink"
+	SISKUR "ritual"
+d	URUDU "copper" det
+3
+cd	GAD(A) gat kat "linen" det
+	INANNA INNIN "[name]"
+	MÁŠ "family"
+	SA₅ DIRI "red" "leftover"
+	SÌR ŠÌR KEŠDA KÉŠ "sing" "bind"
+d	URU "city" det
+4
+	6 ÀŠ "six"
+	TU₇ ÚTUL KAM "soup" "pot" "number"

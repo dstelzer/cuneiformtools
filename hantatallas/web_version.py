@@ -63,7 +63,7 @@ db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
 def do_searching(code, regex, sort, expkey=None):
-	if expkey: experiment.record(expkey, 'SEARCH', f'{code} % {regex} % {sort}')
+	if expkey: experiment.record_search(expkey, code, regex, sort)
 
 	log = StringIO()
 	if code.strip():
@@ -71,7 +71,7 @@ def do_searching(code, regex, sort, expkey=None):
 			with redirect_stdout(log):
 				piece = parse(code)
 		except ValueError:
-			if expkey: experiment.record(expkey, 'ERROR', log.getvalue())
+			if expkey: experiment.record_error(expkey, 'parse', log.getvalue())
 			return -1, '<pre>'+log.getvalue()+'</pre>'
 	else:
 		piece = None
@@ -80,7 +80,7 @@ def do_searching(code, regex, sort, expkey=None):
 		try:
 			recomp = re.compile(regex.strip())
 		except re.error as e:
-			if expkey: experiment.record(expkey, 'ERROR', e.args[0])
+			if expkey: experiment.record_error(expkey, 'regex', e.args[0])
 			return -1, f'<pre>Regex error: {e.args[0]}</pre>'
 	else:
 		recomp = None

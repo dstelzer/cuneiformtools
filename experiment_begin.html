@@ -5,12 +5,29 @@
 	</head>
 	<body>
 		<h1>Experiment Setup</h1>
-		<form action="/experiment/cover" method="get" accept-charset="utf-8">
+		<p><form action="/experiment/cover" method="get" accept-charset="utf-8">
 			<label>Subject key: <input type="text" name="expkey" size="6" required /></label>
 			<label>List key: <input type="text" name="list" size="2" required /></label>
-			<label>System (Z or H): <input type="text" name="system" size="2" required /></label>
+			<label>System (Z or H): <select name="system">
+				<option value="Z">Zeichenlexikon</option>
+				<option value="H">Hantatallas</option>
+			</select></label>
 			<label>Starting index: <input type="text" name="index" size="2" value="0" required /></label>
 			<input type="submit" value="Begin" />
-		</form>
+		</form></p>
+		<h2>Survey</h2>
+		<p><form action="/experiment/give_survey" method="get" accept-charset="utf-8">
+			<label>Subject key: <input type="text" name="expkey" size="6" required /></label>
+			<label>System: <select name="system">
+				<option value="N/A">Doesn't matter</option>
+				<option value="Z">Zeichenlexikon</option>
+				<option value="H">Hantatallas</option>
+			</select></label>
+			<label>Survey: <select name="which">
+				<option value="initial">Initial</option>
+				<option value="final">Final</option>
+			</select></label>
+			<input type="submit" value="Begin" />
+		</form></p>
 	</body>
 </html>
