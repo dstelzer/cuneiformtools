@@ -1,0 +1,77 @@
+<html>
+	<head>
+		{% if which == 'initial' %}
+		<title>Initial Survey</title>
+		{% else %}
+		<title>Final Survey</title>
+		{% endif %}
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		{% if which == 'initial' %}
+		<h2>Initial Survey</h2>
+		{% else %}
+		<h2>Final Survey</h2>
+		{% endif %}
+		<form action="/experiment/survey">
+		<input type="hidden" name="expkey" value="{{expkey}}" />
+		<input type="hidden" name="which" value="{{which}}" />
+		<input type="hidden" name="system" value="{{system}}" />
+		{% if which == 'initial' %}
+		<p><label>Are you currently enrolled in a Hittite class (including LING 404 and relevant independent studies) at the University of Illinois?<br />
+			<input type="text" name="current" size="5" required />
+		</label></p>
+		<p><label>How many semesters of Hittite have you taken at the University of Illinois, including the current semester if applicable?<br />
+			<input type="text" name="semesters" size="5" required />
+		</label></p>
+		<p><label>Do you have experience with Hittite or cuneiform apart from University of Illinois classes? If so, please describe it here.<br />
+			<textarea name="outside" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>How familiar are you with V, CV, and VC signs? Can you generally recognize them without a chart? Can you generally find them quickly if you have a chart?<br />
+			<textarea name="cv" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>As above, how familiar are you with CVC signs?<br />
+			<textarea name="cvc" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>As above, how familiar are you with logograms?<br />
+			<textarea name="logo" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>How familiar are you with sign lists such as the <i>Hethitisches Zeichenlexikon?</i><br />
+			<textarea name="hzl" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>How familiar are you with the Hantatallas lookup system?<br />
+			<textarea name="hantatallas" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>Can you read German? (This is <b>not</b> expected or required for the experiment.)<br />
+			<input type="text" name="german" size="10" required />
+		</label></p>
+		<p><label>Do you have any other relevant experience, or any concerns, you want the experimenters to know about?<br />
+			<textarea name="other" rows="3" cols="50"></textarea>
+		</label></p>
+		{% else %}
+		<p><label>Did you find this system difficult to use? (1 = not difficult, 5 = extremely difficult)<br />
+			<input type="number" name="difficulty" size="5" required />
+		</label></p>
+		<p><label>Did you find this system tiring to use? (1 = not tiring, 5 = extremely tiring)<br />
+			<input type="number" name="tiring" size="5" required />
+		</label></p>
+		<p><label>How certain do you feel about your identifications with this system? (1 = not at all certain, 5 = completely certain)<br />
+			<input type="number" name="certainty" size="5" required />
+		</label></p>
+		<p><label>What was the easiest part of your process with this system?<br />
+			<textarea name="easiest" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>What was the most difficult or tiring part of your process with this system?<br />
+			<textarea name="worst" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>What would have made this system easier to use?<br />
+			<textarea name="improve" rows="3" cols="50"></textarea>
+		</label></p>
+		<p><label>Do you have any other notes about this system that you’d like the experimenters to know?<br />
+			<textarea name="other" rows="3" cols="50"></textarea>
+		</label></p>
+		{% endif %}
+		<p><input type="submit" value="Submit" /></p>
+		</form>
+	</body>
+</html>
