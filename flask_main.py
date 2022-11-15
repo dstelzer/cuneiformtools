@@ -88,7 +88,7 @@ def do_experiment_image():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', 0, type=int)
 	list = request.args.get('list', '', type=str)
-	fn = choose_image(subject=expkey, index=index, list=list)
+	fn = choose_image(subject=expkey, index=index, lst=list)
 	return send_file(fn, mimetype='image/png')
 @app.route('/experiment/respond')
 def do_experiment_submit():
