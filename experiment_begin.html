@@ -7,8 +7,13 @@
 		<h1>Experiment Setup</h1>
 		<p><form action="/experiment/cover" method="get" accept-charset="utf-8">
 			<label>Subject key: <input type="text" name="expkey" size="6" required /></label>
-			<label>List key: <input type="text" name="list" size="2" required /></label>
-			<label>System (Z or H): <select name="system">
+			<label>List key: <select name="list">
+				<option value="S1">Sample 1</option>
+				<option value="S2">Sample 2</option>
+				<option value="P1">Pilot 1</option>
+				<option value="P2">Pilot 2</option>
+			</select></label>
+			<label>System: <select name="system">
 				<option value="Z">Zeichenlexikon</option>
 				<option value="H">Hantatallas</option>
 			</select></label>

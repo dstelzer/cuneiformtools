@@ -4,7 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	</head>
 	<body>
-		<p>This is where the description of the experiment will go. All details can be put here for subjects to read.</p>
+		<p>In this experiment, you will be shown a series of cuneiform signs, one at a time. Your goal is to identify each one and enter its name as accurately as possible.</p>
+		<p>Since it can be difficult to type accents on an unfamiliar computer, you can use the numbers 2 and 3 in place of the acute and grave accents (Á = A2, À = A3), H instead of Ḫ (ḪA = HA), and C instead of Š (CA = ŠA). Note that the difference between Š and S <i>is</i> important for logograms (ŠI and SI are different signs), so C is a better alternative than S.</p>
+		<p>All of the signs in this experiment are logograms, and none of them are used for V, CV, or VC syllables in Hittite (though they might be in Sumerian or Akkadian).</p>
 		{% if system == 'Z' %}
 		<p>You will be using the <i>Hethitisches Zeichenlexikon</i> for this session. Download it here: <a href="/download/Zeichenlexikon.pdf" target="_blank">Hethitisches Zeichenlexikon</a></p>
 		{% else %}
@@ -12,12 +14,12 @@
 		{% endif %}
 		<form action="/experiment/stimulus" method="get" accept-charset="utf-8">
 			<input type="hidden" name="expkey" value="{{expkey}}" />
-			<input type="hidden" name="list" value="{{lst}}" />
+			<input type="hidden" name="list" value="{{list}}" />
 			<input type="hidden" name="index" value="{{index}}" />
 			<input type="hidden" name="system" value="{{system}}" />
 			<input type="submit" value="Begin" />
 		</form>
-		<p>Information for experimenters: subject key {{expkey}}, list {{lst}}, index {{index}}, system {{system}}</p>
+		<p>Information for experimenters: subject key {{expkey}}, list {{list}}, index {{index}}, system {{system}}</p>
 	</body>
 </html>
 
