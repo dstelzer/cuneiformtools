@@ -39,21 +39,20 @@ def image_from_index(index, lst):
 		filelists[lst] = sorted(parent.iterdir())
 	return filelists[lst][index]
 
+def get_sequence_length(lst):
+	if lst not in filelists:
+		image_from_index(0, lst) # The returned value doesn't matter, just need to make sure it's cached
+	return len(filelists[lst])
+
 permutations = {}
 def choose_index(subject, index, lst, salt=''):
 	if not subject.strip(): return index # for testing
-	
-	if lst not in filelists:
-		image_from_index(0, lst) # The returned value doesn't matter, just need to make sure it's cached
-	n_images = len(filelists[lst])
-	
+	n_images = get_sequence_length(lst)
 	if subject not in permutations or len(permutations[subject]) != n_images:
 	#	random.seed(salt+subject)
 		permutations[subject] = random.sample(range(n_images), k=n_images) # Random permutation of the numbers [0..n_images)
 		record(subject, 'SHUFFLE', ' '.join(str(n) for n in permutations[subject]))
-	
 	if index < 0 or index > n_images: raise ValueError(index, n_images, subject, lst)
-	
 	return permutations[subject][index]
 
 def choose_image(subject, index, lst):

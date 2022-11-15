@@ -5,7 +5,7 @@ from werkzeug.wsgi import FileWrapper
 
 from dubsar.consolidated import DubSar
 from hantatallas.web_version import do_rendering, do_searching, do_scribing
-from hantatallas.experiment import choose_image, record_stimulus, record_response, record_survey
+from hantatallas.experiment import choose_image, get_sequence_length, record_stimulus, record_response, record_survey
 
 app = Flask(__name__)
 
@@ -91,7 +91,7 @@ def do_experiment_image():
 	fn = choose_image(subject=expkey, index=index, lst=list)
 	return send_file(fn, mimetype='image/png')
 @app.route('/experiment/respond')
-def do_experiment_submit():
+def do_experiment_respond():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
 	list = request.args.get('list', '', type=str)
@@ -101,12 +101,12 @@ def do_experiment_submit():
 	return redirect(url_for('.do_experiment_stimulus', expkey=expkey, index=index+1, list=list, system=system))
 @app.route('/experiment/stimulus')
 def do_experiment_stimulus():
-	total = 16
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
 	list = request.args.get('list', '', type=str)
 	system = request.args.get('system', None, type=str)
-	if index == total:
+	total = get_sequence_length(list)
+	if index >= total:
 		return redirect(url_for('.do_experiment_give_survey', expkey=expkey, which='final', system=system))
 	record_stimulus(expkey, index, list, system)
 	return render_template('stimulus.html', expkey=expkey, index=index, list=list, system=system, total=total)
