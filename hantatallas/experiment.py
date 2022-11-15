@@ -58,17 +58,17 @@ def choose_index(subject, index, lst, salt=''):
 
 def choose_image(subject, index, lst):
 	i = choose_index(subject, index, lst)
-	img = images_from_index(index, lst)
+	img = image_from_index(index, lst)
 	return img
 
 def record_stimulus(subject, index, lst, system):
 	i = choose_index(subject, index, lst)
-	name = images_from_index(index, lst).stem
+	name = image_from_index(index, lst).stem
 	record(subject, 'STIMULUS', {'list':lst, 'index':index, 'which':i, 'name':name, 'system':system})
 
 def record_response(subject, index, lst, system, result):
 	i = choose_index(subject, index, lst)
-	name = images_from_index(index, lst).stem
+	name = image_from_index(index, lst).stem
 	record(subject, 'RESPONSE', {'list':lst, 'index':index, 'which':i, 'name':name, 'system':system, 'result':result})
 
 def record_survey(subject, result):
