@@ -114,7 +114,7 @@ def do_experiment_stimulus():
 def do_experiment_cover():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	lst = request.args.get('list', 0, type=int)
+	lst = request.args.get('list', '', type=str)
 	system = request.args.get('system', None, type=str)
 	return render_template('cover.html', expkey=expkey, index=index, lst=lst, system=system)
 @app.route('/experiment/survey')

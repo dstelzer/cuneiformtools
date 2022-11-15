@@ -231,7 +231,7 @@
 		NÍTA(Ḫ)
 			male (animal)
 	FORM
-		L[{c[hc]c}v]
+		[{c[hc]c}v]
 	NAME
 		ARAD ÌR IR3 NÍTA NITA2 NÍTAḪ NITAḪ2
 17
@@ -614,9 +614,11 @@
 			work, role
 			sickle
 	FORM
-		W{[v{hhh}vd]h}
+		W{[v{0hhh0}vd]h}
 		L{[v{chhhh}vh]h}
 		L{[v{hc}vc']h}
+		L{[vc'v{0d}]h}
+		{[vcv{0h0}]h}
 		W{[v{hhh}v{h[vvv]}]h}
 		L{[v{[hc]hhh}vh]h}
 	NAME
@@ -655,7 +657,8 @@
 		ḪUB
 			ring, earring
 	FORM
-		W[{[vvh{cc}]h2}v2]
+		W[{[vvh{cc}]h}0'v2]
+		W[{[vvh]h}{cc}0'"v2]
 		W[{[vvd2]h}{cc}0'"v2]
 	NAME
 		ḪUB ḪUP
@@ -747,6 +750,7 @@
 	FORM
 		L[{h'[h2'v]M(h[vv0])}v]
 		L[{h'[h2'v]Mh[vv0]}v]
+		L[{h[{[0hh]([vv0]h)}v]}v]
 		L[{h'h2'hv}vv]
 	NAME
 		AMA DAGAL
@@ -975,6 +979,7 @@
 		qaq
 	FORM
 		L{d(uv)}
+		{d'({h0}v)}
 	NAME
 		QAQ DÙ DU3 DRU GAG RÚ RU2
 76
@@ -1121,9 +1126,10 @@
 		SI
 			horn
 	FORM
-		{[hv'v]h'}
+		{[{0h0}v'v]h'}
 		{[0vv]h2}
 		[{h[v0]h}v]
+		L[hv'{vh}]
 	NAME
 		ŠÍ ŠI2 ŠÉ ŠE2 SI SE ṢÌ ṢI3 ṢÈ ṢE3
 87
@@ -1158,6 +1164,7 @@
 		dir
 	FORM
 		L[{[hvv]h'}vv2]
+		L[{[{hv}v]h}vv2]
 		L{[0v'v'vv2]h2}
 	NAME
 		DIR DIRI SA5
@@ -1602,6 +1609,7 @@
 		L[{chh}{h[hc][hc]h}v2]
 		L[{dhh}{h[hc][hc]h}v2]
 		L[{chh}{hhhhh}{cc}0'"v2]
+		W[{[hc']h}{h[hc][hc]h}0'"v2]
 		W[{[hc']h}{[hc'][hc']}0'"v2]
 	NAME
 		EGIR EŊIR
@@ -1642,7 +1650,7 @@
 		kas₄
 	FORM
 		L[{c[hc]h2c}v2]
-		L[{c[h2c][h2c]c}v2]
+		L[{c[hhc][hhc]c}v2]
 	NAME
 		KAS4 KAŠ4
 130
@@ -2360,6 +2368,7 @@
 	FORM
 		L[{0hh}v{0h}v]
 		[{0hh}vcv]
+		[{[hv][hh]}v]
 	NAME
 		KU7
 185
@@ -2904,6 +2913,7 @@
 			statue, image, figure
 	FORM
 		W[{hh2h}{[vvv]v}TE{hh2h}{[vvv]v}TE]
+		W[{hhh}{[vvvv]v}TE{hhh}{[vvvv]v}TE]
 		W[{hhh}{hhhh'}{hhh}{hhhh'}]
 	NAME
 		ALAM ALAN
@@ -2941,6 +2951,7 @@
 		[{h[{hhhh}v]}v]
 		L[v{hhhhh}vv]
 		L[{h'[h2v]h'}v]
+		[({hhh}v)v]
 	NAME
 		RÍ RI2 U19 URU
 230
@@ -2971,6 +2982,7 @@
 			number, count
 	FORM
 		L[{h[hv]h}{[vv'v'v]h}]
+		W[{hhh}v{[vv'v'v]h}]
 		L[{[hc']h}{[vv'v'v]h}]
 		L[{h'h(hv)}{[vv'v'v]h}]
 		L[{hhv}{[vv'v'v]h}]
@@ -3086,6 +3098,7 @@
 			emmer (type of wheat)
 	FORM
 		P(v{hhhh})
+		P(v{hhh})
 		P([vv]{hhhh})
 	NAME
 		TÀŠ TAŠ3 ÁŠ AŠ2 ÁZ AZ2 ZÍZ ZIZ2
@@ -3416,6 +3429,7 @@
 			kiln
 			fired clay
 	FORM
+		L[c{[{hh}{hhh}]Eh'}v]
 		L[c{[{hh}{hhhh}]Eh'}v]
 		L[c{hh}{hh'h'h}v]
 	NAME
@@ -3925,6 +3939,7 @@
 	FORM
 		L[{cc}{d'hh'"}]
 		L[{cc}{chh}]
+		L[{[vv]0}T{d'hh'"}]
 	NAME
 		GÌR GIR3 GÌRI GIRI3 NÈ NE3
 302
@@ -3936,6 +3951,7 @@
 			donkey
 	FORM
 		L[{ddhh}{h'hh'}]
+		L[{ddhh}{d'hh'}]
 		L[{cchh}{d'hh'""}]
 		L{[{cc}{h'hh'}][(v{hh})M0]}
 		L[{chh}{chh'}]
@@ -4665,7 +4681,7 @@
 		SAR
 			plant
 	FORM
-		L[{ccc}{ccc}{hh}v]
+		[{ccc}{ccc}{hh}v]
 		L[{ccc}{ccc}{hh}vv]
 		L[{ccc}{ccc}({hh}[vv])]
 		[{ccc}{ccc}{[vv]h}]
