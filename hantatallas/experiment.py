@@ -33,19 +33,19 @@ def record(subject, event, detail):
 	exlog.info(clean_data(subject, event, detail))
 
 filelists = {}
-def image_from_index(index, lst):
+def image_from_which(which, lst):
 	if lst not in filelists:
 		parent = Path.cwd() / 'expimgs' / str(lst)
 		filelists[lst] = sorted(parent.iterdir())
-	return filelists[lst][index]
+	return filelists[lst][which]
 
 def get_sequence_length(lst):
 	if lst not in filelists:
-		image_from_index(0, lst) # The returned value doesn't matter, just need to make sure it's cached
+		image_from_which(0, lst) # The returned value doesn't matter, just need to make sure it's cached
 	return len(filelists[lst])
 
 permutations = {}
-def choose_index(subject, index, lst, salt=''):
+def choose_which(subject, index, lst, salt=''):
 	if not subject.strip(): return index # for testing
 	n_images = get_sequence_length(lst)
 	if subject not in permutations or len(permutations[subject]) != n_images:
@@ -56,19 +56,19 @@ def choose_index(subject, index, lst, salt=''):
 	return permutations[subject][index]
 
 def choose_image(subject, index, lst):
-	i = choose_index(subject, index, lst)
-	img = image_from_index(index, lst)
+	which = choose_which(subject, index, lst)
+	img = image_from_which(which, lst)
 	return img
 
 def record_stimulus(subject, index, lst, system):
-	i = choose_index(subject, index, lst)
-	name = image_from_index(index, lst).stem
-	record(subject, 'STIMULUS', {'list':lst, 'index':index, 'which':i, 'name':name, 'system':system})
+	which = choose_which(subject, index, lst)
+	name = image_from_which(which, lst).stem
+	record(subject, 'STIMULUS', {'list':lst, 'index':index, 'which':which, 'name':name, 'system':system})
 
 def record_response(subject, index, lst, system, result):
-	i = choose_index(subject, index, lst)
-	name = image_from_index(index, lst).stem
-	record(subject, 'RESPONSE', {'list':lst, 'index':index, 'which':i, 'name':name, 'system':system, 'result':result})
+	which = choose_which(subject, index, lst)
+	name = image_from_which(which, lst).stem
+	record(subject, 'RESPONSE', {'list':lst, 'index':index, 'which':which, 'name':name, 'system':system, 'result':result})
 
 def record_survey(subject, result):
 	record(subject, 'SURVEY', result)

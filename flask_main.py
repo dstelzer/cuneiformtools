@@ -87,14 +87,14 @@ def do_galdubsar():
 def do_experiment_image():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', 0, type=int)
-	list = request.args.get('list', '', type=str)
+	list = request.args.get('list', None, type=str)
 	fn = choose_image(subject=expkey, index=index, lst=list)
 	return send_file(fn, mimetype='image/png')
 @app.route('/experiment/respond')
 def do_experiment_respond():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	list = request.args.get('list', '', type=str)
+	list = request.args.get('list', None, type=str)
 	result = request.args.get('result', '', type=str)
 	system = request.args.get('system', None, type=str)
 	record_response(expkey, index, list, system, result)
@@ -103,7 +103,7 @@ def do_experiment_respond():
 def do_experiment_stimulus():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	list = request.args.get('list', '', type=str)
+	list = request.args.get('list', None, type=str)
 	system = request.args.get('system', None, type=str)
 	total = get_sequence_length(list)
 	if index >= total:
@@ -114,7 +114,7 @@ def do_experiment_stimulus():
 def do_experiment_cover():
 	expkey = request.args.get('expkey', '', type=str)
 	index = request.args.get('index', -1, type=int)
-	list = request.args.get('list', '', type=str)
+	list = request.args.get('list', None, type=str)
 	system = request.args.get('system', None, type=str)
 	return render_template('cover.html', expkey=expkey, index=index, list=list, system=system)
 @app.route('/experiment/survey')
