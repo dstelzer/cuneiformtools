@@ -54,4 +54,4 @@ def process(inf, outf, chosen=None):
 				writer.writerow(row)
 
 if __name__ == '__main__':
-	process('experiment.6.log', 'PA1.csv', {'PA1'})
+	process('experiment.7.log', 'PB1.csv', {'PB1'})
