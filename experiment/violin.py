@@ -2,7 +2,7 @@ import numpy as np
 import scipy.stats as stat
 import matplotlib.pyplot as plt
 
-def violin(data, pos, color, width=1/3, fake=None, horizontal=False, linesonly=False): # Manual version so we can fine-tune the behavior
+def violin(data, pos, color, width=1/3, fake=None, horizontal=False, linesonly=False, ax=None): # Manual version so we can fine-tune the behavior
 	# Based on http://pyinsci.blogspot.com/2009/09/violin-plot-with-matplotlib.html
 	if fake is None:
 		k = stat.gaussian_kde(data)
@@ -23,13 +23,13 @@ def violin(data, pos, color, width=1/3, fake=None, horizontal=False, linesonly=F
 	w2 = width/2
 	w3 = width/3
 	y /= y.max(); y *= w1 # Scale to desired width
-	ax = plt.gca()
+	if ax is None: ax = plt.gca()
 	if horizontal:
 		between = ax.fill_between
-		lines = plt.vlines
+		lines = ax.vlines
 	else:
 		between = ax.fill_betweenx
-		lines = plt.hlines
+		lines = ax.hlines
 	if not linesonly:
 		between(x, pos, pos+y, edgecolor=color, facecolor=color, alpha=0.5)
 		between(x, pos, pos-y, edgecolor=color, facecolor=color, alpha=0.5)
