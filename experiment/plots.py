@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as stat
 
 from violin import violin
 
@@ -8,7 +9,7 @@ def get_data(subjects):
 	frames = [pd.read_csv(f'tagged/{s}.csv') for s in subjects]
 	return pd.concat(frames)
 
-def variation(data, seed=None): # Currently, uniform distribution between 0 and 1
+def variation(data, seed=None): # Currently, uniform distribution
 	STRIP_SIZE = 0.5
 	if seed is not None: np.random.seed(seed)
 	return np.random.rand(len(data)) * STRIP_SIZE - STRIP_SIZE/2
@@ -29,7 +30,7 @@ def draw_mu_sigma(data, ax=None):
 	ax.hlines(y, mu-sigma, mu+sigma, color=color, zorder=0)
 
 def plot_system_comparison():
-	data = preprocess_data(get_data({'PA1', 'PB1'}))
+	data = preprocess_data(get_data({'PA1', 'PB1', 'PA2', 'PAE'}))
 	data_h = data[data['System']=='H']
 	data_z = data[data['System']=='Z']
 	xs_h_good = data_h[data_h['Accuracy']==1]['Duration']
@@ -73,6 +74,62 @@ def old():
 	plt.xlabel('Time taken (sec)')
 	plt.ylabel('System')
 	plt.show()
+
+def check_distribution(which): # pass 'Z' or 'H'
+	data = preprocess_data(get_data({'PA1', 'PB1', 'PAE', 'PBE', 'PA2'}))
+	chosen = data[data['System']==which]
+	durs = chosen['Duration']
+	loc, scale = stat.expon.fit(durs)
+	ex = stat.expon(loc=loc, scale=scale)
+	print('Loc:', loc, 'Scale:', scale)
+	xs = np.linspace(np.min(durs), np.max(durs), 1000)
+	plt.hist(durs, density=True, bins=20, label='Data')
+	plt.plot(xs, ex.pdf(xs), label='Exponential distribution')
+	plt.xlabel('Time taken (sec)')
+	plt.ylabel('Probability density')
+	plt.yticks(())
+	plt.title('Zeichenlexikon' if which=='Z' else 'Hantatallas')
+	plt.legend()
+	plt.show()
+
+def both_distributions():
+	data = preprocess_data(get_data({'PA1', 'PB1', 'PAE', 'PBE', 'PA2'}))
+	low = np.min(data['Duration'])
+	high = np.max(data['Duration'])
+	
+	def do(sigil, name, color):
+		chosen = data[data['System']==sigil]
+		durs = chosen['Duration']
+		loc, scale = stat.expon.fit(durs)
+		ex = stat.expon(loc=loc, scale=scale)
+		print(name, 'Loc:', loc, 'Scale:', scale)
+		xs = np.linspace(np.min(durs), np.max(durs), 1000)
+		plt.hist(durs, density=True, bins=30, label=name, alpha=0.33, color=color, range=(low,high))
+		plt.plot(xs, ex.pdf(xs), label=f'Exponential Dist', color=color)
+	
+	do('Z', 'Zeichenlexikon', 'r')
+	do('H', 'Hantatallas', 'b')
+	
+	plt.xlabel('Time taken (sec)')
+	plt.ylabel('Probability density')
+	plt.yticks(())
+	plt.legend()
+	plt.show()
+
+def pvalue():
+	data = preprocess_data(get_data({'PA1', 'PB1', 'PAE', 'PA2'}))
+	hdat = data[data['System']=='H']['Duration']
+	zdat = data[data['System']=='Z']['Duration']
+	print(stat.ks_2samp(hdat, zdat))
+
+def bootstrap():
+	data = preprocess_data(get_data({'PA1', 'PB1', 'PAE', 'PA2'}))
+	hdat = data[data['System']=='H']['Duration']
+	zdat = data[data['System']=='Z']['Duration']
+	hmu = stat.bootstrap((hdat,), np.mean)
+	zmu = stat.bootstrap((zdat,), np.mean)
+	print(hmu)
+	print(zmu)
 
 if __name__ == '__main__':
 	plot_system_comparison()
