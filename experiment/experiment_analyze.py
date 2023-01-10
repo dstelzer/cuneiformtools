@@ -1,12 +1,13 @@
 import csv
 from datetime import datetime
 import json
+from collections import defaultdict
 
 from tqdm import tqdm
 
 FORMAT = '%Y-%m-%d %H:%M:%S,%f'
 
-def process(inf, outf, chosen=None):
+def process_results(inf, outf, chosen=None):
 	starts = {}
 	ends = {}
 	data = {}
@@ -53,5 +54,65 @@ def process(inf, outf, chosen=None):
 				
 				writer.writerow(row)
 
+def process_surveys(inf, outf, filter=None):
+	qs_init = {
+		'current':'Currently enrolled in Hittite',
+		'semesters':'Semesters taken (including current)',
+		'outside':'Outside experience',
+		'cv':'Familiarity with V, CV, VC',
+		'cvc':'Familiarity with CVC',
+		'logo':'Familiarity with logograms',
+		'hzl':'Familiarity with the Zeichenlexikon',
+		'hantatallas':'Familiarity with Hantatallas',
+		'german':'Can read German',
+		'other':'Other information',
+	}
+	qs_final = {
+		'difficulty':'Difficult to use',
+		'tiring':'Tiring to use',
+		'certainty':'Certain of answers',
+		'easiest':'Easiest aspects',
+		'worst':'Worst aspects',
+		'improve':'Suggested improvements',
+		'other':'Other information',
+	}
+	
+	data = defaultdict(dict)
+	
+	with open(inf, 'r', newline='') as f:
+		reader = csv.reader(f)
+		for line in tqdm(reader):
+			stamp, subject, action, payload = line
+			payload = json.loads(payload)
+			if filter and subject not in filter: continue
+			
+			if action == 'SURVEY':
+				if payload['which'] == 'initial':
+					key = 'I'
+				elif payload['which'] == 'final' and payload['system'] == 'H':
+					key = 'H'
+				elif payload['which'] == 'final' and payload['system'] == 'Z':
+					key = 'Z'
+				else: # We could just say if not initial, then key = system, but this allows us to be more thorough in detecting mistakes
+					raise ValueError(subject, payload)
+				
+				data[subject][key] = payload
+	
+	with open(outf, 'w', newline='') as f:
+		writer = csv.writer(f)
+		
+		row = ['Subject']
+		row.extend(qs_init[k] for k in qs_init) # Not using .values for symmetry
+		row.extend('H '+qs_final[k] for k in qs_final)
+		row.extend('Z '+qs_final[k] for k in qs_final)
+		writer.writerow(row)
+		
+		for subject, vals in data.items():
+			row = [subject]
+			row.extend(vals['I'][k] for k in qs_init)
+			row.extend(vals['H'][k] for k in qs_final)
+			row.extend(vals['Z'][k] for k in qs_final)
+			writer.writerow(row)
+
 if __name__ == '__main__':
-	process('experiment.9.log', 'PA2.csv', {'PA2'})
+	process_surveys('experiment.10.log', 'surveys.csv', {'PAE','PBE','PA1','PB1','PA2','PB2'})
