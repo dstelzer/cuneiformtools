@@ -266,6 +266,8 @@ if __name__ == '__main__':
 	db = Database()
 	db.load_data('data/hzl.dat')
 	db.prepare_sorting()
+	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
+	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))
 	while True:
 		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: '))):
 			print(name, code, match)

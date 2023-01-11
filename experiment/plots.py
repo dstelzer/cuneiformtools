@@ -37,14 +37,17 @@ def add_t_statistic(data):
 
 def draw_mu_sigma(data, ax=None, stderr=False):
 	if ax is None: ax = plt.gca()
-	y, w1, w2 = 0, 1/3, 1/6
+	y, w1, w2, w3 = 0, 1/3, 1/6, 1/12
 	color = 'blue'
 	mu = np.mean(data)
 	sigma = np.std(data)
-	if stderr: sigma /= np.sqrt(len(data))
+	if stderr: sigma2 = sigma / np.sqrt(len(data))
 	ax.vlines(mu, y-w1, y+w1, color=color, zorder=0)
-	ax.vlines(mu+sigma, y-w2, y+w2, color=color, zorder=0)
-	ax.vlines(mu-sigma, y-w2, y+w2, color=color, zorder=0)
+	ax.vlines(mu+sigma, y-w3, y+w3, color=color, zorder=0)
+	ax.vlines(mu-sigma, y-w3, y+w3, color=color, zorder=0)
+	if stderr:
+		ax.vlines(mu+sigma2, y-w2, y+w2, color=color, zorder=0)
+		ax.vlines(mu-sigma2, y-w2, y+w2, color=color, zorder=0)
 #	ax.hlines(y, np.min(data), np.max(data), color=color, zorder=0)
 	ax.hlines(y, mu-sigma, mu+sigma, color=color, zorder=0)
 
@@ -62,8 +65,8 @@ def plot_system_comparison():
 	ax1.scatter(x=xs_h_bad, y=variation(xs_h_bad, 2), c='red', edgecolors='black', label='Incorrect', marker='D')
 	ax2.scatter(x=xs_z_good, y=variation(xs_z_good, 43), c='cyan', edgecolors='black')
 	ax2.scatter(x=xs_z_bad, y=variation(xs_z_bad, 4), c='red', edgecolors='black', marker='D')
-	draw_mu_sigma(xs_h_good, ax1)
-	draw_mu_sigma(xs_z_good, ax2)
+	draw_mu_sigma(xs_h_good, ax1, True)
+	draw_mu_sigma(xs_z_good, ax2, True)
 	
 	plt.xlabel('Time taken (sec)')
 	ax1.set_yticks(())
@@ -73,7 +76,7 @@ def plot_system_comparison():
 	ax1.legend()
 	plt.xlim(left=0)
 	
-#	plt.savefig('comparison.pdf')
+	plt.savefig('comparison.pdf', bbox_inches='tight')
 	plt.show()
 
 def plot_system_comparison_tstat():
@@ -101,7 +104,7 @@ def plot_system_comparison_tstat():
 	ax1.legend()
 #	plt.xlim(left=0)
 	
-	plt.savefig('comparison_tstat.pdf')
+	plt.savefig('comparison_tstat.pdf', bbox_inches='tight')
 	plt.show()
 
 def compare_difficulty():
@@ -133,7 +136,7 @@ def compare_difficulty():
 	ax1.legend()
 	plt.xlim(left=0)
 	
-	plt.savefig('difficulty.pdf')
+	plt.savefig('difficulty.pdf', bbox_inches='tight')
 	plt.show()
 
 def compare_difficulty_tstat():
@@ -165,7 +168,7 @@ def compare_difficulty_tstat():
 	ax1.legend()
 #	plt.xlim(left=0)
 	
-	plt.savefig('difficulty_tstat.pdf')
+	plt.savefig('difficulty_tstat.pdf', bbox_inches='tight')
 	plt.show()
 
 def compare_signs_tstat():
@@ -205,7 +208,7 @@ def compare_signs_tstat():
 	ax2.set_ylabel('Zeichenlexikon')
 #	plt.xlim(left=0)
 	
-	plt.savefig('signs_tstat.pdf')
+	plt.savefig('signs_tstat.pdf', bbox_inches='tight')
 	plt.show()
 
 def old():
@@ -269,7 +272,7 @@ def both_distributions():
 	plt.yticks(())
 	plt.legend()
 	
-	plt.savefig('distributions.pdf')
+	plt.savefig('distributions.pdf', bbox_inches='tight')
 	plt.show()
 
 def both_distributions_tstat():
@@ -296,7 +299,7 @@ def both_distributions_tstat():
 	plt.yticks(())
 	plt.legend()
 	
-	plt.savefig('distributions_tstat.pdf')
+	plt.savefig('distributions_tstat.pdf', bbox_inches='tight')
 	plt.show()
 
 def both_distributions_separate():
@@ -325,7 +328,7 @@ def both_distributions_separate():
 	do('H', 'Hantatallas', 'b', ax1)
 	ax2.set_xlabel('Time taken (sec)')
 	
-	plt.savefig('distrib_separate.pdf')
+	plt.savefig('distrib_separate.pdf', bbox_inches='tight')
 	plt.show()
 
 def both_distributions_separate_tstat():
@@ -354,7 +357,7 @@ def both_distributions_separate_tstat():
 	do('H', 'Hantatallas', 'b', ax1)
 	ax2.set_xlabel('Time taken (t-statistic)')
 	
-	plt.savefig('distrib_separate_tstat.pdf')
+	plt.savefig('distrib_separate_tstat.pdf', bbox_inches='tight')
 	plt.show()
 
 def pvalue():
@@ -375,7 +378,7 @@ def ttest():
 	zdat = data[(data['System']=='Z') & (data['Accuracy']==1)]['t-stat']
 	print(stat.ttest_ind(hdat, zdat, equal_var=False))
 
-def bootstrap():
+def bootstrap_old():
 	data = preprocess_data(get_data({'PA1', 'PB1', 'PAE'}))
 	hdat = data[(data['System']=='H') & (data['Accuracy']==1)]['Duration']
 	zdat = data[(data['System']=='Z') & (data['Accuracy']==1)]['Duration']
@@ -446,10 +449,13 @@ def show_bootstrapping(n=1_000, func=difference_in_means, key='Name', fn=None, a
 	res = list(bootstrap(n, 'Name', difference_in_means))
 	p = sum(1 for d in res if d<=0) / len(res)
 	print(title, 'p-value =', p)
-	(plt if ax is None else ax).hist(res, bins=25)#, edgecolor='black')
-	(plt.gca() if ax is None else ax).set_title(title)
-	(plt.gca() if ax is None else ax).set_yticks(())
-	if fn is not None: plt.savefig(fn)
+	x = plt.gca() if ax is None else ax
+	x.hist(res, bins=25)#, edgecolor='black')
+	x.set_title(title)
+	x.set_yticks(())
+	x.plot([],[],' ', label=f'p = {p}')
+	x.legend(frameon=False)
+	if fn is not None: plt.savefig(fn, bbox_inches='tight')
 	if ax is None: plt.show()
 
 # 10_000, difference_in_means, 'Name', bootstrap_signs.pdf
@@ -468,22 +474,23 @@ def bootstrap_all():
 	show_bootstrapping(n=n, func=difference_in_locs, key='Name', title='Signs (Distributions)', ax=ne)
 	show_bootstrapping(n=n, func=difference_in_means, key='Subject', title='Subjects (Means)', ax=sw)
 	show_bootstrapping(n=n, func=difference_in_locs, key='Subject', title='Subjects (Distributions)', ax=se)
-	plt.savefig('bootstrap.pdf')
+	plt.savefig('bootstrap.pdf', bbox_inches='tight')
 	plt.show()
 
 def likert():
 	data = get_surveys({'PAE','PA1','PB1','PB2'})
 	columns = list(reversed(['H Difficult to use', 'Z Difficult to use', 'H Tiring to use', 'Z Tiring to use', 'H Certain of answers', 'Z Certain of answers']))
 #	colors = ['red', 'orange', 'yellow', 'green', 'cyan']
-	colors = [plt.cm.coolwarm(i) for i in (0.9, 0.8, 0.5, 0.2, 0.1)]
-	colors[2] = '#aaaaaa'
+#	colors = [plt.cm.coolwarm(i) for i in (0.9, 0.8, 0.5, 0.2, 0.1)]
+#	colors[2] = '#aaaaaa'
+	colors = ['#FF8000', '#FFBF80', '#AAAAAA', '#80BFFF', '#0080FF']
 	
 	def howmany(col, val):
 		return len(data[data[col]==val])
 	
 	left = np.zeros(len(columns))
 	ys = list(range(len(columns), 0, -1)) # n..0
-	ys = list(reversed(['Hantatallas\nDifficulty', 'Zeichenlexikon\nDifficulty', 'Hantatallas\nTiring', 'Zeichenlexikon\nTiring', 'Hantatallas\nCertainty', 'Zeichenlexikon\nCertainty']))
+	ys = list(reversed(['Hantatallas\nDifficult', 'Zeichenlexikon\nDifficult', 'Hantatallas\nTiring', 'Zeichenlexikon\nTiring', 'Hantatallas\nCertain', 'Zeichenlexikon\nCertain']))
 	for i in range(5):
 		vals = [howmany(col, i+1) for col in columns]
 		plt.barh(ys, width=vals, left=left, color=colors[i])
@@ -492,10 +499,12 @@ def likert():
 	plt.legend(['Not at all', 'A bit', 'Somewhat', 'Very', 'Extremely'], ncol=5, bbox_to_anchor=(1.015,1.1))
 	plt.subplots_adjust(left=0.25, right=0.95)
 	plt.xticks((0,1,2,3,4))
+	plt.savefig('likert.pdf')
 	plt.show()
 
 if __name__ == '__main__':
 	likert()
+	
 #	print(add_t_statistic(preprocess_data(get_data({'PBE','PA1','PA2','PB2'}))))
 
 # Bootstrapping: we artificially choose to do the experiment differently
