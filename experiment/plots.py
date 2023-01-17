@@ -483,7 +483,7 @@ def likert():
 #	colors = ['red', 'orange', 'yellow', 'green', 'cyan']
 #	colors = [plt.cm.coolwarm(i) for i in (0.9, 0.8, 0.5, 0.2, 0.1)]
 #	colors[2] = '#aaaaaa'
-	colors = ['#FF8000', '#FFBF80', '#AAAAAA', '#80BFFF', '#0080FF']
+	colors = ['#FF8000', '#FFBF80', '#E0E0E0', '#80BFFF', '#0080FF']
 	
 	def howmany(col, val):
 		return len(data[data[col]==val])
