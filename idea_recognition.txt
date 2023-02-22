@@ -1,0 +1,18 @@
+Sign Recognition Algorithm
+
+Have user draw strokes somehow (mouse interface: start and end point)
+Represent each stroke as a line segment with an AABB
+	Classify them based on slope
+	Winkelhaken? Maybe a separate thing
+Recursively:
+	Take all strokes under consideration
+	Are all diagonal? If so, tenu
+	Can you separate them with a vertical line? If so, hstack
+	Can you separate them with a horizontal line? If so, vstack
+	Otherwise, superposition
+		Children are each type of stroke (all hs, all vs, etc)
+
+How to check separation?
+	Look at interval spanned by each segment!
+
+For tenu, rotate by average slope of strokes in it
