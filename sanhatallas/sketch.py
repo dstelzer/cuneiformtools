@@ -117,22 +117,26 @@ class LineGroup:
 			raise ValueError()
 		
 		# First, check for tenu
-		# TODO
+		pass # TODO
 		
 		# Second, check for horizontal stack
 		hdiv = self.try_to_divide(Orient.HORIZ)
-		if len(hdiv) > 1: # We can divide this way!
+		# Third, check for vertical stack
+		vdiv = self.try_to_divide(Orient.VERT)
+		
+		if len(hdiv) > 1 and len(vdiv) > 1: # We could divide either way: need a heuristic to decide!
+			pass # TODO
+		
+		if len(hdiv) > 1: # We can divide horizontally!
 			print(hdiv)
 			return HStack( [LineGroup(g).parse() for g in hdiv] )
 		
-		# Third, check for vertical stack
-		vdiv = self.try_to_divide(Orient.VERT)
-		if len(vdiv) > 1: # We can divide this way!
+		if len(vdiv) > 1: # We can divide vertically!
 			return VStack( [LineGroup(g).parse() for g in vdiv] )
 		
 		# Fourth, divide into non-intersecting components
 		cdiv = self.partition()
-		if len(cdiv) > 1: # We can divide this way!
+		if len(cdiv) > 1: # We can form useful partitions!
 			return Superpose( [LineGroup(g).parse() for g in cdiv] )
 		
 		# That last one should be guaranteed to succeed. If it doesn't, then something has gone very wrong.
