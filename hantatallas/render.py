@@ -256,7 +256,7 @@ class Renderer:
 		self.draw_potential_damage(x, y, w, h, mods)
 		c = self.ctx
 		c.save()
-		print(x, y, w, h)
+	#	print(x, y, w, h)
 		c.translate(x, y)
 		
 		theta = atan(h/w)
@@ -286,7 +286,7 @@ class Renderer:
 		c.rotate(-phi)
 		c.translate(-head/2, 0)
 		#c.translate(x3, 0)
-		print(head, stroke)
+	#	print(head, stroke)
 		self.draw_stroke(0, 0, head, stroke, mods)
 		c.restore()
 	

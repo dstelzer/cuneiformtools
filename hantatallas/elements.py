@@ -521,10 +521,10 @@ class Container(Element):
 					front_kerning -= space/2
 				
 				if back_kerning and allow_kern_back(each): # Kern backwards the appropriate amount
-					print(f'Kerning between {self.contents[i-1]} and {each}: {back_kerning}')
-					print(f'{current_position}')
+		#			print(f'Kerning between {self.contents[i-1]} and {each}: {back_kerning}')
+		#			print(f'{current_position}')
 					current_position -= (back_kerning - hacked_kerning)
-					print(f'{current_position}')
+		#			print(f'{current_position}')
 				
 				new_u = current_position
 				propagate_child(each, new_j, k, new_u, v)
