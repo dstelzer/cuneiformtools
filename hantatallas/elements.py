@@ -115,6 +115,9 @@ class Canvas(Element):
 		if isinstance(other, Canvas): self.internal.highlight_containment(other.internal, notes)
 		else: self.internal.highlight_containment(other, notes)
 		return notes
+	
+	def forest(self, tabs=0):
+		return '\\begin{forest}\n' + self.internal.forest(tabs) + '\\end{forest}\n'
 
 class Stroke(Element):
 	def __init__(self, ident, mods=None, *args, **kwargs):
@@ -146,6 +149,12 @@ class Stroke(Element):
 			return True
 		else:
 			return False
+	
+	def forest(self, tabs=0):
+		mods = ''.join(sorted(m.value for m in self.mods))
+		if mods: modcode = '}\\code{' + mods
+		else: modcode = ''
+		return '\t'*tabs + '[\inlinesign{' + self._sigil() + modcode + '}]\n'
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
@@ -168,6 +177,8 @@ class Void(Stroke): # An emptiness that takes up space and does nothing else
 		self.adjust = (ax, ay)
 	
 	def functional_form(self, special=empty): return None # Voids are ignored in functional form
+	
+	def forest(self, tabs=0): return '' # Don't include in forest
 
 class Wildcard(Stroke): # A "stroke" that's used only for matching; it matches anything
 	def _sigil(self): return '*'
@@ -548,10 +559,17 @@ class Container(Element):
 		else:
 			self.dims = (largest_k, j)
 			self.adjust = (adjust_v, 0)
+	
+	def forest(self, tabs=0):
+		lines = [child.forest(tabs+1) for child in self.contents]
+		return ( '\t'*tabs + '[\\inlinesign{' + self.forestname() + '}\n'
+				+ ''.join(lines)
+				+ '\t'*tabs + ']\n' )
 
 class HStack(Container):
 	def __str__(self):
 		return '[' + ','.join(str(c) for c in self.contents) + ']'
+	def forestname(self): return 'hstack'
 	
 	def propagate_dimensions(self, dims, pos): return self.kerning_and_arrangement(dims, pos, horizontal=True)
 	def kern_left(self): return self.contents[0].kern_left()
@@ -616,6 +634,7 @@ class HStack(Container):
 class VStack(Container):
 	def __str__(self):
 		return '{' + ','.join(str(c) for c in self.contents) + '}'
+	def forestname(self): return 'vstack'
 	
 	def propagate_dimensions(self, dims, pos): return self.kerning_and_arrangement(dims, pos, horizontal=False)
 	def kern_top(self): return self.contents[0].kern_top()
@@ -684,6 +703,7 @@ class Superpose(Container):
 	
 	def __str__(self):
 		return '(' + ','.join(str(c) for c in self.contents) + ')'
+	def forestname(self): return 'superpose'
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims = dims
@@ -763,6 +783,9 @@ class Adjustment(Element):
 	def functional_form(self, special=empty):
 		# Adjustments are by default ignored in functional form
 		return self.child.functional_form(special)
+	
+	def forest(self, tabs=0):
+		return '\t'*tabs + '[\\code{' + self._sigil() + '}\n' + self.child.forest(tabs+1) + '\t'*tabs + ']\n'
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def _sigil(self): return 'T'

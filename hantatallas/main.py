@@ -11,6 +11,7 @@ def test_rendering():
 			construct = parse(input(), friendly=True)
 			print(construct)
 			print(construct.functional_form())
+			print(construct.forest())
 			TwoSidedRenderer.render(construct).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
