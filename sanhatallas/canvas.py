@@ -5,7 +5,7 @@ import pygame
 from pygame.locals import *
 
 from geometry import XY
-from sketch import Line, LineGroup
+from sketch import Line, Divider, HookLine, LineGroup
 
 path.append(str(Path(__file__).parents[1]))
 #print(path)
@@ -15,10 +15,14 @@ DIMENSIONS = (1000, 1000)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
+CYAN = (0, 128, 255)
+BLUE = (0, 0, 255)
+PINK = (255, 64, 128)
 WIDTH = 8
 
 lines = []
 progress = None
+mode = Line
 
 pygame.init()
 display = pygame.display.set_mode(DIMENSIONS)
@@ -34,7 +38,7 @@ while True:
 				progress = XY(*pygame.mouse.get_pos())
 			else:
 				new = XY(*pygame.mouse.get_pos())
-				lines.append(Line(progress, new))
+				lines.append(mode(progress, new))
 				progress = None
 		elif event.type == KEYDOWN:
 			if event.key == K_RETURN:
@@ -50,12 +54,30 @@ while True:
 			elif event.key == K_ESCAPE:
 				pygame.quit()
 				exit()
+			elif event.key == K_1:
+				mode = Line
+			elif event.key == K_2:
+				mode = Divider
+			elif event.key == K_3:
+				mode = HookLine
 	
 	display.fill(BLACK)
 	for line in lines:
-		pygame.draw.line(display, WHITE, line.head, line.tail, WIDTH)
+		if isinstance(line, Divider):
+			color = BLUE
+		elif isinstance(line, HookLine):
+			color = PINK
+		else:
+			color = WHITE
+		pygame.draw.line(display, color, line.head, line.tail, WIDTH)
 	if progress is not None:
-		pygame.draw.line(display, GREEN, progress, pygame.mouse.get_pos(), WIDTH)
+		if mode == Divider:
+			color = CYAN
+		elif mode == HookLine:
+			color = PINK
+		else:
+			color = GREEN
+		pygame.draw.line(display, color, progress, pygame.mouse.get_pos(), WIDTH)
 	
 	pygame.display.update()
 	clock.tick(60)

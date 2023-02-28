@@ -1,8 +1,9 @@
 from collections import defaultdict, namedtuple
 from math import atan2, pi
 from enum import Enum, auto
+from statistics import mean
 
-from geometry import XY, intersects
+from geometry import XY, intersects, rotate
 
 Interval = namedtuple('Interval', 'low high')
 TaggedInterval = namedtuple('TaggedInterval', 'low high ref')
@@ -59,18 +60,29 @@ class Line:
 		if not isinstance(other, Line): raise ValueError(other)
 		# See notes above for how this works
 		return intersects(self.head, self.tail, other.head, other.tail)
+	
+	def strokify(self): # Convert into a stroke object
+		if self.orient == Orient.HORIZ: return Horizontal()
+		elif self.orient == Orient.VERT: return Vertical()
+		elif self.orient == Orient.UPDIAG: return Upward()
+		elif self.orient == Orient.DOWNDIAG: return Downward()
+		else: raise ValueError(self.orient)
+	
+	def rotated(self, theta): # Create a new Line that's this but rotated
+		cls = type(self) # Make sure we preserve the proper subclass
+		return cls(rotate(self.head, theta), rotate(self.tail, theta))
+
+class Divider(Line): # Acts like a normal line for parsing but does not appear in the output
+	def strokify(self):
+		return None
+
+class HookLine(Line): # For Winkelhaken
+	def strokify(self):
+		return Winkelhaken()
 
 class LineGroup:
 	def __init__(self, children):
 		self.children = list(children)
-	
-	def strokify(self): # If we have only one child, return it as a stroke
-		child = self.children[0]
-		if child.orient == Orient.HORIZ: return Horizontal()
-		elif child.orient == Orient.VERT: return Vertical()
-		elif child.orient == Orient.UPDIAG: return Upward()
-		elif child.orient == Orient.DOWNDIAG: return Downward()
-		else: raise ValueError(child.orient)
 	
 	def try_to_divide(self, axis):
 		# First, convert every line to an interval on the appropriate axis
@@ -97,27 +109,48 @@ class LineGroup:
 	def partition(self):
 		bins = []
 		
-		for child in self.children: # For each child…
-			for bin in bins: # …run through the bins…
+		for i, child in enumerate(self.children): # For each child…
+			for j, bin in enumerate(bins): # …run through the bins…
 				for other in bin: # …and for each bin, see if it conflicts with any element in that bin
-					if child % other: break
+					if child % other:
+		#				print('Child', i, 'conflicts with bin', j)
+						break
 				else: # Didn't intersect with anything? Put it in this bin!
+		#			print('Putting child', i, 'in bin', j)
 					bin.append(child)
 					break
 			else: # Ran out of bins? Make a new one!
+		#		print('Creating new bin', len(bins), 'for child', i)
 				bins.append([child])
 		
 		return bins
 	
+	def rotated(self, theta): # Create a new LineGroup that's this but rotated
+		cls = type(self) # In case we create more subclasses later
+		return cls([c.rotated(theta) for c in self.children])
+	
+	def overall_angle(self): # Determine what angle this whole unit appears to be at
+		def normalize(theta): # Bring all angles to the range [-pi/4, pi/4)
+			while theta >= pi/4: theta -= pi/2
+			return theta
+		angles = [normalize(c.angle) for c in self.children] # Get angles of all children
+		return mean(angles)
+	
+	def untenu(self): # Un-tenu this component if it only contains diagonals
+		theta = -self.overall_angle()
+		new = self.rotated(theta)
+		return Tenu(new.parse())
+	
 	def parse(self):
 		# First, check for a single stroke (or zero) as our base case
 		if len(self.children) == 1:
-			return self.strokify()
+			return self.children[0].strokify()
 		if len(self.children) == 0:
-			raise ValueError()
+			raise ValueError('Empty container')
 		
 		# First, check for tenu
-		pass # TODO
+		if all(c.orient.is_diagonal() for c in self.children):
+			return self.untenu()
 		
 		# Second, check for horizontal stack
 		hdiv = self.try_to_divide(Orient.HORIZ)
@@ -128,7 +161,6 @@ class LineGroup:
 			pass # TODO
 		
 		if len(hdiv) > 1: # We can divide horizontally!
-			print(hdiv)
 			return HStack( [LineGroup(g).parse() for g in hdiv] )
 		
 		if len(vdiv) > 1: # We can divide vertically!
@@ -152,11 +184,16 @@ class Element:
 class Composition(Element):
 	def process(self, raw):
 		if not isinstance(raw, list): raise ValueError('List needed', raw)
-		self.children = raw
+		self.children = [c for c in raw if c is not None]
 class Stroke(Element):
 	def process(self, raw):
-		if raw: raise ValueError('should be nothing', raw)
+		if raw: raise ValueError('Should be nothing', raw)
 	def __str__(self): return self.sigil()
+class Modifier(Element):
+	def process(self, raw):
+		if not isinstance(raw, Composition): raise ValueError('Comp needed', raw)
+		self.child = raw
+	def __str__(self): return str(self.child) + self.sigil()
 class HStack(Composition):
 	def __str__(self): return '[' + ','.join(str(c) for c in self.children) + ']'
 class VStack(Composition):
@@ -173,3 +210,5 @@ class Upward(Stroke):
 	def sigil(self): return 'u'
 class Winkelhaken(Stroke):
 	def sigil(self): return 'c'
+class Tenu(Modifier):
+	def sigil(self): return 'TE' # Make all tenus larger as well as tilted
