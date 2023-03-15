@@ -327,28 +327,12 @@ class GraphicRenderer:
 		self.ctx.restore()
 	
 	@classmethod
-	def render(cls, root, highlight=(), scale=512, margin=32, justify=None, *args, **kwargs): # Any additional parameters are passed to the class constructor
-		# `justify` is unused but it's very convenient to have this and `render_sequence` have the same signature
-		# TODO: remove `justify` since render_sequence is deprecated
+	def render(cls, root, highlight=(), scale=512, *args, **kwargs): # Any additional parameters are passed to the class constructor
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		
-	#	width = int(scale*root.dims[0] + 2*margin)
-	#	height = int(scale*root.dims[1] + 2*margin)
-		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), margin=margin, scale=scale, *args, **kwargs)
-		
-		# Manual blanking
-	#	rend.ctx.set_source_rgba(*rend.bgcolor)
-	#	rend.ctx.rectangle(0, 0, width, height)
-	#	rend.ctx.fill()
-	#	
-	#	rend.ctx.save()
-	#	
-	#	rend.ctx.translate(margin, margin)
-	#	rend.ctx.scale(scale, scale)
+		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), scale=scale, *args, **kwargs)
 		root.draw(rend)
-		
-	#	rend.ctx.restore()
 		return rend
 	
 	def render_sign_at(self, sign, x, y):

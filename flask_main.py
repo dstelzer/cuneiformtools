@@ -43,8 +43,8 @@ def do_hantatallas():
 	scale = args.get('scale', 512, type=int)
 	margin = args.get('margin', 32, type=int)
 	seq = args.get('sequence', 0, type=int)
-	just = args.get('justify', 'c', type=str)
-	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor, strokewidth=strokewidth, fill=fill, scale=scale, margin=margin, sequence=seq, justify=just)
+#	just = args.get('justify', 'c', type=str)
+	return do_rendering(text, rendname=rend, highlight=hlight, format=format, friendly=friendly, bgcolor=bgcolor, fgcolor=fgcolor, hlcolor=hlcolor, strokewidth=strokewidth, fill=fill, scale=scale, margin=margin, sequence=seq)
 
 @app.route('/search')
 def do_hant_search():

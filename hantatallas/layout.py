@@ -68,16 +68,7 @@ class Layout:
 			width = self.fixed
 		self.line_width = width
 		
-	#	full_width = int((width + 2*self.margin) * self.size)
-	#	full_height = int((height + 2*self.margin) * self.size)
 		self.rend = self.renderclass(width*self.size, height*self.size, scale=self.size, margin=self.margin*self.size, **rendparams)
-	#	self.rend.ctx.set_source_rgba(*self.rend.bgcolor)
-	#	self.rend.ctx.rectangle(0, 0, full_width, full_height) # Manual blanking
-	#	self.rend.ctx.fill()
-		
-	#	self.rend.ctx.save()
-	#	self.rend.ctx.scale(self.size, self.size)
-	#	self.rend.ctx.translate(self.margin, self.margin)
 		self.ready = True
 		
 		y = 0
@@ -88,8 +79,6 @@ class Layout:
 				self.render_row(row, y)
 				y += 1
 			y += self.leading
-		
-	#	self.rend.ctx.restore()
 		
 		return self.rend
 
