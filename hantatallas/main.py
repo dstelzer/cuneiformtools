@@ -8,7 +8,7 @@ from database import Database
 def test_rendering():
 	while True:
 		try:
-			construct = parse(input(), friendly=True)
+			construct = parse(input() or 'S([0\'"v!]h2)', friendly=True)
 			print(construct)
 			print(construct.functional_form())
 			print(construct.forest())
@@ -61,7 +61,7 @@ def test_uga():
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
-	test_layout()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

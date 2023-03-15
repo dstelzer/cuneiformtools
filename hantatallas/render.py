@@ -31,7 +31,7 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	except ValueError: return None
 	return (r, g, b, 1)
 
-class Renderer:
+class GraphicRenderer:
 	def __init__(self, width, height, margin=0, scale=0, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
 		self.format = format
 	#	self.tmpval = height # What was this used for? Let's comment it out and see if anything breaks
@@ -329,25 +329,26 @@ class Renderer:
 	@classmethod
 	def render(cls, root, highlight=(), scale=512, margin=32, justify=None, *args, **kwargs): # Any additional parameters are passed to the class constructor
 		# `justify` is unused but it's very convenient to have this and `render_sequence` have the same signature
+		# TODO: remove `justify` since render_sequence is deprecated
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		
-		width = int(scale*root.dims[0] + 2*margin)
-		height = int(scale*root.dims[1] + 2*margin)
-		rend = cls(width, height, skip=True, *args, **kwargs)
+	#	width = int(scale*root.dims[0] + 2*margin)
+	#	height = int(scale*root.dims[1] + 2*margin)
+		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), margin=margin, scale=scale, *args, **kwargs)
 		
 		# Manual blanking
-		rend.ctx.set_source_rgba(*rend.bgcolor)
-		rend.ctx.rectangle(0, 0, width, height)
-		rend.ctx.fill()
-		
-		rend.ctx.save()
-		
-		rend.ctx.translate(margin, margin)
-		rend.ctx.scale(scale, scale)
+	#	rend.ctx.set_source_rgba(*rend.bgcolor)
+	#	rend.ctx.rectangle(0, 0, width, height)
+	#	rend.ctx.fill()
+	#	
+	#	rend.ctx.save()
+	#	
+	#	rend.ctx.translate(margin, margin)
+	#	rend.ctx.scale(scale, scale)
 		root.draw(rend)
 		
-		rend.ctx.restore()
+	#	rend.ctx.restore()
 		return rend
 	
 	def render_sign_at(self, sign, x, y):
@@ -356,60 +357,60 @@ class Renderer:
 		sign.draw(self)
 		self.ctx.restore()
 	
-	def render_sign_row(self, row, y, offset):
-		x = offset / self.scale
-		scaled_margin = self.margin / self.scale # We've scaled the canvas so that 1 unit = scale pixels, therefore margin pixels = margin/scale units
-		for sign in row:
-			x += scaled_margin
-			self.render_sign_at(sign, x, y)
-			x += sign.dims[0] # Sign width
+#	def render_sign_row(self, row, y, offset):
+#		x = offset / self.scale
+#		scaled_margin = self.margin / self.scale # We've scaled the canvas so that 1 unit = scale pixels, therefore margin pixels = margin/scale units
+#		for sign in row:
+#			x += scaled_margin
+#			self.render_sign_at(sign, x, y)
+#			x += sign.dims[0] # Sign width
 	
-	def render_sign_rows(self, rows, offsets):
-		y = 0
-		scaled_margin = self.margin / self.scale # See above
-		for row, offset in zip(rows, offsets):
-			y += scaled_margin * 2
-			self.render_sign_row(row, y, offset)
-			y += 1 # Sign height (fixed)
+#	def render_sign_rows(self, rows, offsets):
+#		y = 0
+#		scaled_margin = self.margin / self.scale # See above
+#		for row, offset in zip(rows, offsets):
+#			y += scaled_margin * 2
+#			self.render_sign_row(row, y, offset)
+#			y += 1 # Sign height (fixed)
 	
-	@classmethod
-	def render_sequence(cls, rows, highlight=(), scale=512, margin=32, justify='c', *args, **kwargs): # As above re additional parameters
-		# This time, `highlight` is the one that's ignored but included in order to make signatures line up
-		row_widths = []
-		for row in rows:
-			for sign in row:
-				sign.propagate_dimensions()
-			# Now measure this row
-			width = (
-				sum(sign.dims[0] for sign in row)*scale # Signs
-				+ margin * (len(row)+1) # Margins
-			)
-			row_widths.append(width)
-		max_width = max(row_widths)
-		height = scale * len(rows) + margin * 2 * (len(rows)+1)
-		
-		rend = cls(int(max_width), int(height), skip=True, *args, **kwargs)
-		rend.scale = scale
-		rend.margin = margin
-		
-		if justify == 'c':
-			offsets = [(max_width-width)/2 for width in row_widths]
-		elif justify == 'r':
-			offsets = [(max_width-width) for width in row_widths]
-		else:
-			offsets = [0 for width in row_widths]
-		
-		# Manual blanking
-		rend.ctx.set_source_rgba(*rend.bgcolor)
-		rend.ctx.rectangle(0, 0, max_width, height)
-		rend.ctx.fill()
-		
-		rend.ctx.save()
-		rend.ctx.scale(scale, scale)
-		rend.render_sign_rows(rows, offsets)
-		rend.ctx.restore()
-		
-		return rend
+#	@classmethod
+#	def render_sequence(cls, rows, highlight=(), scale=512, margin=32, justify='c', *args, **kwargs): # As above re additional parameters
+#		# This time, `highlight` is the one that's ignored but included in order to make signatures line up
+#		row_widths = []
+#		for row in rows:
+#			for sign in row:
+#				sign.propagate_dimensions()
+#			# Now measure this row
+#			width = (
+#				sum(sign.dims[0] for sign in row)*scale # Signs
+#				+ margin * (len(row)+1) # Margins
+#			)
+#			row_widths.append(width)
+#		max_width = max(row_widths)
+#		height = scale * len(rows) + margin * 2 * (len(rows)+1)
+#		
+#		rend = cls(int(max_width), int(height), skip=True, *args, **kwargs)
+#		rend.scale = scale
+#		rend.margin = margin
+#		
+#		if justify == 'c':
+#			offsets = [(max_width-width)/2 for width in row_widths]
+#		elif justify == 'r':
+#			offsets = [(max_width-width) for width in row_widths]
+#		else:
+#			offsets = [0 for width in row_widths]
+#		
+#		# Manual blanking
+#		rend.ctx.set_source_rgba(*rend.bgcolor)
+#		rend.ctx.rectangle(0, 0, max_width, height)
+#		rend.ctx.fill()
+#		
+#		rend.ctx.save()
+#		rend.ctx.scale(scale, scale)
+#		rend.render_sign_rows(rows, offsets)
+#		rend.ctx.restore()
+#		
+#		return rend
 	
 	@contextmanager
 	def tenu(self, pos, dims): # Tilt the whole canvas sideways temporarily
@@ -427,7 +428,7 @@ class Renderer:
 		
 		c.restore() # Un-tenu-fy the canvas again
 
-class OneSidedRenderer(Renderer):
+class OneSidedRenderer(GraphicRenderer):
 	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -553,7 +554,7 @@ class OneSidedRenderer(Renderer):
 		
 		c.restore()
 
-class TwoSidedRenderer(Renderer):
+class TwoSidedRenderer(GraphicRenderer):
 	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -687,7 +688,7 @@ class TwoSidedRenderer(Renderer):
 		
 		c.restore()
 
-class TriangleRenderer(Renderer):
+class TriangleRenderer(GraphicRenderer):
 	def draw_single(self, x, y, w, h, mods):
 		c = self.ctx
 		c.save()
@@ -817,7 +818,7 @@ class TriangleRenderer(Renderer):
 		
 		c.restore()
 
-class LinearRenderer(Renderer):
+class LinearRenderer(GraphicRenderer):
 	WIDTH = 0.1 # The maximum width of a stroke
 	SHARPNESS = 0.01 # How much to extend a stroke past the boundaries, to make convergences look good
 	

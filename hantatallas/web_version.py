@@ -45,8 +45,9 @@ def do_rendering(instr, rendname, highlight='', format='png', friendly=False, se
 	else: hl = ()
 
 	rend = renderers[rendname]
-	func = rend.render_sequence if sequence else rend.render # Choose the right rendering function to invoke
-	data = func(output, hl, format=format, *args, **kwargs).get_raw_data()
+#	func = rend.render_sequence if sequence else rend.render # Choose the right rendering function to invoke
+	if sequence: return 'Sequence rendering deprecated. Use do_scribing instead.'
+	data = rend.render(output, hl, format=format, *args, **kwargs).get_raw_data()
 
 	return formatted_response(data, format)
 
