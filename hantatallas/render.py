@@ -32,17 +32,25 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	return (r, g, b, 1)
 
 class Renderer:
-	def __init__(self, width, height, skip=False, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
+	def __init__(self, width, height, margin=0, scale=0, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
 		self.format = format
-		self.tmpval = height
+	#	self.tmpval = height # What was this used for? Let's comment it out and see if anything breaks
+		self.width = width
+		self.height = height
+		self.margin = margin
+		self.scale = scale
+		
+		self.fullwidth = int(width + margin*2)
+		self.fullheight = int(height + margin*2)
+		
 		if format == 'svg':
 			self.buffer = BytesIO()
-			self.surf = cairo.SVGSurface(self.buffer, width, height)
+			self.surf = cairo.SVGSurface(self.buffer, self.fullwidth, self.fullheight)
 		elif format == 'png':
-			self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+			self.surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.fullwidth, self.fullheight)
 		elif format == 'pdf':
 			self.buffer = BytesIO()
-			self.surf = cairo.PDFSurface(self.buffer, width, height)
+			self.surf = cairo.PDFSurface(self.buffer, self.fullwidth, self.fullheight)
 		else:
 			raise ValueError('Unrecognized format', format)
 		
@@ -54,9 +62,17 @@ class Renderer:
 		self.hatchspace = hatchspace or 8
 		
 		self.ctx = cairo.Context(self.surf)
-		if not skip:
-			self.ctx.scale(width, height)
-			self.blank()
+		self.ctx.save() # Save the "base" context: we'll restore to it later every time we need to blank out the canvas
+		self.blank(initial=True) # This will call setup_scaling for us afterward
+	
+	def setup_scaling(self): # Do initial scalings and translations to take care of the margin
+		if self.scale == 0:
+			sw = self.width
+			sh = self.height
+		else:
+			sw = sh = self.scale
+		self.ctx.translate(self.margin, self.margin)
+		self.ctx.scale(sw, sh)
 	
 	def box(self, x, y, w, h, c):
 		if not DRAW_BOXES: return
@@ -97,10 +113,18 @@ class Renderer:
 		
 		self.ctx.stroke()
 	
-	def blank(self):
+	def draw_rule(self, y, w):
+		self.begin_drawing()
+		self.ctx.move_to(0, y)
+		self.ctx.line_to(w, y)
+		self.ctx.stroke()
+	
+	def blank(self, initial=False):
+		if not initial: self.ctx.restore() # During the initial blanking we haven't made any changes that have to be undone
 		self.ctx.set_source_rgba(*self.bgcolor)
-		self.ctx.rectangle(0, 0, 1, 1)
+		self.ctx.rectangle(0, 0, self.fullwidth, self.fullheight)
 		self.ctx.fill()
+		self.setup_scaling()
 	
 	def begin_drawing(self, highlight=False):
 		if highlight: self.ctx.set_source_rgba(*self.hlcolor)

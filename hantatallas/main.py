@@ -49,6 +49,7 @@ def test_layout():
 	db.prepare_sorting()
 	while True:
 		desc = input()
+		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni `n wa-a-tar-ma e-ku-ut-te-ni `r nu NINDA-an `F'
 		Layout(TriangleRenderer, justify='s').render(db.parse_transcription(desc), fill=True).show()
 
 def test_uga():
@@ -60,7 +61,7 @@ def test_uga():
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
 if __name__ == '__main__':
-	test_rendering()
+	test_layout()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

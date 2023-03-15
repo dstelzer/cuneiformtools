@@ -52,32 +52,34 @@ class Layout:
 		return sign_total + space_total + kern_total
 
 	def render(self, rows, **rendparams):
+		# First, tell each sign to calculate its own dimensions
 		for row in rows:
 			if not isinstance(row, Ruling):
 				for sign in row:
 					if isinstance(sign, Element):
 						sign.propagate_dimensions()
-
+		
+		# Calculate the total height needed for all rows and leadings
 		height = sum(1 for row in rows if not isinstance(row, Ruling)) + self.leading*(len(rows)-1) # Rulings have no height but still get leading between them and the next line
 		width = max(self.row_width(row) for row in rows)
-
+		
 		if self.fixed:
 			if width > self.fixed: raise ValueError(f'Fixed width of {self.fixed} is too small for this text; need at least {width}')
 			width = self.fixed
 		self.line_width = width
-
-		full_width = int((width + 2*self.margin) * self.size)
-		full_height = int((height + 2*self.margin) * self.size)
-		self.rend = self.renderclass(full_width, full_height, skip=True, **rendparams)
-		self.rend.ctx.set_source_rgba(*self.rend.bgcolor)
-		self.rend.ctx.rectangle(0, 0, full_width, full_height) # Manual blanking
-		self.rend.ctx.fill()
-
-		self.rend.ctx.save()
-		self.rend.ctx.scale(self.size, self.size)
-		self.rend.ctx.translate(self.margin, self.margin)
+		
+	#	full_width = int((width + 2*self.margin) * self.size)
+	#	full_height = int((height + 2*self.margin) * self.size)
+		self.rend = self.renderclass(width*self.size, height*self.size, scale=self.size, margin=self.margin*self.size, **rendparams)
+	#	self.rend.ctx.set_source_rgba(*self.rend.bgcolor)
+	#	self.rend.ctx.rectangle(0, 0, full_width, full_height) # Manual blanking
+	#	self.rend.ctx.fill()
+		
+	#	self.rend.ctx.save()
+	#	self.rend.ctx.scale(self.size, self.size)
+	#	self.rend.ctx.translate(self.margin, self.margin)
 		self.ready = True
-
+		
 		y = 0
 		for row in rows:
 			if isinstance(row, Ruling):
@@ -86,16 +88,14 @@ class Layout:
 				self.render_row(row, y)
 				y += 1
 			y += self.leading
-
-		self.rend.ctx.restore()
-
+		
+	#	self.rend.ctx.restore()
+		
 		return self.rend
 
-	def render_rule(self, y): # TODO should this be delegated to the renderer?
-		self.rend.begin_drawing()
-		self.rend.ctx.move_to(0, y)
-		self.rend.ctx.line_to(self.line_width, y)
-		self.rend.ctx.stroke()
+	def render_rule(self, y): # Now delegated to the renderer
+		if not self.ready: raise ValueError('Renderer is not ready!') # Don't try to render anything if we don't have a renderer set up
+		self.rend.draw_rule(y, self.line_width)
 
 	def render_row(self, row, y):
 		if not self.ready: raise ValueError('Renderer is not ready!') # Don't try to render anything if we don't have a renderer set up
