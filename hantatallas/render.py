@@ -31,10 +31,8 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	except ValueError: return None
 	return (r, g, b, 1)
 
-class GraphicRenderer:
-	def __init__(self, width, height, margin=0, scale=0, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
-		self.format = format
-	#	self.tmpval = height # What was this used for? Let's comment it out and see if anything breaks
+class Renderer: # A very abstract base class that doesn't do much of anything
+	def __init__(self, width, height, margin=0, scale=0):
 		self.width = width
 		self.height = height
 		self.margin = margin
@@ -42,6 +40,203 @@ class GraphicRenderer:
 		
 		self.fullwidth = int(width + margin*2)
 		self.fullheight = int(height + margin*2)
+	
+	def hatch(self, x, y, w, h, highlight=False): # Draw a hatched pattern over a rectangle - the algorithm is designed so that adjacent or overlapping rectangles will always line up their hatching properly
+		raise NotImplementedError()
+	
+	def box(self, *args, **kwargs):
+		pass # Does nothing
+	
+	def draw_rule(self, y, w):
+		raise NotImplementedError()
+	
+	def save_transforms(self): # Save our current transformation state to return to later
+		raise NotImplementedError()
+	
+	def untransform(self): # Restore to the saved transformation state
+		raise NotImplementedError()
+	
+	def rotate(self, theta): # Transform our current environment by rotating around the origin
+		raise NotImplementedError()
+	
+	def translate(self, x, y): # Transform our current environment by moving with respect to the origin
+		raise NotImplementedError()
+	
+	def rescale(self, xs, ys): # Transform our current environment by rescaling it
+		raise NotImplementedError()
+	
+	def setup_scaling(self): # Do initial scalings and translations to take care of the margin
+		if self.scale == 0:
+			sw = self.width
+			sh = self.height
+		else:
+			sw = sh = self.scale
+		self.translate(self.margin, self.margin)
+		self.rescale(sw, sh)
+	
+	def draw_potential_damage(self, x, y, w, h, mods):
+		damage = Modifier.DAMAGE in mods
+		highlight = Modifier.HIGHLIGHT in mods
+		if damage: self.hatch(x, y, w, h, highlight)
+	
+	def draw_single(self, x, y, w, h, mods):
+		raise NotImplementedError() # To be implemented in derived classes
+	
+	def draw_double(self, x, y, w, h, mods):
+		raise NotImplementedError() # Same
+	
+	def draw_triple(self, x, y, w, h, mods):
+		raise NotImplementedError() # Same
+	
+	def draw_hook(self, x, y, w, h, mods):
+		raise NotImplementedError() # Same
+	
+	def draw_stroke(self, x, y, w, h, mods): # Delegates to the others after handling some common modifiers
+		
+		# For horizontals and verticals, cutting off a third of the stroke (at head and/or tail) is a good amount of adjustment.
+		# But for diagonals, it's more useful to be able to make them be the same length as other strokes.
+		# For example, in (vhud), it would be nice to make them fit into a circle rather than a square.
+		# So if we're drawing a diagonal, we cut off 1/sqrt(2) of the length, whether it's in one cut or two.
+		if Modifier.INTERNAL_DIAGONAL in mods:
+			adj_amount = h * (1-1/sqrt(2))
+			if Modifier.HEADSHORT in mods and Modifier.TAILSHORT in mods:
+				adj_amount /= 2
+		else:
+			adj_amount = h/3
+		
+		if Modifier.HEADSHORT in mods:
+			h -= adj_amount
+			y += adj_amount
+		if Modifier.TAILSHORT in mods:
+			h -= adj_amount
+		
+		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h, mods)
+		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h, mods)
+		else: self.draw_single(x, y, w, h, mods)
+	
+	def draw_void(self, x, y, w, h, mods): # Draw absolutely nothing except potential damage
+		self.draw_potential_damage(x, y, w, h, mods)
+	
+	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different renderers
+		raise NotImplementedError()
+	
+	def draw_cursor(self, x, y, w, h, mods): # As above, this places a cursor (a line or X)
+		raise NotImplementedError()
+	
+	def draw_hook_wrapper(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+		self.draw_hook(x, y, w, h, mods)
+	
+	def draw_vertical(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+		self.draw_stroke(x, y, w, h, mods)
+	
+	def draw_horizontal(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+		self.save_transforms()
+		self.rotate(-pi/2)
+		self.draw_stroke(-y-h, x, h, w, mods)
+		self.untransform()
+	
+	def draw_downward(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+		self.save_transforms()
+		
+#		c = self.ctx
+#		c.save()
+	#	print(x, y, w, h)
+#		c.translate(x, y)
+		self.translate(x, y)
+		
+		theta = atan(h/w)
+		phi = (pi/2) - theta
+		
+		# I need to attach a diagram to make this all make sense...
+		head = min(h, 1/3) # The width of the stroke head
+		diag = sqrt(w**2 + h**2)
+		
+	#	if h > w:
+	#		x2 = head / (2*cos(phi))
+	#		y2 = 0
+	#		x3 = -head
+	#		cutoff = (head*w) / (2*h)
+	#	else:
+	#		x2 = 0
+	#		y2 = head / (2*cos(theta))
+	#		x3 = 0
+	#		cutoff = (head*h) / (2*w)
+		
+		cutoff = 0
+		stroke = diag - cutoff
+		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL}
+		
+		#c.translate(x2, y2) # Set the new origin point
+	#	c.arc(0, 0, 0.05, 0, pi*2)
+#		c.rotate(-phi)
+		self.rotate(-phi)
+#		c.translate(-head/2, 0)
+		self.translate(-head/2, 0)
+		#c.translate(x3, 0)
+	#	print(head, stroke)
+		self.draw_stroke(0, 0, head, stroke, mods)
+#		c.restore()
+		self.untransform()
+	
+	def draw_upward(self, x, y, w, h, mods=()):
+		self.draw_potential_damage(x, y, w, h, mods)
+#		self.ctx.save()
+		self.save_transforms()
+#		self.ctx.translate(x, y)
+		self.translate(x, y)
+#		self.ctx.scale(1, -1) # Invert vertical axis
+		self.rescale(1, -1)
+#		self.ctx.translate(0, -h)
+		self.translate(0, -h)
+		
+		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL} ^ {Modifier.INTERNAL_FLIP} - {Modifier.DAMAGE} # Since we flipped one of the axes we should unflip it for rendering, and since we already drew the damage we shouldn't draw it again. Also this is a diagonal so we mark that here for safety, even though draw_downward should set that again.
+		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
+		
+#		self.ctx.restore()
+		self.untransform()
+	
+	@classmethod
+	def render(cls, root, highlight=(), scale=512, *args, **kwargs): # Any additional parameters are passed to the class constructor
+		root.propagate_dimensions()
+		root.apply_highlighting(highlight)
+		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), scale=scale, *args, **kwargs)
+		root.draw(rend)
+		return rend
+	
+	def render_sign_at(self, sign, x, y):
+		self.save_transforms()
+		self.translate(x, y)
+		sign.draw(self)
+		self.untransform()
+	
+	@contextmanager
+	def tenu(self, pos, dims): # Tilt the whole canvas sideways temporarily
+		self.save_transforms()
+		
+		x, y = pos
+		w, h = dims
+		
+#		c.translate(x, y+h/2)
+		self.translate(x, y+h/2)
+#		c.rotate(-pi/4)
+		self.rotate(-pi/4)
+#		c.translate(0, 0)
+#		self.translate(0, 0)
+		
+		yield self # This is where the other rendering happens
+		
+#		c.restore() # Un-tenu-fy the canvas again
+		self.untransform()
+
+class GraphicRenderer(Renderer):
+	def __init__(self, width, height, margin=0, scale=0, format='png', bgcolor=None, fgcolor=None, hlcolor=None, strokewidth=None, hatchspace=None, fill=False):
+		super().__init__(width, height, margin=margin, scale=scale) # This fills out the basic layout parameters like fullwidth and fullheight
+		
+		self.format = format
 		
 		if format == 'svg':
 			self.buffer = BytesIO()
@@ -65,14 +260,21 @@ class GraphicRenderer:
 		self.ctx.save() # Save the "base" context: we'll restore to it later every time we need to blank out the canvas
 		self.blank(initial=True) # This will call setup_scaling for us afterward
 	
-	def setup_scaling(self): # Do initial scalings and translations to take care of the margin
-		if self.scale == 0:
-			sw = self.width
-			sh = self.height
-		else:
-			sw = sh = self.scale
-		self.ctx.translate(self.margin, self.margin)
-		self.ctx.scale(sw, sh)
+	# These four map straightforwardly to Cairo context transforms
+	def save_transforms(self):
+		self.ctx.save()
+	
+	def untransform(self):
+		self.ctx.restore()
+	
+	def rotate(self, theta):
+		self.ctx.rotate(theta)
+	
+	def translate(self, x, y):
+		self.ctx.translate(x, y)
+	
+	def rescale(self, xs, ys):
+		self.ctx.scale(xs, ys)
 	
 	def box(self, x, y, w, h, c):
 		if not DRAW_BOXES: return
@@ -166,50 +368,7 @@ class GraphicRenderer:
 			self.buffer.seek(0)
 			return self.buffer
 	
-	def draw_potential_damage(self, x, y, w, h, mods):
-		damage = Modifier.DAMAGE in mods
-		highlight = Modifier.HIGHLIGHT in mods
-		if damage: self.hatch(x, y, w, h, highlight)
-	
-	def draw_single(self, x, y, w, h, mods):
-		raise NotImplementedError() # To be implemented in derived classes
-	
-	def draw_double(self, x, y, w, h, mods):
-		raise NotImplementedError() # Same
-	
-	def draw_triple(self, x, y, w, h, mods):
-		raise NotImplementedError() # Same
-	
-	def draw_hook(self, x, y, w, h, mods):
-		raise NotImplementedError() # Same
-	
-	def draw_stroke(self, x, y, w, h, mods): # Delegates to the others after handling some common modifiers
-		
-		# For horizontals and verticals, cutting off a third of the stroke (at head and/or tail) is a good amount of adjustment.
-		# But for diagonals, it's more useful to be able to make them be the same length as other strokes.
-		# For example, in (vhud), it would be nice to make them fit into a circle rather than a square.
-		# So if we're drawing a diagonal, we cut off 1/sqrt(2) of the length, whether it's in one cut or two.
-		if Modifier.INTERNAL_DIAGONAL in mods:
-			adj_amount = h * (1-1/sqrt(2))
-			if Modifier.HEADSHORT in mods and Modifier.TAILSHORT in mods:
-				adj_amount /= 2
-		else:
-			adj_amount = h/3
-		
-		if Modifier.HEADSHORT in mods:
-			h -= adj_amount
-			y += adj_amount
-		if Modifier.TAILSHORT in mods:
-			h -= adj_amount
-		
-		if Modifier.DOUBLE in mods: self.draw_double(x, y, w, h, mods)
-		elif Modifier.TRIPLE in mods: self.draw_triple(x, y, w, h, mods)
-		else: self.draw_single(x, y, w, h, mods)
-	
-	def draw_void(self, x, y, w, h, mods): # Draw absolutely nothing except potential damage
-		self.draw_potential_damage(x, y, w, h, mods)
-	
-	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different renderers
+	def draw_wildcard(self, x, y, w, h, mods): # Draw a box with an X in it; this is the same between all the different graphic renderers
 		margin = min(w/3, h/3, 0.05)
 		x += margin
 		y += margin
@@ -258,88 +417,6 @@ class GraphicRenderer:
 		c.stroke()
 		
 		c.restore()
-	
-	def draw_hook_wrapper(self, x, y, w, h, mods=()):
-		self.draw_potential_damage(x, y, w, h, mods)
-		self.draw_hook(x, y, w, h, mods)
-	
-	def draw_vertical(self, x, y, w, h, mods=()):
-		self.draw_potential_damage(x, y, w, h, mods)
-		self.draw_stroke(x, y, w, h, mods)
-	
-	def draw_horizontal(self, x, y, w, h, mods=()):
-		self.draw_potential_damage(x, y, w, h, mods)
-		self.ctx.save()
-		self.ctx.rotate(-pi/2)
-		
-		self.draw_stroke(-y-h, x, h, w, mods)
-		
-		self.ctx.restore()
-	
-	def draw_downward(self, x, y, w, h, mods=()):
-		self.draw_potential_damage(x, y, w, h, mods)
-		c = self.ctx
-		c.save()
-	#	print(x, y, w, h)
-		c.translate(x, y)
-		
-		theta = atan(h/w)
-		phi = (pi/2) - theta
-		
-		# I need to attach a diagram to make this all make sense...
-		head = min(h, 1/3) # The width of the stroke head
-		diag = sqrt(w**2 + h**2)
-		
-	#	if h > w:
-	#		x2 = head / (2*cos(phi))
-	#		y2 = 0
-	#		x3 = -head
-	#		cutoff = (head*w) / (2*h)
-	#	else:
-	#		x2 = 0
-	#		y2 = head / (2*cos(theta))
-	#		x3 = 0
-	#		cutoff = (head*h) / (2*w)
-		
-		cutoff = 0
-		stroke = diag - cutoff
-		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL}
-		
-		#c.translate(x2, y2) # Set the new origin point
-	#	c.arc(0, 0, 0.05, 0, pi*2)
-		c.rotate(-phi)
-		c.translate(-head/2, 0)
-		#c.translate(x3, 0)
-	#	print(head, stroke)
-		self.draw_stroke(0, 0, head, stroke, mods)
-		c.restore()
-	
-	def draw_upward(self, x, y, w, h, mods=()):
-		self.draw_potential_damage(x, y, w, h, mods)
-		self.ctx.save()
-		self.ctx.translate(x, y)
-		self.ctx.scale(1, -1) # Invert vertical axis
-		self.ctx.translate(0, -h)
-		
-		mods = set(mods) | {Modifier.INTERNAL_DIAGONAL} ^ {Modifier.INTERNAL_FLIP} - {Modifier.DAMAGE} # Since we flipped one of the axes we should unflip it for rendering, and since we already drew the damage we shouldn't draw it again. Also this is a diagonal so we mark that here for safety, even though draw_downward should set that again.
-		self.draw_downward(0, 0, w, h, mods) # Delegate to downward
-		
-		self.ctx.restore()
-	
-	@classmethod
-	def render(cls, root, highlight=(), scale=512, *args, **kwargs): # Any additional parameters are passed to the class constructor
-		root.propagate_dimensions()
-		root.apply_highlighting(highlight)
-		
-		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), scale=scale, *args, **kwargs)
-		root.draw(rend)
-		return rend
-	
-	def render_sign_at(self, sign, x, y):
-		self.ctx.save()
-		self.ctx.translate(x, y)
-		sign.draw(self)
-		self.ctx.restore()
 	
 #	def render_sign_row(self, row, y, offset):
 #		x = offset / self.scale
@@ -395,22 +472,6 @@ class GraphicRenderer:
 #		rend.ctx.restore()
 #		
 #		return rend
-	
-	@contextmanager
-	def tenu(self, pos, dims): # Tilt the whole canvas sideways temporarily
-		c = self.ctx
-		c.save()
-		
-		x, y = pos
-		w, h = dims
-		
-		c.translate(x, y+h/2)
-		c.rotate(-pi/4)
-		c.translate(0, 0)
-		
-		yield self # This is where the other rendering happens
-		
-		c.restore() # Un-tenu-fy the canvas again
 
 class OneSidedRenderer(GraphicRenderer):
 	def draw_single(self, x, y, w, h, mods):
