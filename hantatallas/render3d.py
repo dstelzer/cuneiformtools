@@ -85,4 +85,4 @@ class ScadRenderer(Renderer):
 
 if __name__ == '__main__':
 	from parser import parse
-	ScadRenderer.render(parse('[hh]'), scale=10, margin=1, thickness=2.5).show()
+	ScadRenderer.render(parse('[hhvh]'), scale=10, margin=1, thickness=2.5).show()

@@ -1,7 +1,8 @@
 module wedge(x, y, z, w, h, phi){
 	s = w / sqrt(2);
-	l = sqrt(h*h - s*s - s*s);
-	theta = atan((w/2)/l);
+	d = w / 2;
+	l = sqrt(h*h - d*d);
+	theta = atan(d/l);
 
 	translate([x, y, z])
 	rotate([0, 0, phi])
