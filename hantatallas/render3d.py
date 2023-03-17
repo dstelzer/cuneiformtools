@@ -71,7 +71,7 @@ class ScadRenderer(Renderer):
 			f.write(self.buffer.getvalue())
 		sp.run(['xdg-open', 'tmp.scad'])
 	
-	def _draw_single(self, x, y, w, h, mods):
+	def _old_draw_single(self, x, y, w, h, mods):
 		self.save_transforms()
 		self.translate(x, y)
 		if Modifier.INVERT in mods:
@@ -81,8 +81,17 @@ class ScadRenderer(Renderer):
 		self.untransform()
 	
 	def draw_single(self, x, y, w, h, mods):
-		self.record(f'wedge({x+w/2}, {y}, 0, {w}, {h}, 90);')
+		self.record(f'singlestroke({x}, {y}, {w}, {h});')
+	
+	def draw_double(self, x, y, w, h, mods):
+		self.record(f'doublestroke({x}, {y}, {w}, {h});')
+	
+	def draw_triple(self, x, y, w, h, mods):
+		self.record(f'triplestroke({x}, {y}, {w}, {h});')
+	
+	def draw_hook(self, x, y, w, h, mods):
+		self.record(f'hookstroke({x}, {y}, {w}, {h});')
 
 if __name__ == '__main__':
 	from parser import parse
-	ScadRenderer.render(parse('[hhvh]'), scale=10, margin=1, thickness=2.5).show()
+	ScadRenderer.render(parse("W[{0[hc]h}v{h[vv2]Mh}v]"), scale=10, margin=1, thickness=2.5).show()

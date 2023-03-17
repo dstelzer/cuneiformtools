@@ -1,3 +1,6 @@
+use <cuneiform.scad>
+
+/*
 module wedge(x, y, z, w, h, phi){
 	s = w / sqrt(2);
 	l = sqrt(h*h - s*s - s*s);
@@ -20,6 +23,7 @@ module haken(x, y, z, s, d){
 	rotate([0, 0, -45])
 	cube([s, s, d]);
 }
+*/
 
 //wedge(0, 0, 0, 10, 30, 30);
 //haken(0, 0, 0, 20);
@@ -38,17 +42,14 @@ difference(){
 scale([1,-1,1]){
 	difference(){
 		translate([0,0,-2.5])
-			cube([12,12,2.5]);
+			cube([15,12,2.5]);
 		union(){
 			translate([1,1,0]){
 				scale([10,10,10]){
-					rotate(-90.0){
-						wedge(-0.5000000000000001, 0, 0, 0.3333333333333333, 0.4166666666666667, 90);
-					}
-					rotate(-90.0){
-						wedge(-0.5000000000000001, 0.4166666666666667, 0, 0.3333333333333333, 0.4166666666666667, 90);
-					}
-					wedge(0.8333333333333334, 0, 0, 0.3333333333333333, 1, 90);
+					singlestroke(0, 0, 0.33, 1);
+					doublestroke(0.33, 0, 0.33, 1);
+					triplestroke(0.66, 0, 0.33, 1);
+					hookstroke(0.99, 0, 0.33, 1);
 				}
 			}
 		}
