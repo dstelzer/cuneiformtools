@@ -6,7 +6,7 @@ from render import Renderer
 from elements import Modifier
 
 class ScadRenderer(Renderer):
-	def __init__(self, width, height, margin=0, scale=0, thickness=None):
+	def __init__(self, width, height, margin=0, scale=0, thickness=None, *args, **kwargs): # TODO remove args and kwargs
 		super().__init__(width, height, margin=margin, scale=scale) # This fills out the basic layout parameters like fullwidth and fullheight
 		
 		self.buffer = StringIO()
@@ -91,6 +91,12 @@ class ScadRenderer(Renderer):
 	
 	def draw_hook(self, x, y, w, h, mods):
 		self.record(f'hookstroke({x}, {y}, {w}, {h});')
+	
+	def draw_rule(self, y, w):
+		self.record(f'hrule({y}, {w});')
+	
+	def hatch(self, x, y, w, h, highlight=False):
+		self.record(f'hatcharea({x}, {y}, {w}, {h});')
 
 if __name__ == '__main__':
 	from parser import parse

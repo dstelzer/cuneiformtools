@@ -1,3 +1,5 @@
+MAX_STROKE_WIDTH = 1/5;
+
 module wedge(x, y, z, w, h, phi, o=false){
 	// o is for offset, an experiment with moving the stroke so that its greatest depth would be at the origin point
 	// It's not working very well; just don't use it for now
@@ -29,30 +31,45 @@ module haken(x, y, z, s, d){
 }
 
 module singlestroke(x, y, w, h){ // Vertical, positioned from top left corner
-	w2 = min(h, w);
+	w2 = min(h, w, MAX_STROKE_WIDTH);
 	wedge(x+w/2, y, 0, w2, h, 90);
 }
 
 module doublestroke(x, y, w, h){
-	dist = min(w, h/4);
+	w2 = min(h, w, MAX_STROKE_WIDTH);
+	dist = min(w2, h/4);
 	h2 = h - dist;
-	singlestroke(x, y, w, h2);
-	singlestroke(x, y+dist, w, h2);
+	h3 = h / 2;
+	wedge(x+w/2, y, 0, w2, h3, 90);
+	wedge(x+w/2, y+dist, 0, w2, h2, 90);
 }
 
 module triplestroke(x, y, w, h){
-	dist = min(w, h/4);
+	w2 = min(h, w, MAX_STROKE_WIDTH);
+	dist = min(w2, h/4);
 	h2 = h - dist*2;
-	singlestroke(x, y, w, h2);
-	singlestroke(x, y+dist, w, h2);
-	singlestroke(x, y+dist*2, w, h2);
+	h3 = min(h/2, h-dist*2);
+	wedge(x+w/2, y, 0, w2, h3, 90);
+	wedge(x+w/2, y+dist, 0, w2, h3, 90);
+	wedge(x+w/2, y+dist*2, 0, w2, h2, 90);
 }
 
 module hookstroke(x, y, w, h, factor=0.75){
 	hh = (w-h/2<0.0001) ? factor*h : h; // By default, the renderer produces hakens that are twice as tall as they are wide - but that means d = 0!
 	// We fix this by reducing h by a factor < 1, when this happens
+	// Comparing against epsilon instead of zero because transferring numbers from Python to SCAD can do weird things occasionally
 	s = hh / sqrt(2);
 	d = sqrt(w*w - hh*hh/4);
 	haken(x, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
 }
-	
+
+module hrule(y, w, h=0.05){
+	s = h*sqrt(2)/2;
+	translate([0, y, -s])
+		rotate([45, 0, 0])
+			cube([w, h, h]);
+}
+
+module hatcharea(x, y, w, h){
+	// TODO
+}

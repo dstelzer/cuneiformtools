@@ -1,6 +1,7 @@
 
 
 from render import *
+from render3d import *
 from parser import parse, parse_sequence
 from layout import Layout
 from database import Database
@@ -49,8 +50,8 @@ def test_layout():
 	db.prepare_sorting()
 	while True:
 		desc = input()
-		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni `n wa-a-tar-ma e-ku-ut-te-ni `r nu NINDA-an `F'
-		Layout(TriangleRenderer, justify='s').render(db.parse_transcription(desc), fill=True).show()
+		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
+		Layout(ScadRenderer, justify='s', size=10).render(db.parse_transcription(desc), fill=True, thickness=2.5).show()
 
 def test_uga():
 	db = Database()
