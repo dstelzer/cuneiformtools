@@ -39,7 +39,7 @@ module doublestroke(x, y, w, h){
 	w2 = min(h, w, MAX_STROKE_WIDTH);
 	dist = min(w2, h/4);
 	h2 = h - dist;
-	h3 = h / 2;
+	h3 = h2 / 2;
 	wedge(x+w/2, y, 0, w2, h3, 90);
 	wedge(x+w/2, y+dist, 0, w2, h2, 90);
 }
@@ -48,19 +48,22 @@ module triplestroke(x, y, w, h){
 	w2 = min(h, w, MAX_STROKE_WIDTH);
 	dist = min(w2, h/4);
 	h2 = h - dist*2;
-	h3 = min(h/2, h-dist*2);
+	h3 = min(h2/2, h-dist*2);
 	wedge(x+w/2, y, 0, w2, h3, 90);
 	wedge(x+w/2, y+dist, 0, w2, h3, 90);
 	wedge(x+w/2, y+dist*2, 0, w2, h2, 90);
 }
 
 module hookstroke(x, y, w, h, factor=0.75){
-	hh = (w-h/2<0.0001) ? factor*h : h; // By default, the renderer produces hakens that are twice as tall as they are wide - but that means d = 0!
+//	hh = (w-h/2<0.0001) ? factor*h : h; // By default, the renderer produces hakens that are twice as tall as they are wide - but that means d = 0!
 	// We fix this by reducing h by a factor < 1, when this happens
 	// Comparing against epsilon instead of zero because transferring numbers from Python to SCAD can do weird things occasionally
-	s = hh / sqrt(2);
-	d = sqrt(w*w - hh*hh/4);
-	haken(x, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
+	// Experiment: changing w instead of h to make hakens wider, which makes them more visible when they're pressed against verticals
+	ww = (w-h/2<0.0001) ? w/factor : w;
+	s = h / sqrt(2);
+	d = sqrt(ww*ww - h*h/4);
+	delta = (ww-w);
+	haken(x-delta, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
 }
 
 module hrule(y, w, h=0.05){
