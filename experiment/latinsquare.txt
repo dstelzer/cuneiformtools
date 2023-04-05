@@ -1,0 +1,16 @@
+Three experimental lists: 1, 2, 3
+Subjects divided three ways: A, B, C
+Subjects also divided two ways: X, Y
+Two methodologies: Z, H
+
+Group A: Z 1, H 2
+Group B: Z 2, H 3
+Group C: Z 3, H 1
+
+Group X: Z first, H second
+Group Y: Z second, H first
+
+Subject code: [ABC][XY][Number]
+	Number is assigned sequentially
+Example: AX1 is first subject doing Z1, H2, in that order
+		 CY3 is third subject doing Z3, H1, opposite order
