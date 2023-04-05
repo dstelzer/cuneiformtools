@@ -1,45 +1,81 @@
-"Degree","Concern","List","Sign"
-0,,"S1","ANŠE ""donkey"""
-0,,2,"ŠÀ ŠAG₄ ""heart"""
-0,"?",1,"ŠÙDUN ŠÙDUL ""yoke"""
-0,"c",2,"DAM dam ""wife"""
-0,"^","S2","EĜIR EGIR ""back"" ""around"""
-0,"!","X","GÍN ""[component]"""
-0,,"S1","GIR₄ ""kiln"" ""pottery"""
-0,"c",1,"GUR gur ""another"" ""cor"""
-0,"c?",2,"ḪUB ḫup ""ring"""
-0,"?",1,"KAŠ₄ ""run"" ""courier"""
-0,,2,"KID LÍL GÉ KE₄ ""field"""
-0,"!","X","KIN qi ""work"" ""sickle"""
-0,"cd",1,"KIRI₆ SAR šar ""plant"" ""garden"" det"
-0,,"S2","KU₇ ""sweet"""
-0,"d?","X","NA₄ ZÁ ""stone"" det"
-0,,1,"NÍTA ARAD ÌR ""servant"" ""male"""
-0,"cd",2,"PÚ GÍGIR túl ""spring"" ""wagon"" det"
-0,"^",2,"SANGA ÀKA ŠIT(I) ""priest"" ""fleece"" ""number"""
-0,"v^","X","SI ší šé ""horn"""
-0,"?",1,"SÍG+MUNUS ""ewe"""
-0,,2,"SIPA(D) ""shepherd"""
-0,"c^",1,"ZÍZ tàš ""emmer"""
-1,"^",2,"AMA DAGAL ""mother"" ""bright"""
-1,"^",1,"GAG DÙ DRU ""do"" ""peg"""
-1,"c",2,"GAL gal ""big"""
-1,,1,"TUR DUMU ""child"" ""small"""
-2,"^",2,"ALAM ALAN ""statue"""
-2,,1,"DUGUD ""difficult"""
-2,,2,"DUḪ GAB(A) ""divide"" ""breast"""
-2,,2,"GIG ""ill"""
-2,"^",1,"GÌR(I) NÈ ""foot"""
-2,"d?","X","KUŠ SU ""skin"" ""entrails"" det"
-2,,"S1","LUGAL ""king"""
-2,,1,"NAG ""drink"""
-2,,"S2","SISKUR ""ritual"""
-2,"d",2,"URUDU ""copper"" det"
-2,"cd",1,"GAD(A) gat kat ""linen"" det"
-3,,2,"INANNA INNIN ""[name]"""
-3,,1,"MÁŠ ""family"""
-3,,1,"SA₅ DIRI ""red"" ""leftover"""
-3,,2,"SÌR ŠÌR KEŠDA KÉŠ ""sing"" ""bind"""
-3,"d^?","X","URU ""city"" det"
-4,,1,"6 ÀŠ ""six"""
-4,,2,"TU₇ ÚTUL KAM ""soup"" ""pot"" ""number"""
+"Degree","Concern","List","Sign","HZL"
+0,"c",1,"GUR gur ""another"" ""cor""",185
+0,"?",1,"KAŠ₄ ""run"" ""courier""",129
+0,"cd",1,"KIRI₆ SAR šar ""plant"" ""garden"" det",353
+0,,1,"NÍTA ARAD ÌR ""servant"" ""male""",16
+0,"?",1,"SÍG+MUNUS ""ewe""",66
+0,"?",1,"ŠÙDUN ŠÙDUL ""yoke""",88
+0,"c^",1,"ZÍZ tàš ""emmer""",241
+1,"^",1,"GAG DÙ DRU ""do"" ""peg""",75
+1,,1,"TUR DUMU ""child"" ""small""",237
+2,,1,"DUGUD ""difficult""",268
+2,"cd",1,"GAD(A) gat kat ""linen"" det",173
+2,"^",1,"GÌR(I) NÈ ""foot""",301
+2,,1,"NAG ""drink""",148
+3,,1,"MÁŠ ""family""",38
+3,,1,"SA₅ DIRI ""red"" ""leftover""",89
+4,,1,"6 ÀŠ ""six""",372
+0,"c",2,"DAM dam ""wife""",298
+0,"c?",2,"ḪUB ḫup ""ring""",50
+0,,2,"KID LÍL GÉ KE₄ ""field""",194
+0,"cd",2,"PÚ GÍGIR túl ""spring"" ""wagon"" det",180
+0,,2,"ŠÀ ŠAG₄ ""heart""",294
+0,"^",2,"SANGA ÀKA ŠIT(I) ""priest"" ""fleece"" ""number""",231
+0,,2,"SIPA(D) ""shepherd""",177
+1,"^",2,"AMA DAGAL ""mother"" ""bright""",57
+1,"c",2,"GAL gal ""big""",242
+2,"^",2,"ALAM ALAN ""statue""",226
+2,,2,"DUḪ GAB(A) ""divide"" ""breast""",164
+2,,2,"GIG ""ill""",269
+2,"d",2,"URUDU ""copper"" det",109
+3,,2,"INANNA INNIN ""[name]""",41
+3,,2,"SÌR ŠÌR KEŠDA KÉŠ ""sing"" ""bind""",106
+4,,2,"TU₇ ÚTUL KAM ""soup"" ""pot"" ""number""",355
+0,,3,"BAL bal “libation” “spindle”",4
+0,"b",3,"DÌḪ ELAM “thorn” “Elam”",74
+0,,3,"EZEN₄ “festival”",107
+0,,3,"GU₄ GUD GUDR “cow”",157
+0,"bd",3,"ḪAR ḪUR MUR ÀR KÍN UR₅ “ring” “thick” “lung”",333
+0,"b",3,"SA “tendon” “muscle”",200
+0,,3,"ZU₉ “tooth”",143
+1,"cb",3,"IKU kán “field”",61
+1,,3,"MIN 2 “2”",361
+2,"d",3,"DUG “vessel”",162
+2,"d",3,"É “building”",199
+2,,3,"LÀL “honey”",170
+2,,3,"MEŠ “many”",360
+3,"c",3,"SAG šak riš “head”",192
+3,,3,"ZÀ ZAG “border”",238
+4,,3,"DUB KIŠIB tup “tablet” “seal”",99
+0,,"S1","ANŠE ""donkey""",302
+0,,"S1","GIR₄ ""kiln"" ""pottery""",266
+2,,"S1","LUGAL ""king""",115
+0,"^","S2","EĜIR EGIR ""back"" ""around""",126
+0,,"S2","KU₇ ""sweet""",184
+2,,"S2","SISKUR ""ritual""",156
+0,"!","X","GÍN ""[component]""",223
+0,"!","X","KIN qi ""work"" ""sickle""",47
+0,"d?","X","NA₄ ZÁ ""stone"" det",73
+0,"v^","X","SI ší šé ""horn""",86
+2,"d?","X","KUŠ SU ""skin"" ""entrails"" det",213
+3,"d^?","X","URU ""city"" det",229
+0,,,"DAG ták “throne”",243
+0,"d",,"DUG “vessel”",162
+0,,,"ÉRIN RÍN ERIM ZÁLAG “balance” “army” “light”",327
+0,,,"GÚ “neck”",201
+0,,,"ÍD I₇ “river”",365
+0,"?",,"KÙ KUG “shiny”",69
+0,"d",,"KUŠ SU ""skin"" ""entrails"" det",213
+0,"bc",,"LAM lam “pistachio”",306
+0,"d",,"LÚ “man”",78
+0,"b",,"MAḪ “great”",10
+0,"vd",,"NINDA NÍG GAR šá “bread” “thing” “lay”",369
+0,,,"ZÀ ZAG “border”",238
+1,"d",,"É “building”",199
+1,"cd",,"GAD(A) gat kat ""linen"" det",173
+3,,,"GAL gal ""big""",242
+3,"b",,"LÚ “man”",78
+3,,,"SANGA ÀKA ŠIT(I) ""priest"" ""fleece"" ""number""",231
+4,,,"EZEN₄ “festival”",107
+4,,,"LUGAL ""king""",115
+4,"d",,"TU₉ TÚG ŠÈ ÁZLAG ZÌ ZÍD “garment” “toward” “flour”",212

@@ -18,6 +18,7 @@ d = det
 ! = not in HZL
 ^ = added to Hantatallas
 X = rejected
+b = unclearly written
 
 0
 	ANŠE "donkey"
