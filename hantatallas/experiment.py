@@ -50,7 +50,10 @@ def choose_which(subject, index, lst, salt=''):
 	n_images = get_sequence_length(lst)
 	if subject not in permutations or len(permutations[subject]) != n_images:
 	#	random.seed(salt+subject)
-		permutations[subject] = random.sample(range(n_images), k=n_images) # Random permutation of the numbers [0..n_images)
+		if n_images > 5:
+			permutations[subject] = random.sample(range(n_images), k=n_images) # Random permutation of the numbers [0..n_images)
+		else:
+			permutations[subject] = list(range(n_images)) # For sample lists, don't bother shuffling, just go in lexicographic order (undamaged then damaged)
 		record(subject, 'SHUFFLE', ' '.join(str(n) for n in permutations[subject]))
 	if index < 0 or index > n_images: raise ValueError(index, n_images, subject, lst)
 	return permutations[subject][index]

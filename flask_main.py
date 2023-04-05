@@ -107,7 +107,10 @@ def do_experiment_stimulus():
 	system = request.args.get('system', None, type=str)
 	total = get_sequence_length(list)
 	if index >= total:
-		return redirect(url_for('.do_experiment_give_survey', expkey=expkey, which='final', system=system))
+		if total > 5: # Only do a final survey for the experimental lists, not the practice ones
+			return redirect(url_for('.do_experiment_give_survey', expkey=expkey, which='final', system=system))
+		else:
+			return 'The practice phase is complete. The experimenter will now set up the next phase.'
 	record_stimulus(expkey, index, list, system)
 	return render_template('stimulus.html', expkey=expkey, index=index, list=list, system=system, total=total)
 @app.route('/experiment/cover')
