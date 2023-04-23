@@ -3,7 +3,7 @@ from math import pi
 import subprocess as sp
 
 from render import Renderer
-from elements import Modifier
+from elements import Modifier, Winkelhaken, Vertical
 
 class ScadRenderer(Renderer):
 	def __init__(self, width, height, margin=0, scale=0, thickness=None, *args, **kwargs): # TODO remove args and kwargs
@@ -97,6 +97,37 @@ class ScadRenderer(Renderer):
 	
 	def hatch(self, x, y, w, h, highlight=False):
 		self.record(f'hatcharea({x}, {y}, {w}, {h});')
+	
+	def adjust_tree(self, tree): # We actually do make some tree adjustments here, because [cv] puts the winkelhaken too close to the vertical for 3D printing purposes
+		hooks = (s for s in tree.traverse_strokes() if isinstance(s, Winkelhaken)) # An iterator of all the hooks in this tree
+		def is_vert(s): return isinstance(s, Vertical) # Two lambdas given names for readability
+		def is_block(s): return isinstance(s, Winkelhaken) or isinstance(s, Vertical)
+		for hook in hooks:
+	#		print('Loop')
+			x, y = hook.pos
+			w, h = hook.dims
+			cx, cy = x+w/2, y+h/2 # Center
+			l1 = cx-0.45*w, cy # A point on the inner left edge
+			l2 = cx-0.55*w, cy # A point on the outer left edge
+			r1 = cx+0.45*w, cy # Inner right
+			r2 = cx+0.55*w, cy # Outer right
+			
+			left_overlap = any(is_vert(s) for s in tree.traverse_strokes_point(*l1)) # Vertical touching on the left
+			right_overlap = any(is_vert(s) for s in tree.traverse_strokes_point(*r1)) # Vertical touching on the right
+			left_block = any(is_block(s) for s in tree.traverse_strokes_point(*l2)) # Hook adjacent on the left
+			right_block = any(is_block(s) for s in tree.traverse_strokes_point(*r2)) # Hook adjacent on the right
+			left_outside = l2[0] <= 0
+			right_outside = r2[0] >= tree.dims[0]
+	#		print(left_overlap, right_overlap, left_block, right_block, left_outside, right_outside)
+			
+			if left_overlap and (not right_block) and (not right_outside):
+	#			print('Adjusted right')
+				hook.pos = (x+w/2, y)
+				hook.dims = (w+w/2, h)
+			elif right_overlap and (not left_block) and (not left_outside):
+	#			print('Adjusted left')
+				hook.pos = (x-w/2, y)
+				hook.dims = (w+w/2, h)
 
 if __name__ == '__main__':
 	from parser import parse

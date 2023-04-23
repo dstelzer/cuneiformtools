@@ -43,6 +43,13 @@ class Element:
 	def orient(self): return Orientation.NEITHER
 	def traverse(self): yield self # For tree traversal
 	
+	def traverse_strokes(self):
+		yield from (s for s in self.traverse() if isinstance(s, Stroke))
+	def traverse_strokes_point(self, x, y): # May need to optimize this further: yield all strokes whose AABB includes the given point
+		def aabb_includes_point(s):
+			return s.pos[0] <= x <= s.pos[0]+s.dims[0] and s.pos[1] <= y <= s.pos[1]+s.dims[1]
+		yield from (s for s in self.traverse_strokes() if aabb_includes_point(s))
+	
 	def add_modifier(self, mod): raise ValueError('Only strokes can have modifiers; you probably want an adjustment instead') # Stroke overrides this method
 	
 	def complexity(self): # Number of strokes within an element

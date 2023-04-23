@@ -59,11 +59,14 @@ module hookstroke(x, y, w, h, factor=0.75){
 	// We fix this by reducing h by a factor < 1, when this happens
 	// Comparing against epsilon instead of zero because transferring numbers from Python to SCAD can do weird things occasionally
 	// Experiment: changing w instead of h to make hakens wider, which makes them more visible when they're pressed against verticals
-	ww = (w-h/2<0.0001) ? w/factor : w;
-	s = h / sqrt(2);
-	d = sqrt(ww*ww - h*h/4);
-	delta = (ww-w);
-	haken(x-delta, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
+	// Experiment undone - it works better changing h and having an adjustment in the renderer for when it's pressed against a vertical
+//	ww = (w-h/2<0.0001) ? w/factor : w;
+	ww = w;
+	hh = (w-h/2<0.0001) ? h*factor : h;
+	s = hh / sqrt(2);
+	d = sqrt(ww*ww - hh*hh/4);
+	deltaw = (ww-w);
+	haken(x-deltaw, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
 }
 
 module hrule(y, w, h=0.05){

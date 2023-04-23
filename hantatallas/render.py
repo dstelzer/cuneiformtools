@@ -41,6 +41,9 @@ class Renderer: # A very abstract base class that doesn't do much of anything
 		self.fullwidth = int(width + margin*2)
 		self.fullheight = int(height + margin*2)
 	
+	def adjust_tree(self, tree): # Make any necessary adjustments to the tree before drawing. This is the renderer's chance to adjust the size and positions of strokes if necessary.
+		pass
+	
 	def hatch(self, x, y, w, h, highlight=False): # Draw a hatched pattern over a rectangle - the algorithm is designed so that adjacent or overlapping rectangles will always line up their hatching properly
 		raise NotImplementedError()
 	
@@ -204,12 +207,14 @@ class Renderer: # A very abstract base class that doesn't do much of anything
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), scale=scale, *args, **kwargs)
+		rend.adjust_tree(root)
 		root.draw(rend)
 		return rend
 	
 	def render_sign_at(self, sign, x, y):
 		self.save_transforms()
 		self.translate(x, y)
+		self.adjust_tree(sign)
 		sign.draw(self)
 		self.untransform()
 	
