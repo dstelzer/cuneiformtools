@@ -688,6 +688,26 @@ class VStack(Container):
 				return new_parent.functional_form(special-{Tenu}) # Note that we specifically use `special` rather than `newspecial` here because we want this evaluated in the same context that we were evaluated in!
 				# Don't re-apply the Tenu modifier when re-functionalizing though - we've already converted cardinal strokes into diagonals, we don't want to do that again
 		
+		# We've added a second extra complication now, for signs like TI: when an [hc] HStack appears inside a VStack, it's not clear where the c belongs. We choose to change {h[hc]h} to [{hhh}c] for normalization purposes.
+		lefts = [] # The of c's we see at the left edge
+		rights = [] # The c's we see at the right edge
+		for i, child in enumerate(children):
+			if isinstance(child, HStack) and any(isinstance(c, Horizontal) for c in child.traverse_strokes()): # The child is an HStack which contains a horizontal
+				if isinstance(child.contents[0], Winkelhaken):
+					lefts.append(child.contents[0]) # Add it to our left list
+					child.contents.pop(0) # And remove it from the child
+				if isinstance(child.contents[-1], Winkelhaken):
+					rights.append(child.contents[-1])
+					child.contents.pop(-1) # Likewise
+		if lefts or rights:
+			new_parent = HStack([
+				VStack(lefts),
+				VStack(children),
+				VStack(rights),
+			])
+	#		return new_parent.functional_form(special-{Tenu}) # As above we re-functionalize in case this change led to new things that need fixing; we specifically omit the Tenu modifier when we do, because that one would be bad to apply twice
+		# TEMPORARILY DISABLED UNTIL BUGS CAN BE FIXED
+		
 		return VStack(children).clean_intersections()
 	
 	def __contains__(self, other):

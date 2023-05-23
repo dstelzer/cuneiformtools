@@ -51,7 +51,7 @@ def test_layout():
 	while True:
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
-		Layout(ScadRenderer, justify='s', size=10).render(db.parse_transcription(desc), fill=True, thickness=2.5).show()
+		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=0.5, shape='seal').show()
 
 def test_uga():
 	db = Database()
@@ -60,6 +60,16 @@ def test_uga():
 	while True:
 		desc = input()
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
+
+def regression_testing():
+	with open('regression.in', 'r') as f1:
+		with open('regression.out', 'w') as f2:
+			for line in f1:
+				print('.', end='', flush=True)
+				construct = parse(line.strip())
+				func = construct.functional_form()
+				f2.write(str(func)+'\n')
+	print('Done')
 
 if __name__ == '__main__':
 	test_layout()

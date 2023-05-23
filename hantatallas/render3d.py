@@ -6,26 +6,57 @@ from render import Renderer
 from elements import Modifier, Winkelhaken, Vertical
 
 class ScadRenderer(Renderer):
-	def __init__(self, width, height, margin=0, scale=0, thickness=None, *args, **kwargs): # TODO remove args and kwargs
+	def __init__(self, width, height, margin=0, scale=0, thickness=None, shape='tablet', *args, **kwargs): # TODO remove args and kwargs
 		super().__init__(width, height, margin=margin, scale=scale) # This fills out the basic layout parameters like fullwidth and fullheight
 		
 		self.buffer = StringIO()
 		
 		self.depth = 0
 		self.depthstack = [] # This is used to imitate Cairo's context save and restore, which is also a stack: here, it holds how many nested levels deep we are
+		self.shape = shape
 		
 		if thickness is None: thickness = min(width, height) / 2
 		
 		self.record('use <../3dmodel/cuneiform.scad>\n') # Import the files we need for this
 		
-		self.rescale(1, -1) # Invert the y-axis to match what Cairo does
-		
-		self.record('difference(){')
-		self.depth += 1
-		self.record(f'translate([0,0,{-thickness}])')
-		self.record(f'\tcube([{self.fullwidth},{self.fullheight},{thickness}]);')
-		self.record('union(){')
-		self.depth += 1
+		if shape == 'stamp': # The imprints will be *positives*
+			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
+			self.record('rotate([0,180,0])') # Flip it around so the positives go up instead of down
+			self.record('union(){') # We're going to start with a thin plate to attach the stamp to
+			self.depth += 1
+			self.record(f'cube([{self.fullwidth},{self.fullheight},{thickness}]);') # This is our plate
+			self.record('difference(){') # Now we're going to subtract the "air" (above the surface) from the styli
+			self.depth += 1
+			self.save_transforms()
+			self.record('union(){')
+			self.depth += 1
+		elif shape == 'seal': # As above, except wrapped around into a ring
+			self.record('use <../3dmodel/cylinder.scad>\n')
+			self.record(f'cylindrify({self.fullwidth}, {self.fullheight}, 1.5, 100)') # TODO PARAMETRIZE third is height of stamp fourth is number of segments in ring
+			# A couple transforms to set this into the position cylindrify wants
+			self.record('rotate([0,0,90])')
+			self.record(f'translate([{self.fullwidth}, 0, 0])')
+			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
+			# And now it's the same as 'stamp'
+			self.record('rotate([0,180,0])') # Flip it around so the positives go up instead of down
+			self.record('union(){') # We're going to start with a thin plate to attach the stamp to
+			self.depth += 1
+			self.record(f'cube([{self.fullwidth},{self.fullheight},{thickness}]);') # This is our plate
+			self.record('difference(){') # Now we're going to subtract the "air" (above the surface) from the styli
+			self.depth += 1
+			self.save_transforms()
+			self.record('union(){')
+			self.depth += 1
+		elif shape == 'tablet': # The imprints will be *negatives*
+			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
+			self.record('difference(){') # We're going to subtract the styli from the clay
+			self.depth += 1
+			self.record(f'translate([0,0,{-thickness}])')
+			self.record(f'\tcube([{self.fullwidth},{self.fullheight},{thickness}]);') # This is our tablet itself, placed just under the XY plane
+			self.record('union(){')
+			self.depth += 1
+		else:
+			raise ValueError('Not a valid shape', shape)
 		
 		self.setup_scaling()
 	
@@ -57,6 +88,10 @@ class ScadRenderer(Renderer):
 		self.depth += 1
 	
 	def finish(self):
+		if self.shape == 'stamp' or self.shape == 'seal': # We need to subtract the "air" from the styli afterward if we're in stamp mode
+			while self.depthstack: self.untransform() # Go back to the very first entry of the depth stack, which should be the one we made at the very beginning
+			self.record(f'cube([{self.fullwidth},{self.fullheight},100]);') # TODO PARAMETRIZE THIS
+		
 		while self.depth:
 			self.depth -= 1
 			self.record('}')
