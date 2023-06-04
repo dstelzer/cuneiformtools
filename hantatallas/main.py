@@ -76,3 +76,5 @@ if __name__ == '__main__':
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't
+
+# Crash comes from {h[0{cc}{hh}{hh}0]h} - FIXED

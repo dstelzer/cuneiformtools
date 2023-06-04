@@ -104,6 +104,7 @@ class Database:
 						self.data.append(entry)
 					entry = DatabaseEntry()
 					entry.ident = line
+	#				print('Processing', line)
 				elif tabs == 1: # Language
 					current_language = line
 				elif tabs == 2: # Form

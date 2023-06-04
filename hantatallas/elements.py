@@ -684,6 +684,7 @@ class VStack(Container):
 				new_contents = list(zip(*child_contents))
 				new_stacks = [VStack(list(c)) for c in new_contents]
 				new_parent = HStack(new_stacks)
+	#			print('Fixed stacking', new_parent)
 				# Then we re-functionalize this in case there are any new nesting issues that need to be handled
 				return new_parent.functional_form(special-{Tenu}) # Note that we specifically use `special` rather than `newspecial` here because we want this evaluated in the same context that we were evaluated in!
 				# Don't re-apply the Tenu modifier when re-functionalizing though - we've already converted cardinal strokes into diagonals, we don't want to do that again
@@ -693,20 +694,25 @@ class VStack(Container):
 		rights = [] # The c's we see at the right edge
 		for i, child in enumerate(children):
 			if isinstance(child, HStack) and any(isinstance(c, Horizontal) for c in child.traverse_strokes()): # The child is an HStack which contains a horizontal
+	#			print('Suitable child', i, child)
 				if isinstance(child.contents[0], Winkelhaken):
 					lefts.append(child.contents[0]) # Add it to our left list
 					child.contents.pop(0) # And remove it from the child
+	#				print('Removed left', child)
 				if isinstance(child.contents[-1], Winkelhaken):
 					rights.append(child.contents[-1])
 					child.contents.pop(-1) # Likewise
+	#				print('Removed right', child)
 		if lefts or rights:
 			new_parent = HStack([
 				VStack(lefts),
 				VStack(children),
 				VStack(rights),
 			])
-	#		return new_parent.functional_form(special-{Tenu}) # As above we re-functionalize in case this change led to new things that need fixing; we specifically omit the Tenu modifier when we do, because that one would be bad to apply twice
-		# TEMPORARILY DISABLED UNTIL BUGS CAN BE FIXED
+	#		print('Lefts', lefts, 'Center', children, 'Rights', rights)
+	#		print('Complete', new_parent)
+	#		input()
+			return new_parent.functional_form(special-{Tenu,VStack}) # As above we re-functionalize in case this change led to new things that need fixing; we specifically omit the Tenu modifier when we do, because that one would be bad to apply twice, and also omit VStack, because this has now become an HStack instead (this avoids an infinite loop that happens for things like {h[{cc}{hh}{hh}]h}; this step and the "rearrange stacks within stacks" step would go back and forth forever)
 		
 		return VStack(children).clean_intersections()
 	
