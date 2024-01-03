@@ -16,4 +16,4 @@ def separates(a, b, c, d): return winding(c, d, a) != winding(c, d, b)
 # See https://bryceboe.com/2006/10/23/line-segment-intersection-algorithm/
 def intersects(a, b, c, d): return separates(a, b, c, d) and separates(c, d, a, b)
 
-def rotate(a, theta): return XY(a.x*cos(theta)-a.y*sin(theta), a.x*sin(theta)+a.y*cos(theta))
+def rotate(a, theta): return XY(a.x*cos(theta)-a.y*sin(theta), a.x*sin(theta)+a.y*cos(theta)) # Just apply the two-dimensional rotation matrix "longhand" instead of involving matrix multiplication
