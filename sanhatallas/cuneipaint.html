@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>Cuneiform Painter ALPHA</title>
+		<script language="javascript" type="text/javascript" src="cuneipaint.js"></script>
+	</head>
+	<body onload="setup();">
+		<p>
+			<input type="button" value="Stroke" onclick="btn_stroke();" />
+			<input type="button" value="Hook" onclick="btn_hook();" />
+			<input type="button" value="Divide" onclick="btn_divide();" />
+			<input type="button" value="Delete" onclick="btn_delete();" />
+			<input type="button" value="Clear" onclick="btn_clear();" />
+			<input type="button" value="Submit" onclick="btn_submit();" />
+			<span id="outputpanel"></span>
+		</p>
+		<canvas id="paintcanvas" width="300" height="300"
+			style="border:1px solid black;"
+			onmousedown="cvs_down(event);"
+			onmouseup="cvs_up(event);"
+			onmousemove="cvs_move(event);"
+		></canvas>
+	</body>
+</html>
