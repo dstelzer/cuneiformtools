@@ -87,7 +87,7 @@ class Line:
 		return cls(rotate(self.head, theta), rotate(self.tail, theta))
 
 class Divider(Line): # Acts like a normal line for parsing but does not appear in the output
-	def strokify(self):
+	def strokify():
 		return None
 
 class DoubleLine(Line): # A normal stroke with a double head
