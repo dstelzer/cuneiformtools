@@ -314,12 +314,12 @@ function handle_server_response(obj){
 		parsed = obj.result;
 		output.innerHTML = '<tt>' + parsed + '</tt>';
 		var code = encodeURIComponent(parsed);
-		var url = "/rendersign?code=" + code + "&format=svg&type=publish&size=300";
+		var url = "/rendersign?code=" + code + "&format=svg&type=publish&scale=300";
 		document.getElementById("preview").src = url;
 		document.getElementById("searchbutton").disabled = false;
 	}else{
 		output.innerHTML = 'Problem! ' + obj.result; // Error message
-		var url = "/rendersign?code=&format=svg&scale=300";
+		var url = "/rendersign?code=0&format=svg&scale=300";
 		document.getElementById("preview").src = url;
 		document.getElementById("searchbutton").disabled = true;
 	}
