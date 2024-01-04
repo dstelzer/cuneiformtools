@@ -314,15 +314,21 @@ function handle_server_response(obj){
 		parsed = obj.result;
 		output.innerHTML = '<tt>' + parsed + '</tt>';
 		var code = encodeURIComponent(parsed);
-		var url = "/rendersign?code=" + code + "&format=svg&type=publish&scale=300";
+		var url = "/rendersign?code=" + code + "&format=svg&type=publish&scale=160";
 		document.getElementById("preview").src = url;
 		document.getElementById("searchbutton").disabled = false;
 	}else{
 		output.innerHTML = 'Problem! ' + obj.result; // Error message
-		var url = "/rendersign?code=0&format=svg&scale=300";
+		var url = "/rendersign?code=0&format=svg&scale=160";
 		document.getElementById("preview").src = url;
 		document.getElementById("searchbutton").disabled = true;
 	}
+}
+
+function resize_preview(){ // Change the size of the preview element, called by preview element's onload
+	var p = document.getElementById("preview");
+	p.style.width = p.contentWindow.document.documentElement.scrollWidth + 'px';
+	p.style.height = p.contentWindow.document.documentElement.scrollHeight + 'px';
 }
 
 // "Search" button to search for the parsed results
