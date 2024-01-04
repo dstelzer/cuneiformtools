@@ -87,12 +87,12 @@ class Line:
 		return cls(rotate(self.head, theta), rotate(self.tail, theta))
 
 class Divider(Line): # Acts like a normal line for parsing but does not appear in the output
-	def strokify():
+	def strokify(self):
 		return None
 
 class DoubleLine(Line): # A normal stroke with a double head
 	def strokify(self):
-		stroke = super().strokify(self)
+		stroke = super().strokify()
 		return DoubleMod(stroke)
 
 class HookLine(Line): # For Winkelhaken
