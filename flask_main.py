@@ -6,6 +6,7 @@ from werkzeug.wsgi import FileWrapper
 from dubsar.consolidated import DubSar
 from hantatallas.web_version import do_rendering, do_searching, do_scribing
 from hantatallas.experiment import choose_image, get_sequence_length, record_stimulus, record_response, record_survey
+from sanhatallas.cuneipaint import paint_process
 
 app = Flask(__name__)
 
@@ -132,3 +133,9 @@ def do_experiment_give_survey():
 	which = request.args.get('which', '', type=str)
 	system = request.args.get('system', None, type=str)
 	return render_template('survey.html', expkey=expkey, which=which, system=system)
+
+@app.route('/cuneipaint_parse')
+def do_cuneipaint_parse():
+	code = request.args.get('code', '', type=str)
+	tolerance = request.args.get('tolerance', 0, type=int)
+	return paint_process(code, tolerance)

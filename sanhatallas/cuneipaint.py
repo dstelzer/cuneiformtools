@@ -3,23 +3,26 @@ from pathlib import Path
 import json
 
 from geometry import XY
-from sketch import Line, Divider, HookLine, LineGroup
+from sketch import Line, DoubleLine, Divider, HookLine, LineGroup
 
 path.append(str(Path(__file__).parents[1]))
 from hantatallas.hack import render, lookup
 
 classes = {
 	'STROKE' : Line,
+	'DOUBLE' : DoubleLine,
 	'HOOK' : HookLine,
 	'DIVIDE' : Divider,
 }
 
+TOLERANCE = 10
+
 def convert_object(obj):
 	cls = classes[obj['type']]
-	start = XY(float(obj['x1']), float(obj['y1']))
-	end = XY(float(obj['x2']), float(obj['y2']))
+	start = XY(obj['head']['x'], obj['head']['y'])
+	end = XY(obj['tail']['x'], obj['tail']['y'])
 	
-	return cls(start, end)
+	return cls(start, end, tolerance=TOLERANCE)
 
 def convert_list(lst):
 	return LineGroup([convert_object(o) for o in lst])
@@ -31,6 +34,18 @@ def handle(s):
 	linegroup = convert_json(s)
 	converted = str(linegroup.parse())
 	render(converted)
+
+def paint_process(s, tolerance=None):
+	global TOLERANCE # TODO: can we do this without a global?
+	if tolerance is not None: TOLERANCE = tolerance
+	
+	try:
+		linegroup = convert_json(s)
+		converted = str(linegroup.parse())
+		return json.dumps({'success':True, 'result':converted})
+	except ValueError as e:
+		err = f'{str(e)} ({str(type(e))})'
+		return json.dumps({'success':False, 'result':err})
 
 if __name__ == '__main__':
 	while True:

@@ -1,16 +1,19 @@
 <html>
 	<head>
 		<title>Cuneiform Painter ALPHA</title>
+		<script language="javascript" type="text/javascript" src="victor.min.js"></script> <!-- https://github.com/maxkueng/victor -->
 		<script language="javascript" type="text/javascript" src="cuneipaint.js"></script>
 	</head>
 	<body onload="setup();">
 		<p>
 			<input type="button" value="Stroke" onclick="btn_stroke();" />
+			<input type="button" value="Double" onclick="btn_double();" />
 			<input type="button" value="Hook" onclick="btn_hook();" />
 			<input type="button" value="Divide" onclick="btn_divide();" />
 			<input type="button" value="Delete" onclick="btn_delete();" />
 			<input type="button" value="Clear" onclick="btn_clear();" />
-			<input type="button" value="Submit" onclick="btn_submit();" />
+			<input type="button" value="Parse" onclick="btn_submit();" />
+			<input type="button" value="Search!" onclick="btn_search();" id="searchbutton" disabled />
 			<span id="outputpanel"></span>
 		</p>
 		<canvas id="paintcanvas" width="300" height="300"
@@ -19,5 +22,7 @@
 			onmouseup="cvs_up(event);"
 			onmousemove="cvs_move(event);"
 		></canvas>
+		<iframe id="preview" width="300" height="300" src="/rendersign?code=&format=svg&scale=300">
+		</iframe>
 	</body>
 </html>

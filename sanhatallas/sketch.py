@@ -38,7 +38,7 @@ class Orient(Enum):
 		else: return Orient.HORIZ
 
 class Line:
-	def __init__(self, head, tail):
+	def __init__(self, head, tail, tolerance=0):
 		self.head = head
 		self.tail = tail
 		
@@ -46,6 +46,17 @@ class Line:
 		xhigh = max(head.x, tail.x)
 		ylow = min(head.y, tail.y)
 		yhigh = max(head.y, tail.y)
+		
+		# Ensure dx and dy are both >= tolerance, to avoid issues with some user error (two horizontal lines next to each other being seen as on different vertical levels)
+		dx = xhigh - xlow
+		dy = yhigh - ylow
+		if dx < tolerance:
+			xhigh += (tolerance-dx)/2
+			xlow -= (tolerance-dx)/2
+		if dy < tolerance:
+			yhigh += (tolerance-dy)/2
+			ylow -= (tolerance-dy)/2
+		
 		self.aabb = AABB(xlow, ylow, xhigh, yhigh)
 		
 		self.angle = atan2(tail.y-head.y, tail.x-head.x)
@@ -75,6 +86,11 @@ class Line:
 class Divider(Line): # Acts like a normal line for parsing but does not appear in the output
 	def strokify(self):
 		return None
+
+class DoubleLine(Line): # A normal stroke with a double head
+	def strokify(self):
+		stroke = super().strokify(self)
+		return DoubleMod(stroke)
 
 class HookLine(Line): # For Winkelhaken
 	def strokify(self):
@@ -189,6 +205,11 @@ class Stroke(Element):
 	def process(self, raw):
 		if raw: raise ValueError('Should be nothing', raw)
 	def __str__(self): return self.sigil()
+class StrokeMod(Element):
+	def process(self, raw):
+		if not isinstance(raw, Stroke): raise ValueError('Stroke needed', raw)
+		self.child = raw
+	def __str__(self): return str(self.child) + self.sigil()
 class Modifier(Element):
 	def process(self, raw):
 		if not isinstance(raw, Composition): raise ValueError('Comp needed', raw)
@@ -212,3 +233,5 @@ class Winkelhaken(Stroke):
 	def sigil(self): return 'c'
 class Tenu(Modifier):
 	def sigil(self): return 'TE' # Make all tenus larger as well as tilted
+class DoubleMod(StrokeMod):
+	def sigil(self): return '2'

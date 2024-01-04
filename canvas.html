@@ -12,7 +12,7 @@
 					if(start == end){
 						code = code.slice(0, start) + '|!' + code.slice(start); // Add cursor
 					}else{
-						code = code.slice(0, start) + code.slice(start, end).replace(/([hvduc])/g, '$1!') + code.slice(end);
+						code = code.slice(0, start) + code.slice(start, end).replace(/([hvduc])/g, '$1!') + code.slice(end); // Highlight selected region by putting ! after each stroke in it
 					}
 					console.log(code);
 				}
