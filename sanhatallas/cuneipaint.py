@@ -2,11 +2,16 @@ from sys import exit, path
 from pathlib import Path
 import json
 
-from geometry import XY
-from sketch import Line, DoubleLine, Divider, HookLine, LineGroup
+try:
+	from geometry import XY
+	from sketch import Line, DoubleLine, Divider, HookLine, LineGroup
+except ImportError:
+	from .geometry import XY
+	from .sketch import Line, DoubleLine, Divider, HookLine, LineGroup
 
-path.append(str(Path(__file__).parents[1]))
-from hantatallas.hack import render, lookup
+if __name__ == '__main__':
+	path.append(str(Path(__file__).parents[1]))
+	from hantatallas.hack import render, lookup
 
 classes = {
 	'STROKE' : Line,

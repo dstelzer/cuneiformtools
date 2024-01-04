@@ -3,7 +3,10 @@ from math import atan2, pi
 from enum import Enum, auto
 from statistics import mean
 
-from geometry import XY, intersects, rotate
+try:
+	from geometry import XY, intersects, rotate
+except ImportError:
+	from .geometry import XY, intersects, rotate
 
 Interval = namedtuple('Interval', 'low high')
 TaggedInterval = namedtuple('TaggedInterval', 'low high ref')
