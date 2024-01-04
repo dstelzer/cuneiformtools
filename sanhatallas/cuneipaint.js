@@ -301,9 +301,11 @@ function btn_clear(){
 // "Submit" button to parse the results
 function btn_submit(){
 	data = JSON.stringify(strokes); // The raw data we're sending
+	console.log(data);
 	code = encodeURIComponent(data);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload = function(){
+		console.log(this.responseText);
 		var resp = JSON.parse(this.responseText);
 		handle_server_response(resp);
 	}
