@@ -294,6 +294,8 @@ function btn_delete(){
 function btn_clear(){
 	strokes = [];
 	redraw();
+	clear_preview();
+	btn_stroke();
 }
 
 // "Submit" button to parse the results
@@ -319,10 +321,14 @@ function handle_server_response(obj){
 		document.getElementById("searchbutton").disabled = false;
 	}else{
 		output.innerHTML = 'Problem! ' + obj.result; // Error message
-		var url = "/rendersign?code=0&format=svg&scale=160";
-		document.getElementById("preview").src = url;
-		document.getElementById("searchbutton").disabled = true;
+		clear_preview();
 	}
+}
+
+function clear_preview(){
+	var url = "/rendersign?code=0&format=svg&scale=160";
+	document.getElementById("preview").src = url;
+	document.getElementById("searchbutton").disabled = true;
 }
 
 function resize_preview(){ // Change the size of the preview element, called by preview element's onload

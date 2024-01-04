@@ -49,7 +49,7 @@ def paint_process(s, tolerance=None):
 		converted = str(linegroup.parse())
 		return json.dumps({'success':True, 'result':converted})
 	except ValueError as e:
-		err = f'{str(e)} ({str(type(e))})'
+		err = f'{str(e)} ({type(e).__name__})'
 		return json.dumps({'success':False, 'result':err})
 
 if __name__ == '__main__':
