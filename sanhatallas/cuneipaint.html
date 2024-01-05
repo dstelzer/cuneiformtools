@@ -3,9 +3,22 @@
 		<title>Cuneiform Painter ALPHA</title>
 		<script language="javascript" type="text/javascript" src="victor.min.js"></script> <!-- https://github.com/maxkueng/victor -->
 		<script language="javascript" type="text/javascript" src="cuneipaint.js"></script>
+		<style>
+			.flexcontainer{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+			input{
+				margin: 3px;
+			}
+			#outputpanel{
+				margin: 3px;
+			}
+		</style>
 	</head>
 	<body onload="setup();">
-		<p>
+		<p class="flexcontainer">
 			<input type="button" value="Stroke" onclick="btn_stroke();" />
 			<input type="button" value="Double" onclick="btn_double();" />
 			<input type="button" value="Hook" onclick="btn_hook();" />
@@ -16,6 +29,7 @@
 			<input type="button" value="Search!" onclick="btn_search();" id="searchbutton" disabled />
 			<span id="outputpanel"></span>
 		</p>
+		<p class="flexcontainer main">
 		<canvas id="paintcanvas" width="300" height="300"
 			style="border:1px solid black;"
 			onmousedown="cvs_down(event);"
@@ -24,6 +38,7 @@
 		></canvas>
 		<iframe id="preview" width="300" height="300" src="/rendersign?code=0&format=svg&scale=160" onload="resize_preview();">
 		</iframe>
+		</p>
 		
 		<p>
 		Site visits:
