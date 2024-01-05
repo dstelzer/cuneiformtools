@@ -37,9 +37,10 @@ function close_to_anchor(){
 	return anchor.distanceSq(cursor) <= THRESHOLD_SQUARED;
 }
 function close_to_hook(stroke){ // Check if within AABB, it's easier
-	var topleft = stroke.head;
-	var bottomright = stroke.tail;
-	return cursor.x >= topleft.x && cursor.x <= bottomright.x && cursor.y >= topleft.y && cursor.y <= bottomright.y;
+	var height = stroke.head.distance(stroke.tail);
+	var left = stroke.head.x - height/4;
+	var right = stroke.head.x + height/4;
+	return cursor.x >= left && cursor.x <= right && cursor.y >= stroke.head.y && cursor.y <= stroke.tail.y;
 }
 function close_to_stroke(stroke){
 	if(stroke.type == Style.HOOK) return close_to_hook(stroke);
@@ -84,8 +85,8 @@ function finalize_hook(){
 		height = 20;
 	}
 	
-	var head = Vec(center.x-width/2, center.y-height/2); // NW
-	var tail = Vec(center.x+width/2, center.y+height/2); // SE
+	var head = Vec(center.x, center.y-height/2); // NW
+	var tail = Vec(center.x, center.y+height/2); // SE
 	
 	strokes.push({type:tool, head:head.unfloat(), tail:tail.unfloat()});
 	anchored = false;
@@ -137,11 +138,17 @@ function draw_stroke(stroke){
 			var width = stroke.head.absDistanceX(stroke.tail);
 			var height = stroke.head.absDistanceY(stroke.tail);
 			var center = stroke.head.clone().mix(stroke.tail, 0.5); // Midpoint
-			if(width < height/2){ // Use the lower of the two dimensions
-				height = width*2;
-			}else{
+			
+			if(pending){ // If pending, use the actual width and height
+				if(width < height/2){ // Use the lower of the two dimensions
+					height = width*2;
+				}else{
+					width = height/2;
+				}
+			}else{ // Otherwise, it's just a vertical line
 				width = height/2;
 			}
+			
 			if(width < 10){ // Raise to the minimum if needed
 				width = 10;
 				height = 20;
