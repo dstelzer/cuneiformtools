@@ -1,0 +1,53 @@
+a, b, c, d = v, h, d, u
+e, f = d!, u!
+w = c
+x, y = seal wedges
+! = !
+
+- = [], crossing
+_ = [], not crossing
+~ = [], half distance
+: = {}, crossing
+; = {}, not crossing
+/ = {}, half distance
+. = diagonal stack {}T
+∅ = heads together
+| = flatten angle of diagonal
+>, < = small angle adjustments
+
+sa, sb, sc, s{} = small
+a, b, c = med
+A, B, C = big
+l, L = shorter/longer
+h, H = smaller/bigger head
+
+*() = precise scale
+>(), <() = precise rotation
+:(), -(), etc = precise spacing
+
+[], s[] = embed one sign in another
+' = reset pen position to top left
+
+TENU INVERTED OPPOSING TIMES CROSSING SQUARED OVER PLUS ROTATED
+
+Examples:
+
+:b-a = (hv)
+;b-a = {vh}
+a-b = [v{h0}]
+a-:b = [vh]
+Bc = (hd)
+c:d = (du)
+
+b::b-a-a-a-a = ({hh}[vvvv])
+c;d-;a-;a = {d(u[vv])}
+
+Algorithm:
+
+Replace ~ -, / :, remove | > <
+Divide first by _, enclose in a []
+Divide second by ;, enclose in a {}
+Enclose the rest with ()
+Convert a- to a_, divide as above
+Convert b: to b;, divide as above
+Enclose the rest with ()
