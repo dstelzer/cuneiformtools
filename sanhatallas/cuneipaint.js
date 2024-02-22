@@ -349,10 +349,11 @@ function resize_preview(){ // Change the size of the preview element, called by 
 // "Search" button to search for the parsed results
 function btn_search(){
 	var code = encodeURIComponent(parsed);
-	var params = new URLSearchParams(document.location.search);
+	var params = new URLSearchParams(document.location.search); // Check if we have an expkey on this page
 	var url = "/search?code="+ code +"&sort=complex";
 	if(params.has("expkey")){ // Make sure the experiment key is preserved
 		url = url +"&expkey="+ params.get("expkey");
 	}
-	document.location = url; // TODO: new tab instead?
+//	document.location = url; // TODO: new tab instead?
+	window.open(url, "_blank");
 }
