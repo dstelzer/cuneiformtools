@@ -1,5 +1,5 @@
 from collections import namedtuple
-from math import sin, cos
+from math import sin, cos, sqrt
 
 XY = namedtuple('XY', 'x y')
 
@@ -17,3 +17,16 @@ def separates(a, b, c, d): return winding(c, d, a) != winding(c, d, b)
 def intersects(a, b, c, d): return separates(a, b, c, d) and separates(c, d, a, b)
 
 def rotate(a, theta): return XY(a.x*cos(theta)-a.y*sin(theta), a.x*sin(theta)+a.y*cos(theta)) # Just apply the two-dimensional rotation matrix "longhand" instead of involving matrix multiplication
+
+def magnitude(tail, head):
+	vec = XY(head.x-tail.x, head.y-tail.y)
+	return sqrt(vec.x**2 + vec.y**2)
+def direction(tail, head):
+	vec = XY(head.x-tail.x, head.y-tail.y)
+	mag = magnitude(tail, head)
+	return XY(vec.x/mag, vec.y/mag)
+
+def distalong(tail, head, dist): # Return a point `dist` units along the segment from `tail` to `head`
+	dir = direction(tail, head)
+	vec = XY(dir.x*dist, dir.y*dist)
+	return XY(tail.x+vec.x, tail.y+vec.y)

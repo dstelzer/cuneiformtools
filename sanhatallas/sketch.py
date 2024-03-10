@@ -4,9 +4,9 @@ from enum import Enum, auto
 from statistics import mean
 
 try:
-	from geometry import XY, intersects, rotate
+	from geometry import XY, intersects, rotate, magnitude, distalong
 except ImportError:
-	from .geometry import XY, intersects, rotate
+	from .geometry import XY, intersects, rotate, magnitude, distalong
 
 Interval = namedtuple('Interval', 'low high')
 TaggedInterval = namedtuple('TaggedInterval', 'low high ref')
@@ -42,15 +42,28 @@ class Orient(Enum):
 
 class Line:
 	def __init__(self, head, tail, tolerance=0):
-		self.head = head
-		self.tail = tail
+		# First, we want to adjust its length
+		# We want to cut `tolerance` off each end, to a minimum total length of `tolerance`
+		magn = magnitude(tail, head)
+		midpoint = magn / 2 # The midpoint of the input stroke
+		magn -= 2*tolerance
+		if magn < tolerance: magn = tolerance
+		# `magn` is now the new length of the stroke
+		# So move half `magn` in each direction from `midpoint`
+		newtail = distalong(tail, head, midpoint-magn/2)
+		newhead = distalong(tail, head, midpoint+magn/2)
 		
+		# Now the endpoints are determined
+		self.head = newhead
+		self.tail = newtail
+		
+		# Calculate its AABB
 		xlow = min(head.x, tail.x)
 		xhigh = max(head.x, tail.x)
 		ylow = min(head.y, tail.y)
 		yhigh = max(head.y, tail.y)
 		
-		# Ensure dx and dy are both >= tolerance, to avoid issues with some user error (two horizontal lines next to each other being seen as on different vertical levels)
+		# Then ensure dx and dy are both >= `tolerance`, to avoid issues with some user error (two horizontal lines next to each other being seen as on different vertical levels)
 		dx = xhigh - xlow
 		dy = yhigh - ylow
 		if dx < tolerance:
@@ -62,6 +75,7 @@ class Line:
 		
 		self.aabb = AABB(xlow, ylow, xhigh, yhigh)
 		
+		# And finally mark down its orientation so we don't have to calculate it later
 		self.angle = atan2(tail.y-head.y, tail.x-head.x)
 		self.orient = Orient.from_angle(self.angle)
 	
@@ -75,14 +89,14 @@ class Line:
 		# See notes above for how this works
 		return intersects(self.head, self.tail, other.head, other.tail)
 	
-	def strokify(self): # Convert into a stroke object
+	def strokify(self): # Convert into a Stroke object
 		if self.orient == Orient.HORIZ: return Horizontal()
 		elif self.orient == Orient.VERT: return Vertical()
 		elif self.orient == Orient.UPDIAG: return Upward()
 		elif self.orient == Orient.DOWNDIAG: return Downward()
 		else: raise ValueError(self.orient)
 	
-	def rotated(self, theta): # Create a new Line that's this but rotated
+	def rotated(self, theta): # Create a new Line that's this but rotated by `theta` radians
 		cls = type(self) # Make sure we preserve the proper subclass
 		return cls(rotate(self.head, theta), rotate(self.tail, theta))
 
