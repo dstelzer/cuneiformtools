@@ -76,8 +76,8 @@ def record_response(subject, index, lst, system, result):
 def record_survey(subject, result):
 	record(subject, 'SURVEY', result)
 
-def record_search(subject, code, regex, sort):
-	record(subject, 'SEARCH', {'code':code, 'regex':regex, 'sort':sort})
+def record_search(subject, code, regex, mode, sort):
+	record(subject, 'SEARCH', {'code':code, 'regex':regex, 'mode':mode, 'sort':sort})
 
 def record_error(subject, type, details):
 	record(subject, 'ERROR', {'type':type, 'details':details})

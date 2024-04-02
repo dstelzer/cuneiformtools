@@ -6,9 +6,16 @@ import re
 try:
 	from parser import parse
 	from layout import Spacer, Ruling, Fill
+	from elements import ModeFlag
 except ImportError:
 	from .parser import parse
 	from .layout import Spacer, Ruling, Fill
+	from .elements import ModeFlag
+
+norm_modes = { # Which normalization modes are currently supported
+	'normal' : frozenset({}),
+	'gottstein' : frozenset({ModeFlag.GOTTSTEIN}),
+}
 
 def dict_list_factory(): return defaultdict(list)
 
@@ -21,10 +28,12 @@ class DatabaseEntry:
 		self.names = set() # names to reference this sign by
 	
 	def finalize(self):
+		self.functional = {}
 		try:
-			self.functional = [parse(f).functional_form() for f in self.forms]
+			for mk, mv in norm_modes.items(): # Make a separate entry for each normalization mode
+				self.functional[mk] = [parse(f).functional_form(mv) for f in self.forms]
 		except ValueError:
-			print(f'(Error while handling {self.ident})')
+			print(f'(Error while handling {self.ident} in {mk} mode)')
 			raise
 		self.names.add('HZL'+str(self.ident)) # Fallback name in case nothing else is provided
 	
@@ -33,7 +42,9 @@ class DatabaseEntry:
 	def sort_complex(self):
 		if not self.functional: raise ValueError('No forms found', self.name)
 		return self.functional[0].complexity()
-	def sort_usage(self): # `not` because we want signs which *do* have an entry for a specific language to come first in the sorting
+	def sort_usage(self):
+		# `not` because we want signs which *do* have an entry for a specific language to come first in the sorting
+		# So this is equivalent to 0 if there is an entry, 1 if there's not, and 0 < 1
 		return (
 			not self.langs['HIT'],
 			self.langs['HIT'][0] if self.langs['HIT'] else '',
@@ -47,11 +58,11 @@ class DatabaseEntry:
 			self.langs['SUM'][0] if self.langs['SUM'] else '',
 		)
 	
-	def find_matches(self, part=None, regex=None):
+	def find_matches(self, part=None, regex=None, mode='normal'):
 		if regex is not None:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
-		for i, (pres, func) in enumerate(zip(self.forms, self.functional)):
+		for i, (pres, func) in enumerate(zip(self.forms, self.functional[mode])):
 			if part is None:
 				ident = f'{self.ident}/{i}' if i else str(self.ident)
 				yield ident, pres, ()
@@ -136,10 +147,10 @@ class Database:
 		self.sorted['complex'] = sorted(self.data, key=DatabaseEntry.sort_complex)
 		self.sorted['usage'] = sorted(self.data, key=DatabaseEntry.sort_usage)
 	
-	def lookup(self, part, regex):
+	def lookup(self, part, regex, mode='normal'):
 		func = part.functional_form()
 		for entry in self.data:
-			yield from entry.find_matches(func, regex)
+			yield from entry.find_matches(func, regex, mode)
 	
 	def yield_all(self): # TODO: probably not needed now due to wildcards
 		for entry in self.data:
@@ -197,7 +208,7 @@ class Database:
 						unit = self.clean_name(unit)
 						if unit in self.expansions:
 							for subunit in self.expansions[unit]:
-								if subunit not in self.name_lookup: raise ValueError('Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
+								if subunit not in self.name_lookup: raise ValueError(f'Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
 								row.append(self.name_lookup[subunit])
 						else:
 							row.append(self.name_to_glyph(unit))
@@ -209,8 +220,9 @@ class Database:
 		return results
 	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part=None, regex=None, sort='hzl'):
-		func = part.functional_form() if part else None
+	def lookup_as_table(self, part=None, regex=None, mode='normal', sort='hzl'):
+		
+		func = part.functional_form(norm_modes[mode]) if part else None
 		rows = [
 			['<tr id="hzl"><th scope="row">HZL Number</th>'],
 			['<tr id="comp"><th scope="row">Composition</th>'],
@@ -226,7 +238,7 @@ class Database:
 		matches = 0
 		
 		for entry in self.sorted[sort]:
-			matching_forms = list(entry.find_matches(func, regex))
+			matching_forms = list(entry.find_matches(func, regex, mode))
 			if matching_forms:
 				matches += 1
 				colspan = len(matching_forms)
@@ -270,5 +282,5 @@ if __name__ == '__main__':
 	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
 	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))
 	while True:
-		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: '))):
+		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), input('Mode: ')):
 			print(name, code, match)

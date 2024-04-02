@@ -3,6 +3,9 @@ from math import sqrt, inf
 
 empty = frozenset()
 
+class ModeFlag(Enum): # Special flags to pass to certain algorithms
+	GOTTSTEIN = 'g' # Treat downward diagonals and Winkelhakens the same when searching - specifically, make them all act as Winkelhakens, since those are the ones that have some special rules for normalization
+
 class Modifier(Enum): # Modifiers that can be applied to strokes
 	HEADSHORT = "'"
 	TAILSHORT = '"'
@@ -297,10 +300,14 @@ class DownDiag(Stroke):
 		rend.draw_downward(*self.pos, *self.dims, self.mods)
 	
 	def functional_form(self, special=empty):
+		# This is where the GOTTSTEIN flag matters - it replaces downward diagonals with Winkelhakens
+		cls = Winkelhaken if ModeFlag.GOTTSTEIN in special else DownDiag
+		# (This wasn't intentional, because I didn't know about Gottstein's encoding when I was building the original system, but it's kind of cute that the code for a Winkelhaken is `c` just like Gottstein's code for a down diag)
+		
 		# There's no diagonal stacking so we use VStack instead, since that becomes a "downward diagonal stack" when tenu
-		if Modifier.DOUBLE in self.mods: return VStack([DownDiag(self.ident), DownDiag(self.ident)])
-		elif Modifier.TRIPLE in self.mods: return VStack([DownDiag(self.ident), DownDiag(self.ident), DownDiag(self.ident)])
-		else: return DownDiag(self.ident)
+		if Modifier.DOUBLE in self.mods: return VStack([cls(self.ident), cls(self.ident)])
+		elif Modifier.TRIPLE in self.mods: return VStack([cls(self.ident), cls(self.ident), cls(self.ident)])
+		else: return cls(self.ident)
 
 class Winkelhaken(Stroke):
 	def _sigil(self): return 'c'

@@ -24,6 +24,10 @@
 				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>
 				<option value="usage" {{ 'selected' if sort=='usage' else '' }}>Usage</option>
 			</select></label>
+			<label>Winkelhaken are: <select name="mode" id="mode">
+				<option value="gottstein" {{ 'selected' if mode=='gottstein' else '' }}>Same as diagonals</option>
+				<option value="normal" {{ 'selected' if mode=='normal' else '' }}>Different from diagonals</option>
+			</select></label>
 			{% if expkey != '' %}
 			<input type="hidden" name="expkey" value="{{expkey}}" />
 			{% endif %}

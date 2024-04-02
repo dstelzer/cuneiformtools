@@ -9,7 +9,7 @@ from werkzeug.wsgi import FileWrapper
 
 from .render import *
 from .parser import parse, parse_sequence
-from .database import Database
+from .database import Database, norm_modes
 from .layout import Layout
 from . import experiment
 
@@ -63,9 +63,9 @@ db.load_expansions('./hantatallas/data/replacements.dat')
 db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
-def do_searching(code, regex, sort, expkey=None):
-	if expkey: experiment.record_search(expkey, code, regex, sort)
-
+def do_searching(code, regex, mode, sort, expkey=None):
+	if expkey: experiment.record_search(expkey, code, regex, mode, sort)
+	
 	log = StringIO()
 	if code.strip():
 		try:
@@ -76,7 +76,7 @@ def do_searching(code, regex, sort, expkey=None):
 			return -1, '<pre>'+log.getvalue()+'</pre>'
 	else:
 		piece = None
-
+	
 	if regex.strip():
 		try:
 			recomp = re.compile(regex.strip())
@@ -85,8 +85,15 @@ def do_searching(code, regex, sort, expkey=None):
 			return -1, f'<pre>Regex error: {e.args[0]}</pre>'
 	else:
 		recomp = None
-
-	return db.lookup_as_table(piece, recomp, sort)
+	
+	if mode.strip():
+		newmode = mode.strip()
+		if newmode not in norm_modes:
+			return -1, f'<pre>Bad norm mode: {newmode}</pre>'
+	else:
+		newmode = 'normal'
+	
+	return db.lookup_as_table(piece, recomp, newmode, sort)
 
 def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
 	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.
