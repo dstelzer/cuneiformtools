@@ -76,6 +76,10 @@ def enclose_first(data):
 		split_dash(data)
 	])
 
+def split_others(data):
+	horizontals = []
+	verticals = []
+
 def split_dash(data):
 	d2 = replace_ab_ac(data, 'a', '-', '_')
 	lists = split_by(d2, '_')

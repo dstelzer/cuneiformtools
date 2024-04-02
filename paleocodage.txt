@@ -48,6 +48,6 @@ Replace ~ -, / :, remove | > <
 Divide first by _, enclose in a []
 Divide second by ;, enclose in a {}
 Enclose the rest with ()
-Convert a- to a_, divide as above
-Convert b: to b;, divide as above
+Convert a- to a_, divide as above // THIS PART IS WRONG
+Convert b: to b;, divide as above // THIS PART IS WRONG
 Enclose the rest with ()
