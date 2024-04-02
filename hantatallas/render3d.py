@@ -31,6 +31,7 @@ class ScadRenderer(Renderer):
 			self.record('union(){')
 			self.depth += 1
 		elif shape == 'seal': # As above, except wrapped around into a ring
+			self.fullwidth += self.scale/3 # Add an extra margin on the right
 			self.record('use <../3dmodel/cylinder.scad>\n')
 			self.record(f'cylindrify({self.fullwidth}, {self.fullheight}, 1.5, 100)') # TODO PARAMETRIZE third is height of stamp fourth is number of segments in ring
 			# A couple transforms to set this into the position cylindrify wants
@@ -47,6 +48,7 @@ class ScadRenderer(Renderer):
 			self.save_transforms()
 			self.record('union(){')
 			self.depth += 1
+			self.record(f'vrule({self.fullwidth-self.scale/6}, {self.fullheight}, {self.scale/20});') # Experiment: put a ridge along one side to mark the start/end
 		elif shape == 'tablet': # The imprints will be *negatives*
 			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
 			self.record('difference(){') # We're going to subtract the styli from the clay

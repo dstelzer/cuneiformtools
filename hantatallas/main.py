@@ -51,7 +51,8 @@ def test_layout():
 	while True:
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
-		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=0.5, shape='seal').show()
+		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='seal').show()
+	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='tablet').show()
 
 def test_uga():
 	db = Database()
@@ -72,7 +73,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_layout()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

@@ -76,6 +76,13 @@ module hrule(y, w, h=0.05){
 			cube([w, h, h]);
 }
 
+module vrule(x, h, w=0.05){
+	s = w*sqrt(2)/2;
+	translate([x, 0, 0]) // TODO why 0 and not -s for the third?
+		rotate([0, 45, 0])
+			cube([w, h, w]);
+}
+
 module hatcharea(x, y, w, h){
 	// TODO
 }
