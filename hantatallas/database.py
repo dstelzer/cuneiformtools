@@ -70,11 +70,6 @@ class DatabaseEntry:
 				ident = f'{self.ident}/{i}' if i else str(self.ident)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
-	
-	def yield_all(self): # TODO not needed now, find_matches with no params does this
-		for i, pres in enumerate(self.forms):
-			ident = f'{self.ident}/{i}' if i else str(self.ident)
-			yield ident, pres, ()
 
 class Database:
 	def __init__(self):
@@ -151,10 +146,6 @@ class Database:
 		func = part.functional_form()
 		for entry in self.data:
 			yield from entry.find_matches(func, regex, mode)
-	
-	def yield_all(self): # TODO: probably not needed now due to wildcards
-		for entry in self.data:
-			yield from entry.yield_all()
 	
 	def name_to_glyph(self, name):
 		name = self.clean_name(name)
