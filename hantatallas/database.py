@@ -40,8 +40,8 @@ class DatabaseEntry:
 	def sort_hzl(self):
 		return self.ident.zfill(3)
 	def sort_complex(self):
-		if not self.functional: raise ValueError('No forms found', self.name)
-		return self.functional[0].complexity()
+		if not self.functional['normal']: raise ValueError('No forms found', self.name)
+		return self.functional['normal'][0].complexity()
 	def sort_usage(self):
 		# `not` because we want signs which *do* have an entry for a specific language to come first in the sorting
 		# So this is equivalent to 0 if there is an entry, 1 if there's not, and 0 < 1
