@@ -172,9 +172,12 @@ class LineGroup:
 	def untenu(self): # Un-tenu this component if it only contains diagonals
 		theta = -self.overall_angle()
 		new = self.rotated(theta)
-		return Tenu(new.parse())
+		parsed = new.parse(already_rotated=True)
+		if parsed is None: # Don't go into an infinite recursion!
+			return None
+		return Tenu(parsed)
 	
-	def parse(self):
+	def parse(self, already_rotated=False):
 		# First, check for a single stroke (or zero) as our base case
 		if len(self.children) == 1:
 			return self.children[0].strokify()
@@ -183,7 +186,9 @@ class LineGroup:
 		
 		# First, check for tenu
 		if all(c.orient.is_diagonal() for c in self.children):
-			return self.untenu()
+			if already_rotated: return None # Avoid infinite regress - it's possible that no rotation will make this work!
+			straightened = self.untenu()
+			if straightened is not None: return straightened
 		
 		# Second, check for horizontal stack
 		hdiv = self.try_to_divide(Orient.HORIZ)
@@ -205,6 +210,13 @@ class LineGroup:
 			return Superpose( [LineGroup(g).parse() for g in cdiv] )
 		
 		# That last one should be guaranteed to succeed. If it doesn't, then something has gone very wrong.
+		# This can happen for certain pathological arrangements of strokes, like this:
+		# --- |
+		#     |
+		# |   |
+		# |
+		# | ---
+		# But those never happen in actual cuneiform afaik
 		raise ValueError('Not able to divide!', self.children)
 
 class Element:
