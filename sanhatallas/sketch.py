@@ -167,6 +167,8 @@ class LineGroup:
 			while theta >= pi/4: theta -= pi/2
 			return theta
 		angles = [normalize(c.angle) for c in self.children] # Get angles of all children
+	#	avg = mean(angles)
+	#	if avg < 0: avg += pi/4 # Ensure it's always a counter-clockwise rotation, since that's what the TENU modifier does; a modification of pi/4 shouldn't change how well `untenu` works since our goal is to make it _ortho_normal
 		return mean(angles)
 	
 	def untenu(self): # Un-tenu this component if it only contains diagonals
