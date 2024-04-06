@@ -17,7 +17,9 @@
 		<p>
 			{% if system == 'Z' %}
 			<a href="/download/Zeichenlexikon.pdf" target="_blank">Hethitisches Zeichenlexikon</a>
-			{% else %}
+			{% elif system == 'S' %}
+			<a href="/cuneipaint.html?expkey={{expkey}}" target="_blank">Sanhatallas Search System</a>
+			{% else %} <!-- system=='H' -->
 			<a href="/canvas.html?expkey={{expkey}}" target="_blank">Hantatallas Search System</a>
 			{% endif %}
 		</p>
