@@ -54,8 +54,8 @@ class Line:
 		newhead = distalong(tail, head, midpoint+magn/2)
 		
 		# Now the endpoints are determined
-		self.head = newhead
-		self.tail = newtail
+		self.head = head = newhead
+		self.tail = tail = newtail
 		
 		# Calculate its AABB
 		xlow = min(head.x, tail.x)

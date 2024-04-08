@@ -38,7 +38,7 @@ while True:
 				progress = XY(*pygame.mouse.get_pos())
 			else:
 				new = XY(*pygame.mouse.get_pos())
-				lines.append(mode(progress, new))
+				lines.append(mode(progress, new, tolerance=10))
 				progress = None
 		elif event.type == KEYDOWN:
 			if event.key == K_RETURN:
