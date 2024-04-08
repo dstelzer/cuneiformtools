@@ -316,7 +316,14 @@ function btn_submit(){
 		var resp = JSON.parse(this.responseText);
 		handle_server_response(resp);
 	}
-	xhttp.open("GET", "/cuneipaint_parse?tolerance=10&code="+code);
+	
+	url = "/cuneipaint_parse?tolerance=10&code="+code;
+	var params = new URLSearchParams(document.location.search); // Check if we have an expkey on this page
+	if(params.has("expkey")){ // Make sure the experiment key is preserved
+		url = url +"&expkey="+ params.get("expkey");
+	}
+	
+	xhttp.open("GET", url);
 	xhttp.send();
 }
 

@@ -79,6 +79,11 @@ def record_survey(subject, result):
 def record_search(subject, code, regex, mode, sort):
 	record(subject, 'SEARCH', {'code':code, 'regex':regex, 'mode':mode, 'sort':sort})
 
+def record_drawing(subject, drawing, tolerance, result):
+	drawing = json.loads(drawing)
+	result = json.loads(result)
+	record(subject, 'DRAW', {'input':drawing, 'tolerance':tolerance, 'output':result})
+
 def record_error(subject, type, details):
 	record(subject, 'ERROR', {'type':type, 'details':details})
 

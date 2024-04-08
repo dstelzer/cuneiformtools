@@ -5,7 +5,7 @@ from werkzeug.wsgi import FileWrapper
 
 from dubsar.consolidated import DubSar
 from hantatallas.web_version import do_rendering, do_searching, do_scribing
-from hantatallas.experiment import choose_image, get_sequence_length, record_stimulus, record_response, record_survey
+from hantatallas.experiment import choose_image, get_sequence_length, record_stimulus, record_response, record_survey, record_drawing
 from sanhatallas.cuneipaint import paint_process
 
 app = Flask(__name__)
@@ -137,6 +137,9 @@ def do_experiment_give_survey():
 
 @app.route('/cuneipaint_parse')
 def do_cuneipaint_parse():
+	expkey = request.args.get('expkey', '', type=str)
 	code = request.args.get('code', '', type=str)
 	tolerance = request.args.get('tolerance', 0, type=int)
-	return paint_process(code, tolerance)
+	result = paint_process(code, tolerance)
+	if expkey: record_drawing(expkey, code, tolerance, result)
+	return result
