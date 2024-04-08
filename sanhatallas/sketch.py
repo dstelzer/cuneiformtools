@@ -109,6 +109,11 @@ class DoubleLine(Line): # A normal stroke with a double head
 		stroke = super().strokify()
 		return DoubleMod(stroke)
 
+class TripleLine(Line): # As above
+	def strokify(self):
+		stroke = super().strokify()
+		return TripleMod(stroke)
+
 class HookLine(Line): # For Winkelhaken
 	def strokify(self):
 		return Winkelhaken()
@@ -167,13 +172,21 @@ class LineGroup:
 			while theta >= pi/4: theta -= pi/2
 			return theta
 		angles = [normalize(c.angle) for c in self.children] # Get angles of all children
-	#	avg = mean(angles)
-	#	if avg < 0: avg += pi/4 # Ensure it's always a counter-clockwise rotation, since that's what the TENU modifier does; a modification of pi/4 shouldn't change how well `untenu` works since our goal is to make it _ortho_normal
-		return mean(angles)
+		avg = mean(angles)
+	#	if avg > 0: avg -= pi/2 # Ensure it's always a counter-clockwise rotation, since that's what the TENU modifier does; a modification of pi/2 shouldn't change how well `untenu` works since our goal is to make it _ortho_normal
+		# TODO why isn't this necessary? It actually breaks things when we draw something like this
+		# \  /
+		#  \ 
+		#   \
+		# Investigate this!
+		return avg
 	
 	def untenu(self): # Un-tenu this component if it only contains diagonals
+		# Returns None if this isn't possible for one reason or another
 		theta = -self.overall_angle()
 		new = self.rotated(theta)
+		if any(isinstance(c, HookLine) or c.orient.is_diagonal() for c in new.children): # Should not have any diagonal strokes or hakens inside a Tenu element!
+			return None
 		parsed = new.parse(already_rotated=True)
 		if parsed is None: # Don't go into an infinite recursion!
 			return None
@@ -198,7 +211,7 @@ class LineGroup:
 		vdiv = self.try_to_divide(Orient.VERT)
 		
 		if len(hdiv) > 1 and len(vdiv) > 1: # We could divide either way: need a heuristic to decide!
-			pass # TODO
+			pass # TODO - currently this results in the heuristic of "when in doubt, divide horizontally"
 		
 		if len(hdiv) > 1: # We can divide horizontally!
 			return HStack( [LineGroup(g).parse() for g in hdiv] )
@@ -266,3 +279,5 @@ class Tenu(Modifier):
 	def sigil(self): return 'TE' # Make all tenus larger as well as tilted
 class DoubleMod(StrokeMod):
 	def sigil(self): return '2'
+class TripleMod(StrokeMod):
+	def sigil(self): return '3'

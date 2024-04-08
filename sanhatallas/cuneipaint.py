@@ -16,6 +16,7 @@ if __name__ == '__main__':
 classes = {
 	'STROKE' : Line,
 	'DOUBLE' : DoubleLine,
+	'TRIPLE' : TripleLine, # Never actually produced yet, but future-proofing
 	'HOOK' : HookLine,
 	'DIVIDE' : Divider,
 }
