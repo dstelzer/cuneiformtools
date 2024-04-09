@@ -308,21 +308,22 @@ function btn_clear(){
 // "Submit" button to parse the results
 function btn_submit(){
 	data = JSON.stringify(strokes); // The raw data we're sending
-	console.log(data);
+	console.log("send: "+data);
 	code = encodeURIComponent(data);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload = function(){
-		console.log(this.responseText);
+		console.log("resp: " + this.responseText);
 		var resp = JSON.parse(this.responseText);
 		handle_server_response(resp);
 	}
 	
-	url = "/cuneipaint_parse?tolerance=10&code="+code;
+	var url = "/cuneipaint_parse?tolerance=10&code="+code;
 	var params = new URLSearchParams(document.location.search); // Check if we have an expkey on this page
 	if(params.has("expkey")){ // Make sure the experiment key is preserved
 		url = url +"&expkey="+ params.get("expkey");
 	}
 	
+	console.log("url: " + url);
 	xhttp.open("GET", url);
 	xhttp.send();
 }

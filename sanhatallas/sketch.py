@@ -169,7 +169,10 @@ class LineGroup:
 	
 	def overall_angle(self): # Determine what angle this whole unit appears to be at
 		def normalize(theta): # Bring all angles to the range [-pi/4, pi/4)
-			while theta >= pi/4: theta -= pi/2
+	#		while theta >= pi/4: theta -= pi/2
+		#	print('Theta', theta, end=' ')
+			while theta > 0: theta -= pi/2
+		#	print('normalized to', theta)
 			return theta
 		angles = [normalize(c.angle) for c in self.children] # Get angles of all children
 		avg = mean(angles)
@@ -179,6 +182,7 @@ class LineGroup:
 		#  \ 
 		#   \
 		# Investigate this!
+	#	print('Avg', avg)
 		return avg
 	
 	def untenu(self): # Un-tenu this component if it only contains diagonals
