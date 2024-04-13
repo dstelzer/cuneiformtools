@@ -1047,7 +1047,7 @@ class InkRenderer(GraphicRenderer):
 		# We do a Cartesian product here, which might end up becoming somewhat expensive, but it hasn't become a problem yet
 		for hs, vs in ((ahs, avs), (ths, tvs)):
 			for v in vs:
-				v_epsilon = v.dims[0] / 2
+				v_epsilon = 1/32
 				v_center = v.pos[0] + v.dims[0] / 2
 				def collision(x, y):
 					return v_center-v_epsilon < x < v_center+v_epsilon and v.pos[1] <= y <= v.pos[1]+v.dims[1]
@@ -1059,7 +1059,7 @@ class InkRenderer(GraphicRenderer):
 			
 			# As above but inverted
 			for h in hs:
-				h_epsilon = h.dims[1] / 2
+				h_epsilon = 1/32
 				h_center = h.pos[1] + h.dims[1] / 2
 				def collision(y, x): # NOTE INVERSION
 					return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
@@ -1068,6 +1068,27 @@ class InkRenderer(GraphicRenderer):
 					v_center = v.pos[0] + v.dims[0] / 2
 					if collision(v.pos[1], v_center-v_epsilon) and collision(v.pos[1], v_center+v_epsilon):
 						v.mods.add(Modifier.INTERNAL_HEADLESS)
+			
+			# Now we see if we beheaded a stroke that's right after another stroke in the same direction—if so we need to ensure the head is drawn, or else it won't be visible at all
+			epsilon2 = (1/12) ** 2 # Universal one this time since we're comparing a single point for each stroke
+			def close(first, second):
+				return (first[0]-second[0])**2 + (first[1]-second[1])**2 < epsilon2
+			
+			endpts = {(v.pos[0]+v.dims[0]/2, v.pos[1]+v.dims[1]) for v in vs} # Bottom center of each vertical
+			for v in vs:
+				head = (v.pos[0]+v.dims[0]/2, v.pos[1]) # Top center
+				for tail in endpts:
+					if close(head, tail):
+						v.mods -= {Modifier.INTERNAL_HEADLESS}
+						break
+			
+			endpts = {(h.pos[0]+h.dims[0], h.pos[1]+h.dims[1]/2) for h in hs} # Center right of each horizontal
+			for h in hs:
+				head = (h.pos[0], h.pos[1]+h.dims[1]/2) # Center left
+				for tail in endpts:
+					if close(head, tail):
+						h.mods -= {Modifier.INTERNAL_HEADLESS}
+						break
 		
 		# Now, we go through and consolidate groups of adjacent parallel strokes
 		hstacks = [node for node in tree.traverse() if isinstance(node, HStack)]
