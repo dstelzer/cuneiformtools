@@ -16,6 +16,7 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	INVERT = '?'
 	DAMAGE = '#'
 	INTERNAL_DIAGONAL = '_D' # As above
+	INTERNAL_HEADLESS = '_H' # As above
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0

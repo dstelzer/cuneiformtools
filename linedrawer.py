@@ -123,6 +123,29 @@ line 283 162
 stroke
 '''
 
+instructions_ir = '''
+width 5
+# upward
+color 0 0 1 1
+move 35 244
+line 258 137
+stroke
+# downward
+color 0 0 0 0.33
+move 28 21
+line 259 122
+stroke
+# vertical
+color 1 0 0 1
+move 71 137
+line 71 290
+move 140 136
+line 141 289
+move 201 129
+line 201 283
+stroke
+'''
+
 buffer = BytesIO()
 surf = cairo.PDFSurface(buffer, WIDTH, HEIGHT)
 ctx = cairo.Context(surf)
@@ -152,7 +175,7 @@ def parse_line(line):
 	else:
 		raise ValueError(cmd)
 
-for line in (instructions_all+instructions_tenu).split('\n'):
+for line in (instructions_all+instructions_ir).split('\n'):
 	parse_line(line)
 
 surf.show_page()

@@ -23,7 +23,7 @@ class DatabaseEntry:
 	def __init__(self):
 		self.ident = None # internal ID, must be unique
 		self.langs = defaultdict(list) # lang -> [reading]
-		self.forms = [] # [Canvas]
+		self.forms = [] # [code]
 		self.notes = defaultdict(dict_list_factory) # lang -> name -> [meaning]
 		self.names = set() # names to reference this sign by
 	

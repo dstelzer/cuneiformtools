@@ -10,10 +10,10 @@ from PIL.ImageColor import getrgb
 
 # It's hard to know if we need to import these with relative paths or absolute ones, so we just try both
 try:
-	from elements import Modifier
+	from elements import Modifier, HStack, VStack, Horizontal, Vertical
 	from layout import Spacer
 except ImportError:
-	from .elements import Modifier
+	from .elements import Modifier, HStack, VStack, Horizontal, Vertical
 	from .layout import Spacer
 
 DRAW_BOXES = False
@@ -42,7 +42,7 @@ class Renderer: # A very abstract base class that doesn't do much of anything
 		self.fullheight = int(height + margin*2)
 	
 	def adjust_tree(self, tree): # Make any necessary adjustments to the tree before drawing. This is the renderer's chance to adjust the size and positions of strokes if necessary.
-		pass
+		return tree
 	
 	def hatch(self, x, y, w, h, highlight=False): # Draw a hatched pattern over a rectangle - the algorithm is designed so that adjacent or overlapping rectangles will always line up their hatching properly
 		raise NotImplementedError()
@@ -207,14 +207,14 @@ class Renderer: # A very abstract base class that doesn't do much of anything
 		root.propagate_dimensions()
 		root.apply_highlighting(highlight)
 		rend = cls(int(root.dims[0]*scale), int(root.dims[1]*scale), scale=scale, *args, **kwargs)
-		rend.adjust_tree(root)
+		root = rend.adjust_tree(root)
 		root.draw(rend)
 		return rend
 	
 	def render_sign_at(self, sign, x, y):
 		self.save_transforms()
 		self.translate(x, y)
-		self.adjust_tree(sign)
+		sign = self.adjust_tree(sign)
 		sign.draw(self)
 		self.untransform()
 	
@@ -997,7 +997,221 @@ class LinearRenderer(GraphicRenderer):
 		c.restore()
 	'''
 
-if __name__ == '__main__':
+class InkRenderer(GraphicRenderer):
+	HEAD_SEPARATION = 1/3 # The maximum distance multiple heads can be separated by
+	
+	class MultiStroke:
+		def __init__(self, x, y, w, h, n, mods):
+			self.x = x
+			self.y = y
+			self.w = w
+			self.h = h
+			self.n = n
+			self.mods = mods
+		def heads(self):
+			if Modifier.DOUBLE in self.mods:
+				return 2
+			elif Modifier.TRIPLE in self.mods:
+				return 3
+			else:
+				return 1
+	
+	class MultiHoriz(MultiStroke):
+		def draw(self, rend): # Modified from Renderer.draw_horizontal
+			rend.draw_potential_damage(self.x, self.y, self.w, self.h, self.mods)
+			rend.save_transforms()
+			rend.rotate(-pi/2)
+			rend.draw_general_mod(-self.y-self.h, self.x, self.h, self.w, self.heads(), self.n, self.mods)
+			rend.untransform()
+	class MultiVert(MultiStroke):
+		def draw(self, rend):
+			rend.draw_potential_damage(self.x, self.y, self.w, self.h, self.mods)
+			rend.draw_general_mod(self.x, self.y, self.w, self.h, self.heads(), self.n, self.mods)
+	
+	def adjust_tree(self, tree): # This one actually does something here!
+		# tree = tree.copy() TODO HOW TO COPY TREES
+		
+		hs = [node for node in tree.traverse() if isinstance(node, Horizontal)]
+		vs = [node for node in tree.traverse() if isinstance(node, Vertical)]
+		
+		# We do a Cartesian product here, which might end up becoming somewhat expensive, but it hasn't become a problem yet
+		for v in vs:
+			v_epsilon = v.dims[0] / 2
+			v_center = v.pos[0] + v.dims[0] / 2
+			def collision(x, y):
+				return v_center-v_epsilon < x < v_center+v_epsilon and v.pos[1] <= y <= v.pos[1]+v.dims[1]
+			for h in hs:
+				h_epsilon = h.dims[1] / 2
+				h_center = h.pos[1] + h.dims[1] / 2
+				if collision(h.pos[0], h_center-h_epsilon) and collision(h.pos[0], h_center+h_epsilon):
+					h.mods.add(Modifier.INTERNAL_HEADLESS)
+		
+		# As above but inverted
+		for h in hs:
+			h_epsilon = h.dims[1] / 2
+			h_center = h.pos[1] + h.dims[1] / 2
+			def collision(y, x): # NOTE INVERSION
+				return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
+			for v in vs:
+				v_epsilon = v.dims[0] / 2
+				v_center = v.pos[0] + v.dims[0] / 2
+				if collision(v.pos[1], v_center-v_epsilon) and collision(v.pos[1], v_center+v_epsilon):
+					v.mods.add(Modifier.INTERNAL_HEADLESS)
+		
+		# Now, we go through and consolidate groups of adjacent parallel strokes
+		hstacks = [node for node in tree.traverse() if isinstance(node, HStack)]
+		vstacks = [node for node in tree.traverse() if isinstance(node, VStack)]
+		
+		for hstack in hstacks:
+	#		print('Parsing hstack')
+			new = []
+			current = None
+			for child in hstack.contents:
+				if isinstance(child, Vertical):
+	#				print('\tFound vertical')
+					if current is None:
+						current = self.MultiVert(*child.pos, *child.dims, 1, child.mods)
+					elif current.mods != child.mods:
+						new.append(current)
+						current = self.MultiVert(*child.pos, *child.dims, 1, child.mods)
+					else: # Mods are compatible!
+						current.n += 1 # Increase number of tails
+						current.w = (child.pos[0] + child.dims[0]) - current.x # Set width so the right edge is our new stroke's right edge
+				else:
+	#				print('\tFound non-vertical')
+					if current is not None: new.append(current)
+					current = None
+					new.append(child)
+			if current is not None: new.append(current)
+			hstack.contents = new # Replace the old children with the new ones
+		
+		for vstack in vstacks:
+	#		print('Parsing vstack')
+			new = []
+			current = None
+			for child in vstack.contents:
+				if isinstance(child, Horizontal):
+	#				print('\tFound horizontal')
+					if current is None:
+						current = self.MultiHoriz(*child.pos, *child.dims, 1, child.mods)
+					elif current.mods != child.mods:
+						new.append(current)
+						current = self.MultiHoriz(*child.pos, *child.dims, 1, child.mods)
+					else: # Mods are compatible!
+						current.n += 1 # Increase number of tails
+						current.h = (child.pos[1] + child.dims[1]) - current.y # Set height so the bottom edge is our new stroke's bottom edge
+				else:
+	#				print('\tFound non-horizontal')
+					if current is not None: new.append(current)
+					current = None
+					new.append(child)
+			if current is not None: new.append(current)
+			vstack.contents = new # Replace the old children with the new ones
+		
+		return tree
+	
+	def draw_general_mod(self, x, y, w, h, heads, tails, mods):
+		# Handle common modifiers and then delegate to draw_general; makes things easier for MultiStroke
+		
+		if Modifier.INTERNAL_DIAGONAL in mods:
+			adj_amount = h * (1-1/sqrt(2))
+			if Modifier.HEADSHORT in mods and Modifier.TAILSHORT in mods:
+				adj_amount /= 2
+		else:
+			adj_amount = h/3
+		
+		if Modifier.HEADSHORT in mods:
+			h -= adj_amount
+			y += adj_amount
+		if Modifier.TAILSHORT in mods:
+			h -= adj_amount
+		
+		self.draw_general(x, y, w, h, heads, tails, mods)
+	
+	def draw_general(self, x, y, w, h, heads, tails, mods):
+		# Draw a stroke with any number of heads and tails - this only happens in the ink renderer which tries to consolidate parallel strokes together!
+		c = self.ctx
+		c.save()
+		c.translate(x, y) # Make sure we don't have to worry about x and y ever again
+		
+		headless = Modifier.INTERNAL_HEADLESS in mods
+		
+		tailstride = w / (tails+1) # How far apart each tail should be placed
+		headstride = min(self.HEAD_SEPARATION, h/(heads+1)) # And for the heads; don't let this exceed HEAD_SEPARATION
+	#	print('Stride:', tailstride, headstride)
+		
+		center = -3/2 * w # Center of the circle we're drawing our arc from is at (w/2, center)
+		# TODO is -1 what we want?
+		theta = atan((w/2) / center) # The angle that the arc goes in **each** direction (so total arc is 2*theta)
+		radius = sqrt(center**2 + (w/2)**2) # The radius of that circle
+		
+		def get_dy(dx): # Given the horizontal distance from the left edge to one of the tails, get the vertical distance to the top of that tail
+			if headless: return 0 # If there's no rounded head to align with, don't bother to!
+	#		print('Distance from left edge:', dx)
+			xx = w/2 - dx # Change "distance from left edge" to "distance from center line"
+	#		print('Distance from center line:', xx)
+			# Now the point xx, yy is on the circle with radius `radius` and center `center`
+			# So xx**2 + yy**2 = radius**2
+			yy = sqrt(radius**2 - xx**2)
+	#		print('Distance from circle center:', yy)
+	#		print('Radius:', radius)
+			# And yy = center + dy
+			# Since the top line is `center` down from the center point
+			dy = yy - (-center)
+	#		print('Distance from top line:', dy)
+			return dy
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		
+		# Draw `heads` heads
+		for i in range(heads):
+			if i==0 and headless: continue
+			cc = (w/2, center+i*headstride)
+			c.move_to(w, i*headstride)
+			c.arc(*cc, radius, pi/2+theta, pi/2-theta)
+		
+		# Draw `tails` tails
+		for i in range(tails):
+			dx = (i+1)*tailstride
+			dy = get_dy(dx)
+			c.move_to(dx, dy)
+			c.line_to(dx, h)
+		
+		c.set_line_cap(cairo.LineCap.ROUND)
+		c.set_line_join(cairo.LineJoin.ROUND)
+		
+		c.stroke()
+		
+		c.restore()
+	
+	def draw_single(self, x, y, w, h, mods):
+		self.draw_general(x, y, w, h, 1, 1, mods)
+	def draw_double(self, x, y, w, h, mods):
+		self.draw_general(x, y, w, h, 2, 1, mods)
+	def draw_triple(self, x, y, w, h, mods):
+		self.draw_general(x, y, w, h, 3, 1, mods)
+	
+	def draw_hook(self, x, y, w, h, mods): # Based on OneSidedRenderer but with round caps and joins - hakens don't seem to be attested in the inked tablets sadly so I have to extrapolate
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		ne = (w, 0)
+		se = (w, h)
+		w = (0, h/2)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*ne)
+		c.line_to(*w)
+		c.line_to(*se)
+		
+		c.set_line_cap(cairo.LineCap.ROUND)
+		c.set_line_join(cairo.LineJoin.ROUND)
+		c.stroke()
+		
+		c.restore()
+
+def test_twosided():
 	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold', fill=False)
 	rend.blank()
 	rend.draw_vertical(0.25, 0.25, 0.25, 0.5, mods={Modifier.TRIPLE})
@@ -1006,3 +1220,13 @@ if __name__ == '__main__':
 	rend.hatch(0.25, 0.25, 0.5, 0.5)
 	rend.hatch(0.3446, 0.33, 0.25, 0.5, True)
 	rend.show()
+
+def test_ink():
+	rend = InkRenderer(256, 256, format='svg')
+	rend.blank()
+	rend.draw_general(0, 1/3, 1/3, 1/2, 3, 3, set())
+	rend.draw_general(1/3, 1/3, 2/3, 1/2, 3, 3, set())
+	rend.show()
+
+if __name__ == '__main__':
+	test_ink()

@@ -18,6 +18,7 @@ renderers = {
 	'handwrite' : OneSidedRenderer,
 	'linear' : LinearRenderer,
 	'triangle' : TriangleRenderer,
+	'ink' : InkRenderer,
 }
 
 formats = { # Maps from format shorthand to MIME type

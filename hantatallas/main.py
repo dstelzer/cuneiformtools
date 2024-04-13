@@ -13,7 +13,7 @@ def test_rendering():
 			print(construct)
 			print(construct.functional_form())
 			print(construct.forest())
-			TwoSidedRenderer.render(construct, margin=32).show()
+			InkRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
 		except ValueError: pass
@@ -22,7 +22,7 @@ def test_group_rendering():
 	while True:
 		try:
 			seq = parse_sequence(input())
-			TwoSidedRenderer.render_sequence(seq, justify='c').show()
+			InkRenderer.render_sequence(seq, justify='c').show()
 		except ValueError: pass
 
 def test_comparisons():
@@ -51,7 +51,8 @@ def test_layout():
 	while True:
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
-		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='seal').show()
+		Layout(InkRenderer, justify='s', size=256, margin=0.25).render(db.parse_transcription(desc), strokewidth=0.05).show()
+	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='seal').show()
 	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='tablet').show()
 
 def test_uga():
@@ -73,7 +74,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_rendering()
+	test_layout()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't
