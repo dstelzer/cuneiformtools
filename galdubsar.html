@@ -18,33 +18,39 @@
 			}
 			
 			function do_preset(){
-				document.getElementsByName("type")[0].selectedIndex = 0; // Published
-				document.getElementsByName("format")[0].selectedIndex = 0; // PNG
-				document.getElementsByName("bgcolor")[0].value = "";
-				document.getElementsByName("fgcolor")[0].value = "";
-				document.getElementsByName("hlcolor")[0].value = "";
-				document.getElementsByName("strokewidth")[0].value = 0.01;
-				document.getElementsByName("hatchspace")[0].value = 8;
-				document.getElementsByName("fill")[0].selectedIndex = 0; // No
-				document.getElementsByName("justify")[0].selectedIndex = 4; // s
-				document.getElementsByName("size")[0].value = 256;
-				document.getElementsByName("margin")[0].value = 0.125;
-				document.getElementsByName("leading")[0].value = 0.25;
-				document.getElementsByName("spacing")[0].value = 0.5;
-				document.getElementsByName("kerning")[0].value = 0.125;
-				document.getElementsByName("fixedwidth")[0].value = "";
-				document.getElementsByName("absolute")[0].selectedIndex = 0; // Relative
-				
 				let which = document.getElementById("preset").value;
-				if(which=="paper"){
+				if(which=="default"){
+					document.getElementsByName("type")[0].selectedIndex = 0; // Published
+					document.getElementsByName("format")[0].selectedIndex = 0; // PNG
+					document.getElementsByName("bgcolor")[0].value = "";
+					document.getElementsByName("fgcolor")[0].value = "";
+					document.getElementsByName("hlcolor")[0].value = "";
+					document.getElementsByName("strokewidth")[0].value = 0.01;
+					document.getElementsByName("hatchspace")[0].value = 8;
+					document.getElementsByName("fill")[0].selectedIndex = 0; // No
+					document.getElementsByName("justify")[0].selectedIndex = 4; // s
+					document.getElementsByName("size")[0].value = 256;
+					document.getElementsByName("margin")[0].value = 0.125;
+					document.getElementsByName("leading")[0].value = 0.25;
+					document.getElementsByName("spacing")[0].value = 0.5;
+					document.getElementsByName("kerning")[0].value = 0.125;
+					document.getElementsByName("fixedwidth")[0].value = "";
+					document.getElementsByName("absolute")[0].selectedIndex = 0; // Relative
+				}else if(which=="paper"){
+					document.getElementsByName("format")[0].selectedIndex = 2; // PDF
+					document.getElementsByName("bgcolor")[0].value = "white";
+					document.getElementsByName("fgcolor")[0].value = "black";
+					document.getElementsByName("hlcolor")[0].value = "red";
+					document.getElementsByName("strokewidth")[0].value = 0.05;
+					document.getElementsByName("margin")[0].value = 0.025;
+				}else if(which=="ink"){
 					document.getElementsByName("format")[0].selectedIndex = 2; // PDF
 					document.getElementsByName("bgcolor")[0].value = "white";
 					document.getElementsByName("fgcolor")[0].value = "black";
 					document.getElementsByName("hlcolor")[0].value = "red";
 					document.getElementsByName("strokewidth")[0].value = 0.05;
 					document.getElementsByName("margin")[0].value = 0.05;
-				}else if(which=="ink"){
-					// etc
+					document.getElementsByName("hatchspace")[0].value = 5;
 				}
 			}
 		</script>
@@ -54,7 +60,8 @@
 		<form action="/galdubsar" method="post" accept-charset="utf-8">
 			<span id="collapsed"><span onclick="expand();">[+] Advanced options</span> — <label title="Select a particular mode quickly">Preset: <select id="preset" onchange="do_preset();">
 				<option value="default">Web</option>
-				<option value="paper">Printing</option>
+				<option value="paper">Print</option>
+				<option value="ink">Ink</option>
 			</select></label></span>
 			<span id="expanded" style="display:none"><span onclick="collapse();">[–] Advanced options</span><br />
 			

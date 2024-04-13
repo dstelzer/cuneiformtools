@@ -10,10 +10,10 @@ from PIL.ImageColor import getrgb
 
 # It's hard to know if we need to import these with relative paths or absolute ones, so we just try both
 try:
-	from elements import Modifier, HStack, VStack, Horizontal, Vertical
+	from elements import Modifier, HStack, VStack, Horizontal, Vertical, Tenu
 	from layout import Spacer
 except ImportError:
-	from .elements import Modifier, HStack, VStack, Horizontal, Vertical
+	from .elements import Modifier, HStack, VStack, Horizontal, Vertical, Tenu
 	from .layout import Spacer
 
 DRAW_BOXES = False
@@ -1031,32 +1031,43 @@ class InkRenderer(GraphicRenderer):
 	def adjust_tree(self, tree): # This one actually does something here!
 		# tree = tree.copy() TODO HOW TO COPY TREES
 		
-		hs = [node for node in tree.traverse() if isinstance(node, Horizontal)]
-		vs = [node for node in tree.traverse() if isinstance(node, Vertical)]
+		# First, we're going to put the Headless modifier on every stroke whose head is right up against a perpendicular one
+		# TODO though is this desirable for things like GECTIN?
+		ahs = {node for node in tree.traverse() if isinstance(node, Horizontal)}
+		avs = {node for node in tree.traverse() if isinstance(node, Vertical)}
+		
+		# We need to separate out the ones that are inside Tenu adjustments because they use a different coordinate system
+		ts = {node for node in tree.traverse() if isinstance(node, Tenu)}
+		ths = {node for t in ts for node in t.traverse() if isinstance(node, Horizontal)}
+		tvs = {node for t in ts for node in t.traverse() if isinstance(node, Vertical)}
+		
+		ahs -= ths
+		avs -= tvs
 		
 		# We do a Cartesian product here, which might end up becoming somewhat expensive, but it hasn't become a problem yet
-		for v in vs:
-			v_epsilon = v.dims[0] / 2
-			v_center = v.pos[0] + v.dims[0] / 2
-			def collision(x, y):
-				return v_center-v_epsilon < x < v_center+v_epsilon and v.pos[1] <= y <= v.pos[1]+v.dims[1]
-			for h in hs:
-				h_epsilon = h.dims[1] / 2
-				h_center = h.pos[1] + h.dims[1] / 2
-				if collision(h.pos[0], h_center-h_epsilon) and collision(h.pos[0], h_center+h_epsilon):
-					h.mods.add(Modifier.INTERNAL_HEADLESS)
-		
-		# As above but inverted
-		for h in hs:
-			h_epsilon = h.dims[1] / 2
-			h_center = h.pos[1] + h.dims[1] / 2
-			def collision(y, x): # NOTE INVERSION
-				return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
+		for hs, vs in ((ahs, avs), (ths, tvs)):
 			for v in vs:
 				v_epsilon = v.dims[0] / 2
 				v_center = v.pos[0] + v.dims[0] / 2
-				if collision(v.pos[1], v_center-v_epsilon) and collision(v.pos[1], v_center+v_epsilon):
-					v.mods.add(Modifier.INTERNAL_HEADLESS)
+				def collision(x, y):
+					return v_center-v_epsilon < x < v_center+v_epsilon and v.pos[1] <= y <= v.pos[1]+v.dims[1]
+				for h in hs:
+					h_epsilon = h.dims[1] / 2
+					h_center = h.pos[1] + h.dims[1] / 2
+					if collision(h.pos[0], h_center-h_epsilon) and collision(h.pos[0], h_center+h_epsilon):
+						h.mods.add(Modifier.INTERNAL_HEADLESS)
+			
+			# As above but inverted
+			for h in hs:
+				h_epsilon = h.dims[1] / 2
+				h_center = h.pos[1] + h.dims[1] / 2
+				def collision(y, x): # NOTE INVERSION
+					return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
+				for v in vs:
+					v_epsilon = v.dims[0] / 2
+					v_center = v.pos[0] + v.dims[0] / 2
+					if collision(v.pos[1], v_center-v_epsilon) and collision(v.pos[1], v_center+v_epsilon):
+						v.mods.add(Modifier.INTERNAL_HEADLESS)
 		
 		# Now, we go through and consolidate groups of adjacent parallel strokes
 		hstacks = [node for node in tree.traverse() if isinstance(node, HStack)]
@@ -1141,7 +1152,6 @@ class InkRenderer(GraphicRenderer):
 	#	print('Stride:', tailstride, headstride)
 		
 		center = -3/2 * w # Center of the circle we're drawing our arc from is at (w/2, center)
-		# TODO is -1 what we want?
 		theta = atan((w/2) / center) # The angle that the arc goes in **each** direction (so total arc is 2*theta)
 		radius = sqrt(center**2 + (w/2)**2) # The radius of that circle
 		
