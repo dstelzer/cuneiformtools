@@ -999,6 +999,9 @@ class LinearRenderer(GraphicRenderer):
 
 class InkRenderer(GraphicRenderer):
 	HEAD_SEPARATION = 1/3 # The maximum distance multiple heads can be separated by
+	COLLISION_TRIM = 1/12 # The maximum distance we'll shorten a stroke by if its head runs into another stroke - see adjust_tree
+	OVERLAP_EPSILON = 1/32 # How close one stroke's head can be to another's body before the algorithm makes it headless
+	HEADTAIL_EPSILON = 1/12 # How close the tail of one stroke can be to the head of another before the algorithm separates them for clarity
 	
 	class MultiStroke:
 		def __init__(self, x, y, w, h, n, mods):
@@ -1047,7 +1050,7 @@ class InkRenderer(GraphicRenderer):
 		# We do a Cartesian product here, which might end up becoming somewhat expensive, but it hasn't become a problem yet
 		for hs, vs in ((ahs, avs), (ths, tvs)):
 			for v in vs:
-				v_epsilon = 1/32
+				v_epsilon = self.OVERLAP_EPSILON
 				v_center = v.pos[0] + v.dims[0] / 2
 				def collision(x, y):
 					return v_center-v_epsilon < x < v_center+v_epsilon and v.pos[1] <= y <= v.pos[1]+v.dims[1]
@@ -1059,7 +1062,7 @@ class InkRenderer(GraphicRenderer):
 			
 			# As above but inverted
 			for h in hs:
-				h_epsilon = 1/32
+				h_epsilon = self.OVERLAP_EPSILON
 				h_center = h.pos[1] + h.dims[1] / 2
 				def collision(y, x): # NOTE INVERSION
 					return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
@@ -1070,7 +1073,7 @@ class InkRenderer(GraphicRenderer):
 						v.mods.add(Modifier.INTERNAL_HEADLESS)
 			
 			# Now we see if we beheaded a stroke that's right after another stroke in the same direction—if so we need to ensure the head is drawn, or else it won't be visible at all
-			epsilon2 = (1/12) ** 2 # Universal one this time since we're comparing a single point for each stroke
+			epsilon2 = self.HEADTAIL_EPSILON ** 2 # Universal one this time since we're comparing a single point for each stroke
 			def close(first, second):
 				return (first[0]-second[0])**2 + (first[1]-second[1])**2 < epsilon2
 			
@@ -1079,7 +1082,14 @@ class InkRenderer(GraphicRenderer):
 				head = (v.pos[0]+v.dims[0]/2, v.pos[1]) # Top center
 				for tail in endpts:
 					if close(head, tail):
+						trim = min(v.dims[0]/2, self.COLLISION_TRIM)
+						# We add this amount to y and subtract it from h
+						# To effectively move the stroke right by that amount
+						v.pos = (v.pos[0], v.pos[1]+trim)
+						v.dims = (v.dims[0], v.dims[1]-trim)
 						v.mods -= {Modifier.INTERNAL_HEADLESS}
+						# These modifications can get overwritten by the later groupings, potentially, but it's not a problem if so—the grouping code requires the same mods on all of them, so they'll all be not-headless, and thus the big head will be clear enough
+						# TODO but if this is the start of a new group, will it result in the positioning being wrong?
 						break
 			
 			endpts = {(h.pos[0]+h.dims[0], h.pos[1]+h.dims[1]/2) for h in hs} # Center right of each horizontal
@@ -1087,6 +1097,9 @@ class InkRenderer(GraphicRenderer):
 				head = (h.pos[0], h.pos[1]+h.dims[1]/2) # Center left
 				for tail in endpts:
 					if close(head, tail):
+						trim = min(h.dims[1]/2, self.COLLISION_TRIM)
+						h.pos = (h.pos[0]+trim, h.pos[1])
+						h.dims = (h.dims[0]-trim, h.dims[1])
 						h.mods -= {Modifier.INTERNAL_HEADLESS}
 						break
 		
