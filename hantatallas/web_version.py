@@ -19,6 +19,7 @@ renderers = {
 	'linear' : LinearRenderer,
 	'triangle' : TriangleRenderer,
 	'ink' : InkRenderer,
+	'sharp' : SharpInkRenderer,
 }
 
 formats = { # Maps from format shorthand to MIME type

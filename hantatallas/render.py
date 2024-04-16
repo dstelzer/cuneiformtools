@@ -1035,7 +1035,6 @@ class InkRenderer(GraphicRenderer):
 		# tree = tree.copy() TODO HOW TO COPY TREES
 		
 		# First, we're going to put the Headless modifier on every stroke whose head is right up against a perpendicular one
-		# TODO though is this desirable for things like GECTIN?
 		ahs = {node for node in tree.traverse() if isinstance(node, Horizontal)}
 		avs = {node for node in tree.traverse() if isinstance(node, Vertical)}
 		
@@ -1255,6 +1254,111 @@ class InkRenderer(GraphicRenderer):
 		
 		c.restore()
 
+# Like an InkRenderer but with sharp points instead of rounded ones
+class SharpInkRenderer(InkRenderer):
+	
+	# Taken straight from InkRenderer
+	def draw_general(self, x, y, w, h, heads, tails, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y) # Make sure we don't have to worry about x and y ever again
+		
+		headless = Modifier.INTERNAL_HEADLESS in mods
+		
+		tailstride = w / (tails+1) # How far apart each tail should be placed
+		headstride = min(self.HEAD_SEPARATION, h/(heads+1)) # And for the heads; don't let this exceed HEAD_SEPARATION
+		
+		center = -3/2 * w # Center of the circle we're drawing our arc from is at (w/2, center)
+		radius = sqrt(center**2 + (w/2)**2)
+		
+		p1 = (center + radius) - self.strokewidth*0 # y-coordinate of a point on the upper arc
+		p2 = (center + radius) + self.strokewidth*1 # And the lower
+		# We err more on the lower side because the upper side can cause problems if it "overflows" (if the point chosen is above the midline so the circle flips upside down)
+		
+		# Now imagine a circle passing through three points
+		# (-x, 0), (0, p), (x, 0)
+		# Its center lies at (0, y)
+		# We now know that (x-0)**2 + (0-y)**2 - r**2 = 0
+		# And (0-0)**2 + (p-y)**2 - r**2 = 0
+		# i.e. p**2 - 2*p*y + y**2 - r**2 = 0
+		# Subtracting these equations, we see that
+		# x**2 - p**2 + 2*p*y = 0
+		# Thus, y = (p**2 - x**2) / 2*p
+		center1 = (p1**2 - (w/2)**2) / (2*p1)
+		center2 = (p2**2 - (w/2)**2) / (2*p2)
+		# So we now have the y-coordinates 
+		radius1 = -center1 + p1 # Since center < 0
+		radius2 = -center2 + p2
+		
+	#	print('p:', p1, p2, p1-p2)
+	#	print('center:', center1, center2, center1-center2)
+	#	print('radius:', radius1, radius2, radius1-radius2)
+		
+		theta1 = atan((w/2) / center1)
+		theta2 = atan((w/2) / center2)
+		
+		def get_dy(dx): # Given the horizontal distance from the left edge to one of the tails, get the vertical distance to the top of that tail
+			if headless: return 0 # If there's no rounded head to align with, don't bother to!
+			xx = w/2 - dx # Change "distance from left edge" to "distance from center line"
+			# Now the point xx, yy is on the circle with radius `radius` and center `center`
+			# So xx**2 + yy**2 = radius**2
+			yy = sqrt(radius**2 - xx**2)
+			# And yy = center + dy
+			# Since the top line is `center` down from the center point
+			dy = yy - (-center)
+			return dy
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		
+		# Draw `heads` heads
+		for i in range(heads):
+			if i==0 and headless: continue
+			cc1 = (w/2, center1+i*headstride)
+			cc2 = (w/2, center2+i*headstride)
+	#		c.move_to(w, i*headstride)
+			c.arc(*cc1, radius1, pi/2+theta1, pi/2-theta1)
+			c.arc_negative(*cc2, radius2, pi/2-theta2, pi/2+theta2)
+			c.fill()
+		
+		# Draw `tails` tails
+		for i in range(tails):
+			dx = (i+1)*tailstride
+			
+			dx1 = dx - self.strokewidth/2
+			dx2 = dx + self.strokewidth/2
+			
+			dy1 = get_dy(dx1)
+			dy2 = get_dy(dx2)
+			
+			c.move_to(dx, h) # Tip
+			c.line_to(dx1, dy1)
+			c.line_to(dx2, dy2)
+			c.line_to(dx, h)
+			c.fill()
+		
+		c.restore()
+	
+	# Taken from LinearRenderer
+	def draw_hook(self, x, y, w, h, mods):
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		ne = (w, 0)
+		se = (w, h)
+		_w = (0, h/2)
+		_c = (self.strokewidth, h/2)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.move_to(*ne)
+		c.line_to(*_c)
+		c.line_to(*se)
+		c.line_to(*_w)
+		c.line_to(*ne)
+		c.fill()
+		
+		c.restore()
+
 def test_twosided():
 	rend = TwoSidedRenderer(256, 256, format='svg', hlcolor='gold', fill=False)
 	rend.blank()
@@ -1266,7 +1370,7 @@ def test_twosided():
 	rend.show()
 
 def test_ink():
-	rend = InkRenderer(256, 256, format='svg')
+	rend = SharpInkRenderer(256, 256, format='svg', strokewidth=0.05)
 	rend.blank()
 	rend.draw_general(0, 1/3, 1/3, 1/2, 3, 3, set())
 	rend.draw_general(1/3, 1/3, 2/3, 1/2, 3, 3, set())
