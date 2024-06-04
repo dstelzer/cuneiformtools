@@ -19,6 +19,20 @@ norm_modes = { # Which normalization modes are currently supported
 
 def dict_list_factory(): return defaultdict(list)
 
+class DatabaseForm: # A sign form, with its tags - this could be a namedtuple but I want to give it methods
+	def __init__(self, code, tags=()):
+		self.code = code
+		self.tags = frozenset(tags)
+	
+	def matches(self, query):
+		return tuple(q in self.tags for q in query) # Return a tuple showing which of the tags our form matches, to sort by
+	
+	@classmethod
+	def from_line(cls, line):
+		components = line.strip().split()
+		if len(components) == 1: return cls(components[0]) # No tags
+		return cls(components[0], components[1:]) # Tags!
+
 class DatabaseEntry:
 	def __init__(self):
 		self.ident = None # internal ID, must be unique
@@ -31,7 +45,7 @@ class DatabaseEntry:
 		self.functional = {}
 		try:
 			for mk, mv in norm_modes.items(): # Make a separate entry for each normalization mode
-				self.functional[mk] = [parse(f).functional_form(mv) for f in self.forms]
+				self.functional[mk] = [parse(f.code).functional_form(mv) for f in self.forms]
 		except ValueError:
 			print(f'(Error while handling {self.ident} in {mk} mode)')
 			raise
@@ -58,16 +72,19 @@ class DatabaseEntry:
 			self.langs['SUM'][0] if self.langs['SUM'] else '',
 		)
 	
-	def find_matches(self, part=None, regex=None, mode='normal'):
+	def find_matches(self, part=None, regex=None, tags=(), mode='normal'):
+		tags = tuple(tags)
 		if regex is not None:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional[mode])):
+			if not any(pres.matches(tags)): # Filter out forms based on the tags
+				continue
 			if part is None:
-				ident = f'{self.ident}/{i}' if i else str(self.ident)
+				ident = f'{self.ident}/{i+1}' if i else str(self.ident)
 				yield ident, pres, ()
 			elif part in func:
-				ident = f'{self.ident}/{i}' if i else str(self.ident)
+				ident = f'{self.ident}/{i+1}' if i else str(self.ident)
 				match = func.highlight_containment(part)
 				yield ident, pres, match
 
@@ -115,7 +132,7 @@ class Database:
 					current_language = line
 				elif tabs == 2: # Form
 					if current_language == 'FORM':
-						entry.forms.append(line)
+						entry.forms.append(DatabaseForm.from_line(line))
 					elif current_language == 'NAME':
 						names = line.upper().split()
 						for name in names:
@@ -142,12 +159,12 @@ class Database:
 		self.sorted['complex'] = sorted(self.data, key=DatabaseEntry.sort_complex)
 		self.sorted['usage'] = sorted(self.data, key=DatabaseEntry.sort_usage)
 	
-	def lookup(self, part, regex, mode='normal'):
+	def lookup(self, part, regex, tags=(), mode='normal'):
 		func = part.functional_form()
 		for entry in self.data:
-			yield from entry.find_matches(func, regex, mode)
+			yield from entry.find_matches(func, regex, tags, mode)
 	
-	def name_to_glyph(self, name):
+	def name_to_glyph(self, name, tags=()):
 		name = self.clean_name(name)
 		if name in self.expansions:
 			exp = '.'.join(self.expansions[name])
@@ -161,11 +178,12 @@ class Database:
 		if name not in self.name_lookup: raise ValueError(f'Unknown sign name {name}')
 		
 		entry = self.name_lookup[name]
-		if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
+		forms = sorted((f for f in entry.forms), reverse=True, key=lambda f: f.matches(tags)) # The `matches` method returns a tuple of booleans showing which tags matched; sorting by that key, in reverse order, puts the Trues before Falses, so it'll first return a form matching the first tag, then if that's not available a form matching the second tag, and so on
+		if len(forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s) with tag(s) ({", ".join(tags)}); cannot produce {variant}')
 		
-		return parse(entry.forms[variant-1])
+		return parse(forms[variant-1].code)
 	
-	def parse_transcription(self, trans): # Go from a textual transcription to a list of rows of signs and spacers
+	def parse_transcription(self, trans, tags=()): # Go from a textual transcription to a list of rows of signs and spacers
 		# Special codes: `n newline, `r ruling, `w word sep, `f hfill
 		# (Not used here: `s sign sep in raw sequence parser)
 		results = []
@@ -200,9 +218,9 @@ class Database:
 						if unit in self.expansions:
 							for subunit in self.expansions[unit]:
 								if subunit not in self.name_lookup: raise ValueError(f'Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
-								row.append(self.name_lookup[subunit])
+								row.append(self.name_to_glyph(subunit, tags))
 						else:
-							row.append(self.name_to_glyph(unit))
+							row.append(self.name_to_glyph(unit, tags))
 				except ValueError as e:
 					print(f'Parse error in line {i+1}, sign {j+1}')
 					if e.args: print('\n'.join(e.args))
@@ -211,12 +229,13 @@ class Database:
 		return results
 	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part=None, regex=None, mode='normal', sort='hzl'):
+	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='hzl'):
 		
 		func = part.functional_form(norm_modes[mode]) if part else None
 		rows = [
 			['<tr id="hzl"><th scope="row">HZL Number</th>'],
 			['<tr id="comp"><th scope="row">Composition</th>'],
+			['<tr id="tags"><th scope="row">Tags</th>'],
 			['<tr id="form"><th scope="row">Sign</th>'],
 			['<tr id="hit"><th scope="row">In Hittite</th>'],
 			['<tr id="hurr"><th scope="row">In foreign words</th>'],
@@ -226,6 +245,8 @@ class Database:
 			['<tr id="code"><th scope="row">Code</th>'],
 		]
 		
+		HZL, COMP, TAGS, FORM, HIT, HURR, AKK, SUM, DET, CODE = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+		
 		matches = 0
 		
 		for entry in self.sorted[sort]:
@@ -234,35 +255,36 @@ class Database:
 				matches += 1
 				colspan = len(matching_forms)
 				for ident, pres, match in matching_forms:
-					raw = {'code':pres}
+					raw = {'code':pres.code}
 					if match: raw['highlight'] = ','.join(str(s) for s in match)
 					query = urlencode(raw)
-					rows[2].append(f'<td><img src="/rendersign?{query}" height="100px" /></td>')
-					rows[8].append(f'<td><tt>{pres}</tt></td>')
+					rows[FORM].append(f'<td><img src="/rendersign?{query}" height="100px" /></td>')
+					rows[CODE].append(f'<td><tt>{pres.code}</tt></td>')
+					rows[TAGS].append(f'<td>{", ".join(pres.tags)}</td>')
 				
 				hzl = entry.ident
-				rows[0].append(f'<td colspan="{colspan}">{hzl}</td>')
+				rows[HZL].append(f'<td colspan="{colspan}">{hzl}</td>')
 				
 				comp = ', '.join(entry.langs['COMP'])
-				rows[1].append(f'<td colspan="{colspan}">{comp}</td>')
+				rows[COMP].append(f'<td colspan="{colspan}">{comp}</td>')
 				
 				hittite = ', '.join(entry.langs['HIT'])
-				rows[3].append(f'<td colspan="{colspan}">{hittite}</td>')
+				rows[HIT].append(f'<td colspan="{colspan}">{hittite}</td>')
 				
 				foreign = ', '.join(entry.langs['HURR'])
-				rows[4].append(f'<td colspan="{colspan}">{foreign}</td>')
+				rows[HURR].append(f'<td colspan="{colspan}">{foreign}</td>')
 				
 				akkadian = ', '.join(entry.langs['AKK'])
-				rows[5].append(f'<td colspan="{colspan}">{akkadian}</td>')
+				rows[AKK].append(f'<td colspan="{colspan}">{akkadian}</td>')
 				
 				def meanings1(sg): return ', '.join(entry.notes['SUM'][sg])
 				sumerian = ', '.join(f'{sg} "{meanings1(sg)}"' for sg in entry.langs['SUM'])
-				rows[6].append(f'<td colspan="{colspan}">{sumerian}</td>')
+				rows[SUM].append(f'<td colspan="{colspan}">{sumerian}</td>')
 				
 				def meanings2(sg): return ', '.join(entry.notes['DET'][sg])
 				determinative = ', '.join(f'{sg} "{meanings2(sg)}"' for sg in entry.langs['DET'])
-				rows[7].append(f'<td colspan="{colspan}">{determinative}</td>')
-		for row in rows: row.append('</td></tr>')
+				rows[DET].append(f'<td colspan="{colspan}">{determinative}</td>')
+		for row in rows: row.append('</tr>')
 		
 		return matches, '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
 

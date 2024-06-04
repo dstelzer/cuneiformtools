@@ -1,5 +1,6 @@
 import subprocess
 from pathlib import Path
+import lxml.etree as et
 
 import fontforge, psMat
 from tqdm import tqdm
@@ -41,6 +42,28 @@ def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
 
 ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since that's the default rendering of a wildcard stroke) - could change to P* to make it narrower if desired
 
+# I HATE that this is necessary
+# But recent versions of pycairo export SVGs with stroke, fill, etc as their own element attributes
+# Inkscape malfunctions if these are kept separate instead of being put in a single style attribute
+# (It seems to work okay but the resulting paths lose their style information, so you'll end up with fills and no strokes)
+# So we have to manually go in and fix up the XML
+def clean_xml(file):
+	SAFE_ATTRS = {'d', 'transform', 'style'} # The attributes we don't want to change
+	tree = et.parse(file)
+#	print('\tRead file')
+	for path in tree.getroot().iter():
+		if not path.tag.endswith('path'): continue
+		if 'style' in path.attrib: continue # Already has a style
+		style = []
+		iterator = list(path.attrib.items()) # So we can edit while iterating
+		for key, val in iterator:
+#			print('\t', key, val)
+			if key in SAFE_ATTRS: continue
+			style.append(f'{key}:{val};')
+			del path.attrib[key]
+		path.attrib['style'] = ''.join(style)
+	tree.write(file)
+
 class Font:
 	def __init__(self, tmpname=Path('tmp.svg'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, stroke_width=0.025, renderer=TwoSidedRenderer, **extra):
 		self.font = fontforge.font() # Make a new font
@@ -73,6 +96,7 @@ class Font:
 			print('\t\t' + ' '.join(f'{c:04x}' for c in missing))
 			for cp in missing:
 				self.encode_glyph(cp, ERROR_CODE, None) # Creates the missing glyphs but leaves them empty
+		self.encode_glyph(0xFFFD, ERROR_CODE, None) # And put the ERROR_CODE symbol at U+FFFD, "replacement character", so that it can be used as an error symbol for font problems later
 		self.font.save(filename)
 	
 	def select_glyph(self, codepoint):
@@ -87,21 +111,21 @@ class Font:
 	def inkscape_processing(self):
 		actions = [
 			'select-all:groups', # Select the main group
-			'SelectionUnGroup', # Ungroup it (this is important! without it you get weird tapers)
+			'selection-ungroup', # Ungroup it (this is important! without it you get weird tapers)
 			'select-all', # Select all the components
-			'SelectionBreakApart', # Break the paths down into smaller parts
+			'path-break-apart', # Break the paths down into smaller parts
 			'select-all', # Select all the parts
 			'object-stroke-to-path', # Convert strokes to outlined paths for the font
 			'select-all', # Select all the paths
-			'SelectionUnion', # Union them into a single path
-			'FileSave', # Save the results
+			'path-union', # Union them into a single path
 		]
 		args = [
 			'inkscape',
 			'--batch-process', # Allow use of GUI (needed for a couple verbs), but if we do, close it at the end
 			'--actions',
 			';'.join(actions),
-			str(self.tmp), # Both input and output
+			'--export-filename='+str(self.tmp), # Output
+			str(self.tmp), # Input
 		]
 		subprocess.run(args, stderr=subprocess.DEVNULL)
 	
@@ -131,6 +155,7 @@ class Font:
 	def write_glyph_data(self, root):
 		data = self.renderer.render(root, scale=self.glyph_size, margin=self.initial_margin, fgcolor='black', bgcolor='0', format='svg', **self.extra).get_raw_data() # fgcolor and bgcolor are necessary for the SVG to be read properly
 		with open(self.tmp, 'wb') as f: f.write(data.read()) # Transfer the buffer to an actual file because we need Inkscape and FontForge to be able to access it from the command line
+		clean_xml(self.tmp)
 	
 	def encode_glyph(self, unicode, root, name):
 		if isinstance(unicode, int): unicode = (unicode,) # Ensure a tuple
@@ -138,14 +163,19 @@ class Font:
 			if self.font.findEncodingSlot(unicode[0]) != -1: # Already exists
 				print(f'\tWarning: codepoint {unicode[0]:04x} already used! Skipping.')
 				return # Skip instead of overwriting - if we import another glyph into the slot it'll actually add them together instead of overwriting, and since the first one's already been repositioned, the result will be a mess
+			print('\tSelecting single glyph', unicode[0])
 			self.select_glyph(unicode[0])
 		else: # Ligature of codepoints
+			print('\tSelecting ligature', unicode, name)
 			self.select_ligature(unicode, name)
+		print('\tWriting glyph data')
 		self.write_glyph_data(root)
+		print('\tProcessing in Inkscape')
 		self.inkscape_processing()
+		print('\tReading glyph data')
 		self.read_glyph_data()
 
-def generate_font(renderer, outname, **extra):
+def generate_font(renderer, outname, tags=(), **extra):
 	from database import Database
 	db = Database()
 	db.load_data('data/hzl.dat')
@@ -182,7 +212,9 @@ def generate_font(renderer, outname, **extra):
 				print(f'\tWarning: no sign numbered {hzl2} found in database! Skipping and moving on')
 				continue
 			try:
-				font.encode_glyph(codepoints, parser.parse(entry.forms[0]), name)
+				best = max((f for f in entry.forms), key=lambda f: f.matches(tags)) # Find the form that best matches the tags
+				print('\tFound code', best.code)
+				font.encode_glyph(codepoints, parser.parse(best.code), name)
 			except KeyboardInterrupt:
 				break
 	print('Glyphs encoded')

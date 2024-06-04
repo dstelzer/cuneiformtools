@@ -65,8 +65,8 @@ db.load_expansions('./hantatallas/data/replacements.dat')
 db.load_data('./hantatallas/data/hzl.dat')
 db.prepare_sorting()
 
-def do_searching(code, regex, mode, sort, expkey=None):
-	if expkey: experiment.record_search(expkey, code, regex, mode, sort)
+def do_searching(code, regex, tags, mode, sort, expkey=None):
+	if expkey: experiment.record_search(expkey, code, regex, tags, mode, sort)
 	
 	log = StringIO()
 	if code.strip():
@@ -88,6 +88,11 @@ def do_searching(code, regex, mode, sort, expkey=None):
 	else:
 		recomp = None
 	
+	if tags.strip():
+		newtags = frozenset(tags.split(','))
+	else:
+		newtags = ()
+	
 	if mode.strip():
 		newmode = mode.strip()
 		if newmode not in norm_modes:
@@ -95,7 +100,7 @@ def do_searching(code, regex, mode, sort, expkey=None):
 	else:
 		newmode = 'normal'
 	
-	return db.lookup_as_table(piece, recomp, newmode, sort)
+	return db.lookup_as_table(piece, recomp, newtags, newmode, sort)
 
 def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
 	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.

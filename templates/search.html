@@ -19,6 +19,7 @@
 		<form action="/search" method="get" accept-charset="utf-8">
 			<label>Code: <input type="text" name="code" size="20" value="{{code}}" /></label>
 			<label>Regex: <input type="text" name="regex" size="10" value="{{regex}}" /></label>
+			<label>Tags: <input type="text" name="tags" size="10", value="{{tags}}" /></label>
 			<label>Sort by: <select name="sort" id="sort">
 				<option value="hzl" {{ 'selected' if sort=='hzl' else '' }}>HZL number</option>
 				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>

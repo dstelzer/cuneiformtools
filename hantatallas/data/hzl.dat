@@ -577,12 +577,15 @@
 	SUM
 		IB/URAŠ/URTA
 			the god Ninurta
+	HURR
+		if
+		ef
 	FORM
 		L[{[vh]h}vv]
 		L[{[v(v'h)]h}vv]
 		L[([vh]{0h})vv]
 	NAME
-		IB IP EB EP URAŠ URTA
+		IB IP EB EP URAŠ URTA IF EF
 45
 	SUM
 		U₈/US₅
@@ -1259,11 +1262,13 @@
 	SUM
 		AB
 			window
+	HURR
+		af
 	FORM
 		L[{hh}{h0h}v]
 		L[{h2h2}v]
 	NAME
-		AP AB
+		AP AB AF
 98
 	HIT
 		um
@@ -1921,12 +1926,14 @@
 		up
 	AKK
 		ár
+	HURR
+		uf
 	FORM
 		P{chhc}
 		{d'hhh'}
 		P{c(v{hh})c}
 	NAME
-		UP UB ÁR AR2
+		UP UB ÁR AR2 UF
 153
 	HIT
 		bi
@@ -2220,14 +2227,14 @@
 	SUM
 		UGULA
 			overseer
-		GIDRU
+		GIDRU (ŊIDRU)
 			staff, scepter
 	FORM
 		P(v{hh})
 		P{(vh)h}
 		P{vhh}
 	NAME
-		PA ḪAD ḪAT BÁ BA2 ḪAṬ SÀK SAK3 GIDRU UGULA
+		PA ḪAD ḪAT BÁ BA2 ḪAṬ SÀK SAK3 GIDRU UGULA ŊIDRU
 175
 	COMP
 		PA.IB
@@ -4183,90 +4190,93 @@
 		wa+ap
 	HURR
 		wa(ap)
-		af?
-		aw?
+		áf?
+		áw?
 	FORM
 		L[{cc}v{h[{hh}{hh}v]M}]
 	NAME
-		WA+AP ÁW AW2 AF WA(AP) WA_AP
+		WA+AP ÁW AW2 ÁF AF2 WA(AP) WA_AP
 319
 	COMP
 		wa+i
 	HURR
 		wi(i)
+		fi
 	FORM
 		[{cc}v{h{[hh][hh]h}ME}]
 	NAME
-		WI+I WI× WI(I) WI_I WII
+		WI+I WI× WI(I) WI_I WII FI
 320
 	COMP
 		wa+pí
 	HURR
 		wi(pí)
-		fi?
+		fí?
 	FORM
 		[{cc}v{h{[hc][hc]}ME}]
 	NAME
-		WI+PÍ WI+PI2 WI(PÍ) WI(PI2) WI_PÍ WI_PI2 FI
+		WI+PÍ WI+PI2 WI(PÍ) WI(PI2) WI_PÍ WI_PI2 FÍ FI2
 321
 	COMP
 		wa+ú
 	HURR
 		wu(ú)
+		fu
 	FORM
 		L[{cc}v{h[{hh}vvv]M}]
 	NAME
-		WU+Ú WU+U2 WU_Ú WU_U2 WU(Ú) WU(U2) WUU
+		WU+Ú WU+U2 WU_Ú WU_U2 WU(Ú) WU(U2) WUU FU
 322
 	COMP
 		wa+e
 	HURR
 		we(e)
+		fe
 	FORM
 		L[{cc}v{h[{hh}vv2]M}]
 		L[{cc}v{h[{h(hv)}v2]M}]
 	NAME
-		WE+E WE_E WE(E) WEE
+		WE+E WE_E WE(E) WEE FE
 323
 	COMP
 		wa+u
 	HURR
 		wu(u)
-		wo?
+		fo
 	FORM
 		[{cc}v{hc'}]
 	NAME
-		WU+U WU_U WU(U) WO WOO
+		WU+U WU_U WU(U) WO WOO WO(O) WO+O WO_O FO
 324
 	COMP
 		wa+pu
 	HURR
 		wu(pu)
-		fu?
+		fú?
 	FORM
 		[{cc}v{h[0"{cc}{cc}h]}]
 	NAME
-		WU+PU WU_PU WU(PU) FU
+		WU+PU WU_PU WU(PU) FÚ FU2
 325
 	COMP
 		wa+ip
 	HURR
 		wi(ip)
-		if?
+		íf?
 	FORM
 		L[{cc}v{h[{[vh]h}vv]M}]
 	NAME
-		WI+IP WI_IP WI(IP) IF
+		WI+IP WI_IP WI(IP) ÍF IF2
 326
 	COMP
 		wa+a
 	HURR
 		wa(a)
-		fa?
+		fa
 	FORM
 		[{cc}v{h[vv2]M}]
 	NAME
-		WA+A WA_A WA(a) WAA
+		WA+A WA_A WA(A) WAA FA
 327
 	AKK
 		ṣap

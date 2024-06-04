@@ -76,8 +76,8 @@ def record_response(subject, index, lst, system, result):
 def record_survey(subject, result):
 	record(subject, 'SURVEY', result)
 
-def record_search(subject, code, regex, mode, sort):
-	record(subject, 'SEARCH', {'code':code, 'regex':regex, 'mode':mode, 'sort':sort})
+def record_search(subject, code, regex, tags, mode, sort):
+	record(subject, 'SEARCH', {'code':code, 'regex':regex, 'tags':tags, 'mode':mode, 'sort':sort})
 
 def record_drawing(subject, drawing, tolerance, result):
 	drawing = json.loads(drawing)
