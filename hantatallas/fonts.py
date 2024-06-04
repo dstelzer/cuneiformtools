@@ -47,9 +47,9 @@ ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since 
 # Inkscape malfunctions if these are kept separate instead of being put in a single style attribute
 # (It seems to work okay but the resulting paths lose their style information, so you'll end up with fills and no strokes)
 # So we have to manually go in and fix up the XML
-def clean_xml(file):
+def clean_xml(file1, file2):
 	SAFE_ATTRS = {'d', 'transform', 'style'} # The attributes we don't want to change
-	tree = et.parse(file)
+	tree = et.parse(file1)
 #	print('\tRead file')
 	for path in tree.getroot().iter():
 		if not path.tag.endswith('path'): continue
@@ -62,12 +62,13 @@ def clean_xml(file):
 			style.append(f'{key}:{val};')
 			del path.attrib[key]
 		path.attrib['style'] = ''.join(style)
-	tree.write(file)
+	tree.write(file2)
 
 class Font:
-	def __init__(self, tmpname=Path('tmp.svg'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, stroke_width=0.025, renderer=TwoSidedRenderer, **extra):
+	def __init__(self, tmpname=Path('font_tmp'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, stroke_width=0.025, renderer=TwoSidedRenderer, **extra):
 		self.font = fontforge.font() # Make a new font
 		self.tmp = tmpname
+		self.tmp.mkdir(exist_ok=True) # If it doesn't already exist
 		self.final_margin = final_margin
 		self.initial_margin = initial_margin
 		self.final_bottom = final_bottom
@@ -124,13 +125,13 @@ class Font:
 			'--batch-process', # Allow use of GUI (needed for a couple verbs), but if we do, close it at the end
 			'--actions',
 			';'.join(actions),
-			'--export-filename='+str(self.tmp), # Output
-			str(self.tmp), # Input
+			'--export-filename=' + str(self.tmp / 'inkscape.svg'), # Output
+			str(self.tmp / 'modxml.svg'), # Input
 		]
 		subprocess.run(args, stderr=subprocess.DEVNULL)
 	
 	def read_glyph_data(self):
-		self.glyph.importOutlines(str(self.tmp), scale=False)
+		self.glyph.importOutlines(str(self.tmp / 'inkscape.svg'), scale=False)
 	#	print(self.glyph.boundingBox())
 	#	x1, y1, x2, y2 = self.glyph.boundingBox()
 	#	dx, dy = x2-x1, y2-y1
@@ -154,8 +155,8 @@ class Font:
 	
 	def write_glyph_data(self, root):
 		data = self.renderer.render(root, scale=self.glyph_size, margin=self.initial_margin, fgcolor='black', bgcolor='0', format='svg', **self.extra).get_raw_data() # fgcolor and bgcolor are necessary for the SVG to be read properly
-		with open(self.tmp, 'wb') as f: f.write(data.read()) # Transfer the buffer to an actual file because we need Inkscape and FontForge to be able to access it from the command line
-		clean_xml(self.tmp)
+		with open(self.tmp / 'cairo.svg', 'wb') as f: f.write(data.read()) # Transfer the buffer to an actual file because we need Inkscape and FontForge to be able to access it from the command line
+		clean_xml(self.tmp / 'cairo.svg', self.tmp / 'modxml.svg')
 	
 	def encode_glyph(self, unicode, root, name):
 		if isinstance(unicode, int): unicode = (unicode,) # Ensure a tuple
@@ -229,4 +230,4 @@ if __name__ == '__main__':
 #	f.glyph_import()
 #	f.finalize('/home/daniel/Downloads/tmp/tmp.sfd')
 #	input()
-	generate_font(InkRenderer, 'ink.sfd', strokewidth=0.05)
+	generate_font(InkRenderer, 'ink.sfd', ('new',), strokewidth=0.05)
