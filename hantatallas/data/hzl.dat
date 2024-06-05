@@ -718,10 +718,13 @@
 			hunter
 		(TÉŠ?)
 	FORM
-		L{[vvhv]h}
-		L[{[v(hv)]h"}v]
+		L[{[vvh]h}v]	old
+		L[(h[vv{h0}])v]	new
+		L[{[v(hv)]h"}v]	variant
 	NAME
 		UR LIG LIK LIQ TÍŠ TIŠ2 TAŠ TÉŠ TEŠ2
+	NOTE
+		Not totally happy with the new form here, since it puts two horizontals inside a composition.
 52
 	COMP
 		ŠUŠANA+IŠ
@@ -730,7 +733,7 @@
 			dead, ghost
 	FORM
 		W[{[vv{[hc]h}]h"}vv]
-		W[{[vvh]h}{[hc]h0}vv]
+		W[{[vvh]h}{[hc]h0}vv]	variant
 	NAME
 		GIDIM
 53
@@ -738,10 +741,11 @@
 		TUK(U)
 			anger, rage
 	FORM
-		L{[vvd]h}
-		L{[0vhv]h}
-		[v{{vh}Mh}]
-		(h[vv])
+		L{[vvd']h}
+		{[vvc]h}
+		L{[0vhv]h}	variant unusual
+		[v{{vh}Mh}]	variant unusual
+		(h[vv])	variant unusual
 	NAME
 		TUK TUKU
 54
@@ -751,9 +755,9 @@
 		SILA₄
 			lamb
 	FORM
-		L[{h({h'"h'"}v)M(h[vv0])}v]
-		W[{h'(h[v'v'])}(v{hhhh})v]
-		L[{h({hhhh}v)M(h[vv0])}v]
+		W[{h'(h[v'v'])}(v{hhhh})v]	old
+		L[{h({h'"h'"}v)M(h[vv0])}v]	new
+		L[{h({hhhh}v)M(h[vv0])}v]	variant
 	NAME
 		SILA4
 55
@@ -764,7 +768,7 @@
 			container
 	FORM
 		[{h{[vvv]v}Mh}v]
-		[{h[v{[vv]v}]Mh}v]
+		[{h[v{[vv]v}]Mh}v]	variant
 	NAME
 		BÚGIN BUGIN2 BÚNIN BUNIN2 BUNIŊ
 56
@@ -779,6 +783,7 @@
 	FORM
 		L[{h'(h[v'v'0])}v]
 		L[{h'h[vv0]}v]
+		[{h'h}v]	variant unusual
 	NAME
 		BA4 MÀ MA3 GÁ GA2 MAL PISAN
 57
@@ -792,8 +797,8 @@
 	FORM
 		L[{h'[h2'v]M(h[vv0])}v]
 		L[{h'[h2'v]Mh[vv0]}v]
-		L[{h[{[0hh]([vv0]h)}v]}v]
-		L[{h'h2'hv}vv]
+		L[{h[{[0hh]([vv0]h)}v]}v]	variant
+		L[{h'h2'h[vv]}vv]	variant
 	NAME
 		AMA DAGAL
 58
@@ -807,6 +812,8 @@
 		L[{h[{0hh}{vv}{vv}{vv}v2]Mh[vv0]}v]
 	NAME
 		ÙR UR3
+	NOTE
+		The v2 on the right should be more separate from the {vv} on the left, but there's just not enough space to distinguish them.
 59
 	COMP
 		GÁ×ŠE
@@ -814,8 +821,8 @@
 		ÀRAḪ/ÉSAG
 			store, storage, barn
 	FORM
-		[{h[0{cc}{cc}0]M(h[vv0])}v]
-		[{h[0{cc}{cc}0]Mh[vv0]}v]
+		[{h[0{cc}{cc}]ME(h[vv0])}v]
+		[{h[0{cc}{cc}]MEh[vv0]}v]
 	NAME
 		ÀRAḪ ARAḪ3 ÉSAG ESAG2
 60
@@ -825,8 +832,8 @@
 		GALGA (ŊALGA)
 			forethought, planning, advice
 	FORM
-		[{h{[vvv]v}M(h[vv0])}v]
-		[{h{[vvv]v}Mh[vv0]}v]
+		L[{h[0{[vvv]v}]M(h[vv0])}v]
+		[{h[0{[vvv]v}]Mh[vv0]}v]
 	NAME
 		GALGA ŊALGA
 61
@@ -839,7 +846,7 @@
 	FORM
 		L[{h'0(h[vvv0])}v]
 		L[{h'h[vvv0]}v]
-		L[{h'[v'v'v'0]h}v]
+		L[{h'[v'v'v'0]h}v]	variant
 	NAME
 		GÁN GAN2 KÁN KAN2 IKU
 62
@@ -849,7 +856,10 @@
 		ERIN/EREN
 			cedar
 	FORM
-		W[{h'[h'c]h'h}v{[hvvv]Mh}v]
+		W[{[0{hh}c]h}v{[hvvv]Mh}v]
+		W[{[0{hhh}c]h}v{[hvvv]Mh}v]	variant
+		W[{[0{hhh}c]h}v{(h[vvv])Mh}v]	variant
+		W[{[0{hhh}cv][hh]}[hv'v'v'v]]	variant unusual
 	NAME
 		ERIN EREN
 63
@@ -859,8 +869,8 @@
 		ŠÉŠ
 			licorice plant?
 	FORM
-		W[{h'[h'c]h'h}v{[{cc}{hh}v]Mh}v]
-		W[{h'[h'c]h'h}v{[{c[hc]h}v]Mh}v]
+		W[{[0{hh}c]h}v{[{cc}{hh}v]Mh}v]
+		W[{[0{hh}c]h}v{[{c[hc]h}v]Mh}v]
 	NAME
 		ŠÉŠ ŠEŠ2
 64
@@ -871,17 +881,21 @@
 			total, in all
 	FORM
 		L[{h'h'h'h}{hh}v]
-		L[{h'h'h'h}{hh2}v]
+		L[{h'h'h'h}{hh2}v]	variant
 	NAME
 		ŠU+NÍGIN ŠU+NIGIN2
+	NOTE
+		Unnamed in the HZL
 65
 	SUM
 		SÍG/SÍK/SIKI
 			wool
+			the Ḫulana river
 	FORM
+		{[0{hhh}cv][hh]}
 		L[{h'h'h'h}{[c'v]h}]
-		L[{0[hc]h}{[vc']h}]
-		L[{h'ch}v{0h}]
+		L[{[{hhhh}c]h}v{ch}]	variant unusual
+		L[{h'ch}v{0h}]	variant unusual
 	NAME
 		SÍG SIG2 SÍK SIK2 SIKI
 66
@@ -891,7 +905,8 @@
 		SÍG+MUNUS
 			ewe
 	FORM
-		L[{[0{hh[hc]}]h}v{[{cc}h]MEh}]
+		L[{[0{hhh}c]h}v{[{cc}h]MEh}]
+		L{[0{hh}cv[vv]Th][hh]}	variant unusual
 	NAME
 		SÍG+MUNUS SIG2+MUNUS
 67
@@ -903,8 +918,9 @@
 			door
 		(GÁL?)
 	FORM
-		L[{[0{h[hc]h}]h}v0'"{cc}]
-		[{[vcv]h}{cc}]
+		L[{[0{h[hc]h}]h}v0'"{cc}]	old
+		[{[vcv]h}{cc}]	new
+		[hvcv{cc}]	variant unusual
 	NAME
 		IG IK IQ EG EK EQ GÁL GAL2
 68
@@ -918,6 +934,7 @@
 			hand
 	FORM
 		[{0h'h'h'h}v]
+		[(v{0hh'h'h})v]	variant unusual
 	NAME
 		ŠU KAT7 SU×
 69
@@ -926,9 +943,10 @@
 			pure, clean
 			shiny
 	FORM
-		L[{0h'h'h'h}vv2]
-		P{[vv][vv]h}
-		P[{v2}{v2h}]
+		L[{0h'h'h'h}vv2]	old
+		P{[vv][vv]h}	new
+		[{hhh}vv]	variant
+		P[{v2}{v2h}]	variant
 	NAME
 		KÙ KU3 KUG
 70
@@ -938,22 +956,26 @@
 		GIŠIMMAR
 			date palm
 	FORM
-		W[{h'h'h'h'h[cc]}Evv20'"[{0hh}{vv}{vv}{vv}v2]]
-		W[{h'h'h'h'h[hch]M}Evv20'"[{0hh}{vc}{vc}{vc}v2]]
+		X[{hh'h'h'h[cc]}Evv20'"[{0hh}{vv}{vv}{vv}v2]]
+		X[{h'h'h'h'h[hch]M}Evv20'"[{0hh}{vc}{vc}{vc}v2]]	variant
+		X{[v{h2hh}vcv{[hh][hh]h[ccc]}]h}	variant
 	NAME
 		GIŠIMMAR
 71
+	COMP
+		[???]+TAR
 	AKK
 		tàra
 	SUM
 		DÀRA
 			ibex
 	FORM
-		L[{[cc]h'h'h'h}vv{0[hc][hc]}]
-		W[{[cc]h'h'h'h}v{[vv'v'v]h}{ch[vvv]c}{0h2d}]
-		W[{[cc]h'h'h'h}v{[vv'v'v]h}{dh0}{0h2v}]
-		W[{[cc]h'h'h'h}v{[vv'v'v{0hh}]h}{cccc}{cccc}(h2[0c])]
-		W[{[{d2hhh}v{[v'v']h}v{h[ccc]}]h}E{cc}{0h2v}]
+		L[{d2h'h'h'h}vv{0[hc][hc]}]	old
+		X[{[cc]h'h'h'h}v{[vv'v'v]h}E{ch[vvv]hc}{0h2d'}]	new
+		X[{[cc]h'h'h'h}v{[vv'v'v]h}E{dh0}{0h2d'}]	variant
+		W[{[{d2h'h'h}v{[v'v']h}v{h[ccc]}]h}E{cc}{0h2v}]	variant
+		X[{[{d'[{hhh}v]}{[vv'v'v][ccc]}{0d}]h}E{0d2}R]	variant
+		X[{h(hv')}{d2h'h'h'h}v{[vv'v'v{hh}]h}E{ccc}{ccc}(h2c')]	variant
 	NAME
 		TÀRA TARA3 DÀRA DARA3
 72
@@ -968,12 +990,12 @@
 			oil, fat
 			anoint
 	FORM
-		L{du}
-		L{dh0}
-		L{d(u[0vv0])}
-		L{dh[0vv0]}
-		L(du)
-		L(dh)
+		L{du}	old
+		L{d(u[0vv0])}	new
+		L{d'h0}
+		L{d'h[0vv0]}
+		L(du)	variant unusual
+		L(d'h)	variant unusual
 	NAME
 		NI NÉ NE2 LÍ LI2 ṢAL Ì I3 IÀ IA3 YÀ YA3 ZAL
 73
@@ -987,8 +1009,8 @@
 			stone
 	FORM
 		L[{d'h0'}{cc0'}0'"v]
-		L[{hh0'}{cc0'}0'"v]
-		L[{d'h[vv]}c"c"v]
+		L[{h'h0'}{cc0'}0'"v]	variant
+		L[{d'h[vv]}c"{c'0'}0'v]	variant unusual
 	NAME
 		IA4 YA4 NA4 ZÁ ZA2
 74
@@ -1005,10 +1027,11 @@
 	HURR
 		nim
 	FORM
-		L[{du0'}{cc0'}v]
-		L[c'{du}c'v]
-		L[{[cc][hc]0}v]
-		L[{[ccc][hcc]c}v]
+		L[{du0'}{cc0'}v]	old
+		L[c'{du}c'v]	new
+		L[{[cc][hc]0}v]	variant
+		L[{[ccc][hcc]c}v]	variant unusual
+		[c{cv}cv]	variant unusual
 	NAME
 		NIM NEM NUM DÌḪ DIḪ3 ELAM
 75
@@ -1021,7 +1044,7 @@
 		qaq
 	FORM
 		L{d(uv)}
-		{d'({h0}v)}
+		{d'({h0}v)}	variant
 	NAME
 		QAQ DÙ DU3 DRU GAG RÚ RU2
 76
@@ -1030,9 +1053,9 @@
 	HURR
 		né(e)
 	FORM
-		W[{dh[0vv]}{0[{0hh}vv2]}]
+		W[{d'h[0vv]}{0[{0hh}vv2]}]
 	NAME
-		NÉ+E NÉ_E NÉ(E) NE2+E NE2_E NE2(E) NEE
+		NÉ+E NÉ_E NÉ(E) NE2+E NE2_E NE2(E) NEE NÉE
 77
 	HIT
 		ir
@@ -1043,9 +1066,10 @@
 			consult an oracle
 	FORM
 		L{d(u[vvv])}
-		L{d(h[vvv])}
 		L{dh[vvv]}
-		L{h([vvvv]h)}
+		L{d(h[vvv])}	variant
+		L{h'"h[vvv]}	variant unusual
+		L{h([vvvv]h)}	variant unusual
 	NAME
 		IR ER
 78
@@ -1059,11 +1083,12 @@
 			profession (male)
 	FORM
 		L{[d0][dd]u}
-		L{[{cc}c"]u}
-		L{d2[c0"]u}
-		{[0"c'c']h}
-		{h2hh}
-		L{[d0][dd]h[vvvv0]}
+		L{[d'd2]h}	variant
+		L{[0{hh}h]h}	variant
+		{[vvv]v}T	variant unusual
+		{[0"c'c']h}	variant unusual
+		{h2hh}	variant unusual
+		L{{[vvvv]v}T([vvvv]h)}	variant unusual
 	NAME
 		LÚ LU2
 79
@@ -1075,10 +1100,9 @@
 	FORM
 		L{[0"{cc}c"0"c][hc]}
 		L[{[0"{cc}c0"]h}{cc}]
-		L{[0"{cc}c"0"c]([hc][0vvv0])}
-		L{[{[vvv]v}TEc]([hc]v)}
-		L{[{d'"d2'"d'"}c]([hc]v)}
-		L{[h2c]h'"[hc]}
+		L{[0"{cc}c"0"c]([hc][0vvv0])}	variant
+		L{[{[vvv]v}TEc]([hc]v)}	variant unusual
+		L{d2[0{hhh}0c][hc][vvv]}	variant unusual
 	NAME
 		SES ŠEŠ
 80
@@ -1086,10 +1110,10 @@
 		AŠGAB
 			leatherworker, cobbler
 	FORM
-		L({[vd]u}[0vvvv])
-		L(h[v(d[0vvv])])
-		L(h[v{h[0vvvv]}])
-		L(h[v{h[0vvvv]}])
+		L({[vd]u}[00vvvv])	old
+		L({0h}[v{0h[0vvvv]}])	new
+		L(h[v(d'[0v'v'v'])])	variant
+		L([v0]{cEh[0vvvv]})	variant
 	NAME
 		AŠGAB
 81
@@ -1099,9 +1123,12 @@
 		AG
 			[component of other signs]
 	FORM
-		L[{[h{hhh}{hhh}]h}v{0hh}]
-		L{[hv(h2v)]h'}
-		L{[hvhvh]h}
+		L[{[h{hhh}{hhh}]h}v{0hh}]	old
+		L{[hRv0'(h2v)]h}	new
+		L[{[h{hhh}]h}(v{hh})]	variant
+		L{[hvhvh]h}	variant
+		L[hv{hh}v]	variant
+		L[h([vv]{hh})E]	variant
 	NAME
 		AG AK AQ
 82
@@ -1111,8 +1138,8 @@
 		MÈ
 			battle
 	FORM
-		W[{[h{hhh}{hhh}]h}v{hh}{cc}0'"v2]
-		L[{[hv(h2v)]h'}{cc}0'"v2]
+		W[{[h{hhh}{hhh}]}[v{hh}{cc}0'v2]]	old
+		L[{[hRv0'(h2v)]h}{cc}0'v2]	new
 	NAME
 		MÈ ME3
 83
@@ -1120,12 +1147,12 @@
 		tár
 		ṭár
 	SUM
-		GÙN
+		GÙN/DAR
 			colorful
 	FORM
 		L[{[h{hhh}c]h}v]
-		L[hv{[hc]hhh}v]
-		L[h{h[hc]h}v]
+		L[hv{[hc]hhh}v]	variant
+		L[h{h[hc]h}v]	variant
 	NAME
 		TÁR TAR2 ṬÁR ṬAR2 GÙN GUN3 DAR
 84
@@ -1137,7 +1164,7 @@
 			month
 	FORM
 		L[{0[hccc]h}v2]
-		L[{h[ccc]h}v2]
+		L[{h[ccc]h}v2]	variant
 	NAME
 		ITI ITU
 85
@@ -1147,8 +1174,8 @@
 		ŠINIG
 			tamarisk (shrub)
 	FORM
-		W[{hh}v{cc}{cc}{ccc}{cc}0'"v2{d'u}]
-		W[{[hv]h}{cc}{cc}{hhh}{hh}0'"v2{d'u}]
+		X[[{hh}v]RE{cc}{cc}{ccc}{cc}0'"v2{d'u}]
+		X[{[hv]h}{cc}{cc}[{hhh}{hh}]0'"v2{d'u}]	variant
 	NAME
 		ŠINIG
 86
@@ -1169,9 +1196,8 @@
 			horn
 	FORM
 		{[{0h0}v'v]h'}
-		{[0vv]h2}
-		[{h[v0]h}v]
-		L[hv'{vh}]
+		{[0vv]h2}	variant
+		[{h[v0]h}v]	variant
 	NAME
 		ŠÍ ŠI2 ŠÉ ŠE2 SI SE ṢÌ ṢI3 ṢÈ ṢE3
 87
@@ -1179,10 +1205,10 @@
 		MÁ
 			ship
 	FORM
-		{[hvv'v]h}
-		{(h[vvv])h}
-		{[vvv]hh}
-		{[vvv]h2}
+		{[hRvv'v]h}
+		{(h[vvv])h}	variant
+		{[vvv]hh}	variant
+		{[vvv]h2}	variant
 	NAME
 		MÁ MA2
 88
@@ -1190,7 +1216,7 @@
 		ŠÙDUL/ŠÙDUN
 			yoke
 	FORM
-		W[{[hvvvh]h}{cc}{cc}0'"v2]
+		W[{[hRvvvhR]h}{cc}{cc}0'"v2]
 		W[(h[vv])0'"v{[cc]hc}{cc}0'"v2]
 	NAME
 		ŠÙDUL ŠUDUL3 ŠÙDUN ŠUDUN3
@@ -1205,9 +1231,10 @@
 	AKK
 		dir
 	FORM
-		L[{[hvv]h'}vv2]
-		L[{[{hv}v]h}vv2]
-		L{[0v'v'vv2]h2}
+		L[{[hRv'v]h'}vv2]	old
+		L[{[hvv]h'}vv2]	new
+		L[{[{hv}v]h}vv2]	variant
+		L{[0v'v'vv2]h2}	variant unusual
 	NAME
 		DIR DIRI SA5
 90
@@ -1220,8 +1247,8 @@
 		ṭap
 	FORM
 		{hh}
-		{(hc)(hc)}
-		({hh}{cc})
+		{(hc)(hc)}	variant unusual
+		({hh}{cc})	variant unusual
 	NAME
 		TAB TAP DÁB DAB2 DÁP DAP2 TAU TAW TAV ṬAB ṬAP
 91
@@ -1231,8 +1258,8 @@
 		tà
 	FORM
 		L[{hh}{dhu}]
-		L[{hh}v{dhu}]
-		L[{hh}(dhu)]
+		L[{hh}(dhu)]	variant
+		L[{hh}v{dhu}]	variant
 	NAME
 		ŠUM TÀ TA3 TAG
 92
@@ -1247,12 +1274,25 @@
 		AZ
 			bear (animal)
 	FORM
-		L{[{hh}{dhh}][{vv}{vv}000]M}
-		L[{hh}{dhh}]
-		L{[{hh}{hhh}][{vv}{vv}000]M}
-		L[{hh}{hhh}]
+		L[{hh}{dhh}]	old
+		L{[{hh}{dhh}][{vv}{vv}000]M}	new
+		L{[0c][hh][hh]}	variant old
+		L[{hh}{hhh}]	variant old
+		L[{hh}{d'h2h}]	variant old
+		L{[{hh}{hhh}][{vv}{vv}000]M}	variant new
 	NAME
 		AZ AS AṢ
+92A
+	SUM
+		PIRIG
+			lion
+	FORM
+		L[{hh}{dhh}]
+		L{[0c][hh][hh]}	variant
+		L[{hh}{hhh}]	variant
+		L[{hh}{d'h2h}]	variant
+	NOTE
+		Not given its own HZL index, but this is how AZ and UK were written in Old Script
 93
 	COMP
 		PIRIG&UT
@@ -1262,10 +1302,12 @@
 		UG/PÌRIG
 			tiger?
 	FORM
-		L{[{hh}{dhh}][{cc}v0]M}
-		L[{hh}{dhh}]
-		L{[{hh}{hhh}][{cc}v0]M}
-		L[{hh}{hhh}]
+		L[{hh}{dhh}]	old
+		L{[{hh}{dhh}][{cc}v0]M}	new
+		L{[0c][hh][hh]}	variant old
+		L[{hh}{hhh}]	variant old
+		L[{hh}{d'h2h}]	variant old
+		L{[{hh}{hhh}][{cc}v0]M}	variant new
 	NAME
 		UG UK UQ PÌRIG PIRIG3
 94
@@ -1282,9 +1324,12 @@
 	HIT
 		la
 	FORM
-		L[{[0"h][hh][hh]h'}v]
-		L[{hh}{hhhh}v]
-		L[{hh}{hhhhhh}v]
+		L[{[hh][hh][0"h]h'}v]	old
+		L[{[{hh}{hhh}]h'}v]	new
+		L[{hh}{hhhh}v]	variant
+		[{h2h2h}v]	variant
+		L[h{hh'h'h}v]	variant
+		L[{hh}{hh'h'h'h'h}v]	variant
 	NAME
 		LA
 96
@@ -1292,7 +1337,9 @@
 		UKU
 			[component of other signs]
 	FORM
-		L[{hhhh}{[vvhv]h}E]
+		W[{hh}(h[vv{h0}])Ev]	old
+		L[{hhhh}{[vvhv]h}E]	new
+		L{[{hhh}vv{hh}v]h}	variant
 	NAME
 		UKU
 97
@@ -1304,8 +1351,9 @@
 	HURR
 		af
 	FORM
-		L[{hh}{h0h}v]
-		L[{h2h2}v]
+		L[{hh}{h0h}v]	old
+		L[{hh}{hh}v]	new
+		L[{hh}{h(hvR)}v]	variant
 	NAME
 		AP AB AF
 98
@@ -1315,7 +1363,10 @@
 		ubₓ
 	FORM
 		L[{hh}{h0h}v]
-		L[{h'([0vv]{hh})h'}v]
+		(v{h2h2})	variant
+		L[{hh}{h[0v'v'0]h}v]	variant
+		L[{h'([0vv]{hh})h'}v]	variant
+		W[{[{hh}vvvvv]h2}v]	variant unusual
 	NAME
 		UM UB×
 99
@@ -1329,9 +1380,12 @@
 		KIŠIB
 			seal (stamp)
 	FORM
+		[{h2h2}v]
 		L[{hh}{hh}v]
-		L[{h2h2}v]
-		L[{h'hhh'}v]
+		(v{h2h2})	variant
+		L[{h'hhh'}v]	variant
+		L[{hh}{h[v'v'v'0]h}v]	variant
+		L[{hh}{hh}vvv]	variant
 	NAME
 		TUB TUP DUB DUP ṬUP KIŠIB
 100
@@ -1346,6 +1400,7 @@
 101
 	COMP
 		3×AN
+		(AN&AN)+AN
 	AKK
 		mul
 	SUM
@@ -1356,7 +1411,7 @@
 			star
 	FORM
 		W[{0h2h2}v20'"h2v]
-		W[{(h2v)(h2v)}E0'"(h2v)]
+		W[{(h2v)(h2v)}E0'"(h2v)]	variant
 	NAME
 		MUL
 102

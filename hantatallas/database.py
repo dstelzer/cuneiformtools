@@ -253,7 +253,6 @@ class Database:
 		func = part.functional_form(norm_modes[mode]) if part else None
 		rows = [
 			['<tr id="hzl"><th scope="row">HZL Number</th>'],
-			['<tr id="comp"><th scope="row">Composition</th>'],
 			['<tr id="tags"><th scope="row">Tags</th>'],
 			['<tr id="form"><th scope="row">Sign</th>'],
 			['<tr id="hit"><th scope="row">In Hittite</th>'],
@@ -262,9 +261,10 @@ class Database:
 			['<tr id="sum"><th scope="row">Sumerogram</th>'],
 			['<tr id="det"><th scope="row">Determinative</th>'],
 			['<tr id="code"><th scope="row">Code</th>'],
+			['<tr id="note"><th scope="row">Notes</th>'],
 		]
 		
-		HZL, COMP, TAGS, FORM, HIT, HURR, AKK, SUM, DET, CODE = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+		HZL, TAGS, FORM, HIT, HURR, AKK, SUM, DET, CODE, NOTE = range(10)
 		
 		matches = 0
 		
@@ -284,9 +284,6 @@ class Database:
 				hzl = entry.ident
 				rows[HZL].append(f'<td colspan="{colspan}">{hzl}</td>')
 				
-				comp = ', '.join(entry.langs['COMP'])
-				rows[COMP].append(f'<td colspan="{colspan}">{comp}</td>')
-				
 				hittite = ', '.join(entry.langs['HIT'])
 				rows[HIT].append(f'<td colspan="{colspan}">{hittite}</td>')
 				
@@ -295,6 +292,9 @@ class Database:
 				
 				akkadian = ', '.join(entry.langs['AKK'])
 				rows[AKK].append(f'<td colspan="{colspan}">{akkadian}</td>')
+				
+				note = '; '.join(entry.langs['COMP'] + entry.langs['NOTE'])
+				rows[NOTE].append(f'<td colspan="{colspan}">{note}</td>')
 				
 				def meanings1(sg): return ', '.join(entry.notes['SUM'][sg])
 				sumerian = ', '.join(f'{sg} "{meanings1(sg)}"' for sg in entry.langs['SUM'])
