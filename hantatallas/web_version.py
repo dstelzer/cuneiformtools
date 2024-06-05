@@ -89,7 +89,7 @@ def do_searching(code, regex, tags, mode, sort, expkey=None):
 		recomp = None
 	
 	if tags.strip():
-		newtags = frozenset(tags.split(','))
+		newtags = tuple(t.strip() for t in tags.split(','))
 	else:
 		newtags = ()
 	

@@ -78,8 +78,9 @@ class DatabaseEntry:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional[mode])):
-			if not any(pres.matches(tags)): # Filter out forms based on the tags
-				continue
+	#		if not any(pres.matches(tags)): # Filter out forms based on the tags
+	#			continue
+	# TODO: should tags be considered in this method at all?
 			if part is None:
 				ident = f'{self.ident}/{i+1}' if i else str(self.ident)
 				yield ident, pres, ()
@@ -170,18 +171,35 @@ class Database:
 			exp = '.'.join(self.expansions[name])
 			raise ValueError(f'Sign {name} is shorthand for {exp}')
 		
-		if '/' in name: name, variant = name.split('/')
-		else: variant = '1'
-		name = name.strip()
-		variant = int(variant.strip())
+		if '/' in name: # We have name/variant instead of just name
+			name, variant = name.split('/')
+			name = name.strip()
+			variant = variant.strip()
+			
+			try: # Is the variant a number?
+				variant = int(variant)
+			except ValueError: # Nope!
+				pass
+		else: # It's just a name, set variant to None
+			name = name.strip()
+			variant = None
 		
 		if name not in self.name_lookup: raise ValueError(f'Unknown sign name {name}')
 		
 		entry = self.name_lookup[name]
-		forms = sorted((f for f in entry.forms), reverse=True, key=lambda f: f.matches(tags)) # The `matches` method returns a tuple of booleans showing which tags matched; sorting by that key, in reverse order, puts the Trues before Falses, so it'll first return a form matching the first tag, then if that's not available a form matching the second tag, and so on
-		if len(forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s) with tag(s) ({", ".join(tags)}); cannot produce {variant}')
 		
-		return parse(forms[variant-1].code)
+		if isinstance(variant, int): # Do we have a variant number?
+			if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
+			code = forms[variant-1].code # -1 because the first one is 1 not 0, following the HZL's practice
+		else: # No variant number specified, so we're looking for the form that maximizes our tags
+			if variant is not None: # Do we have a variant that's not a number? If so, we add it to the front of our tags list
+				tags = (variant,) + tags
+			# Then we take the form that maximally matches our tags
+			# The `matches` method returns a tuple of booleans showing which tags matched in which order, so we maximize that tuple
+			form = max((f for f in entry.forms), key=lambda f: f.matches(tags))
+			code = form.code
+		
+		return parse(code)
 	
 	def parse_transcription(self, trans, tags=()): # Go from a textual transcription to a list of rows of signs and spacers
 		# Special codes: `n newline, `r ruling, `w word sep, `f hfill
@@ -202,6 +220,7 @@ class Database:
 	#		line = re.sub(r'\s*(`[wfF])\s*', r'.\1.', line) # Remove any whitespace surrounding separators and fillers
 			line = re.sub(r'\s+', '.`w.', line) # Replace whitespace with `w (word separator)
 			line = line.replace('-', '.') # Standardize separators; dot and dash are treated equivalently here
+			line = line.replace('^', '.') # Similarly ^ for determiners
 			for j, unit in enumerate(line.split('.')):
 				try:
 					if not unit: continue
