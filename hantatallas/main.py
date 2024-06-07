@@ -8,15 +8,16 @@ from database import Database
 
 def test_rendering():
 	while True:
-		try:
-			construct = parse(input() or 'S([0\'"v!]h2)', friendly=True)
+	#	try:
+			construct = parse(input('>') or 'S([0\'"v!]h2)', friendly=True)
 			print(construct)
-			print(construct.functional_form())
-			print(construct.forest())
-			InkRenderer.render(construct, margin=32).show()
+		#	print(construct.functional_form())
+		#	print(construct.forest())
+		#	InkRenderer.render(construct, margin=32).show()
+			TwoSidedRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
-		except ValueError: pass
+	#	except ValueError: pass
 
 def test_group_rendering():
 	while True:
@@ -74,9 +75,15 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_layout()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't
 
 # Crash comes from {h[0{cc}{hh}{hh}0]h} - FIXED
+
+# CRASH TO FIX
+# {h[vT]M} causes an infinite loop
+# Search for PASS_LIMIT in elements.py to see where
+# Currently added a way to break out of it if there's trouble
+# But this deserves more attention!

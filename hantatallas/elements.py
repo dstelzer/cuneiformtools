@@ -79,6 +79,8 @@ class CanvasShape(Enum):
 
 MAXIMUM_HEAD_SIZE = 1/3
 
+PASS_LIMIT = 20 # Avoid an infinite loop in one routine
+
 class Canvas(Element):
 	def __init__(self, shape, internal, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -479,6 +481,7 @@ class Container(Element):
 		
 		while True: # Now we go through an iterative process, reclaiming any available space, redistributing it, and repeating as necessary.
 			# The first step: figuring out how much space can be reclaimed, and where it should be put.
+			print('.', end='', flush=True)
 			for each in self.contents: each._tmpgrow = 0 # Scratch variable
 			dirty = False # Do we need to recalculate anything?
 			while True:
@@ -564,6 +567,10 @@ class Container(Element):
 			
 			passes += 1
 			# Now loop back and check again
+			# But as a failsafe:
+			if passes > PASS_LIMIT: # This should never be necessary, but we don't want to crash
+				print('WARNING: PASS_LIMIT REACHED')
+				break
 		
 		# Once we've done all the positioning, we see if there's any vertical space we can give up to other elements on the next level up
 		largest_k = max(each.dims[kd] for each in self.contents)
