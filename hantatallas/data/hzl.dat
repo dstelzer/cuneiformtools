@@ -2523,8 +2523,9 @@
 			reeds, swamp
 	FORM
 		[{h[vv2]Mh}v]
-		[{[v{h[vv2]M}]h}v]
-		[{[hv'v2']h}v]
+		[{[v{h[vv2]M}]h}v]	variant
+		L[{hh}vv2v]	variant
+		L[{hh}{[vv]v}v]	variant
 	NAME
 		AMBAR BUGIN BUNIN SUG
 183
@@ -2534,11 +2535,13 @@
 		AL
 			hoe
 	FORM
-		L[{0hh}v{0h}v]
-		L[{0hh}v{ch}v]
-		W[{0hh}{[vvd]h}]
-		L[{0hh}{[v0v]h}]
-		L[{0hh}v{0u}v]
+		L[{hh}v{0h}v]	old
+		L[{hh}v{ch}v]	new
+		L[{hh}v{0u}v]	variant
+		L[{hh}v{vu}]	variant
+		L[{hh}{[v0v]h}]	variant
+		W[{hh}{[vvd']h}E]	variant
+		L[{hh}{[vvh]h}E]	variant
 	NAME
 		AL
 184
@@ -2546,9 +2549,9 @@
 		KU₇
 			sweet
 	FORM
-		L[{0hh}v{0h}v]
-		[{0hh}vcv]
-		[{[hv][hh]}v]
+		L[{hh}v{0h}v]	old
+		[{hh}vcv]	new
+		[{[hv][hh]}v]	variant
 	NAME
 		KU7
 185
@@ -2562,8 +2565,9 @@
 			another
 			cor (Akk. kurrum, a unit of measurement)
 	FORM
-		[{0h(hv)}v]
-		L[{0h'h}vv]
+		[{h(hv)R}v]	old
+		L[{h'h}vv]	new
+		L[{h2h}vv]	variant
 	NAME
 		GUR KÙR KUR3 QUR
 186
@@ -2571,18 +2575,23 @@
 		LAGAR
 			[component of other signs]
 	FORM
-		[{0h(hv)}v]
-		L[{0h'h}vv]
+		[{h(hv)R}v]	old
+		L[{h'h}vv]	new
 	NAME
 		LAGAR
+	NOTE
+		Never used on its own in Hittite
 187
 	HIT
 		e
 	AKK
 		i₁₅
 	FORM
-		[{0h(hv)}v2]
-		[{0hh}vv2]
+		[{0h(hv)}v2]	old
+		[{0hh}vv2]	new
+		[{hhv}v2]	variant
+		[{hhh}vv2]	variant
+		[{hh(hv)}v]	variant
 	NAME
 		E I15
 188
@@ -2592,7 +2601,7 @@
 		UTUL₅
 			cattle herder
 	FORM
-		W[{0hh}vv2c{d{[hc]([hc]v)}Mu}c]
+		W[{0hh}vv2c{d{[hc]([hc]v)}Mu}Ec]
 	NAME
 		UTUL5
 189
@@ -2600,10 +2609,10 @@
 		E!.KISIM₅×GA
 	SUM
 		UBUR
-			(female-presenting) breast, nipple
+			(female) breast, nipple
 	FORM
-		W[{0hh}vv2c{d{[hc]([hc][vv])}Mu}c]
-		W[{0h(hv)}v2c{d{[hc]([hc][vv])}Mu}c]
+		W[{0h(hv)}v2c{d{[hc]([hc][vv])}Mu}Ec]	old
+		W[{0hh}vv2c{d({[hc][hc]}[vv])Mu}Ec]	new
 	NAME
 		UBUR
 190
@@ -2613,7 +2622,7 @@
 		E!.KISIM₅×(A.MAŠ)
 			pen (for animals)
 	FORM
-		W[{0hh}vv2c{d[vv20'"(hv)]Mu}c]
+		W[[{0hh}v]v2c{d[vv20'"(hv)]Mu}Ec]
 	NAME
 		E+KISIM5×A+MAŠ
 191
@@ -2635,9 +2644,11 @@
 			head
 			first
 	FORM
-		L[{[hv]h'}v{hh}v]
-		L[{0h(hv)}v{0hh}v]
-		L[{[hvv{0h'h'}]h}v]
+		L[{[hv{hh}]E([v0]h)}v]	old
+		L[{[hv]h'}v{hh}v]	new
+		L[{0h(hv)}v{0hh}v]	variant
+		L{[hv'v0'"(v{hh})]h}	variant
+		L[{[hvv{0h'h'}]h}v]	variant
 	NAME
 		ŠAG ŠAK ŠAQ RIŠ SAG SUR14
 193
@@ -2645,9 +2656,11 @@
 		GURUN
 			fruit
 	FORM
-		[{0hh0}{vc'}{vc'}{0cc0}]
 		{[0vv0][hc][hc][0cc0]}
-		[{0hh0}{vv}{vv}{0hh0}]
+		[{0hh0}{vc'}{vc'}{0cc0}]	variant
+		[{0hh0}{vc'}{vc'}]	variant
+		[{0hh0}{vv}{vv}{0hh0}]	variant
+		([v"v"][v'?v'?]{h"h"}{h'?h'?})	variant unusual anomalous
 	NAME
 		GURUN
 194
@@ -2660,9 +2673,9 @@
 			[component of other signs]
 	FORM
 		L[{0hh}vv'v]
-		L[{dh}vv'v]
-		L(h[{h0}vv'v])
-		({hh}[vvv])
+		L[{d'h}vv'v]	variant
+		L(h[{h0}vv'v])	variant
+		({hh}[vvv])	variant
 	NAME
 		KID KIT KIṬ GÉ GE2 KE4 LÍL LIL2
 195
@@ -2680,11 +2693,13 @@
 		Ú
 			plant
 	FORM
-		[{0hh}vvv]
-		{[vvv]hh}
-		({0hh}[vvvv])
-		L[{0hh}vvvvvvv]
-		{[hvvv]h}
+		L[{hh}vvv]
+		{[vvv]hh}	variant
+		L({hh}[vvvv])	variant
+		L[(v{hh})vvv]	variant
+		[{hh}vv]	variant
+		W[{hh}vvvvvvv]	variant
+		L{[hvvv]h}	variant
 	NAME
 		Ú U2 ʔU× ŠAM KÙŠ KUŠ3
 196
@@ -2706,9 +2721,11 @@
 		LAMMA
 			protective deity
 	FORM
-		L[({0hh}[0vv0])v2]
-		[{0hh}vvv2]
-		[{0h(hv)}vv2]
+		L[({hh}[0vv0])v2]	old
+		L[{hh}vvv2]	new
+		[{0h(hv)}vv2]	variant
+		[{cc}vvv2]	variant
+		L[{[hvv]h}v2]	variant
 	NAME
 		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KALA KALAG LAMMA
 197
@@ -2720,8 +2737,10 @@
 			humanity
 			population
 	FORM
-		[{0h(hv')}{vv}{vv}]
-		[{0hhv}{vv}{vv}]
+		[{h(hv'R)}{vv}{vv}]	old
+		L[{hh}v{vv}{vv}]	new
+		[{hh}{vv}{vv}]	variant
+		[{0hhvR}{vv}{vv}]	variant
 	NAME
 		UN ÙG UG3 ÙKU UKU3
 198
@@ -2733,11 +2752,12 @@
 		SUKKAL
 			vizier, minister
 	FORM
-		L[{0hh}vv'v'v]
-		L[{h'[{hh}v]}[vv'v'v]]
-		L[{0h(hv')}vv'v'v]
-		L[{0hhv}vv'v'v]
-		L[{hh}vvvc]
+		L[{hh}Evv'v'v]	old
+		W[{h'[{hh}v]}Evv'v'v]	new
+		L({0hh}[vv'v'v])	variant
+		L[{h(hvR)}Evv'v'v]	variant
+		L[{0hhv}Evv'v'v]	variant
+		L[{hh}vvvc]	variant unusual
 	NAME
 		LUḪ LÀḪ LAḪ3 SUKKAL
 199
@@ -2751,10 +2771,12 @@
 		É
 			building
 	FORM
-		L[{0hh}vv'v'v'v]
-		L[([vv'v'v'0]{0hh})v]
-		L[{[hv'v'v'v'0]h}v]
-		L[{[0vvvv0]hh}v]
+		L[([vv'v'v'0]{0hh})v]	old
+		L[{hh}Evv'v'v'v]	new
+		L[{[hv'v'v'v'0]h}v]	variant
+		L[{[0vvvv0]hh}v]	variant
+		L[{(h[vvvv0])h}v]	variant
+		L[{[0vv]hh}vv]	variant
 	NAME
 		É E2 PID PIT PIṬ
 200
@@ -2766,11 +2788,12 @@
 		SA
 			tendon, muscle
 	FORM
-		L([vv'v'v'v']{0hh})
-		L{[v0'"{d[vvvv]}]h}
-		L[v({d[vvvv]}{0h})]
-		L([v0]{hh[0vvvv]})
-		L[{0hh}vv'v'v'v']
+		L([vv'v'v'v']{0hh})	old
+		L([v{d'[vvvv]}]{0h})	new
+		L{[v0'"{d[vvvv]}]h}	new
+		L([v0]{hh[0vvvv]})	variant
+		L[{0hh}vv'v'v'v']	variant
+		L([v0]{0h(h[0vvv])})	variant
 	NAME
 		SA
 201
@@ -2781,7 +2804,8 @@
 	FORM
 		L[{0hh}v2c'{cc}]
 		L[{0hh}v2{[vv]v}TE]
-		[{vh(vh)}c'{cc}]
+		[{vh(vh)}c'{cc}]	variant
+		[{h(vh)}c'{cc}]	variant
 	NAME
 		GÚ GU2
 202
@@ -2794,10 +2818,11 @@
 	AKK
 		ṭur
 	FORM
-		L[{0hh}v2c'{chc}]
-		L[{[hv][hv]}0'"c'{cc}h]
-		L[{0hh}v20'"{ccc}{d(uv)}]
-		L[{[hv][hv]}0'"{ccc}h]
+		L[{hh}v2c'{chc}]	old
+		L[{[hv][hv]}0'"c'{cc}h]	old
+		L[{hh}v20'"{ccc}{d(uv)}]	new
+		W[{h2h'}v2c'{cc}{d'hv}]	variant
+		L[{hh}v2c{cc}(hv)]	variant
 	NAME
 		DUR TÚR TUR2 ṬUR
 203
@@ -2809,8 +2834,8 @@
 			body part
 			meat
 	FORM
-		L[{0hh}v2{[vvv][vv]}TE]
-		L[{0hh}v20'"{cc}{cc}]
+		L[{hh}v2{[vvv][vv]}TE]
+		L[{hh}v20'"{cc}{cc}]	variant
 	NAME
 		UZU
 204
