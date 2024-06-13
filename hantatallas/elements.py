@@ -481,7 +481,7 @@ class Container(Element):
 		
 		while True: # Now we go through an iterative process, reclaiming any available space, redistributing it, and repeating as necessary.
 			# The first step: figuring out how much space can be reclaimed, and where it should be put.
-			print('.', end='', flush=True)
+	#		print('.', end='', flush=True)
 			for each in self.contents: each._tmpgrow = 0 # Scratch variable
 			dirty = False # Do we need to recalculate anything?
 			while True:

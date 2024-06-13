@@ -31,6 +31,7 @@ SANITIZE = { # FontForge doesn't like certain characters in glyph names
 	'Ḫ' : 'H',
 	'Ṭ' : 'T.',
 	'Ṣ' : 'S.',
+	'₄' : '4',
 }
 
 def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
@@ -50,14 +51,12 @@ ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since 
 def clean_xml(file1, file2):
 	SAFE_ATTRS = {'d', 'transform', 'style'} # The attributes we don't want to change
 	tree = et.parse(file1)
-#	print('\tRead file')
 	for path in tree.getroot().iter():
 		if not path.tag.endswith('path'): continue
 		if 'style' in path.attrib: continue # Already has a style
 		style = []
 		iterator = list(path.attrib.items()) # So we can edit while iterating
 		for key, val in iterator:
-#			print('\t', key, val)
 			if key in SAFE_ATTRS: continue
 			style.append(f'{key}:{val};')
 			del path.attrib[key]
@@ -176,13 +175,17 @@ class Font:
 		print('\tReading glyph data')
 		self.read_glyph_data()
 
-def generate_font(renderer, outname, tags=(), **extra):
+def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
+	if dryrun: print('*** DRY RUN ***')
+	
 	from database import Database
 	db = Database()
 	db.load_data('data/hzl.dat')
 	print('Database loaded')
 	
-	font = Font(renderer=renderer, **extra)
+	unused = set(e.ident for e in db.data) # Set of all HZL codes
+	
+	if not dryrun: font = Font(renderer=renderer, **extra)
 	print('Font skeleton prepared')
 	
 	import csv
@@ -212,15 +215,20 @@ def generate_font(renderer, outname, tags=(), **extra):
 			if entry is None:
 				print(f'\tWarning: no sign numbered {hzl2} found in database! Skipping and moving on')
 				continue
+			unused.discard(hzl2) # We've now used this one
 			try:
 				best = max((f for f in entry.forms), key=lambda f: f.matches(tags)) # Find the form that best matches the tags
-				print('\tFound code', best.code)
-				font.encode_glyph(codepoints, parser.parse(best.code), name)
+				print('\tFound code', best.code, 'with tags <', ' '.join(best.tags), '>')
+				if not dryrun: font.encode_glyph(codepoints, parser.parse(best.code), name)
 			except KeyboardInterrupt:
 				break
 	print('Glyphs encoded')
 	
-	font.finalize(outname)
+	if unused:
+		tmp = ' '.join(unused)
+		print(f'WARNING: {len(unused)} HZL codes not encoded: {tmp}')
+	
+	if not dryrun: font.finalize(outname)
 	print('Font exported! Finished!')
 
 if __name__ == '__main__':
@@ -230,4 +238,4 @@ if __name__ == '__main__':
 #	f.glyph_import()
 #	f.finalize('/home/daniel/Downloads/tmp/tmp.sfd')
 #	input()
-	generate_font(InkRenderer, 'ink.sfd', ('new',), strokewidth=0.05)
+	generate_font(InkRenderer, 'ink_old.sfd', ('old',), strokewidth=0.05, dryrun=False)

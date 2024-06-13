@@ -1485,7 +1485,7 @@
 	NAME
 		EZEN4 EZEN
 	NOTE
-		Used instead of the usual EZEN in Hittite.
+		Used instead of the usual EZEN in Hittite. But why does it need a separate name?
 108
 	COMP
 		AB×PA
@@ -3171,7 +3171,7 @@
 			[usage not clear]
 	FORM
 		W[{d2hhh}R{[v'vv'v'v]h}c"c"c"]
-		L{[d2'vv'v'v0]h(h[0ccc])	variant
+		L{[d2'vv'v'v0]h(h[0ccc])}	variant
 		W[{cc}{[{vv}{vv}{vv}]h}c"c"c"]	variant
 		L{[{cc}v'{vv}{vv}{vv}]h}	variant
 	NAME
@@ -3337,6 +3337,7 @@
 	SUM
 		SIG₇
 			green, yellow
+		(LIM-gunu?)
 			10,000, myriad, unusually many
 	FORM
 		L[{hhhh}cvh]
@@ -3344,7 +3345,7 @@
 		L[{h[hc]h}vh]	variant
 		[{hch}vh]	variant
 	NAME
-		SIG7
+		SIG7 10000
 240
 	HIT
 		kàr
@@ -3357,7 +3358,7 @@
 		L[{hhh}[v{[vv]v}]TE]	variant
 		L[{hh2h}{[vvv]v}TE]	variant
 	NAME
-		GÀR GAR3 KÀR KAR3 QAR 10000
+		GÀR GAR3 KÀR KAR3 QAR
 241
 	HIT
 		tàš
@@ -3461,7 +3462,6 @@
 	HIT
 		:
 		P2
-		Glossenkeil
 	FORM
 		N{cc}
 		P[c'c']
@@ -3470,6 +3470,8 @@
 		[vv]T
 	NAME
 		: P2
+	NOTE
+		The "Glossenkeil"
 249
 	HIT
 		te
@@ -4068,7 +4070,7 @@
 	SUM
 		IGI
 			eye, see
-		1000
+		(U.ME?)
 			1,000
 	FORM
 		[cvh]
@@ -4798,8 +4800,6 @@
 	NAME
 		ḪI ḪE ŠÁR ŠAR2 TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 DU10 DÙG DUG3 NIMIN NIN5 40
 336
-	COMP
-		TODO FIX ME
 	SUM
 		GAŠAN
 			lady, mistress (respectful)
@@ -4814,6 +4814,19 @@
 		GAŠAN
 	NOTE
 		The only form shown in the HZL is the "anomalous" one here. The others are based on tablets examined by the author.
+336B
+	COMP
+		"GAŠAN+TI"
+		SIG₅-gunu
+	SUM
+		(GAŠAN+TI?)
+			100,000?
+	FORM
+		L[{ddhuu}cvhc']	reconstructed
+	NOTE
+		Reconstructed; see Hoffner, "On Higher Numbers in Hittite".
+	NAME
+		GAŠAN+TI 100000
 337
 	HIT
 		im
@@ -5076,10 +5089,12 @@
 	FORM
 		[{ccc}{ccc}{hh}v]	old
 		L[{ccc}{ccc}{hh}vv]	new
-		L[{ccc}{ccc}({hh}[vv])]
-		[{ccc}{ccc}{[vv]h}]
-		L[{v[vvv]}TEv{hh}v]
-		L[{d2d2d2d}v{h'h}v]
+		L[{ccc}{ccc}({hh}[vv])]	variant
+		L[{[vvv][vvv]}T({hh}[vv])]	variant
+		L[{ccc}{ccc}0'"v({hh}v)]	variant
+		[{ccc}{ccc}{[vv]h}]	variant
+		L[{v[vvv]}TEv{hh}v]	variant
+		L[{d2d2d2d}v{h'h}v]	variant
 	NAME
 		ŠAR ŠIR9 SAR ŠER9 KIRI6 MÚ MU2 SAKAR
 354
@@ -5089,15 +5104,16 @@
 		en₆
 	FORM
 		L[{ccc}{ccc}{du}]
-		L[{ccc}{ccc}(du)]
-		L[{[vvvv][vvv]}TE{h'h}]
-		L[{d2d2d}{h'(h[v'v'0])}]
-		L[{cc}{cc}{d'(u[vvv0])}]
+		L[{ccc}{ccc}{d'u}]
+		L[{ccc}{ccc}(du)]	variant
+		W[{[vvvv][vvv]}T{h'h}]	variant
+		L[{d2d2d}{h'(h[v'v'0])}]	variant
+		L[{cc}{cc}{d'(u[vvv0])}]	variant
 	NAME
 		IN EN6
 355
 	COMP
-		ḪI.BAD?
+		ḪI+BAD?
 	HIT
 		kam
 	AKK
@@ -5115,9 +5131,8 @@
 			number
 	FORM
 		{[vvv][vvv]v}T
-		{[vvv][vv]}T
-		P{d2d2d2d"}
-		L[{[vvvv]v}TEhc"]
+		{[vvv][vv]}T	variant
+		L[{[vvvv]v}TEhc"]	variant unusual
 	NAME
 		KAM GÁM GAM2 QÁM QAM2 TU7 ÚTUL UTUL2
 356
@@ -5137,10 +5152,11 @@
 		GÉŠ/GÍŠ
 			60
 	DET
-		DIŠ/1
-			individual name (usually male)
+		DIŠ/1/m
+			individual name
+			male name
 	FORM
-		Pv
+		Nv
 	NAME
 		DIŠ TIŠ DÁŠ DAŠ2 TÁŠ TAŠ2 ANA GÌ GI3 ṬIŠ GÉŠ GEŠ2 GÍŠ GIŠ2 1 M 60
 357
@@ -5157,8 +5173,9 @@
 			[component of other signs]
 	FORM
 		P[vh]
+		P(vh)	variant unusual
 	NAME
-		ME MÌ MI3 ŠIB ŠIP IŠIB
+		ME MÌ MI3 ŠIB ŠIP IŠIB 100
 358
 	HIT
 		lal
@@ -5169,6 +5186,7 @@
 			tip?
 	FORM
 		[v0'"{h0}]
+		[v0'"{hh"0}]	variant
 	NAME
 		LAL LÁ LA2
 359
@@ -5176,7 +5194,7 @@
 		70
 			70
 	FORM
-		[vc]
+		P[vc]
 	NAME
 		70
 359B
@@ -5199,12 +5217,15 @@
 		90?
 			90
 	FORM
-		[vccc]
-		[vhhh]
-		[v(h[ccc])]
-		[vvccc]
-		[vvhhh]
-		[vd3]
+		[vccc]	old
+		[vhhh]	new
+		[v(h[ccc])]	variant
+		L[vhccc]	variant
+		[ccvc]	variant
+		[vEhhhhh]	variant unusual
+		[vvccc]	variant
+		[vvhhh]	variant
+		[v0'd3"]	variant unusual
 	NAME
 		MEŠ EŠ17 90
 361
@@ -5225,8 +5246,8 @@
 			[component of other signs]
 	FORM
 		[vv'{hh'0}]
-		[v20'"{hh0}]
-		[v"v'0'"{h0'"d2}]
+		[v20'"{hh0}]	variant
+		[v"v'0'"{h0'"d2"}]	variant unusual
 	NAME
 		LÁL LAL2 LA5
 363
@@ -5253,8 +5274,23 @@
 			moist, fresh
 	FORM
 		P[vv2]
+		P[vvv']	variant unusual
 	NAME
 		A ʔ× ʔA× DUR5 DURU5 AYA AIA AYE AIE
+364B
+	COMP
+		A+NA
+	AKK
+		aná
+	FORM
+		L[vv2hc{c0}v]
+		L[vvhccv]	variant
+		L[vvh{cc}v]	variant
+		L[vv{ch}v]	variant
+	NOTE
+		Not given its own sign number in HZL.
+	NAME
+		A+NA ANÁ ANA2
 365
 	COMP
 		A.ENGUR
@@ -5266,7 +5302,7 @@
 			river
 	FORM
 		L[vv20'"{hh2h}v]
-		L[vv20'"{h[h2v]Mh}v]
+		L[vv20'"{h[h2v]Mh}v]	variant
 	NAME
 		I7 ÍD ID2
 366
@@ -5284,6 +5320,7 @@
 			carnelian
 	FORM
 		P[{vv}{vv}]
+		P{[vvv][vv]}	variant
 	NAME
 		ZA SÀ SA3 ṢA
 367
@@ -5298,8 +5335,11 @@
 		KU₆
 			fish
 	FORM
-		P[{vv}E{0c}{vv}E{0c}]
-		P{[vv][vcvc]}
+		P{[vv][vcvc]}	old
+		P[{vv}E{0c}{vv}E{0c}]	old
+		P[{vv}{vv}{0c}]	new
+		P{[vcvc][vv]}	variant
+		P{[vv][vvc]h}	variant
 	NAME
 		ḪA ʔA4 KU6
 368
@@ -5328,7 +5368,8 @@
 			bread
 	FORM
 		{[vv'v]v}
-		{[vv'v]h}
+		[v{[vv]v}]	variant
+		{[vv'v]h}	variant unusual
 	NAME
 		ŠÁ ŠA2 NÌ NI3 NÍG NIG2 NÍK NIK2 NÍQ NIQ2 GAR NINDA
 370
@@ -5337,8 +5378,8 @@
 			4
 	FORM
 		{[vvv]v}
-		[v{[vv]v}E]
-		[{[vv]v}Ev]
+		[v{[vv]v}E]	variant
+		[{[vv]v}Ev]	variant
 	NAME
 		LIMMU 4
 371
@@ -5363,7 +5404,7 @@
 			7
 	FORM
 		P{[vvv][vvv]v}
-		{[vvvv][vvv]}
+		{[vvvv][vvv]}	variant
 	NAME
 		IMIN 7
 374
@@ -5380,6 +5421,6 @@
 			9
 	FORM
 		P[{vvv}{vvv}{vvv}]
-		P{[vvvv][vvv][vv]}
+		P{[vvvv][vvv][vv]}	variant
 	NAME
 		ILIMMU 9
