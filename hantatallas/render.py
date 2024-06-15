@@ -1078,6 +1078,7 @@ class InkRenderer(GraphicRenderer):
 			
 			endpts = {(v.pos[0]+v.dims[0]/2, v.pos[1]+v.dims[1]) for v in vs} # Bottom center of each vertical
 			for v in vs:
+				if Modifier.INTERNAL_HEADLESS not in v.mods: continue # This is only a problem for headless strokes
 				head = (v.pos[0]+v.dims[0]/2, v.pos[1]) # Top center
 				for tail in endpts:
 					if close(head, tail):
@@ -1093,6 +1094,7 @@ class InkRenderer(GraphicRenderer):
 			
 			endpts = {(h.pos[0]+h.dims[0], h.pos[1]+h.dims[1]/2) for h in hs} # Center right of each horizontal
 			for h in hs:
+				if Modifier.INTERNAL_HEADLESS not in h.mods: continue
 				head = (h.pos[0], h.pos[1]+h.dims[1]/2) # Center left
 				for tail in endpts:
 					if close(head, tail):

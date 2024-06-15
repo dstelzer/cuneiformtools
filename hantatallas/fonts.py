@@ -38,7 +38,7 @@ def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
 	out = 'LIG_' + orig
 	for k,v in SANITIZE.items():
 		out = out.replace(k,v)
-	print(f'\tSanitized {orig} to {out}')
+#	print(f'\tSanitized {orig} to {out}')
 	return out
 
 ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since that's the default rendering of a wildcard stroke) - could change to P* to make it narrower if desired
@@ -48,23 +48,34 @@ ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since 
 # Inkscape malfunctions if these are kept separate instead of being put in a single style attribute
 # (It seems to work okay but the resulting paths lose their style information, so you'll end up with fills and no strokes)
 # So we have to manually go in and fix up the XML
+# Similarly, we have to ensure all paths are enclosed by a group, because the ungrouping operation sets certain path attributes that Inkscape needs
+# Without that, we'll get odd tapers at the ends of strokes when we perform Stroke to Path
 def clean_xml(file1, file2):
+	def real_tag_name(element): # Deal with namespacing
+		return et.QName(element).localname
+	
 	SAFE_ATTRS = {'d', 'transform', 'style'} # The attributes we don't want to change
 	tree = et.parse(file1)
-	for path in tree.getroot().iter():
-		if not path.tag.endswith('path'): continue
+	root = tree.getroot()
+	for path in root.iter():
+#		print(real_tag_name(path))
+		if not real_tag_name(path) == 'path': continue
 		if 'style' in path.attrib: continue # Already has a style
 		style = []
-		iterator = list(path.attrib.items()) # So we can edit while iterating
-		for key, val in iterator:
+		for key, val in list(path.attrib.items()): # List so we can edit while iterating
 			if key in SAFE_ATTRS: continue
 			style.append(f'{key}:{val};')
 			del path.attrib[key]
 		path.attrib['style'] = ''.join(style)
+	if not any(real_tag_name(child) == 'g' for child in root): # No group in the root
+		g = et.Element('g')
+		for child in list(root): # Again, so we can edit while iterating
+			g.append(child) # In lxml.etree, unlike standard Python etree, nodes can only have one parent, so this also unlinks them from the root
+		root.append(g)
 	tree.write(file2)
 
 class Font:
-	def __init__(self, tmpname=Path('font_tmp'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, stroke_width=0.025, renderer=TwoSidedRenderer, **extra):
+	def __init__(self, tmpname=Path('font_tmp'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, renderer=TwoSidedRenderer, **extra):
 		self.font = fontforge.font() # Make a new font
 		self.tmp = tmpname
 		self.tmp.mkdir(exist_ok=True) # If it doesn't already exist
@@ -72,7 +83,6 @@ class Font:
 		self.initial_margin = initial_margin
 		self.final_bottom = final_bottom
 		self.glyph_size = glyph_size
-		self.stroke_width = stroke_width
 		self.renderer = renderer
 		
 		self.extra = extra
@@ -92,7 +102,7 @@ class Font:
 	#	self.font.generate(filename)
 		missing = self.used_in_ligatures - self.used_outside_ligatures
 		if missing: # If this becomes a problem, put actual handling here
-			print('\tWARNING: some signs used in ligatures but not outside them! Encoding as crosses for now...')
+			print('\nWarning: some signs used in ligatures but not outside them! Encoding as crosses for now...')
 			print('\t\t' + ' '.join(f'{c:04x}' for c in missing))
 			for cp in missing:
 				self.encode_glyph(cp, ERROR_CODE, None) # Creates the missing glyphs but leaves them empty
@@ -161,18 +171,18 @@ class Font:
 		if isinstance(unicode, int): unicode = (unicode,) # Ensure a tuple
 		if len(unicode) == 1: # Single codepoint
 			if self.font.findEncodingSlot(unicode[0]) != -1: # Already exists
-				print(f'\tWarning: codepoint {unicode[0]:04x} already used! Skipping.')
+				print(f'\n\tWarning: codepoint {unicode[0]:04x} already used! Skipping.')
 				return # Skip instead of overwriting - if we import another glyph into the slot it'll actually add them together instead of overwriting, and since the first one's already been repositioned, the result will be a mess
-			print('\tSelecting single glyph', unicode[0])
+	#		print('\tSelecting single glyph', unicode[0])
 			self.select_glyph(unicode[0])
 		else: # Ligature of codepoints
-			print('\tSelecting ligature', unicode, name)
+	#		print('\tSelecting ligature', unicode, name)
 			self.select_ligature(unicode, name)
-		print('\tWriting glyph data')
+	#	print('\tWriting glyph data')
 		self.write_glyph_data(root)
-		print('\tProcessing in Inkscape')
+	#	print('\tProcessing in Inkscape')
 		self.inkscape_processing()
-		print('\tReading glyph data')
+	#	print('\tReading glyph data')
 		self.read_glyph_data()
 
 def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
@@ -181,17 +191,17 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 	from database import Database
 	db = Database()
 	db.load_data('data/hzl.dat')
-	print('Database loaded')
+#	print('Database loaded')
 	
 	unused = set(e.ident for e in db.data) # Set of all HZL codes
 	
 	if not dryrun: font = Font(renderer=renderer, **extra)
-	print('Font skeleton prepared')
+#	print('Font skeleton prepared')
 	
 	import csv
 	with Path('data/unicode_cleaned.csv').open('r', newline='') as f:
 		r = csv.DictReader(f)
-		for row in r:
+		for row in tqdm(list(r)):
 			hzl = row['HethZL'].strip()
 			if '*' in hzl: # Flags like *B, *C, etc are used when multiple Unicode codepoints should have the same HZL value (due to signs merging in Hittite)
 				hzl2 = hzl.split('*')[0]
@@ -207,29 +217,50 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 					codepoints.append(int(c[2:], 16)) # Read as hex
 			printable = '+'.join(f'{c:04x}' for c in codepoints)
 			if not codepoints:
-				print(f'\tWarning: no codepoints found for {name} ("{unicode}")')
+				print(f'\n\tWarning: no codepoints found for {name} ("{unicode}")')
 				continue
 			
-			print(f'Looking up sign {hzl}: {name} ({printable})')
+	#		print(f'Looking up sign {hzl}: {name} ({printable})')
 			entry = next((e for e in db.data if e.ident==hzl2), None)
 			if entry is None:
-				print(f'\tWarning: no sign numbered {hzl2} found in database! Skipping and moving on')
+				print(f'\n\tWarning: no sign numbered {hzl2} found in database! Skipping and moving on')
 				continue
 			unused.discard(hzl2) # We've now used this one
 			try:
 				best = max((f for f in entry.forms), key=lambda f: f.matches(tags)) # Find the form that best matches the tags
-				print('\tFound code', best.code, 'with tags <', ' '.join(best.tags), '>')
+	#			print('\tFound code', best.code, 'with tags <', ' '.join(best.tags), '>')
 				if not dryrun: font.encode_glyph(codepoints, parser.parse(best.code), name)
 			except KeyboardInterrupt:
+				print(f'\nINTERRUPT')
 				break
-	print('Glyphs encoded')
+#	print('Glyphs encoded')
 	
 	if unused:
 		tmp = ' '.join(unused)
-		print(f'WARNING: {len(unused)} HZL codes not encoded: {tmp}')
+		print(f'\nWarning: {len(unused)} HZL codes not encoded: {tmp}')
 	
 	if not dryrun: font.finalize(outname)
-	print('Font exported! Finished!')
+#	print('Font exported! Finished!')
+
+rends = {
+#	'ink' : InkRenderer,
+	'pub' : TwoSidedRenderer,
+	'write' : OneSidedRenderer,
+	'linear' : LinearRenderer,
+}
+
+tags = {
+#	'old' : ('old',),
+	'new' : ('new',),
+#	'midold' : ('middle', 'old'),
+#	'midnew' : ('middle', 'new'),
+}
+
+opts = {
+	'ink' : {'strokewidth':0.05},
+	'pub' : {'strokewidth':0.025},
+	'write' : {'strokewidth':0.025},
+}
 
 if __name__ == '__main__':
 #	f = Font()
@@ -238,4 +269,11 @@ if __name__ == '__main__':
 #	f.glyph_import()
 #	f.finalize('/home/daniel/Downloads/tmp/tmp.sfd')
 #	input()
-	generate_font(InkRenderer, 'ink_old.sfd', ('old',), strokewidth=0.05, dryrun=False)
+	
+#	clean_xml('font_tmp/cairo.svg', 'font_tmp/modxml3.svg')
+	
+	input()
+	for rname, rend in tqdm(rends.items()):
+		opt = opts[rname] if rname in opts else {}
+		for tname, tag in tqdm(tags.items()):
+			generate_font(rend, f'fonts/{rname}_{tname}.sfd', tag, **opt)

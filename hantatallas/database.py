@@ -101,6 +101,7 @@ class Database:
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
 			for line in lines:
+				if not line: continue
 				source, target = line.split('\t')
 				self.cleanup[source] = target
 	
@@ -108,6 +109,7 @@ class Database:
 		with open(fn, 'r') as f:
 			lines = f.read().split('\n')
 			for line in lines:
+				if not line: continue
 				source, target = line.split('\t')
 				expand = list(target.split('.'))
 				self.expansions[source] = expand
@@ -310,6 +312,7 @@ class Database:
 if __name__ == '__main__':
 	db = Database()
 	db.load_data('data/hzl.dat')
+	db.load_expansions('data/replacements.dat')
 	db.prepare_sorting()
 	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
 	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))

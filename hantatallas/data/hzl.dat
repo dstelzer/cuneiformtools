@@ -1794,7 +1794,7 @@
 	HIT
 		wi₅
 	SUM
-		GEŠTIN
+		GEŠTIN (ŊEŠTIN)
 			wine
 	FORM
 		L[{0[hc]h}v{0dh}]
@@ -1803,7 +1803,7 @@
 		L[{hhh}(vdu)E]	variant unusual
 		W[{0hh0}{chhc}{h(du)}E]	variant unusual
 	NAME
-		WI5 UI5 GEŠTIN
+		WI5 UI5 GEŠTIN ŊEŠTIN
 132
 	HIT
 		uš
@@ -2640,7 +2640,7 @@
 		šak
 		riš
 	SUM
-		SAG
+		SAG (SAŊ)
 			head
 			first
 	FORM
@@ -2650,7 +2650,7 @@
 		L{[hv'v0'"(v{hh})]h}	variant
 		L[{[hvv{0h'h'}]h}v]	variant
 	NAME
-		ŠAG ŠAK ŠAQ RIŠ SAG SUR14
+		ŠAG ŠAK ŠAQ RIŠ SAG SUR14 SAŊ
 193
 	SUM
 		GURUN
@@ -3227,7 +3227,7 @@
 	AKK
 		lak
 	SUM
-		SANGA
+		SANGA (SAŊŊA)
 			priest, high priest
 		ÀKA
 			fleece
@@ -3243,7 +3243,7 @@
 		L[{[hc']c}{[vv'v'v]h}E]	variant
 		L[{hhh}{[vvv]h}E]	variant
 	NAME
-		LAG LAK LAQ ÀKA AKA3 SANGA ŠID ŠIT ŠITA5 ŠITI
+		LAG LAK LAQ ÀKA AKA3 SANGA ŠID ŠIT ŠITA5 ŠITI SAŊŊA
 232
 	COMP
 		E!.KISIM₅×LA
@@ -5288,7 +5288,7 @@
 		L[vvh{cc}v]	variant
 		L[vv{ch}v]	variant
 	NOTE
-		Not given its own sign number in HZL.
+		Not given its own sign number or reading in HZL.
 	NAME
 		A+NA ANÁ ANA2
 365
