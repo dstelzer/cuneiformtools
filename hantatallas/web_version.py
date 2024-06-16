@@ -102,11 +102,16 @@ def do_searching(code, regex, tags, mode, sort, expkey=None):
 	
 	return db.lookup_as_table(piece, recomp, newtags, newmode, sort)
 
-def do_scribing(instr, rendname, format='png', rendparams=None, layoutparams=None):
+def do_scribing(instr, rendname, tags='', format='png', rendparams=None, layoutparams=None):
+	if tags.strip():
+		newtags = tuple(t.strip() for t in tags.split(','))
+	else:
+		newtags = ()
+	
 	log = StringIO() # If there's an error, it'll get pretty-printed to stdout. So we capture everything sent to stdout in order to show it to the user if needed.
 	try:
 		with redirect_stdout(log):
-			rows = db.parse_transcription(instr)
+			rows = db.parse_transcription(instr, newtags)
 	except ValueError as e:
 		result = log.getvalue() or 'Error outside normal handling system\n'+'\n'.join(e.args) # The error message should always be pretty-printed to stdout (and thus redirected into `log`), but just in case it's not we have a fallback here: printing the exception's arguments
 		return '<pre>'+result+'</pre>'

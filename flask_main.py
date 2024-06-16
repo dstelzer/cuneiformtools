@@ -81,10 +81,11 @@ def do_galdubsar():
 	kerning = args.get('kerning', 1/8, type=float)
 	absolute = args.get('absolute', 0, type=int)
 	fixedwidth = args.get('fixedwidth', 0, type=float)
+	tags = args.get('tags', '', type=str)
 	
 	rendparams = {'bgcolor':bgcolor, 'fgcolor':fgcolor, 'hlcolor':hlcolor, 'strokewidth':strokewidth, 'hatchspace':hatchspace, 'fill':fill}
 	layoutparams = {'justify':justify, 'size':size, 'margin':margin, 'leading':leading, 'spacing':spacing, 'kerning':kerning, 'absolute':absolute, 'fixed':fixedwidth}
-	return do_scribing(text, rendname=rend, format=format, rendparams=rendparams, layoutparams=layoutparams)
+	return do_scribing(text, rendname=rend, tags=tags, format=format, rendparams=rendparams, layoutparams=layoutparams)
 
 @app.route('/experiment/image')
 def do_experiment_image():
