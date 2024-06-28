@@ -768,6 +768,13 @@ class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both 
 			return None
 		return AmbigStack(children)
 	
+	# For rendering, in case it's helpful for the UI, we treat it as vertical if it contains only horizontals and upwards, and otherwise horizontal
+	def propagate_dimensions(self, dims, pos):
+		if all(isinstance(child, (Horizontal, UpDiag)) for child in self.contents):
+			return VStack.propagate_dimensions(self, dims, pos)
+		else:
+			return HStack.propagate_dimensions(self, dims, pos)
+	
 	# We shouldn't have to worry about __contains__, because AmbigStacks should always be on the *right* side of a containment operation (and multiclassing will take care of that, it's both an HStack and a VStack), but we might as well safety-proof this
 	def __contains__(self, other): # This works the same as HStack and VStack except it checks both stack classes (which'll also catch AmbigStack as a subclass of them both)
 		if any((other in child) for child in self.contents): return True
