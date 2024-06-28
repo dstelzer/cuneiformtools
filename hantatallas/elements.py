@@ -746,7 +746,7 @@ class VStack(Container):
 
 class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both HStack and VStack for comparison purposes
 	def __str__(self): # We use weird brackets because people are never expected to code this explicitly
-		return '⁅' + ','.join(str(c) for c in self.contents) + '⁆'
+		return '⟦' + ','.join(str(c) for c in self.contents) + '⟧'
 	def forestname(self): return 'ambigstack'
 	# Other behavior is basically just inherited from HStack
 	# We only have to override this one method to call the appropriate class constructor

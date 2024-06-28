@@ -272,7 +272,7 @@ class VStack(Composition):
 class Superpose(Composition):
 	def __str__(self): return '(' + ','.join(str(c) for c in self.children) + ')'
 class AmbigStack(Composition): # This is the only place AmbigStacks are expected to come from, in the parser
-	def __str__(self): return '⁅' + ','.join(str(c) for c in self.children) + '⁆'
+	def __str__(self): return '⟦' + ','.join(str(c) for c in self.children) + '⟧'
 class Horizontal(Stroke):
 	def sigil(self): return 'h'
 class Vertical(Stroke):
