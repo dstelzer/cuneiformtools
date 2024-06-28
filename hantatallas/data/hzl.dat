@@ -4725,7 +4725,7 @@
 		L[{[vv]v}TEh]	variant
 		W[{[vvvv]v}T(h2[0vvvv])]	variant aleph
 	NAME
-		AḪ EḪ IḪ UḪ ʔA ʔE ʔI ʔU ʔ ALEPH
+		AḪ EḪ IḪ UḪ ʔA ʔE ʔI ʔU ʔ ALEPḪ
 	NOTE
 		Some dialects of Akkadian distinguished a sign for VḪ (the standard form) from a sign for ʔV (the "aleph" form), but Hittite didn't.
 333
@@ -5319,7 +5319,7 @@
 		GUG
 			carnelian
 	FORM
-		P[{vv}{vv}]
+		P{[vv][vv]}
 		P{[vvv][vv]}	variant
 	NAME
 		ZA SÀ SA3 ṢA
@@ -5395,7 +5395,7 @@
 		ÀŠ
 			6
 	FORM
-		[{vv}{vv}{vv}]
+		{[vvv][vvv]}
 	NAME
 		ÀŠ AŠ3 6
 373
@@ -5420,7 +5420,7 @@
 		ILIMMU
 			9
 	FORM
-		P[{vvv}{vvv}{vvv}]
+		P{[vvv][vvv][vvv]}
 		P{[vvvv][vvv][vv]}	variant
 	NAME
 		ILIMMU 9

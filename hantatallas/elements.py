@@ -167,7 +167,7 @@ class Stroke(Element):
 		mods = ''.join(sorted(m.value for m in self.mods))
 		if mods: modcode = '}\\code{' + mods
 		else: modcode = ''
-		return '\t'*tabs + '[\inlinesign{' + self._sigil() + modcode + '}]\n'
+		return '\t'*tabs + '[\\inlinesign{' + self._sigil() + modcode + '}]\n'
 
 class Void(Stroke): # An emptiness that takes up space and does nothing else
 	def __init__(self, *args, **kwargs):
@@ -741,6 +741,44 @@ class VStack(Container):
 				return True
 			child._remove_children(notes)
 		if isinstance(other, VStack):
+			return self._match_contents_highlight(other, notes)
+		return False
+
+class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both HStack and VStack for comparison purposes
+	def __str__(self): # We use weird brackets because people are never expected to code this explicitly
+		return '⁅' + ','.join(str(c) for c in self.contents) + '⁆'
+	def forestname(self): return 'ambigstack'
+	# Other behavior is basically just inherited from HStack
+	# We only have to override this one method to call the appropriate class constructor
+	# But it can be much simpler, since an AmbigStack should never contain stacks
+	def functional_form(self, special=empty):
+		# First, take the functional form of each child
+		raw_children = [c.functional_form(special) for c in self.contents]
+		children = []
+		# Then go through and check some things
+		for child in raw_children:
+			if child is None: continue # Skip over blanks
+			elif isinstance(child, Container): raise ValueError('Container inside AmbigStack is not allowed') # Much simpler!
+			else: children.append(child)
+		if len(children) == 1:
+			# If we only have one child, don't bother with a container
+			return children[0]
+		if not children:
+			# If we have *no* children, return nothing
+			return None
+		return AmbigStack(children)
+	
+	# We shouldn't have to worry about __contains__, because AmbigStacks should always be on the *right* side of a containment operation (and multiclassing will take care of that, it's both an HStack and a VStack), but we might as well safety-proof this
+	def __contains__(self, other): # This works the same as HStack and VStack except it checks both stack classes (which'll also catch AmbigStack as a subclass of them both)
+		if any((other in child) for child in self.contents): return True
+		if isinstance(other, (HStack, VStack)) and self._match_contents(other): return True
+		return False
+	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+		for child in self.contents:
+			if child.highlight_containment(other, notes):
+				return True
+			child._remove_children(notes)
+		if isinstance(other, (HStack, VStack)):
 			return self._match_contents_highlight(other, notes)
 		return False
 

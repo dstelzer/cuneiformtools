@@ -169,12 +169,15 @@ class Database:
 	
 	def name_to_glyph(self, name, tags=()):
 		name = self.clean_name(name)
-		if name in self.expansions:
+		if name in self.expansions: # An expansion name shouldn't be passed to this function
 			exp = '.'.join(self.expansions[name])
 			raise ValueError(f'Sign {name} is shorthand for {exp}')
 		
 		if '/' in name: # We have name/variant instead of just name
-			name, variant = name.split('/')
+			try:
+				name, variant = name.split('/')
+			except ValueError as e:
+				raise ValueError(f'Malformed sign name {name}: expected either name or name/variant')
 			name = name.strip()
 			variant = variant.strip()
 			
@@ -191,6 +194,7 @@ class Database:
 		entry = self.name_lookup[name]
 		
 		if isinstance(variant, int): # Do we have a variant number?
+			# If so, we ignore the tags, and take that numbered variant from the dictionary
 			if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
 			code = forms[variant-1].code # -1 because the first one is 1 not 0, following the HZL's practice
 		else: # No variant number specified, so we're looking for the form that maximizes our tags

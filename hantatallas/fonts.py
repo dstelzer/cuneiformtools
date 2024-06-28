@@ -42,6 +42,8 @@ def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
 	return out
 
 ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since that's the default rendering of a wildcard stroke) - could change to P* to make it narrower if desired
+DAMAGE_CODE = parser.parse('0#') # A void covered with hatching, to indicate damage to the tablet
+DAMAGE_CP = 0x2592 # U+2592 MEDIUM SHADE
 
 # I HATE that this is necessary
 # But recent versions of pycairo export SVGs with stroke, fill, etc as their own element attributes
@@ -107,6 +109,7 @@ class Font:
 			for cp in missing:
 				self.encode_glyph(cp, ERROR_CODE, None) # Creates the missing glyphs but leaves them empty
 		self.encode_glyph(0xFFFD, ERROR_CODE, None) # And put the ERROR_CODE symbol at U+FFFD, "replacement character", so that it can be used as an error symbol for font problems later
+		self.encode_glyph(DAMAGE_CP, DAMAGE_CODE, None) # Similarly, put the DAMAGE_CODE symbol at U+2592, "medium shade"
 		self.font.save(filename)
 	
 	def select_glyph(self, codepoint):
@@ -243,14 +246,14 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 #	print('Font exported! Finished!')
 
 rends = {
-#	'ink' : InkRenderer,
-	'pub' : TwoSidedRenderer,
-	'write' : OneSidedRenderer,
-	'linear' : LinearRenderer,
+	'ink' : InkRenderer,
+#	'pub' : TwoSidedRenderer,
+#	'write' : OneSidedRenderer,
+#	'linear' : LinearRenderer,
 }
 
 tags = {
-#	'old' : ('old',),
+	'old' : ('old',),
 	'new' : ('new',),
 #	'midold' : ('middle', 'old'),
 #	'midnew' : ('middle', 'new'),

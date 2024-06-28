@@ -5,8 +5,8 @@ try:
 except ImportError:
 	from .elements import *
 
-STARTS = '([{'
-ENDS = ')]}'
+STARTS = '([{⁅'
+ENDS = ')]}⁆'
 MODS = set(m.value for m in Modifier)
 ADJS = {
 	'T':Tenu,
@@ -60,6 +60,8 @@ class ParseFrame:
 			newtype = VStack
 		elif a == '(':
 			newtype = Superpose
+		elif a == '⁅':
+			newtype = AmbigStack
 		
 		if len(self.contents) < 3:
 			if friendly: self.contents.insert(1, Wildcard('-1'))

@@ -194,6 +194,8 @@ class LineGroup:
 		parsed = new.parse(already_rotated=True)
 		if parsed is None: # Don't go into an infinite recursion!
 			return None
+		if isinstance(parsed, Composition) and all(isinstance(child, Stroke) for child in parsed.children): # Special exception: if this is a composition that only contains strokes, make it an AmbigStack. The difference between {dd} and [dd] is very hard to capture in a drawing; in this algorithm, they'll both end up as [vv]T, and this step turns that into ⁅vv⁆T, which normalizes to ⁅dd⁆. Both [dd] and {dd} contain that, since an AmbigStack acts as both an HStack and a VStack in the encompassing algorithm.
+			parsed = AmbigStack(parsed.children)
 		return Tenu(parsed)
 	
 	def parse(self, already_rotated=False):
@@ -269,6 +271,8 @@ class VStack(Composition):
 	def __str__(self): return '{' + ','.join(str(c) for c in self.children) + '}'
 class Superpose(Composition):
 	def __str__(self): return '(' + ','.join(str(c) for c in self.children) + ')'
+class AmbigStack(Composition): # This is the only place AmbigStacks are expected to come from, in the parser
+	def __str__(self): return '⁅' + ','.join(str(c) for c in self.children) + '⁆'
 class Horizontal(Stroke):
 	def sigil(self): return 'h'
 class Vertical(Stroke):
