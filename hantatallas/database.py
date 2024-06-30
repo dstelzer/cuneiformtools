@@ -196,7 +196,7 @@ class Database:
 		if isinstance(variant, int): # Do we have a variant number?
 			# If so, we ignore the tags, and take that numbered variant from the dictionary
 			if len(entry.forms) < variant: raise ValueError(f'Sign {name} has only {len(entry.forms)} variant(s); cannot produce {variant}')
-			code = forms[variant-1].code # -1 because the first one is 1 not 0, following the HZL's practice
+			code = entry.forms[variant-1].code # -1 because the first one is 1 not 0, following the HZL's practice
 		else: # No variant number specified, so we're looking for the form that maximizes our tags
 			if variant is not None: # Do we have a variant that's not a number? If so, we add it to the front of our tags list
 				tags = (variant,) + tags
