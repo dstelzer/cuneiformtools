@@ -9,6 +9,8 @@ WIDTH = HEIGHT = 300
 # \{"type":"STROKE","head":\{"x":(\d+),"y":(\d+)\},"tail":\{"x":(\d+),"y":(\d+)\}\},?
 # \nmove \1 \2\nline \3 \4
 
+# TODO [{"type":"STROKE","head":{"x":59,"y":52},"tail":{"x":60,"y":265}},{"type":"STROKE","head":{"x":141,"y":206},"tail":{"x":262,"y":204}},{"type":"STROKE","head":{"x":17,"y":90},"tail":{"x":237,"y":91}},{"type":"STROKE","head":{"x":190,"y":50},"tail":{"x":197,"y":258}}]
+
 instructions_all = '''
 color 1 1 1 1
 blank
@@ -146,6 +148,26 @@ line 201 283
 stroke
 '''
 
+instructions_p4 = '''
+width 5
+color 1 0 0 1
+move 59 52
+line 60 265
+stroke
+color 0 0 1 1
+move 17 90
+line 237 91
+stroke
+color 1 0 0 1
+move 190 50
+line 197 258
+stroke
+color 0 0 1 1
+move 141 206
+line 262 204
+stroke
+'''
+
 buffer = BytesIO()
 surf = cairo.PDFSurface(buffer, WIDTH, HEIGHT)
 ctx = cairo.Context(surf)
@@ -175,7 +197,7 @@ def parse_line(line):
 	else:
 		raise ValueError(cmd)
 
-for line in (instructions_all+instructions_ir).split('\n'):
+for line in (instructions_all+instructions_p4).split('\n'):
 	parse_line(line)
 
 surf.show_page()

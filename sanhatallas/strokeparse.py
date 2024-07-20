@@ -194,8 +194,13 @@ class LineGroup:
 		parsed = new.parse(already_rotated=True)
 		if parsed is None: # Don't go into an infinite recursion!
 			return None
-		if isinstance(parsed, Composition) and all(isinstance(child, Stroke) for child in parsed.children): # Special exception: if this is a composition that only contains strokes, make it an AmbigStack. The difference between {dd} and [dd] is very hard to capture in a drawing; in this algorithm, they'll both end up as [vv]T, and this step turns that into ⁅vv⁆T, which normalizes to ⁅dd⁆. Both [dd] and {dd} contain that, since an AmbigStack acts as both an HStack and a VStack in the encompassing algorithm.
-			parsed = AmbigStack(parsed.children)
+		if isinstance(parsed, Composition) and all(isinstance(child, Stroke) for child in parsed.children): # Special exception: if this is a composition that only contains strokes, make it an AmbigStack. The difference between {dd} and [dd] is very hard to capture in a drawing; in this algorithm, they'll both end up as [vv]T, and this step turns that into ⟦vv⟧T, which normalizes to ⟦dd⟧. Both [dd] and {dd} contain that, since an AmbigStack acts as both an HStack and a VStack in the encompassing algorithm.
+			# We actually have two different AmbigStack classes here, one for if it was originally an HStack, and one for if it was originally a VStack. The difference only matters for rendering, but it lets the render look a bit closer to what the user drew.
+			if isinstance(parsed, HStack):
+				cls = HAmbigStack
+			else:
+				cls = VAmbigStack
+			parsed = cls(parsed.children)
 		return Tenu(parsed)
 	
 	def parse(self, already_rotated=False):
@@ -271,8 +276,10 @@ class VStack(Composition):
 	def __str__(self): return '{' + ','.join(str(c) for c in self.children) + '}'
 class Superpose(Composition):
 	def __str__(self): return '(' + ','.join(str(c) for c in self.children) + ')'
-class AmbigStack(Composition): # This is the only place AmbigStacks are expected to come from, in the parser
+class HAmbigStack(Composition): # This is the only place AmbigStacks are expected to come from, in the parser
 	def __str__(self): return '⟦' + ','.join(str(c) for c in self.children) + '⟧'
+class VAmbigStack(Composition): # We stick a dimensionless void at the end if the AmbigStack was originally a VStack, to pass that information to the renderer. It's completely ignored in every other way.
+	def __str__(self): return '⟦' + ','.join(str(c) for c in self.children) + ',0\'"⟧'
 class Horizontal(Stroke):
 	def sigil(self): return 'h'
 class Vertical(Stroke):

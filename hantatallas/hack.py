@@ -4,6 +4,8 @@ from .render import *
 from .parser import parse, parse_sequence
 from .database import Database
 
+# This file exposes easy access to various Hantatallas features, so that they can be used when testing other components. It shouldn't be used in production since it's extremely inflexible.
+
 def render(s):
 	TwoSidedRenderer.render(parse(s, friendly=True)).show()
 

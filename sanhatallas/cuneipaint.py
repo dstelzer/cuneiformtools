@@ -4,10 +4,10 @@ import json
 
 try:
 	from geometry import XY
-	from sketch import Line, DoubleLine, TripleLine, Divider, HookLine, LineGroup
+	from strokeparse import Line, DoubleLine, TripleLine, Divider, HookLine, LineGroup
 except ImportError:
 	from .geometry import XY
-	from .sketch import Line, DoubleLine, TripleLine, Divider, HookLine, LineGroup
+	from .strokeparse import Line, DoubleLine, TripleLine, Divider, HookLine, LineGroup
 
 if __name__ == '__main__':
 	path.append(str(Path(__file__).parents[1]))

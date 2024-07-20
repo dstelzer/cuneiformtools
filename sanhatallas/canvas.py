@@ -5,7 +5,7 @@ import pygame
 from pygame.locals import *
 
 from geometry import XY
-from sketch import Line, Divider, HookLine, LineGroup
+from strokeparse import Line, Divider, HookLine, LineGroup
 
 path.append(str(Path(__file__).parents[1]))
 #print(path)

@@ -392,19 +392,26 @@ class Container(Element):
 		cls = type(self)
 		matched = 0
 		for each in outer:
+#			print('Considering outer:', str(each))
 			if any(isinstance(descendant, cls) for descendant in each.traverse()): # This one has a relevant container as a descendant, so we should check for sub-sequences
+#				print('\tIt has descendant of class', cls)
 				# So let's see if some sub-sequence of our whole sequence is contained (to deal with instances where there's an HStack nested somewhere inside an HStack etc)
 				for end in range(len(inner), matched, -1): # Take progressively shorter sub-sequences
+#					print('\t\tConsidering range', matched, 'to', end)
 					subseq = cls(inner[matched:end]) # [matched:end], [matched:end-1], etc
 					if subseq in each:
 						matched = end
+#						print('\t\t\tSuccess!', matched)
 						break
 				else: # We didn't find any sub-sequence, so let's test for a single element's containment instead
+#					print('\t\tRanges did not succeed')
 					if inner[matched] in each:
 						matched += 1
+#						print('\t\t\tBut single element containment did')
 			else: # No descendants of the same class, so we don't have to bother checking sub-sequences
 				if inner[matched] in each:
 					matched += 1
+#					print('\tSingle element containment worked', matched)
 			if matched >= len(inner): return True
 		return False
 	def _match_contents_highlight(self, other, notes): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
@@ -613,7 +620,7 @@ class HStack(Container):
 		# Then go through and check some things
 		for child in raw_children:
 			if child is None: continue # Skip over blanks
-			elif isinstance(child, HStack): children.extend(child.contents) # Flatten out nested HStacks
+			elif isinstance(child, HStack) and not isinstance(child, AmbigStack): children.extend(child.contents) # Flatten out nested HStacks
 			else: children.append(child)
 		if len(children) == 1:
 			# If we only have one child, don't bother with a container
@@ -677,7 +684,7 @@ class VStack(Container):
 		children = []
 		for child in raw_children:
 			if child is None: continue
-			elif isinstance(child, VStack): children.extend(child.contents)
+			elif isinstance(child, VStack) and not isinstance(child, AmbigStack): children.extend(child.contents)
 			else: children.append(child)
 		if len(children) == 1:
 			return children[0]
@@ -768,9 +775,9 @@ class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both 
 			return None
 		return AmbigStack(children)
 	
-	# For rendering, in case it's helpful for the UI, we treat it as vertical if it contains only horizontals and upwards, and otherwise horizontal
+	# Rendering should only be needed in the UI, so we can be kind of hacky about it. The UI inserts a 0'" stroke at the end if it's supposed to render as a VStack, and otherwise it's supposed to render as an HStack.
 	def propagate_dimensions(self, dims, pos):
-		if all(isinstance(child, (Horizontal, UpDiag)) for child in self.contents):
+		if isinstance(self.contents[-1], Void):
 			return VStack.propagate_dimensions(self, dims, pos)
 		else:
 			return HStack.propagate_dimensions(self, dims, pos)
