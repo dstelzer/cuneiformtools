@@ -314,12 +314,48 @@ class Database:
 		return matches, '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
 
 if __name__ == '__main__':
+	
+	from elements import Superpose, Stroke
+	from collections import Counter
+	def is_improper(root): # A tree is *improper* if there are two strokes of the same type with a superposition as their last common ancestor
+		for elem in root.traverse():
+			if isinstance(elem, Superpose): # Iterate over superpositions
+				strokesets = []
+				for child in elem.contents: # For each child, make a set of all the stroke types appearing in that child
+					ss = {type(s) for s in child.traverse_strokes()}
+					strokesets.append(ss)
+				# Now if any type appears in more than one of those sets, we have an improper tree
+				counts = Counter()
+				for ss in strokesets:
+					counts.update(ss)
+				# I.e. if any of these counts is > 1
+				for k,v in counts.items():
+					if v > 1:
+						return k
+		return None
+	
 	db = Database()
 	db.load_data('data/hzl.dat')
 	db.load_expansions('data/replacements.dat')
 	db.prepare_sorting()
+	print('Total', len(db.data))
 	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
 	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))
+	
+	print('Improper:')
+	y = 0
+	for e in db.data:
+		x = 0
+		for i, f in enumerate(e.functional['normal']):
+			repeat = is_improper(f)
+			if repeat is not None:
+				x += 1
+				print(f'\t{e.ident}/{i+1}: {repeat.__name__}')
+		if x:
+			print(f'\t\t{x}/{i+1}')
+			y += 1
+	print(f'\tTotal: {y}')
+	
 	while True:
 		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), input('Mode: ')):
 			print(name, code, match)
