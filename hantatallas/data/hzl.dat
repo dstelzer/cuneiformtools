@@ -2656,11 +2656,11 @@
 		GURUN
 			fruit
 	FORM
-		{[0vv0][hc][hc][0cc0]}
+		{[0vv0][hc][hc][0'cc0']}
 		[{0hh0}{vc'}{vc'}{0cc0}]	variant
 		[{0hh0}{vc'}{vc'}]	variant
 		[{0hh0}{vv}{vv}{0hh0}]	variant
-		([v"v"][v'?v'?]{h"h"}{h'?h'?})	variant unusual anomalous
+		([{vv?}{vv?}]{[hh?][hh?]})	variant unusual anomalous
 	NAME
 		GURUN
 194

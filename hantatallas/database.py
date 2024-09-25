@@ -330,9 +330,17 @@ if __name__ == '__main__':
 					counts.update(ss)
 				# I.e. if any of these counts is > 1
 				for k,v in counts.items():
+					if 'Void' in k.__name__: continue
 					if v > 1:
-						return k
+						return f'{k.__name__}, {str(elem)}'
 		return None
+	
+	from elements import Modifier
+	def is_anomalous(root):
+		for elem in root.traverse_strokes():
+			if Modifier.INVERT in elem.mods or Modifier.TRIPLE in elem.mods:
+				return True
+		return False
 	
 	db = Database()
 	db.load_data('data/hzl.dat')
@@ -341,20 +349,27 @@ if __name__ == '__main__':
 	print('Total', len(db.data))
 	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
 	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))
+	print('Forms', sum(len(e.forms) for e in db.data))
 	
 	print('Improper:')
 	y = 0
 	for e in db.data:
 		x = 0
-		for i, f in enumerate(e.functional['normal']):
-			repeat = is_improper(f)
+		for i, f in enumerate(e.forms):
+			repeat = is_improper(parse(f.code))
 			if repeat is not None:
 				x += 1
-				print(f'\t{e.ident}/{i+1}: {repeat.__name__}')
+				print(f'\t{e.ident}/{i+1}: {repeat}')
 		if x:
 			print(f'\t\t{x}/{i+1}')
 			y += 1
 	print(f'\tTotal: {y}')
+	
+	print('Anomalous:')
+	for e in db.data:
+		for i, f in enumerate(e.forms):
+			if is_anomalous(parse(f.code)):
+				print(f'\t{e.ident}/{i+1}')
 	
 	while True:
 		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), input('Mode: ')):
