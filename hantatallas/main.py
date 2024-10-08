@@ -75,7 +75,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_comparisons()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

@@ -46,6 +46,7 @@ class Element:
 	def allow_kern_downward(self): return True
 	def orient(self): return Orientation.NEITHER
 	def traverse(self): yield self # For tree traversal
+	def size_factor(self): return 1 # How much space should this be given? Only overridden in Expand and Cursor, everything else uses 1
 	
 	def traverse_strokes(self):
 		yield from (s for s in self.traverse() if isinstance(s, Stroke))
@@ -208,6 +209,7 @@ class Cursor(Stroke): # A "stroke" that indicates where the cursor is placed in 
 	def draw(self, rend): rend.draw_cursor(*self.pos, *self.dims, self.mods)
 	def functional_form(self, special=empty): return None # Remove from functional form
 	def __contains__(self, other): raise ValueError('cursor should not be in search')
+	def size_factor(self): return 0 # Take up no space at all
 
 class Vertical(Stroke):
 	def _sigil(self): return 'v'
@@ -464,20 +466,23 @@ class Container(Element):
 		else: (k, j), (v, u), (kd, jd) = dims, pos, (0, 1)
 		self.adjust = 0,0
 		
-		pieces = len(self.contents) + sum(c.factor()-1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus (factor-1) for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
+		pieces = sum(c.size_factor() for c in self.contents)
+	#	pieces = len(self.contents) + sum(c.factor()-1 for c in self.contents if isinstance(c, Expand)) - sum(1 for c in self.contents if isinstance(c, Cursor)) # The number of pieces, plus (factor-1) for each Expand adjustment we find, minus 1 for each Cursor (since those take no space)
 		if pieces == 0: pieces = 1 # Prevent divide by zero when cursor but no other strokes
 		each_j = j/pieces
 		i = 0
-		# First pass: just divide up the space evenly (with more space for Expands and less space for Cursors)
+		# First pass: just divide up the space evenly (with more space for Expands and less space for Cursors based on their size_factor)
 		for each in self.contents:
-			if isinstance(each, Cursor):
-				propagate_child(each, 0, k, u+i*each_j, v)
-			elif isinstance(each, Expand):
-				propagate_child(each, each_j*each.factor(), k, u+i*each_j, v)
-				i += each.factor()
-			else:
-				propagate_child(each, each_j, k, u+i*each_j, v)
-				i += 1
+			propagate_child(each, each_j*each.size_factor(), k, u+i*each_j, v)
+			i += each.size_factor()
+	#		if isinstance(each, Cursor):
+	#			propagate_child(each, 0, k, u+i*each_j, v)
+	#		elif isinstance(each, Expand):
+	#			propagate_child(each, each_j*each.factor(), k, u+i*each_j, v)
+	#			i += each.factor()
+	#		else:
+	#			propagate_child(each, each_j, k, u+i*each_j, v)
+	#			i += 1
 		
 		# Now iteratively try to reclaim and reapportion space (if elements aren't using it or can kern into it)
 		# We loop until nothing can expand, or no space can be reclaimed
@@ -886,6 +891,8 @@ class Adjustment(Element):
 	
 	def forest(self, tabs=0):
 		return '\t'*tabs + '[\\code{' + self._sigil() + '}\n' + self.child.forest(tabs+1) + '\t'*tabs + ']\n'
+	
+	
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def _sigil(self): return 'T'
@@ -971,9 +978,8 @@ class Expand(Adjustment): # Request twice as much space as usual from our parent
 	# This class actually does basically nothing - but it's checked for in the kerning algorithm in VStack and HStack
 	# Note that this prevents its child from expanding! It's meant to be used when an element doesn't ask for enough space, and expanding elements always ask for as much space as possible. So don't use this on an expanding element unless you want to give it a fixed size.
 	def _sigil(self): return 'E'
-	def factor(self): # How much expansion do we want?
-		if isinstance(self.child, Expand): return 1+self.child.factor()
-		else: return 2
+	def size_factor(self): # How much expansion do we want?
+		return 1 + self.child.size_factor()
 	def can_expand_horizontally(self): return 0
 	def can_expand_vertically(self): return 0
 	def propagate_dimensions(self, dims, pos):
@@ -1018,6 +1024,26 @@ class Restrict(Adjustment): # Prevent a component from expanding
 	def kern_bottom(self): return self.child.kern_bottom()
 	def kern_left(self): return self.child.kern_left()
 	def kern_right(self): return self.child.kern_right()
+	def propagate_dimensions(self, dims, pos):
+		self.dims, self.pos = dims, pos
+		self.adjust = (0, 0)
+		self.child.propagate_dimensions(dims, pos)
+
+class Allow(Adjustment): # Allow a component to expand in any direction, regardless of what its children say
+	def _sigil(self): return 'A'
+	def can_expand_horizontally(self): return inf
+	def can_expand_vertically(self): return inf
+	
+	def size_factor(self): # If this is wrapped around an E element, allow that to work too, as a special case (normally E must be outermost)
+		return self.child.size_factor()
+	
+	def draw(self, rend): self.child.draw(rend)
+	def orient(self): return self.child.orient()
+	def kern_top(self): return self.child.kern_top()
+	def kern_bottom(self): return self.child.kern_bottom()
+	def kern_left(self): return self.child.kern_left()
+	def kern_right(self): return self.child.kern_right()
+	
 	def propagate_dimensions(self, dims, pos):
 		self.dims, self.pos = dims, pos
 		self.adjust = (0, 0)

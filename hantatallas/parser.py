@@ -13,6 +13,7 @@ ADJS = {
 	'E':Expand,
 	'M':Margin,
 	'R':Restrict,
+	'A':Allow,
 }
 
 SHAPES = set(s.value for s in CanvasShape)
