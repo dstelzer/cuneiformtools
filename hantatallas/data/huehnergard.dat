@@ -296,3 +296,806 @@
 		L[hvcv{v[vvv]}TEEEE]	$na
 	NAME
 		NAM
+23
+	AKK
+		en
+	SUM
+		EN
+			bēlum
+	FORM
+		L{[0v{hh'h'h'h'}v]EAh[v0Ev?v?v?v?]}	$obl
+		L[h{vc'}{0hhh0}{vc'}]	$obc
+		{[vv]h[cc]A}	$obc
+		[h{vc'}{vc'}]	$na
+	NAME
+		EN
+24
+	AKK
+		ri
+		re
+		tal
+		ṭal
+	FORM
+		L[(h[vv{0c}])v]	$obl $obc improper
+		L[hvvcv]	$na
+	NAME
+		RI RE
+		TAL ṬAL
+25
+	AKK
+		zi
+		ze
+		sí
+		sé
+		ṣí
+		ṣé
+	FORM
+		L(h[vv0{cc}{cc}{cc}{cc}])	$obl improper
+		L[(h[vv]){cc}{cc}{cc}]	$obc
+		L[(h[0vv0]){cc}{cc}]	$obc
+		L[hvv{v[vvv]}TEEE]	$na
+	NAME
+		ZI ZE
+		SÍ SÉ SI2 SE2
+		ṢÍ ṢÉ ṢI2 ṢE2
+26
+	AKK
+		gi
+		ge
+	SMR
+		SIG₁₇
+			[component]
+	LIG
+		KUG.SIG₁₇ (GUŠKIN)
+			ḫurāṣum
+	FORM
+		W(h[vv0{du}{du}{du}{du}])	$obl improper
+		L[(h[vv]){[vvv]h}TE]	$obc
+		L[hvv{[vvv]v}TEEE]	$na
+	NAME
+		GI GE
+		SIG17
+27
+	SUM
+		MÁ
+			eleppum
+	FORM
+		L{[hvv'v]Ah'}	$obl $obc
+		L[{hh'}vvv]	$na
+	NAME
+		MÁ MA2
+28
+	SUM
+		INANNA
+			Ištar
+	FORM
+		L[(h[vv{0c}])v]	$obl improper
+		L[h{[vv]v}v]	$obc
+		L[{[0vv0]hv}Av]	$obc
+		L[h{[vvv]v}EEE0'v]	$na
+	NAME
+		INANNA
+		INANA
+29
+	SUM
+		NUN
+			rubûm
+	LIG
+		UD.KIB.NUN^KI (ZIMBIR^KI)
+			Sippar
+	FORM
+		L[(h[0[vvvv]0])v]	$obl
+		L[(h[0v'v'v'0])v]	$obc
+		L[hEvvvv]	$na
+	NAME
+		NUN
+30
+	SUM
+		KUN
+			zibbatum
+	FORM
+		W[{vhv?}c"vv'"{dd'"u'"u}]	$obl bad
+		W[(h[vvvv])c'{dhu}]	$obc
+		W[(hv)c'{dd'u'u}]	$obc bad
+		W[[hv]{[vvv]v}TEEE(h2[0vvv])EEE]	$na
+	NAME
+		KUN
+31
+	AKK
+		kán
+	SUM
+		IKU
+			ikûm
+	FORM
+		L[{h0[vvv]h}Av]	$obl
+		L[{h'0(h[vvv])}v]	$obc $na
+		L[{h'0(h[vv0])}v]	$obc
+	NAME
+		KÁN KAN2
+		IKU
+32
+	AKK
+		si
+		se
+	FORM
+		[{hvh}Av]	$obl
+		{[hvv]Ah'}	$obc
+		[{hh'}[vv]]	$na
+	NAME
+		SI SE
+33
+	SUM
+		KÚR
+			nakrum
+	FORM
+		(du)	$obl $obc
+		(hd'")	$na
+	NAME
+		KÚR KUR2
+34
+	SUM
+		DÙ
+			banûm
+			epēšum
+		GAG
+			[component]
+	LIG
+		MAŠ.GAG.EN
+			muškēnum
+		MAŠ.EN.GAG
+			muškēnum
+	FORM
+		L[v'{du}]	$obl
+		[v'{du}]	$obc
+		{h(hv)R}	$na
+	NAME
+		DÙ DU3
+		GAG
+35
+	AKK
+		ni
+		né
+		ì (only in ì-lí)
+		lí (only in ì-lí, be-lí)
+	SUM
+		NI
+			=šu, =ša (his, her)
+		Ì
+			šamnum
+	LIG
+		Ì.GIŠ
+			šamnum
+	FORM
+		L[v{d(uv)}]	$obl
+		L{d(u[0vv0])}	$obc
+		L{d'u}	$obc
+		L[v'{d'u}]	$obc
+		{h(h[vv])R}	$na
+	NAME
+		NI
+		NÉ NE2
+		Ì I3
+		LÍ LI2
+36
+	SUM
+		NA₄
+			abnum
+	DET
+		NA₄
+			stone, mineral
+	FORM
+		X[v{d(uv)}EE0{ud}EE{du}]	$obl
+		W[{d(u[0vv0])}EE{dd}v]	$obc
+		L[{h(h[vv])R}{cc}0'{vv}]	$na
+	NAME
+		NA4
+37
+	AKK
+		ir
+		er
+	FORM
+		L[v{d(u[vvv0])}]	$obl
+		L[v'{d'(u[0vvv0])}]	$obc
+		L{d(u[0vvv0])}	$obc
+		L{h(h[vvv])R}	$na
+	NAME
+		IR ER
+38
+	SUM
+		LÚ
+			awīlum
+	DET
+		LÚ
+			men's occupations
+	FORM
+		W{d'(u[v{dv}vvvv0EE])}	$obl
+		L{d2(u[vdvvv0])}	$obc
+		L{d2(u[dvvv0])}	$obc
+		L{d'(u[vvvvv0EE])}	$obc
+		{[v{vv}]h}T	$obc
+		%L[{hhh}{[hhh]0R(h[vvv])R}E]	$na
+	NAME
+		LÚ LU2
+39
+	AKK
+		tab/p
+	SUM
+		TAB
+			[component]
+	LIG
+		TAB.BA
+			tappûm
+	FORM
+		{hh}	$obl $obc $na
+	NAME
+		TAB TAP
+39
+	AKK
+		sa
+	FORM
+		L[v{h[v{h[v{h[v{h0}A]}A]}A]}A]	$obl
+		L{h0[vvvv]h}	$obc
+		L{h'0(h[0vvv])}	$na
+	NAME
+		SA
+41
+	SUM
+		URU
+			ālum
+	FORM
+		L[{([0v{h0}]{0h[v0]})h}v]	$obl improper
+		L[(v{h'hh})v]	$obc
+		L[{h'hh}v]	$obc
+		L[h{hh}vv]	$na
+	NAME
+		URU
+42
+	AKK
+		ab/p
+	FORM
+		L[v{d0u}v'"{u0d}v]	$obl
+		L[{0hh0}{u0d}v]	$obc
+		[{h2h2}v]	$obc
+		L[{hh}{hh}v]	$na
+	NAME
+		AB AP
+43
+	AKK
+		um
+	FORM
+		L[{0hh0}v{h[vv]h}EAv]	$obl
+		L[{0hh0}{h[vvv]h}EAv]	$obc
+		L[{0hh0}{[(v{h0})v]h}E]	$obc
+		L[{0hh0}v{hh}EEv]	$obc
+		L[{0hh0}{h0h}Ev]	$obc
+		W[{0hh0}{h0h}vvv]	$na
+	NAME
+		UM
+44
+	SUM
+		DUB
+			ṭuppum
+	LIG
+		DUB.SAR
+			ṭupšarrum
+	FORM
+		L[{0h0"(hv)0}v{h[vv]h}EAv]	$obl
+		L[{0h0"[vv]h0}{h[vvv]h}EAv]	$obc
+		L[{0h0"(hv)0}v{h[vv]h}EAv]	$obc
+		L[{0hh0}{h0h}Ev]	$obc
+		W[{0hh0}{h0h}vvvv]	$na
+	NAME
+		DUB
+45
+	SUM
+		ḪÉ
+			[component]
+		KÁM
+			[alternative to KAM]
+	LIG
+		ḪÉ.GÁL
+			ḫegallum
+	FORM
+		L[{0h0"[vv]h0}Av'"{0d(uv)0}v{d(uv)d(uv)}]	$obl
+		L[{0hhh0}{h0"[(du)vv]0"h}E]	$obc
+		L[{0hh0}{h0"du0"h}]	$obc
+		L[{0hh0}{hhh}]	$obc
+		L[{0hh0}{h[hh]h}]	$na
+	NAME
+		ḪÉ ḪE2
+		KÁM KAM2
+46
+	AKK
+		ad/t/ṭ
+	SUM
+		AD
+			abum
+	FORM
+		L[v{d0(uv)}{uudd}EEv]	$obl
+		L[{0hh0}{hh'h'h}Ev]	$obc
+		L[{0hh0}{hhh}Ev]	$obc $na
+	NAME
+		AD AT AṬ
+47
+	AKK
+		ṣi
+		ṣe
+		zí
+		zé
+	FORM
+		L[v{d0(uv)}{u[0(v{hh})E]d}EEv]	$obl
+		L[{0hh0}{(v{hh'h'0})h}Ev]	$obc
+		L[{0hh0}({hh'h}v)Ev]	$obc
+		L[{0hh0}{hhh}Evv]	$na
+	NAME
+		ṢI ṢE
+		ZÍ ZI2 ZÉ ZE2
+48
+	SUM
+		BÀD
+			dūrum
+	FORM
+		W[{0hh0}{h{chc}Mh}Ev{hh}v]	$obl
+		W[{0hh0}{h[hc]Mh}Ev{hh}v]	$obc
+		L[{h'AhAh'AhAh'A}v{hh}v]	$obc
+		L{[h{hhh}v{h'[hc]M}EEv]A[hh]}	$na
+	NAME
+		BÀD BAD3
+49
+	SUM
+		ŠÁM
+			šīmum
+	FORM
+		X[{hh}{h[{du}{cc}{cc}{cc}{cc}0'vv20'(hvu'"d'")]Mh}EEEE]	$obl
+		X[[{hh}{c'c'}]{h[{cc}{cc}{cc}]Ah}0'vv20'(hvu'"d'")]	$obc
+		L[{hh}c'{h[{cc}{cc}h2]MAh}EE]	$obc
+		W[[{hh}c]{h[{v[vvv]}TE[vv2]0'(h2[0EEv0])]Mh}EEE]	$na
+	NAME
+		ŠÁM ŠAM2
+50
+	AKK
+		úr
+	FORM
+		W[{[{h0'vh0}A{vv}{h'0}]h'}v]	$obl
+		W[{h(h[vv])R}{c'c'}{hh}v]	$obc
+		L[{[hc'h][hhE]}v]	$obc
+		L[{hh}{c'c'}{hh}v]	$obc
+		L[{[hc'h][hhE]}vv]	$na
+	NAME
+		ÚR UR2
+51
+	AKK
+		uš
+		ús/z/ṣ
+	FORM
+		L[{h[{[vv']h0}{0d}]}v]	$obl
+		L[{h[(h[vv0]R)c]}v]	$obc
+		L[{hvh}Av0'c0'v]	$obc
+		L[{[hc]0"[v0]h}v]	$obc
+		[{hh}cv]	$obc
+		L[{[hc](h[vv0])}v]	$na
+	NAME
+		UŠ
+		ÚS US2
+		ÚZ UZ2
+		ÚṢ UṢ2
+52
+	AKK
+		du
+		ṭù
+	SUM
+		RÁ
+			[component]
+	LIG
+		A.RÁ
+			adi
+	FORM
+		L[v{[hc']h2}v]	$obl
+		[{[hc']h2}v]	$obc
+		L[{[hc]0"[v0]h2}v]	$obc
+		L[{[hc'][hh]}v]	$na
+	NAME
+		DU
+		ṬÙ ṬU3
+		RÁ RA2
+53
+	AKK
+		iš
+		ís/ṣ/z
+		mil
+	FORM
+		L[([0cv0]{hhhh})v]	$obl
+		L[([0vc0]{hhh})v]	$obc
+		L[{hh}cvv]	$obc
+		L[{[hc']h}vv]	$na
+	NAME
+		IŠ
+		ÍS IS2
+		ÍṢ IṢ2
+		ÍZ IZ2
+		MIL
+54
+	AKK
+		il
+	FORM
+		L[{h0"vh0}A{vv}(du{v2cv})EEE{vv}]	$obl
+		L[{hh}{[v'v2]h}TEEEvv]	$obc
+		L[{h[hc']}{0(d3u)E0}EEv]	$obc
+		W[{[hc"d2M][hh]}vv]	$na
+	NAME
+		IL
+55
+	AKK
+		ub/p
+	FORM
+		(([vv]{hh})Tv')	$obl
+		[{ud}v{du}]	$obc
+		[{ud}c{du}]	$obc bad
+		[{ud}{du}]	$obc
+		P{cEhvhcE}	$obc
+		L[{hh}{cvc}{hh}]	$na
+	NAME
+		UB UP
+56
+	AKK
+		šum
+	FORM
+		W[v{h0"vh}A{0du0}v{d([vvv0]u)}EE]	$obl
+		L[{hh}{0du0}{d([vvv0]u)}EE]	$obc
+		L[{h2h2}{d(uv)}]	$obc
+		L[{hh}{0du0}{du}E]	$obc
+		L[{hh}({hh}d)E]	$na
+	NAME
+		ŠUM
+57
+	AKK
+		am
+	FORM
+		L[{hh}v({du}[{cc}c"])EE]	$obl
+		L[{hh}{[vvv]v}TE]	$obc
+		L[{hh}v{[vvv]v}TEE]	$obc
+		L[{hh}{[vvv]v}TE]	$na bad
+	NAME
+		AM
+58
+	AKK
+		dur
+		ṭur
+		túr
+	FORM
+		L[{0'vEEEv}{hh}c({du}{0du0})E]	$obl improper
+		L[{hh}{[v{[0v]h}Mv]v}TEE]	$obc
+		L[{hh}{[vv]v}TEE{hh}]	$obc
+		W[{h'0"(hv2)}{[vvv]v}TE{h(hvR)}]	$na
+	NAME
+		DUR ṬUR
+		TÚR TUR2
+59
+	AKK
+		ne
+		bí
+		b/pil
+		ṭè
+	FORM
+		W[{hhhh}cEv'{du}{hh}EEv]	$obl
+		W[{hh}{[vvv]v}TEE{hh}v]	$obc
+		W[{hh}{[vvv]v}TEE{hh}v]	$na bad
+	NAME
+		NE
+		BÍ BI2
+		BIL PIL
+		ṬÈ ṬE3
+60
+	AKK
+		b/píl
+	FORM
+		W[{hhhh}cEv'{du}{h(du)Mh}EEv]	$obl
+		W[{hh}{[vvv]v}TEE{hduh}v]	$obc
+		W[{hh}{[vvv]h}TEE{hduh}v]	$obc
+		W[{hh}{[vvv]v}TEE{hh}{c'c'}v]	$na bad
+	NAME
+		BÍL BIL2
+		PÍL PIL2
+61
+	SUM
+		UZU
+			šīrum
+	DET
+		UZU
+			parts of the body
+	FORM
+		X[{hh}{d0u}{d0u}{d0u}{d0u}cEv({du}{0du0})EEcE]	$obl improper
+		L[{hh}{ccc}({du}{0[c{du}0]0})EE]	$obc improper
+		[{hh}{ccc}{cc}]	$obc
+		L[{hh}{[vvv]v}TEEhc']	$na bad
+	NAME
+		UZU
+62
+	SUM
+		GÚ
+			kišādum
+	LIG
+		GÚ.UN (GUN)
+			biltum
+	FORM
+		L[{0hh[v0]}EcEv'{du}]	$obl
+		L[{hh}v2{[vvv]v}TEE]	$obc
+		L[{h'0"(hv2)}{[vvv]v}T]	$na bad
+	NAME
+		GÚ GU2
+63
+	SUM
+		LUGAL
+			šarrum
+	FORM
+		W[[{hhhh}v]{[v{dd}dEEE](u[0vvvv0])}EEE]	$obl
+		W[{hhhhh}{[cd](u[0vvv0])}EE]	$obc
+		L[{hh}{[ccc]u}E]	$obc
+		W[{[{0h}{hhh}]h}{[hhh](h[vvv]R)}]	$na
+	NAME
+		LUGAL
+64
+	AKK
+		bi
+		bé
+		pí
+		pé
+	SUM
+		BI
+			=šu, =ša (its)
+	FORM
+		L[v{h0"[vvv]h}Av{d(uv)}]	$obl
+		W[{h0"[vvvvv]h}{d(u[0vv0])}]	$obc
+		{[hc'][hc']}	$obc $na
+	NAME
+		BI
+		BÉ BE2
+		PÍ PI2
+		PÉ PE2
+65
+	AKK
+		ga
+		qá
+	FORM
+		L[{hhhh}v{d(u[vvv0])}EE]	$obl
+		L[{hhhh}{[[vvv]d]u}EE]	$obc
+		L[{hh}{d(u[vvv])}E]	$obc
+		[{h(h[vv0]R)}{c'c'}]	$obc
+		L[{hh}vvv{cc}]	$na
+	NAME
+		GA
+		QÁ QA2
+66
+	AKK
+		šim
+	FORM
+		W[v{d[vvv]u}Av{d(uv)}({hhhh}c)Ev]	$obl
+		W[{hh}{c'c'}({hhhhh}c)v]	$obc
+		W[{hh}{c'c'}{[hc']h}vv]	$na
+	NAME
+		ŠIM
+67
+	AKK
+		kum
+	FORM
+		W[{hh}{0du0}{h0EEh}E{du}]	$obl
+		L[{hh}{c'c'}{hh}{c'c'}]	$obc
+		L{[hc'hc'][hhc']}	$na
+	NAME
+		KUM
+68
+	AKK
+		d/t/ṭum
+	FORM
+		W[{[v{h0"vh}A]0}{vv}{h[{d0}{ud}]h}EE]	$obl
+		L[{hh}{c'c'}{(u{dd})u}E]	$obc
+		L[{hh}c{h(du)Mh}E]	$obc
+		L[{hh}{c'c'}{hhhh}]	$obc
+		L{[hc'0'v0'{hhh}]A[hEhEE]}	$na
+	NAME
+		TUM
+		DUM
+		ṬUM
+69
+	AKK
+		ta
+		ṭá
+	FORM
+		L[{hh}v(du)EEv]	$obl
+		L[{h(h[vv]R)}v{du}v]	$obc
+		[{h(h[vv]R)}{c'c'}v]	$obc
+		[{hh}{c'c'}v]	$obc
+		L[{[0h][hh]h}[vvv]]	$na
+	NAME
+		TA
+		ṬÁ ṬA2
+70
+	SUM
+		ŠITIM
+			itinnum
+	FORM
+		L[{h[hc"{0hd"}]}v]	$obl
+		W[{h0"[{[vv0'd2]h}h]}v]	$obc
+		L[c{hd2Mh}vv]	$na
+	NAME
+		ŠITIM
+71
+	SUM
+		KÁ
+			bābum
+	LIG
+		KÁ.DINGIR.RA^KI
+			Bābilim
+		KÁ.GAL (ABUL)
+			abullum
+	FORM
+		L[v{[cc]h[v{h[v{h[v{h[cc]}A]}A]}A]}Av]	$obl
+		L[{h(h[vvvv]R)}{cc}{cc}v]	$obc
+		[{hh}{c'c'}v2]	$obc
+		L[{0hh0}{h(hvR)}{vv}]	$na
+	NAME
+		KÁ KA2
+72
+	SUM
+		KIB
+			[component]
+	LIG
+		UD.KIB.NUN^KI (ZIMBIR^KI)
+			Sippar
+	FORM
+		L[({dd}{uu}){vv}]	$obl
+		[{cchh}v2]	$obc
+		[{hh}{c'c'}0'{vv}]	$na
+	NAME
+		KIB
+73
+	SUM
+		GABA
+			irtum
+	FORM
+		W[{hh}{cc}{cc}{cc}{cc}]	$obl
+		L[{hh}{cc}{cc}{cc}]	$obc
+		[{hh}{c'c'}{c'c'}]	$obc
+		[{hh}{v[vvv]}TEE]	$na
+	NAME
+		GABA
+74
+	SUM
+		KASKAL
+			ḫarrānum
+	FORM
+		([vv]{hh})T	$obl
+		({hh}[dd])	$obc
+		L({hh}[0dd0])	$na
+	NAME
+		KASKAL
+75
+	AKK
+		is/ṣ/z
+		es/ṣ/z
+	SUM
+		GIŠ
+			iṣum
+	DET
+		GIŠ
+			objects of wood
+			names of trees
+	FORM
+		L[{hh}v]	$obl
+		P[{hh}v]	$obc $na
+		[{[v{h0}]Ah}v]	$obc
+	NAME
+		IS IṢ IZ
+		ES EṢ EZ
+		GIŠ
+76
+	SUM
+		GADA
+			[component]
+	LIG
+		NA.GADA
+			nāqidum
+	FORM
+		({ud}v)	$obl $obc
+		{(hv)c'}	$na
+	NAME
+		GADA
+77
+	SUM
+		LÍL
+			[component]
+	LIG
+		d^EN.LÍL
+			Enlil
+	FORM
+		W[([v'v'v'v0]{hhhh})v]	$obl improper
+		L[{h([vvvv]h)}v]	$obc
+		L[{h([0vv0]h)}v]	$obc
+		L[{hh}vvv]	$na
+	NAME
+		LÍL LIL2
+78
+	SUM
+		É
+			bītum
+	LIG
+		É.GAL
+			ekallum
+		É.GAR₈
+			igārum
+	FORM
+		L[v{h[v{h[v{h[v{h0}A]}A]}A]}Av]	$obl
+		L[{h[v{hhhh}v]Mh}v]	$obc
+		L[{h(h[vvv0]R)}v]	$obc
+		L[{hh}v]	$obc
+		W[{hh}vvvv]	$na
+	NAME
+		É E2
+79
+	AKK
+		pa
+	SMR
+		2BÁN/BÁNMIN
+			2 sâtum
+	FORM
+		L({hh}v)	$obl
+		({hh}v)	$obc $na
+	NAME
+		PA
+		2BÁN 2BAN2
+		BÁNMIN BANMIN2
+80
+	AKK
+		ka
+	SUM
+		KA
+			pûm
+	FORM
+		L[v'"{u[0v0'{hhhh}]d}Av{hh}v]	$obl
+		L[{hch}v{hh}v]	$obc
+		L[{hh'h'0"d}v{hh}v]	$obc
+		L{[h{hh}vhv]Ah'}	$na
+	NAME
+		KA
+81
+	SUM
+		EME
+			lišānum
+	COMP
+		KA×ME
+	FORM
+		L[v'"{u[0v0'{hhhh}]d}Av{h[vh]Mh}Av]	$obl
+		L[{hh}c'{h[v0vhv]Ah}EE]	$obc
+		W{[h{hh}v{h[vh]M}EEv]Ah'}	$na
+	NAME
+		EME
+		KA×ME
+82
+	SUM
+		SAG
+			rēšum
+	LIG
+		SAG.DU
+			qaqqadum
+		SAG.ÌR
+			wardum
+		SAG.GEME₂
+			amtum
+	FORM
+		L[v'"{uvd}Av{hh}v]	$obl
+		L[{[vv'v]h}EE0'{hh}v]	$obc
+		L[{h(hvR)}v0'{hh}v]	$obc
+		W[{hh'}vv0'(v{hh})]	$na
+	NAME
+		SAG
+83
+	SUM
+		SIPAD
+			rēʔûm
+	FORM
+		L[(v{hh})v{h(vh)Mh}v]	$obl
+		W[(v{hh}){[vv0]hh}Av]	$obc
+		W[(v{hh}){[v0'{hhh}vv]Ah}E]	$na
+	NAME
+		SIPAD
+
