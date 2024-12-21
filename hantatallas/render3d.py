@@ -5,11 +5,22 @@ import subprocess as sp
 from render import Renderer
 from elements import Modifier, Winkelhaken, Vertical
 
+tau = 2*pi # I am obstinate
+
+def remap(val1, lo1, hi1, lo2, hi2): # Remap `val` from the range `lo1-hi1` to the range `lo2-hi2`
+	range1 = hi1 - lo1
+	range2 = hi2 - lo2
+	normalized = (val1 - lo1) / range1
+	val2 = (normalized * range2) + lo2
+	return val2
+
 class ScadRenderer(Renderer):
-	def __init__(self, width, height, margin=0, scale=0, thickness=None, shape='tablet', *args, **kwargs): # TODO remove args and kwargs
+	def __init__(self, width, height, margin=0, scale=0, thickness=None, shape='tablet', multiplex=1, *args, **kwargs): # TODO remove args and kwargs
 		super().__init__(width, height, margin=margin, scale=scale) # This fills out the basic layout parameters like fullwidth and fullheight
 		
 		self.buffer = StringIO()
+		
+		self.multiplex = multiplex # Multiple copies of one text, if the text is too small
 		
 		self.depth = 0
 		self.depthstack = [] # This is used to imitate Cairo's context save and restore, which is also a stack: here, it holds how many nested levels deep we are
@@ -17,7 +28,8 @@ class ScadRenderer(Renderer):
 		
 		if thickness is None: thickness = min(width, height) / 2
 		
-		self.record('use <../3dmodel/cuneiform.scad>\n') # Import the files we need for this
+		self.record('include <../3dmodel/cuneiform.scad>\n') # Import the files we need for this
+		# Using `include` instead of `use` we can override MAX_STROKE_WIDTH later if we want
 		
 		if shape == 'stamp': # The imprints will be *positives*
 			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
@@ -30,25 +42,50 @@ class ScadRenderer(Renderer):
 			self.save_transforms()
 			self.record('union(){')
 			self.depth += 1
+		
 		elif shape == 'seal': # As above, except wrapped around into a ring
-			self.fullwidth += self.scale/3 # Add an extra margin on the right
+			ridgesize = self.scale/5 # TODO parametrize this!
+			extramargin = self.scale/3 # And this!
+			self.fullwidth += extramargin + ridgesize # Add an extra margin on the right
+			
+			outerdepth = self.scale / 3 # How much beyond the surface we should try to capture in the cylinder
+			
+			if thickness < 0:
+				print('Thickness:', thickness)
+				print('Circumference:', self.fullwidth*self.multiplex)
+				print('Outer radius:', (self.fullwidth*self.multiplex / tau))
+				print('Inner radius:', -thickness)
+				thickness = (self.fullwidth*self.multiplex / tau) - (-thickness) # Make sure the hole in the middle of the seal has a radius of `-thickness` - outer circumference is fullwidth, so outer radius is fullwidth/τ, and thus thickness should be outer radius minus inner radius
+				print('Result:', thickness)
+				thickness -= outerdepth
+				print('Adjusted:', thickness)
+			
 			self.record('use <../3dmodel/cylinder.scad>\n')
-			self.record(f'cylindrify({self.fullwidth}, {self.fullheight}, 1.5, 100)') # TODO PARAMETRIZE third is height of stamp fourth is number of segments in ring
+	#		if self.multiplex > 1: # For the doubleseal version
+			self.record('module part(){')
+			
+			self.record(f'cylindrify({self.fullwidth * self.multiplex}, {self.fullheight}, {outerdepth}, 50*($preview?1:10))') # TODO PARAMETRIZE third is height of stamp fourth is number of segments in ring (lowered for preview, raised for render)
 			# A couple transforms to set this into the position cylindrify wants
 			self.record('rotate([0,0,90])')
 			self.record(f'translate([{self.fullwidth}, 0, 0])')
 			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
 			# And now it's the same as 'stamp'
 			self.record('rotate([0,180,0])') # Flip it around so the positives go up instead of down
+			
 			self.record('union(){') # We're going to start with a thin plate to attach the stamp to
 			self.depth += 1
-			self.record(f'cube([{self.fullwidth},{self.fullheight},{thickness}]);') # This is our plate
+			self.record(f'cube([{self.fullwidth},{self.fullheight},{thickness if thickness > 0 else f"/* {thickness} */ 1"}]);') # This is our plate
 			self.record('difference(){') # Now we're going to subtract the "air" (above the surface) from the styli
 			self.depth += 1
+			
 			self.save_transforms()
 			self.record('union(){')
 			self.depth += 1
-			self.record(f'vrule({self.fullwidth-self.scale/6}, {self.fullheight}, {self.scale/20});') # Experiment: put a ridge along one side to mark the start/end
+			
+			self.record(f'vrule({self.fullwidth-self.scale/6-ridgesize}, {self.fullheight}, {ridgesize});') # Experiment: put a ridge along one side to mark the start/end
+			self.record(f'edgerule(0, {self.fullwidth}, {ridgesize}, true);') # Similarly, ridge at top edge
+			self.record(f'edgerule({self.fullheight}, {self.fullwidth}, {ridgesize}, false);') # And bottom edge
+		
 		elif shape == 'tablet': # The imprints will be *negatives*
 			self.rescale(1, -1) # Invert the y-axis to match what Cairo does
 			self.record('difference(){') # We're going to subtract the styli from the clay
@@ -57,6 +94,7 @@ class ScadRenderer(Renderer):
 			self.record(f'\tcube([{self.fullwidth},{self.fullheight},{thickness}]);') # This is our tablet itself, placed just under the XY plane
 			self.record('union(){')
 			self.depth += 1
+		
 		else:
 			raise ValueError('Not a valid shape', shape)
 		
@@ -97,6 +135,18 @@ class ScadRenderer(Renderer):
 		while self.depth:
 			self.depth -= 1
 			self.record('}')
+		
+	#	if self.multiplex == 1: # We put this in a module definition, so we should now invoke the module
+		if self.shape == 'seal':
+			self.record('}')
+			self.record('')
+			for i in range(self.multiplex):
+				self.record(f'rotate([0,0,{i*360/self.multiplex}]) part();')
+		
+		if self.shape == 'stamp' or self.shape == 'seal': # We want thicker strokes if it's a positive rather than a negative
+			self.record('')
+			self.record('MAX_STROKE_WIDTH = 1/3;')
+		
 		return self.buffer.getvalue()
 	
 	def result(self):
@@ -127,7 +177,11 @@ class ScadRenderer(Renderer):
 		self.record(f'triplestroke({x}, {y}, {w}, {h});')
 	
 	def draw_hook(self, x, y, w, h, mods):
-		self.record(f'hookstroke({x}, {y}, {w}, {h});')
+		if h > 0.5: # When hooks are too big they go a lot deeper than any other stroke, so we have a "factor" argument we can reduce if they do
+			factor = remap(h, 0.5, 1, 0.75, 0.9)
+			self.record(f'hookstroke({x}, {y}, {w}, {h}, {factor});')
+		else: # Default is 0.75; 1 means perfectly flat against the surface, so larger factors are shallower
+			self.record(f'hookstroke({x}, {y}, {w}, {h});')
 	
 	def draw_rule(self, y, w):
 		self.record(f'hrule({y}, {w});')
@@ -165,6 +219,8 @@ class ScadRenderer(Renderer):
 	#			print('Adjusted left')
 				hook.pos = (x-w/2, y)
 				hook.dims = (w+w/2, h)
+		
+		return tree
 
 if __name__ == '__main__':
 	from parser import parse

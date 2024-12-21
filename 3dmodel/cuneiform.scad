@@ -20,7 +20,7 @@ module wedge(x, y, z, w, h, phi, o=false){
 	cube([l, s, s]);
 }
 
-module haken(x, y, z, s, d){
+module haken(x, y, z, s, d){ // Winkelhaken, positioned from top left corner - now called from the more elaborate hookstroke below
 	w = s*sqrt(2);
 	theta = atan(d/(w/2));
 	translate([x, y, z])
@@ -61,22 +61,33 @@ module hookstroke(x, y, w, h, factor=0.75){
 	// Experiment: changing w instead of h to make hakens wider, which makes them more visible when they're pressed against verticals
 	// Experiment undone - it works better changing h and having an adjustment in the renderer for when it's pressed against a vertical
 //	ww = (w-h/2<0.0001) ? w/factor : w;
-	ww = w;
+	ww = w; // We bring in ww and hh because SCAD does single assignment of variables
 	hh = (w-h/2<0.0001) ? h*factor : h;
-	s = hh / sqrt(2);
-	d = sqrt(ww*ww - hh*hh/4);
+	s = hh / sqrt(2); // Side length of the square we're going to embed
+	d = sqrt(ww*ww - hh*hh/4); // Depth that square is going to sink into the tablet
 	deltaw = (ww-w);
 	haken(x-deltaw, y+h/2, 0, s, d); // Use h instead of hh because the haken() module wants the position of the tip, and that needs to be at the midpoint of the *original* bounding box
 }
 
-module hrule(y, w, h=0.05){
-	s = h*sqrt(2)/2;
+module hrule(y, w, h=0.05){ // Draw a horizontal rule at a given y-value, spanning a given width; h is the thickness of the rule
+	s = h*sqrt(2)/2; // Side length of a square with diagonal h
 	translate([0, y, -s])
 		rotate([45, 0, 0])
 			cube([w, h, h]);
 }
 
-module vrule(x, h, w=0.05){
+module edgerule(y, w, h=0.05, top=true){ // Like hrule except it's cut in half to go at the top and bottom of a cylinder seal
+	s = h*sqrt(2)/2;
+	translate([0, y, -s])
+		difference(){
+			rotate([45, 0, 0])
+				cube([w, h, h]);
+			translate([-0.01, (top ? -h : 0), 0])
+				cube([w+0.02, h, 2*h]);
+		}
+}
+
+module vrule(x, h, w=0.05){ // Vertical rule, like hrule but reversed
 	s = w*sqrt(2)/2;
 	translate([x, 0, 0]) // TODO why 0 and not -s for the third?
 		rotate([0, 45, 0])

@@ -24,7 +24,7 @@ module cylindrify(length, width, square_thickness, fn) {
             // make the character stand up
             translate([r - square_thickness, 0, width]) 
                 rotate([0, 90, 0]) 
-                    children(0);
+                    %children(0);
         }
     }
 }
