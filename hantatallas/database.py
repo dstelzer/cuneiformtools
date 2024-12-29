@@ -102,6 +102,7 @@ class Database:
 		self.name_lookup = {}
 		self.cleanup = {}
 		self.expansions = {}
+		self.attested_rows = set() # Which rows (like HIT, AKK, etc) are found in the database?
 	
 	def load_cleanup(self, fn):
 		with open(fn, 'r') as f:
@@ -136,6 +137,7 @@ class Database:
 					if entry:
 						entry.finalize()
 						self.data.append(entry)
+						self.attested_rows |= set(entry.langs.keys())
 					entry = DatabaseEntry()
 					entry.ident = line
 	#				print('Processing', line)
@@ -158,6 +160,7 @@ class Database:
 			if entry:
 				entry.finalize()
 				self.data.append(entry)
+				self.attested_rows |= set(entry.langs.keys())
 		return self
 	
 	def clean_name(self, name):
@@ -263,65 +266,66 @@ class Database:
 			results.append(row)
 		return results
 	
+	ROWS = { # Order the rows should appear in, depending what rows are in the database
+		'IDENT' : 'Ident',
+		'TAGS' : 'Tags',
+		'FORM' : 'Sign',
+		'HIT' : 'In Hittite words',
+		'HURR' : 'In foreign words',
+		'AKK' : 'In Akkadian words',
+		'DET' : 'Determinative',
+		'SUM' : 'Sumerogram',
+		'LIG' : 'Ligatures',
+		'CODE' : 'Code',
+		'NOTE' : 'Notes',
+		'COMP' : 'Composition',
+	}
+	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', rendersign_path='/rendersign'):
+	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', rendersign_path='/rendersign'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
+		
+		used_rows = {k:v for k,v in self.ROWS.items() if k in self.attested_rows | {'IDENT', 'FORM', 'TAGS', 'CODE'}} # Which table rows do we actually need? ROWS specifies the order of them
+		# We always include these four, because they're generated from the other data in the entry instead of stored in the .langs data, which means they won't be in attested_rows
+		rows = {k: [f'<tr id="{k.lower()}"><th scope="row">{v}</th>'] for k,v in used_rows.items()} # Each key gets a list of cells forming its row; we start with the th cell, which will appear at the left as a legend and hover over the rest
 		
 		func = part.functional_form(norm_modes[mode]) if part else None
-		rows = [
-			['<tr id="ident"><th scope="row">Ident</th>'],
-			['<tr id="tags"><th scope="row">Tags</th>'],
-			['<tr id="form"><th scope="row">Sign</th>'],
-			['<tr id="hit"><th scope="row">In Hittite</th>'],
-			['<tr id="hurr"><th scope="row">In foreign words</th>'],
-			['<tr id="akk"><th scope="row">In Akkadian</th>'],
-			['<tr id="sum"><th scope="row">Sumerogram</th>'],
-			['<tr id="det"><th scope="row">Determinative</th>'],
-			['<tr id="code"><th scope="row">Code</th>'],
-			['<tr id="note"><th scope="row">Notes</th>'],
-		]
+		matches = 0 # How many distinct signs (not forms) have matched so far? This is reported at the end of the search
 		
-		IDENT, TAGS, FORM, HIT, HURR, AKK, SUM, DET, CODE, NOTE = range(10)
-		
-		matches = 0
-		
-		for entry in self.sorted[sort]:
+		for entry in self.sorted[sort]: # Use the self.sorted array to iterate over them in the correct order
 			matching_forms = list(entry.find_matches(func, regex, mode))
-			if matching_forms:
+			if matching_forms: # One or more of these forms matched!
 				matches += 1
-				colspan = len(matching_forms)
-				for _, pres, match in matching_forms:
+				colspan = len(matching_forms) # For the TAGS, FORM, and CODE columns, we have separate cells for each form; for all the rest, we have a single cell covering all of them, which has colspan="{colspan}"
+				for _, pres, match in matching_forms: # So we handle those three first
 					raw = {'code':pres.code}
 					if match: raw['highlight'] = ','.join(str(s) for s in match)
 					query = urlencode(raw)
-					rows[FORM].append(f'<td><img src="{rendersign_path}?{query}" height="100px" /></td>')
-					rows[CODE].append(f'<td><tt>{pres.code}</tt></td>')
-					rows[TAGS].append(f'<td>{", ".join(pres.tags)}</td>')
+					rows['FORM'].append(f'<td><img src="{rendersign_path}?{query}" height="100px" /></td>') # Form row: a rendered image of the form
+					rows['CODE'].append(f'<td><tt>{pres.code}</tt></td>') # Code row: the code that leads to that form
+					rows['TAGS'].append(f'<td>{", ".join(pres.tags)}</td>') # Tags row: form-specific tags used to select this form over others
+					# (Any sign-specific rather than form-specific information goes in NOTE instead)
 				
-				ident = entry.ident
-				rows[IDENT].append(f'<td colspan="{colspan}">{ident}</td>')
+				# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
+				rows['IDENT'].append(f'<td colspan="{colspan}">{entry.ident}</td>')
 				
-				hittite = ', '.join(entry.langs['HIT'])
-				rows[HIT].append(f'<td colspan="{colspan}">{hittite}</td>')
-				
-				foreign = ', '.join(entry.langs['HURR'])
-				rows[HURR].append(f'<td colspan="{colspan}">{foreign}</td>')
-				
-				akkadian = ', '.join(entry.langs['AKK'])
-				rows[AKK].append(f'<td colspan="{colspan}">{akkadian}</td>')
-				
-				note = '; '.join(entry.langs['COMP'] + entry.langs['NOTE'])
-				rows[NOTE].append(f'<td colspan="{colspan}">{note}</td>')
-				
-				def meanings1(sg): return ', '.join(entry.notes['SUM'][sg])
-				sumerian = ', '.join(f'{sg} "{meanings1(sg)}"' for sg in entry.langs['SUM'])
-				rows[SUM].append(f'<td colspan="{colspan}">{sumerian}</td>')
-				
-				def meanings2(sg): return ', '.join(entry.notes['DET'][sg])
-				determinative = ', '.join(f'{sg} "{meanings2(sg)}"' for sg in entry.langs['DET'])
-				rows[DET].append(f'<td colspan="{colspan}">{determinative}</td>')
-		for row in rows: row.append('</tr>')
+				# All the rest vary depending on the database file; we just include whichever ones are available
+				for lang in self.attested_rows:
+					rs = []
+					for reading in entry.langs[lang]: # Since they're defaultdicts in the entry, we can query whichever ones we want, it'll just return [] if it doesn't exist (which means this for-loop will immediately exit)
+						notes = entry.notes[lang][reading] # Do we have any notes on this specific reading?
+						if notes:
+							notes = ', '.join(notes)
+							rs.append(f'{reading} “{notes}”')
+						else:
+							rs.append(reading)
+					rs = ', '.join(rs)
+					rows[lang].append(f'<td colspan="{colspan}">{rs}</td>')
 		
-		return matches, '<table>' + ''.join(''.join(row) for row in rows) + '</table>'
+		# Finally, close all the row tags
+		for row in rows: rows[row].append('</tr>')
+		
+		# Wrap it in a table tag, and return it along with the count of matches
+		return matches, '<table>' + ''.join(''.join(row) for row in rows.values()) + '</table>'
 
 def preview_database(fn):
 	import webbrowser
