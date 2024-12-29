@@ -891,8 +891,6 @@ class Adjustment(Element):
 	
 	def forest(self, tabs=0):
 		return '\t'*tabs + '[\\code{' + self._sigil() + '}\n' + self.child.forest(tabs+1) + '\t'*tabs + ']\n'
-	
-	
 
 class Tenu(Adjustment): # Rotate a container 45 degrees
 	def _sigil(self): return 'T'
@@ -937,6 +935,11 @@ class Tenu(Adjustment): # Rotate a container 45 degrees
 		# Then, translate the origin
 		yy += self.dims[1]/2 # By half the large square side length
 		# (I.e. the distance between the small square's origin and the large square's origin)
+		# Because the large square's origin is the top left corner, and the small square's origin is the left corner
+		# +--+
+		# |/\|
+		# |\/|
+		# +--+
 		return xx, yy
 	def _determine_extrema(self):
 		strokes = [elem for elem in self.child.traverse() if type(elem) in {Horizontal, Vertical, DownDiag, UpDiag, Winkelhaken}]
@@ -1043,6 +1046,23 @@ class Allow(Adjustment): # Allow a component to expand in any direction, regardl
 	def kern_bottom(self): return self.child.kern_bottom()
 	def kern_left(self): return self.child.kern_left()
 	def kern_right(self): return self.child.kern_right()
+	
+	def propagate_dimensions(self, dims, pos):
+		self.dims, self.pos = dims, pos
+		self.adjust = (0, 0)
+		self.child.propagate_dimensions(dims, pos)
+
+class Kern(Adjustment): # Allow neighboring elements to kern into this one from every side, up to a maximum of half this element's dimension
+	def _sigil(self): return 'K'
+	def can_expand_horizontally(self): return self.child.can_expand_horizontally()
+	def can_expand_vertically(self): return self.child.can_expand_vertically()
+	def draw(self, rend): self.child.draw(rend)
+	def orient(self): return self.child.orient()
+	
+	def kern_top(self): return self.dims[1]/2
+	def kern_bottom(self): return self.dims[1]/2
+	def kern_left(self): return self.dims[0]/2
+	def kern_right(self): return self.dims[0]/2
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims, self.pos = dims, pos

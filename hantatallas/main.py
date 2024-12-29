@@ -65,7 +65,7 @@ def test_seals():
 	while True:
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
-		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc, ('new',)), fill=True, thickness=-5, shape='seal', multiplex=2).show()
+	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc, ('new',)), fill=True, thickness=-5, shape='seal', multiplex=2).show()
 		# Size should be 10 or 15, both work well atm
 		# Thickness should be 1.5 or negative
 		# Cookie cutter: nu NINDA-an `n ez-za-te-%{d([vv0]u)}
@@ -73,7 +73,8 @@ def test_seals():
 		# Dog: %{[vvhv]Ah}-%P[{hh'h'h'h}v]-%[(h[vv{0c}])v]-%P[{h'h'h'h}v]-%[{cc}v'"{du}v]-%P[{hh'h}v]-%[{0hh0}{u0d}v] `n %[{[cc]h[cc]}{cc}]-%L[{hh'h'h'h}v2(h[v'"v'"v'"])EEv2]-%[{h(h[vvv])Mh}v]-%[{h0([0vv0EE]h)}v]-%[{h0([0vv0EE]h)}v] `n %(hu'")-%[{ud}v'{du}]-%[{h(h[vvv])Mh}v]-%P[vv2]-%(hvd'"u'")
 		# Scribes: inim-inim-ma-nam-dumu `n é-dub-ba-a-ke4-ne `n cu-za-íb-ci-in-tùm
 		# Rearranged: %[{0[hc]h}v(v{0hh})]-%[{0[hc]h}v(v{0hh})]-%[{hhh}v]-nam `n %{[{hhh}{hh}]E([0v]h)}-%L[{hh}Evv'v'v'v]-%P[{hh}{hh}v]-%P[{hh'd}v]-a `n %[{0hh}vv'v]-%L[{hh}{[vvv]v}TEE{hh}v]-cu-za `n %[{chh}{h'h'h'h}]-ci-%[{ccc}{ccc}{du}]-%L[c'{d[{h'h[vvv0]}v0]u}c"v]
-	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='tablet').show()
+		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc, ('new',)), fill=True, thickness=5, shape='tablet').show()
+		# f-e-%[{h[hc]h}v] %[{[hc']h}vv]-te-el-%[{[hc']([hc']v)R}v]-ar `n MUNUS.TÚG mi-nu-ú-ti-im
 # cylindrify(132.0, 41, 5, 50*($preview?1:10))
 
 def test_uga():

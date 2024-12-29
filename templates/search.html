@@ -21,7 +21,7 @@
 			<label>Regex: <input type="text" name="regex" size="10" value="{{regex}}" /></label>
 			<label>Tags: <input type="text" name="tags" size="10", value="{{tags}}" /></label>
 			<label>Sort by: <select name="sort" id="sort">
-				<option value="hzl" {{ 'selected' if sort=='hzl' else '' }}>HZL number</option>
+				<option value="ident" {{ 'selected' if sort=='ident' else '' }}>Index number</option>
 				<option value="complex" {{ 'selected' if sort=='complex' else '' }}>Complexity</option>
 				<option value="usage" {{ 'selected' if sort=='usage' else '' }}>Usage</option>
 			</select></label>
@@ -39,7 +39,7 @@
 			<h3>Results
 				{% if code != '' %} for <tt>{{code}}</tt>{% endif %}
 				{% if regex != '' %} matching <tt>{{regex}}</tt>{% endif %}
-				 sorted by {{ {'hzl':'HZL number','complex':'complexity','usage':'usage'}[sort] }}</h3>
+				 sorted by {{ {'ident':'index number','complex':'complexity','usage':'usage'}[sort] }}</h3>
 			
 			{% if matches == -1 %}
 				{{table|safe}}
@@ -48,11 +48,11 @@
 				<p>No matches found</p>
 			{% else %}
 				{% if code != '' %} <p><img src="/rendersign?code={{code|urlencode}}" height="100px" /></p> {% endif %}
-				<p>Found {{matches}} matching {{'signs' if matches>1 else 'sign'}}</p>
+				<p>Found {{matches}} matching {{'signs' if matches!=1 else 'sign'}}</p>
 				{{table|safe}}
 			{% endif %}
 		{% else %}
-			<p>This page lets you search the Zeichenlexikon for signs containing a particular component, or whose names match a particular regex. Enter a part of a sign (and/or a regex) in the boxes above, then click "Search".</p>
+			<p>This page lets you search for signs containing a particular component, or whose names match a particular regex. Enter a part of a sign (and/or a regex) in the boxes above, then click "Search".</p>
 			
 			<p>Tips for effective searching by component:
 			<ul>
@@ -69,6 +69,7 @@
 				<li>If there's a particular sign you want, just type in its name.</li>
 				<li>Use all-caps, and use the actual characters <tt>Ḫ Š Ṭ Ṣ Ŋ</tt> rather than <tt>H C T, S, J</tt> (sorry, I'm working on this one).</li>
 				<li>Use a dot (<tt>.</tt>) to match any single letter, and dot-star (<tt>.*</tt>) to match any number of letters.</li>
+				<li>Use <tt>^</tt> to mark the start of the name, and <tt>$</tt> to mark the end: <tt>^AN$</tt> will find only AN, not BAN, ANŠE, or SANGA.</li>
 			</ul>
 			</p>
 		{% endif %}
