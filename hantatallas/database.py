@@ -338,9 +338,10 @@ def preview_database(fn):
 		regex = input('Regex: ') or None
 		tags = input('Tags: ') or None
 		if tags: tags = tags.split()
-		matches, table = db.lookup_as_table(part, regex, tags, rendersign_path='https://dstelzer.pythonanywhere.com/rendersign')
+		matches, table = db.lookup_as_table(part, regex, tags, rendersign_path='https://dstelzer.pythonanywhere.com/rendersign') # Use the remote server address instead so this can be run locally
 		print(matches, 'match'+('es' if matches != 1 else ''))
 		with open('tmp.html', 'w') as f:
+			# The basic styling that's needed for the table to be readable
 			f.write('''<html><head><style>
 			table, th, td {
 				border: 1px solid black;
@@ -353,14 +354,11 @@ def preview_database(fn):
 				left: 0;
 			}
 			</style></head>\n<body>\n''')
-			f.write(table)
+			f.write(table) # Beyond that, nothing but the table, no frills
 			f.write('\n</body></html>')
 		webbrowser.open('tmp.html')
 
-if __name__ == '__main__':
-	
-	preview_database('data/huehnergard.dat')
-	
+def eval_database():
 	from elements import Superpose, Stroke
 	from collections import Counter
 	def is_improper(root): # A tree is *improper* if there are two strokes of the same type with a superposition as their last common ancestor
@@ -416,7 +414,15 @@ if __name__ == '__main__':
 		for i, f in enumerate(e.forms):
 			if is_anomalous(parse(f.code)):
 				print(f'\t{e.ident}/{i+1}')
-	
+
+def use_database():
+	db = Database()
+	db.load_data('data/hzl.dat')
+	db.load_expansions('data/replacements.dat')
+	db.prepare_sorting()
 	while True:
 		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), input('Mode: ')):
 			print(name, code, match)
+
+if __name__ == '__main__':
+	preview_database('data/huehnergard.dat')
