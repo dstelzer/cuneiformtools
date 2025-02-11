@@ -11,10 +11,10 @@ def test_rendering():
 	#	try:
 			construct = parse(input('>') or 'S([0\'"v!]h2)', friendly=True)
 			print(construct)
-		#	print(construct.functional_form())
-		#	print(construct.forest())
+			print(construct.functional_form())
+			print(construct.forest())
 		#	InkRenderer.render(construct, margin=32).show()
-			TwoSidedRenderer.render(construct, margin=32).show()
+		#	TwoSidedRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
 	#	except ValueError: pass
@@ -96,7 +96,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_seals()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

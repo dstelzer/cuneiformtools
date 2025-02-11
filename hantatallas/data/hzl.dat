@@ -524,7 +524,7 @@
 		{v[hc]c}
 		[hvcc]	variant
 		[{[{0h}v]h}c']	variant
-		L[hc'vhc']	variant uncommon
+		L[hc'vhc']	variant unusual
 	NAME
 		TI DÌ DI3 ṬÌ ṬI3 TE9 TÌL TIL3
 38
@@ -574,7 +574,7 @@
 			Inanna (goddess)
 	FORM
 		L[h{[vv]v}v]
-		L[{[0vvv]h[v0]}v]	variant uncommon
+		L[{[0vvv]h[v0]}v]	variant unusual
 		L[(h[{vv}v0])v]	variant
 	NAME
 		INANNA INNIN INANA
@@ -603,8 +603,8 @@
 		L{[d'vv'v]h}	old
 		L{[d'vvv]h}	new
 		L{[cvvv]h}	variant
-		L{[vvv]h2}	variant uncommon
-		L[{hh}{[v'v'v]h}]	variant uncommon
+		L{[vvv]h2}	variant unusual
+		L[{hh}{[v'v'v]h}]	variant unusual
 		L([cvvv]h)	variant
 	NAME
 		RU ŠUB ŠUP
@@ -1027,7 +1027,7 @@
 	HURR
 		nim
 	FORM
-		L[{du0'}{cc0'}v]	old
+		L[{dcKu}{cc}v]	old
 		L[c'{du}c'v]	new
 		L[{[cc][hc]0}v]	variant
 		L[{[ccc][hcc]c}v]	variant unusual
@@ -2264,7 +2264,7 @@
 			fingernail
 			wheel
 	FORM
-		X[[{hh}{d2'v}]{[vv'{vh}v']h}{c[hh][hh][ccc]}[vv]]	old
+		X[[{hh}{d2'v}KE0']E{[vv'{vh}AEEv']Ah}EE{c[hh][hh][ccc]}EE[vv]]	old
 		X[{[hv]h}{[cc]h'h'h'h}v0'"{[vv'v'v]h}E{c[hh][hh][ccc]}vv]	new
 		X[(v{[hc']h}){[vvv][vvv]h}{[0c]h2h2}[vv]]	variant
 		X[{[hc'][(hv){hhh}v]}{[vv'v'v{h[ccc]}E]h}[vv]]	variant
@@ -2563,7 +2563,7 @@
 	SUM
 		GUR
 			another
-			cor (Akk. kurrum, a unit of measurement)
+			cor (Akk <i>kurrum</i>, a unit of measurement)
 	FORM
 		[{h(hv)R}v]	old
 		L[{h'h}vv]	new
@@ -2929,6 +2929,16 @@
 		L[{([{h0}v0]h)h}v]	variant
 	NAME
 		ZU SÚ SU2 ṢÚ ṢU2 GÍN× GIN2×
+209B
+	SUM
+		GIN₉ ("GÍN")
+			shekel (unit)
+	FORM
+		L[{hh'h}vv]
+	NAME
+		GIN9
+	NOTE
+		Hittite scribes regularly used an old form of ZU to write GÍN "shekel", so this sign is usually read as GÍN. However, the standard form of GÍN (#223) is also found in letters from Egypt. The HZL gives them both the reading GÍN, but assigns them different index numbers. For clarity, we assign the reading GIN₉ here for the peculiarly Hittite form, and reserve GÍN for the standard one.
 210
 	HIT
 		lu
@@ -3118,7 +3128,9 @@
 	AKK
 		ṭu
 	SUM
-		GÍN/TÙN
+		GÍN
+			shekel (unit)
+		TÙN
 			[component of other signs]
 	FORM
 		L[{hhh}{hhh}v2]
@@ -3128,6 +3140,8 @@
 		W[{[vvvv{0hh}]h}v]	variant unusual
 	NAME
 		ṬU GÍN GIN2 TÙN TUN3
+	NOTE
+		Hittite scribes wrote "shekel" with a sign more like ZU, but the standard GÍN is also found in letters from Egypt. The particularly Hittite "GÍN" (sign #209B) is here given the reading GIN₉ for clarity.
 224
 	COMP
 		LAGAB×BAD

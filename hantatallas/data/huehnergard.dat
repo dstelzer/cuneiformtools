@@ -1193,7 +1193,7 @@
 		([vvv]{hh})	cursive
 		L([0vvvv]{hhhh})	cursive
 		P(v{hh})	cursive
-		W[{hh}vvv{hh}]
+		W[{hh}vvv{hh}]	neoassyrian
 	NAME
 		Ú U2
 93
@@ -1814,7 +1814,7 @@
 		{[cccc][ccc]}	cursive
 		{[ccc][ccc]}	cursive
 		P{[cc][cc]}	cursive
-		{v[vvv]}T	$NA
+		{v[vvv]}T	neoassyrian
 	NAME
 		ŠE
 139
@@ -2232,7 +2232,7 @@
 	FORM
 		X[{[ud]h'[du][0(v{hh})E0]M}v{d[{[{hhhh}v]h}uEE]}EEE]	lapidary bad
 		W[{[vvv]v}TEh{d[{hh}u]h}E]	cursive
-		W[{[vvv]v}T{d[hhu]h}]	cursive
+		W[{[vvv]v}T{d[hhh]h}]	cursive
 		W[{[hc']h}{[v{hh2}]Ah}E]	neoassyrian
 	NAME
 		ANŠE
