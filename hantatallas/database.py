@@ -229,6 +229,7 @@ class Database:
 		# (We're assuming nobody writes \n`r`n or `n`r\n)
 		trans = trans.replace('`r', '\n`r\n') # Then impose them uniformly everywhere
 		trans = trans.replace('`n', '\n') # For circumstances where newlines aren't possible, we've defined a control-character-less alternative. Here, we turn that into a normal newline.
+		# TODO - Also recognize `r with newlines on only one side
 		for i, line in enumerate(trans.split('\n')):
 			if line.strip() == '`r': # Check for a special case: rulings
 				results.append(Ruling())

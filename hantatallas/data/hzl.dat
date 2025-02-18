@@ -32,6 +32,17 @@
 		h2
 	NAME
 		ḪAL DIDLI
+	NOTE
+		The HZL puts DIDLI under index 1 instead of index 2. I'm unsure why.
+	LIG
+		DIDLI.ḪI.A
+			[plural]
+		AŠ.NU.GAL
+			alabaster
+		AŠ.ME
+			sun-disc
+		AŠ-ŠUM
+			(Akk) because of
 3
 	SUM
 		PÉŠ, PÍŠ
@@ -41,6 +52,9 @@
 		W[{[0({hhh}[vvv])0]Mh2[0{cc}v0]M}{dhv}]	variant
 	NAME
 		PÉŠ PEŠ2 PÍŠ PIŠ2
+	LIG
+		PÉŠ.TUR-wa
+			Mašḫuiluwa (male name)
 4
 	HIT
 		bal
@@ -71,6 +85,8 @@
 		L[{hh}{dhh}{hhhh}h]	variant
 	NAME
 		NU11 SIR4 ŠIR
+	NOTE
+		Can appear in Kreuzform
 6
 	SUM
 		GÍR
@@ -86,6 +102,13 @@
 		[{c[h2]c}h]	variant unusual
 	NAME
 		GÍR GIR2 UL4
+	LIG
+		GÍR.LÍL
+			field knife (?)
+		GÍR.TAB(-PU)
+			scorpion
+		UL₄.GAL
+			sword
 7
 	HIT
 		tar
@@ -107,6 +130,15 @@
 		{0h2h'}	variant
 	NAME
 		TAR ḪAŠ DAR6 KUD KUT QUD QUT ṬAR ṬÍR ṬIR2 KU5
+	LIG
+		tar-u-an
+			[an oracular term]
+		tar-liš
+			abbreviation for taruyalliš (TODO)
+		tar-lì-an
+			abbreviation for tarwalliyan
+		tar-(wa-)li₁₂-an
+			abbreviation for tarwalliyan
 8
 	HIT
 		an
@@ -127,6 +159,33 @@
 		(h2d'"u'")	variant unusual
 	NAME
 		AN ÌL IL3 DINGIR DIŊIR D
+	LIG
+		DINGIR-LIM
+			stands for -ili or -maššani in names
+		DINGIR.MAḪ
+			mother goddess
+		AN.BAR
+			iron
+		AN.BAR.DÍM.DÍM
+			blacksmith
+		AN.NA (NAGGA)
+			tin
+		AN.ŠUR (or ŠUR.AN)
+			"rain of heaven" (?)
+		AN.TAḪ.SUM
+			[type of plant] (crocus?)
+		AN.TA
+			upper, atop
+		AN.TA.LÙ
+			eclipse
+		AN.GE₆
+			eclipse
+		AN.ZA.GÀR
+			pillar, tower
+		DINGIR.MEŠ.IR
+			Maššanuzzi (female name)
+		DINGIR.MEŠ.GAL
+			Maššanura (male name)
 9
 	SUM
 		APIN
@@ -140,6 +199,9 @@
 		L[{h'h2[h'v]}v]	variant
 	NAME
 		APIN ENGAR
+	LIG
+		APIN.LÁ
+			plowman
 10
 	HIT
 		maḫ
@@ -170,6 +232,17 @@
 		(u'"h)	variant
 	NAME
 		NU LÀ LA3
+	LIG
+		NÚ.(Ì.)GAL
+			unavailable
+		NU.(AL.)TIL
+			unfinished
+		NU.LUḪ.ḪA
+			asafoetida (plant)
+		NU.ÚR.MAḪ
+			pomegranate
+		NU.GIŠ.KIRI₆
+			gardener
 12
 	HIT
 		kul
@@ -208,6 +281,15 @@
 		[hc'"]
 	NAME
 		PÁT PAT2 PÁD PAD2 PÍT PIT2 PÍD PID2 PÈ PE3 PÌ PI3 MÚT MUT2 MÚD MUD2 BAD BAT BAṬ BE BI4 MID MIT MIṬ SUMUN SUN TIL ÚŠ UŠ2
+	LIG
+		BE-EL
+			(Akk) lord
+		TIL.LA
+			finished
+		PÉT-ḪAL-LUM
+			(Akk) horseman
+		BE-EL MAD-GAL₉-TI
+			(Akk) governor (of a province)
 14
 	HIT
 		dim
@@ -235,6 +317,13 @@
 		L[hccv]	variant
 	NAME
 		NA
+	LIG
+		NA.GAD
+			shepherd
+		NA.RÚ
+			stele
+		NA-ŠI ṢÍ-DI-TI₄
+			(Akk) provisioner
 16
 	SUM
 		ARAD, ÌR
@@ -245,6 +334,9 @@
 		[{c[hc]c}v]
 	NAME
 		ARAD ÌR IR3 NÍTA NITA2 NÍTAḪ NITAḪ2
+	LIG
+		ÌR-li
+			Ḫutarli (male name)
 17
 	HIT
 		mu
@@ -260,6 +352,13 @@
 		[h{v[vvv]}TE]	variant
 	NAME
 		MU MUḪALDIM
+	LIG
+		MU.AN
+			[type of wooden implement]
+		MU.IM.MA
+			last year
+		MU.IM.MA-an-ni
+			next year
 18
 	SUM
 		MUN
@@ -289,6 +388,9 @@
 		W[h2{[hh][hh]h}v2{d'hv}]	variant unusual
 	NAME
 		NAR
+	LIG
+		NAR.GAL
+			lead musician
 20
 	HIT
 		pár
@@ -302,12 +404,32 @@
 		BÁN
 			measurement
 		BAR
+			[component of other signs]
 	FORM
 		(vh)
 		{vh}	variant
 		(v{0d0})	variant unusual
 	NAME
 		PÁR PAR2 BAR MAŠ MAS BÁN BAN2
+	LIG
+		BAR.SI
+			headband
+		MAŠ.EN.GAG (MÁŠDA)
+			pauper
+		MAŠ.SÌL
+			hip
+		MAŠ.TAB.BA
+			twin
+		MAŠ-LU
+			(Akk) decorated
+		BAR.DUL₈
+			garment, weaver
+		MAŠ.GIM
+			groin?
+		BAR.TE
+			[type of garment]
+		BAR.KÍN
+			covering, overlay
 21
 	HIT
 		qa
@@ -325,6 +447,20 @@
 		L[(du)v]	variant
 	NAME
 		QA GA5 KA4 SÌL SIL3 SÌLA SILA3
+	LIG
+		SÌLA.ŠU.DUḪ (SAGI)
+			cupbearer
+		SÌLA.ŠU.DUḪ.LIŠ.A (SAGI.LIŠ.A)
+			cupbearer
+		QA-TI, QA-AT, QA-TUM, QA-TAM
+			(Akk) hand
+			(Akk) finished
+		QA-DU
+			(Akk) together with
+		QA-DU₄
+			(Akk) together with
+		QA-TAM-MA
+			(Akk) likewise
 22
 	SUM
 		MUG
@@ -344,6 +480,9 @@
 		L[(hv){[vvvv]v}TE]	variant
 	NAME
 		UZ6
+	LIG
+		UZ₆.KUR.RA
+			mountain goat
 24
 	HIT
 		ḫu
@@ -360,6 +499,14 @@
 		(h[vcv])	variant
 	NAME
 		ḪU BAG BAK BAQ MUŠEN
+	LIG
+		MUŠEN.DÙ
+			birdcatcher
+			augur
+		MUŠEN.GAL
+			duck? goose?
+		MUŠEN ḪUR-RI
+			rock partridge? shelduck?
 25
 	AKK
 		u₅
@@ -367,6 +514,11 @@
 		W[hvcvh{[vv]h}]
 	NAME
 		U5
+	LIG
+		LE-U₅
+			(Akk) wooden writing board
+	NOTE
+		This word is used as a "pseudo-Sumerogram" only to write the Akkadian word <i>lēʔum</i>
 26
 	AKK
 		mut
@@ -389,12 +541,15 @@
 		L[hvc{cv}{cv}{cv}]	variant unusual
 	NAME
 		SE24 SÈD SED3 ŠE12 ŠED9
+	LIG
+		SÈD-nu-
+			satisfy
 28
 	COMP
 		SI×SÁ
 	SUM
 		SI×SÁ
-			arrange, join, fix, preordain
+			arrange, join, fix, preordain (ḫandai-)
 	FORM
 		L[hv{[{[cc]hh}v]MEh}v]
 		L[hv{[c{chh}v]MEh}v]	variant
@@ -423,6 +578,7 @@
 	SUM
 		GI
 			reed
+			abbreviation for gipeššar
 		(SI₂₂/SIG₁₇?)
 	DET
 		GI
@@ -434,6 +590,19 @@
 		L[hvvvc{cc}]	variant unusual
 	NAME
 		GI GE KÍ KI2 KÉ KE2 QÌ QI3 QÈ QE3 SI22 SIG17
+	LIG
+		GI.IZI.LÁ
+			torch
+		GI É ṬUP-PI, GI É.DUB.BA
+			kalamos (reed pen)
+		QÈ-RU-UB
+			(Akk) near
+		GI.DÙG.GA
+			[reed used as a seasoning]
+		GI.GÍD
+			flute
+		GI.DUR₅
+			[kind of reed]
 31
 	COMP
 		ge+e
@@ -459,6 +628,13 @@
 		L(h[vvcv])	variant
 	NAME
 		RI RE TAL DAL
+	LIG
+		RI.RI.GAL
+			downfall
+		RI-QÚ, RI-QUM
+			(Akk) empty
+		RE-E-ET, RI-I-IT, RI-IT
+			(Akk) pasture
 33
 	HIT
 		zi
@@ -472,12 +648,26 @@
 		ZI
 			soul, life
 			bile, gallbladder
+			abbreviation for zizaḫiš, Ziplantawiya (female name), or Zippalanda (city)
 	FORM
 		L[hvv{cc}{cc}]
 		L(h[vv{cc}{cc}])	variant
 		L[{hh}vv{cc}{cc}]	variant
 	NAME
 		ZI ZE SÍ SI2 SÉ SE2 ṢÍ ṢI2 ṢÉ ṢE2
+	LIG
+		zi-an
+			abbreviation for zilawan
+		ZI.GA
+			uprising
+		ZI.IN.GI
+			ankle
+		ZI.KIN
+			huwasi (cult stele)
+		ZI.KIN.BAR
+			needle(?)
+		SÍ-BU-U
+			(Akk) innkeeper
 34
 	COMP
 		NUN.LAGAR?
@@ -509,6 +699,11 @@
 		L[hvvvv'v]	new
 	NAME
 		NUN
+	LIG
+		Ì.NUN(.NA)
+			ghee (clarified butter)
+		ANŠE.GIR.NUN.NA
+			mule
 37
 	HIT
 		ti
@@ -519,7 +714,7 @@
 		TI/TÌL
 			life, live
 			rib
-			"lifestone"
+			"lifestone"(?)
 	FORM
 		{v[hc]c}
 		[hvcc]	variant
@@ -527,6 +722,9 @@
 		L[hc'vhc']	variant unusual
 	NAME
 		TI DÌ DI3 ṬÌ ṬI3 TE9 TÌL TIL3
+	LIG
+		TI-BI IM
+			(Akk) "elevation of the winds" (term in haruspicy)
 38
 	SUM
 		MÁŠ
@@ -536,13 +734,23 @@
 		L[{[0v]hh'}{[vvv]v}TE]	variant
 	NAME
 		MÁŠ MAŠ2
+	LIG
+		MÁŠ.ŠIR, MÁŠ.GAL, MÁŠ.GAL.ŠIR, MÁŠ.GAL.NÍTA
+			billygoat
+		MAŠ.TUR
+			kid (young goat)
+		MÁŠ.ANŠE
+			animal, wildlife, livestock
+		MÁŠ.ḪUL.DÚB.BA
+			scapegoat
 39
 	HIT
 		nam
 	SUM
 		NAM
 			district
-			governor
+			administrator
+			[forms abstract nouns]
 		SIM
 			swallow (bird)
 		BURU₅
@@ -554,6 +762,25 @@
 		[{chc}{ccc}{ccc}]	variant
 	NAME
 		NAM SIM SÍN SIN2 BURU5
+	LIG
+		NAM.TAR
+			fate
+			mandrake
+		NAM.NUN.NA
+			principality
+		NAM.ÉRIM
+			oath
+		NAM.TÚL
+			article of clothing(?)
+		NAM.UTUL₅
+			position of district governor
+		NAM.RA
+			plunder
+			serf
+		NAM.RU, NAM.RI
+			(misinterpretation of NAM.RA as an Akk word)
+		NAM.LÚ.U₁₉.LU
+			humanity
 40
 	HIT
 		en
