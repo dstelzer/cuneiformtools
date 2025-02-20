@@ -795,10 +795,31 @@
 		[h{vc}{vc}]	new
 	NAME
 		EN IN4
+	LIG
+		EN.NU.UN
+			guard
+		EN QA-TI
+			(Akk) artisan
+		EN GIŠ.KIN.TI
+			artisan
+		EN.ME.LI (ENSI)
+			seer
+		EN SISKUR, EN SÍSKUR
+			ritual client
+		EN MAD-GAL₉-TI
+			(Akk) governor (of a province)
+		EN ÈN.TAR
+			spokesperson (calqued from Akk)
+		1-EN
+			one (Akk ištēn)
+		EN.ZU (ZUEN)
+			Sîn (moon god)
+		EN-LUGAL-ma
+			Ibri-Šarruma (male name)
 41
 	SUM
 		INANNA/INNIN
-			Inanna (goddess)
+			Inanna/Ištar (goddess)
 	FORM
 		L[h{[vv]v}v]
 		L[{[0vvv]h[v0]}v]	variant unusual
@@ -817,6 +838,9 @@
 		L[hv{[vv]v}]	variant
 	NAME
 		ŠUR SUR
+	LIG
+		ŠUR.AN
+			"rain of heaven"(?)
 43
 	HIT
 		ru
@@ -835,6 +859,9 @@
 		L([cvvv]h)	variant
 	NAME
 		RU ŠUB ŠUP
+	LIG
+		SAḪAR.ŠUB.BA
+			leprosy
 44
 	HIT
 		ip
@@ -851,6 +878,11 @@
 		L[{[vh]h}vv]	variant
 	NAME
 		IB IP EB EP URAŠ URTA IF EF
+	LIG
+		IB-NI
+			(Akk) he built
+		tù-ku-ul-ti-d^IB
+			Tukulti-Ninurta (male name)
 45
 	SUM
 		U₈/US₅
@@ -861,6 +893,9 @@
 		L{[v{hhhh}vcv]h}	variant
 	NAME
 		U8 US5
+	LIG
+		US₅.UDU.ḪI.A (USDUḪA)
+			sheep and goats (collectively)
 46
 	HIT
 		zul
@@ -874,13 +909,18 @@
 		L[{[v{vh[hcc]}M]h}v]	variant
 	NAME
 		ZUL ŠUL SUL
+	LIG
+		ŠUL-PÁT
+			(Akk) drinking straw
+		ŠUL-MU
+			(Akk) health
 47
 	AKK
 		qi
 		qe
 	SUM
 		KIN
-			work, role
+			work, role (aniur, aniyan, etc)
 			sickle
 	FORM
 		L{[v{0hhh0}vd']h}
@@ -891,6 +931,9 @@
 		W{[v{hhh}v{h[vvv]}]h}	variant unusual
 	NAME
 		QI QE KIN GUR10
+	LIG
+		KIN.GI₄.A
+			courier
 48
 	FORM
 		{[vv]h}
@@ -899,6 +942,8 @@
 			[component of other signs]
 	NAME
 		ŠUŠANA
+	NOTE
+		See sign 52 (GIDIM). It's unclear if ŠUŠANA was ever actually used in Hittite.
 49
 	HIT
 		kap
@@ -919,6 +964,16 @@
 		L[{[vvd']h}{cc}v]	variant
 	NAME
 		KAB KAP GÁB GAB2 GÁP GAP2 QÁB QAB2 QÁP QAP2 GÙB GUB3 ḪÚB ḪUB2
+	LIG
+		ḪÚB.BI, ḪÚB.BÍ
+			ring, earring
+			acrobat
+		KAP-PÍ E-NI
+			(Akk) eyelid
+		KAB.KA.DÙ
+			[type of vessel]
+		GÁB.ZU.ZU
+			trained
 50
 	HIT
 		ḫup
@@ -931,6 +986,10 @@
 		W[{[vvd2']h}{cc}0'"v2]	variant
 	NAME
 		ḪUB ḪUP
+	LIG
+		ḪUB.BI, ḪUB.BÍ
+			ring, earring
+			acrobat
 51
 	HIT
 		ur
@@ -946,12 +1005,24 @@
 		(TÉŠ?)
 	FORM
 		L[{[vvh]h}v]	old
-		L[({0h}[vvh])v]	new
+		L[({0h}[vvh])v]	new improper
 		L[{[v(hv)]h"}v]	variant
 	NAME
 		UR LIG LIK LIQ TÍŠ TIŠ2 TAŠ TÉŠ TEŠ2
-	NOTE
-		Not totally happy with the new form here, since it puts two horizontals inside a composition.
+	LIG
+		UR.MAḪ
+			lion
+		UR.SAG
+			hero
+		UR.SAG-tar
+			heroism
+		UR.BAR.RA
+			wolf
+		UR.GI₇
+			dog (can be an insult)
+			hunter
+		UR.BI
+			together
 52
 	COMP
 		ŠUŠANA+IŠ
@@ -975,6 +1046,15 @@
 		(h[vv])	variant unusual
 	NAME
 		TUK TUKU
+	LIG
+		TUKU.TUKU
+			anger, rage
+		TUKU.TUKU-nu-zi
+			is angry
+		TUKU.TUKU-eš-zi
+			becomes angry
+		NU.TUKU
+			unavailable
 54
 	COMP
 		GÁ×PA
@@ -1013,6 +1093,15 @@
 		[{h'h}v]	variant unusual
 	NAME
 		BA4 MÀ MA3 GÁ GA2 MAL PISAN
+	LIG
+		GÁ.E
+			I
+		A.MAL
+			Marduk (deity)
+		ZA-BÁ-BÁ
+			(Akk) Zababa (deity)
+	NOTE
+		TODO are AD.KID and DUḪ.SÚ.A listed elsewhere?
 57
 	COMP
 		GÁ×AN
@@ -1028,6 +1117,19 @@
 		L[{h'h2'h[vv]}vv]	variant
 	NAME
 		AMA DAGAL
+	LIG
+		AMA.MUNUS
+			mother
+		AMA.DINGIR-LIM, DINGIR-LIM.AMA
+			priestess (lit. godsmother)
+		AMA.AMA
+			grandmother
+		AMA.AR.GI
+			tax exemption
+		AMA.DÙG.GA
+			beloved mother
+		AMA.(A.)TU
+			housemate
 58
 	COMP
 		GÁ×NIR
@@ -1040,7 +1142,10 @@
 	NAME
 		ÙR UR3
 	NOTE
-		The v2 on the right should be more separate from the {vv} on the left, but there's just not enough space to distinguish them.
+		The v2 on the right should be more separate from the {vv} on the left, but there's just not enough space to distinguish them. TODO!
+	LIG
+		É GIŠ.ÙR.RA
+			attic
 59
 	COMP
 		GÁ×ŠE
@@ -1070,12 +1175,22 @@
 	SUM
 		IKU
 			field
+			unit of length and area
 	FORM
 		L[{h'0(h[vvv0])}v]
 		L[{h'h[vvv0]}v]
 		L[{h'[v'v'v'0]h}v]	variant
 	NAME
 		GÁN GAN2 KÁN KAN2 IKU
+	LIG
+		IKU-li
+			in one-iku units
+		kán-la
+			abbreviation for kanqatitalla
+		kán-iš
+			abbreviation for Kantuzziliš
+		kán-li
+			abbreviation for Kantuzzili
 62
 	COMP
 		SÍK.NUN
@@ -1094,12 +1209,15 @@
 		SÍK.LAM
 	SUM
 		ŠÉŠ
-			licorice plant?
+			licorice (plant)
 	FORM
 		W[{[0{hh}c]h}v{[{cc}{hh}v]Mh}v]
 		W[{[0{hh}c]h}v{[{c[hc]h}v]Mh}v]
 	NAME
 		ŠÉŠ ŠEŠ2
+	LIG
+		Á.ŠÉŠ
+			[name of a city]
 64
 	COMP
 		ŠU+NÍGIN
@@ -1112,12 +1230,12 @@
 	NAME
 		ŠU+NÍGIN ŠU+NIGIN2
 	NOTE
-		Unnamed in the HZL
+		Unnamed in the HZL, it's treated as a graphic ligature like d+EN
 65
 	SUM
 		SÍG/SÍK/SIKI
 			wool
-			the Ḫulana river
+			Ḫulana (a river)
 	FORM
 		{[0{hhh}cv][hh]}
 		L[{h'h'h'h}{[c'v]h}]
@@ -1125,17 +1243,27 @@
 		L[{h'ch}v{0h}]	variant unusual
 	NAME
 		SÍG SIG2 SÍK SIK2 SIKI
+	LIG
+		SÍG.SÁ
+			[type of wool?]
 66
 	COMP
 		SÍG+MUNUS
 	SUM
 		SÍG+MUNUS
-			ewe
+			ewe (generally with UDU or SILA₄)
 	FORM
 		L[{[0{hhh}c]h}v{[{cc}h]MEh}]
 		L{[0{hh}cv[vv]Th][hh]}	variant unusual
 	NAME
 		SÍG+MUNUS SIG2+MUNUS
+	LIG
+		UDU.SÍG+MUNUS
+			ewe
+		SILA₄.SÍG+MUNUS
+			female lamb
+	NOTE
+		This may be another graphic ligature that wasn't taken as its own sign, like d+EN
 67
 	HIT
 		ik
@@ -1143,19 +1271,31 @@
 	SUM
 		IG
 			door
-		(GÁL?)
+			doorman
+		GÁL
+			[component of other signs]
 	FORM
 		L[{[0{h[hc]h}]h}v0'"{cc}]	old
 		[{[vcv]h}{cc}]	new
 		[hvcv{cc}]	variant unusual
 	NAME
 		IG IK IQ EG EK EQ GÁL GAL2
+	NOTE
+		In other languages this is the logogram for "south", but Hittite scribes invariably use GAL "great" instead
+	LIG
+		IQ-BI
+			(Akk) he said
+		IK-RU-UB
+			(Akk) he vowed
 68
 	HIT
 		šu
 	AKK
 		kat₇?
 		suₓ?
+		ŠU
+			his, her
+			[forms number adverbs]
 	SUM
 		ŠU
 			hand
@@ -1164,6 +1304,65 @@
 		[(v{0hh'h'h})v]	variant unusual
 	NAME
 		ŠU KAT7 SU×
+	LIG
+		ŠU.AN
+			triumphal monument
+		ŠU.ŠÙDUN
+			yoke
+		ŠU.SI
+			finger(width)
+		ŠU.GÁN
+			[type of garden plant]
+		ŠU.GUR
+			ring
+		ŠU.GÁL
+			commander(?)
+		ŠU-NU
+			(Akk) their
+		ŠU.GI
+			elder
+			wise woman (ritual expert)
+		ŠU.RI.ÀM
+			half
+		ŠU.TAG.GA
+			adorn(?)
+		ŠU.DAB(.BU), ŠU.DIB
+			prisoner of war
+		ŠU.TÚG.LA
+			[type of metal object?]
+		ŠU-ÚR E-NI
+			(Akk) eyebrow
+		ŠU.ÚR.MÌN
+			cypress(?)
+		ŠU.NAG(.NAG), ŠU.GU₇.GU₇, ŠU.GU₇.NAG, ŠU.NAG.GU₇
+			[vessels for food and drink]
+		ŠU.NÍGIN
+			sum, total
+		ŠU.NÍGIN.GAL
+			total sum
+		ŠU.NIR
+			emblem
+		ŠU.I
+			barber
+			spear(head)?
+		ŠU.ḪA₆
+			hunter, fisher
+		ŠU-PUR
+			(Akk) write!, send!
+		ŠU.BÙLUG (GEŠPU/GEŠBU)
+			wrestling
+			wrestler, athlete
+			fist(?)
+		ŠU.U
+			basalt(?) (kunkunuzzi-)
+		ŠU.KIŠ
+			nettle(?)
+		ŠU-ŠI
+			(Akk) 60
+		ŠU.ŠAR
+			rope, cord
+		ŠU.KIN
+			sickle
 69
 	SUM
 		KÙ/KUG
@@ -1176,6 +1375,40 @@
 		P[{v2}{v2h}]	variant
 	NAME
 		KÙ KU3 KUG
+	LIG
+		KÙ.GA
+			pure
+		KUG.AN (AZAG)
+			taboo
+			demon
+		KUG.GI (KU.SIG₁₇, GUŠKIN)
+			gold
+		KUG.GI.DÍM.DÍM (GUŠKIN.DÍM.DÍM)
+			goldsmith
+		KÙ.DÍM
+			gold- and silversmith
+		KÙ.BABBAR
+			silver
+			Ḫattuša (city)
+		KÙ.BABBAR-ti
+			Ḫatti (city)
+		KÙ.BABBAR.DÍM.DÍM
+			silversmith
+		KÙ.(GA.)PU-ma
+			Šuppiluliuma (male name)
+		KÙ.BABBAR-d^LAMMA
+			Ḫattuša-Inara (male name)
+69B
+	SUM
+		KÙ+BABBAR
+	FORM
+		L[{[{vv}{vv}cc]h}v]
+	NAME
+		KÙ+BABBAR
+		KU3+BABBAR
+		KUG+BABBAR
+	NOTE
+		Graphical ligature
 70
 	COMP
 		Unknown?
@@ -1190,7 +1423,7 @@
 		GIŠIMMAR
 71
 	COMP
-		[???]+TAR
+		[???]+TAR (only new)
 	AKK
 		tàra
 	SUM
@@ -1205,11 +1438,16 @@
 		X[{h(hv')}{d2h'h'h'h}v{[vv'v'v{hh}]h}E{ccc}{ccc}(h2c')]	variant
 	NAME
 		TÀRA TARA3 DÀRA DARA3
+	LIG
+		DÀRA.MAŠ
+			deer
 72
 	HIT
 		ni
 		né
 	AKK
+		ni
+			our
 		lí
 		ṣal
 	SUM
@@ -1225,6 +1463,39 @@
 		L(d'h)	variant unusual
 	NAME
 		NI NÉ NE2 LÍ LI2 ṢAL Ì I3 IÀ IA3 YÀ YA3 ZAL
+	LIG
+		ni, ni-iš, ni-eš
+			abbreviation for nipašureš
+		Ì.DÙG.GA
+			fine oil
+		Ì.SAG.DÙG.GA
+			best-quality oil
+		Ì.GÁL
+			exists, is present
+		Ì.NUN(.NA)
+			ghee (clarified butter)
+		Ì.UDU
+			tallow
+		Ì.GAB, Ì.GAB.ŠE
+			??? TODO
+		Ì.GU₄
+			beef fat
+		Ì.GIŠ
+			sesame oil
+		Ì.ŠAḪ
+			pork fat
+		NI.DUḪ
+			gatekeeper
+		NI-IL-QÉ
+			(Akk) we took
+		NI-IŠ-KU-UN
+			(Akk) we put
+		NI-IŠ-ME
+			(Akk) we heard
+		NI-ID-DI-IN
+			(Akk) we gave
+		NI-MUR
+			(Akk) we saw
 73
 	COMP
 		NI+UD
@@ -1261,6 +1532,12 @@
 		[c{cv}cv]	variant unusual
 	NAME
 		NIM NEM NUM DÌḪ DIḪ3 ELAM
+	LIG
+		NIM.LÀL
+			bee
+			beekeeper
+		ELAM.MA
+			Elam (place)
 75
 	SUM
 		DÙ (DRU)
@@ -1274,6 +1551,11 @@
 		{d'({h0}v)}	variant
 	NAME
 		QAQ DÙ DU3 DRU GAG RÚ RU2
+	LIG
+		DÙ.A.BI
+			everything, in all
+		GAG.(Ú.)TAG(.GA)
+			arrow
 76
 	COMP
 		né+e
@@ -1291,6 +1573,7 @@
 		IR
 			ask
 			consult an oracle
+			oracular inquiry
 	FORM
 		L{d(u[vvv])}
 		L{dh[vvv]}
@@ -1299,6 +1582,11 @@
 		L{h([vvvv]h)}	variant unusual
 	NAME
 		IR ER
+	LIG
+		ir-liš
+			abbreviation for irkipelliš
+		ir-d^U-ub
+			Ir-Teššub (male name)
 78
 	AKK
 		lú
@@ -1318,6 +1606,31 @@
 		L{{[vvvv]v}T([vvvv]h)}	variant unusual
 	NAME
 		LÚ LU2
+	LIG
+		LÚ-(na-)tar
+			masculinity, heroic deed
+		LÚ.GÍR
+			sword-swallower
+		LÚ-ni-li
+			in a manly way
+		LÚ.MEŠ NA-RA-RI
+			(Akk) auxiliary troops
+		LÚ.NAM.U₁₉.LU
+			mankind, humanity
+		LÚ ZI-IT-TI, LÚ ZI-IT-TI₄
+			(Akk) shareholder
+		LÚ IL-KI, LÚ IL₅-KI
+			(Akk) vassal
+		LÚ É.ŠÀ
+			chamberlain
+		LÚ.U₁₉.LU
+			human, mortal
+		LÚ PA₅
+			canal inspector
+		LÚ NÍG.GAL.GAL
+			braggart
+		LÚ KIN
+			artisan
 79
 	SUM
 		ŠEŠ
@@ -1332,10 +1645,16 @@
 		L{d2[0{hhh}0c][hc][vvv]}	variant unusual
 	NAME
 		SES ŠEŠ
+	LIG
+		ŠEŠ-tar
+			brotherhood
+		ŠEŠ-zi-iš
+			Naniziš (male name)
 80
 	SUM
 		AŠGAB
 			leatherworker, cobbler
+			leatherworking
 	FORM
 		L({[vd]u}[00vvvv])	old
 		L({0h}[v{0h[0vvvv]}])	new
@@ -1358,6 +1677,11 @@
 		L[h([vv]{hh})E]	variant
 	NAME
 		AG AK AQ
+	LIG
+		AQ-BI
+			(Akk) I said
+		AK-RU-UB
+			(Akk) I vowed
 82
 	COMP
 		AG.ERIM
@@ -1382,6 +1706,9 @@
 		L[h{h[hc]h}v]	variant
 	NAME
 		TÁR TAR2 ṬÁR ṬAR2 GÙN GUN3 DAR
+	LIG
+		DAR.A
+			colorful
 84
 	SUM
 		ITI/ITU
@@ -1394,6 +1721,34 @@
 		L[{h[ccc]h}v2]	variant
 	NAME
 		ITI ITU
+	LIG
+		ITU GIBIL
+			new moon
+			first of the month
+		ITU.BÁR.ZAG.GAR
+			nisannu (the first month)
+		ITU.GU₄.SI.SÁ
+			ayyaru (the second month)
+		ITU.SIG₄.A
+			simanu (the third month)
+		ITU.ŠU.NUMUN.NA, ITU.ŠU.NUMUN.A
+			Duʔūzu (the fourth month)
+		ITU.NE.NE.GAR
+			abu (the fifth month)
+		ITU.KIN.d^INANNA
+			elūnu (the sixth month)
+		ITU.DU₆.KÙ
+			tašrītu (the seventh month)
+		ITU.APIN.DU₈.A
+			araḫsamna (the eighth month)
+		ITU.GAN.GAN.È.A
+			kislīmu (the ninth month)
+		ITU.AB.È.A
+			ṭebētu/kinūnu (the tenth month)
+		ITU.ZÍZ.A
+			šabaṭu (the eleventh month)
+		ITU.ŠE.KIN.KUD
+			addaru (the twelfth month)
 85
 	COMP
 		GAD.ŠE.NAGA
@@ -1427,6 +1782,11 @@
 		[{h[v0]h}v]	variant
 	NAME
 		ŠÍ ŠI2 ŠÉ ŠE2 SI SE ṢÌ ṢI3 ṢÈ ṢE3
+	LIG
+		SI.GAR
+			(head)band, chain
+		SI.NAG
+			drinking horn(?)
 87
 	SUM
 		MÁ
@@ -1438,6 +1798,9 @@
 		{[vvv]h2}	variant
 	NAME
 		MÁ MA2
+	LIG
+		MÁ.(URU.)URU₅, É.MÁ.URU₅(.URU)
+			quiver (for arrows)
 88
 	SUM
 		ŠÙDUL/ŠÙDUN
@@ -1447,6 +1810,11 @@
 		W[(h[vv])0'"v{[cc]hc}{cc}0'"v2]
 	NAME
 		ŠÙDUL ŠUDUL3 ŠÙDUN ŠUDUN3
+	LIG
+		ŠU.ŠÙDUN
+			yoke
+	NOTE
+		Some sources assign the readings DUN₄ and DUL₄ so that the ligature can be read as ŠU.DUN₄ etc.
 89
 	COMP
 		SI.A
@@ -1457,6 +1825,7 @@
 			leftover
 	AKK
 		dir
+			abbreviation for tīrānu "intestine"
 	FORM
 		L[{[hRv'v]h'}vv2]	old
 		L[{[hvv]h'}vv2]	new
@@ -1478,17 +1847,28 @@
 		({hh}{cc})	variant unusual
 	NAME
 		TAB TAP DÁB DAB2 DÁP DAP2 TAU TAW TAV ṬAB ṬAP
+	LIG
+		TAB.TAB (LÍMMU)
+			[component of other signs]
 91
 	HIT
 		šum
 	AKK
 		tà
+		ŠUM
+			name
+			call, command
 	FORM
 		L[{hh}{dhu}]
 		L[{hh}(dhu)]	variant
 		L[{hh}v{dhu}]	variant
 	NAME
 		ŠUM TÀ TA3 TAG
+	LIG
+		ŠUM-MI
+			(Akk) name
+		ŠUM-ŠU
+			(Akk) his/her name
 92
 	COMP
 		PIRIG&ZA
@@ -1509,6 +1889,9 @@
 		L{[{hh}{hhh}][{vv}{vv}000]M}	variant new
 	NAME
 		AZ AS AṢ
+	LIG
+		AS-KUT
+			(Akk) I remained silent
 92A
 	SUM
 		PIRIG
@@ -1527,7 +1910,7 @@
 		uk
 	SUM
 		UG/PÌRIG
-			tiger?
+			tiger(?)
 	FORM
 		L[{hh}{dhh}]	old
 		L{[{hh}{dhh}][{cc}v0]M}	new
@@ -1537,6 +1920,9 @@
 		L{[{hh}{hhh}][{cc}v0]M}	variant new
 	NAME
 		UG UK UQ PÌRIG PIRIG3
+	LIG
+		PÌRIG.TUR
+			leopard, panther
 94
 	COMP
 		PIRIG&KAL
@@ -1569,6 +1955,11 @@
 		L{[{hhh}vv{hh}v]h}	variant
 	NAME
 		UKU
+	LIG
+		UKU.UŠ
+			(heavily armed) soldier
+		UKU.UŠ.(SÁ.)E.NE
+			[plural of UKU.UŠ]
 97
 	HIT
 		ap
@@ -1583,6 +1974,13 @@
 		L[{hh}{h(hvR)}v]	variant
 	NAME
 		AP AB AF
+	LIG
+		AB-NI
+			(Akk) I built
+		AB.SÍN
+			furrow (for seeds)
+		AB.BA
+			ancestor
 98
 	HIT
 		um
@@ -1596,6 +1994,9 @@
 		W[{[{hh}vvvvv]h2}v]	variant unusual
 	NAME
 		UM UB×
+	LIG
+		UM-MA
+			(Akk) thus, as follows
 99
 	HIT
 		tup
@@ -1615,6 +2016,19 @@
 		L[{hh}{hh}vvv]	variant
 	NAME
 		TUB TUP DUB DUP ṬUP KIŠIB
+	LIG
+		DUB.ŠEN
+			tablet container
+		DUB.SAR
+			scribe
+		DUB.SAR.GIŠ
+			scribe of wooden tablets
+		ṬUP-PU
+			(Akk) clay tablet, document
+		ṬUP-PU RI-KIL-TI
+			(Akk) contract
+		ṬUP-PA.ḪI.A
+			paperwork ("claywork"?)
 100
 	COMP
 		AN&AN
@@ -1624,6 +2038,9 @@
 		[{0h2h2}v2]
 	NAME
 		NAB NAP
+	LIG
+		NAP-ṬAR-TI, NAP-ṬIR₅-TI
+			(Akk) concubine
 101
 	COMP
 		3×AN
@@ -1633,6 +2050,7 @@
 	SUM
 		MUL
 			star
+			"starstone" (star-shaped stone? meteor?)
 	DET
 		MUL
 			star
@@ -1641,6 +2059,12 @@
 		W[{(h2v)(h2v)}E0'"(h2v)]	variant
 	NAME
 		MUL
+	LIG
+		MUL.TI₈^MUŠEN
+			Aquila (constellation)
+		MUL^UD.ZAL.LE
+			morning star
+			[type of metal cult object]
 102
 	SUM
 		DÉ
@@ -1650,9 +2074,14 @@
 		P[{chhc}v]	variant
 	NAME
 		DÉ DE2
+	LIG
+		E.DÉ (SIMUG)
+			smith
+		(E.)DÉ.A
+			smith
 103
 	COMP
-		NÍNDA×AN or NÍNDA+AN
+		NÍNDA×AN or (variant) NÍNDA.AN
 	HIT
 		šàm
 	SUM
@@ -1686,6 +2115,14 @@
 		L[{h'h2h2h'}v]	variant
 	NAME
 		AD AT AṬ
+	LIG
+		AD.KID
+			woven reeds
+			basket-weaver
+		AD-DIN
+			(Akk) I gave
+		AT
+			abbreviation for Atriya (city)
 106
 	AKK
 		sìr
@@ -1701,18 +2138,23 @@
 		L[{h'"[hh][hh]h'"}[v{hh}v]]	variant
 	NAME
 		SÌR SIR3 ŠÌR ŠIR3 KÉŠ KEŠ2 KEŠDA ŠÈR ŠER3
+	LIG
+		SÌR-RU
+			she sings (Akk phon compl)
+		ŠÈR.ŠÈR
+			chain, knot
 107
 	COMP
 		EZEN×ŠE
 	SUM
 		EZEN₄
-			feast, celebration
+			festival, feast
 	FORM
 		W[{hh}{hh'h'h}v{h[cc][cc]h}v]
 	NAME
 		EZEN4 EZEN
 	NOTE
-		Used instead of the usual EZEN in Hittite. But why does it need a separate name?
+		Used instead of the standard EZEN in Hittite. Due to the different composition (EZEN×ŠE) it's given a separate name, but many scholars just consider this to be the Hittite shape of EZEN and transcribe it thus.
 108
 	COMP
 		AB×PA
@@ -1732,6 +2174,13 @@
 		L[{hh}{hh'h'h}vv]	variant
 	NAME
 		ZÉ ZE2 ZÍ ZI2 SI20 SE20 ṢI ṢE
+	LIG
+		SE₂₀-ER-DUM
+			(Akk) olive tree
+		ṢE-(E-)RI
+			(Akk) of the fields (in divine names, e.g. d^IŠTAR ṢĒRI "Ishtar of the fields")
+		ṢE-E-ET d^UTU(-aš)
+			east, sunrise
 109
 	SUM
 		URUDU
@@ -1746,6 +2195,17 @@
 		L[{0hh0}{h[vv]Mh}v]	variant unusual
 	NAME
 		URUDU
+	LIG
+		URUDU.DÍM.DÍM
+			coppersmith
+		URUDU.NAG
+			drinking vessel
+		URUDU.PAD
+			copper bars/ingots
+		URUDU.NAGAR (TIBIRA/TABIRA)
+			metalworker
+		URUDU.DA (ÙMMEDA)
+			attendant, keeper
 110
 	SUM
 		MÚRU/MURUB₄
@@ -1769,6 +2229,9 @@
 		L[{hhh}{h[ccc]h}v2]	variant
 	NAME
 		ERI11 UNU UNUG
+	LIG
+		NÈ.ERI₁₁.GAL
+			Nergal (divine name)
 112
 	COMP
 		AB×A?
@@ -1797,6 +2260,10 @@
 		L{h'"[hh2][hh]}	variant
 	NAME
 		ḪÉ ḪE2 ḪÍ ḪI2 KAN GAN
+	LIG
+		GAN.KAL
+			offering table(?)
+			altar(?)
 114
 	SUM
 		BÀD
@@ -1808,6 +2275,15 @@
 		W[{hh}R{h[{hhh}c]h}v({hh}v)]	variant
 	NAME
 		BÀD BAD3
+	LIG
+		BÀD-an-za
+			walled, fortified
+		BÀD-eš-ša-ar
+			wall, fortification
+		BÀD-(eš-)na-i
+			fortify
+		BÀD.KARAŠ
+			fortified encampment
 115
 	AKK
 		šàr
@@ -1822,6 +2298,17 @@
 		L[{hh}{h2h"h"h"h[vv]}E]	variant unusual
 	NAME
 		ŠÀR ŠAR3 LUGAL
+	LIG
+		LUGAL.GAL
+			great king, emperor
+		LUGAL-ma
+			Šarruma (divine name)
+		LUGAL-ma-an-ni
+			Šarrumanni (divine name0
+		LUGAL-gi-na
+			Šarrugina/Sargon (male name)
+		LUGAL-d^ZUEN
+			Šarru-Kušuḫ (male name)
 116
 	AKK
 		dìm
@@ -1833,6 +2320,9 @@
 		X[{hh}{[d0][dd]0'"h[cc]}E{0h2h'}]	variant
 	NAME
 		DÌM DIM3
+	LIG
+		DÌM.NUN.ME
+			Lamaštu (divine name)
 117
 	COMP
 	HIT
@@ -1849,6 +2339,9 @@
 		W[{0[hc]h}{[vvd2']h}E[vvv2]]	variant unusual
 	NAME
 		IL ÉL EL2
+	LIG
+		IL-QÉ-E, IL-QÈ
+			he took
 118
 	SUM
 		PAN
@@ -1865,14 +2358,24 @@
 119
 	SUM
 		NÍNDA
-			[component of other signs]
 	FORM
 		L[{hh}c'{hh}]	old
 		L[{hh}{hh}]	new
 	NAME
 		NÍNDA NINDA2
 	NOTE
-		Never used as its own sign in Hittite.
+		Never used as an actual sign in Hittite (not even in compound logograms).
+119B
+	SUM
+		GALAM
+			[component of other signs]
+	FORM
+		W[{hh}cK0'{du}c]
+	NOTE
+		The HZL does not assign a number to this sign, since it only appears on one fragment, which was discovered after numbering had been determined. Still, it is clearly its own sign, if a marginal one.
+	LIG
+		GALAM.GALAM
+			secret
 120
 	HIT
 		kum
@@ -1898,6 +2401,9 @@
 		W[{0hh0}Rc"{h[{hh}{[vvv]v}TE{hh}]MEh}v]	variant
 	NAME
 		ÁG AG2 ÁGA AGA2
+	LIG
+		Á.ÁG.GÁ
+			instruction, message, command (ḫatreššar)
 122
 	COMP
 		KUM×ŠE
@@ -1933,12 +2439,18 @@
 	SUM
 		ÚR
 			genitals
+			thigh
 	FORM
 		W[{chh}{0"h(hv)R}v]	old
 		W[{[hc']h}{hh}vv]	new
 		W[{h'hh}{hh}vv]	variant
 	NAME
 		ÚR UR2
+	LIG
+		ÚR-RA-AM ŠE-RA-AM
+			in the future
+		ÚR.GÌR
+			ball of the foot(?)
 125
 	HIT
 		tum
@@ -1957,10 +2469,16 @@
 		W[{chh}v{h'h'h'h}]	variant unusual
 	NAME
 		TUM DUM TU4 DU4 ÍB IB2 ÍP IP2 ÉB EB2 ÉP EP2 ṬU4 ṬUM
+	LIG
+		ÍB.TAG₄
+			remainder
+		ÍB.LÁ
+			belt, girdle
+			light garment
 126
 	SUM
 		EGIR (EŊIR)
-			back, around
+			back, around, backside (appa, appan)
 	FORM
 		L[{d'hh}{h[hc][hc]h}v2]
 		W[{[hc']h}{h[hc][hc]h}0'"v2]	variant
@@ -1968,6 +2486,22 @@
 		W[{0hh}{cEhhhhh}{cc}0'"v2]	variant
 	NAME
 		EGIR EŊIR
+	LIG
+		EGIR-an-da, EGIR-an-ta
+			afterward (appanda)
+		EGIR-iz-zi-iš
+			last (appizziš)
+		EGIR-ŠU(-NU), EGIR-ŠÚ(-NU)
+			after that (appan(an)da)
+		EGIR-TI, EGIR-TIM
+			lower rank (Akk arkûti)
+		EGIR-TUM
+			backside (Akk arkatum)
+		EGIR.KASKAL(-NI)
+			(on) the way back
+		EGIR.UD(.KAM), EGIR.UD(.KAM)-MI
+			future
+
 127
 	SUM
 		LIL
@@ -1976,9 +2510,11 @@
 		lil
 	FORM
 		W[{0'hh0'}{{[vvv][vv]}TEh}c"]
-		W[{0'hh0'}c'{0'cc0'}{0'cc0'}{du}c']	variant
+		W[{0'hh0'}c'{0'cc0'}{0'cc0'}{du}c']	variant unusual
 	NAME
 		LIL
+	NOTE
+		The form tagged "unusual" has not been confirmed on any tablet; it was taken from Forrer's sign list.
 128
 	HIT
 		du
@@ -1997,11 +2533,21 @@
 		[{h'hh}v]	variant
 	NAME
 		DU TÙ TU3 ṬÙ ṬU3 GIN GUB RÁ RA2 RI6 ŠA4
+	LIG
+		GUB-aš
+			standing
+		GUB.BA
+			standing (TODO)
+		GUB ŠEN KÙ.BABBAR
+			stand(?) for a silver kettle?
+		DU-d^U-ub
+			Duppi-Teššub (male name)
+	NOTE
+		TODO confirm with 294 about UŠ overlap
 129
 	SUM
 		KAŠ₄
 			run
-			courier
 	AKK
 		kas₄
 	FORM
@@ -2009,6 +2555,9 @@
 		L[{c[hhc][hhc]c}v2]	new
 	NAME
 		KAS4 KAŠ4
+	LIG
+		KAŠ4.E
+			courier
 130
 	SUM
 		DÚB
@@ -2017,20 +2566,42 @@
 		W[{chh}{[v0'"{[hc]h}]h}Evv]
 	NAME
 		DÚB DUB2
+	LIG
+		MÁŠ.ḪUL.DÚB.BA
+			scapegoat
+	NOTE
+		May be a variant of BALAG (#225)
 131
 	HIT
 		wi₅
 	SUM
 		GEŠTIN (ŊEŠTIN)
-			wine
+			wine, vine
 	FORM
 		L[{0[hc]h}v{0dh}]
 		L{[{ch}v{0d}]h2}	variant
 		L{[hc'vh]h}	variant
 		L[{hhh}(vdu)E]	variant unusual
-		W[{0hh0}{chhc}{h(du)}E]	variant unusual
+		W[{0hh0}{chhc}{h(du)}E]	variant unusual contaminated
 	NAME
 		WI5 UI5 GEŠTIN ŊEŠTIN
+	LIG
+		GEŠTIN.NAG
+			[type of wine]
+		GEŠTIN.KAŠ
+			"wine beer"(?)
+		GEŠTIN.LÀL
+			mead
+		GEŠTIN KÀ-RA-A-AN
+			(Akk) grape
+		GEŠTIN KU₇
+			sweet wine
+		GEŠTIN ḪÁD.DU.A
+			raisin
+		GEŠTIN EM-ṢÚ
+			(Akk) sour/bitter wine
+	NOTE
+		The form tagged "contaminated" appears behind an erasure and might be the remnants of an old UB overlapping a new GEŠTIN
 132
 	HIT
 		uš
@@ -2038,7 +2609,7 @@
 		ús
 	SUM
 		NITA(Ḫ)
-			man, male
+			man, male (human)
 	FORM
 		[{[hc']h}v]
 		[{hch}v]	variant
@@ -2048,6 +2619,21 @@
 		L[{0h(h[v'v'])}(hv)]	variant unusual
 	NAME
 		UŠ ÚS US2 NITA NITAḪ
+	LIG
+		UŠ.BAR
+			weaver
+		UŠ.KU (GALA)
+			cult singer (a type of priest)
+		UŠ-PA-AḪ-ḪU
+			(Akk) swaps(?) TODO
+		UŠ-KI-EN, UŠ-GI-EN
+			(Akk) (he/she) bows down
+		UŠ-KI-EN-NU, UŠ-GI-EN-NU
+			(Akk) (they) bow down
+		UŠ-MI-IT
+			(Akk) (he/she) killed
+	NOTE
+		Occasionally NITA "male human" is substituted for NÍTA (#16) "male animal"
 133
 	HIT
 		ka
@@ -2060,7 +2646,7 @@
 		KIR₄
 			nose
 		INIM
-			word
+			word, matter, thing
 		DU₁₁/DUG₄
 			speak
 		ZÚ
@@ -2076,6 +2662,31 @@
 		L[h{0hh}v(v{0hh})]	variant
 	NAME
 		KA GA14 QÀ QA3 DU11 DUG4 GÙ GU3 INIM KIR4 ZÚ ZU2
+	LIG
+		ka
+			abbreviation for kapunu
+		KA.BAL
+			airhole, hatch
+		KA.GAG(.A)
+			"small beer"? TODO
+		KA.GI.NA
+			hematite
+		KIR₄.TAB
+			halter, reins
+		KIR₄.TAB.ANŠE
+			donkey halter
+		KA.DU
+			[type of body part, maybe GÙ.DU "anus"?]
+		KA.NE, KA.ŠEG₆
+			fried meat
+		INIM.ITI
+			literally "matter of fire"?
+		KA.GÌR
+			way, path
+		ZÚ.LUM
+			date (fruit)
+		d^KA.DI-ya, d^KA.DI-ayya
+			Ištaranay(y)a (male name)
 134
 	COMP
 		KA×BAR
@@ -2112,7 +2723,7 @@
 	COMP
 		KA×ÚR
 	SUM
-		[unknown]
+		KA×ÚR
 			[a wooden object?]
 	FORM
 		W[{0[hc]h}v{h[{hh}{hh}{cv}v]Mh}v]
@@ -2122,18 +2733,19 @@
 	COMP
 		KA×PA
 	SUM
-		[unknown]
+		KA×PA
 			[a metal object?]
 	FORM
 		W[{0[hc]h}v{h(v{hh})Mh}v]
-		L[{0[hc]h}{[v{h(v{hh})M}v]h}E]	variant
 	NAME
 		KA×PA
+	NOTE
+		URUDU^KA×PA alternates with GIŠ^KA×GIŠ (#139) in duplicate texts, so this sign may be a simple misspelling of that one
 139
 	COMP
 		KA×GIŠ
 	SUM
-		[unknown]
+		KA×GIŠ
 			[a wooden container?]
 	FORM
 		W[{0[hc]h}v{h[{hh}v]Mh}v]
@@ -2174,6 +2786,8 @@
 		W[[{0[hc]h}v]{h[0{cc}{hh}{hh}0]h}v]
 	NAME
 		KA×LUM
+	NOTE
+		The context of this sign is damaged beyond recognition, but KA.LUM could be read as ZÚ.GUZ "sharpen teeth".
 143
 	COMP
 		KA×UD
@@ -2185,6 +2799,9 @@
 		W[{hch}v{h[0{cc}0'"v0]Mh}v]
 	NAME
 		ZU9
+	LIG
+		ZU₉.(AM.)SI
+			ivory
 144
 	COMP
 		KA×IM
@@ -2211,11 +2828,13 @@
 		KA×LI
 	SUM
 		MU₇
-			conjurer
+			summoner (ḫukmatalla-)
 	FORM
 		W[[{0[hc]h}v]{h[{cc}{cc}{c0}vv]Mh}v]
 	NAME
 		MU7 TU6
+	NOTE
+		This sign is a hapax, but based on Akkadian usage, MU₇.MU₇ would be the expected form
 147
 	COMP
 		KA×ME
@@ -2228,17 +2847,24 @@
 		W[{hch}v{h[vh]Mh}v]	variant
 	NAME
 		EME
+	LIG
+		EME.GÍR
+			blade (of a knife or dagger)
 148
 	COMP
 		KA×A
 	SUM
 		NAG
 			drink
+			drinking vessel
 	FORM
 		W[{0[hc]h}v{h[vv2]Mh}v]
 		W[{0[hh]h'}v{h[vv]Mh}v]	variant unusual
 	NAME
 		NAG
+	LIG
+		NAG.NAG
+			tub(?)
 149
 	COMP
 		KA×NÍG
@@ -2255,7 +2881,7 @@
 	COMP
 		KA×ÀŠ
 	SUM
-		[unknown]
+		KA×ÀŠ
 			[a body part?]
 	FORM
 		W[[{0[hc]h}v]{h[{vv}{vv}{vv}]Mh}v]
@@ -2272,7 +2898,7 @@
 		íz
 	SUM
 		KUŠ₇
-			servant
+			servant, squire, driver
 		SAḪAR
 			dirt, dust, ash
 	FORM
@@ -2281,6 +2907,21 @@
 		L[{[hh]h'"}vv]	variant unusual
 	NAME
 		IŠ EŠ15 MIL MEL ÍS IS2 ÍṢ IṢ2 ÍZ IZ2 KUŠ7 SAḪAR
+	LIG
+		SAḪAR.ŠUB.BA
+			leprosy
+		KUŠ₇.GUŠKIN
+			gold miner
+		KUŠ₇.ANŠE.KUR.RA
+			stablehand
+		IŠ-ṬUR, IŠ-ṬÚ-UR
+			(Akk) he wrote
+		IŠ-PUR
+			(Akk) he sent
+		IŠ-ME
+			he heard
+		IŠ-TU
+			(Akk) with, from
 152
 	HIT
 		up
@@ -2294,6 +2935,9 @@
 		P{c(v{hh})c}	variant unusual
 	NAME
 		UP UB ÁR AR2 UF
+	LIG
+		UP-NU, UP-NI
+			(Akk) handful (measurement)
 153
 	HIT
 		bi
@@ -2310,12 +2954,22 @@
 		{[hc'][(hv)c']}	variant
 	NAME
 		PÍ PI2 PÉ PE2 BI BÉ BE2 KAŠ GAŠ
+	LIG
+		pí
+			abbreviation for piran
+			abbreviation for Pina (city)
+		KAŠ.GEŠTIN
+			"beer-wine"? "wine-beer"? see also GEŠTIN.KAŠ
+		KAŠ.LÀL
+			honey-beer (walḫi?)
+		BI-aš, BI-un
+			that (apaš, apun)
 154
 	SUM
 		ŠEM/ŠIM
 			fragrance
 		LUNGA
-			brewer
+			(beer-)brewer
 	FORM
 		W[{[hc'][hc']}{[hc']h}vv]
 	NAME
@@ -2333,6 +2987,17 @@
 		L[c'{hh}{c'c'}]	variant
 	NAME
 		ṢÁR ṢAR2 ṢUR AMAR
+	LIG
+		AMAR.APIN.LÁ
+			young plow animal
+		AMAR.MAḪ
+			purebred(?) calf
+		AMAR.ÁB
+			heifer
+		AMAR.UTU
+			Marduk (divine name)
+		AMAR-ti
+			Ḫubiti (male name)
 156
 	COMP
 		AMAR×ŠE
@@ -2346,6 +3011,9 @@
 		L{[(h[cc])c][(h[cc])c]}	variant
 	NAME
 		SISKUR
+	LIG
+		SISKUR.SISKUR (SÍSKUR)
+			ritual, offering
 157
 	HURR
 		gu₄
@@ -2361,10 +3029,25 @@
 		L[(v{hh}){c'c'}]	variant
 	NAME
 		GU4 GUD GUDR
+	LIG
+		GU₄.APIN.LA
+			plow animal
+		GU₄.MAḪ
+			bull
+		GU₄.SI.AŠ
+			battering ram
+		GU₄.GAZ
+			beef cattle? threshing animals?
+		GU₄.NIGA
+			beef cattle
+	NOTE
+		GU₄.GAZ could be read as either "cattle for slaughter" or "cattle for threshing"
 158
 	HIT
 		ša
 	AKK
+		ŠA
+			of
 		saₓ
 	FORM
 		L[{[hc']([hc']v)R}v]
@@ -2376,6 +3059,11 @@
 		L[{[h2c][hv][hh]}v]	variant unusual
 	NAME
 		ŠA SA×
+	LIG
+		ŠA-A
+			(Akk) of
+		ŠA-PAL
+			(Akk) under
 159
 	HIT
 		ga
@@ -2393,6 +3081,23 @@
 		L[{h(h[0vvvvv0])R}{c'c'}]	variant
 	NAME
 		GA KÀ KA3 QÁ QA2
+	LIG
+		GA ṢÉ-E-TI
+			(Akk) special(?) milk
+		GA.KALA.GA, GA DAN-NU
+			(Sum or Akk) curdled milk
+		GA EM-ṢÚ
+			(Akk) sour milk
+		GA.RAŠ
+			leek
+		GA.ZUM
+			comb
+		KÀ.SÚM
+			(Akk?) cup
+		KÀ.GÌR.KASKAL
+			intersection
+		GA.KIN.AG, GA.KIN.DÙ
+			cheese
 160
 	HIT
 		ta
@@ -2410,18 +3115,27 @@
 		[{[hc'][hc']}v]	variant
 	NAME
 		TA DÁ DA2 ṬÁ ṬA2
+	LIG
+		ta
+			abbreviation for tananiš
+		TA-ÈM
+			[forms distributives]
+		ta-ni
+			abbreviation for Tanizila (city)
 161
 	COMP
 		GA.GÍN
 	SUM
 		ÍL
-			[unknown]
+			[meaning unknown]
 	FORM
 		X[{h(h[0vv0])R}{c'c'}0'"v(v{hhh})v]
 		X[({hh}v){c'c'}{h'h2h'}vv]	variant
 		X[{hh}v{cc}{h2hh}vv]	variant
 	NAME
 		ÍL IL2
+	NOTE
+		This combination is read as ÍL because GA.GÍN is meaningless, but that doesn't make the meaning of ÍL any clearer, either
 162
 	COMP
 		BI×A
@@ -2439,6 +3153,17 @@
 		L[{hh}vv2{cc}]	variant
 	NAME
 		DUG DUK DUQ TÙK TUK3 TÙQ TUQ3
+	LIG
+		DUG.SÌLA.BUR (BÁḪAR)
+			potter
+		DUG.SÌLA.BUR.NA (BAḪAR₅)
+			potter
+		Ú-NU-UT BÁḪAR
+			pottery
+		(DUG.)KA.GAG(.A)
+			low(?) beer TODO
+		DUG.DU₁₀.ÚS.SA
+			washbasin
 163
 	COMP
 		ŠIM×NÍG
@@ -2460,7 +3185,7 @@
 	SUM
 		DU₈/DUḪ
 			solve
-			divide
+			divide (in omens)
 		GAB(A)
 			breast, chest
 	FORM
@@ -2468,12 +3193,24 @@
 		[{hh}v{c'c'}{c'c'}]	variant
 	NAME
 		GAB GAP QAB QAP DU8 DUḪ GABA
+	LIG
+		DUḪ.LÀL
+			wax
+		DUḪ.ŠÚ.A
+			[type of stone, possibly quartz, rock crystal, or diorite]
+			raw(?) leather
+		DUḪ-ši
+			frank, straightforward
+		GAB.A.RI
+			equal
+	NOTE
+		DUḪ.ŠÚ.A is the Hittite spelling of the standard Sumerian DUḪ.ŠI.A
 165
 	AKK
 		kim
 	SUM
 		GIM
-			as, when, as soon as
+			as, when, as soon as (maḫḫan, mān)
 		DÍM
 			[component of other signs]
 	FORM
@@ -2490,6 +3227,7 @@
 		UMBIN
 			fingernail
 			wheel
+			hair clip(?)
 	FORM
 		X[[{hh}{d2'v}KE0']E{[vv'{vh}AEEv']Ah}EE{c[hh][hh][ccc]}EE[vv]]	old
 		X[{[hv]h}{[cc]h'h'h'h}v0'"{[vv'v'v]h}E{c[hh][hh][ccc]}vv]	new
@@ -2501,7 +3239,7 @@
 		This sign has enormous variation in how it's written; I haven't attempted to capture all of the variants here. If a sign seems excessively complicated, it's probably UMBIN.
 167
 	SUM
-		KÁ
+		KÁ (KAN₄)
 			door
 	FORM
 		[{chhc}v2]	old
@@ -2512,7 +3250,24 @@
 		W[{hh}{c'c'}{hh}vv2]	variant unusual
 		L[{d'd2d2}v{hhhh}]	variant
 	NAME
-		KÁ KA2
+		KÁ KA2 KAN4
+	LIG
+		KÁ.DINGIR.RA
+			Babylon
+			[type of stone: "Babylon stone"?]
+		KÁ.DINGIR.RA-li
+			in Akkadian (pabilili)
+		KÁ.GI.NA
+			hematite (normally KA.GI.NA)
+		KÁ.GIŠ
+			mortar (for grinding)
+		KÁ.GAL (ABUL)
+			(city) gate
+			[a haruspicy term]
+		KÁ.GAL UR.GI₇
+			"dog-gate people"(??)
+	NOTE
+		The logogram KÁ.DINGIR.RA for Babylon was invented based on a folk etymology: Akk bāb ilim "god's gate"
 168
 	HIT
 		am
@@ -2525,6 +3280,17 @@
 		L[{hh}{dddd}]	variant unusual
 	NAME
 		AM
+	LIG
+		am-ši(-in)
+			abbreviation for ambašši(n)
+		AM-QUT
+			(Akk) I fell (down)
+		AM.SI
+			elephant
+		ZU₉ AM.SI
+			ivory
+		AM.SÌLA.BUR (EDIN)
+			TODO SEE #203
 169
 	HIT
 		ne
@@ -2538,7 +3304,7 @@
 		BIL/BAR₇/BIR₉
 			burn, roast
 		NE
-			[oracular term?]
+			[oracular term: reading?]
 	FORM
 		W[{hh}{[vvv]v}TE{hh}v]
 		W[{hhh}{[vvvv]v}TE{hh}v]	variant
@@ -2546,6 +3312,19 @@
 		W[{hh}{[vvv]v}TE{h(hv)R}v]	variant
 	NAME
 		NE NI5 BÍ BI2 DÈ DE3 ṬÈ ṬE3 BAR7 BIL BIR9 IZI LÁM LAM2 ŠEG6
+	LIG
+		BIL.ZA.ZA
+			frog
+		IZI.GAR
+			lamp
+		NE.GI (GIBIL₆/GÌRA)
+			[divine name]
+		NE.MA
+			Elam (place)
+		NE.RU (ÉRIM)
+			[component of other signs]
+	NOTE
+		One Hurrian text has a ligature of this sign with E, which may be a new sign NE+E; I have not been able to find the text (KBo 33.69 I 1) to confirm. TODO it should be in the library!
 170
 	SUM
 		LÀL
@@ -2592,6 +3371,9 @@
 		W[{hh}{[vvvv]v}TE{h[hc{cc}]Mh}Ev2{0hhh}]	variant
 	NAME
 		PÍL PIL2 BÍL BIL2 PÉL PEL2 LI13 GIBIL
+	LIG
+		hi-li₁₃
+			(Hurr) ḫilipšiman
 173
 	HIT
 		gat
@@ -2602,6 +3384,7 @@
 	SUM
 		GAD(A)
 			linen, cloth
+			towel
 	DET
 		GADA
 			linen, cloth
@@ -2614,11 +3397,37 @@
 		P[{hh}v]	variant unusual
 	NAME
 		GAD GAT KAD KAT KID9 KIT9 QÀD QAD3 QÀT QAT3 GADA
+	LIG
+		GAD.TAR
+			[type of official?]
+		GADA.ŠU, GADA QA-TI
+			hand towel
+		GAD.KA×IM
+			[unknown male profession]
+		GADA.SU₆
+			napkin (lit. "beard towel")
+		GADA.IGI
+			veil(?)
+		GADA.DAM
+			spat (shoe covering)
+173B
+	COMP
+		KAT+TA
+	HIT
+		kat+ta
+	FORM
+		W{[h{h(h[vv]R)}{cc}v]A([0vR0EEEE]h)K}	old
+	NOTE
+		Graphical ligature used only in the Old Script
+	NAME
+		KAT+TA
 174
 	HIT
 		pa
 		ḫat
 	AKK
+		PA
+			abbreviation for parīsu
 		bá
 		sàk
 	SUM
@@ -2626,6 +3435,7 @@
 			overseer
 		GIDRU (ŊIDRU)
 			staff, scepter
+			herald
 	FORM
 		P(v{hh})
 		P{(vh)h}	variant
@@ -2633,6 +3443,27 @@
 		P[{hh}v]	variant
 	NAME
 		PA ḪAD ḪAT BÁ BA2 ḪAṬ SÀK SAK3 GIDRU UGULA ŊIDRU
+	LIG
+		PA.AN (GARZA)
+			office, cult custom
+		PA-AN, PA-NI
+			(Akk) before
+		pa-an
+			abbreviation for pariyan
+		pa-i
+			abbreviation for pangawi
+		pa-za
+			abbreviation for pankuš=za
+		UGULA LI-IM(-TI)
+			leader of a thousand
+		PA.TÚG (NUSKA)
+			[divine name]
+		GIŠ^GIDRU-(ši-)DINGIR-LIM
+			Ḫattušili (male name)
+		GIŠ^GIDRU-LÚ
+			Ḫattušaziti (male name)
+		ḫat-ši
+			abbreviation for Ḫattuši (city)
 175
 	COMP
 		PA.IB
@@ -2649,6 +3480,9 @@
 		W[(v{hh})([v{h0}]h)vv]
 	NAME
 		ŠAB ŠAP ŠÌB ŠIB3 ŠÌP ŠIP3 SAB SAP
+	LIG
+		KUR ŠAP, KUR ŠAP-LI-TI
+			(Akk) lower land
 176
 	COMP
 		PA.KAŠ₄
@@ -2662,7 +3496,7 @@
 		MAŠKIM
 177
 	COMP
-		PA.LU?
+		PA.LU
 	SUM
 		SIPA(D)
 			shepherd
@@ -2695,6 +3529,28 @@
 		P(v{hh})	variant
 	NAME
 		EZ IZ NÍŠ NIŠ2 IS ES IṢ EṢ IŠ6 GIŠ ŊIŠ G
+	LIG
+		GIŠ.MAḪ, GIŠ.ÙR
+			(roof) beam
+		GIŠ.d^INANNA
+			stringed instrument (lyre? zither?)
+		GIŠ.MI (GISSU)
+			shadow
+		GIŠ.ŠUB.BA
+			portion, lot
+		GIŠ.RÍN, GIŠ.RÍN ZI.BA.NA
+			(balance) scale
+		GIŠ.NUNUZ, GIŠ.NUNUZ ZI.BA.NA
+			(balance) scale
+		GIŠ.ḪUR
+			board
+			template(?), plan(?), draft(?)
+		GIŠ.KÍN
+			fruit (tree)
+		GIŠ.KIN.TI
+			craft, tools
+		GIŠ.GIM.MAŠ
+			Gilgamesh (divine name, Hittite reading unknown)
 179
 	HIT
 		ḫap
@@ -2702,15 +3558,22 @@
 		kil
 		kel
 	SUM
-		ḪAB
-			jug
-		GUD₈/GUR₄/LÚGUD
+		ḪAB/GUD₈/GUR₄/LÚGUD
 			[component of other signs]
 	FORM
 		P[{hh}v]
 		[v{hh}v]	variant
 	NAME
 		ḪAB ḪAP KIL KEL GUD8 GUR4 LAGAB LÚGUD LUGUD2 NÍGIN NIGIN2 RIN
+	LIG
+		ḪAB.ḪAB
+			jug
+		LÚGUD.DA (GUD₈.DA)
+			short
+		GUR₄.RA
+			thick (only in NINDA.GUR₄.RA "thick bread")
+		ṬUP-PU RI-KIL-TI
+			(Akk) contract
 180
 	COMP
 		LAGAB×U
@@ -2729,6 +3592,9 @@
 		P[{hh'h}v]	variant
 	NAME
 		TÚL TUL2 GÍGIR GIGIR2 PÚ PU2
+	LIG
+		PÚ-na
+			Arinna (city)
 181
 	COMP
 		LAGAB×SUM
@@ -2740,13 +3606,16 @@
 		[{h[{[vvv][vv]}Tv2]Mh}v]
 	NAME
 		ṢAR ZAR
+	LIG
+		ḪA-ṢAR-TUM
+			(Akk) green
 182
 	COMP
 		LAGAB×A
 	SUM
 		BUGIN/BUNIN
-			vessel?
-		AMBAR
+			trough(?)
+		AMBAR/SUG
 			reeds, swamp
 	FORM
 		[{h[vv2]Mh}v]
@@ -2755,6 +3624,9 @@
 		L[{hh}{[vv]v}v]	variant
 	NAME
 		AMBAR BUGIN BUNIN SUG
+	LIG
+		BUGIN.GÍD.DA
+			long trough(?)
 183
 	HIT
 		al
@@ -2771,6 +3643,13 @@
 		L[{hh}{[vvh]h}E]	variant
 	NAME
 		AL
+	LIG
+		AL.GAZ
+			crushed, pounded (usually with DIM₄ "malt")
+		AL.DI.RÍ.GA
+			wren(?)
+		AL.LUL.A
+			crab
 184
 	SUM
 		KU₇
@@ -2781,6 +3660,9 @@
 		[{[hv][hh]}v]	variant
 	NAME
 		KU7
+	LIG
+		KU₇.KU₇
+			sweet
 185
 	HIT
 		gur
@@ -2790,7 +3672,7 @@
 	SUM
 		GUR
 			another
-			cor (Akk <i>kurrum</i>, a unit of measurement)
+			cor (unit of volume ≈300 liters, Akk kurrum)
 	FORM
 		[{h(hv)R}v]	old
 		L[{h'h}vv]	new
@@ -2821,22 +3703,49 @@
 		[{hh(hv)}v]	variant
 	NAME
 		E I15
+	LIG
+		E.URUDU
+			misspelling of BANŠUR (URU.URUDU); see #229 TODO CONFIRM
+		E.DÉ (SIMUG)
+			smith
+		E.DÉ.A (SIMUG.A)
+			smith
+		E.ÍB (GURU₂₁)
+			belt, light tunic(?)
+		E.ÍB.GÍR
+			belt for daggers
+		E.ÍB ZAG.TAR
+			[type of belt]
+		E.ÍB.KUN
+			something that hangs on a belt
+		E-PIŠ
+			(Akk) maker (of something)
+		E.SIR
+			shoe
+		E.NE
+			[plural marker]
+	NOTE
+		E.NE is the actual plural marker in Sumerian, but was rarely used in Hittite; MEŠ "they are" and ḪI.A "mixed" were significantly more common. E.NE mostly appears in UKU.UŠ.E.NE "soldiers".
 188
 	COMP
 		E!.KISIM₅×GU₄
 	SUM
 		UTUL₅
-			cattle herder
+			[component of other signs]
 	FORM
 		W[{0hh}vv2c{d{[hc]([hc]v)}Mu}Ec]
 	NAME
 		UTUL5
+	LIG
+		NAM.UTUL₅
+			cattle herder
 189
 	COMP
 		E!.KISIM₅×GA
 	SUM
 		UBUR
-			(female) breast, nipple
+			(female) breast
+			nipple (only in plural)
 	FORM
 		W[{0h(hv)}v2c{d{[hc]([hc][vv])}Mu}Ec]	old
 		W[{0hh}vv2c{d({[hc][hc]}[vv])Mu}Ec]	new
@@ -2852,6 +3761,8 @@
 		W[[{0hh}v]v2c{d[vv20'"(hv)]Mu}Ec]
 	NAME
 		E+KISIM5×A+MAŠ
+	NOTE
+		Other E+KISIM₅×… signs likely exist, but are too poorly preserved to be sure of.
 191
 	HIT
 		mar
@@ -2862,6 +3773,15 @@
 		L[{hh}vvh]
 	NAME
 		MAR
+	LIG
+		MAR.GÍD.DA
+			truck
+			the Big Dipper
+		MAR.TU
+			west
+			Amurru (land to the west of Mesopotamia)
+		MAR.TU-a-ša-ri-ša
+			Amurru-ašarid (male name)
 192
 	HIT
 		šak
@@ -2870,6 +3790,7 @@
 		SAG (SAŊ)
 			head
 			first
+			palace official (eunuch?)
 	FORM
 		L[{[hv{hh}]E([v0]h)}v]	old
 		L[{[hv]h'}v{hh}v]	new
@@ -2877,7 +3798,38 @@
 		L{[hv'v0'"(v{hh})]h}	variant
 		L[{[hvv{0h'h'}]h}v]	variant
 	NAME
-		ŠAG ŠAK ŠAQ RIŠ SAG SUR14 SAŊ
+		ŠAG ŠAK ŠAQ RIŠ SAG SUR14 SAŊ SÚR SUR2
+	LIG
+		SAG.DU
+			head
+		SAG.KAL
+			first
+		SUR₁₄.DÙ.A
+			falcon
+		SAG.KUL
+			(door)bolt
+		SAG(.DU).KI
+			face, forehead, front
+		SAG.UŠ
+			regular, consistent
+		SAG.ÍL.LÁ
+			water carrier
+		SAG.PA.LAGAB (ZARAḪ)
+			wailing, unrest
+		SAG.DUL
+			[type of head covering]
+		SAG.GE₆(.GA.A)
+			dark-headed people
+		SAG.GUL
+			[type of blunt weapon]
+		SAG.GÉME.ARAD
+			servants (collectively)
+		SAG.ME
+			[haruspicy term]
+		ya-riš
+			Iyarriš (divine name)
+	NOTE
+		The normal Sumerogram for "falcon" would be SÚR.DÙ.A, but in Hittite it's always spelled with SAG instead, earning it the reading SUR₁₄. Since SÚR (SAG-gunu) isn't found in Hittite, though, we could also just say that SÚR and SAG have merged in Hittite.
 193
 	SUM
 		GURUN
@@ -2895,7 +3847,7 @@
 		kit
 	SUM
 		LÍL
-			field
+			field, meadow, steppe
 		GÉ/KE₄
 			[component of other signs]
 	FORM
@@ -2905,6 +3857,8 @@
 		({hh}[vvv])	variant
 	NAME
 		KID KIT KIṬ GÉ GE2 KE4 LÍL LIL2
+	NOTE
+		Arguably one instance of the reading kit in Hittite, but could be ú instead
 195
 	HIT
 		ú
@@ -2915,7 +3869,7 @@
 		Ú
 			plant, grass
 		KÙŠ
-			cubit
+			cubit (unit of length, slightly over 20 inches)
 	DET
 		Ú
 			plant
@@ -2929,6 +3883,39 @@
 		L{[hvvv]h}	variant
 	NAME
 		Ú U2 ʔU× ŠAM KÙŠ KUŠ3
+	NOTE
+		Recent consensus is that ú indicated /u/ in Hittite, while u (#261) indicated /o/
+	LIG
+		Ú.GÍR.LAGAB(.KUR.RA) (KIŠI₁₆.ḪAB(.KUR.RA))
+			[type of acacia tree]
+		Ú-BA-RUM
+			(Akk) protected guest(?) stranger(?)
+		Ú-NU-UT
+			(Akk) device
+		Ú.TAG.GA
+			arrow
+		Ú-RA-KI
+			(Akk) ingot
+		Ú.TE.TÈ.GA (UGA)
+			raven, crow
+		Ú.BAR₈
+			spring (season)
+		Ú-UL
+			not (Hitt natta)
+		Ú.SIG₅
+			[unknown male profession]
+		Ú.SAL
+			way, manner
+		Ú.KUR.RA (ŠIMBIRIDA)
+			toothpickweed (Ammi visnaga, a medicinal plant in the carrow family)
+		Ú.ḪÚB
+			deaf
+		Ú.ḪUB
+			[error for Ú.ḪÚB]
+		GAL Ú.ḪÚB
+			overseer of the deaf?
+		Ú-ZÁḪ
+			he destroys (Akk uḫallaq)
 196
 	HIT
 		kal
@@ -2939,10 +3926,10 @@
 		lap
 		rip
 	SUM
-		KAL(A(G))
+		KAL/KALA/KALAG
 			strong, strengthen
 		GURUŠ
-			manly
+			young man, manly
 		ESI
 			ebony (wood)
 		LAMMA
@@ -2955,6 +3942,15 @@
 		L[{[hvv]h}v2]	variant
 	NAME
 		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KALA KALAG LAMMA
+	LIG
+		KALA.GA
+			strong, strengthen
+		GURUŠ-tar
+			manliness
+		d^LAMMA-LÚ
+			Inaraziti (male name)
+		d^LAMMA-SUM
+			Inarapiya (male name)
 197
 	HIT
 		un
@@ -2970,6 +3966,9 @@
 		[{0hhvR}{vv}{vv}]	variant
 	NAME
 		UN ÙG UG3 ÙKU UKU3
+	LIG
+		UN.MEŠ-tar, UN.ḪI.A-tar
+			humanity, population
 198
 	HIT
 		luḫ
@@ -2977,7 +3976,7 @@
 		làḫ
 	SUM
 		SUKKAL
-			vizier, minister
+			vizier, minister, herald
 	FORM
 		L[{hh}Evv'v'v]	old
 		W[{h'[{hh}v]}Evv'v'v]	new
@@ -2987,6 +3986,11 @@
 		L[{hh}vvvc]	variant unusual
 	NAME
 		LUḪ LÀḪ LAḪ3 SUKKAL
+	LIG
+		NU.LUḪ.ḪA
+			asafoetida
+		KISAL.LUḪ
+			courtyard sweeper
 199
 	AKK
 		é
@@ -3006,6 +4010,61 @@
 		L[{[0vv]hh}vv]	variant
 	NAME
 		É E2 PID PIT PIṬ
+	LIG
+		É.MAḪ
+			[unknown]
+		É.DINGIR-LIM
+			temple
+		É.MÁ.URU₅
+			quiver (for arrows)
+		É NA-AP-ṬÁ-RI, É NAP-ṬÁ-RI
+			(Akk) guesthouse(?)
+		É MUḪALDIM
+			kitchen
+		É.NAM.ḪÉ
+			"temple designation"? TODO
+		É.EN.NU.UN
+			guardhouse, prison
+		É.DUB.BA.A
+			archive
+			scribal school
+		É.GU₄
+			barn
+		É.GÚ.È.A
+			clothing storage(?)
+		É.GAL
+			palace
+		É.GI₄.A
+			bride
+			daughter-in-law
+		É.NA₄
+			tomb
+		É.NIM.LÀL
+			beehive
+		É.ŠÀ
+			inner chamber
+			bedroom
+			sanctum
+		É.ŠÀ KÙ.GA
+			sanctum
+		É KI-LI
+			(Akk) prison
+		É.KUR.RA
+			temple
+		É.DU₁₀.ÚS.SA
+			house/room for (cultic) washing
+		É.IN.NU.DA
+			barn, shed
+		É.TU₇
+			[type of kitchen]
+		É (GIŠ.)KIN.TI
+			workshop
+		É A-BU-(US-)SÍ
+			(Akk) storeroom
+		É (LÚ^)NINDA.DÙ.DÙ
+			bakery
+		É.A
+			Ea (divine name)
 200
 	AKK
 		sa
@@ -3023,11 +4082,19 @@
 		L([v0]{0h(h[0vvv])})	variant
 	NAME
 		SA
+	LIG
+		SA.DU
+			[type of body part?]
+		SA.SAL
+			spine
+		SA.GAZ
+			pirate
+		ús-sa
+			Ussa (city)
 201
 	SUM
 		GÚ
 			throat, neck
-			shoulder
 	FORM
 		L[{0hh}v2c'{cc}]
 		L[{0hh}v2{[vv]v}TE]
@@ -3035,6 +4102,51 @@
 		[{h(vh)}c'{cc}]	variant
 	NAME
 		GÚ GU2
+	LIG
+		GÚ.ḪAL
+			[part of the neck]
+		GÚ-tar
+			shoulder (kuttar)
+		GÚ.TAR (GÚ.ḪAŠ?)
+			back (of the head)
+		GÚ.BAL
+			ruin hill TODO
+		GÚ.ZAL
+			secret
+		GÚ.BAR
+			hunter
+		GU.UN (GUN)
+			load, weight
+			talent (unit of weight equal to 3,600 shekels, ≈30kg)
+		GU.UN-liš (GUN-liš)
+			[oracular term]
+		GU.UN-an (GUN-an)
+			[oracular term]
+		GÚ.GAL
+			pea
+		GÚ.TUR
+			[type of pea]
+		GÚ.GILIM
+			fighter, fight
+		GÚ.SES (GÚ.ŠEŠ)
+			bitter pea
+		GÚ.ŠUB
+			stubborn(?)
+		GÚ.ŠUB.DA.A.RI
+			be stubborn(?)
+		GÚ.È(.A)
+			robe
+			shirt/coat(?)
+		GÚ.KI.ŠÈ
+			bow down(?)
+		GÚ.GAR(.GAR)
+			bow down(?)
+		GÚ.GÌR
+			hole(?)
+		GÚ.TÁL
+			back (side)
+		GÚ.(DU₈.)ŠÚ.A
+			Kutha (city)
 202
 	HIT
 		dur
@@ -3052,6 +4164,9 @@
 		L[{hh}v2c{cc}(hv)]	variant
 	NAME
 		DUR TÚR TUR2 ṬUR
+	LIG
+		ṬUR-RU
+			(Akk) band, ribbon, necklace
 203
 	SUM
 		UZU
@@ -3069,6 +4184,9 @@
 		L[{hh}{[vvv][vv]}TE]	variant unusual
 	NAME
 		UZU
+	LIG
+		UZU EDIN.NA
+			rabbit meat
 204
 	COMP
 		NUN&NUN
@@ -3080,6 +4198,10 @@
 		L[{(h[vvv0])(h[vvv0])}v2]	variant
 	NAME
 		NIR NÀR NAR3
+	LIG
+		NIR.GÁL
+			strong, mighty
+			Muwattalli (male name)
 205
 	HIT
 		ba
@@ -3094,6 +4216,11 @@
 		[h{hh}v]	variant
 	NAME
 		BA PÁ PA2
+	LIG
+		BA.BA.ZA
+			barley porridge (Akk pappāsu)
+		BA.ÚŠ, BA.UŠ
+			died
 206
 	HIT
 		ku
@@ -3106,6 +4233,7 @@
 			sit
 		TUKUL
 			tool, weapon
+			[haruspicy term]
 	FORM
 		[{hh'h}v]
 		[v{[{hh}v]h}]	variant
@@ -3113,6 +4241,24 @@
 		[{h2h}v]	variant
 	NAME
 		KU GU5 QÚ QU2 TUŠ DÚR DUR2 DÚRU DURU2 DURUN TUKUL
+	LIG
+		TUŠ-aš
+			sitting
+		TUKUL GÍD.DA
+			farming implement(?) lit. "long tool"
+			farmer(?)
+		KU-NU
+			(Akk) your (m pl)
+		KU-KU-UB, KU-KU-BU
+			(Akk) sacrificial vessel
+		ku-uš
+			abbreviation for kuštayati
+		KU-UŠ
+			abbreviation for Akk TÚG^kuššatu
+		ku-ši
+			abbreviation for TÚG^kušiši
+		GIŠ^TUKUL-ti-d^IB
+			Tukulti-Ninurta (male name)
 207
 	COMP
 		KU!.U.GAG
@@ -3123,14 +4269,16 @@
 		W[{hh'h}vc{d(uv)}]
 	NAME
 		MUD4
+	NOTE
+		MUD₄ is normally LAGAB.U.GAG, but in Hittite is written KU.U.GAG instead
 208
 	HIT
 		ma
 	SUM
 		PÈŠ
 			fig
-		MA (properly MA.NA)
-			mine (for ore)
+		MA
+			abbreviation for MA.NA
 	FORM
 		L[{hh'h}v]	old
 		L[{hhh}v]	new
@@ -3139,15 +4287,31 @@
 		L[{h2h}v]	variant
 	NAME
 		MA PÈŠ PEŠ3
+	LIG
+		MA.NU
+			cornel tree (Cornus mas)
+		MA-MIT
+			(Akk) oath
+		MA.NA
+			mine (place where mining happens)
+		MA-LU-Ú
+			(Akk) they are full
+		ma-zé(-eš)
+			abbreviation for mazereš
+		MA.SÁ.AB
+			basket
+		MA-ḪI-IṢ, RA-IṢ
+			beaten, struck
+		MA.MÚ
+			dream
+		MA-ṢA-AR É.DINGIR-LIM
+			temple guard
 209
 	HIT
 		zu
 	AKK
 		sú
 		ṣú
-	SUM
-		GÍNₓ?
-			shekel (unit)
 	FORM
 		L[{hh'h}vv]	old
 		L[{h2h}vv]	new
@@ -3155,17 +4319,29 @@
 		L[h{hh}vv]	variant
 		L[{([{h0}v0]h)h}v]	variant
 	NAME
-		ZU SÚ SU2 ṢÚ ṢU2 GÍN× GIN2×
+		ZU SÚ SU2 ṢÚ ṢU2
+	LIG
+		ZU (SÚ)
+			(Akk) his, her
+		ZU-NU (SÚ-NU)
+			(Akk) their
+		EM-ṢÚ
+			(Akk) sour, rennet
+	NOTE
+		Strictly speaking, Akk su and sunu should only be used after a dental consonant, with šu and šunu used elsewhere. Hittite scribes were not always consistent about this.
 209B
 	SUM
 		GIN₉ ("GÍN")
-			shekel (unit)
+			shekel (unit of mass, ≈9 grams, or volume, ≈17 milliliters; Akk šiqlu)
 	FORM
 		L[{hh'h}vv]
 	NAME
-		GIN9
+		GIN9 GIN×
 	NOTE
 		Hittite scribes regularly used an old form of ZU to write GÍN "shekel", so this sign is usually read as GÍN. However, the standard form of GÍN (#223) is also found in letters from Egypt. The HZL gives them both the reading GÍN, but assigns them different index numbers. For clarity, we assign the reading GIN₉ here for the peculiarly Hittite form, and reserve GÍN for the standard one.
+	LIG
+		GIN₉.GIN₉
+			shekel
 210
 	HIT
 		lu
