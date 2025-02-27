@@ -283,7 +283,7 @@ class Database:
 	}
 	
 	@staticmethod
-	def prettify_plaintext(text, colspan=1): # All plaintext fields from the database (i.e. all fields except CODE, IDENT, and FORM) are run through this before being printed, letting us do a little bit of formatting on them
+	def prettify_plaintext(text, colspan=1, always_expand=False, start_checked=False): # All plaintext fields from the database (i.e. all fields except CODE, IDENT, and FORM) are run through this before being printed, letting us do a little bit of formatting on them
 		def make_link(m):
 			num = m.group(1)
 			query = urlencode({'regex' : fr'^\#{num}$'})
@@ -296,15 +296,17 @@ class Database:
 		height = len(text.split('\n'))
 		text = text.replace('\n', '<br />')
 		
-		if width > 33 * colspan or height > 4:
+		if (width > 25 * colspan or height > 4) and not always_expand:
 			if '<br />' in text: extra = '<br />'
 			else: extra = ''
-			text = f'<label class="showlong">Show long text? <input type="checkbox" /></label><span class="hidden">{extra}{text}</span>'
+			if start_checked: check = ' checked'
+			else: check = ''
+			text = f'<label class="showlong">Show long text? <input type="checkbox"{check} /></label><span class="hidden">{extra}{text}</span>'
 		
 		return text
 	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', rendersign_path='/rendersign', signinfo_path='/search?regex=^%23{}%24'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
+	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', start_checked=False, rendersign_path='/rendersign', signinfo_path='/search?regex=^%23{}%24'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
 		
 		used_rows = {k:v for k,v in self.ROWS.items() if k in self.attested_rows | {'IDENT', 'FORM', 'TAGS', 'CODE'}} # Which table rows do we actually need? ROWS specifies the order of them
 		# We always include these four, because they're generated from the other data in the entry instead of stored in the .langs data, which means they won't be in attested_rows
@@ -312,49 +314,54 @@ class Database:
 		
 		func = part.functional_form(norm_modes[mode]) if part else None
 		matches = 0 # How many distinct signs (not forms) have matched so far? This is reported at the end of the search
+		temp = [] # We need to know the number of entries before formatting them, so we store our intermediate results here before formatting
 		
 		for entry in self.sorted[sort]: # Use the self.sorted array to iterate over them in the correct order
 			matching_forms = list(entry.find_matches(func, regex, mode))
 			if matching_forms: # One or more of these forms matched!
 				matches += 1
-				colspan = len(matching_forms) # For the TAGS, FORM, and CODE columns, we have separate cells for each form; for all the rest, we have a single cell covering all of them, which has colspan="{colspan}"
-				for _, pres, match in matching_forms: # So we handle those three first
-					raw = {'code':pres.code}
-					if match: raw['highlight'] = ','.join(str(s) for s in match)
-					query = urlencode(raw)
-					rows['FORM'].append(f'<td><img src="{rendersign_path}?{query}" height="100px" /></td>') # Form row: a rendered image of the form
-					rows['CODE'].append(f'<td><tt>{pres.code}</tt></td>') # Code row: the code that leads to that form
-					rows['TAGS'].append(f'<td>{", ".join(pres.tags)}</td>') # Tags row: form-specific tags used to select this form over others
-					# (Any sign-specific rather than form-specific information goes in NOTE instead)
-				
-				# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
-				rows['IDENT'].append(f'<td colspan="{colspan}">#{entry.ident}</td>')
-				
-				# All the rest vary depending on the database file; we just include whichever ones are available
-				for lang in self.attested_rows:
-					rs = []
-					for reading in entry.langs[lang]: # Since they're defaultdicts in the entry, we can query whichever ones we want, it'll just return [] if it doesn't exist (which means this for-loop will immediately exit)
-						notes = entry.notes[lang][reading] # Do we have any notes on this specific reading?
-						if notes:
-							if any(',' in n or '(' in n for n in notes):
-								sep = '; '
-							else:
-								sep = ', '
-							notes = sep.join(notes)
-							rs.append(f'{reading} “{notes}”')
+				temp.append((entry, matching_forms))
+		
+		# We now know how many matches we have, so we can format them appropriately
+		for entry, matching_forms in temp:
+			colspan = len(matching_forms) # For the TAGS, FORM, and CODE columns, we have separate cells for each form; for all the rest, we have a single cell covering all of them, which has colspan="{colspan}"
+			for _, pres, match in matching_forms: # So we handle those three first
+				raw = {'code':pres.code}
+				if match: raw['highlight'] = ','.join(str(s) for s in match)
+				query = urlencode(raw)
+				rows['FORM'].append(f'<td><img src="{rendersign_path}?{query}" height="100px" /></td>') # Form row: a rendered image of the form
+				rows['CODE'].append(f'<td><tt>{pres.code}</tt></td>') # Code row: the code that leads to that form
+				rows['TAGS'].append(f'<td>{", ".join(pres.tags)}</td>') # Tags row: form-specific tags used to select this form over others
+				# (Any sign-specific rather than form-specific information goes in NOTE instead)
+			
+			# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
+			rows['IDENT'].append(f'<td colspan="{colspan}">#{entry.ident}</td>')
+			
+			# All the rest vary depending on the database file; we just include whichever ones are available
+			for lang in self.attested_rows:
+				rs = []
+				for reading in entry.langs[lang]: # Since they're defaultdicts in the entry, we can query whichever ones we want, it'll just return [] if it doesn't exist (which means this for-loop will immediately exit)
+					notes = entry.notes[lang][reading] # Do we have any notes on this specific reading?
+					if notes:
+						if any(',' in n or '(' in n for n in notes):
+							sep = '; '
 						else:
-							rs.append(reading)
-					if any(',' in r or '(' in r or '“' in r for r in rs):
-						sep = '\n' # Will become <br /> in prettify_plaintext
+							sep = ', '
+						notes = sep.join(notes)
+						rs.append(f'{reading} “{notes}”')
 					else:
-						sep = ', '
-					rs = sep.join(rs)
-					rs = self.prettify_plaintext(rs, colspan)
-					if 25 < len(rs) and colspan < 2: # Add a bit of padding in this case
-						extra = ' style="min-width:10em;"'
-					else:
-						extra= ''
-					rows[lang].append(f'<td colspan="{colspan}"{extra}>{rs}</td>')
+						rs.append(reading)
+				if any(',' in r or '(' in r or '“' in r for r in rs):
+					sep = '\n' # Will become <br /> in prettify_plaintext
+				else:
+					sep = ', '
+				rs = sep.join(rs)
+				rs = self.prettify_plaintext(rs, colspan, matches==1, start_checked)
+				if len(rs) > 25 and colspan < 2: # Add a bit of padding in this particular case, because this is when the cramping is worst
+					extra = ' class="minwidth"'
+				else:
+					extra= ''
+				rows[lang].append(f'<td colspan="{colspan}"{extra}>{rs}</td>')
 		
 		# Finally, close all the row tags
 		for row in rows: rows[row].append('</tr>')
@@ -388,8 +395,14 @@ def preview_database(fn):
 				z-index: 100;
 				left: 0;
 			}
+			.minwidth {
+				min-width: 10em;
+			}
 			.hidden {
-				display: none;
+				display: block;
+				height: 0;
+				width: 0;
+				overflow: hidden;
 			}
 			label.showlong:has(input:checked) ~ .hidden {
 				display: inline;

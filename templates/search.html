@@ -13,6 +13,23 @@
 				z-index: 100;
 				left: 0;
 			}
+			.minwidth {
+				min-width: 10em;
+			}
+			.hidden { /* Using this strange workaround instead of display:none allows the text to be found with ctrl-F, just hidden until clicked */
+				display: block;
+				height: 0;
+				width: 0;
+				overflow: hidden;
+			}
+			label.showlong:has(input:checked) ~ .hidden {
+				display: inline;
+			}
+			label.showlong {
+				font-size: smaller;
+				font-style: italic;
+				color: #888888;
+			}
 		</style>
 	</head>
 	<body>
