@@ -2,12 +2,9 @@
 	HIT
 		aš
 	AKK
-		às
-		àz
-		dil
-		del
-		rù
-		rum
+		às, àz
+		dil, del
+		rù, rum
 		INA
 			in, at
 	SUM
@@ -593,7 +590,6 @@
 	SUM
 		GI
 			reed
-			abbreviation for gipeššar
 		SI₂₂/SIG₁₇
 			[component of other signs]
 	DET
@@ -607,6 +603,8 @@
 	NAME
 		GI GE KÍ KI2 KÉ KE2 QÌ QI3 QÈ QE3 SI22 SIG17
 	LIG
+		gi
+			abbreviation for gipeššar
 		GI.IZI.LÁ
 			torch
 		GI É <ṬUP-PI>, GI É.DUB.BA
@@ -1103,13 +1101,13 @@
 	COMP
 		LAGAB×NÍG
 	SUM
-		BÚGIN/BÚNIN (BUNIŊ)
+		BÚGIN/BÚNIN (BÚNIŊ)
 			box/container for dry matter
 	FORM
 		[{h{[vvv]v}Mh}v]
 		[{h[v{[vv]v}]Mh}v]	variant
 	NAME
-		BÚGIN BUGIN2 BÚNIN BUNIN2 BUNIŊ
+		BÚGIN BUGIN2 BÚNIN BUNIN2 BÚNIŊ
 56
 	AKK
 		ba₄
@@ -1130,10 +1128,8 @@
 			I
 		A.MAL
 			Marduk (deity)
-		ZA-BÁ-BÁ
-			(Akk) Zababa (deity)
-	NOTE
-		TODO are AD.KID and DUḪ.SÚ.A listed elsewhere?
+		<ZA-BÁ-BÁ>
+			Zababa (deity)
 57
 	COMP
 		GÁ×AN
@@ -1167,14 +1163,12 @@
 		ÙR
 			(wooden) beam
 	FORM
-		L[{h[{0hh}{vv}{vv}{vv}v2]M(h[vv0])}v]
-		L[{h[{0hh}{vv}{vv}{vv}v2]Mh[vv0]}v]
+		W[{h[0{hh}{vv}{vv}{vv}0Ev2]MEEEh[vv0]}v]
+		W[{h[0{hh}{vv}{vv}{vv}0Ev2]ME(h[vv0])}v]
 	NAME
 		ÙR UR3
-	NOTE
-		The v2 on the right should be more separate from the {vv} on the left, but there's just not enough space to distinguish them. TODO!
 	LIG
-		GIŠ.ÙR (or GIŠ^ÙR)
+		GIŠ.ÙR (or GIŠ^ÙR?)
 			wooden beam
 		É GIŠ.ÙR.RA
 			attic
@@ -1600,9 +1594,9 @@
 	FORM
 		W[{d'h[0vv]}{0[{0hh}vv2]}]
 	NAME
-		NÉ+E NÉ_E NÉ(E) NE2+E NE2_E NE2(E) NEE NÉE
+		NÉ+E NÉ_E NÉ(E) NE2+E NE2_E NE2(E) NÉE
 	NOTE
-		See ge_e (#31)
+		See ge_e (#31) and ne_e (#169B)
 77
 	HIT
 		ir
@@ -2597,7 +2591,7 @@
 		DU-d^U-ub
 			Duppi-Teššub (male name)
 	NOTE
-		TODO confirm with 294 about UŠ overlap
+		Would be expected to have the reading ŠA₄ in the compound ŠÀ.NE.ŠA₄ "plaintiff", but in Hittite that logogram is instead spelled ŠÀ.NE.UŠ. See ŠÀ (#294).
 129
 	SUM
 		KAŠ₄
@@ -3101,7 +3095,7 @@
 	HIT
 		ša
 	AKK
-		ŠA
+		<ŠA>
 			of
 		saₓ
 	FORM
@@ -3347,7 +3341,7 @@
 		ZU₉ AM.SI
 			ivory
 		AM.SÌLA.BUR (EDIN)
-			TODO SEE #203
+			rabbit (only in UZU EDIN.NA "rabbit meat")
 169
 	HIT
 		ne
@@ -3380,15 +3374,13 @@
 			Elam (place)
 		NE.RU (ÉRIM)
 			[component of other signs]
-	NOTE
-		One Hurrian text has a ligature of this sign with E, which may be a new sign NE+E; I have not been able to find the text (KBo 33.69 I 1) to confirm. TODO it should be in the library!
 169B
 	COMP
 		NE&E
 	HURR
-		ne_e
+		ne_e ne(e)
 	FORM
-		*	todo
+		W{[{hh}{[vvvv]v}TE{hh}v][0EE{h(hv)R}v2]}
 	NAME
 		NE_E NE(E) NEE
 	NOTE
@@ -4556,8 +4548,6 @@
 	LIG
 		KUŠ.LÁ
 			waterskin
-	NOTE
-		TODO compare against #161 note on A.ÍL.LÁ
 214
 	HIT
 		da
@@ -5624,7 +5614,7 @@
 	NAME
 		Ù U3 LIBIR
 	NOTE
-		This sign is effectively an Akkadian logogram; in both Akkadian and Hittite, it's used only for the word "and", not for the sound /u/ in other contexts. TODO SEE 313
+		This sign is effectively an Akkadian logogram; in both Akkadian and Hittite, it's used only for the word <U> "and", not for the sound /u/ in other contexts. See also <U₇> "and" (#313B).
 	LIG
 		Ù-<TUM>
 			sleep, dream
@@ -6031,10 +6021,8 @@
 	HIT
 		ši
 	AKK
-		lì
-		lim
-		si₁₇
-		še₂₀
+		lì, lim
+		si₁₇, še₂₀
 		<LIM>
 			thousand(?)
 	SUM
@@ -6211,7 +6199,7 @@
 			relative (member of one's family)
 		ŠÀ.(AB.)ZU
 			midwife
-		ŠÀ.NE.ŠA₄
+		ŠÀ.NE.UŠ (!)
 			plaintiff
 		ŠÀ.GA.(AN.)DÙ, ŠÀ.KA.DÙ, ŠÀ.GA.TU₄
 			sash(?)
@@ -6230,7 +6218,7 @@
 		ŠÀ.GAR
 			hunger
 	NOTE
-		Normally the reading TIBULA means ŠÀ.MIN.TAR, but in Hittite it's invariably ŠÀ.A.TAR instead. I'm unsure why this wasn't given a different reading.
+		(1) Normally the reading TIBULA means ŠÀ.MIN.TAR, but in Hittite it's invariably ŠÀ.A.TAR instead. I'm unsure why this wasn't given a different reading. (2) For "plaintiff", ŠÀ.NE.ŠA₄ (where ŠA₄ = DU, #128) would be expected, but instead in Hittite we find ŠÀ.NE.UŠ. The HZL calls this an Old Babylonian variant.
 295
 	AKK
 		pat
@@ -6783,7 +6771,6 @@
 			morning star
 			evening
 			[type of metal ornament]
-			TODO CHECK UNDER OTHERS
 		UD.DU, UD.DU.A (È, È.A)
 			out, exit
 		UD.DU.A d^UTU (È.A d^UTU)
@@ -6792,7 +6779,6 @@
 		TÚG.GÚ.UD.DU(.A) (TÚG.GÚ.È(.A))
 			robe
 			shirt(?)
-			TODO CHECK UNDER OTHERS
 		ḪÁD.DU(.A)
 			dry
 		UD.KA.BAR (ZABAR)
@@ -7079,7 +7065,7 @@
 		TIN TÉN TEN2 TAN× DIN DEN KÚRUN KURUN2
 	LIG
 		KÚRUN.NA
-			host (see #33 TODO)
+			host
 			beer-brewer(?)
 		TIN.TIR (GAMUN)
 			caraway (spice)
@@ -7095,8 +7081,7 @@
 	HIT
 		eš
 	AKK
-		és
-		ìš
+		és, ìš
 		sin
 		<SIN>
 			moon god
@@ -7255,7 +7240,7 @@
 		d^U ḪI.ḪI(-aš-ši-iš)
 			storm god of lightning (Piḫaššaššiš)
 	NOTE
-		The Akkadian reading <tí> is rare in Boğazköy, and when it appears (e.g. in the place name URU^Tí-iš-ḫi-ni-ya), <tí> is written with four Winkelhaken on top (the form tagged "ti") and <ḫi> with three. If there were more examples, it would merit a separate index entry, but it only appears in Akkadian texts and rare Akkadograms like <PÁT-TÍ> "border zone". TODO CONFIRM
+		The Akkadian reading <tí> is rare in Boğazköy, and when it appears (e.g. in the place name URU^Tí-iš-ḫi-ni-ya), <tí> is written with four Winkelhaken on top (the form tagged "ti") and <ḫi> with three. If there were more examples, it would merit a separate index entry, but it only appears in Akkadian texts and rare Akkadograms like <PÁT-TÍ> "border zone".
 336
 	SUM
 		GAŠAN
@@ -7764,21 +7749,19 @@
 		dáš
 		táš
 	AKK
-		<ANA>
-			to
 		gì
 		ṭiš
+		<ANA>
+			to
 	SUM
 		DIŠ
 			if
 			1
 		GÉŠ/GÍŠ
 			60 (see note)
-			TODO SEE #68
 	DET
 		DIŠ/1/m
-			individual name
-			male name
+			(male) name
 	FORM
 		Nv
 	NAME
@@ -7789,7 +7772,7 @@
 		1-<NU-TUM>, 1-<NU-TI>
 			set, unit (Akk <ištenūtu>)
 	NOTE
-		May also be used as a sentence divider(?). The Mesopotamian base-60 number system was never adopted in Boğazköy; GÍŠ is used as the sign for "60", but 120 is 1-<ME>-20, not 2-GÍŠ.
+		May also be used as a sentence divider(?). The Mesopotamian base-60 number system was never adopted in Boğazköy; to write the number 60, an Akkadogram <ŠUŠI> is more common (see ŠU, #68). GÍŠ was used primarily to form numbers from 61 to 99: 70 is GÍŠ.10 (see "70", #359), but 120 is 1-<ME>-20, not 2-GÍŠ.
 357
 	HIT
 		me

@@ -276,14 +276,35 @@ class Database:
 		'AKK' : 'In Akkadian words',
 		'DET' : 'Determinative',
 		'SUM' : 'Sumerogram',
-		'LIG' : 'Ligatures',
+		'LIG' : 'Compounds',
 		'CODE' : 'Code',
 		'NOTE' : 'Notes',
 		'COMP' : 'Composition',
 	}
 	
+	@staticmethod
+	def prettify_plaintext(text, colspan=1): # All plaintext fields from the database (i.e. all fields except CODE, IDENT, and FORM) are run through this before being printed, letting us do a little bit of formatting on them
+		def make_link(m):
+			num = m.group(1)
+			query = urlencode({'regex' : fr'^\#{num}$'})
+			searchurl = f'/search?{query}'
+			return f'<a href="{searchurl}">#{num}</a>'
+		
+		text = re.sub(r'<([^>]+)>', r'<em>\1</em>', text)
+		text = re.sub(r'#([0-9A-Z]+)', make_link, text)
+		width = max(len(s) for s in text.split('\n')) # Length of the longest line
+		height = len(text.split('\n'))
+		text = text.replace('\n', '<br />')
+		
+		if width > 33 * colspan or height > 4:
+			if '<br />' in text: extra = '<br />'
+			else: extra = ''
+			text = f'<label class="showlong">Show long text? <input type="checkbox" /></label><span class="hidden">{extra}{text}</span>'
+		
+		return text
+	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
-	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', rendersign_path='/rendersign'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
+	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', rendersign_path='/rendersign', signinfo_path='/search?regex=^%23{}%24'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
 		
 		used_rows = {k:v for k,v in self.ROWS.items() if k in self.attested_rows | {'IDENT', 'FORM', 'TAGS', 'CODE'}} # Which table rows do we actually need? ROWS specifies the order of them
 		# We always include these four, because they're generated from the other data in the entry instead of stored in the .langs data, which means they won't be in attested_rows
@@ -307,7 +328,7 @@ class Database:
 					# (Any sign-specific rather than form-specific information goes in NOTE instead)
 				
 				# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
-				rows['IDENT'].append(f'<td colspan="{colspan}">{entry.ident}</td>')
+				rows['IDENT'].append(f'<td colspan="{colspan}">#{entry.ident}</td>')
 				
 				# All the rest vary depending on the database file; we just include whichever ones are available
 				for lang in self.attested_rows:
@@ -315,12 +336,25 @@ class Database:
 					for reading in entry.langs[lang]: # Since they're defaultdicts in the entry, we can query whichever ones we want, it'll just return [] if it doesn't exist (which means this for-loop will immediately exit)
 						notes = entry.notes[lang][reading] # Do we have any notes on this specific reading?
 						if notes:
-							notes = ', '.join(notes)
+							if any(',' in n or '(' in n for n in notes):
+								sep = '; '
+							else:
+								sep = ', '
+							notes = sep.join(notes)
 							rs.append(f'{reading} “{notes}”')
 						else:
 							rs.append(reading)
-					rs = ', '.join(rs)
-					rows[lang].append(f'<td colspan="{colspan}">{rs}</td>')
+					if any(',' in r or '(' in r or '“' in r for r in rs):
+						sep = '\n' # Will become <br /> in prettify_plaintext
+					else:
+						sep = ', '
+					rs = sep.join(rs)
+					rs = self.prettify_plaintext(rs, colspan)
+					if 25 < len(rs) and colspan < 2: # Add a bit of padding in this case
+						extra = ' style="min-width:10em;"'
+					else:
+						extra= ''
+					rows[lang].append(f'<td colspan="{colspan}"{extra}>{rs}</td>')
 		
 		# Finally, close all the row tags
 		for row in rows: rows[row].append('</tr>')
@@ -353,6 +387,17 @@ def preview_database(fn):
 				position: sticky;
 				z-index: 100;
 				left: 0;
+			}
+			.hidden {
+				display: none;
+			}
+			label.showlong:has(input:checked) ~ .hidden {
+				display: inline;
+			}
+			label.showlong {
+				font-size: smaller;
+				font-style: italic;
+				color: #888888;
 			}
 			</style></head>\n<body>\n''')
 			f.write(table) # Beyond that, nothing but the table, no frills
@@ -426,4 +471,4 @@ def use_database():
 			print(name, code, match)
 
 if __name__ == '__main__':
-	preview_database('data/huehnergard.dat')
+	preview_database('data/hzl.dat')
