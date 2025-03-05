@@ -2,4 +2,6 @@ In some cases the HZL assigns the same reading to multiple signs, if there's no 
 
 But since this database is also used for the GAL.DUB.SAR typesetting tool, it's necessary that each reading correspond to exactly one sign—not just semantically, but in terms of sign index numbers. Thus, we read #223 as GÍN and #209B as GIN₉, URU.URUDU as BANŠUR and E.URUDU as BANŠUR₄.
 
-For the same reason, graphic ligatures—when adjacent signs overlap, without any special semantic meaning—are given their own names and entries in the database, even if they don't have their own HZL numbers. These are generally named with a + between the components (the ligature of A and NA is called A+NA), and this is how they can be selected in GAL.DUB.SAR.
+For the same reason, graphic ligatures—when adjacent signs overlap, without any special semantic meaning—are given their own names and entries in the database, even if they don't have their own HZL numbers. These are generally named with a + between the components (the ligature of A and NA is named A+NA), and this is how they can be selected in GAL.DUB.SAR.
+
+Numerical signs are given numerical readings, so the sign DIŠ can also be written as 1, MIN as 2, U as 10, and so on. To specify the sign with the actual index number 1 (AŠ), use a number sign: #1. Roman numeral readings are not supported: use 1 and 10, not I and X. (Having the reading lowercase-i mean #217 but capital-I mean #356 is unnecessarily confusing, and would require the entire system to be made case-sensitive to support this one exception.)

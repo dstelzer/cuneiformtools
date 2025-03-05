@@ -71,7 +71,7 @@
 		L[{vh2c}{cc}]	variant
 		L[{ch2c}{chc}]	variant
 		[(h2[0vv]){cc}]	variant unusual
-		L{v[h2c][h'c]}	variant unusual
+		L{v[h2c]K[h'c]}	variant unusual
 		L[hcvhc]	variant
 	NAME
 		BAL PAL
@@ -99,7 +99,7 @@
 		L(h2[0{cc}vvv])	old
 		L[{ch2c}vvv]	new
 		L[{hh2h}vvv]	variant
-		L[{[{h'h2}v]h'}v]	variant
+		L[{[{h'h20}v0R]Ah'}v]	variant
 		{c[h2c]c}	variant unusual
 		[{c[h2]c}h]	variant unusual
 	NAME
@@ -199,7 +199,7 @@
 		L[h{hh'h}v]	old
 		L[{h'h2h'}v]	new
 		L[{d'h2h'}v]	variant
-		L[{h'h2[h'v]}v]	variant
+		L[{h'h2[h'v]}Av]	variant
 	NAME
 		APIN ENGAR
 	LIG
@@ -212,8 +212,9 @@
 		MAḪ
 			great, large
 	FORM
-		L[{[h{hh'h}]0}{[vv]d2'}]	old
-		L[{[vv]Th2[0v]}{[vv]d2'}]	middle
+		L{[h{hh'h}vv][0d2']}	old
+		L{[d'd'vv]h2[0vd2']}	middle
+		L{[h'vv]Ah2[h'cc]A}	new
 		L[{h'h2h'}{vc}{vc}]	new
 		L[{ddhuu}{vc}{vc}]	variant unusual
 		L[h{h([vv]Rh)}{vc}{vc}]	variant unusual
@@ -222,6 +223,8 @@
 		L[{h'h'h2h'h'}{vc}{vc}]	variant unusual
 	NAME
 		MAḪ
+	NOTE
+		TODO REVIEW and change kern?
 11
 	HIT
 		nu
@@ -374,9 +377,9 @@
 		MUN
 			salt
 	FORM
-		W[{chc}{[vv]v}T{d[vv0]u}]	old
-		W[{ch2c}{[vv]v}T{du}]	new
-		W[{ch2c}{[vv]v}T(du)]	variant
+		W[{chc}{[vv]v}T{d[v'"v'"0E]Ku}]	old
+		W[{ch2c}0'{[vv]v}TK{du}]	new contain
+		W[{ch2c}0'{[vv]v}TK(du)]	variant
 		W[{chc}{cc}{d(u[vv])}]	variant
 		W[{ch2c}c'"{c'c'}{du}]	variant
 		W[{ch2c}c'"{c'c'}(du)]	variant
@@ -517,7 +520,7 @@
 	AKK
 		U₅
 	FORM
-		W[hvcvh{[vv]h}]
+		W[hvcvh{[vv]h}] kern
 	NAME
 		U5
 	LIG
@@ -532,7 +535,7 @@
 		MUD
 			blood
 	FORM
-		L[hvcv{[vvv]v}TE]
+		L[hvcv{[vvv]v}TEEE]
 	NAME
 		MUD MUT MUṬ
 27
@@ -687,7 +690,7 @@
 			stockyard
 	FORM
 		W[(h[vvv]){h(vRh)}v]	old
-		W[{[hvvvh]h}vv]	new
+		W[{[hvvvh]Ah}vv]	new
 		W[hvvv{0hh}vv]	variant
 	NAME
 		TÙR TUR3
@@ -726,9 +729,9 @@
 			rib
 			[type of stone: "lifestone"?]
 	FORM
-		{v[hc]c}
+		{v[hc]KcE}
 		[hvcc]	variant
-		[{[{0h}v]h}c']	variant
+		[{[hv]Ah}c']	variant
 		L[hc'vhc']	variant unusual
 	NAME
 		TI DÌ DI3 ṬÌ ṬI3 TE9 TÌL TIL3
@@ -769,7 +772,7 @@
 	FORM
 		[{[0v]hcE}{ccc}{ccc}]
 		[({hh}v){ccc}{ccc}]	variant
-		L[hvcv{[vvvv][vvv]}TE]	variant
+		L[hvcv{[vvvv][vvv]}TEEE]	variant
 		[{chc}{ccc}{ccc}]	variant
 	NAME
 		NAM SIM SÍN SIN2 BURU5
@@ -805,7 +808,7 @@
 	FORM
 		L[{0hv}{[vv]d2}]	old
 		L[h{[vv]v}{0d2}]	middle
-		[h{vc}{vc}]	new
+		[h{vc}{vc}]	new kern
 	NAME
 		EN IN4
 	LIG
@@ -890,7 +893,7 @@
 	FORM
 		L[{[v(v'h)]h}v]	old
 		L[([vh]{0h})vv]	new
-		L[{[vh]h}vv]	variant
+		L[{[vh]Ah}vv]	variant
 	NAME
 		IB IP EB EP URAŠ URTA IF EF
 	LIG
@@ -904,7 +907,7 @@
 	FORM
 		L{[v{h[vd]}v]h}
 		L{[v{h(vd)}v]h}
-		L{[v{hhhh}vcv]h}	variant
+		L{[v{hhhh}vcv]Ah}	variant
 	NAME
 		U8 US5
 	LIG
@@ -917,8 +920,8 @@
 		šul
 		sul
 	FORM
-		W[{[v{0hh}]h}{vc}{vc}{vc}v2]
-		W[{[v[{0hh}{vc}{vc}{vc}]M]h}v2]
+		W[{[v{0hh}]h}{vc}{vc}{vc}v2]	kern
+		W[{[v[{0hh}{vc}{vc}{vc}]M]h}v2]	kern
 		W[cv2{0hh}{vv}{vv}{vv}v2]	variant
 		L[{[v{vh[hcc]}M]h}v]	variant
 	NAME
@@ -938,11 +941,11 @@
 			sickle
 	FORM
 		L{[v{0hhh0}vd']h}
-		L[v{hhhh}{vd'}]	variant
-		L{[v{cEhhhh}vh]h}	variant
+		L[v{hhhh}{vd'}]	variant kern
+		L{[v{cEhhhh}EEvh]Ah}	variant
 		L{[v{hc}vd']h}	variant
-		{[vcvh]h}	variant
-		W{[v{hhh}v{h[vvv]}]h}	variant unusual
+		{[vcvh]Ah}	variant
+		W{[v{hhh}v{h[vvv]}]Ah}	variant unusual
 	NAME
 		QI QE KIN GUR10
 	LIG
@@ -970,8 +973,8 @@
 			ring, earring
 		KAB/GÁB
 	FORM
-		L{[vvhc"v]h}
-		L[{[vvhc"]h}v]
+		L{[vvhc"v]Ah}
+		L[{[vvhc"]Ah}v]
 		L{[vcvcv]h}	variant
 		L{[vvd2'v]h}	variant
 		L[{[vvd']h}{cc}v]	variant
@@ -996,8 +999,8 @@
 		ḪUB
 			ring, earring
 	FORM
-		W[{[vvh{cc}]h}0'v2]
-		W[{[vvh]h}{cc}0'"v2]
+		W[{[vvh{cc}]Ah}0'v2]
+		W[{[vvh]Ah}{cc}0'"v2]
 		W[{[vvd2']h}{cc}0'"v2]	variant
 	NAME
 		ḪUB ḪUP
@@ -1019,7 +1022,7 @@
 			hunter
 		TÉŠ
 	FORM
-		L[{[vvh]h}v]	old
+		L[{[vvh]Ah}v]	old
 		L[({0h}[vvh])v]	new improper
 		L[{[v(hv)]h"}v]	variant
 	NAME
@@ -1048,8 +1051,8 @@
 			dead
 			ghost
 	FORM
-		W[{[vv{[hc]h}]h"}vv]
-		W[{[vvh]h}{[hc]h0}vv]	variant
+		W[{[vv{[hc]h}]Ah"}vv]
+		W[{[vvh]Ah}{[hc]h0}vv]	variant
 	NAME
 		GIDIM
 53
@@ -1059,7 +1062,7 @@
 	FORM
 		L{[vvd']h}
 		{[vvc]h}
-		L{[0vhv]h}	variant unusual
+		L{[0vhv]Ah}	variant unusual
 		[v{{vh}Mh}]	variant unusual
 		(h[vv])	variant unusual
 	NAME
@@ -1128,8 +1131,8 @@
 	FORM
 		L[{h'[h2'v]M(h[vv0])}v]
 		L[{h'[h2'v]Mh[vv0]}v]
-		L[{h[{[0hh]([vv0]h)}v]}v]	variant
-		L[{h'h2'h[vv]}vv]	variant
+		L[{h"[{[0hh]([vv0]h")}v]}v]	variant
+		L[{h'h2'h[vv0]}Avv]	variant
 	NAME
 		AMA DAGAL
 	LIG
@@ -1166,8 +1169,8 @@
 		ÀRAḪ/ÉSAG
 			store, storage, barn
 	FORM
-		[{h[0{cc}{cc}]ME(h[vv0])}v]
-		[{h[0{cc}{cc}]MEh[vv0]}v]
+		[{h[0{cc}{cc}]ME(h[vv0])}v]	review
+		[{h[0{cc}{cc}]MEh[vv0]}v]	review
 	NAME
 		ÀRAḪ ARAḪ3 ÉSAG ESAG2
 60
@@ -1214,7 +1217,7 @@
 		W[{[0{hh}c]h}v{[hvvv]Mh}v]
 		W[{[0{hhh}c]h}v{[hvvv]Mh}v]	variant
 		W[{[0{hhh}c]h}v{(h[vvv])Mh}v]	variant
-		W[{[0{hhh}cv][hh]}[hv'v'v'v]]	variant unusual
+		W[{[0{hhh}cv]A[hh]}[hv'v'v'v]]	variant unusual
 	NAME
 		ERIN EREN
 63
@@ -1224,8 +1227,7 @@
 		ŠÉŠ
 			licorice (plant)
 	FORM
-		W[{[0{hh}c]h}v{[{cc}{hh}v]Mh}v]
-		W[{[0{hh}c]h}v{[{c[hc]h}v]Mh}v]
+		W[{[0{hh}c]h}v{[{d'd'0}{hh}v]Ah}0'v]
 	NAME
 		ŠÉŠ ŠEŠ2
 	LIG
@@ -1239,6 +1241,7 @@
 			total, in all
 	FORM
 		L[{h'h'h'h}{hh}v]
+		L[{h'h'h'h'h}{hh}v]	variant
 		L[{h'h'h'h}{hh2}v]	variant
 	NAME
 		ŠU+NÍGIN ŠU+NIGIN2
@@ -1250,7 +1253,7 @@
 			wool
 			Ḫulana (a river)
 	FORM
-		{[0{hhh}cv][hh]}
+		{[0{hhh}cv]A[hh]}
 		L[{h'h'h'h}{[c'v]h}]
 		L[{[{hhhh}c]h}v{ch}]	variant unusual
 		L[{h'ch}v{0h}]	variant unusual
@@ -1267,7 +1270,7 @@
 			ewe (generally with UDU or SILA₄)
 	FORM
 		L[{[0{hhh}c]h}v{[{cc}h]MEh}]
-		L{[0{hh}cv[vv]Th][hh]}	variant unusual
+		L{[0{hh}cv[vv]Th]A[hh]}	variant unusual ambigstack
 	NAME
 		SÍG+MUNUS SIG2+MUNUS
 	LIG
@@ -1431,7 +1434,7 @@
 	FORM
 		X[{hh'h'h'h[cc]}Evv20'"[{0hh}{vv}{vv}{vv}v2]]
 		X[{h'h'h'h'h[hch]M}Evv20'"[{0hh}{vc}{vc}{vc}v2]]	variant
-		X{[v{h2hh}vcv{[hh][hh]h[ccc]}]h}	variant
+		W{[v{h2hh}vcv{[hh][hh]h[ccc]}]Ah}	variant
 	NAME
 		GIŠIMMAR
 71
@@ -1555,7 +1558,7 @@
 			Elam (place)
 75
 	SUM
-		DÙ (DRU)
+		DÙ (DRÙ)
 			do, make (iya-, ešša-)
 			happen (kiš-)
 		GAG
@@ -1564,9 +1567,9 @@
 		qaq
 	FORM
 		L{d(uv)}
-		{d'({h0}v)}	variant
+		{d'(hv')K}	variant
 	NAME
-		QAQ DÙ DU3 DRU GAG RÚ RU2
+		QAQ DÙ DU3 DRÙ DRU3 GAG RÚ RU2
 	LIG
 		DÙ.A.BI
 			everything, in all
@@ -1594,7 +1597,7 @@
 	FORM
 		L{d(u[vvv])}
 		L{dh[vvv]}
-		L{d(h[vvv])}	variant
+		L{d(h[v'v'v'])K}	variant
 		L{h'"h[vvv]}	variant unusual
 		L{h([vvvv]h)}	variant unusual
 	NAME
@@ -1619,10 +1622,11 @@
 		L{[d0][dd]u}
 		L{[d'd2]h}	variant
 		L{[0{hh}h]h}	variant
+		{[vv]vh}T	variant
 		{[vvv]v}T	variant unusual
 		{[0"c'c']h}	variant unusual
 		{h2hh}	variant unusual
-		L{{[vvvv]v}T([vvvv]h)}	variant unusual
+		L{{[vvvv]v}TEEE([vvvv]h)}	variant unusual
 	NAME
 		LÚ LU2
 	LIG
@@ -1657,11 +1661,12 @@
 		SES
 			bitter
 	FORM
-		L{[0"{cc}c"0"c][hc]}
-		L[{[0"{cc}c0"]h}{cc}]
-		L{[0"{cc}c"0"c]([hc][0vvv0])}	variant
+		L{[0"{cc}c'0"{c0'}]A[hc']K}
+		L{[0"{v[vv]}TEE0"{c0}]A[hc']K}
+		L{[0"E{cc}0"{cc}0"Ec]EE[hc]Kv}	variant
+		L{[0"{cc}c"0"c']A[(h[vvv]R)c']}	variant
 		L{[{[vvv]v}TEc]([hc]v)}	variant unusual
-		L{d2[0{hhh}0c][hc][vvv]}	variant unusual
+		L{d2[0{hhh}0c][(h[vvv]R)c]}	variant unusual
 	NAME
 		SES ŠEŠ
 	LIG
@@ -1679,6 +1684,7 @@
 		L({0h}[v{0h[0vvvv]}])	new
 		L(h[v(d'[0v'v'v'])])	variant
 		L([v0]{cEh[0vvvv]})	variant
+		L{[v{h[0vvvv]}]h}	variant
 	NAME
 		AŠGAB
 81
@@ -1688,7 +1694,7 @@
 		L[{[h{hhh}{hhh}]h}v{0hh}]	old
 		L{[hRv0'(h2v)]h}	new
 		L[{[h{hhh}]h}(v{hh})]	variant
-		L{[hvhvh]h}	variant
+		L{[hvhvh]Ah}	variant
 		L[hv{hh}v]	variant
 		L[h([vv]{hh})E]	variant
 	NAME
@@ -1793,7 +1799,7 @@
 		SI
 			horn
 	FORM
-		{[{0h0}v'v]h'}
+		{[hv'v]Ah'}
 		{[0vv]h2}	variant
 		[{h[v0]h}v]	variant
 	NAME
@@ -1822,7 +1828,7 @@
 		ŠÙDUL/ŠÙDUN
 			yoke
 	FORM
-		W[{[hRvvvhR]h}{cc}{cc}0'"v2]
+		W[{[hvvvh]Ah}{cc}{cc}0'"v2]
 		W[(h[vv])0'"v{[cc]hc}{cc}0'"v2]
 	NAME
 		ŠÙDUL ŠUDUL3 ŠÙDUN ŠUDUN3 DUN4 DUL4
@@ -1843,9 +1849,9 @@
 		DIR
 			abbreviation for tīrānu "intestine"
 	FORM
-		L[{[hRv'v]h'}vv2]	old
-		L[{[hvv]h'}vv2]	new
-		L[{[{hv}v]h}vv2]	variant
+		L[{[hEv'v0]Ah'}vv2]	old
+		L[{[hEvv0]Ah'}vv2]	new
+		L[{[{hv}AEEv0]h}Avv2]	variant
 		L{[0v'v'vv2]h2}	variant unusual
 	NAME
 		DIR DIRI SA5
@@ -1908,8 +1914,8 @@
 		<AS-KUT>
 			I remained silent
 	NOTE
-		See PIRIŊ (#92A)
-92A
+		See PIRIG (#92B)
+92B
 	SUM
 		PIRIG (PIRIŊ)
 			wild animal
@@ -1921,7 +1927,7 @@
 	NAME
 		PIRIG PIRIŊ
 	NOTE
-		In Old Script, AZ (#92) and UG (#93) are often written without their ZA/UD phonetic complements and (especially in the Anitta texts) used for "wild animal(s)" in general; the HZL interprets this as a variant use of AZ/UG, but here we call this merged form PIRIG and give it the index number #92A.
+		In Old Script, AZ (#92) and UG (#93) are often written without their ZA/UD phonetic complements and (especially in the Anitta texts) used for "wild animal(s)" in general; the HZL interprets this as a variant use of AZ/UG, but here we call this merged form PIRIG and give it the index number #92B.
 93
 	COMP
 		PIRIG&UT
@@ -1943,7 +1949,7 @@
 		PÌRIG.TUR
 			leopard, panther
 	NOTE
-		See PIRIG (#92A)
+		See PIRIG (#92B)
 94
 	COMP
 		PIRIG&KAL
@@ -1968,20 +1974,20 @@
 		LA
 96
 	SUM
-		UKU
+		UKU/AGA
 	FORM
-		W[{hh}(h[vv{h0}])Ev]	old
-		L[{hhhh}{[vvhv]h}E]	new
-		L{[{hhh}vv{hh}v]h}	variant
+		W[{hh}({0h}[vvh])EEv]	old improper
+		L[{hhhh}{[vvhv]Ah}E]	new kern
+		L{[{hhh0}vv{hh}v]Ah}	variant
 	NAME
-		UKU
+		UKU AGA
 	LIG
 		UKU.UŠ (AGA.ÚS)
 			(professional) soldier
 		UKU.UŠ.(SÁ.)E.NE (AGA.ÚS.SÁ.E.NE)
 			[plural of UKU.UŠ]
 	NOTE
-		UKU.UŠ (AGA.ÚS) soldiers are a permanent standing army, while ERIM (#327) troops are levied only when necessary
+		UKU.UŠ (AGA.ÚS?) soldiers are a permanent standing army, while ERIM (#327) can also include troops levied as needed from the general population
 97
 	HIT
 		ap
@@ -2013,7 +2019,7 @@
 		(v{h2h2})	variant
 		L[{hh}{h[0v'v'0]h}v]	variant
 		L[{h'([0vv]{hh})h'}v]	variant
-		W[{[{hh}vvvvv]h2}v]	variant unusual
+		W[{0[{hh0}vvvvv0]AEEh2}v]	variant unusual
 	NAME
 		UM UB×
 	LIG
@@ -2129,8 +2135,8 @@
 			wizard
 	FORM
 		L[{0hh0}{h([vvv]h)Mh}Ev]
-		L[{0hh0}{h({hh}[vvv])}Ev]	variant
-		W[{hh}{hh'h}[vvvv]]	variant
+		L[{0hh0}{h({hh}[vvv]R)}Ev]	variant
+		W[{hh}{hh'h}[vvvv]EE]	variant
 		L[{0hh0}{h[vv2]Mh}Ev]	variant unusual
 	NAME
 		AZU ÚZU UZU2
@@ -2269,7 +2275,7 @@
 	FORM
 		L[{hh}{h[vv2]Mh}v]
 		L[{hh}{h([vv2]h)R}v]
-		L[{0hh}{[vvv]h}]	variant
+		L[{0hh}{[vvv]h}]	variant kern
 	NAME
 		MIŠ MIS
 	NOTE
@@ -2297,7 +2303,7 @@
 		BÀD
 			wall, fortification
 	FORM
-		L[{hh}{h[{hh}c]h}v{0hh}v]	old
+		L[{hh}{h[{hh}cK]h}v{0hh}v]	old
 		W[{hh}R{h[hc]h}v({hh}v)]	new
 		W[{hh}R{h[h2c]h}v({hh}v)]	variant
 		W[{hh}R{h[{hhh}c]h}v({hh}v)]	variant
@@ -2320,15 +2326,15 @@
 			king
 	FORM
 		W[{hh}{[d0][dd]u}E]
-		W[{hh}{[{hh}h]u}E]	variant
+		W[{hh}{[{hh}h]Ku}E]	variant
 		W[{hh}{[{hh}h]h}E]	variant
-		W[{hh}{[{hhh}d]h[vvv]}E]	variant unusual
+		W[{hh}{[{hhh0}d]Ah[vvv]}E]	variant unusual
 		L[{hh}{h2h"h"h"h[vv]}E]	variant unusual
 	NAME
 		ŠÀR ŠAR3 LUGAL
 	LIG
 		LUGAL.GAL
-			great king, emperor
+			Great King, emperor
 		LUGAL-ma
 			Šarruma (divine name)
 		LUGAL-ma-an-ni
@@ -2344,7 +2350,7 @@
 		DÌM
 			pillar, post
 	FORM
-		W[{hh}{[d0][dd]0'"h}E{cc}{0h2d'}]
+		W[{hh}{[d0][d2d]0'"h}E{cc}{0h2d'}]
 		X[{hh}{[d0][dd]0'"h[cc]}E{0h2h'}]	variant
 	NAME
 		DÌM DIM3
@@ -2580,18 +2586,18 @@
 	AKK
 		kas₄
 	FORM
-		L[{c[hc]h2c}v2]	old
+		L[{c[hc]Kh2c}v2]	old
 		L[{c[hhc][hhc]c}v2]	new
 	NAME
 		KAS4 KAŠ4
 	LIG
-		KAŠ4.E
+		KAŠ₄.E
 			courier
 130
 	SUM
 		DÚB
 	FORM
-		W[{chh}{[v0'"{[hc]h}]h}Evv]
+		W[{chh}{[v0'"{[hc]h}]Ah}Evv]
 	NAME
 		DÚB DUB2
 	LIG
@@ -2607,8 +2613,8 @@
 			wine, vine
 	FORM
 		L[{0[hc]h}v{0dh}]
-		L{[{ch}v{0d}]h2}	variant
-		L{[hc'vh]h}	variant
+		L{[{ch}v{0d}]Ah2}	variant
+		L{[hc"vh]Ah}	variant
 		L[{hhh}(vdu)E]	variant unusual
 		W[{0hh0}{chhc}{h(du)}E]	variant unusual contaminated
 	NAME
@@ -2682,12 +2688,12 @@
 			obsidian
 			flint
 	FORM
-		L{[{0hc}v{0hh}v]h}	old
+		L{[{0hc}v{0hh}v]Ah}	old
 		L[{0[hc]h}v(v{0hh})]	new
 		L[{0[hc]h}v{0hh}v]	variant
 		L[{h[cc]}v{hh}v]	variant
-		L{[hc"v(v{0hh})]h2}	variant
-		L[h{0hh}v(v{0hh})]	variant
+		L{[hc"v(v{0hh})]Ah2}	variant
+		L[h{0hh}v(v{0hh})EE]	variant
 	NAME
 		KA GA14 QÀ QA3 DU11 DUG4 GÙ GU3 INIM KIR4 ZÚ ZU2
 	LIG
@@ -2723,7 +2729,7 @@
 			meeting, assembly
 	FORM
 		W[{0[hc]h}v{h(hv)Mh}v]
-		W[{0[hc]d'}v{h(hv)Mh}v]	variant
+		W[{0[hc]Kd'}v{h(hv)Mh}v]	variant
 	NAME
 		UKKIN UNKIN
 135
@@ -2744,9 +2750,11 @@
 		SU₆
 			beard
 	FORM
-		W[[{0[hc]h}v]{h{[vh](h[00vvv])}Mh}Ev]
+		W[[{0[hc]h}v]{h{[vh]A(h[00vvv])K}Mh}Ev]
 	NAME
 		SU6
+	NOTE
+		A good example of the A and K modifiers—both are needed here!
 137
 	COMP
 		KA×ÚR
@@ -2777,7 +2785,7 @@
 			[a wooden container?]
 	FORM
 		W[{0[hc]h}v{h[{hh}v]Mh}v]
-		W[{0[hc]h}v{h[{h'h'h}v]}v]	variant
+		W[{0[hc]h}v{h[{h'h'h}v]}Av]	variant
 	NAME
 		KA×GIŠ KA×ŊIŠ
 140
@@ -2790,7 +2798,7 @@
 		W[{0[hc]h}v{h{d'hv}Mh}v]
 		W[{0[hc]h}v{hch(hv)}v]	variant
 		W[{0h2h}v{hh'h'h}v]	variant
-		W[{[hc]c}v{h(hv)Mh}v]	variant unusual
+		W[{[hc']c}v{h(hv)Mh}v]	variant unusual
 	NAME
 		KIR14
 141
@@ -2811,7 +2819,7 @@
 		[unknown]
 			[hapax legomenon]
 	FORM
-		W[[{0[hc]h}v]{h[0{cc}{hh}{hh}0]h}v]
+		W[[{0[hc]h}v]{h[{cc}{hh}{hh}]Mh}v]
 	NAME
 		KA×LUM
 	NOTE
@@ -2837,7 +2845,7 @@
 		BÚN
 			thunder
 	FORM
-		W[[{0[hc]h}v]{h[{[vvv]v}TEhvv]Mh}v]
+		W[[{0[hc]h}v]{h[{[vvv]v}TEEhvv]Mh}v]
 		W[[{0[hc]h}v]{h[{[vvv]v}TE(h[vv])]Mh}v]
 	NAME
 		BÚN BUN2
@@ -2901,8 +2909,8 @@
 			eat
 	FORM
 		W[{0[hc]h}v{h{[vvv]v}Mh}v]
-		W[{0[hc]h}v{h[vvv](vh)}v]	variant
-		W[{chh}v{h[vvv](vh)}v]	variant
+		W[{0[hc]h}v{h[vvv](vh)}Av]	variant
+		W[{chh}v{h[vvv](vh)}Av]	variant
 	NAME
 		GU7
 150
@@ -2979,7 +2987,7 @@
 			beer
 	FORM
 		{[hc'][hc']}
-		{[hc'][(hv)c']}	variant
+		{[hc'][(hvR)c']}	variant
 	NAME
 		PÍ PI2 PÉ PE2 BI BÉ BE2 KAŠ GAŠ
 	LIG
@@ -3053,7 +3061,7 @@
 		GU₄
 			bovine
 	FORM
-		L{[hc']([hc"]v)}
+		L{[hc']([hc']vR)}
 		L[{h(hv)R}{c'c'}]
 		L[(v{hh}){c'c'}]	variant
 	NAME
@@ -3085,7 +3093,7 @@
 		L[{hvh}{c0'c}v]	variant
 		[{[hc'][hc']}v]	variant
 		L[{[{hhhh}v]}0'"{cc}0'"v]	variant unusual
-		L[{[h2c][hv][hh]}v]	variant unusual
+		L[{[h2c][hv]A[hh]}v]	variant unusual
 	NAME
 		ŠA SA×
 	LIG
@@ -3103,8 +3111,8 @@
 		GA
 			milk
 	FORM
+		L{[hc']([0vv0]R[hc'])}
 		L[{h(h[0vv0])R}{c'c'}]
-		L{[hc']([0vv0][hc"])}
 		L([0vvv0]{[hc'][hc']})	variant
 		L[{hh}vv{cc}]	variant
 		L[{h(h[0vvvvv0])R}{c'c'}]	variant
@@ -3200,8 +3208,8 @@
 		BAPPIR
 			beer-bread
 	FORM
-		W[({hh}{0[vvv]v}){c'c'}{[hc']h}vv]
-		W[{h[0vvv0]hv}{c'c'}{[hc']h}vv]
+		W[{[hc]K[0vvv0][hc]Kv}EE0'{[hc']h}vv]
+		W[{(h[vvv])(hv)}{c'c'}{[hc']h}vv]
 		X[{hh}{[vvv]v}{c'c'}{[hc']h}vv]	variant
 		X[{hh}{[vvv]v}0'"{chh}{[hc']h}vv]	variant
 		L[{hh}{[vvv]v}{cc}]	variant unusual
@@ -3248,7 +3256,7 @@
 		L[{vRhh[0d20]}v]	variant
 		L[{(vh)h[0d20]}v]	variant
 		L[{0hh}{0d2}vv]	variant
-		L[({hh}vc")v]	variant unusual
+		L[({hcAh}v)v]	variant unusual
 		L[{hh}{c'c'}v{hh}v]	variant unusual
 	NAME
 		KIM GIM DÍM DIM2
@@ -3260,9 +3268,9 @@
 			hair pin/clip(?)
 	FORM
 		X[[{hh}{d2'v}KE0']E{[vv'{vh}AEEv']Ah}EE{c[hh][hh][ccc]}EE[vv]]	old
-		X[{[hv]h}{[cc]h'h'h'h}v0'"{[vv'v'v]h}E{c[hh][hh][ccc]}vv]	new
+		X[{[hv]Ah}{[cc]h'h'h'h}v0'"{[vv'v'v]h}E{c[hh][hh][ccc]}vv]	new
 		X[(v{[hc']h}){[vvv][vvv]h}{[0c]h2h2}[vv]]	variant
-		X[{[hc'][(hv){hhh}v]}{[vv'v'v{h[ccc]}E]h}[vv]]	variant
+		X[{[hc'][(hv){hhh}v]}{[vv'v'v{h[ccc]}E]h}E[vv]]	variant
 	NAME
 		UMBIN
 	NOTE
@@ -3428,9 +3436,9 @@
 			linen, cloth
 	FORM
 		P{h(vh)}	old
-		P{[hv]d'}	new
-		P{[hv]h}	variant
-		P(h[{h0}v])	variant
+		P{[hv]Ad'K}	new
+		P{[hv]Ah}	variant
+		P(h[{h0}v])	variant improper
 		P(v{hh})	variant unusual
 		P[{hh}v]	variant unusual
 	NAME
@@ -3448,7 +3456,9 @@
 			veil(?)
 		GADA.DAM
 			spat (shoe covering)
-173B
+	NOTE
+		TODO also a good example for A+K interaction
+173L
 	COMP
 		KAT+TA
 	HIT
@@ -3514,8 +3524,8 @@
 		ŠAB
 			bowl
 	FORM
-		W[(v{hh}){[vh]h}vv]
-		W[(v{hh})([v{h0}]h)vv]
+		W[(v{hh}){[vh]Ah}vv]
+		W[(v{hh})([v{h0}]h)vv]	improper
 	NAME
 		ŠAB ŠAP ŠÌB ŠIB3 ŠÌP ŠIP3 SAB SAP
 	LIG
@@ -3529,7 +3539,6 @@
 			commissar
 	FORM
 		W[(v{hh}){c[hc][h2c]c}Ev2]
-		W[(v{hh}){chh2c}{0'cc0'}Ev2]
 	NAME
 		MAŠKIM
 177
@@ -3562,7 +3571,7 @@
 			wood
 	FORM
 		P[{hh}v]
-		P(h[{h0}v0])	variant
+		P(h[{h0}v0])	variant improper
 		P[{h(hv)}v]	variant unusual
 		P(v{hh})	variant
 	NAME
@@ -3675,10 +3684,10 @@
 		L[{hh}v{0h}v]	old
 		L[{hh}v{ch}v]	new
 		L[{hh}v{0u}v]	variant
-		L[{hh}v{vu}]	variant
+		L[{hh}v{vuK}]	variant
 		L[{hh}{[v0v]h}]	variant
 		W[{hh}{[vvd']h}E]	variant
-		L[{hh}{[vvh]h}E]	variant
+		L[{hh}{[vvh]Ah}E]	variant
 	NAME
 		AL
 	LIG
@@ -3695,7 +3704,7 @@
 	FORM
 		L[{hh}v{0h}v]	old
 		[{hh}vcv]	new
-		[{[hv][hh]}v]	variant
+		[{[hEEv0]A[hh]}v]	variant
 	NAME
 		KU7
 	LIG
@@ -3735,7 +3744,7 @@
 	FORM
 		[{0h(hv)}v2]	old
 		[{0hh}vv2]	new
-		[{hhv}v2]	variant
+		[{hhv}Av2]	variant
 		[{hhh}vv2]	variant
 		[{hh(hv)}v]	variant
 	NAME
@@ -3802,9 +3811,7 @@
 	NAME
 		E+KISIM5×A+MAŠ E+KISIM5×(A+MAŠ)
 	NOTE
-		Other E.KISIM₅×… signs likely exist, but are too poorly preserved to be sure
-	NOTE
-		See LAḪTA (#232)
+		Other E.KISIM₅×… signs likely exist, but are too poorly preserved to be sure. See LAḪTA (#232).
 191
 	HIT
 		mar
@@ -3836,11 +3843,11 @@
 		SUR₁₄
 			[see note]
 	FORM
-		L[{[hv{hh}]E([v0]h)}v]	old
-		L[{[hv]h'}v{hh}v]	new
+		L[{[hv{hh}]E([v'0]h)K}v]	old
+		L[{[hv0]Ah'}AEEv{hh}v]	new
 		L[{0h(hv)}v{0hh}v]	variant
-		L{[hv'v0'"(v{hh})]h}	variant
-		L[{[hvv{0h'h'}]h}v]	variant
+		L{[hv'v0'"(v{hh})]Ah}	variant
+		L[{[hvv{0h'h'}]Ah}v]	variant
 	NAME
 		ŠAG ŠAK ŠAQ RIŠ SAG SUR14 SAŊ SÚR SUR2
 	LIG
@@ -3879,9 +3886,9 @@
 		GURUN
 			fruit
 	FORM
-		{[0vv0][hc][hc][0'cc0']}
-		[{0hh0}{vc'}{vc'}{0cc0}]	variant
-		[{0hh0}{vc'}{vc'}]	variant
+		{[0vv0][hc]K0"[hc]K[0'cc0']}
+		[{0hh0}{vc'}K0'{vc'}K{0cc0}A]	variant
+		[{0hh0}{vc'}K{vc'}]	variant
 		[{0hh0}{vv}{vv}{0hh0}]	variant
 		([{vv?}{vv?}]{[hh?][hh?]})	variant unusual anomalous
 	NAME
@@ -3896,7 +3903,7 @@
 	FORM
 		L[{0hh}vv'v]
 		L[{d'h}vv'v]	variant
-		L(h[{h0}vv'v])	variant
+		L(h[{h0}vv'v])	variant improper
 		({hh}[vvv])	variant
 	NAME
 		KID KIT KIṬ GÉ GE2 KE4 LÍL LIL2
@@ -3923,11 +3930,11 @@
 		L[(v{hh})vvv]	variant
 		[{hh}vv]	variant
 		W[{hh}vvvvvvv]	variant
-		L{[hvvv]h}	variant
+		L{[hvvv]Ah}	variant
 	NAME
 		Ú U2 ʔU× ŠAM KÙŠ KUŠ3
 	NOTE
-		Recent consensus is that <ú> was /u/ in Hittite, while <u> (#261) was /o/
+		Consensus is emerging that <ú> was /u/ in Hittite, while <u> (#261) was /o/. See that sign for details.
 	LIG
 		Ú.GÍR.LAGAB(.KUR.RA) (KIŠI₁₆.ḪAB(.KUR.RA))
 			[type of acacia tree]
@@ -3982,7 +3989,7 @@
 		L[{hh}vvv2]	new
 		[{0h(hv)}vv2]	variant
 		[{cc}vvv2]	variant
-		L[{[hvv]h}v2]	variant
+		L[{[hEEvv0]Ah}v2]	variant
 	NAME
 		KAL GAL9 DAN TAN LAB LAP RIB RIP ESI GURUŠ KALA KALAG LAMMA
 	LIG
@@ -4022,7 +4029,7 @@
 			vizier, minister, herald
 	FORM
 		L[{hh}Evv'v'v]	old
-		W[{h'[{hh}v]}Evv'v'v]	new
+		W[{h'0"[{hh}EEv0]}EAvv'v'v]	new
 		L({0hh}[vv'v'v])	variant
 		L[{h(hvR)}Evv'v'v]	variant
 		L[{0hhv}Evv'v'v]	variant
@@ -4047,10 +4054,10 @@
 	FORM
 		L[([vv'v'v'0]{0hh})v]	old
 		L[{hh}Evv'v'v'v]	new
-		L[{[hv'v'v'v'0]h}v]	variant
+		L[{[hv'v'v'v'0]Ah}v]	variant
 		L[{[0vvvv0]hh}v]	variant
 		L[{(h[vvvv0])h}v]	variant
-		L[{[0vv]hh}vv]	variant
+		L[{[0vv0]hh}Avv]	variant
 	NAME
 		É E2 PID PIT PIṬ
 	LIG
@@ -4282,7 +4289,7 @@
 			[haruspicy term]
 	FORM
 		[{hh'h}v]
-		[v{[{hh}v]h}]	variant
+		[v{[{hh0}v]Ah}]	variant
 		[v{hhh}v]	variant
 		[{h2h}v]	variant
 	NAME
@@ -4361,7 +4368,7 @@
 	FORM
 		L[{hh'h}vv]	old
 		L[{h2h}vv]	new
-		L[{h[{h'h}v]}v]	variant
+		L[{h[{h'h}v]}Av]	variant
 		L[h{hh}vv]	variant
 		L[{([{h0}v0]h)h}v]	variant
 	NAME
@@ -4407,7 +4414,7 @@
 		([vvv]{hhh})
 		[v{h(vh)Mh}v]	variant
 		L[{hhh}[vvvv]Eh]	variant
-		L([0v]{[vvv0]hhh})	variant unusual
+		L([0v]{[vvv0]hhh})	variant unusual improper
 		{[v([vv]{hh})]h}	variant
 		[v(v{hhhh})v]	variant
 		L[v{hhhhhh}[vvvvv]E]	variant unusual
@@ -4706,7 +4713,7 @@
 		W[{hhh}{h(h'"c)h}Ev2]	variant
 		W[{hhh}{h(du)Mh}Ev2]	variant
 		W[{hhhh}{h[hccc]h}v2]	variant
-		W[{[vvvv{0hh}]h}v]	variant unusual
+		W[{[vvvv{hh0}]Ah}v]	variant unusual
 	NAME
 		ṬU GÍN GIN2 TÙN TUN3
 	NOTE
@@ -4736,7 +4743,7 @@
 		W[{[hc]hh[hv]}{d2u}{cc0'}0'"v2]	variant
 		W[({0h2}[hc'vhh]){cc}0'"v2]	variant
 		W[{hh}{cv}{ch}{cc}{cc}0'"v2]	variant
-		W[{[hc']h}{[v0'"{[hc]h}]h}vv]	variant unusual
+		W[{[hc']h}{[v0'"{[hc]h}]Ah}vv]	variant unusual
 	NAME
 		BALAG
 	NOTE
@@ -4860,6 +4867,8 @@
 	LIG
 		<AŠ-ŠUM> LÚ^SANGA-<UT-TIM>
 			for the priesthood
+	NOTE
+		TODO all these forms should be reviewed for kerning changes
 232
 	COMP
 		E!.KISIM₅×LA
@@ -4893,6 +4902,8 @@
 	LIG
 		RA-<IṢ>
 			beaten (Akk maḫiṣ)
+	NOTE
+		TODO check all forms for kerning issues (also ra+a and ra+an)
 233L
 	COMP
 		RA+AN
@@ -4919,7 +4930,7 @@
 	SUM
 		GE₄/GI₄
 	FORM
-		W[{[{hhh}(h[vv])]Ah}{[vvv]h}T]	old
+		W[{[{0hhh0}(h[vv])]Ah}{[vvv]h}T]	old
 		W[{0hhhh0}(h[vv]){[vvvv]v}TE]	new
 		W[{0hhhh0}(h[vv]){[vvv]h}TE]	variant
 	NAME
@@ -4937,7 +4948,7 @@
 		W[{hhhh}{h(du)Mh}{[hhh][ccc]}v2]	variant
 		W[{hhhh}{h(hc)Mh}{[hhh][ccc]}v2]	variant
 		W[{hhhh}{h[{vc}{vc}{vc}]Mh}Ev2]	variant
-		W[{hhhh}{c[{hhhh}v]c}Ev2{hhhh}]	variant unusual
+		W[{hhhh}{c[{hhhh}v]EEc}Ev2{hhhh}]	variant unusual
 		L[{hhh}{hhhh}v2]	variant unusual
 	NAME
 		BÁR BAR2
@@ -5033,7 +5044,6 @@
 			10,000, myriad, unusually many
 	FORM
 		L[{hhhh}cvh]
-		L[{h[hc]hh}vh]
 		L[{h[hc]h}vh]	variant
 		[{hch}vh]	variant
 	NAME
@@ -5238,7 +5248,7 @@
 	FORM
 		L[{dd2d}vvv2]	old
 		L[{h'[hh]h'}[vvv2]]	new
-		L[{v[vvv]}TEvvv2]	variant
+		L[{v[vvv]}TEEEvvv2]	variant
 		L[{cc}{cc}vvv2]	variant
 	NAME
 		KAR KIR8 GAR14 QÁR QAR2
@@ -5288,11 +5298,11 @@
 	SUM
 		ḪÚL+KUN
 	FORM
-		W[([v0]{[0hvvv]h0})Ec'{c[hh]c}]
+		W[([v0]{[0hvvv]Ah0})Ec'{c[hh]c}]	improper
 	NAME
 		ḪÚL+KUN ḪUL2+KUN
 	LIG
-		UDU.ḪÚL+KUN
+		UDU.ḪÚL+KUN (GUKKAL+KUN)
 			fat-tailed sheep
 	NOTE
 		Normally, the Sumerogram for "fat-tailed sheep" is UDU.ḪÚL, read as GUKKAL. However, in the only known Hittite instance, the scribe seems to have combined an extra KUN "tail" into the ḪUL sign. If this appears more often (and isn't just a graphic ligature), a reading like GÚKKAL might be appropriate; but for a hapax, UDU.ḪÚL+KUN works.
@@ -5301,8 +5311,8 @@
 		IDIGNA
 			Tigris (river)
 	FORM
-		W[([v{h0}]{0h}){[hc'c'{ccc}{ccc}][hc']}E]
-		W{[vh2c'c'{ccc}{ccc}][hhc']}
+		W{[v{[h2c'c'{ccc}{ccc}]E0}]A[hhc']K}
+		W[([v{h0}]{0h}){[hc'c'{ccc}{ccc}][hc']}E] improper
 	NAME
 		IDIGNA
 254
@@ -5321,10 +5331,10 @@
 		SIG
 			thin, flat, narrow
 	FORM
-		L[([0v{d0}]d)v]
-		L[(vd)(vd)]	variant
-		[(h[v{h0}])v]	variant
-		L[(h[v{h0}])vv]	variant unusual
+		L[([0v{d0}]d)v]	improper
+		L[(vdK)(vdK)]
+		[({0h}[vh])v]	variant improper
+		L[({0h}[vh])vv]	variant unusual improper
 		[cvcv]	variant
 		[v{dd}v]	variant
 	NAME
@@ -5440,7 +5450,8 @@
 		ŠENNUR
 			medlar (type of fruit) (?)
 	FORM
-		L[{c({dd}{uu})c}v2]
+		L[{cK({dd}{uu})cK}v2]
+		P[{cK([vv]{hh})TcK}Av2]	ugly
 		L[({0hh0}[{0c}dd{c0}])v2]	variant
 		L[{h'hhh'}v2]	variant unusual
 		L[{[ddd]hhc}v2{0hhhhh}]	variant
@@ -5519,11 +5530,11 @@
 	FORM
 		L[c{[h{h[hc]h}]Eh'}v]
 		L[ch{h[hc]h}v]	variant
-		L[c{[hh]h}c'v]	variant
+		L[c{[hh]h}cKv]	variant
 		L[ch{hhh}v]	variant unusual
-		L[c{[hv(v{hh})]h}]	variant
-		L[c{[hv{ch}v]h}]	variant
-		L[ch{[v{hh[hc]hh}]h}Ev]	variant
+		L[c{[hv(v{hh})EE]Ah}]	variant
+		L[c{[hv{ch}v]Ah}]	variant
+		L[ch{[v{hh[hc]hh}]Ah}EEv]	variant kern
 	NAME
 		IŠTAR
 	LIG
@@ -5573,6 +5584,8 @@
 		Ù U3 LIBIR
 	NOTE
 		This sign is effectively an Akkadian logogram; in both Akkadian and Hittite, it's used only for the word <U> "and", not for the sound /u/ in other contexts. See also <U₇> "and" (#313B).
+	NOTE
+		TODO CHECK KERNING ON ALL
 	LIG
 		Ù-<TUM>
 			sleep, dream
@@ -5842,8 +5855,8 @@
 	FORM
 		L[c0'"v'"v2'"{du}]
 		W[c0'"v'"v2'"(du)]
-		L[c'{d[vv200]u}]
-		L[c'{d[vv200]h}]	variant
+		L[c'{d[vv200]Ku}]
+		L[c'{d[vv200]h}]	variant kern
 	NAME
 		ÁB×A AB2×A
 285
@@ -5981,7 +5994,7 @@
 	FORM
 		[cvh]
 		[c'(vh)]	variant
-		(h[0v{h0}])	variant
+		(h[0v{h0}])	variant improper
 		[cv{hh}]	variant unusual
 	NAME
 		ŠI LÌ LI3 ŠE20 LIM SI17 IGI 1000
@@ -6055,9 +6068,9 @@
 		ḪUL
 			bad, evil
 	FORM
-		W[[cvh]({0h}[vvh])Ev]
-		W[[cvh]{[vvh]h}Ev]	variant
-		W[{[vh]h}v{[vhv]h}]	variant unusual
+		W[[cvh]({0h}[vvh])Ev]	improper
+		W[[cvh]{[vvh]Ah}Ev]	variant
+		W[{[vh]Ah"}v0'{[vhv]Ah}]	variant unusual
 	NAME
 		ḪUL
 291
@@ -6082,7 +6095,7 @@
 	HIT
 		pà
 	FORM
-		W[[cvh]{[d'vv'v]h}E]
+		W[cEvh{[d'vv'v]h}EEEE]
 	NAME
 		PÀ PA3
 	LIG
@@ -6337,7 +6350,7 @@
 	FORM
 		L[{ddhh}{d'hh'}]
 		L[{ddhh}{h'hh'}]	variant
-		L[{[{cc}{hh}]E0"hh}{d'h0}]	variant
+		L[{[ch][ch]hh}{d'h}]	variant
 		L[{chh}{chh'}]	variant
 		L[{cc}{h'hh'}]	variant
 		[{cc}{d'hh"}]	variant
@@ -6371,7 +6384,7 @@
 		ALIM
 			bison
 	FORM
-		L{[{cc}{ch0'"}]E0'"[[[vv2]0'"cvh]Mh]}
+		L{[{cc}{cEh0}]E0'"[[[vv2]0'"cvh]M{h0}]}
 	NAME
 		ALIM
 	NOTE
@@ -6426,7 +6439,7 @@
 		L[c({hh}d)vv]	variant
 		W[cc{0hhh}vv]	variant
 		L[{[0ch][ch]h}vv]	variant
-		[{cc}{[hv'v]h}]	variant unusual
+		[{cc}{[hv'v]Ah}]	variant unusual
 	NAME
 		LAM LIB× LIP× LA12
 	LIG
@@ -6443,9 +6456,9 @@
 		SIKIL
 	FORM
 		L[{cc}{[{0h0}vvv]h}]
-		L[[{cc}h]{[vv'v]h}E]	variant
-		L[[{cc}{hh}]{[vv'v]h}E]	variant
-		L[{cc}({[vvv]h}h)]	variant
+		L[[{cc}h]{[vv'v]h}E]	variant kern
+		L[[{cc}{hh}]{[vv'v]h}E]	variant kern
+		L[{cc}{(h[vvv])h}]	variant
 		L[{cc}{[vv'v]hh'}]	variant unusual
 	NAME
 		EL IL5 SIKIL
@@ -6465,9 +6478,9 @@
 		NAGAR
 			carpenter, woodworker
 	FORM
-		[{cc}(hv)c]
+		[{cc}(hv)c']
 		[{cc}hvc]	variant
-		L[{[vv]v}TEhvc']	variant
+		L[{[vv]v}TEEEhvc]	variant
 	NAME
 		NAGAR
 309
@@ -6481,9 +6494,9 @@
 			swineherd
 	FORM
 		L[{cc}{([vvvv]h)[cccc]v}v2]	old
-		W[{[cc]c}Ev{hh}{vc}{vc}{vc}v2]	new
+		W[{[cc]c}Ev{hh}{vc}{vc}{vc}v2]	new kern
 		W[{[cc]c}Ev{hh}{vv}{vv}{vv}{vv}v2]	variant
-		W[{[cc]c}Ev{hh}{[vvv][hhh]}v2]	variant
+		W[{[cc]c}Ev{hh}{[vvv][hhh]}v2]	variant kern
 	NAME
 		ŠAḪ ŠIḪ
 	LIG
@@ -6551,7 +6564,7 @@
 		[{c[ch]h}v]	new
 		L[cv{hh}v]	variant unusual
 		L[cv(v{hh})]	variant unusual
-		{[v{hh}v]h}	variant unusual
+		{[v{hh}v]Ah}	variant unusual
 	NAME
 		DI DE TI4 ŠÙL ŠUL3 SÁ SA2 SALIM SILIM
 	LIG
@@ -6581,11 +6594,11 @@
 		KI
 			place, land (rare, mostly Akkadian)
 	FORM
-		L[c{chhhh}v]	old
+		[c{cEhhhh}v]	old
 		[{[cc]Eh'h'h'h}v]	new
 		L[cc{hhhhh}v]	variant
 		[{dd0}{hh}v]	variant
-		[c{[v{hhh0'"}v]h}E]	variant
+		[c{[v{hhh}v]Ah}E]	variant
 		[cv({hh}v)]	variant unusual
 	NAME
 		KI KE GI5 GE5 QÍ QI2 QÉ QE2
@@ -6645,7 +6658,7 @@
 	NAME
 		KIMIN U₇
 	NOTE
-		Alteration of KI+MIN "ditto" used to mean "and" in some Akk texts from Hattusa; sometimes given the Sumerian name KIMIN based on its composition, other times named <U₇> from Akk <u> "and". Treated as a graphic ligature in the HZL and thus not given its own name or index number, but we consider it a sign rather than a ligature because the MIN is enclosed by the KI rather than standing side by side.
+		Alteration of KI.MIN "ditto" used to mean "and" in some Akk texts from Hattusa; sometimes given the Sumerian name KIMIN based on its composition, other times named <U₇> from Akk <u> "and". Treated as a graphic ligature in the HZL and thus not given its own name or index number, but we consider it a sign rather than a ligature because the MIN is enclosed by the KI rather than standing side by side.
 314
 	SUM
 		NÁ/NÚ
@@ -6656,7 +6669,7 @@
 		W[c{[c{hhhh}]h}E{[vvv]v}TE]	variant
 		W[{[cc]h}{[vvv][vvv]v}T]	variant
 		W[c"{[c'{ddd}]h}{[vvv]v}TE]	variant
-		W[c{ch}{[vvvvv]v[vvvvv]v}TE]	variant
+		W[c{ch}{[vvvvv]v[vvvvv]v}TE]	variant unusual
 	NAME
 		NÁ NA2 NÚ NU2
 	LIG
@@ -6666,10 +6679,10 @@
 	SUM
 		URU₅
 	FORM
-		W[{cc}{d[({hhh}v)0]u}c]
+		W[{cc}{d[({hhh}v)0]Ku}c]
 		W[{cc}{[0{hh'h}Ev]u}c]	variant
 		L[{cc}({hhhh}v)c]	variant
-		W[{cc}{d[h{hhh}v0]u}v]	variant
+		W[{cc}{d[h{hhh}v0EE]Ku}v]	variant
 	NAME
 		URU5
 	LIG
@@ -6827,7 +6840,7 @@
 		fu
 	FORM
 		L[{cc}v{h[{hh}vvv]M}]
-		L[{cc}v{h(h[{h0}vvvv])M}]	variant
+		L[{cc}v{h(h[{h0}vvvv])M}]	variant improper
 	NAME
 		WU+Ú WU+U2 WU_Ú WU_U2 WU(Ú) WU(U2) WUU FU WÙ WU3
 	NOTE
@@ -6874,7 +6887,7 @@
 	HURR
 		wi_ip
 	FORM
-		L[{cc}v{h[([vh]{0h})[vv]]M}]
+		L[{cc}v{h[([vh]{0h})[vv]]M}]	improper
 	NAME
 		WI+IP WI_IP WI(IP)
 	NOTE
@@ -6937,7 +6950,7 @@
 			work crew, construction crew
 			settlers
 	NOTE
-		UKU.UŠ are specifically professional soldiers in the standing army, while ERIM can also include troops levied as needed from the population
+		UKU.UŠ (#96) are specifically professional soldiers in the standing army, while ERIM can also include troops levied as needed from the population
 328
 	SUM
 		NUNUZ
@@ -7326,11 +7339,11 @@
 	FORM
 		L[{cc}{cc}hvcv]	old new
 		W[{cc}{cc}h2vcv]	middle
-		W[{dd}{[{dd}v]h2}vcv]	variant unusual
+		W[{dd}{[{ddd}v]h2}vcv]	variant unusual
 	NAME
 		UZ US UṢ UŠ10
 	NOTE
-		TODO something about a broken horizontal I don't understand
+		The HZL reports that a variant with a "broken" horizontal is "strikingly" found in Akkadian fragments and the Amarna letters, but TODO I don't understand what this would look like. Need to follow up the citations!
 341
 	SUM
 		SUD
@@ -7346,7 +7359,7 @@
 		SUD-li, SUD-li₁₂
 			[an oracular term]
 	NOTE
-		TODO something about Sumerian vowel harmony
+		Some authors have suggested that this sign should be taken as a variant of GÍD (#339), but Borger prefers to distinguish GÍD "length" from GÍD-gunu "drag" (this sign) and reserve the reading SUD for this one.
 342
 	AKK
 		muš
@@ -7394,7 +7407,7 @@
 	FORM
 		W[{cc}{cc}{hh}{hh}v]	old
 		L[{cc}{cc}{c0'}vv]	new
-		L[{cc}{cc}{hh}(h[{h0}v])]	variant
+		L[{cc}{cc}{hh}({0h}[{h0}v])]	variant improper
 		L[{cc}{cc}{h'hh'}v]	variant
 		L[{d'd2d}v{c0'}v]	variant
 		L[{cc}{cc}({h2h2}[0vv])]	variant
@@ -7435,8 +7448,8 @@
 	FORM
 		W[{cc}{cc}{hh}[{vv}{vv}{vv}{vv}]v2]
 		W[{cc}{cc}{hh}{vv}{vv}{vv}]	variant
-		W[{cc}{cc}{hh}{vc}{vc}{vc}{vc}v2]	variant
-		L[{cc}{cc}{h[hv]}{v[cc]}v2]	variant unusual
+		W[{cc}{cc}{hh}{vc}{vc}{vc}{vc}v2]	variant kern
+		L[{cc}{cc}{h[hv]}{v[cc]}v2]	variant unusual kern
 	NAME
 		TIR TER DIR4 ṬIR5
 	LIG
@@ -7509,7 +7522,7 @@
 			lock of hair
 	FORM
 		L[{ccc}{cc}{d'h0}c']
-		W[{[{[vvv][vv]}Td]Eu}c']	variant
+		W[{[{[vvv][vv]}Td]Eu}c']	variant ugly
 		W[{[vvv][vv]}T{d'hh'}{[vv]v}T]	variant
 		W[{cc}{cc}{chc}c"]	variant
 		L[{ccc}{ccc}{d'h0}c']	variant
@@ -7702,7 +7715,7 @@
 		1-<NU-TUM>, 1-<NU-TI>
 			set, unit (Akk <ištenūtu>)
 	NOTE
-		May also be used as a sentence divider(?). The Mesopotamian base-60 number system was never adopted in Boğazköy; to write the number 60, an Akkadogram <ŠUŠI> is more common (see ŠU, #68). GÍŠ was used primarily to form numbers from 61 to 99: 70 is GÍŠ.10 (see "70", #359), but 120 is 1-<ME>-20, not 2-GÍŠ.
+		May also be used as a sentence divider(?). The Mesopotamian base-60 number system was never adopted in Boğazköy; to write the number 60, an Akkadogram <ŠU-ŠI> is more common (see ŠU, #68). GÍŠ was used primarily to form numbers from 61 to 99: 70 is GÍŠ.10 (see "70", #359), but 120 is 1-<ME>-20, not 2-GÍŠ.
 357
 	HIT
 		me
@@ -7828,7 +7841,7 @@
 	FORM
 		[vv'{hh'0}]
 		[v20'"{hh0}]	variant
-		[v"v'0'"{h0'"d2"}]	variant unusual
+		[v"Kv'0'"{h0'"d2"}]	variant unusual
 	NAME
 		LÁL LAL2 LA5
 	NOTE
@@ -7922,7 +7935,7 @@
 		L[vv2hc{c0}v]
 		L[vvhccv]	variant
 		L[vvh{cc}v]	variant
-		L[vv{ch}v]	variant
+		L[vv{ch}v]	variant unusual
 	NAME
 		A+NA
 	NOTE

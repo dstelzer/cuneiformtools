@@ -158,6 +158,7 @@ class Database:
 				elif tabs == 3: # Elaboration of some sort
 					entry.notes[current_language][current_form].append(line)
 			if entry:
+				self.name_lookup['#'+entry.ident] = entry
 				entry.finalize()
 				self.data.append(entry)
 				self.attested_rows |= set(entry.langs.keys())
@@ -180,6 +181,7 @@ class Database:
 			yield from entry.find_matches(func, regex, tags, mode)
 	
 	def name_to_glyph(self, name, tags=()):
+		orig = name # For error messages
 		name = self.clean_name(name)
 		if name in self.expansions: # An expansion name shouldn't be passed to this function
 			exp = '.'.join(self.expansions[name])
@@ -201,7 +203,10 @@ class Database:
 			name = name.strip()
 			variant = None
 		
-		if name not in self.name_lookup: raise ValueError(f'Unknown sign name {name}')
+		if name not in self.name_lookup:
+			if '[' in name or '{' in name or '(' in name: extra = f'. If you want to use a kadaru code directly, put a percent sign in front of it: %{orig} rather than {orig}.'
+			else: extra = ''
+			raise ValueError(f'Unknown sign name {name}' + extra)
 		
 		entry = self.name_lookup[name]
 		
@@ -297,8 +302,9 @@ class Database:
 		text = text.replace('\n', '<br />')
 		
 		if (width > 25 * colspan or height > 4) and not always_expand:
-			if '<br />' in text: extra = '<br />'
-			else: extra = ''
+		#	if '<br />' in text: extra = '<br />'
+		#	else: extra = ''
+			extra = '<br />' # Looks better this way
 			if start_checked: check = ' checked'
 			else: check = ''
 			text = f'<label class="showlong">Show long text? <input type="checkbox"{check} /></label><span class="hidden">{extra}{text}</span>'
