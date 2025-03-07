@@ -158,7 +158,7 @@ class Database:
 				elif tabs == 3: # Elaboration of some sort
 					entry.notes[current_language][current_form].append(line)
 			if entry:
-				self.name_lookup['#'+entry.ident] = entry
+				self.name_lookup['#'+str(entry.ident)] = entry
 				entry.finalize()
 				self.data.append(entry)
 				self.attested_rows |= set(entry.langs.keys())

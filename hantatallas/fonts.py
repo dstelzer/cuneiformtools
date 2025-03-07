@@ -204,7 +204,8 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 	import csv
 	with Path('data/unicode_cleaned.csv').open('r', newline='') as f:
 		r = csv.DictReader(f)
-		for row in tqdm(list(r)):
+		filtered = [row for row in r if row['HethZL'].strip() and row['Unicode Glyph'].strip()] # Do some preliminary filtering to make the progress bar cleaner
+		for row in tqdm(filtered):
 			hzl = row['HethZL'].strip()
 			if '*' in hzl: # Flags like *B, *C, etc are used when multiple Unicode codepoints should have the same HZL value (due to signs merging in Hittite)
 				hzl2 = hzl.split('*')[0]
@@ -213,7 +214,7 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 			name = row['Sign Name'].strip()
 			unicode = row['Unicode Glyph'].strip()
 			
-			if not hzl or not unicode: continue
+			if not hzl or not unicode or hzl.startswith('('): continue
 			codepoints = []
 			for c in unicode.split():
 				if c.startswith('U+'):

@@ -1414,7 +1414,7 @@
 			Šuppiluliuma (male name)
 		KÙ.BABBAR-d^LAMMA
 			Ḫattuša-Inara (male name)
-69B
+69L
 	SUM
 		KÙ+BABBAR
 	FORM
@@ -7028,12 +7028,20 @@
 	NOTE
 		"Black caraway" and "white caraway" are only found in one text so far; compare UD.TIR under UD (#316). The form tagged "erroneous" is probably a scribal error.
 331
-	COMP
-		3×U
 	HIT
 		eš
 	AKK
 		és, ìš
+	FORM
+		[ccc]	old
+		[hhh]	new
+		{vvv}T	variant
+	NAME
+		EŠ ÌŠ IŠ3
+331B
+	COMP
+		3×U
+	AKK
 		sin
 		<SIN>
 			moon god
@@ -7041,11 +7049,9 @@
 		ÙŠU
 			30
 	FORM
-		[ccc]	old
-		[hhh]	new
-		{vvv}T	variant
+		[ccc]
 	NAME
-		EŠ ÌŠ IŠ3 SIN ÙŠU UŠU3 30
+		SIN ÙŠU UŠU3 30
 	LIG
 		d^SIN-IR
 			Armauzzi (female name)
@@ -7057,6 +7063,8 @@
 			Armadatta (male name)
 		d^SIN-SUM
 			Armapiya (male name)
+	NOTE
+		This sign is equated with <eš> in the HZL, but <eš> shifted to be written with three horizontals instead of three Winkelhaken in later eras, and as far as I can tell, the number 30 did not. TODO GET MORE EVIDENCE!
 332
 	HIT
 		aḫ, eḫ, iḫ, uḫ (əḫ)
@@ -7817,7 +7825,7 @@
 	NAME
 		90
 	NOTE
-		90 and MEŠ are usually considered the same sign (and assigned the same index number), but MEŠ changed form in Neo-Hittite, while as far as I can tell 90 didn't. TODO FIND MORE EVIDENCE!
+		90 and MEŠ (#360) are usually considered the same sign (and assigned the same index number in the HZL), but MEŠ changed form in Neo-Hittite, while as far as I can tell 90 didn't. Unfortunately, I have not yet been able to find an instance of 90 in an unambiguously Neo-Hittite text to confirm. TODO!
 361
 	SUM
 		MIN
