@@ -49,6 +49,7 @@ def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
 	return out
 
 ERROR_CODE = parser.parse('*') # A big X in the current renderer's style (since that's the default rendering of a wildcard stroke) - could change to P* to make it narrower if desired
+ERROR_CP = 0xFFFD # U+FFFD REPLACEMENT CHARACTER
 DAMAGE_CODE = parser.parse('0#') # A void covered with hatching, to indicate damage to the tablet
 DAMAGE_CP = 0x2592 # U+2592 MEDIUM SHADE
 
@@ -117,7 +118,7 @@ class Font:
 			print('\t\t' + ' '.join(f'{c:04x}' for c in missing))
 			for cp in missing:
 				self.encode_glyph(cp, ERROR_CODE, None) # Creates the missing glyphs but leaves them empty
-		self.encode_glyph(0xFFFD, ERROR_CODE, None) # And put the ERROR_CODE symbol at U+FFFD, "replacement character", so that it can be used as an error symbol for font problems later
+		self.encode_glyph(ERROR_CP, ERROR_CODE, None) # And put the ERROR_CODE symbol at U+FFFD, "replacement character", so that it can be used as an error symbol for font problems later
 		self.encode_glyph(DAMAGE_CP, DAMAGE_CODE, None) # Similarly, put the DAMAGE_CODE symbol at U+2592, "medium shade"
 		self.font.save(filename)
 		if self.outname:
