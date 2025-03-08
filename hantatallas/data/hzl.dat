@@ -7159,11 +7159,6 @@
 		ḫi
 		ḫe
 	AKK
-		šár
-		tí
-		té
-		ṭí
-		ṭé
 	SUM
 		NIMIN/NIN₅
 			40
@@ -7172,11 +7167,11 @@
 		{[vvv]v}T
 		[{vv}vv]T	variant
 		[{[vvv]v}Ev]T	variant
-		{[vvvv]v}T	variant ti
+		{[vvvv]v}T	variant
 		{[vvvvv]v}T	variant
 		{[vv]v}T	variant
 	NAME
-		ḪI ḪE ŠÁR ŠAR2 TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 DU10 DÙG DUG3 NIMIN NIN5 40
+		ḪI ḪE DU10 DÙG DUG3 NIMIN NIN5 40
 	LIG
 		DÙG.GAN
 			bag, pouch
@@ -7198,7 +7193,25 @@
 		d^U ḪI.ḪI(-aš-ši-iš)
 			storm god of lightning (Piḫaššaššiš)
 	NOTE
-		The Akkadian reading <tí> is rare in Boğazköy, and when it appears (e.g. in the place name URU^Tí-iš-ḫi-ni-ya), <tí> is written with four Winkelhaken on top (the form tagged "ti") and <ḫi> with three. If there were more examples, it would merit a separate index entry, but it only appears in Akkadian texts and rare Akkadograms like <PÁT-TÍ> "border zone".
+		See also ŠÁR (#335B).
+335B
+	AKK
+		tí
+		té
+		ṭí
+		ṭé
+		šár
+	FORM
+		{[vvvv]v}T
+		{[vvv]v}T	variant
+	NAME
+		TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 ŠÁR ŠAR2
+	LIG
+		<PÁT-TÍ>
+			border zone
+	NOTE
+		(1) This sign is rare in Hittite and is usually equated with ḪI (#335), but it appears occasionally in Akkadian texts from Boğazköy in a way that makes it clear it's a different sign—for example, the place name URU^<tí-iš-ḫi-ni-ya> in KBo 10.1 Vs 9 is written with a clearly distinct <tí> (four strokes on top) and <ḫi> (three strokes on top). So while the HZL gives them the same index number, this database treats them as separate signs.
+		(2) The Sumerogram ŠÁR "3,600; all, arbitrarily many" is not found in Hittite, which used a base-10 number system instead of the Mesopotamian base-60.
 336
 	SUM
 		GAŠAN

@@ -17,6 +17,12 @@ SANITIZE = { # FontForge doesn't like certain characters in glyph names
 	')' : '',
 	'.' : '_',
 	',' : '',
+	'=' : '',
+	'×' : 'x',
+	'+' : 't',
+	'!' : '',
+	'?' : '',
+	'#' : '',
 	'/' : '_',
 	'Á' : 'A2',
 	'À' : 'A3',
@@ -38,6 +44,7 @@ def sanitize_name(orig): # Sanitize a name so FontForge doesn't complain
 	out = 'LIG_' + orig
 	for k,v in SANITIZE.items():
 		out = out.replace(k,v)
+	if len(out) > 24: out = out[:24]
 #	print(f'\tSanitized {orig} to {out}')
 	return out
 
@@ -87,6 +94,8 @@ class Font:
 		self.glyph_size = glyph_size
 		self.renderer = renderer
 		
+		self.outname = None
+		
 		self.extra = extra
 		
 		self.used_in_ligatures = set()
@@ -111,6 +120,10 @@ class Font:
 		self.encode_glyph(0xFFFD, ERROR_CODE, None) # And put the ERROR_CODE symbol at U+FFFD, "replacement character", so that it can be used as an error symbol for font problems later
 		self.encode_glyph(DAMAGE_CP, DAMAGE_CODE, None) # Similarly, put the DAMAGE_CODE symbol at U+2592, "medium shade"
 		self.font.save(filename)
+		if self.outname:
+			# TODO - this doesn't seem to work, but why?
+		#	print('GENERATING FONT FILE', self.outname + '.otf')
+			self.font.generate(self.outname + '.otf')
 	
 	def select_glyph(self, codepoint):
 		self.glyph = self.font.createChar(codepoint, glyph_name(codepoint))
@@ -134,7 +147,8 @@ class Font:
 		]
 		args = [
 			'inkscape',
-			'--batch-process', # Allow use of GUI (needed for a couple verbs), but if we do, close it at the end
+		#	'--batch-process', # Allow use of GUI (needed for a couple verbs), but if we do, close it at the end
+			'--without-gui',
 			'--actions',
 			';'.join(actions),
 			'--export-filename=' + str(self.tmp / 'inkscape.svg'), # Output
@@ -162,7 +176,7 @@ class Font:
 		self.glyph.width = round(dx + 2*self.final_margin)
 	#	print(self.glyph.boundingBox())
 	#	print(self.glyph.width)
-		self.glyph.addExtrema()
+		self.glyph.addExtrema('all')
 		self.glyph.autoHint()
 	
 	def write_glyph_data(self, root):
@@ -187,8 +201,18 @@ class Font:
 		self.inkscape_processing()
 	#	print('\tReading glyph data')
 		self.read_glyph_data()
+	
+	def set_name(self, name):
+		shortname = name.replace(' ', '').replace('-', '') # For the filenames
+		self.font.familyname = name
+		self.font.fontname = shortname
+		self.font.fullname = name
+		self.font.version = VERSION
+		self.font.copyright = COPY
+		
+		self.outname = shortname
 
-def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
+def generate_font(renderer, outname, tags=(), fontname=None, dryrun=False, **extra):
 	if dryrun: print('*** DRY RUN ***')
 	
 	from database import Database
@@ -214,7 +238,7 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 			name = row['Sign Name'].strip()
 			unicode = row['Unicode Glyph'].strip()
 			
-			if not hzl or not unicode or hzl.startswith('('): continue
+			if not hzl or not unicode or hzl.startswith('(') or hzl.endswith('?'): continue
 			codepoints = []
 			for c in unicode.split():
 				if c.startswith('U+'):
@@ -243,21 +267,24 @@ def generate_font(renderer, outname, tags=(), dryrun=False, **extra):
 		tmp = ' '.join(unused)
 		print(f'\nWarning: {len(unused)} HZL codes not encoded: {tmp}')
 	
+	if fontname and not dryrun:
+		font.set_name(fontname)
+	
 	if not dryrun: font.finalize(outname)
 #	print('Font exported! Finished!')
 
 rends = {
 	'ink' : InkRenderer,
-#	'pub' : TwoSidedRenderer,
-#	'write' : OneSidedRenderer,
-#	'linear' : LinearRenderer,
+	'pub' : TwoSidedRenderer,
+	'write' : OneSidedRenderer,
+	'linear' : LinearRenderer,
 }
 
 tags = {
 	'old' : ('old',),
 	'new' : ('new',),
-#	'midold' : ('middle', 'old'),
-#	'midnew' : ('middle', 'new'),
+	'midold' : ('middle', 'old'),
+	'midnew' : ('middle', 'new'),
 }
 
 opts = {
@@ -265,6 +292,20 @@ opts = {
 	'pub' : {'strokewidth':0.025},
 	'write' : {'strokewidth':0.025},
 }
+
+names = {
+	'ink' : 'Armannis',
+	'pub' : 'Mittellinien',
+	'write' : 'Penstroke',
+	'linear' : 'Linear',
+	'new' : 'New',
+	'old' : 'Old',
+	'midnew' : 'Newish',
+	'midold' : 'Oldish',
+}
+
+VERSION = '1.1.0'
+COPY = '(c) 2025, Daniel Stelzer'
 
 if __name__ == '__main__':
 #	f = Font()
@@ -280,4 +321,6 @@ if __name__ == '__main__':
 	for rname, rend in tqdm(rends.items()):
 		opt = opts[rname] if rname in opts else {}
 		for tname, tag in tqdm(tags.items()):
-			generate_font(rend, f'fonts/{rname}_{tname}.sfd', tag, **opt)
+			name = f'{names[rname]} {names[tname]}'
+#			print('*** Starting', name)
+			generate_font(rend, f'fonts/{rname}_{tname}.sfd', tags=tag, fontname=name, **opt)
