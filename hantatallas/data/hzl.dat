@@ -7069,19 +7069,34 @@
 	HIT
 		aḫ, eḫ, iḫ, uḫ (əḫ)
 	AKK
-		ʔa, ʔe, ʔi, ʔu (ʔ, ʔə)
+		ʔa, ʔe, ʔi, ʔu (ʔ, ʔə, "aleph")
 	FORM
 		[c"{ch"c}]	old
 		[c'{cc}h]	new
 		L[{[vv]v}TEh]	variant
-		W[{[vvvv]v}T(h2[0vvvv])]	variant aleph
 	NAME
-		AḪ EḪ IḪ UḪ ƏḪ ʔA ʔE ʔI ʔU ʔƏ ʔ ALEPḪ
+		AḪ EḪ IḪ UḪ ƏḪ
+		ʔA ʔE ʔI ʔU ʔƏ ʔ
+		'A 'E 'I 'U 'Ə '
+		ALEPḪ
 	NOTE
-		Some dialects of Akkadian distinguished a sign for VḪ from a sign for ʔ or ʔV (the form tagged "aleph"), but Hittite didn't, and these forms were not reliably distinguished
+		Properly speaking, this sign should be <ʔV> or <V́ḫ>, and #332B should be <Vḫ>. But they were seldom distinguished in Hittite, so it's long-standing convention in Hittitology to transcribe this sign as AḪ/EḪ/IḪ/UḪ. See #332B for details.
 	LIG
 		UḪ.ŠE
 			[type of grain pest]
+332B
+	AKK
+		áḫ, éḫ, íḫ, úḫ (ə́ḫ)
+		aḫ₄
+	FORM
+		W[{[vvvv]v}T(h[0vvvv])]
+		W[{[vvvv]v}T(h2[0vvv])]	variant
+	NAME
+		AḪ4 ÁḪ AḪ2 ÉḪ EḪ2 ÍḪ IḪ2 ÚḪ UḪ2 Ə́Ḫ ƏḪ2
+	NOTE
+		Some dialects of Akkadian distinguished a sign for <ʔV> (#332) from a sign for <Vḫ> (this one), but Hittite generally did not. As a result, the HZL gives them the same index number; #332 is the standard way to write the sound /aḫ/ (and /eḫ/, etc) in Hittite. But in Labat's words (<L'Akkadien de Boghaz-Koi>, 1932, p8), analysis of Akkadian-language treaties from Boğazköy "proves that the scribes knew both signs and their distinct values; but that in pronunciation, they made no distinction between the two Semitic gutturals, and thus felt no need to differentiate them in writing". Since (according to Labat) the distinction is made properly in diplomatic correspondence, we need to give the specifically <Vḫ> sign its own database entry and readings.
+		< >
+		In Akkadian, then, the readings <aḫ₄ éḫ íḫ úḫ> belong to #332, while the readings <aḫ eḫ iḫ uḫ> belong to this sign (#332B); but standard practice in Hittite is to transcribe #332 as AḪ/EḪ/IḪ/UḪ, so we've assigned the other readings to this sign as a compromise. While we're breaking from the official standards, we've also given this sign the reading <áḫ> that officially belongs to ŠEŠ (#63); #63 was never used for /aḫ/ in Hittite.
 333
 	COMP
 		ḪI+ÁŠ
