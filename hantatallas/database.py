@@ -182,10 +182,6 @@ class Database:
 	
 	def name_to_glyph(self, name, tags=()):
 		orig = name # For error messages
-		name = self.clean_name(name)
-		if name in self.expansions: # An expansion name shouldn't be passed to this function
-			exp = '.'.join(self.expansions[name])
-			raise ValueError(f'Sign {name} is shorthand for {exp}')
 		
 		if '/' in name: # We have name/variant instead of just name
 			try:
@@ -198,10 +194,16 @@ class Database:
 			try: # Is the variant a number?
 				variant = int(variant)
 			except ValueError: # Nope!
+		#		variant = variant.lower()
 				pass
 		else: # It's just a name, set variant to None
 			name = name.strip()
 			variant = None
+		
+		name = self.clean_name(name)
+		if name in self.expansions: # An expansion name shouldn't be passed to this function
+			exp = '.'.join(self.expansions[name])
+			raise ValueError(f'Sign {name} is shorthand for {exp}')
 		
 		if name not in self.name_lookup:
 			if '[' in name or '{' in name or '(' in name: extra = f'. If you want to use a kadaru code directly, put a percent sign in front of it: %{orig} rather than {orig}.'
@@ -258,9 +260,9 @@ class Database:
 					elif unit.startswith('%'): # Recursive code rather than sign name
 						row.append(parse(unit[1:]))
 					else:
-						unit = self.clean_name(unit)
-						if unit in self.expansions:
-							for subunit in self.expansions[unit]:
+						unit2 = self.clean_name(unit)
+						if unit2 in self.expansions:
+							for subunit in self.expansions[unit2]:
 								if subunit not in self.name_lookup: raise ValueError(f'Internal problem in expansion of {unit}: could not find subunit {subunit}. Please report this!') # This should never happen, ideally - it means we've defined a compound logogram that refers to a simple logogram that doesn't exist
 								row.append(self.name_to_glyph(subunit, tags))
 						else:
