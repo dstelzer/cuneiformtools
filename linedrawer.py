@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from io import BytesIO
 import subprocess as sp
 
@@ -168,6 +170,32 @@ line 262 204
 stroke
 '''
 
+instructions_a = '''
+width 5
+move 87 44
+line 82 255
+move 180 41
+line 182 127
+move 187 133
+line 185 248
+stroke
+color 1 0 0 1
+width 10
+# Bad tolerance
+move 87 300
+line 82 300
+move 177 300
+line 182 300
+move 190 300
+line 185 300
+# Good tolerance
+move 80 300
+line 90 300
+move 175 300
+line 195 300
+stroke
+'''
+
 buffer = BytesIO()
 surf = cairo.PDFSurface(buffer, WIDTH, HEIGHT)
 ctx = cairo.Context(surf)
@@ -197,7 +225,7 @@ def parse_line(line):
 	else:
 		raise ValueError(cmd)
 
-for line in (instructions_all+instructions_p4).split('\n'):
+for line in (instructions_all+instructions_a).split('\n'):
 	parse_line(line)
 
 surf.show_page()

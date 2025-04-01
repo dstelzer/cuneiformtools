@@ -293,7 +293,7 @@ class Database:
 	def prettify_plaintext(text, colspan=1, always_expand=False, start_checked=False): # All plaintext fields from the database (i.e. all fields except CODE, IDENT, and FORM) are run through this before being printed, letting us do a little bit of formatting on them
 		def make_link(m):
 			num = m.group(1)
-			query = urlencode({'regex' : fr'^\#{num}$'})
+			query = urlencode({'regex':fr'^#{num}$', 'sort':'ident', 'code':''})
 			searchurl = f'/search?{query}'
 			return f'<a href="{searchurl}">#{num}</a>'
 		
@@ -312,6 +312,13 @@ class Database:
 			text = f'<label class="showlong">Show long text? <input type="checkbox"{check} /></label><span class="hidden">{extra}{text}</span>'
 		
 		return text
+	
+	@staticmethod
+	def make_ident_link(ident):
+		if not ident.startswith('#'): ident = '#' + ident
+		query = urlencode({'regex':fr'^{ident}$', 'sort':'ident', 'code':''})
+		searchurl = f'/search?{query}'
+		return f'<a href="{searchurl}">{ident}</a>'
 	
 	# Present results as an HTML table - this is kind of a mess and deserves refactoring
 	def lookup_as_table(self, part=None, regex=None, tags=(), mode='normal', sort='ident', start_checked=False, rendersign_path='/rendersign', signinfo_path='/search?regex=^%23{}%24'): # rendersign_path allows this to be run locally instead of on a server, for testing - point it to the actual web URL of the renderer instead of a local path
@@ -343,7 +350,7 @@ class Database:
 				# (Any sign-specific rather than form-specific information goes in NOTE instead)
 			
 			# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
-			rows['IDENT'].append(f'<td colspan="{colspan}">#{entry.ident}</td>')
+			rows['IDENT'].append(f'<td colspan="{colspan}">{self.make_ident_link(ident)}</td>')
 			
 			# All the rest vary depending on the database file; we just include whichever ones are available
 			for lang in self.attested_rows:
@@ -458,8 +465,10 @@ def eval_database():
 	db.load_expansions('data/replacements.dat')
 	db.prepare_sorting()
 	print('Total', len(db.data))
-	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT']))
-	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT']))
+	print('Not ligatures', sum(1 for e in db.data if not e.ident.endswith('L')))
+	print('Not Hittite', sum(1 for e in db.data if not e.langs['HIT'] and not e.ident.endswith('L')))
+	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT'] and not e.ident.endswith('L')))
+	print('Hurrian and not Hittite or Sumerian', sum(1 for e in db.data if e.langs['HURR'] and not e.langs['HIT'] and not e.langs['SUM'] and not e.ident.endswith('L')))
 	print('Forms', sum(len(e.forms) for e in db.data))
 	
 	print('Improper:')
@@ -492,4 +501,5 @@ def use_database():
 			print(name, code, match)
 
 if __name__ == '__main__':
-	preview_database('data/hzl.dat')
+	eval_database()
+	#preview_database('data/hzl.dat')

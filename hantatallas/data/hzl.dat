@@ -227,7 +227,7 @@
 		TODO REVIEW and change kern?
 11
 	HIT
-		nu
+		nu (no)
 	AKK
 		là
 	SUM
@@ -237,7 +237,7 @@
 		(ch)
 		(u'"h)	variant
 	NAME
-		NU LÀ LA3
+		NU NO LÀ LA3
 	LIG
 		NU.(Ì.)GAL, NU.TUKU
 			(is) unavailable
@@ -352,7 +352,7 @@
 			Ḫutarli (male name)
 17
 	HIT
-		mu
+		mu (mo)
 	SUM
 		MU
 			year
@@ -364,7 +364,7 @@
 		[{chc}{cc}]	variant
 		[h{v[vvv]}TE]	variant
 	NAME
-		MU MUḪALDIM
+		MU MO MUḪALDIM
 	LIG
 		MU.AN
 			[type of wooden implement]
@@ -494,7 +494,7 @@
 			mountain goat
 24
 	HIT
-		ḫu
+		ḫu (ḫo)
 	AKK
 		bak
 	SUM
@@ -507,7 +507,7 @@
 		[hvcv]
 		(h[vcv])	variant
 	NAME
-		ḪU BAG BAK BAQ MUŠEN
+		ḪU ḪO BAG BAK BAQ MUŠEN
 	LIG
 		MUŠEN.DÙ
 			birdcatcher
@@ -516,6 +516,18 @@
 			duck? goose?
 		MUŠEN <ḪUR-RI>
 			rock partridge? shelduck?
+24L
+	COMP
+		ḪU+O
+	HIT
+		ḫu+o (ḫo+o)
+	FORM
+		[hvcvc]
+	NAME
+		ḪU+U ḪU+O ḪO+O
+	NOTE
+		Possibly a graphic ligature of <ḫu> (#24) and <o> (#261), or possibly just a variant of <ḫu>. Melchert argues that words like <ḫu-o-ek-> "conjure" should actually be read as non-plene <ḫu+o-ek-> (that is, /xʷek/), since they were spelled non-plene in Old Script; this ligature may have been introduced to distinguish <ḫu> from the very similar <ri> (#32).
+		This sign is not included in the HZL, but is discussed in Hoffner and Melchert's grammar (2024 version).
 25
 	AKK
 		U₅
@@ -861,13 +873,12 @@
 			rain of heaven TODO
 43
 	HIT
-		ru
+		ru (ro)
 	AKK
 		šup
 	SUM
 		ŠUB
 			downfall
-		(RU?)
 	FORM
 		L{[d'vv'v]h}	old
 		L{[d'vvv]h}	new
@@ -876,7 +887,7 @@
 		L[{hh}{[v'v'v]h}]	variant unusual
 		L([cvvv]h)	variant
 	NAME
-		RU ŠUB ŠUP
+		RU RO ŠUB ŠUP
 	LIG
 		SAḪAR.ŠUB.BA
 			leprosy
@@ -939,6 +950,7 @@
 		KIN
 			work, role (aniur, aniyan, aniyatta, etc)
 			sickle
+		GUR₁₀
 	FORM
 		L{[v{0hhh0}vd']h}
 		L[v{hhhh}{vd'}]	variant kern
@@ -1010,7 +1022,7 @@
 			acrobat
 51
 	HIT
-		ur
+		ur (or)
 		lik
 	HURR
 		tíš
@@ -1026,7 +1038,7 @@
 		L[({0h}[vvh])v]	new improper
 		L[{[v(hv)]h"}v]	variant
 	NAME
-		UR LIG LIK LIQ TÍŠ TIŠ2 TAŠ TÉŠ TEŠ2
+		UR OR LIG LIK LIQ TÍŠ TIŠ2 TAŠ TÉŠ TEŠ2
 	LIG
 		UR.MAḪ
 			lion
@@ -1120,6 +1132,8 @@
 			Marduk (deity)
 		<ZA-BÁ-BÁ>
 			Zababa (deity)
+	NOTE
+		TODO add form with more verticals
 57
 	COMP
 		GÁ×AN
@@ -1303,7 +1317,7 @@
 			(Akk) he vowed
 68
 	HIT
-		šu
+		šu (šo)
 	AKK
 		kat₇?
 		suₓ?
@@ -1317,7 +1331,7 @@
 		[{0h'h'h'h}v]
 		[(v{0hh'h'h})v]	variant unusual
 	NAME
-		ŠU KAT7 SU×
+		ŠU ŠO KAT7 SU×
 	LIG
 		ŠU.AN
 			triumphal monument(?)
@@ -1932,7 +1946,7 @@
 	COMP
 		PIRIG&UT
 	HIT
-		uk
+		uk (ok)
 	SUM
 		UG/PÌRIG
 			tiger(?)
@@ -1944,7 +1958,7 @@
 		L[{hh}{d'h2h}]	variant old
 		L{[{hh}{hhh}][{cc}v0]M}	variant new
 	NAME
-		UG UK UQ PÌRIG PIRIG3
+		UG UK UQ OG OK OQ PÌRIG PIRIG3
 	LIG
 		PÌRIG.TUR
 			leopard, panther
@@ -2011,7 +2025,7 @@
 			ancestor
 98
 	HIT
-		um
+		um (om)
 	HURR
 		ubₓ
 	FORM
@@ -2021,7 +2035,7 @@
 		L[{h'([0vv]{hh})h'}v]	variant
 		W[{0[{hh0}vvvvv0]AEEh2}v]	variant unusual
 	NAME
-		UM UB×
+		UM OM UB×
 	LIG
 		<UM-MA>
 			thus, as follows
@@ -2179,7 +2193,7 @@
 			chain, knot
 107
 	COMP
-		EZEN×ŠE
+		KEŠDA×ŠE
 	SUM
 		EZEN₄ (EZEN)
 			festival, feast
@@ -2188,7 +2202,7 @@
 	NAME
 		EZEN4 EZEN
 	NOTE
-		Used instead of the standard EZEN in Hittite. Due to the different composition (EZEN×ŠE) it's given a separate name, but many sources just consider this to be the Hittite form of EZEN and transcribe it thus.
+		Used instead of the standard EZEN in Hittite. Due to the different composition (EZEN×ŠE or KEŠDA×ŠE) it's given a separate name (in Akkadian, EZEN is a reading of #106 KEŠDA), but many sources just consider this to be the Hittite form of EZEN (split from KEŠDA) and transcribe it thus. So for the purposes of this database, we assign the reading EZEN to this sign instead of to #106.
 108
 	COMP
 		AB×PA
@@ -2470,7 +2484,7 @@
 		ŠÁM ŠAM2
 124
 	HIT
-		úr
+		úr (ór)
 	SUM
 		ÚR
 			genitals
@@ -2480,7 +2494,7 @@
 		W[{[hc']h}{hh}vv]	new
 		W[{h'hh}{hh}vv]	variant
 	NAME
-		ÚR UR2
+		ÚR UR2 ÓR OR2
 	LIG
 		<ÚR-RA-AM ŠE-RA-AM>
 			in the future
@@ -2552,7 +2566,7 @@
 		The form tagged "unusual" has not been confirmed on any tablet; it was taken from Forrer's sign list.
 128
 	HIT
-		du
+		du (do)
 	AKK
 		tù
 		ṭù
@@ -2567,7 +2581,7 @@
 		L[{d'hh}v]	variant
 		[{h'hh}v]	variant
 	NAME
-		DU TÙ TU3 ṬÙ ṬU3 GIN GUB RÁ RA2 RI6 ŠA4
+		DU DO TÙ TU3 ṬÙ ṬU3 GIN GUB RÁ RA2 RI6 ŠA4
 	LIG
 		GUB-aš
 			standing
@@ -2638,7 +2652,7 @@
 		The form tagged "contaminated" appears behind an erasure and might be the remnants of an old UB overlapping a new GEŠTIN
 132
 	HIT
-		uš
+		uš (oš)
 	AKK
 		ús
 	SUM
@@ -2652,7 +2666,7 @@
 		[{[hc'](h[vv])R}v]	variant unusual
 		L[{0h(h[v'v'])}(hv)]	variant unusual
 	NAME
-		UŠ ÚS US2 NITA NITAḪ
+		UŠ OŠ ÚS US2 NITA NITAḪ
 	LIG
 		UŠ.BAR
 			weaver
@@ -2960,17 +2974,17 @@
 			(Akk) with, from
 152
 	HIT
-		up
+		up (op)
 	AKK
 		ár
 	HURR
-		uf
+		uf (of)
 	FORM
 		P{chhc}
 		{d'hhh'}	variant
 		P{c(v{hh})c}	variant unusual
 	NAME
-		UP UB ÁR AR2 UF
+		UP UB OP OB ÁR AR2 UF OF
 	LIG
 		<UP-NU>, <UP-NI>
 			handful (measurement)
@@ -4003,7 +4017,7 @@
 			Inarapiya (male name)
 197
 	HIT
-		un
+		un (on)
 	SUM
 		UN/ÙKU/ÙG
 			human
@@ -4015,7 +4029,7 @@
 		[{hh}{vv}{vv}]	variant
 		[{0hhvR}{vv}{vv}]	variant
 	NAME
-		UN ÙG UG3 ÙKU UKU3
+		UN ON ÙG UG3 ÙKU UKU3
 	LIG
 		UN.MEŠ-tar, UN.ḪI.A-tar
 			humanity, population
@@ -4275,7 +4289,7 @@
 		Less common than <pa> (#174) in Hittite, used primarily in titles and names like Labarna
 206
 	HIT
-		ku
+		ku (ko)
 	AKK
 		gu₅
 		qú
@@ -4293,7 +4307,7 @@
 		[v{hhh}v]	variant
 		[{h2h}v]	variant
 	NAME
-		KU GU5 QÚ QU2 TUŠ DÚR DUR2 DÚRU DURU2 DURUN TUKUL
+		KU KO GU5 QÚ QU2 TUŠ DÚR DUR2 DÚRU DURU2 DURUN TUKUL
 	LIG
 		TUŠ-aš
 			sitting
@@ -4361,7 +4375,7 @@
 			temple guard
 209
 	HIT
-		zu
+		zu (zo)
 	AKK
 		sú
 		ṣú
@@ -4372,7 +4386,7 @@
 		L[h{hh}vv]	variant
 		L[{([{h0}v0]h)h}v]	variant
 	NAME
-		ZU SÚ SU2 ṢÚ ṢU2
+		ZU ZO SÚ SU2 ṢÚ ṢU2
 	LIG
 		<ZU> (<SÚ>)
 			his, her
@@ -4398,7 +4412,7 @@
 			shekel
 210
 	HIT
-		lu
+		lu (lo)
 	HURR
 		tip
 		dip
@@ -4419,7 +4433,7 @@
 		[v(v{hhhh})v]	variant
 		L[v{hhhhhh}[vvvvv]E]	variant unusual
 	NAME
-		LU DIB DIP TIB TIP DAB DUL8 UDU
+		LU LO DIB DIP TIB TIP DAB DUL8 UDU
 	LIG
 		LU.LIM
 			deer
@@ -5259,7 +5273,7 @@
 			turban, (pointed) cap
 251
 	HIT
-		šú
+		šú (šó)
 	AKK
 		<ŠÚ>
 			his, her
@@ -5269,7 +5283,7 @@
 		P(vh)	variant
 		{vh}	variant unusual
 	NAME
-		ŠÚ ŠU2
+		ŠÚ ŠU2 ŠÓ ŠO2
 	LIG
 		<ŠÚ-NU>
 			(Akk) their
@@ -5676,7 +5690,7 @@
 			apprentice
 271
 	HIT
-		gul
+		gul (gol)
 	AKK
 		kúl
 	SUM
@@ -5686,7 +5700,9 @@
 		W[c{hh}{hh'h}c'v]
 		W[c{hh}{h[h2c]h}v]	variant
 	NAME
-		GUL KÚL KUL2
+		GUL GOL KÚL KUL2
+	NOTE
+		While most CuC signs haven't been given CoC readings in this database, this one is specifically used to write the verb <golš-> "carve, inscribe".
 272
 	COMP
 		U.KA
@@ -5740,7 +5756,7 @@
 		BAR8 BURU14 SULLIM
 275
 	HIT
-		ul
+		ul (ol)
 	AKK
 		<UL>
 			not
@@ -5749,7 +5765,7 @@
 		L[c{[hc']([hc']v)R}]
 		L([c{hh}{c'c'}]v)	variant
 	NAME
-		UL
+		UL OL
 	LIG
 		<Ú-UL>
 			not
@@ -5999,7 +6015,7 @@
 	NAME
 		ŠI LÌ LI3 ŠE20 LIM SI17 IGI 1000
 	NOTE
-		The reading <lim> arose from a combination of U "ten" and <ME> "hundred" (Akk līmu "thousand"), only coincidentally similar to IGI "eye". <LIM> as a logogram for "thousand" is never found in Hittite sources, which prefer <LI-IM>, but we still give this sign the reading "1000" based on the Hittite use of LIM-gunu (#239) for "ten thousand" and LIM-gunu-šeššig (#336B) for "hundred thousand"
+		The reading <lim> arose from a combination of U "ten" and <ME> "hundred" (Akk līmu "thousand"), only coincidentally similar to IGI "eye". <LIM> as a logogram for "thousand" is never found in Hittite sources, which prefer <LI-IM>, but we still give this sign the reading "1000" based on the Hittite use of LIM-gunu (#239) for "ten thousand" and LIM-gunu-šeššig (#336B) for "hundred thousand".
 	LIG
 		ši(-iš)
 			abbreviation for šintaḫiš
@@ -6391,14 +6407,14 @@
 		In other words, this is GÌR or ANŠE with the phonetic complement A.LIM
 304
 	HIT
-		gu
+		gu (go)
 	AKK
 		ku₈
 	FORM
 		L[{cc}h{cc}]
 		L[{cc}h{[vvv]v}TE]	variant
 	NAME
-		GU KU8
+		GU GO KU8
 	LIG
 		GU.ZA
 			throne
@@ -6690,7 +6706,7 @@
 			quiver (for arrows)
 316
 	HIT
-		ut
+		ut (ot)
 		pir
 	AKK
 		bír
@@ -6714,7 +6730,7 @@
 		P[{cc}v]	new
 		[ccv]	variant
 	NAME
-		UD UT PIR BÍR BIR2 DÁM DAM2 PAR TAM ṬÁM ṬAM2 TÚ TU2 U4 UṬ BABBAR ḪÁD ḪAD2 UTU ZALAG
+		UD UT OD OT PIR BÍR BIR2 DÁM DAM2 PAR TAM ṬÁM ṬAM2 TÚ TU2 U4 UṬ BABBAR ḪÁD ḪAD2 UTU ZALAG
 	NOTE
 		(1) d^UTU can refer to any of the many different sun deities in the Hittite pantheon. (2) Sometimes the Akkadian word ūmum is transcribed as a pure Akkadogram <U₄-MU-UM> instead of a Sumerogram with phonetic complement UD-<MU-UM>, but since U₄ isn't otherwise used as a phonogram in Akkadian, UD-<MU-UM> is recommended for clarity.
 	LIG
@@ -7067,7 +7083,7 @@
 		This sign is equated with <eš> in the HZL, but <eš> shifted to be written with three horizontals instead of three Winkelhaken in later eras, and as far as I can tell, the number 30 did not. TODO GET MORE EVIDENCE!
 332
 	HIT
-		aḫ, eḫ, iḫ, uḫ (əḫ)
+		aḫ, eḫ, iḫ, uḫ (oḫ, əḫ)
 	AKK
 		ʔa, ʔe, ʔi, ʔu (ʔ, ʔə, "aleph")
 	FORM
@@ -7075,9 +7091,9 @@
 		[c'{cc}h]	new
 		L[{[vv]v}TEh]	variant
 	NAME
-		AḪ EḪ IḪ UḪ ƏḪ
-		ʔA ʔE ʔI ʔU ʔƏ ʔ
-		'A 'E 'I 'U 'Ə '
+		AḪ EḪ IḪ UḪ OḪ ƏḪ
+		ʔA ʔE ʔI ʔU ʔO ʔƏ ʔ
+		'A 'E 'I 'U 'O 'Ə '
 		ALEPḪ
 	NOTE
 		Properly speaking, this sign should be <ʔV> or <V́ḫ>, and #332B should be <Vḫ>. But they were seldom distinguished in Hittite, so it's long-standing convention in Hittitology to transcribe this sign as AḪ/EḪ/IḪ/UḪ. See #332B for details.
@@ -7096,7 +7112,7 @@
 	NOTE
 		Some dialects of Akkadian distinguished a sign for <ʔV> (#332) from a sign for <Vḫ> (this one), but Hittite generally did not. As a result, the HZL gives them the same index number; #332 is the standard way to write the sound /aḫ/ (and /eḫ/, etc) in Hittite. But in Labat's words (<L'Akkadien de Boghaz-Koi>, 1932, p8), analysis of Akkadian-language treaties from Boğazköy "proves that the scribes knew both signs and their distinct values; but that in pronunciation, they made no distinction between the two Semitic gutturals, and thus felt no need to differentiate them in writing". Since (according to Labat) the distinction is made properly in diplomatic correspondence, we need to give the specifically <Vḫ> sign its own database entry and readings.
 		< >
-		In Akkadian, then, the readings <aḫ₄ éḫ íḫ úḫ> belong to #332, while the readings <aḫ eḫ iḫ uḫ> belong to this sign (#332B); but standard practice in Hittite is to transcribe #332 as AḪ/EḪ/IḪ/UḪ, so we've assigned the other readings to this sign as a compromise. While we're breaking from the official standards, we've also given this sign the reading <áḫ> that officially belongs to ŠEŠ (#63); #63 was never used for /aḫ/ in Hittite.
+		In Akkadian, then, the readings <aḫ₄ éḫ íḫ úḫ> belong to #332, while the readings <aḫ eḫ iḫ uḫ> belong to this sign (#332B); but standard practice in Hittite is to transcribe #332 as AḪ/EḪ/IḪ/UḪ, so we've assigned the other readings to this sign as a compromise. While we're breaking from the official standards, we've also given this sign the reading <áḫ> that officially belongs to ŠEŠ (#63); #63 was never used for /aḫ/ in any Boğazköy text.
 333
 	COMP
 		ḪI+ÁŠ
@@ -7347,8 +7363,8 @@
 			harvest workers
 339
 	HIT
-		pu
-		bu
+		pu (po)
+		bu (bo)
 	AKK
 		gít
 		qít
@@ -7361,13 +7377,13 @@
 		[{v[vvv]}TEh]	variant
 		[{cc}{chc}]	variant
 	NAME
-		PU BU GÍT GIT2 GÍD GID2 GÍṬ GIṬ2 QÍD QID2 QÍT QIT2 QÍṬ QIṬ2 ŠÍR ŠIR2
+		PU PO BU BO GÍT GIT2 GÍD GID2 GÍṬ GIṬ2 QÍD QID2 QÍT QIT2 QÍṬ QIṬ2 ŠÍR ŠIR2
 	LIG
 		GÍD.DA
 			long, length
 340
 	HIT
-		uz
+		uz (oz)
 	AKK
 		us
 		uṣ
@@ -7377,7 +7393,7 @@
 		W[{cc}{cc}h2vcv]	middle
 		W[{dd}{[{ddd}v]h2}vcv]	variant unusual
 	NAME
-		UZ US UṢ UŠ10
+		UZ OZ US UṢ UŠ10
 	NOTE
 		The HZL reports that a variant with a "broken" horizontal is "strikingly" found in Akkadian fragments and the Amarna letters, but TODO I don't understand what this would look like. Need to follow up the citations!
 341
@@ -7512,7 +7528,7 @@
 		TÈ TE3 NIDABA NISABA
 346
 	HIT
-		tu
+		tu (to)
 	AKK
 		dú
 		ṭú
@@ -7522,7 +7538,7 @@
 		L[{cc}{cc}{uudd}v]	variant
 		L[{v[vvv]}TE{hhhhhhhhh}v]	variant unusual
 	NAME
-		TU DÚ DU2 ṬÚ ṬU2
+		TU TO DÚ DU2 ṬÚ ṬU2
 	LIG
 		TU.TUR
 			small dove
