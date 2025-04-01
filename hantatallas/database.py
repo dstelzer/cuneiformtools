@@ -350,7 +350,7 @@ class Database:
 				# (Any sign-specific rather than form-specific information goes in NOTE instead)
 			
 			# The fourth universal row is IDENT, which is the internal identifier of this entry, generally the sign list index number
-			rows['IDENT'].append(f'<td colspan="{colspan}">{self.make_ident_link(ident)}</td>')
+			rows['IDENT'].append(f'<td colspan="{colspan}">{self.make_ident_link(entry.ident)}</td>')
 			
 			# All the rest vary depending on the database file; we just include whichever ones are available
 			for lang in self.attested_rows:
