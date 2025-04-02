@@ -1181,6 +1181,7 @@ class InkRenderer(GraphicRenderer):
 		c.translate(x, y) # Make sure we don't have to worry about x and y ever again
 		
 		headless = Modifier.INTERNAL_HEADLESS in mods
+		amphisbaena = Modifier.INTERNAL_BOTHWAYS in mods
 		
 		tailstride = w / (tails+1) # How far apart each tail should be placed
 		headstride = min(self.HEAD_SEPARATION, h/(heads+1)) # And for the heads; don't let this exceed HEAD_SEPARATION
@@ -1215,12 +1216,21 @@ class InkRenderer(GraphicRenderer):
 			c.move_to(w, i*headstride)
 			c.arc(*cc, radius, pi/2+theta, pi/2-theta)
 		
+		# Draw the opposite head, if needed
+		if amphisbaena:
+			cc = (w/2, h-center)
+			c.move_to(0, h)
+			c.arc(*cc, radius, -pi/2+theta, -pi/2-theta)
+		
 		# Draw `tails` tails
 		for i in range(tails):
 			dx = (i+1)*tailstride
 			dy = get_dy(dx)
 			c.move_to(dx, dy)
-			c.line_to(dx, h)
+			if amphisbaena:
+				c.line_to(dx, h-dy)
+			else:
+				c.line_to(dx, h)
 		
 		c.set_line_cap(cairo.LineCap.ROUND)
 		c.set_line_join(cairo.LineJoin.ROUND)
@@ -1372,10 +1382,10 @@ def test_twosided():
 	rend.show()
 
 def test_ink():
-	rend = SharpInkRenderer(256, 256, format='svg', strokewidth=0.05)
+	rend = InkRenderer(256, 256, format='svg', strokewidth=0.05)
 	rend.blank()
 	rend.draw_general(0, 1/3, 1/3, 1/2, 3, 3, set())
-	rend.draw_general(1/3, 1/3, 2/3, 1/2, 3, 3, set())
+	rend.draw_general(1/3, 1/3, 2/3, 1/2, 3, 3, {Modifier.INTERNAL_BOTHWAYS})
 	rend.show()
 
 if __name__ == '__main__':
