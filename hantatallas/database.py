@@ -83,7 +83,7 @@ class DatabaseEntry:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional[mode])):
-			if not any(pres.matches(tags)): # Filter out forms based on the tags
+			if tags and not any(pres.matches(tags)): # Filter out forms based on the tags
 				continue
 				# TODO: should tags be considered in this method at all?
 			if part is None:
