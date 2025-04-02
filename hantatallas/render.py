@@ -1046,6 +1046,8 @@ class InkRenderer(GraphicRenderer):
 		ahs -= ths
 		avs -= tvs
 		
+		# TODO we also need to shorten amphisbaena strokes from the tail end, consider kac4 where we have (among other things) [hcv]
+		
 		# We do a Cartesian product here, which might end up becoming somewhat expensive, but it hasn't become a problem yet
 		for hs, vs in ((ahs, avs), (ths, tvs)):
 			for v in vs:
@@ -1127,8 +1129,16 @@ class InkRenderer(GraphicRenderer):
 					prev = child
 				elif isinstance(child, Winkelhaken) and prev is not None:
 					prev.mods |= {Modifier.INTERNAL_BOTHWAYS}
-					w = (child.pos[0] + child.dims[0]) - prev.pos[0] # Set the width of the conjoined stroke to the right edge of the Winkelhaken minus the left edge of the horizontal
-					prev.dims = (w, prev.dims[1])
+					width = (child.pos[0] + child.dims[0]) - prev.pos[0] # Set the width of the conjoined stroke to the right edge of the Winkelhaken minus the left edge of the horizontal
+					for vert in avs: # Make sure it doesn't conflict with a vertical though!
+						center = vert.pos[0] + vert.dims[0]/2
+						if (
+							center - self.OVERLAP_EPSILON < child.pos[0] + child.dims[0] < center + self.OVERLAP_EPSILON # Horizontally, the tip collides with the line
+						) and (
+							vert.pos[1] <= child.pos[1]+child.dims[1]/2 <= vert.pos[1] + vert.dims[1] # Vertically, the tip is within the line
+						):
+							width -= self.COLLISION_TRIM
+					prev.dims = (width, prev.dims[1])
 					new.append(prev)
 					prev = None
 				else:
@@ -1147,8 +1157,16 @@ class InkRenderer(GraphicRenderer):
 					prev = child
 				elif isinstance(child, Winkelhaken) and prev is not None:
 					prev.mods |= {Modifier.INTERNAL_BOTHWAYS}
-					h = (child.pos[1] + child.dims[1]) - prev.pos[1] # Set the height of the conjoined stroke to the bottom edge of the Winkelhaken minus the top edge of the vertical
-					prev.dims = (prev.dims[0], h)
+					height = (child.pos[1] + child.dims[1]) - prev.pos[1] # Set the height of the conjoined stroke to the bottom edge of the Winkelhaken minus the top edge of the vertical
+					for horiz in ahs: # Make sure it doesn't conflict with a horizontal though!
+						center = horiz.pos[1] + horiz.dims[1]/2
+						if (
+							center - self.OVERLAP_EPSILON < child.pos[1] + child.dims[1] < center + self.OVERLAP_EPSILON # Vertically, the tip collides with the line
+						) and (
+							horiz.pos[0] <= child.pos[0]+child.dims[0]/2 <= horiz.pos[0] + horiz.dims[0] # Horizontally, the tip is within the line
+						):
+							height -= self.COLLISION_TRIM
+					prev.dims = (prev.dims[0], height)
 					new.append(prev)
 					prev = None
 				else:
