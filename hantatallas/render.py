@@ -1111,9 +1111,9 @@ class InkRenderer(GraphicRenderer):
 		# We iterate through once to find [hc] and {vc} arrangements and turn them into amphisbaenas
 		# Then a second time to consolidate parallel strokes
 		
-		# TODO: ensure that signs like BI get properly handled
+		# This ensures that signs like BI get properly handled, since we're not running the normalizer: our goal is to go {[hc][hc]} -> {[h*][h*]} > {<hh>*} (where * is bothways and <> is multi) and this requires looking inside containers
 		def unpack(item):
-			if isinstance(item, Adjustment): return unpack(item.child)
+			if isinstance(item, Adjustment) and not isinstance(item, Tenu): return unpack(item.child)
 			if isinstance(item, Container) and len(item.contents) == 1: return unpack(item.contents[0])
 			return item
 		
@@ -1135,6 +1135,7 @@ class InkRenderer(GraphicRenderer):
 					if prev is not None: new.append(prev)
 					new.append(child)
 					prev = None
+			if prev is not None: new.append(prev)
 			hstack.contents = new
 		
 		for vstack in vstacks:
@@ -1154,6 +1155,7 @@ class InkRenderer(GraphicRenderer):
 					if prev is not None: new.append(prev)
 					new.append(child)
 					prev = None
+			if prev is not None: new.append(prev)
 			vstack.contents = new
 		
 		# Second pass
