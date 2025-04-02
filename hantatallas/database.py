@@ -83,9 +83,9 @@ class DatabaseEntry:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
 		for i, (pres, func) in enumerate(zip(self.forms, self.functional[mode])):
-	#		if not any(pres.matches(tags)): # Filter out forms based on the tags
-	#			continue
-	# TODO: should tags be considered in this method at all?
+			if not any(pres.matches(tags)): # Filter out forms based on the tags
+				continue
+				# TODO: should tags be considered in this method at all?
 			if part is None:
 				ident = f'{self.ident}/{i+1}' if i else str(self.ident)
 				yield ident, pres, ()
@@ -332,7 +332,7 @@ class Database:
 		temp = [] # We need to know the number of entries before formatting them, so we store our intermediate results here before formatting
 		
 		for entry in self.sorted[sort]: # Use the self.sorted array to iterate over them in the correct order
-			matching_forms = list(entry.find_matches(func, regex, mode))
+			matching_forms = list(entry.find_matches(part=func, regex=regex, mode=mode, tags=tags))
 			if matching_forms: # One or more of these forms matched!
 				matches += 1
 				temp.append((entry, matching_forms))
@@ -392,6 +392,7 @@ def preview_database(fn):
 	print('Loaded', fn)
 	while True:
 		part = input('Part: ') or None
+		if part: part = parse(part)
 		regex = input('Regex: ') or None
 		tags = input('Tags: ') or None
 		if tags: tags = tags.split()
@@ -501,5 +502,5 @@ def use_database():
 			print(name, code, match)
 
 if __name__ == '__main__':
-	eval_database()
-	#preview_database('data/hzl.dat')
+	#eval_database()
+	preview_database('data/huehnergard.dat')
