@@ -13,7 +13,7 @@ def test_rendering():
 			print(construct)
 			print(construct.functional_form())
 			print(construct.forest())
-		#	InkRenderer.render(construct, margin=32).show()
+			InkRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
@@ -96,7 +96,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_layout()
+	test_rendering()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't

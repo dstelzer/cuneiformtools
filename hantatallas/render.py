@@ -10,10 +10,10 @@ from PIL.ImageColor import getrgb
 
 # It's hard to know if we need to import these with relative paths or absolute ones, so we just try both
 try:
-	from elements import Modifier, HStack, VStack, Horizontal, Vertical, Tenu
+	from elements import Modifier, HStack, VStack, Horizontal, Vertical, Winkelhaken, Tenu, Container, Adjustment
 	from layout import Spacer
 except ImportError:
-	from .elements import Modifier, HStack, VStack, Horizontal, Vertical, Tenu
+	from .elements import Modifier, HStack, VStack, Horizontal, Vertical, Winkelhaken, Tenu, Container, Adjustment
 	from .layout import Spacer
 
 DRAW_BOXES = False
@@ -1108,11 +1108,61 @@ class InkRenderer(GraphicRenderer):
 		hstacks = [node for node in tree.traverse() if isinstance(node, HStack)]
 		vstacks = [node for node in tree.traverse() if isinstance(node, VStack)]
 		
+		# We iterate through once to find [hc] and {vc} arrangements and turn them into amphisbaenas
+		# Then a second time to consolidate parallel strokes
+		
+		# TODO: ensure that signs like BI get properly handled
+		def unpack(item):
+			if isinstance(item, Adjustment): return unpack(item.child)
+			if isinstance(item, Container) and len(item.contents) == 1: return unpack(item.contents[0])
+			return item
+		
+		# First pass
+		for hstack in hstacks:
+			new = []
+			prev = None
+			for child in hstack.contents:
+				child = unpack(child)
+				if isinstance(child, Horizontal) and Modifier.TAILSHORT not in child.mods:
+					prev = child
+				elif isinstance(child, Winkelhaken) and prev is not None:
+					prev.mods |= {Modifier.INTERNAL_BOTHWAYS}
+					w = (child.pos[0] + child.dims[0]) - prev.pos[0] # Set the width of the conjoined stroke to the right edge of the Winkelhaken minus the left edge of the horizontal
+					prev.dims = (w, prev.dims[1])
+					new.append(prev)
+					prev = None
+				else:
+					if prev is not None: new.append(prev)
+					new.append(child)
+					prev = None
+			hstack.contents = new
+		
+		for vstack in vstacks:
+			new = []
+			prev = None
+			for child in vstack.contents:
+				child = unpack(child)
+				if isinstance(child, Vertical) and Modifier.TAILSHORT not in child.mods:
+					prev = child
+				elif isinstance(child, Winkelhaken) and prev is not None:
+					prev.mods |= {Modifier.INTERNAL_BOTHWAYS}
+					h = (child.pos[1] + child.dims[1]) - prev.pos[1] # Set the height of the conjoined stroke to the bottom edge of the Winkelhaken minus the top edge of the vertical
+					prev.dims = (prev.dims[0], h)
+					new.append(prev)
+					prev = None
+				else:
+					if prev is not None: new.append(prev)
+					new.append(child)
+					prev = None
+			vstack.contents = new
+		
+		# Second pass
 		for hstack in hstacks:
 	#		print('Parsing hstack')
 			new = []
 			current = None
 			for child in hstack.contents:
+				child = unpack(child)
 				if isinstance(child, Vertical):
 	#				print('\tFound vertical')
 					if current is None:
@@ -1136,6 +1186,7 @@ class InkRenderer(GraphicRenderer):
 			new = []
 			current = None
 			for child in vstack.contents:
+				child = unpack(child)
 				if isinstance(child, Horizontal):
 	#				print('\tFound horizontal')
 					if current is None:
