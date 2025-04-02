@@ -7,8 +7,8 @@ class ModeFlag(Enum): # Special flags to pass to certain algorithms
 	GOTTSTEIN = 'g' # Treat downward diagonals and Winkelhakens the same when searching - specifically, make them all act as Winkelhakens, since those are the ones that have some special rules for normalization
 
 class Modifier(Enum): # Modifiers that can be applied to strokes
-	HEADSHORT = "'"
-	TAILSHORT = '"'
+	HEADSHORT = "'" # Single quote
+	TAILSHORT = '"' # Double quote
 	DOUBLE = '2'
 	TRIPLE = '3'
 	HIGHLIGHT = '!'
@@ -16,7 +16,8 @@ class Modifier(Enum): # Modifiers that can be applied to strokes
 	INVERT = '?'
 	DAMAGE = '#'
 	INTERNAL_DIAGONAL = '_D' # As above
-	INTERNAL_HEADLESS = '_H' # As above
+	INTERNAL_HEADLESS = '_H' # As above - indicates that the head of the stroke should not be drawn, for internal renderer reasons
+	INTERNAL_BOTHWAYS = '_B' # As above - indicates that a head should be drawn at both ends of the stroke, like an amphisbaena, for internal renderer reasons
 
 class Orientation(Enum): # The general shape of an element
 	WIDE = 0

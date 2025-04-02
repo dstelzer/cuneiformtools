@@ -1003,7 +1003,7 @@ class InkRenderer(GraphicRenderer):
 	OVERLAP_EPSILON = 1/32 # How close one stroke's head can be to another's body before the algorithm makes it headless
 	HEADTAIL_EPSILON = 1/12 # How close the tail of one stroke can be to the head of another before the algorithm separates them for clarity
 	
-	class MultiStroke:
+	class MultiStroke: # Represents a block of strokes that should be drawn as one by this renderer; we don't inherit from Element or Stroke directly because we don't actually need all that machinery (the elements.py code has already done all the layout), we just need to keep track of where the stack is and what modifiers it has
 		def __init__(self, x, y, w, h, n, mods):
 			self.x = x
 			self.y = y
@@ -1019,20 +1019,20 @@ class InkRenderer(GraphicRenderer):
 			else:
 				return 1
 	
-	class MultiHoriz(MultiStroke):
+	class MultiHoriz(MultiStroke): # A vertical stack of horizontals
 		def draw(self, rend): # Modified from Renderer.draw_horizontal
 			rend.draw_potential_damage(self.x, self.y, self.w, self.h, self.mods)
 			rend.save_transforms()
 			rend.rotate(-pi/2)
 			rend.draw_general_mod(-self.y-self.h, self.x, self.h, self.w, self.heads(), self.n, self.mods)
 			rend.untransform()
-	class MultiVert(MultiStroke):
+	class MultiVert(MultiStroke): # A horizontal stack of verticals
 		def draw(self, rend):
 			rend.draw_potential_damage(self.x, self.y, self.w, self.h, self.mods)
 			rend.draw_general_mod(self.x, self.y, self.w, self.h, self.heads(), self.n, self.mods)
 	
 	def adjust_tree(self, tree): # This one actually does something here!
-		# tree = tree.copy() TODO HOW TO COPY TREES
+		# tree = tree.copy() TODO HOW TO COPY TREES - right now we just modify in place
 		
 		# First, we're going to put the Headless modifier on every stroke whose head is right up against a perpendicular one
 		ahs = {node for node in tree.traverse() if isinstance(node, Horizontal)}
@@ -1063,7 +1063,7 @@ class InkRenderer(GraphicRenderer):
 			for h in hs:
 				h_epsilon = self.OVERLAP_EPSILON
 				h_center = h.pos[1] + h.dims[1] / 2
-				def collision(y, x): # NOTE INVERSION
+				def collision(y, x): # NOTE INVERSION FOR SYMMETRY: y,x not x,y
 					return h_center-h_epsilon < y < h_center+h_epsilon and h.pos[0] <= x <= h.pos[0]+h.dims[0]
 				for v in vs:
 					v_epsilon = v.dims[0] / 2
