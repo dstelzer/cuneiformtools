@@ -106,7 +106,7 @@
 		GÍR GIR2 UL4
 	LIG
 		GÍR.LÍL
-			field knife TODO
+			field knife
 		GÍR.TAB(-<PU>)
 			scorpion (Akk <zuqaqīpu>)
 		UL₄.GAL
@@ -174,7 +174,7 @@
 		AN.NA (NAGGA)
 			tin
 		AN.ŠUR, ŠUR.AN
-			rain of heaven TODO
+			rain of heaven
 		AN.TAḪ.SUM
 			[type of plant: crocus?]
 		AN.TA
@@ -847,15 +847,19 @@
 41
 	SUM
 		INANNA/INNIN
-			Inanna/Ištar (category of goddess)
 	FORM
 		L[h{[vv]v}v]
 		L[{[0vvv]h[v0]}v]	variant unusual
 		L[(h[{vv}v0])v]	variant
 	NAME
 		INANNA INNIN INANA
+	LIG
+		INANNA.GAL
+			large lyre (hunzinar)
+		INANNA.TUR
+			small lyre (ippizinar)
 	NOTE
-		See <IŠTAR> #263
+		INANNA is not used as a logogram for the deity in Hittite; see <IŠTAR> (#263) for that. However, it's still given the divine determiner when used in compounds: "large lyre" is written GIŠ.d^INANNA.GAL, etc.
 42
 	HIT
 		šur
@@ -870,7 +874,7 @@
 		ŠUR SUR
 	LIG
 		ŠUR.AN
-			rain of heaven TODO
+			rain of heaven
 43
 	HIT
 		ru (ro)
@@ -1509,7 +1513,7 @@
 		Ì.UDU
 			tallow
 		Ì.GAB, Ì.GAB.ŠE
-			??? TODO
+			[type of liquid oil]
 		Ì.GU₄
 			beef fat
 		Ì.GIŠ
@@ -2191,6 +2195,8 @@
 			she sings (Akk izammaru)
 		ŠÈR.ŠÈR
 			chain, knot
+	NOTE
+		For the reading EZEN, see EZEN₄ (#107)
 107
 	COMP
 		KEŠDA×ŠE
@@ -2202,7 +2208,7 @@
 	NAME
 		EZEN4 EZEN
 	NOTE
-		Used instead of the standard EZEN in Hittite. Due to the different composition (EZEN×ŠE or KEŠDA×ŠE) it's given a separate name (in Akkadian, EZEN is a reading of #106 KEŠDA), but many sources just consider this to be the Hittite form of EZEN (split from KEŠDA) and transcribe it thus. So for the purposes of this database, we assign the reading EZEN to this sign instead of to #106.
+		Used instead of the standard EZEN (= KEŠDA, #106) in Hittite. Due to the different form it's given a separate name in the HZL; but many sources just consider this to be a split, with KEŠDA and EZEN becoming distinct in Hittite despite being the same in Akkadian, and transcribe it as simply EZEN. So for the purposes of this database, we give this sign both the readings EZEN and EZEN₄; for #106, use the name KEŠDA.
 108
 	COMP
 		AB×PA
@@ -2583,10 +2589,8 @@
 	NAME
 		DU DO TÙ TU3 ṬÙ ṬU3 GIN GUB RÁ RA2 RI6 ŠA4
 	LIG
-		GUB-aš
+		GUB-aš, GUB.BA
 			standing
-		GUB.BA
-			standing (TODO)
 		GUB ŠEN KÙ.BABBAR
 			stand(?) for a silver kettle
 		DU-d^U-ub
@@ -2673,7 +2677,7 @@
 		UŠ.KU (GALA)
 			cult singer (a type of priest)
 		<UŠ-PA-AḪ-ḪU>
-			swaps(?) TODO
+			changes, swaps
 		<UŠ-KI-EN>, <UŠ-GI-EN>
 			(he/she) bows down
 		<UŠ-KI-EN-NU>, <UŠ-GI-EN-NU>
@@ -3317,7 +3321,7 @@
 			(city) gate
 			porta hepatis (haruspicy term)
 		KÁ.GAL UR.GI₇
-			"dog-gate people"(?? TODO)
+			"people of the dog-gate"?
 	NOTE
 		The logogram KÁ.DINGIR.RA is a back-formation based on a folk etymology: reinterpreting an originally Sumerian(?) name as Akk <bāb ilim> "god's gate"
 168
@@ -3593,9 +3597,6 @@
 	LIG
 		GIŠ.MAḪ, GIŠ.ÙR
 			(roof) beam
-		GIŠ.d^INANNA
-			stringed instrument
-			lyre? zither?
 		GIŠ.MI (GISSU)
 			shadow
 		GIŠ.ŠUB.BA
@@ -4086,7 +4087,7 @@
 		É MUḪALDIM
 			kitchen
 		É.NAM.ḪÉ
-			"temple designation"? TODO
+			[name of a temple]
 		É.EN.NU.UN
 			guardhouse, prison
 		É.DUB.BA.A
@@ -5565,7 +5566,8 @@
 		d^<IŠTAR>-A.A
 			Šauškamuwa (male name)
 	NOTE
-		The Hittite pantheon included a wide variety of "Ishtars" (Anzili, Šauška/Šafoška, Pirinkir, and several others), like how it included a wide variety of sun gods and storm gods. In other words, <IŠTAR> (despite being Akkadian) should be taken as a logogram like UTU or IŠKUR, not as a name in and of itself. See also INANNA (#41) and LIŠ (#286).
+		The Hittite pantheon included a wide variety of "Ishtars" (Anzili, Šauška/Šafoška, Pirinkir, and several others), like how it included a wide variety of sun gods and storm gods. In other words, <IŠTAR> (despite being Akkadian) should be taken as a logogram like UTU or IŠKUR, not as a name in and of itself. See also GAŠAN (#336) and LIŠ (#286).
+		The sign U (#261) is sometimes given the reading <IŠ₈> so that this compound can be read as <IŠ₈-TÁR> instead of a single sign <IŠTAR>, but <IŠTAR> is the preferred reading, since U is never used for <iš₈> elsewhere in Hittite.
 264
 	SUM
 		UDUN
@@ -5660,7 +5662,7 @@
 	SUM
 		GIG
 			sick, ill
-			"amputation"? TODO
+			(with UZU det) [something cut off]
 	FORM
 		W[c{0hh0}{chhc}v2{0hhh}]
 		W[c{c[hh][hh]c}Ev2{0hhh}]
@@ -6306,7 +6308,7 @@
 			wife of the god (type of priestess)
 		NIN.GABA.MEŠ
 			milk sisters(?)
-			pair(?) TODO
+			harness(?)
 300
 	HIT
 		zum
@@ -6656,7 +6658,7 @@
 		KI.LÁ.BI, KI.LÁ.BI-ŠU, KI.LÁ.BI-ŠÚ
 			its weight
 		KI.LÁ TI₈^MUŠEN
-			eagleweight(?) TODO
+			eagle-shaped weight
 		KI.LÁ NA₄
 			stone weight
 		KI.MIN
@@ -7247,6 +7249,7 @@
 	SUM
 		GAŠAN
 			lady, mistress (term of respect)
+			Ištar (category of goddess)
 	FORM
 		(c({[00vvv]0}[{00hhh}0])T)	variant
 		N{dddcEuuu}	variant
@@ -7437,7 +7440,7 @@
 		MUŠ.ŠU.LÚ
 			[type of snake]
 		MUŠ <ŠUM> LUGAL
-			snake of the king's name(??) TODO
+			"snake of the king's name" (oracular term)
 		MUŠ.DÍM.KUR.RA
 			gecko
 			[type of medicine]
@@ -7446,7 +7449,7 @@
 		MUŠ.ŠÀ.TÙR
 			venomous snake
 		MUŠ.GUNNI
-			stove snake(??) TODO
+			hearth snake
 343
 	HIT
 		li
@@ -8104,7 +8107,7 @@
 		Sometimes indistinguishable from LIMMU (#370), but the top center stroke of NINDA is almost always shorter than the ones around it, while the top strokes of LIMMU are the same length
 	LIG
 		NÍG.ŠID
-			rakewood TODO
+			tally
 		NÍG.SI.SÁ
 			just, right
 			justice
