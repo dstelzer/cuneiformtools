@@ -143,7 +143,7 @@ class LineGroup:
 		return results
 	
 	# Divide the children into maximal subsets such that any two elements of a subset do not intersect
-	# TODO: Is this truly maximal? That is, will it always give the smallest possible number of subsets?
+	# This currently uses a greedy algorithm, which will not always give the maximal result, but runs in O(n)
 	def partition(self):
 		bins = []
 		
@@ -296,3 +296,33 @@ class DoubleMod(StrokeMod):
 	def sigil(self): return '2'
 class TripleMod(StrokeMod):
 	def sigil(self): return '3'
+
+if __name__ == '__main__': # For manually testing the untenu mechanism
+	from math import degrees
+	points = [
+		((56, 86), (120, 186)),
+		((130, 42), (198, 148)),
+		((98, 64), (159, 170)),
+		((99, 226), (237, 146)),
+	]
+	
+	def normalize(theta): # Bring all angles to the range [-pi/4, pi/4)
+#		while theta >= pi/4: theta -= pi/2
+	#	print('Theta', theta, end=' ')
+		while theta > 0: theta -= pi/2
+	#	print('normalized to', theta)
+		return theta
+	
+	lines = [Line(XY(a,b), XY(c,d)) for ((a,b),(c,d)) in points]
+	group = LineGroup(lines)
+	
+	print('Raw angles:', [degrees(l.angle) for l in lines])
+	print('Angles:', [degrees(normalize(l.angle)) for l in lines])
+	print('Average:', degrees(group.overall_angle()))
+	
+	theta = -group.overall_angle()
+	new = group.rotated(theta)
+	print('New coordinates:')
+	for l in new.children:
+		print(f'move {l.head.x+100} {l.head.y-50}')
+		print(f'line {l.tail.x+100} {l.tail.y-50}')

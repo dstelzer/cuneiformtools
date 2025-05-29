@@ -139,6 +139,7 @@ class Stroke(Element):
 		super().__init__(*args, **kwargs)
 		self.mods = mods or set()
 		self.ident = ident # Used to identify this stroke for the highlighting features
+		self.maximum_head_size = MAXIMUM_HEAD_SIZE # Allow this to be overridden later
 	
 	def __str__(self):
 		return self._sigil() + ''.join(sorted(m.value for m in self.mods)) # Sort so that it's deterministic
@@ -216,10 +217,10 @@ class Vertical(Stroke):
 	def _sigil(self): return 'v'
 	
 	def can_expand_vertically(self): return inf
-	def can_expand_horizontally(self): return max(0, MAXIMUM_HEAD_SIZE-self.dims[0])
+	def can_expand_horizontally(self): return max(0, self.maximum_head_size-self.dims[0])
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
-		act = min(w, MAXIMUM_HEAD_SIZE)
+		act = min(w, self.maximum_head_size)
 		self.dims = (act, h)
 		(x,y) = pos
 		adj_x, adj_y = 0, 0
@@ -248,10 +249,10 @@ class Horizontal(Stroke):
 	def _sigil(self): return 'h'
 	
 	def can_expand_horizontally(self): return inf
-	def can_expand_vertically(self): return max(0, MAXIMUM_HEAD_SIZE-self.dims[1])
+	def can_expand_vertically(self): return max(0, self.maximum_head_size-self.dims[1])
 	def propagate_dimensions(self, dims, pos):
 		(w,h) = dims
-		act = min(h, MAXIMUM_HEAD_SIZE)
+		act = min(h, self.maximum_head_size)
 		self.dims = (w, act)
 		(x,y) = pos
 		adj_x, adj_y = 0, 0

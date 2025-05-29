@@ -78,7 +78,7 @@ class DatabaseEntry:
 		)
 	
 	def find_matches(self, part=None, regex=None, tags=(), mode='normal'):
-		tags = tuple(tags)
+		tags = tuple(tags or ())
 		if regex is not None:
 			if not any(re.search(regex, name) for name in self.names):
 				return # We didn't match the regex
@@ -394,7 +394,7 @@ def preview_database(fn):
 		part = input('Part: ') or None
 		if part: part = parse(part)
 		regex = input('Regex: ') or None
-		tags = input('Tags: ') or None
+		tags = input('Tags: ') or ()
 		if tags: tags = tags.split()
 		matches, table = db.lookup_as_table(part, regex, tags, rendersign_path='https://dstelzer.pythonanywhere.com/rendersign') # Use the remote server address instead so this can be run locally
 		print(matches, 'match'+('es' if matches != 1 else ''))

@@ -32,6 +32,8 @@ def colorparse(color): # Convert a color name into a RGBA tuple
 	return (r, g, b, 1)
 
 class Renderer: # A very abstract base class that doesn't do much of anything
+	MAX_STROKE_HEAD = 1/3
+	
 	def __init__(self, width, height, margin=0, scale=0):
 		self.width = width
 		self.height = height
@@ -155,7 +157,7 @@ class Renderer: # A very abstract base class that doesn't do much of anything
 		phi = (pi/2) - theta
 		
 		# I need to attach a diagram to make this all make sense...
-		head = min(h, 1/3) # The width of the stroke head
+		head = min(h, self.MAX_STROKE_HEAD) # The width of the stroke head
 		diag = sqrt(w**2 + h**2)
 		
 	#	if h > w:
@@ -1003,6 +1005,8 @@ class InkRenderer(GraphicRenderer):
 	OVERLAP_EPSILON = 1/32 # How close one stroke's head can be to another's body before the algorithm makes it headless
 	HEADTAIL_EPSILON = 1/12 # How close the tail of one stroke can be to the head of another before the algorithm separates them for clarity
 	
+	MAX_STROKE_HEAD = 1/3 # 1/3 is the default value, increase this to make the heads wider
+	
 	class MultiStroke: # Represents a block of strokes that should be drawn as one by this renderer; we don't inherit from Element or Stroke directly because we don't actually need all that machinery (the elements.py code has already done all the layout), we just need to keep track of where the stack is and what modifiers it has
 		def __init__(self, x, y, w, h, n, mods):
 			self.x = x
@@ -1033,6 +1037,11 @@ class InkRenderer(GraphicRenderer):
 	
 	def adjust_tree(self, tree): # This one actually does something here!
 		# tree = tree.copy() TODO HOW TO COPY TREES - right now we just modify in place
+		
+		# Before anything else, we have to update the maximum_head_width of every stroke
+		for stroke in tree.traverse_strokes():
+			stroke.maximum_head_size = self.MAX_STROKE_HEAD
+		tree.propagate_dimensions()
 		
 		# First, we're going to put the Headless modifier on every stroke whose head is right up against a perpendicular one
 		ahs = {node for node in tree.traverse() if isinstance(node, Horizontal)}

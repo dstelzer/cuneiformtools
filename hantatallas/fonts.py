@@ -56,7 +56,7 @@ DAMAGE_CP = 0x2592 # U+2592 MEDIUM SHADE
 # I HATE that this is necessary
 # But recent versions of pycairo export SVGs with stroke, fill, etc as their own element attributes
 # Inkscape malfunctions if these are kept separate instead of being put in a single style attribute
-# (It seems to work okay but the resulting paths lose their style information, so you'll end up with fills and no strokes)
+# (It APPEARS to work okay but the resulting paths lose their style information, so you'll end up with fills and no strokes)
 # So we have to manually go in and fix up the XML
 # Similarly, we have to ensure all paths are enclosed by a group, because the ungrouping operation sets certain path attributes that Inkscape needs
 # Without that, we'll get odd tapers at the ends of strokes when we perform Stroke to Path
@@ -122,9 +122,8 @@ class Font:
 		self.encode_glyph(DAMAGE_CP, DAMAGE_CODE, None) # Similarly, put the DAMAGE_CODE symbol at U+2592, "medium shade"
 		self.font.save(filename)
 		if self.outname:
-			# TODO - this doesn't seem to work, but why?
-		#	print('GENERATING FONT FILE', self.outname + '.otf')
-			self.font.generate(self.outname + '.otf')
+	#		print('GENERATING FONT FILE', self.outname + '.otf')
+			self.font.generate(str(self.outname) + '.otf')
 	
 	def select_glyph(self, codepoint):
 		self.glyph = self.font.createChar(codepoint, glyph_name(codepoint))
@@ -211,7 +210,7 @@ class Font:
 		self.font.version = VERSION
 		self.font.copyright = COPY
 		
-		self.outname = shortname
+		self.outname = 'fonts/' + shortname
 
 def generate_font(renderer, outname, tags=(), fontname=None, dryrun=False, **extra):
 	if dryrun: print('*** DRY RUN ***')
@@ -230,7 +229,7 @@ def generate_font(renderer, outname, tags=(), fontname=None, dryrun=False, **ext
 	with Path('data/unicode_cleaned.csv').open('r', newline='') as f:
 		r = csv.DictReader(f)
 		filtered = [row for row in r if row['HethZL'].strip() and row['Unicode Glyph'].strip()] # Do some preliminary filtering to make the progress bar cleaner
-		for row in tqdm(filtered):
+		for row in tqdm(filtered, desc='Signs'):
 			hzl = row['HethZL'].strip()
 			if '*' in hzl: # Flags like *B, *C, etc are used when multiple Unicode codepoints should have the same HZL value (due to signs merging in Hittite)
 				hzl2 = hzl.split('*')[0]
@@ -319,9 +318,13 @@ if __name__ == '__main__':
 #	clean_xml('font_tmp/cairo.svg', 'font_tmp/modxml3.svg')
 	
 	input()
-	for rname, rend in tqdm(rends.items()):
+	for rname, rend in tqdm(rends.items(), desc='Renderers'):
 		opt = opts[rname] if rname in opts else {}
-		for tname, tag in tqdm(tags.items()):
+		for tname, tag in tqdm(tags.items(), desc='Eras'):
 			name = f'{names[rname]} {names[tname]}'
 #			print('*** Starting', name)
 			generate_font(rend, f'fonts/{rname}_{tname}.sfd', tags=tag, fontname=name, **opt)
+
+# To automatically install the fonts once they've been generated:
+# $ cp *.otf ~/.fonts/
+# Then log out and log back in to update the system font database

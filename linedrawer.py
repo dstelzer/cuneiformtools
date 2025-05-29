@@ -196,6 +196,35 @@ line 195 300
 stroke
 '''
 
+instructions_uz6 = '''
+width 5
+move 56 86
+line 120 186
+move 130 42
+line 198 148
+move 98 64
+line 159 170
+move 99 226
+line 237 146
+stroke
+'''
+
+instructions_uz6_untenu = '''
+width 5
+color 0 0 0 0.33
+move 103.1172022595643 52.578180185032366
+line 105.78834610999803 171.27470494683948
+move 189.2055394687277 53.47159865438084
+line 192.17362170821934 179.37310971687612
+move 150.43230080264217 55.62472738782249
+line 147.42108112823917 177.88646529495549
+stroke
+color 0 0 0 1
+move 67.05173662338701 194.52282498872236
+line 226.526810415736 197.94347389278147
+stroke
+'''
+
 buffer = BytesIO()
 surf = cairo.PDFSurface(buffer, WIDTH, HEIGHT)
 ctx = cairo.Context(surf)
@@ -225,7 +254,7 @@ def parse_line(line):
 	else:
 		raise ValueError(cmd)
 
-for line in (instructions_all+instructions_a).split('\n'):
+for line in (instructions_all+instructions_uz6_untenu).split('\n'):
 	parse_line(line)
 
 surf.show_page()
