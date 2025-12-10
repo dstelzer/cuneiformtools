@@ -7084,37 +7084,38 @@
 	NOTE
 		This sign is equated with <eš> in the HZL, but <eš> shifted to be written with three horizontals instead of three Winkelhaken in later eras, and as far as I can tell, the number 30 did not. TODO GET MORE EVIDENCE!
 332
-	HIT
-		aḫ, eḫ, iḫ, uḫ (oḫ, əḫ)
 	AKK
 		ʔa, ʔe, ʔi, ʔu (ʔ, ʔə, "aleph")
+		aḫ₄, "áḫ", éḫ, íḫ, úḫ (ə́ḫ)
 	FORM
 		[c"{ch"c}]	old
 		[c'{cc}h]	new
 		L[{[vv]v}TEh]	variant
 	NAME
-		AḪ EḪ IḪ UḪ OḪ ƏḪ
 		ʔA ʔE ʔI ʔU ʔO ʔƏ ʔ
 		'A 'E 'I 'U 'O 'Ə '
 		ALEPḪ
+		AḪ4 ÁḪ AḪ2 ÉḪ EḪ2 ÍḪ IḪ2 ÚḪ UḪ2 Ə́Ḫ ƏḪ2
 	NOTE
-		Properly speaking, this sign should be <ʔV> or <V́ḫ>, and #332B should be <Vḫ>. But they were seldom distinguished in Hittite, so it's long-standing convention in Hittitology to transcribe this sign as AḪ/EḪ/IḪ/UḪ. See #332B for details.
+		In normal Hittite usage, this sign is merged with <aḫ> (#332B). It's only in certain Akkadian diplomatic letters that the two are distinguished. See that sign for more.
+		The reading <áḫ> properly belongs to the sign ŠEŠ (#63), but that sign was never used this way in any Boğazköy text. I assign the reading <áḫ> to this sign instead to cut down on student mistakes.
+332B
+	HIT
+		aḫ, eḫ, iḫ, uḫ (oḫ, əḫ)
+	AKK
+	FORM
+		[c"{ch"c}]	old
+		[c'{cc}h]	new
+		L[{[vv]v}TEh]	variant
+		W[{[vvvv]v}T(h[0vvvv])]	akkadian
+		W[{[vvvv]v}T(h2[0vvv])]	akkadian variant
+	NAME
+		AḪ EḪ IḪ UḪ OḪ ƏḪ
 	LIG
 		UḪ.ŠE
 			[type of grain pest]
-332B
-	AKK
-		áḫ, éḫ, íḫ, úḫ (ə́ḫ)
-		aḫ₄
-	FORM
-		W[{[vvvv]v}T(h[0vvvv])]
-		W[{[vvvv]v}T(h2[0vvv])]	variant
-	NAME
-		AḪ4 ÁḪ AḪ2 ÉḪ EḪ2 ÍḪ IḪ2 ÚḪ UḪ2 Ə́Ḫ ƏḪ2
 	NOTE
-		Some dialects of Akkadian distinguished a sign for <ʔV> (#332) from a sign for <Vḫ> (this one), but Hittite generally did not. As a result, the HZL gives them the same index number; #332 is the standard way to write the sound /aḫ/ (and /eḫ/, etc) in Hittite. But in Labat's words (<L'Akkadien de Boghaz-Koi>, 1932, p8), analysis of Akkadian-language treaties from Boğazköy "proves that the scribes knew both signs and their distinct values; but that in pronunciation, they made no distinction between the two Semitic gutturals, and thus felt no need to differentiate them in writing". Since (according to Labat) the distinction is made properly in diplomatic correspondence, we need to give the specifically <Vḫ> sign its own database entry and readings.
-		< >
-		In Akkadian, then, the readings <aḫ₄ éḫ íḫ úḫ> belong to #332, while the readings <aḫ eḫ iḫ uḫ> belong to this sign (#332B); but standard practice in Hittite is to transcribe #332 as AḪ/EḪ/IḪ/UḪ, so we've assigned the other readings to this sign as a compromise. While we're breaking from the official standards, we've also given this sign the reading <áḫ> that officially belongs to ŠEŠ (#63); #63 was never used for /aḫ/ in any Boğazköy text.
+		Hittite and Boğazköy Akkadian did not, as a general rule, distinguish <ʔa> (#332) from <aḫ> (this one). But a small number of diplomatic letters did, and thus these signs are given separate entries. See Labat (<L'Akkadien de Boghaz-Koi>, 1932, p8) for examples and analysis.
 333
 	COMP
 		ḪI+ÁŠ
@@ -7191,31 +7192,18 @@
 	HIT
 		ḫi
 		ḫe
-	AKK
-	SUM
-		NIMIN/NIN₅
-			40
-		DU₁₀/DÙG
 	FORM
 		{[vvv]v}T
 		[{vv}vv]T	variant
 		[{[vvv]v}Ev]T	variant
-		{[vvvv]v}T	variant
+		{[vvvv]v}T	variant akkadian
 		{[vvvvv]v}T	variant
 		{[vv]v}T	variant
 	NAME
-		ḪI ḪE DU10 DÙG DUG3 NIMIN NIN5 40
+		ḪI ḪE
 	LIG
-		DÙG.GAN
-			bag, pouch
-			sheath(?)
 		ḫi-li₁₃, ḫi-li₈
 			abbreviation for ḫilipšiman
-		DÙG.GA
-			fine, high quality
-			beloved (in letter salutations, e.g. ŠEŠ.DÙG.GA-<YA> "my beloved brother")
-		Ì.DÙG.GA
-			high-quality oil
 		ḪI.ḪI (DU₁₀.DU₁₀?)
 			lightning (storm)
 			[name of a color?]
@@ -7226,7 +7214,7 @@
 		d^U ḪI.ḪI(-aš-ši-iš)
 			storm god of lightning (Piḫaššaššiš)
 	NOTE
-		See also ŠÁR (#335B).
+		The signs ḪI and TÍ (#335B) are generally identical in Hittite, but in Akkadian texts from Boğazköy, they are consistently distinguished: for example, the place name URU^<tí-iš-ḫi-ni-ya> in KBo 10.1 Vs 9 is written with a clearly distinct <tí> (three strokes on top) and <ḫi> (four strokes on top).
 335B
 	AKK
 		tí
@@ -7234,17 +7222,31 @@
 		ṭí
 		ṭé
 		šár
+	SUM
+		NIMIN/NIN₅
+			40
+		DU₁₀/DÙG
 	FORM
-		{[vvvv]v}T
-		{[vvv]v}T	variant
+		{[vvv]v}T
+		[{vv}vv]T	variant
+		[{[vvv]v}Ev]T	variant
+		{[vv]v}T	variant
 	NAME
+		DU10 DÙG DUG3 NIMIN NIN5 40
 		TÍ TI2 TÉ TE2 ṬÍ ṬI2 ṬÉ ṬE2 ŠÁR ŠAR2
 	LIG
+		DÙG.GAN
+			bag, pouch
+			sheath(?)
+		DÙG.GA
+			fine, high quality
+			beloved (in letter salutations, e.g. ŠEŠ.DÙG.GA-<YA> "my beloved brother")
+		Ì.DÙG.GA
+			high-quality oil
 		<PÁT-TÍ>
 			border zone
 	NOTE
-		(1) This sign is rare in Hittite and is usually equated with ḪI (#335), but it appears occasionally in Akkadian texts from Boğazköy in a way that makes it clear it's a different sign—for example, the place name URU^<tí-iš-ḫi-ni-ya> in KBo 10.1 Vs 9 is written with a clearly distinct <tí> (four strokes on top) and <ḫi> (three strokes on top). So while the HZL gives them the same index number, this database treats them as separate signs.
-		(2) The Sumerogram ŠÁR "3,600; all, arbitrarily many" is not found in Hittite, which used a base-10 number system instead of the Mesopotamian base-60.
+		The Sumerogram ŠÁR "3,600; all, arbitrarily many" is not found in Hittite, which used a base-10 number system instead of the Mesopotamian base-60. See also the notes on ḪI (#335).
 336
 	SUM
 		GAŠAN
