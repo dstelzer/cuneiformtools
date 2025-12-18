@@ -148,10 +148,11 @@ def do_cuneipaint_parse():
 
 import renegade # See that file for explanation
 from tempfile import TemporaryDirectory
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from pathlib import Path
 UPLOAD_FOLDER = Path('renegade_files')
+app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024 # 200 MiB(!)
 
 @app.route('/renegade', methods=['GET', 'POST'])
 def do_renegade():
