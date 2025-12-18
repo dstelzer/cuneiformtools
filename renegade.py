@@ -15,7 +15,7 @@ def unwatermark_file(filename, temp_folder):
 	Path(temp_folder).mkdir(exist_ok=True)
 	sp.run(['pdftk', str(filename), 'output', str(tmp1), 'uncompress'])
 	with tmp2.open('wb') as f1:
-		sp.run(['sed', '-e', 's~\<446F776E6C6F6164656420627920[0-9A-F]*\>~\<20\>~', str(tmp1)], stdout=f)
+		sp.run(['sed', '-e', 's~\<446F776E6C6F6164656420627920[0-9A-F]*\>~\<20\>~', str(tmp1)], stdout=f1)
 	with tmp3.open('wb') as f2:
 		sp.run(['sed', '-e', 's~\(Downloaded by[^)]*\)~ ~', str(tmp2)], stdout=f2)
 	sp.run(['pdftk', str(tmp3), 'output', str(tmp4), 'compress'])
