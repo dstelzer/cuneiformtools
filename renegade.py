@@ -19,4 +19,4 @@ def unwatermark_file(filename, temp_folder):
 	with tmp3.open('wb') as f2:
 		sp.run(['sed', '-e', 's~\(Downloaded by[^)]*\)~ ~', str(tmp2)], stdout=f2)
 	sp.run(['pdftk', str(tmp3), 'output', str(tmp4), 'compress'])
-	tmp4.move(filename)
+	tmp4.replace(filename)
