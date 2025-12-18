@@ -145,3 +145,40 @@ def do_cuneipaint_parse():
 	result = paint_process(code, tolerance)
 	if expkey: record_drawing(expkey, code, tolerance, result)
 	return result
+
+import renegade # See that file for explanation
+from tempfile import TemporaryDirectory
+from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
+from pathlib import Path
+UPLOAD_FOLDER = Path('renegade_files')
+
+@app.route('/renegade', methods=['GET', 'POST'])
+def do_renegade():
+	if request.method == 'POST':
+		if 'file' not in request.files:
+			flash('No file part')
+			return redirect(request.url)
+		file = request.files['file']
+		if file.filename == '':
+			flash('No selected file')
+			return redirect(request.url)
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file.save(UPLOAD_FOLDER / filename)
+			with TemporaryDirectory(dir=UPLOAD_FOLDER) as tmp:
+				renegade.unwatermark_file(UPLOAD_FOLDER / filename, tmp)
+			return redirect(url_for('renegade_dl', name=filename))
+	return '''
+	<!doctype html>
+	<title>Renegade Unwatermarker</title>
+	<h1>Upload new File</h1>
+	<form method=post enctype=multipart/form-data>
+	  <input type=file name=file>
+	  <input type=submit value=Unwatermark>
+	</form>
+	'''
+@app.route('/renegade_dl/<name>')
+def renegade_dl(name):
+    return send_from_directory(UPLOAD_FOLDER, name)
+
