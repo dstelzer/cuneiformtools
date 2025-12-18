@@ -12,7 +12,7 @@ def unwatermark_file(filename, temp_folder):
 	tmp3 = temp_folder / '3.pdf'
 	tmp4 = temp_folder / '4.pdf'
 	
-	Path(temp_folder).mkdir(exists_ok=True)
+	Path(temp_folder).mkdir(exist_ok=True)
 	sp.run(['pdftk', str(filename), 'output', str(tmp1), 'uncompress'])
 	with tmp2.open('wb') as f1:
 		sp.run(['sed', '-e', 's~\<446F776E6C6F6164656420627920[0-9A-F]*\>~\<20\>~', str(tmp1)], stdout=f)
