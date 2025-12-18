@@ -163,7 +163,7 @@ def do_renegade():
 		if file.filename == '':
 			flash('No selected file')
 			return redirect(request.url)
-		if file and allowed_file(file.filename):
+		if file:
 			filename = secure_filename(file.filename)
 			file.save(UPLOAD_FOLDER / filename)
 			with TemporaryDirectory(dir=UPLOAD_FOLDER) as tmp:
