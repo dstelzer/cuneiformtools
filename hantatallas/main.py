@@ -13,7 +13,7 @@ def test_rendering():
 			print(construct)
 			print(construct.functional_form())
 			print(construct.forest())
-			InkRenderer.render(construct, margin=32).show()
+			WideInkRenderer.render(construct, scale=256, margin=19.2, strokewidth=0.05, format='pdf', bgcolor='white', fgcolor='black', ).show()
 		#	TwoSidedRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()

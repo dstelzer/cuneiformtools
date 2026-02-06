@@ -1346,6 +1346,9 @@ class InkRenderer(GraphicRenderer):
 		
 		c.restore()
 
+class WideInkRenderer(InkRenderer):
+	MAX_STROKE_HEAD = 2/3
+
 # Like an InkRenderer but with sharp points instead of rounded ones
 class SharpInkRenderer(InkRenderer):
 	
