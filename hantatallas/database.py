@@ -471,6 +471,8 @@ def eval_database():
 	print('Sumerian and not Hittite', sum(1 for e in db.data if e.langs['SUM'] and not e.langs['HIT'] and not e.ident.endswith('L')))
 	print('Hurrian and not Hittite or Sumerian', sum(1 for e in db.data if e.langs['HURR'] and not e.langs['HIT'] and not e.langs['SUM'] and not e.ident.endswith('L')))
 	print('Forms', sum(len(e.forms) for e in db.data))
+	print('Max strokes', max(form.complexity() for e in db.data for form in e.functional['normal']))
+	print('Min strokes', min(form.complexity() for e in db.data for form in e.functional['normal']))
 	
 	print('Improper:')
 	y = 0
@@ -502,5 +504,5 @@ def use_database():
 			print(name, code, match)
 
 if __name__ == '__main__':
-	#eval_database()
-	preview_database('data/huehnergard.dat')
+	eval_database()
+	#preview_database('data/huehnergard.dat')

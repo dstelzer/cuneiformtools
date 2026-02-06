@@ -1553,7 +1553,6 @@
 			thorn (type of plant)
 		ELAM
 			Elam (place)
-		(NIM?)
 	AKK
 		nim
 		nem
@@ -1945,7 +1944,7 @@
 	NAME
 		PIRIG PIRIŊ
 	NOTE
-		In Old Script, AZ (#92) and UG (#93) are often written without their ZA/UD phonetic complements and (especially in the Anitta texts) used for "wild animal(s)" in general; the HZL interprets this as a variant use of AZ/UG, but here we call this merged form PIRIG and give it the index number #92B.
+		In Old Script, AZ (#92) and UG (#93) are often written without their ZA/UD phonetic complements and (especially in the Anitta texts) used for "wild animal(s)" in general. The HZL interprets this as a variant use of AZ/UG, but here we call this merged form PIRIG and give it the index number #92B; Forrer's earlier sign list (<Die Keilschrift von Boghazköi>, 1921, p20) claims that the lexical list KBo.I.52 I.3-5 glosses it as <[bi-]ri>, suggesting that PIRIG is the better name.
 93
 	COMP
 		PIRIG&UT
@@ -4758,11 +4757,11 @@
 		W[{[hc]hh[hv]}{d2u}{cc0'}0'"v2]	variant
 		W[({0h2}[hc'vhh]){cc}0'"v2]	variant
 		W[{hh}{cv}{ch}{cc}{cc}0'"v2]	variant
-		W[{[hc']h}{[v0'"{[hc]h}]Ah}vv]	variant unusual
+		W[{[hc']h}{[v0'"{[hc]h}]Ah}vv]	variant unusual incorrect
 	NAME
 		BALAG
 	NOTE
-		This is another sign with an astonishing number of variants. The form tagged "unusual" is probably actually a miscategorized DÚB (#130) rather than a BALAG, but it's been included here because it's in the HZL.
+		This is another sign with an astonishing number of variants. The form tagged "incorrect" is probably actually a miscategorized DÚB (#130) rather than a BALAG, but it's been included here because it's in the HZL.
 	LIG
 		BALAG.DI
 			BALAG-instrument
