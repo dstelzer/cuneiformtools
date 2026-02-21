@@ -274,7 +274,7 @@ def generate_font(renderer, outname, tags=(), fontname=None, dryrun=False, **ext
 #	print('Font exported! Finished!')
 
 rends = {
-	'ink' : InkRenderer,
+#	'ink' : InkRenderer,
 	'pub' : TwoSidedRenderer,
 	'write' : OneSidedRenderer,
 	'linear' : LinearRenderer,
@@ -304,8 +304,8 @@ names = {
 	'midold' : 'Oldish',
 }
 
-VERSION = '1.1.0'
-COPY = '(c) 2025, Daniel Stelzer'
+VERSION = '1.2.0'
+COPY = '(c) 2026, Daniel Stelzer'
 
 if __name__ == '__main__':
 #	f = Font()

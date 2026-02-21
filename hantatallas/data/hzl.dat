@@ -3854,7 +3854,7 @@
 			head
 			first
 			palace official (eunuch?)
-		SUR₁₄
+		SÚR/SUR₁₄
 			[see note]
 	FORM
 		L[{[hv{hh}]E([v'0]h)K}v]	old
@@ -5586,19 +5586,19 @@
 			sleep, dream
 		LIBIR
 	FORM
-		L[ch{[v{hhh0'"}v]h}E]	old
-		W[cvhR{[v{hhhh0'"}Evv]h}]	new
-		L[ch{[v{hhh0'"}]h}Ev]	variant
+		L[ch{[v{hhh0'"}v]h}KEE]	old
+		W[cvh{[v{hhhh0'"}KEEvv]h}]	new
+		L[ch{[v{hhh0'"}]h}KEEv]	variant
 		L[ch{h[{hh}c]h}Ev]	variant
 		L[chv{d2'h}v]	variant
-		L[ch{hhh}c'v]	variant
+		L[ch{h[hc]h}v]	variant
 		L[cvhv(v{hhh})v]	variant unusual
 		L[c[vh]({hhh}[vvv])E]	variant unusual
 		[cv{[vvv][{hhhh}c]E}]	variant unusual
 	NAME
 		Ù U3 LIBIR
 	NOTE
-		This sign is effectively an Akkadian logogram; in both Akkadian and Hittite, it's used only for the word <U> "and", not for the sound /u/ in other contexts. See also <U₇> "and" (#313B).
+		This sign is effectively an Akkadian logogram; in both Akkadian and Hittite, it's used phonetically only for the word <U> "and", not for the sound /u/ in other contexts. See also <U₇> "and" (#313B).
 	NOTE
 		TODO CHECK KERNING ON ALL
 	LIG
@@ -5714,9 +5714,11 @@
 			up (šara), above (šarazzi-), above (šer), top (Akk elēnu)
 	FORM
 		L[c{[hc']h}v{hhh}v]	old
-		L[c[{[hc]h}v]({hh}v)E]	new
+		W[c[{[hc']h}v]({hh}v)]	new
 		L[c{hch}v{hh}v]	variant
 		L[c'({h2h}v)v]	variant
+		W[c{hh}({hh}v)Ev]	variant
+		L[c{chh0R}v({0hh0}v)E]	variant
 	NAME
 		MUḪ UGU
 	LIG
@@ -6882,7 +6884,7 @@
 		wu_u (wo_o, wú)
 		fo
 	FORM
-		[{cc}v{hc}]
+		[{cc}v{hcMA}]
 	NAME
 		WU+U WU_U WU(U) WOO WO(O) WO+O WO_O FO WÚ WU2
 	NOTE
@@ -7090,6 +7092,7 @@
 		[c"{ch"c}]	old
 		[c'{cc}h]	new
 		L[{[vv]v}TEh]	variant
+		L[{[vvv]v}TE(h2[0v])]	akkadian
 	NAME
 		ʔA ʔE ʔI ʔU ʔO ʔƏ ʔ
 		'A 'E 'I 'U 'O 'Ə '
@@ -7098,6 +7101,7 @@
 	NOTE
 		In normal Hittite usage, this sign is merged with <aḫ> (#332B). It's only in certain Akkadian diplomatic letters that the two are distinguished. See that sign for more.
 		The reading <áḫ> properly belongs to the sign ŠEŠ (#63), but that sign was never used this way in any Boğazköy text. I assign the reading <áḫ> to this sign instead to cut down on student mistakes.
+		The form tagged "akkadian" is not listed in the HZL, but appears in KBo 1.10 Rs Z.65. Sign #332B originated as a modification of this form.
 332B
 	HIT
 		aḫ, eḫ, iḫ, uḫ (oḫ, əḫ)

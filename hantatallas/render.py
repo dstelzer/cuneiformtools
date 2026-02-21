@@ -1,5 +1,5 @@
 import subprocess as sp
-from math import pi, atan, cos, sqrt
+from math import pi, atan, atan2, cos, sqrt
 from time import sleep
 from contextlib import contextmanager
 from io import StringIO, BytesIO
@@ -1346,8 +1346,49 @@ class InkRenderer(GraphicRenderer):
 		
 		c.restore()
 
-class WideInkRenderer(InkRenderer):
+class WideInkRenderer(InkRenderer): # This is where I do other experiments
 	MAX_STROKE_HEAD = 2/3
+	CURVE_FACTOR = 0.5 # 0 = quarter circles, ∞ = straight lines
+	
+	@staticmethod
+	def rect_to_polar(center, point): # Convert x, y to r, theta
+		x = center[0] - point[0]
+		y = center[1] - point[1]
+		r = sqrt(x**2 + y**2)
+		theta = atan(y/x)
+		return r, theta
+	
+	def draw_hook(self, x, y, w, h, mods): # Based on bead and seal inscriptions
+		c = self.ctx
+		c.save()
+		c.translate(x, y)
+		
+		ne = (w, 0)
+		nw_out = (-w*self.CURVE_FACTOR, -(h/2)*self.CURVE_FACTOR)
+		se = (w, h)
+		sw_out = (-w*self.CURVE_FACTOR, h+(h/2)*self.CURVE_FACTOR)
+		w = (0, h/2)
+		
+		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		r, th1 = self.rect_to_polar(nw_out, ne)
+		_, th2 = self.rect_to_polar(nw_out, w)
+	#	print('r', r, 'th1', th1, '_', _, 'th2', th2)
+		c.arc(*nw_out, r, th1, th2)
+		
+		r, th1 = self.rect_to_polar(sw_out, w)
+		_, th2 = self.rect_to_polar(sw_out, se)
+	#	print('r', r, 'th1', th1, '_', _, 'th2', th2)
+		c.arc(*sw_out, r, th1, th2)
+		
+	#	c.move_to(*ne) # For testing
+	#	c.line_to(*w)
+	#	c.line_to(*se)
+		
+		c.set_line_cap(cairo.LineCap.ROUND)
+		c.set_line_join(cairo.LineJoin.ROUND)
+		c.stroke()
+		
+		c.restore()
 
 # Like an InkRenderer but with sharp points instead of rounded ones
 class SharpInkRenderer(InkRenderer):

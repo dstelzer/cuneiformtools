@@ -1061,10 +1061,26 @@ class Kern(Adjustment): # Allow neighboring elements to kern into this one from 
 	def draw(self, rend): self.child.draw(rend)
 	def orient(self): return self.child.orient()
 	
-	def kern_top(self): return self.dims[1]/2
-	def kern_bottom(self): return self.dims[1]/2
-	def kern_left(self): return self.dims[0]/2
-	def kern_right(self): return self.dims[0]/2
+	def kern_top(self):
+		if isinstance(self.child, Container):
+			return max(c.kern_top() for c in self.child.contents)
+		else:
+			return self.dims[1]/2
+	def kern_bottom(self):
+		if isinstance(self.child, Container):
+			return max(c.kern_bottom() for c in self.child.contents)
+		else:
+			return self.dims[1]/2
+	def kern_left(self):
+		if isinstance(self.child, Container):
+			return max(c.kern_left() for c in self.child.contents)
+		else:
+			return self.dims[0]/2
+	def kern_right(self):
+		if isinstance(self.child, Container):
+			return max(c.kern_right() for c in self.child.contents)
+		else:
+			return self.dims[0]/2
 	
 	def propagate_dimensions(self, dims, pos):
 		self.dims, self.pos = dims, pos

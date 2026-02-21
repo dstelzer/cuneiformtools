@@ -24,6 +24,7 @@ STROKES = {
 	'u':UpDiag,
 	'd':DownDiag,
 	'c':Winkelhaken,
+	'w':Winkelhaken,
 	'0':Void,
 	'*':Wildcard,
 	'|':Cursor,

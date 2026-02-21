@@ -94,6 +94,19 @@ line 279 241
 stroke
 '''
 
+instructions_imposs2 = '''
+width 5
+move 31 80
+line 129 237
+move 194 74
+line 286 224
+move 74 92
+line 171 90
+move 145 225
+line 256 225
+stroke
+'''
+
 instructions_ninda = '''
 width 5
 move 72 43
@@ -254,7 +267,7 @@ def parse_line(line):
 	else:
 		raise ValueError(cmd)
 
-for line in (instructions_all+instructions_uz6_untenu).split('\n'):
+for line in (instructions_all+instructions_imposs2).split('\n'):
 	parse_line(line)
 
 surf.show_page()
