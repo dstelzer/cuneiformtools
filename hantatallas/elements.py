@@ -130,22 +130,18 @@ class Canvas(Element):
 			if isinstance(elem, Stroke) and elem.ident in ids:
 				elem.add_modifier(Modifier.HIGHLIGHT)
 	
-	def highlight_containment(self, other, notes=None):
-		if notes is None:
-			notes = set()
+	def highlight_containment(self, other):
 		if isinstance(other, Canvas):
-			self.highlight_containment(other.internal, notes)
+			return self.highlight_containment(other.internal)
 		elif isinstance(other, HStack) and other.has_equal_children():
 			# This bit is kind of a mess currently...
-			notes1 = set()
-			notes2 = set()
-			self.internal.highlight_containment(other, notes1)
-			self.internal.highlight_containment(other.alternate_form(), notes2)
-			if notes1: notes |= notes1
-			else: notes |= notes2
+			if opt1 := self.internal.highlight_containment(other):
+				return opt1
+			if opt2 := self.internal.highlight_containment(other.alternate_form()):
+				return opt2
+			return ()
 		else:
-			self.internal.highlight_containment(other, notes)
-		return notes
+			return self.internal.highlight_containment(other)
 	
 	def forest(self, tabs=0):
 		return '\\begin{forest}\n' + self.internal.forest(tabs) + '\\end{forest}\n'
@@ -175,12 +171,11 @@ class Stroke(Element):
 		# This method is expected to be used on functional forms, so modifiers don't matter
 		# Note that any stroke matches a wildcard
 		return isinstance(other, Stroke) and (type(other) == type(self) or type(other) == Wildcard)
-	def highlight_containment(self, other, notes): # An extension to the above which is much less efficient but specifically notes which things have matched
+	def highlight_containment(self, other): # An extension to the above which is much less efficient but specifically notes which things have matched
 		if other in self:
-			notes.add(self.ident)
-			return True
+			return {self.ident}
 		else:
-			return False
+			return ()
 	
 	def forest(self, tabs=0):
 		mods = ''.join(sorted(m.value for m in self.mods))
@@ -434,26 +429,29 @@ class Container(Element):
 #					print('\tSingle element containment worked', matched)
 			if matched >= len(inner): return True
 		return False
-	def _match_contents_highlight(self, other, notes): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
+	def _match_contents_highlight(self, other): # Less-efficient version of above that specifically keeps track of what things have matched for later highlighting
 		outer, inner = self.contents, other.contents
 		cls = type(self)
 		matched = 0
+		matchstrokes = set()
 		for each in outer:
 			if any(isinstance(descendant, cls) for descendant in each.traverse()):
 				for end in range(len(inner), matched, -1):
 					subseq = cls(inner[matched:end])
-					if each.highlight_containment(subseq, notes):
+					if ms := each.highlight_containment(subseq):
 						matched = end
+						matchstrokes |= ms
 						break
 				else:
-					if each.highlight_containment(inner[matched], notes):
+					if ms := each.highlight_containment(inner[matched]):
 						matched += 1
+						matchstrokes |= ms
 			else:
-				if each.highlight_containment(inner[matched], notes):
+				if ms := each.highlight_containment(inner[matched]):
 					matched += 1
-			if matched >= len(inner): return True
-		self._remove_children(notes)
-		return False
+					matchstrokes |= ms
+			if matched >= len(inner): return matchstrokes
+		return ()
 	
 	def kerning_and_arrangement(self, dims, pos, horizontal): # This is the special arrangement code for HStack and VStack, unified here based on the "horizontal" parameter
 		# So instead of w/h we have "j" (direction of stacking) and "k" (opposite direction)
@@ -685,14 +683,13 @@ class HStack(Container):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, HStack) and self._match_contents(other): return True
 		return False
-	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+	def highlight_containment(self, other): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
-			if child.highlight_containment(other, notes):
-				return True
-			child._remove_children(notes)
+			if match := child.highlight_containment(other):
+				return match
 		if isinstance(other, HStack):
-			return self._match_contents_highlight(other, notes)
-		return False
+			return self._match_contents_highlight(other)
+		return ()
 
 class VStack(Container):
 	def __str__(self):
@@ -776,14 +773,13 @@ class VStack(Container):
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, VStack) and self._match_contents(other): return True
 		return False
-	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+	def highlight_containment(self, other): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
-			if child.highlight_containment(other, notes):
-				return True
-			child._remove_children(notes)
+			if match := child.highlight_containment(other):
+				return match
 		if isinstance(other, VStack):
-			return self._match_contents_highlight(other, notes)
-		return False
+			return self._match_contents_highlight(other)
+		return ()
 
 class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both HStack and VStack for comparison purposes
 	def __str__(self): # We use weird brackets because people are never expected to code this explicitly
@@ -821,14 +817,13 @@ class AmbigStack(HStack, VStack): # A new experiment: a stack that acts as both 
 		if any((other in child) for child in self.contents): return True
 		if isinstance(other, (HStack, VStack)) and self._match_contents(other): return True
 		return False
-	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+	def highlight_containment(self, other): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
-			if child.highlight_containment(other, notes):
-				return True
-			child._remove_children(notes)
+			if match := child.highlight_containment(other):
+				return match
 		if isinstance(other, (HStack, VStack)):
-			return self._match_contents_highlight(other, notes)
-		return False
+			return self._match_contents_highlight(other)
+		return ()
 
 class Superpose(Container):
 	def __init__(self, *args, pulldir=Orientation.NEITHER, **kwargs):
@@ -885,22 +880,21 @@ class Superpose(Container):
 				if not any(oc in child for child in self.contents): return False
 			return True
 		return False
-	def highlight_containment(self, other, notes): # Less-efficient version of the above that also highlights matches
+	def highlight_containment(self, other): # Less-efficient version of the above that also highlights matches
 		for child in self.contents:
-			if child.highlight_containment(other, notes):
-				return True
-			child._remove_children(notes)
+			if match := child.highlight_containment(other):
+				return match
+		notes = set()
 		if isinstance(other, Superpose):
 			for oc in other.contents:
 				for child in self.contents:
-					if child.highlight_containment(oc, notes):
+					if match := child.highlight_containment(oc):
+						notes |= match
 						break # Skip the else-clause
 				else: # There was no match
-					self._remove_children(notes)
-					return False
-			return True
-		self._remove_children(notes)
-		return False
+					return ()
+			return notes
+		return ()
 
 class Adjustment(Element):
 	def __init__(self, child, *args, **kwargs):

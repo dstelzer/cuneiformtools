@@ -37,7 +37,7 @@ def test_comparisons():
 		if inf in outf:
 			match = outf.highlight_containment(inf)
 	#		print(match)
-			print('Match')
+			print('Match:', match)
 			TwoSidedRenderer.render(outer, match).show()
 		else:
 			print('No match')
@@ -85,6 +85,18 @@ def test_uga():
 		desc = input()
 		Layout(TwoSidedRenderer, justify='l', spacing=0.67).render(db.parse_transcription(desc), fill=True).show()
 
+def test_normalization():
+	basic = parse('{h([vv]h)}')
+	print('First:', end=' ')
+	for s in basic.traverse_strokes():
+		print(f'{s._sigil()}{s.ident}', end=' ')
+	print()
+	normal = basic.functional_form()
+	print('Second:', end=' ')
+	for s in normal.traverse_strokes():
+		print(f'{s._sigil()}{s.ident}', end=' ')
+	print()
+
 def regression_testing():
 	with open('regression.in', 'r') as f1:
 		with open('regression.out', 'w') as f2:
@@ -96,7 +108,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_rendering()
+	test_comparisons()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Should match, currently doesn't
