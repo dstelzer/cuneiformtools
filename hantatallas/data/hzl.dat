@@ -3037,7 +3037,7 @@
 			calf
 			young animal in general
 	FORM
-		L{[hc]c[hc]}
+		L{[hc]KcE[hc]K}
 		L[c'{hh}{c'c'}]	variant
 	NAME
 		ṢÁR ṢAR2 ṢUR AMAR
@@ -3060,8 +3060,8 @@
 			ritual
 			offering
 	FORM
-		L{[hc][c{cc}{cc}][hc]}	old
-		L{[hc][cc][cc][hc]}	new
+		L{[hc]K[c{cc}{cc}]E[hc]K}	old
+		L{[hc]K[{cc}{cc}]E[hc]K}	new
 		L{[(h[cc])c][(h[cc])c]}	variant
 	NAME
 		SISKUR
@@ -5587,7 +5587,7 @@
 		LIBIR
 	FORM
 		L[ch{[v{hhh0'"}v]h}KEE]	old
-		W[cvh{[v{hhhh0'"}KEEvv]h}]	new
+		W[cEvh{[v{hhhh0'"}vv]h}KEEEE]	new
 		L[ch{[v{hhh0'"}]h}KEEv]	variant
 		L[ch{h[{hh}c]h}Ev]	variant
 		L[chv{d2'h}v]	variant
@@ -5781,7 +5781,7 @@
 		AMAR×KU₆
 	FORM
 		L[c{h[vv]h[vcvc]}{cc}]
-		L[c{[hc][0vv0][hc][0vcvc0]}]
+		L[c{[hc]K[0vv0][hc]K[0vcvc0]}]
 	NAME
 		AMAR×KU6
 	LIG

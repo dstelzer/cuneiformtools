@@ -500,9 +500,9 @@ def use_database():
 	db.load_expansions('data/replacements.dat')
 	db.prepare_sorting()
 	while True:
-		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), input('Mode: ')):
+		for name, code, match in db.lookup(parse(input('Code: ')), re.compile(input('Regex: ')), (), input('Mode: ')):
 			print(name, code, match)
 
 if __name__ == '__main__':
-	eval_database()
+	use_database()
 	#preview_database('data/huehnergard.dat')

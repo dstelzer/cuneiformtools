@@ -117,8 +117,13 @@ class Canvas(Element):
 	def __contains__(self, other): # This one just delegates
 		if isinstance(other, Canvas):
 			if other.shape != CanvasShape.FUNCTIONAL or self.shape != CanvasShape.FUNCTIONAL: raise ValueError('Only elements in functional form should be compared with `in`') # Sanity check
-			return other.internal in self.internal
-		else: return other in self.internal
+			return other.internal in self
+		elif isinstance(other, HStack) and other.has_equal_children():
+			# When we normalize a stack like [{cc}{cc}], we normalize it differently depending on whether it's inside a VStack or not
+			# But that only works if it's inside something! If it's not inside anything, we need to check both ways
+			return other in self.internal or other.alternate_form() in self.internal
+		else:
+			return other in self.internal
 	
 	def apply_highlighting(self, ids): # Apply the HIGHLIGHT modifier to any strokes whose ident is listed in ids
 		for elem in self.traverse():
@@ -616,6 +621,17 @@ class HStack(Container):
 	def kern_bottom(self): return min(c.kern_bottom() for c in self.contents)
 	def allow_kern_upward(self): return all(c.allow_kern_upward() for c in self.contents)
 	def allow_kern_downward(self): return all(c.allow_kern_downward() for c in self.contents)
+	
+	# Are all our children vstacks with an equal number of elements?
+	# See Canvas.__contains__ for details
+	def has_equal_children(self):
+		return (
+			len(self.contents) >= 2 and
+			all(isinstance(c, VStack) for c in self.contents) and
+			all(len(c.contents) == len(self.contents[0].contents) for c in self.contents[1:]) # All same length
+		)
+	def alternate_form(self):
+		return self.functional_form(special={VStack})
 	
 	def functional_form(self, special=empty):
 		newspecial = special - {VStack} # Indicate that the current processing is NOT happening inside a VStack, which matters for a certain type of ambiguity
