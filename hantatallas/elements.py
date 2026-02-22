@@ -131,9 +131,20 @@ class Canvas(Element):
 				elem.add_modifier(Modifier.HIGHLIGHT)
 	
 	def highlight_containment(self, other, notes=None):
-		if notes is None: notes = set()
-		if isinstance(other, Canvas): self.internal.highlight_containment(other.internal, notes)
-		else: self.internal.highlight_containment(other, notes)
+		if notes is None:
+			notes = set()
+		if isinstance(other, Canvas):
+			self.highlight_containment(other.internal, notes)
+		elif isinstance(other, HStack) and other.has_equal_children():
+			# This bit is kind of a mess currently...
+			notes1 = set()
+			notes2 = set()
+			self.internal.highlight_containment(other, notes1)
+			self.internal.highlight_containment(other.alternate_form(), notes2)
+			if notes1: notes |= notes1
+			else: notes |= notes2
+		else:
+			self.internal.highlight_containment(other, notes)
 		return notes
 	
 	def forest(self, tabs=0):
