@@ -339,6 +339,7 @@ class GraphicRenderer(Renderer):
 		if highlight: self.ctx.set_source_rgba(*self.hlcolor)
 		else: self.ctx.set_source_rgba(*self.fgcolor)
 		self.ctx.set_line_width(self.strokewidth)
+		self.ctx.set_line_join(cairo.LINE_JOIN_MITER) # Default to miter
 	
 	def show(self):
 		if self.format == 'png':
@@ -739,7 +740,7 @@ class TwoSidedRenderer(GraphicRenderer):
 		c.line_to(*se)
 		c.curve_to(*se, *w, *ne)
 		if self.fill: c.fill_preserve()
-		c.set_line_join(cairo.LINE_JOIN_BEVEL)
+		# Miter, not bevel, for this one
 		c.stroke()
 		
 		c.restore()
