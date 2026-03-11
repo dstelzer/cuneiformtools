@@ -632,6 +632,7 @@ class TwoSidedRenderer(GraphicRenderer):
 		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
+		c.set_line_join(cairo.LINE_JOIN_BEVEL)
 		c.stroke()
 		
 		c.restore()
@@ -670,6 +671,7 @@ class TwoSidedRenderer(GraphicRenderer):
 		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
+		c.set_line_join(cairo.LINE_JOIN_BEVEL)
 		c.stroke()
 		
 		c.restore()
@@ -717,6 +719,7 @@ class TwoSidedRenderer(GraphicRenderer):
 		if self.fill: c.fill_preserve()
 		c.move_to(*mid)
 		c.line_to(*s)
+		c.set_line_join(cairo.LINE_JOIN_BEVEL)
 		c.stroke()
 		
 		c.restore()
@@ -736,6 +739,7 @@ class TwoSidedRenderer(GraphicRenderer):
 		c.line_to(*se)
 		c.curve_to(*se, *w, *ne)
 		if self.fill: c.fill_preserve()
+		c.set_line_join(cairo.LINE_JOIN_BEVEL)
 		c.stroke()
 		
 		c.restore()
