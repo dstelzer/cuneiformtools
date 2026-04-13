@@ -10,4 +10,6 @@ For now:
 
 Look in `/hantatallas/` first; that's where most of the important stuff is. Most of the Python files in that directory can be run as standalone programs to test their features; for those that can't, `/hantatallas/main.py` shows how to invoke them.
 
+The files `manifest.scm` and `channels.scm` record the development environment I'm using via Guix. Use `guix time-machine -C channels.scm -- shell -C -m manifest.scm -- python3 [whatever].py` to run these files exactly as I do.
+
 Have fun!

@@ -65,7 +65,7 @@ def clean_xml(file1, file2):
 		return et.QName(element).localname
 	
 	SAFE_ATTRS = {'d', 'transform', 'style'} # The attributes we don't want to change
-	tree = et.parse(file1)
+	tree = et.parse(str(file1))
 	root = tree.getroot()
 	for path in root.iter():
 #		print(real_tag_name(path))
@@ -82,7 +82,7 @@ def clean_xml(file1, file2):
 		for child in list(root): # Again, so we can edit while iterating
 			g.append(child) # In lxml.etree, unlike standard Python etree, nodes can only have one parent, so this also unlinks them from the root
 		root.append(g)
-	tree.write(file2)
+	tree.write(str(file2))
 
 class Font:
 	def __init__(self, tmpname=Path('font_tmp'), final_margin=100, initial_margin=100, final_bottom=200, glyph_size=1000, renderer=TwoSidedRenderer, **extra):
@@ -318,6 +318,7 @@ if __name__ == '__main__':
 #	clean_xml('font_tmp/cairo.svg', 'font_tmp/modxml3.svg')
 	
 	input()
+	Path('fonts').mkdir(exist_ok=True)
 	for rname, rend in tqdm(rends.items(), desc='Renderers'):
 		opt = opts[rname] if rname in opts else {}
 		for tname, tag in tqdm(tags.items(), desc='Eras'):
