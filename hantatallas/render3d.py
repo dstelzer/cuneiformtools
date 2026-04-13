@@ -15,12 +15,14 @@ def remap(val1, lo1, hi1, lo2, hi2): # Remap `val` from the range `lo1-hi1` to t
 	return val2
 
 class ScadRenderer(Renderer):
-	def __init__(self, width, height, margin=0, scale=0, thickness=None, shape='tablet', multiplex=1, *args, **kwargs): # TODO remove args and kwargs
+	def __init__(self, width, height, margin=0, scale=0, thickness=None, shape='tablet', multiplex=1, ridge=5, extramargin=3, *args, **kwargs): # TODO remove args and kwargs
 		super().__init__(width, height, margin=margin, scale=scale) # This fills out the basic layout parameters like fullwidth and fullheight
 		
 		self.buffer = StringIO()
 		
 		self.multiplex = multiplex # Multiple copies of one text, if the text is too small
+		self.ridge = ridge
+		self.extramargin = extramargin
 		
 		self.depth = 0
 		self.depthstack = [] # This is used to imitate Cairo's context save and restore, which is also a stack: here, it holds how many nested levels deep we are
@@ -44,8 +46,8 @@ class ScadRenderer(Renderer):
 			self.depth += 1
 		
 		elif shape == 'seal': # As above, except wrapped around into a ring
-			ridgesize = self.scale/5 # TODO parametrize this!
-			extramargin = self.scale/3 # And this!
+			ridgesize = self.scale/self.ridge if self.ridge else 0
+			extramargin = self.scale/self.extramargin if self.extramargin else 0
 			self.fullwidth += extramargin + ridgesize # Add an extra margin on the right
 			
 			outerdepth = self.scale / 3 # How much beyond the surface we should try to capture in the cylinder

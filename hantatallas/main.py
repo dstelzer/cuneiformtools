@@ -13,7 +13,7 @@ def test_rendering():
 			print(construct)
 			print(construct.functional_form())
 			print(construct.forest())
-			WideInkRenderer.render(construct, scale=256, margin=19.2, strokewidth=0.05, format='pdf', bgcolor='white', fgcolor='black', ).show()
+			InkRenderer.render(construct, scale=256, margin=19.2, strokewidth=0.05, format='pdf', bgcolor='white', fgcolor='black', ).show()
 		#	TwoSidedRenderer.render(construct, margin=32).show()
 		#	TwoSidedRenderer.render(construct, ('1')).show()
 		#	TwoSidedRenderer.render(construct.functional_form()).show()
@@ -53,7 +53,7 @@ def test_layout():
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
 		Layout(InkRenderer, justify='s', size=256, margin=0.25).render(db.parse_transcription(desc), strokewidth=0.05).show()
-	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='seal').show()
+	#	Layout(ScadRenderer, justify='s', size=15, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='seal').show()
 	#	Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc), fill=True, thickness=5, shape='tablet').show()
 
 def test_seals():
@@ -65,10 +65,12 @@ def test_seals():
 	while True:
 		desc = input()
 		if not desc: desc = 'nu NINDA-an e-ez-za-at-te-ni/3 `n wa-a-tar-ma e-ku-ut-te-ni/3 `r nu NINDA-an `F'
-		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc, ('new',)), fill=True, thickness=-5, shape='seal', multiplex=2).show()
+		Layout(ScadRenderer, justify='s', size=10, margin=0.25).render(db.parse_transcription(desc, ('new',)), fill=True, thickness=-5, shape='seal', multiplex=3, extramargin=5).show()
 		# Size should be 10 or 15, both work well atm
 		# Thickness should be 1.5 or negative
 		# Cookie cutter: nu NINDA-an `n ez-za-te-%{d([vv0]u)}
+		# New version:   nu NINDA-an `n ez-za-%W[{hh}{hhhh}v0'"{[vv]v}TEE]
+		# 		(That last sign is AT + TÉN combined to fit nicely)
 		# Ea-Nāṣir: ana2-É.A `n na-ṣi-%{d([vvv]u)} `n qí-bí-ma
 		# Dog: %{[vvhv]Ah}-%P[{hh'h'h'h}v]-%[(h[vv{0c}])v]-%P[{h'h'h'h}v]-%[{cc}v'"{du}v]-%P[{hh'h}v]-%[{0hh0}{u0d}v] `n %[{[cc]h[cc]}{cc}]-%L[{hh'h'h'h}v2(h[v'"v'"v'"])EEv2]-%[{h(h[vvv])Mh}v]-%[{h0([0vv0EE]h)}v]-%[{h0([0vv0EE]h)}v] `n %(hu'")-%[{ud}v'{du}]-%[{h(h[vvv])Mh}v]-%P[vv2]-%(hvd'"u'")
 		# Scribes: inim-inim-ma-nam-dumu `n é-dub-ba-a-ke4-ne `n cu-za-íb-ci-in-tùm
@@ -108,7 +110,7 @@ def regression_testing():
 	print('Done')
 
 if __name__ == '__main__':
-	test_comparisons()
+	test_seals()
 
 # Test case for stack containment: Outer: [v{h[{cc}{cc}]h}v] Inner: {h[cc][cc]h}
 # Make sure it also matches [{cc}{cc}]
