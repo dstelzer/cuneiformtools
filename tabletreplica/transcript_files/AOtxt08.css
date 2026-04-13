@@ -1,0 +1,147 @@
+<style type="text/css">
+
+td {border:1px dotted #EFEFEF;vertical-align:top}
+
+ a:link { color:#111111;  text-decoration:none;   white-space:nowrap; }
+ a:visited {  text-decoration:none;   white-space:nowrap;}
+ a:hover { color:#EE0000;  background-color:#FFFF99;  text-decoration:none;   white-space:nowrap;}
+ a:active {  text-decoration:none;  white-space:nowrap; }
+ body { font-family:"Arial Unicode MS",sans-serif; font-size:11pt; }
+<!-- div section ANFANG-->
+.table { display:table; border-collapse:separate; vertical-align:top;}
+.tr { display:table-row; vertical-align:top;}
+.td { display:table-cell;  padding:2px;vertical-align:top;}
+
+.AOParagrNr {margin-top:15px; font-family:"Arial Unicode MS";font-weight:normal;font-size:100%; vertical-align:baseline}
+
+.STD { text-align:justify;font-size:11pt;font-family:"Arial Unicode MS";}
+.FNO { text-align:justify;font-size:10pt;font-family:"Arial Unicode MS";}
+.fnz {display:table-cell; border:collapse; padding:5px; text-indent:0.5988cm;font-family:"Arial Unicode MS";font-size:10pt;text-align:left;}
+.fnbod {display:table-cell; border:collapse; padding:5px;font-family:"Arial Unicode MS";font-size:80%;text-align:left;}
+
+.Standard { text-align:justify;font-size:11pt;font-family:"Arial Unicode MS";}
+
+P.STD { margin-left: 1.0cm;  border:collapse; font-size:11pt; text-align:justify; vertical-align:top;}
+P.Textbody { text-align:justify;font-size:11pt;font-family:"Arial Unicode MS";}
+P.Textbodyindent{ text-align:justify; text-align:left; margin-left:1.4cm;font-size:11pt;font-family:"Arial Unicode MS";}
+
+P.Title {font-size:20pt; font-weight:bold;text-align:center;font-family:"Arial Unicode MS";}
+P.Subtitle {font-size:18pt; font-weight:bold;font-style:italic;text-align:center;font-family:"Arial Unicode MS";}
+P.Heading1 {font-size:17pt; font-weight:bold;font-family:"Arial Unicode MS";}
+P.Heading2 { margin-left: 0.4cm; font-size:15pt; font-weight:bold;font-style:italic;font-family:"Arial Unicode MS";}
+P.Heading3 { margin-left: 0.7cm; font-size:14pt; font-weight:bold;font-family:"Arial Unicode MS";}
+P.Heading4 { margin-left: 1.0cm; font-size:13pt; font-weight:bold;font-family:"Arial Unicode MS";}
+
+P.AOTitle {font-size:20pt; font-weight:bold;text-align:center;font-family:"Arial Unicode MS";}
+P.AOSubtitle {font-size:18pt; font-weight:bold;font-style:italic;text-align:center;font-family:"Arial Unicode MS";}
+P.AOH1 {font-size:16pt; font-weight:bold;font-family:"Arial Unicode MS";}
+P.AOH2 { margin-left: 0.4cm; font-size:14pt; font-weight:bold;font-style:italic;font-family:"Arial Unicode MS";}
+P.AOH3 { margin-left: 0.7cm; font-size:13pt; font-weight:bold;font-family:"Arial Unicode MS";}
+P.AOH4 { margin-left: 1.0cm; font-size:12pt; font-weight:bold;font-style:italic;font-family:"Arial Unicode MS";}
+P.AOH4 { margin-left: 1.0cm; font-size:11pt; font-weight:bold;font-family:"Arial Unicode MS";}
+
+
+.inhVHeading1 {margin-left: 0.0cm; font-size:10pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+.inhVHeading2 {margin-left: 0.3cm; font-size:9pt; font-variant:small-caps;font-style:italic;font-family:"Arial Unicode MS";}
+.inhVHeading3 {margin-left: 0.6cm;font-size:8pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+.inhVHeading4 {margin-left: 0.9cm;font-size:7pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+
+#master {display:block; border:2px solid lightgray; font-weight:600;background-color:#EEEEEE;font-family:"Arial Unicode MS";}
+
+.AOExemplar { padding-left:5px;padding-right:5px; font-weight:bold;font-family:"Arial Unicode MS"; white-space:nowrap; vertical-align:top;  vertical-align:top;   }
+.AOKolonNr {padding-left:5px;padding-right:5px;display:table-cell; text-align:right;font-weight:bold;font-family:"Arial Unicode MS"; white-space:nowrap;      }
+.LineNrExpl {font-weight:bold; color:orange; font-family:"Arial Unicode MS"; white-space:nowrap; }
+
+.AOTextline-Hit { vertical-align:top; display:inline; background-color:transparent;font-style:oblique;color:#000050;font-family:"Arial Unicode MS";}
+.AOTextline-Akk {  display:inline; background-color:transparent;font-style:italic;color:#800000;font-family:"Arial Unicode MS";}
+.AOTextline-Hurr {  display:inline; background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+.AOTextline-Luw {  display:inline; background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+.AOTextline-Sum {  display:inline; background-color:transparent;font-style:normal;color:#355e00;font-family:"Arial Unicode MS";} 
+
+<!-- div section ENDE -->
+
+p.AOParagrNr {white-space:nowrap;margin-top:15px; font-family:"Arial Unicode MS";font-weight:bold;font-size:14pt; vertical-align:baseline}
+p.Footnote {margin-left:0.5988cm;margin-right:0.0cm;text-indent:-0.5988cm;font-family:"Arial Unicode MS";font-size:90%}
+p.sdfootnote {margin-left:0.5988cm;margin-right:0.0cm;text-indent:-0.5988cm;font-family:"Arial Unicode MS";font-size:10pt}
+
+p.Standard { text-align:justify;font-size:12pt;font-family:"Arial Unicode MS";}
+p.Textbody { text-align:justify;font-size:12pt;font-family:"Arial Unicode MS";}
+p.Textbodyindent{ text-align:justify; text-align:left; margin-left:1.4cm;font-size:11pt;font-family:"Arial Unicode MS";}
+
+<!--
+p.Title {font-size:20pt; font-weight:bold;text-align:center;font-family:"Arial Unicode MS";}
+p.Subtitle {font-size:18pt; font-weight:bold;font-style:italic;text-align:center;font-family:"Arial Unicode MS";}
+p.Heading1 {font-size:17pt; font-weight:bold;font-family:"Arial Unicode MS";}
+p.Heading2 {font-size:15pt; font-weight:bold;font-style:italic;font-family:"Arial Unicode MS";}
+p.Heading3 {font-size:14pt; font-weight:bold;font-family:"Arial Unicode MS";}
+p.Heading4 {font-size:13pt; font-weight:bold;font-family:"Arial Unicode MS";}
+
+
+
+p.inhVHeading1 {font-size:12pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+p.inhVHeading2 {font-size:11pt; ffont-variant:small-caps;font-style:italic;font-family:"Arial Unicode MS";}
+p.inhVHeading3 {font-size:9pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+p.inhVHeading4 {font-size:9pt; font-variant:small-caps;font-family:"Arial Unicode MS";}
+-->
+
+
+p.AOExemplar {font-weight:bold; font-family:"Arial Unicode MS";white-space:nowrap; vertical-align:top;}
+p.AOKolonNr {text-align:right;font-weight:bold; font-family:"Arial Unicode MS";white-space:nowrap;}
+p.LineNr {font-weight:bold; color:orange; font-family:"Arial Unicode MS";white-space:nowrap;}
+
+p.AOTextline-Hit {background-color:transparent;font-style:italic;color:#000050;font-family:"Arial Unicode MS";}
+p.AOTextline-Akk {background-color:transparent;font-style:italic;color:#800000;font-family:"Arial Unicode MS";}
+p.AOTextline-Hurr {background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+p.AOTextline-Luw {background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+p.AOTextline-Sum {background-color:transparent;font-style:normal;color:#355e00;font-family:"Arial Unicode MS";}
+p.svh--LitBemerk {margin-left:2.4cm;font-size:85%;}
+
+span.Hit {background-color:transparent;font-style:italic;color:#000050;font-family:"Arial Unicode MS";}
+span.Akk {background-color:transparent;font-style:italic;color:#800000;font-family:"Arial Unicode MS";}
+span.Hurr {background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+span.Luw {background-color:transparent;font-style:normal;color:#800080;font-family:"Arial Unicode MS";}
+span.Sum {background-color:transparent;font-style:normal;color:#355e00;font-family:"Arial Unicode MS";}
+
+
+span.AONumeral {font-style:normal;font-size:100%;color:black;font-family:"Arial Unicode MS";}
+span.AOSumgram {font-style:normal;font-size:90%;color:#355e00;background-color:transparent;font-family:"Arial Unicode MS";}
+span.AOSumGram {font-style:normal;font-size:90%;color:#133c00;background-color:transparent;font-family:"Arial Unicode MS";}
+span.AOAkkgram {font-style:italic;font-size:90%;color:#500000;font-family:"Arial Unicode MS";}
+
+span.AOHurrian {font-style:normal;font-size:90%;color:#800080a;background-color:transparent;font-family:"Arial Unicode MS";}
+span.AOLuwian {font-style:normal;font-size:90%;color:#800080a;background-color:transparent;font-family:"Arial Unicode MS";}
+span.AOHittite {background-color:transparent;font-style:italic;color:#000050;font-family:"Arial Unicode MS";}
+span.AOAkkadian {background-color:transparent;font-style:italic;color:#800000;font-family:"Arial Unicode MS";}
+
+span.AODeterm {font-style:normal;font-size:58%;vertical-align:super;color:#663300;font-family:"Arial Unicode MS";}
+
+span.AO-LineNrExpl {font-style:normal;font-weight:bold; font-size:68%;vertical-align:text-top;color:yellow;background-color:blue;font-family:"Arial Unicode MS";}
+
+span.FnAnc {font-style:normal;font-size:68%;vertical-align:text-top;background-color:#ffcc99; color:#111111;font-weight:bold;;font-family:"Arial Unicode MS";}
+span.FnSym {font-style:normal;font-size:68%;vertical-align:text-top;background-color:#ffcc99; color:#111111;font-weight:bold;;font-family:"Arial Unicode MS";}
+span.FnAncT {font-style:normal;font-size:68%;vertical-align:text-top;background-color:#ffcc99; color:#111111;font-weight:bold;border:1px solid blue;font-family:"Arial Unicode MS";}
+span.FnSymT {font-style:normal;font-size:68%;vertical-align:text-top;background-color:#ffcc99; color:#111111;font-weight:bold;border:1px solid blue;font-family:"Arial Unicode MS";}
+
+span.AO-Text-Gap {font-style:normal;background-color:#e6e6ff;font-family:"Arial Unicode MS";}
+span.AOsuperscr {font-style:normal;font-size:58%;vertical-align:super;color:#ff00ff;background-color:transparent;font-family:"Arial Unicode MS";}
+
+span.AOLIT {font-weight:bold;background-color:#ffff99;font-family:"Arial Unicode MS";}
+span.AO--index {font-style:normal;font-size:58%;vertical-align:sub;font-family:"Arial Unicode MS";}
+span.AO--superscr {font-style:normal;font-size:58%;vertical-align:super; color:black;font-family:"Arial Unicode MS";}
+span.KolonNr {vertical-align:text-top; background-color:black;font-size:65%;color:white;font-family:"Arial Unicode MS";}
+
+span.steif {font-style:normal;  vertical-align:top; color:black;font-family:"Arial Unicode MS";}
+span.AO--italic {font-style:italic;font-family:"Arial Unicode MS";}
+span.master {background-color:red; color:yellow; font-weight:900; font-family:"Arial Unicode MS";}
+span.masterT {background-color:blue; color:yellow; font-weight:900; font-family:"Arial Unicode MS";}
+
+td.master {border:2px solid lightgray; font-weight:800;background-color:#EEEEEE;font-family:"Arial Unicode MS";}
+
+p.zcth {font-weight: normal; color:#333333;}
+P.ztitel {font-size: 11pt; color:#663300;vertical-align:top;}
+p.zeditor {font-size: 10pt; color:#666666;vertical-align:top;}
+span.LL {font-size: 10pt; color:#666666; margin: 4px;  font-variant:small-caps; color:#995511; border-width:0px; border-style:solid; padding:0.2em; text-align:left;}
+
+<!--    white-space:nowrap;  -->
+
+</style>
