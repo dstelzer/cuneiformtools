@@ -1299,13 +1299,15 @@ class InkRenderer(GraphicRenderer):
 		for i in range(heads):
 			if i==0 and headless: continue
 			cc = (w/2, center+i*headstride)
-			c.move_to(w, i*headstride)
+		#	c.move_to(w, i*headstride)
+			c.new_sub_path()
 			c.arc(*cc, radius, pi/2+theta, pi/2-theta)
 		
 		# Draw the opposite head, if needed
 		if amphisbaena:
 			cc = (w/2, h-center)
-			c.move_to(0, h)
+		#	c.move_to(0, h)
+			c.new_sub_path()
 			c.arc(*cc, radius, -pi/2+theta, -pi/2-theta)
 		
 		# Draw `tails` tails
