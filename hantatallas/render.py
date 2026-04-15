@@ -1293,6 +1293,7 @@ class InkRenderer(GraphicRenderer):
 			return dy
 		
 		self.begin_drawing((Modifier.HIGHLIGHT in mods))
+		c.set_line_cap(cairo.LineCap.ROUND)
 		
 		# Draw `heads` heads
 		for i in range(heads):
